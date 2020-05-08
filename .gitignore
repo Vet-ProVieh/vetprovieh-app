@@ -1,0 +1,4 @@
+# Node Modules ignorieren, da beim npm install neu gebaut wird
+node_modules/
+# Generierte DAteien rausnehmen
+www/
