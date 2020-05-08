@@ -16,7 +16,7 @@ const production = !process.env.ROLLUP_WATCH;
 export default {
   input: 'src/app/main.js',
   output: {
-    file: 'public/bundle.js',
+    file: 'www/bundle.js',
     format: 'iife', // immediately-invoked function expression — suitable for <script> tags
     sourcemap: true
   },
@@ -27,12 +27,13 @@ export default {
     copy({ // Copy HTML-Pages to Public Folder
       targets: [
         { src: 'src/assets/*', dest: 'www/assets' },
-        { src: 'src/pages/*', dest: 'www'}
+        { src: 'src/pages/*', dest: 'www'},
+        { src: 'node_modules/bulma/*', dest: 'www/node_modules/bulma'} 
       ]
     }),
     generateSW({
-      swDest: 'public/wb_service_worker.js',
-      globDirectory: 'public/',
+      swDest: 'www/wb_service_worker.js',
+      globDirectory: 'www/',
       globIgnores: ['injectManifest_sw.js'],
     })
   ]
