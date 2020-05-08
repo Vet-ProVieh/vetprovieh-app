@@ -34,6 +34,7 @@ export class VetproviehLayout extends HTMLElement {
      */
     _updateRendering() {
         this.innerHTML = `
+        <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
         <nav class="navbar is-fixed-top has-shadow has-background-grey-darker" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a class="navbar-item" href="/">
