@@ -11,10 +11,45 @@
 <!-- Layout-Container -->
 
 <body>
-<vetprovieh-layout>
-    <vetprovieh-detail src="/service/farmers" id="1">
+<vetprovieh-layout title="Landwirt bearbeiten">
+    <vetprovieh-detail src="/service/farmers">
         <template>
+            <div class="field">
+                <label class="label">Unternehmen</label>
+                <div class="control">
+                    <input property="name" class="input is-success" type="text">
+                </div>
 
+                <label class="label">VVVO</label>
+                <div class="control">
+                    <input property="vvvoNumber" class="input is-success" type="text">
+                </div>
+
+                <label class="label">Vorname</label>
+                <div class="control">
+                    <input property="firstname" class="input is-success" type="text">
+                </div>
+
+                <label class="label">Nachname</label>
+                <div class="control">
+                    <input property="lastname" class="input is-success" type="text" >
+                </div>
+
+                <label class="label">Postleitzahl</label>
+                <div class="control">
+                    <input property="postalcode" class="input is-success" type="text">
+                </div>
+
+                <label class="label">Straße</label>
+                <div class="control">
+                    <input property="streetname" class="input is-success" type="text">
+                </div>
+
+                <label class="label">Hausnummer</label>
+                <div class="control">
+                    <input property="streetnumber" class="input is-success" type="text">
+                </div>
+            </div>
         </template>
     </vetprovieh-detail>
 </vetprovieh-layout>

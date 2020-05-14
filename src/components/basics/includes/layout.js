@@ -64,7 +64,7 @@ export class VetproviehLayout extends HTMLElement {
         ["left", "right"].forEach((menuOrientation) => {
             var button = document.getElementById(menuOrientation + "-menu-open");
             var sideMenu = document.getElementById(menuOrientation + "-menu");
-            button.addEventListener("click", () => {
+            button.addEventListener("click", (event) => {
                 sideMenu.dispatchEvent(new Event("toggle"));
             });
         })
@@ -79,9 +79,9 @@ export class VetproviehLayout extends HTMLElement {
         <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
         <link rel="stylesheet" href="/node_modules/fontawesome/css/all.css">
         <link rel="stylesheet" href="/assets/css/layout.css">
-        <nav class="navbar is-fixed-top has-shadow has-background-grey-light" role="navigation" aria-label="main navigation">
+        <nav class="navbar is-fixed-top has-shadow has-background-vetprovieh-light-blue" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a id="left-menu-open" class="navbar-item" >
+                <a id="left-menu-open" class="navbar-item has-text-white" >
                     <i class="fas fa-bars"></i>
                 </a>
             </div>

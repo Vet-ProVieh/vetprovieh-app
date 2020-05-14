@@ -35,6 +35,21 @@ export default {
     generateSW({
       swDest: 'www/wb_service_worker.js',
       globDirectory: 'www/',
+      globPatterns: '**/*.{js,css,html,ico,png}',
+      clientsClaim: true,
+      skipWaiting: true,
+      runtimeCaching: [{
+        urlPattern: /service|node_modules/,
+        handler: "CacheFirst",
+        options: {
+          cacheName: 'api',
+          expiration: {
+            maxEntries: 100,
+            maxAgeSeconds: 72 * 60 * 60
+          },
+          cacheableResponse: { statuses: [0, 200] },
+        }
+      }],
       globIgnores: ['injectManifest_sw.js'],
     })
   ]

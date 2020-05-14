@@ -2,6 +2,14 @@
     font-size: 21px;
 }
 
+.has-background-vetprovieh-blue{
+    background-color: #0a143a;
+}
+.has-background-vetprovieh-light-blue{
+    background-color: #233f68;
+}
+
+
 .navbar-center {
     margin: auto auto;
 }

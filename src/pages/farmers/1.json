@@ -1,0 +1,16 @@
+{
+  "id" : 1,
+  "city" : "Lohne",
+  "postalcode" : "493993",
+  "streetname" : "Im Heidewinkel ",
+  "streetnumber" : 3,
+  "latitude" : 52.650573,
+  "longitude" : 8.262598,
+  "vvvonumber" :"09548604596",
+  "firstname" : "Max",
+  "landline" : "",
+  "lastname" : "Mueller",
+  "mobile" : "012458347",
+  "name" : "Mueller GmbH",
+  "veterinarian" : "Paul Weber"
+}

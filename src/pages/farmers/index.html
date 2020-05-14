@@ -12,11 +12,14 @@
 
 <body>
   <vetprovieh-layout title="Ihre Landwirte">
-    <h1>Test</h1>
-    <vetprovieh-list src="/service/farmers" pagesize="4">
+    <vetprovieh-list src="/service/farmers/all" pagesize="20">
       <template>
         <div>
-          <strong>{{id}}</strong>: <span>{{name}}</span>
+          <a href="/farmers/show.html?id={{vvvoNumber}}">
+            <strong>{{name}}</strong>
+          </a><br/>
+          <span>VVVO: {{vvvoNumber}}</span><br/>
+          <span>{{address.streetName}} {{address.streetNumber}}, {{address.postalCode}} {{address.city}}</span>
         </div>
         <hr />
       </template>

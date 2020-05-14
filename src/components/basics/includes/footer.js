@@ -14,7 +14,7 @@ export class VetproviehFooter extends HTMLElement {
      */
     _updateRendering() {
         this.innerHTML = `
-        <footer class="footer is-fixed-bottom has-background-grey-darker">
+        <footer class="footer is-fixed-bottom  has-background-vetprovieh-blue">
             <div class="content has-text-centered">
                 <p>
                 <img src="/assets/imgs/icons/icon-72x72.png" width="28" height="28">
