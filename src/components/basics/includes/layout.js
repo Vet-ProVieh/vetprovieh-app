@@ -14,6 +14,11 @@ export class VetproviehLayout extends HTMLElement {
             outsideInnerHtml: this.innerHTML,
             title: "No Title Set"
         };
+
+        let _this = this;
+        document.addEventListener("DOMContentLoaded", function(event) {
+            _this._deactivatePageLoader();
+        });
     }
 
     /**
@@ -71,14 +76,27 @@ export class VetproviehLayout extends HTMLElement {
     }
 
     /**
+     * Hide pageloader
+     * @private
+     */
+    _deactivatePageLoader() {
+        let element = document.getElementById("pageloader");
+        setTimeout(
+            (_) =>element.classList.remove("is-active"),
+            500)
+    }
+
+    /**
      * HTML-Output schreiben
      * @private
      */
     _updateRendering() {
         this.innerHTML = `
         <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
+        <link rel="stylesheet" href="/node_modules/bulma-pageloader/dist/css/bulma-pageloader.min.css">
         <link rel="stylesheet" href="/node_modules/fontawesome/css/all.css">
         <link rel="stylesheet" href="/assets/css/layout.css">
+        <div id="pageloader" class="pageloader is-active has-background-vetprovieh-light-blue"><span class="title">Ihre Daten werden geladen...</span></div>
         <nav class="navbar is-fixed-top has-shadow has-background-vetprovieh-light-blue" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a id="left-menu-open" class="navbar-item has-text-white" >
