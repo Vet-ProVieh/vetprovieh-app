@@ -4,7 +4,7 @@
 <!-- Header -->
 <head>
     <meta charset="utf-8">
-    <title>vetprovieh</title>
+    <title>Vet:Provieh - Ihre Landwirte</title>
     <link rel="manifest" href="/manifest.json">
 </head>
 
@@ -13,7 +13,14 @@
 <body>
   <vetprovieh-layout>
     <h1>Test</h1>
-
+    <vetprovieh-list src="/service/farmers" pagesize="4">
+      <template>
+        <div>
+          <strong>{{id}}</strong>: <span>{{name}}</span>
+        </div>
+        <hr />
+      </template>
+    </vetprovieh-list>
   </vetprovieh-layout>
 </body>
 

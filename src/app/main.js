@@ -1,5 +1,6 @@
 // Externe Komponenten
 import { VetproviehList } from "@tomuench/vetprovieh-list";
+import { VetproviehSidemenu } from "@tomuench/vetprovieh-sidemenu";
 
 // Interne Komponenten
 import * as Component from "../components/components.module.js";

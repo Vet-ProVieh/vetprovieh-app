@@ -44,22 +44,22 @@ export class VetproviehLayout extends HTMLElement {
             <button id="left-menu-open">open Left</button>
             <button id="right-menu-open">open right</button>
         </nav>
-        <side-menu id="left-menu" width="300px">
+        <vetprovieh-sidemenu id="left-menu" width="300px">
         <h2> LEFT </h2>
             <ul>
                 <li><a href="#">Item 1</a></li>
                 <li><a href="#">Item 2</a></li>
                 <li><a href="#">Item 3</a></li>
             </ul>
-        </side-menu>
-        <side-menu id="right-menu" orientation="right" width="300px">
+        </vetprovieh-sidemenu>
+        <vetprovieh-sidemenu id="right-menu" orientation="right" width="300px">
         <h2> Right </h2>
             <ul>
                 <li><a href="#">Item 1</a></li>
                 <li><a href="#">Item 2</a></li>
                 <li><a href="#">Item 3</a></li>
             </ul>
-        </side-menu>
+        </vetprovieh-sidemenu>
         <section class="section">
             <div class="container">
             ` + this._outsideInnerHtml + `
