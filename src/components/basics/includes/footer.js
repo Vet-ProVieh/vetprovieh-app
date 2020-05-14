@@ -14,10 +14,11 @@ export class VetproviehFooter extends HTMLElement {
      */
     _updateRendering() {
         this.innerHTML = `
-        <footer class="footer is-fixed-bottom">
+        <footer class="footer is-fixed-bottom has-background-grey-darker">
             <div class="content has-text-centered">
                 <p>
-                <strong>vetprovieh</strong> 
+                <img src="/assets/imgs/icons/icon-72x72.png" width="28" height="28">
+                <strong class="has-text-white">Vet::ProVieh</strong> 
                 </p>
             </div>
         </footer>

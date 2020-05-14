@@ -1,10 +1,51 @@
 export class VetproviehLayout extends HTMLElement {
 
-    constructor() {
-        super();
-        this._outsideInnerHtml = this.innerHTML;
+    static get observedAttributes() {
+        return ["title"];
     }
 
+    constructor() {
+        super();
+        /**
+         * @type {!Object}
+         * @private
+         */
+        this._properties = {
+            outsideInnerHtml: this.innerHTML,
+            title: "No Title Set"
+        };
+    }
+
+    /**
+     * Callback for Attributes
+     * @param {*} name
+     * @param {*} oldValue
+     * @param {*} newValue
+     */
+    attributeChangedCallback(name, old, value) {
+        if (old !== value) {
+            this[name] = value;
+        }
+    }
+
+    /**
+     * PUBLIC
+     * Getter for title of current layout
+     */
+    get title() {
+        return this._properties.title;
+    }
+
+    /**
+     * PUBLIC
+     * Setter for title of current layout
+     */
+    set title(val) {
+        if (val !== this.title) {
+            this._properties.title = val;
+            this._updateRendering();
+        }
+    }
 
     connectedCallback() {
         this._addCssClassToBody();
@@ -21,8 +62,8 @@ export class VetproviehLayout extends HTMLElement {
 
     _addListenerToButton() {
         ["left", "right"].forEach((menuOrientation) => {
-            var button = document.getElementById(menuOrientation +"-menu-open");
-            var sideMenu = document.getElementById(menuOrientation +"-menu");
+            var button = document.getElementById(menuOrientation + "-menu-open");
+            var sideMenu = document.getElementById(menuOrientation + "-menu");
             button.addEventListener("click", () => {
                 sideMenu.dispatchEvent(new Event("toggle"));
             });
@@ -31,38 +72,86 @@ export class VetproviehLayout extends HTMLElement {
 
     /**
      * HTML-Output schreiben
+     * @private
      */
     _updateRendering() {
         this.innerHTML = `
         <link rel="stylesheet" href="/node_modules/bulma/css/bulma.min.css">
-        <nav class="navbar is-fixed-top has-shadow has-background-grey-darker" role="navigation" aria-label="main navigation">
+        <link rel="stylesheet" href="/node_modules/fontawesome/css/all.css">
+        <link rel="stylesheet" href="/assets/css/layout.css">
+        <nav class="navbar is-fixed-top has-shadow has-background-grey-light" role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
-                <a class="navbar-item" href="/">
-                <img src="/assets/imgs/icons/icon-72x72.png" width="28" height="28">
+                <a id="left-menu-open" class="navbar-item" >
+                    <i class="fas fa-bars"></i>
                 </a>
             </div>
-            <button id="left-menu-open">open Left</button>
-            <button id="right-menu-open">open right</button>
+            <div class="navbar-item navbar-center">
+                <h1 id="title" class="has-text-white">` + this.title + `</h1>
+            </div>
+           <!-- <button id="right-menu-open">open right</button> -->
         </nav>
         <vetprovieh-sidemenu id="left-menu" width="300px">
-        <h2> LEFT </h2>
-            <ul>
-                <li><a href="#">Item 1</a></li>
-                <li><a href="#">Item 2</a></li>
-                <li><a href="#">Item 3</a></li>
-            </ul>
+            <aside class="menu">
+                <div >
+                    <div class="card-content">
+                        <div class="media">
+                          <div class="media-left">
+                            <figure class="image is-48x48">
+                              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                            </figure>
+                          </div>
+                          <div class="media-content">
+                            <p class="title is-5">Stephan Göken</p>
+                            <p class="subtitle is-7">Gemeinschaftspraxis Göken & Braune</p>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="menu-label">
+                   Behandlung
+                </p>
+                <ul class="menu-list">
+                    <li><a href="#">Behandlungen</a></li>
+                </ul>
+                
+                <p class="menu-label">
+                   Persönliche Einstellungen
+                </p>
+                <ul class="menu-list">
+                    <li><a href="#">Mein Profil</a></li>
+                    <li><a href="#">Benachrichtigungen</a></li>
+                    <li><a href="#">Termine</a></li>
+                </ul>
+            
+                <p class="menu-label">
+                  Meine Stammdaten
+                </p>
+                <ul class="menu-list">
+                    <li><a href="/farmers/index.html">Landwirte</a></li>
+                    <li><a href="/barns/index.html">Ställe</a></li>
+                </ul>
+                <p class="menu-label">
+                  Meine Praxis
+                </p>
+                <ul class="menu-list">
+                    <li><a href="#">Basisdaten</a></li>
+                    <li><a href="#">Benutzer</a></li>
+                    <li><a href="#">Behandlungspläne</a></li>
+                </ul>
+                
+            </aside>
         </vetprovieh-sidemenu>
-        <vetprovieh-sidemenu id="right-menu" orientation="right" width="300px">
+      <!--  <vetprovieh-sidemenu id="right-menu" orientation="right" width="300px">
         <h2> Right </h2>
             <ul>
                 <li><a href="#">Item 1</a></li>
                 <li><a href="#">Item 2</a></li>
                 <li><a href="#">Item 3</a></li>
             </ul>
-        </vetprovieh-sidemenu>
+        </vetprovieh-sidemenu> -->
         <section class="section">
             <div class="container">
-            ` + this._outsideInnerHtml + `
+            ` + this._properties.outsideInnerHtml + `
             </div>
         </section>
         

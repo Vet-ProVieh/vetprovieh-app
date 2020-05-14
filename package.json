@@ -10,6 +10,7 @@
     "serve": "^11.0.2"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@tomuench/vetprovieh-list": "0.0.1",
     "@tomuench/vetprovieh-sidemenu": "file:../vetprovieh-menu",
     "date-fns": "^1.30.1",

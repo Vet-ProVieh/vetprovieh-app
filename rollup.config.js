@@ -28,7 +28,8 @@ export default {
       targets: [
         { src: 'src/assets/*', dest: 'www/assets' },
         { src: 'src/pages/*', dest: 'www'},
-        { src: 'node_modules/bulma/*', dest: 'www/node_modules/bulma'} 
+        { src: 'node_modules/bulma/*', dest: 'www/node_modules/bulma'} ,
+        { src: 'node_modules/@fortawesome/fontawesome-free/*', dest: 'www/node_modules/fontawesome'}
       ]
     }),
     generateSW({
