@@ -1,41 +1,93 @@
-<div class="field">
-    <label class="label">Unternehmen</label>
-    <div class="control">
-        <input property="name" class="input is-success" type="text">
-    </div>
+<template>
+    <div class="field">
+        <div class="columns">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title is-4">Allgemeines</p>
 
-    <label class="label">VVVO</label>
-    <div class="control">
-        <input property="vvvoNumber" class="input is-success" type="text">
-    </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="label">Unternehmen</label>
+                                <div class="control">
+                                    <input property="name" class="input " type="text">
+                                </div>
+                            </div>
+                        </div>
 
-    <label class="label">Vorname</label>
-    <div class="control">
-        <input property="contactPerson.firstName" class="input is-success" type="text">
-    </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="label">VVVO</label>
+                                <div class="control">
+                                    <input property="vvvoNumber" class="input " type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <label class="label">Nachname</label>
-    <div class="control">
-        <input property="contactPerson.lastName" class="input is-success" type="text" >
-    </div>
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title is-4">Addresse</p>
+                        <div class="columns">
+                            <div class="column is-four-fifths">
+                                <label class="label">Straße</label>
+                                <div class="control">
+                                    <input property="address.streetName" class="input " type="text">
+                                </div>
+                            </div>
+                            <div class="column">
+                                <label class="label">Hausnummer</label>
+                                <div class="control">
+                                    <input property="address.streetNumber" class="input " type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="label">Postleitzahl</label>
+                                <div class="control">
+                                    <input property="address.postalCode" class="input " type="text">
+                                </div>
+                            </div>
+                            <div class="column is-four-fifths">
+                                <label class="label">Stadt</label>
+                                <div class="control">
+                                    <input property="address.city" class="input " type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <label class="label">Postleitzahl</label>
-    <div class="control">
-        <input property="address.postalCode" class="input is-success" type="text">
-    </div>
+        <br/>
+        <div class="card">
+            <div class="card-content">
+                <p class="title is-4">Kontakt</p>
+                <label class="label">Vorname</label>
+                <div class="control">
+                    <input property="contactPerson.firstName" class="input " type="text">
+                </div>
 
-    <label class="label">Straße</label>
-    <div class="control">
-        <input property="address.streetName" class="input is-success" type="text">
-    </div>
+                <label class="label">Nachname</label>
+                <div class="control">
+                    <input property="contactPerson.lastName" class="input " type="text">
+                </div>
 
-    <label class="label">Hausnummer</label>
-    <div class="control">
-        <input property="address.streetNumber" class="input is-success" type="text">
-    </div>
+                <label class="label">Telefon</label>
+                <div class="control">
+                    <input property="contactPerson.landline" type="tel" class="input " type="text">
+                </div>
 
-    <label class="label">Stadt</label>
-    <div class="control">
-        <input property="address.city" class="input is-success" type="text">
+                <label class="label">Mobil</label>
+                <div class="control">
+                    <input property="contactPerson.mobile" type="tel" class="input " type="text">
+                </div>
+            </div>
+        </div>
     </div>
-</div>
+</template>
