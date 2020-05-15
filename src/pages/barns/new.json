@@ -1,0 +1,17 @@
+{
+  "name": null,
+  "vvvoNumber": null,
+  "animal": null,
+  "veterinarian": null,
+  "vet": null,
+  "address": {
+    "city": null,
+    "postalCode": null,
+    "streetName": null,
+    "streetNumber": null
+  },
+  "gpsCoordinates": {
+    "latitude": 0,
+    "longitude": 0
+  }
+}

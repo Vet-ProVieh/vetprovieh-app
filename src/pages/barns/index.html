@@ -6,22 +6,30 @@
     <meta charset="utf-8">
     <title>Vet:Provieh - Ihre Ställe</title>
     <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
 </head>
 
 <!-- Layout-Container -->
 
 <body>
-  <vetprovieh-layout title="Ihr Ställe">
-    <h1>Test</h1>
-    <vetprovieh-list src="/service/barns" pagesize="25">
-      <template>
-        <div>
-          <strong>{{id}}</strong>: <span>{{name}}</span>
-        </div>
-        <hr />
-      </template>
+<vetprovieh-layout title="Ihre Ställe">
+    <a class="button is-primary is-pulled-right" href="create.html">
+        Neuen Stall erstellen
+    </a>
+    <br/><br/>
+    <vetprovieh-list src="/service/barns" pagesize="20">
+        <template>
+            <div>
+                <a href="/barns/show.html?id={{vvvoNumber}}">
+                    <strong>{{name}}</strong>
+                </a><br/>
+                <span>VVVO: {{vvvoNumber}}</span><br/>
+                <span>{{address.streetName}} {{address.streetNumber}}, {{address.postalCode}} {{address.city}}</span>
+            </div>
+            <hr />
+        </template>
     </vetprovieh-list>
-  </vetprovieh-layout>
+</vetprovieh-layout>
 </body>
 
 <!-- Skript inkludierungen -->

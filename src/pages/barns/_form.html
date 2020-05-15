@@ -1,0 +1,67 @@
+<template>
+    <div class="field">
+        <div class="columns">
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title is-4">Allgemeines</p>
+
+                        <div class="columns">
+                            <div class="column">
+                                <label class="label">Stall-Bezeichnung</label>
+                                <div class="control">
+                                    <input property="name" class="input " type="text">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="columns">
+                            <div class="column">
+                                <label class="label">VVVO</label>
+                                <div class="control">
+                                    <input property="vvvoNumber" class="input " type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title is-4">Addresse</p>
+                        <div class="columns">
+                            <div class="column is-four-fifths">
+                                <label class="label">Straße</label>
+                                <div class="control">
+                                    <input property="address.streetName" class="input " type="text">
+                                </div>
+                            </div>
+                            <div class="column">
+                                <label class="label">Hausnummer</label>
+                                <div class="control">
+                                    <input property="address.streetNumber" class="input " type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="label">Postleitzahl</label>
+                                <div class="control">
+                                    <input property="address.postalCode" class="input " type="text">
+                                </div>
+                            </div>
+                            <div class="column is-four-fifths">
+                                <label class="label">Stadt</label>
+                                <div class="control">
+                                    <input property="address.city" class="input " type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
