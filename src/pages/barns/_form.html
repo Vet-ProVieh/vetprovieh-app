@@ -10,7 +10,7 @@
                             <div class="column">
                                 <label class="label">Stall-Bezeichnung</label>
                                 <div class="control">
-                                    <input property="name" class="input " type="text">
+                                    <input property="name" class="input " type="text" required>
                                 </div>
                             </div>
                         </div>
@@ -19,7 +19,7 @@
                             <div class="column">
                                 <label class="label">VVVO</label>
                                 <div class="control">
-                                    <input property="vvvoNumber" class="input " type="text">
+                                    <input property="vvvoNumber" pattern="276\d{12}" placeholder="276..." class="input" type="text" required>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                             <div class="column">
                                 <label class="label">Hausnummer</label>
                                 <div class="control">
-                                    <input property="address.streetNumber" class="input " type="text">
+                                    <input property="address.streetNumber" pattern="\d+[ ]{0,1}[a-z]{0,2}" class="input " type="text">
                                 </div>
                             </div>
                         </div>
@@ -49,13 +49,13 @@
                             <div class="column">
                                 <label class="label">Postleitzahl</label>
                                 <div class="control">
-                                    <input property="address.postalCode" class="input " type="text">
+                                    <input property="address.postalCode" pattern="^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$" class="input " type="text">
                                 </div>
                             </div>
                             <div class="column is-four-fifths">
                                 <label class="label">Stadt</label>
                                 <div class="control">
-                                    <input property="address.city" class="input " type="text">
+                                    <input property="address.city" class="input" type="text">
                                 </div>
                             </div>
                         </div>
