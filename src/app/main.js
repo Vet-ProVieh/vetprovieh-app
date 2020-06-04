@@ -1,5 +1,5 @@
 // Externe Komponenten
-import { VetproviehList } from "@tomuench/vetprovieh-list";
+import { VetproviehList } from "@tomuench/vetprovieh-list/";
 import { VetproviehDetail } from "@tomuench/vetprovieh-detail";
 import { VetproviehSidemenu } from "@tomuench/vetprovieh-sidemenu";
 

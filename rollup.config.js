@@ -15,7 +15,7 @@ import {
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-    input: 'src/app/main.js',
+    input: 'lib/app/main.js',
     output: {
         file: 'www/bundle.js',
         format: 'iife', // immediately-invoked function expression — suitable for <script> tags
@@ -27,8 +27,8 @@ export default {
         production && terser(), // minify, but only in production
         copy({ // Copy HTML-Pages to Public Folder
             targets: [
-                {src: 'src/assets/*', dest: 'www/assets'},
-                {src: 'src/pages/*', dest: 'www'},
+                {src: 'lib/assets/*', dest: 'www/assets'},
+                {src: 'lib/pages/*', dest: 'www'},
                 {src: 'node_modules/bulma/*', dest: 'www/node_modules/bulma'},
                 {src: 'node_modules/bulma-pageloader/*', dest: 'www/node_modules/bulma-pageloader'},
                 {src: 'node_modules/@fortawesome/fontawesome-free/*', dest: 'www/node_modules/fontawesome'}
