@@ -5,3 +5,5 @@ www/
 
 # Webstorm
 .idea/
+
+coverage/

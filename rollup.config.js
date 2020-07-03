@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 const {generateSW} = require('rollup-plugin-workbox');
 const {injectManifest} = require('rollup-plugin-workbox');
 import copy from 'rollup-plugin-copy'
+import typescript from 'rollup-plugin-typescript';
 
 
 import {
@@ -15,20 +16,24 @@ import {
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-    input: 'src/app/main.js',
+    input: 'src/app/main.ts',
     output: {
         file: 'www/bundle.js',
-        format: 'iife', // immediately-invoked function expression — suitable for <script> tags
+        format: 'es', // immediately-invoked function expression — suitable for <script> tags
         sourcemap: true
     },
     plugins: [
+        typescript(),
         resolve(), // tells Rollup how to find date-fns in node_modules
-        commonjs(), // converts date-fns to ES modules
+        commonjs(
+
+            
+        ), // converts date-fns to ES modules
         production && terser(), // minify, but only in production
         copy({ // Copy HTML-Pages to Public Folder
             targets: [
-                {src: 'lib/assets/*', dest: 'www/assets'},
-                {src: 'lib/pages/*', dest: 'www'},
+                {src: 'src/assets/*', dest: 'www/assets'},
+                {src: 'src/pages/*', dest: 'www'},
                 {src: 'node_modules/bulma/*', dest: 'www/node_modules/bulma'},
                 {src: 'node_modules/bulma-pageloader/*', dest: 'www/node_modules/bulma-pageloader'},
                 {src: 'node_modules/@fortawesome/fontawesome-free/*', dest: 'www/node_modules/fontawesome'}

@@ -1,10 +1,10 @@
 // Externe Komponenten
-import { VetproviehList } from "@tomuench/vetprovieh-list";
-import { VetproviehDetail } from "@tomuench/vetprovieh-detail";
-import { VetproviehSidemenu } from "@tomuench/vetprovieh-sidemenu";
+export { VetproviehList } from "@tomuench/vetprovieh-list";
+export { VetproviehDetail } from "@tomuench/vetprovieh-detail";
+export { VetproviehSidemenu } from "@tomuench/vetprovieh-sidemenu";
 
 // Interne Komponenten
-import * as Component from "../components/components.module.js";
+export * as Component from "../components/components.module.js";
 
 
 
