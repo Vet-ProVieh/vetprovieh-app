@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+<head>
+    <meta charset="utf-8">
+    <title>VetProVieh::Login</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+  <vetprovieh-layout title="Vet:ProVieh - Anmeldung" class="login">
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <div class="column is-4 is-offset-4">
+                    <div class="box">
+                        <figure class="avatar">
+                            <img src="/assets/imgs/icons/icon-128x128.png">
+                        </figure>
+                        <form>
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input is-medium" type="email" placeholder="Ihre Emailadresse"
+                                        autofocus="" required>
+                                </div>
+                            </div>
+
+                            <div class="field">
+                                <div class="control">
+                                    <input class="input  is-medium" type="password" placeholder="Ihr Passwort" required>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Login Speichern
+                                </label>
+                            </div>
+                            <button class="button is-block is-info is-large is-fullwidth">Login <i class="fa fa-sign-in"
+                                    aria-hidden="true"></i></button>
+                        </form>
+                    </div>
+                    <p class="has-text-grey">
+                        <a href="../">Registrieren</a> &nbsp;·&nbsp;
+                        <a href="../">Passwort vergessen</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  </vetprovieh-layout>
+</body>
+
+<!-- Skript inkludierungen -->
+<script type="module" src='/bundle.js'></script>
+
+</html>

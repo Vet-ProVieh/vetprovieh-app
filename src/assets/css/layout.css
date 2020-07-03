@@ -25,3 +25,13 @@ footer {
 .full-height {
     min-height: calc(100vh - 230px);
 }
+
+
+.login section.section.full-height {
+    background: url(/assets/imgs/login_background.jpg);
+    background-position-y: center;
+}
+
+vetprovieh-layout footer {
+    border-top: 2px solid #fff;
+}
