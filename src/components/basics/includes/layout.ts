@@ -1,78 +1,83 @@
-export class VetproviehLayout extends HTMLElement {
+import {VetproviehElement} from '@tomuench/vetprovieh-shared';
 
-    static get observedAttributes() {
-        return ["title"];
-    }
+/**
+ * Layout for Vet:ProVieh
+ */
+export class VetproviehLayout extends VetproviehElement {
+  /**
+       * Observed Attributes
+       */
+  static get observedAttributes() {
+    return ['title'];
+  }
 
-    constructor() {
-        super();
-        /**
-         * @type {!Object}
-         * @private
-         */
-        this._properties = {
-            outsideInnerHtml: this.innerHTML,
-            title: "No Title Set"
-        };
-
-        let _this = this;
-        document.addEventListener("DOMContentLoaded", function(event) {
-            _this._deactivatePageLoader();
-        });
-    }
+    private _title = 'No Title Set';
+    private _outsideInnerHtml = '';
 
     /**
-     * Callback for Attributes
-     * @param {*} name
-     * @param {*} oldValue
-     * @param {*} newValue
+     * Konstruktor
      */
-    attributeChangedCallback(name, old, value) {
-        if (old !== value) {
-            this[name] = value;
-        }
+    constructor() {
+      super();
+      this._outsideInnerHtml = this.innerHTML;
+
+      const self = this;
+      document.addEventListener('DOMContentLoaded', function() {
+        self._deactivatePageLoader();
+      }, false);
     }
 
     /**
      * PUBLIC
      * Getter for title of current layout
+     * @return {string}
      */
     get title() {
-        return this._properties.title;
+      return this._title;
     }
 
     /**
      * PUBLIC
      * Setter for title of current layout
+     * @param {string} val
      */
     set title(val) {
-        if (val !== this.title) {
-            this._properties.title = val;
-            this._updateRendering();
-        }
+      if (val !== this.title) {
+        this._title = val;
+        this._updateRendering();
+      }
     }
 
+    /**
+     * Callback after Render
+     */
     connectedCallback() {
-        this._addCssClassToBody();
-        this._updateRendering();
-        this._addListenerToButton();
+      this._addCssClassToBody();
+      this._updateRendering();
+      this._addListenerToButton();
     }
 
     /**
      * CSS-Klasse an das Body-Element hängen, so dass Header fixed ist.
      */
     _addCssClassToBody() {
-        document.getElementsByTagName("body")[0].classList.add('has-navbar-fixed-top');
+      document.getElementsByTagName('body')[0]
+          .classList.add('has-navbar-fixed-top');
     }
 
+    /**
+     * Listener for Button (Left/Right)
+     */
     _addListenerToButton() {
-        ["left", "right"].forEach((menuOrientation) => {
-            var button = document.getElementById(menuOrientation + "-menu-open");
-            var sideMenu = document.getElementById(menuOrientation + "-menu");
-            button.addEventListener("click", (event) => {
-                sideMenu.dispatchEvent(new Event("toggle"));
-            });
-        })
+      ['left', 'right'].forEach((menuOrientation) => {
+        const button = document
+            .getElementById(menuOrientation + '-menu-open') as HTMLElement;
+        const sideMenu = document
+            .getElementById(menuOrientation + '-menu') as HTMLElement;
+        button.addEventListener('click', () => {
+          sideMenu.dispatchEvent(new Event('toggle'));
+        });
+      });
     }
 
     /**
@@ -80,10 +85,10 @@ export class VetproviehLayout extends HTMLElement {
      * @private
      */
     _deactivatePageLoader() {
-        let element = document.getElementById("pageloader");
-        setTimeout(
-            (_) =>element.classList.remove("is-active"),
-            500)
+      const element = document.getElementById('pageloader') as HTMLElement;
+      setTimeout(
+          (_) => element.classList.remove('is-active'),
+          500);
     }
 
     /**
@@ -91,9 +96,14 @@ export class VetproviehLayout extends HTMLElement {
      * @private
      */
     _updateRendering() {
-        this.innerHTML = `
-        <div id="pageloader" class="pageloader is-active has-background-vetprovieh-light-blue"><span class="title">Ihre Daten werden geladen...</span></div>
-        <nav class="navbar is-fixed-top has-shadow has-background-vetprovieh-light-blue" role="navigation" aria-label="main navigation">
+      this.innerHTML = `
+        <div id="pageloader" 
+             class="pageloader is-active has-background-vetprovieh-light-blue">
+             <span class="title">Ihre Daten werden geladen...</span>
+        </div>
+        <nav class="navbar is-fixed-top has-shadow 
+                    has-background-vetprovieh-light-blue" 
+             role="navigation" aria-label="main navigation">
             <div class="navbar-brand">
                 <a id="left-menu-open" class="navbar-item has-text-white" >
                     <i class="fas fa-bars"></i>
@@ -111,12 +121,15 @@ export class VetproviehLayout extends HTMLElement {
                         <div class="media">
                           <div class="media-left">
                             <figure class="image is-48x48">
-                              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                              <img src="https://bulma.io/images/placeholders/96x96.png" 
+                                   alt="Placeholder image">
                             </figure>
                           </div>
                           <div class="media-content">
                             <p class="title is-5">Stephan Göken</p>
-                            <p class="subtitle is-7">Gemeinschaftspraxis Göken & Braune</p>
+                            <p class="subtitle is-7">
+                                Gemeinschaftspraxis Göken & Braune
+                            </p>
                           </div>
                         </div>
                     </div>
@@ -155,7 +168,8 @@ export class VetproviehLayout extends HTMLElement {
                 
             </aside>
         </vetprovieh-sidemenu>
-      <!--  <vetprovieh-sidemenu id="right-menu" orientation="right" width="300px">
+      <!--  <vetprovieh-sidemenu id="right-menu" 
+                   orientation="right" width="300px">
         <h2> Right </h2>
             <ul>
                 <li><a href="#">Item 1</a></li>
@@ -165,7 +179,7 @@ export class VetproviehLayout extends HTMLElement {
         </vetprovieh-sidemenu> -->
         <section class="section full-height">
             <div class="container">
-            ` + this._properties.outsideInnerHtml + `
+            ` + this._outsideInnerHtml + `
             </div>
         </section>
         
@@ -176,4 +190,4 @@ export class VetproviehLayout extends HTMLElement {
 
 
 // Komponente registrieren
-customElements.define("vetprovieh-layout", VetproviehLayout);
+customElements.define('vetprovieh-layout', VetproviehLayout);

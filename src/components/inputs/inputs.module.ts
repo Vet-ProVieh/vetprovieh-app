@@ -1,4 +1,4 @@
 // Web-Komponenten registrieren
-console.log("Registry: Registriere Inputs");
+console.log('Registry: Registriere Inputs');
 
-export { VetproviehSelect } from "./includes/vetprovieh-select";
+export {VetproviehSelect} from './includes/vetprovieh-select';

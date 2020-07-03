@@ -28,6 +28,7 @@
     "@tomuench/vetprovieh-detail": "file:../vetprovieh-detail",
     "@tomuench/vetprovieh-list": "file:../vetprovieh-list",
     "@tomuench/vetprovieh-sidemenu": "file:../vetprovieh-menu",
+    "@tomuench/vetprovieh-shared": "file:../vetprovieh-shared",
     "@tomuench/formt-validation": "file:../formt-validation",
     "bulma": "^0.8.2",
     "bulma-pageloader": "^0.3.0",
@@ -37,6 +38,7 @@
     "build": "rollup -c",
     "watch": "rollup -c -w",
     "test": "jest --colors --coverage test",
-    "start": "./build_and_run.sh"
+    "start": "./build_and_run.sh",
+    "lint": "eslint . --ext .ts --fix"
   }
 }
