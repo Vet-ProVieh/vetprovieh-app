@@ -25,14 +25,15 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.13.0",
+    "@tomuench/formt-validation": "file:../formt-validation",
     "@tomuench/vetprovieh-detail": "file:../vetprovieh-detail",
     "@tomuench/vetprovieh-list": "file:../vetprovieh-list",
-    "@tomuench/vetprovieh-sidemenu": "file:../vetprovieh-menu",
     "@tomuench/vetprovieh-shared": "file:../vetprovieh-shared",
-    "@tomuench/formt-validation": "file:../formt-validation",
+    "@tomuench/vetprovieh-sidemenu": "file:../vetprovieh-menu",
     "bulma": "^0.8.2",
     "bulma-pageloader": "^0.3.0",
-    "date-fns": "^1.30.1"
+    "date-fns": "^1.30.1",
+    "keycloak-js": "^10.0.2"
   },
   "scripts": {
     "build": "rollup -c",

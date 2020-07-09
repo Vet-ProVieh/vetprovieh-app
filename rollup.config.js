@@ -43,6 +43,7 @@ export default {
             swDest: 'www/wb_service_worker.js',
             globDirectory: 'www/',
             globPatterns: ['**/*.{js,css,html,ico,png}'],
+            globIgnores: ['auth/**/*'],
             clientsClaim: true,
             skipWaiting: true,
             runtimeCaching: [{
