@@ -1,6 +1,6 @@
 {
     "realm": "vetprovieh",
-    "auth-server-url": "http://localhost/auth/",
+    "auth-server-url": "/auth/",
     "ssl-required": "none",
     "resource": "app",
     "verify-token-audience": true,

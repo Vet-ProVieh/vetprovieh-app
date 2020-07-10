@@ -11,7 +11,7 @@ class KeycloakHelper {
         onLoad: 'login-required',
         token,
         refreshToken
-      }).success(function (authenticated) {}).error(function (x) {
+      }).success(function (authenticated) {}).catch(function (x) {
         console.log('failed to initialize Keycloak');
       });
     }
@@ -45,7 +45,7 @@ class KeycloakHelper {
           .then(() => {
             this.storeTokens();
             resolve();
-          }).error(reject);
+          }).catch(reject);
       })
     }
   
