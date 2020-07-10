@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+<head>
+    <meta charset="utf-8">
+    <title>Vet:Provieh - Ihre Behandlungspläne</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+  <vetprovieh-layout title="Ihre Behandlungspläne">
+    <a class="button is-primary is-pulled-right" href="create.html">
+      Neuen Behandlungsplan erstellen
+    </a>
+    <br/><br/>
+    <vetprovieh-list src="/service/careplans" pagesize="5">
+      <template>
+        <div>
+          <a href="/settings/careplans/show.html?id={{id}}">
+            <strong>{{name}}</strong>
+          </a>
+        </div>
+        <hr />
+      </template>
+    </vetprovieh-list>
+  </vetprovieh-layout>
+</body>
+
+
+  <!--#include file="/includes/scripts.html"-->
+
+</html>

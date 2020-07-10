@@ -154,8 +154,8 @@ export class VetproviehLayout extends VetproviehElement {
                   Meine Stammdaten
                 </p>
                 <ul class="menu-list">
-                    <li><a href="/farmers/index.html">Landwirte</a></li>
-                    <li><a href="/barns/index.html">Ställe</a></li>
+                    <li><a href="/farmers">Landwirte</a></li>
+                    <li><a href="/barns">Ställe</a></li>
                 </ul>
                 <p class="menu-label">
                   Meine Praxis
@@ -163,7 +163,7 @@ export class VetproviehLayout extends VetproviehElement {
                 <ul class="menu-list">
                     <li><a href="#">Basisdaten</a></li>
                     <li><a href="#">Benutzer</a></li>
-                    <li><a href="#">Behandlungspläne</a></li>
+                    <li><a href="/settings/careplans">Behandlungspläne</a></li>
                 </ul>
                 
             </aside>
