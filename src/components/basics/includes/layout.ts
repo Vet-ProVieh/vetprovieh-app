@@ -108,8 +108,6 @@ export class VetproviehLayout extends VetproviehElement {
                 <a id="left-menu-open" class="navbar-item has-text-white" >
                     <i class="fas fa-bars"></i>
                 </a>
-            </div>
-            <div class="navbar-item navbar-center">
                 <h1 id="title" class="has-text-white">` + this.title + `</h1>
             </div>
            <!-- <button id="right-menu-open">open right</button> -->

@@ -65,6 +65,7 @@ export default {
             globIgnores: ['auth/**/*', 'injectManifest_sw.js'],
             clientsClaim: true,
             skipWaiting: true,
+            ignoreURLParametersMatching: [/.*/],
             runtimeCaching: [{
                     urlPattern: /service/,
                     handler: "NetworkFirst",

@@ -15,10 +15,10 @@
         </div>
         <div class="card">
             <div class="card-content">
-                <p class="title is-4">Gruppen</p>
+                <p class="title is-4">Untegordnete Felder</p>
                 <vetprovieh-list src="/service/careplans/groups/{{id}}/fields" pagesize="10">
                     <template>
-                        <a href="../fields/show.html?id={{id}}">
+                        <a href="../fields/show.html?id={{id}}" is="local-store">
                             {{id}}. {{name}}
                         </a>
                     </template>
