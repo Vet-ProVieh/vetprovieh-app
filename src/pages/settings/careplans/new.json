@@ -1,5 +1,16 @@
 {
     "id": null,
     "name": "",
-    "groups": []
+    "groups": [{
+        "id": null,
+        "name": "Testgruppe",
+        "position": 1,
+        "fields": [{
+            "id": null,
+            "name": "Feld 1",
+            "position": 1,
+            "optional": false,
+            "voiceInputable": true
+        }]
+    }]
 }
