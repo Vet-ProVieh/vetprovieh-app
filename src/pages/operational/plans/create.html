@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Vet:Provieh - Neue Behandlung</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+    <vetprovieh-layout title="Neue Behandlung erstellen">
+        <vetprovieh-detail src="/service/operationcareplans">
+            <template>
+                <div class="columns">
+                    <div class="column is-four-fifths">
+                        <!--#include file="_form.html"-->
+                    </div>
+                    <div class="column">
+                        <!--#include file="_sidemenu.html"-->
+                    </div>
+                </div>
+            </template>
+        </vetprovieh-detail>
+    </vetprovieh-layout>
+</body>
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>

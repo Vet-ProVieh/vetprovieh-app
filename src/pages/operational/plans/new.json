@@ -1,4 +1,52 @@
 {
   "id": null,
-  "name": null
+  "name": null,
+  "groups": [
+    {
+      "id": null,
+      "position": 1,
+      "name": "Schritt 1",
+      "fields": [
+        {
+          "id": null,
+          "position": 1,
+          "name": "F1",
+          "optional": false,
+          "voiceInputable": true,
+          "value": ""
+        },
+        {
+          "id": null,
+          "position": 2,
+          "name": "F2 (opt)",
+          "optional": true,
+          "voiceInputable": false,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "position": 2,
+      "name": "Schritt 2",
+      "fields": [
+        {
+          "id": null,
+          "position": 1,
+          "name": "F3",
+          "optional": false,
+          "voiceInputable": false,
+          "value": ""
+        },
+        {
+          "id": null,
+          "position": 2,
+          "name": "F4 (opt)",
+          "optional": true,
+          "voiceInputable": true,
+          "value": ""
+        }
+      ]
+    }
+  ]
 }

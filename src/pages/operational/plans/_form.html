@@ -1,93 +1,21 @@
-<template>
-    <div class="field">
-        <div class="columns">
-            <div class="column">
-                <div class="card">
-                    <div class="card-content">
-                        <p class="title is-4">Allgemeines</p>
-
-                        <div class="columns">
-                            <div class="column">
-                                <label class="label">Unternehmen</label>
-                                <div class="control">
-                                    <input property="name" class="input " type="text" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="columns">
-                            <div class="column">
-                                <label class="label">VVVO</label>
-                                <div class="control">
-                                    <input property="vvvoNumber" pattern="276\d{12}" placeholder="276..." class="input " type="text" required>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="card">
-                    <div class="card-content">
-                        <p class="title is-4">Addresse</p>
-                        <div class="columns">
-                            <div class="column is-four-fifths">
-                                <label class="label">Straße</label>
-                                <div class="control">
-                                    <input property="address.streetName" class="input " type="text">
-                                </div>
-                            </div>
-                            <div class="column">
-                                <label class="label">Hausnummer</label>
-                                <div class="control">
-                                    <input property="address.streetNumber" pattern="\d+[ ]{0,1}[a-z]{0,2}" class="input " type="text">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="columns">
-                            <div class="column">
-                                <label class="label">Postleitzahl</label>
-                                <div class="control">
-                                    <input property="address.postalCode" pattern="^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$" class="input " type="text">
-                                </div>
-                            </div>
-                            <div class="column is-four-fifths">
-                                <label class="label">Stadt</label>
-                                <div class="control">
-                                    <input property="address.city" class="input " type="text">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="panel">
+    <p class="panel-heading">
+        Allgemeines
+    </p>
+    <div class="panel-block" style="display:block">
+        <label class="label">Unternehmen</label>
+        <div class="control">
+            <input property="name" class="input " type="text" required>
         </div>
 
-        <br/>
-        <div class="card">
-            <div class="card-content">
-                <p class="title is-4">Kontakt</p>
-                <label class="label">Vorname</label>
-                <div class="control">
-                    <input property="contactPerson.firstName" class="input " type="text">
-                </div>
+        <label class="label">VVVO</label>
+        <div class="control">
+            <input property="vvvoNumber" pattern="276\d{12}" placeholder="276..." class="input " type="text" required>
+        </div>
 
-                <label class="label">Nachname</label>
-                <div class="control">
-                    <input property="contactPerson.lastName" class="input " type="text">
-                </div>
-
-                <label class="label">Telefon</label>
-                <div class="control">
-                    <input property="contactPerson.landline" type="tel" class="input " type="text">
-                </div>
-
-                <label class="label">Mobil</label>
-                <div class="control">
-                    <input property="contactPerson.mobile" type="tel" class="input " type="text">
-                </div>
-            </div>
+        <label class="label">Text1</label>
+        <div class="control">
+            <textarea class="textarea" is="voice-input" property="x"></textarea>
         </div>
     </div>
-</template>
+</div>

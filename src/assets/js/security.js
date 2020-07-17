@@ -1,7 +1,6 @@
 
 var keycloakHelper = new KeycloakHelper();
 
-
 const proxied = window.fetch;
 window.fetch = function () {
 

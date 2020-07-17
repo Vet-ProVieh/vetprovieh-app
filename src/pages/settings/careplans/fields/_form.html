@@ -3,13 +3,24 @@
         <div class="card">
             <div class="card-content">
                 <p class="title is-4">Allgemeines</p>
-                <div class="columns">
-                    <div class="column">
-                        <label class="label">Bezeichnung</label>
-                        <div class="control">
-                            <input property="name" class="input " type="text" required>
-                        </div>
-                    </div>
+                <label class="label">Bezeichnung</label>
+                <div class="control">
+                    <input property="name" class="input " type="text" required>
+                </div>
+
+                <div class="control">
+                    <label class="checkbox">
+                        <input property="voiceInputable" type="checkbox">
+                        Spracheingabe?
+                    </label>
+                </div>
+
+
+                <div class="control">
+                    <label class="checkbox">
+                        <input property="optional" type="checkbox">
+                        Optional?
+                    </label>
                 </div>
             </div>
         </div>

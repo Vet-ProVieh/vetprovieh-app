@@ -1,4 +1,4 @@
-import {VetproviehElement} from '@tomuench/vetprovieh-shared';
+import { VetproviehElement } from '@tomuench/vetprovieh-shared';
 
 /**
  * Layout for Vet:ProVieh
@@ -11,92 +11,94 @@ export class VetproviehLayout extends VetproviehElement {
     return ['title'];
   }
 
-    private _title = 'No Title Set';
-    private _outsideInnerHtml = '';
+  private _title = 'No Title Set';
+  private _outsideInnerHtml = '';
 
-    /**
-     * Konstruktor
-     */
-    constructor() {
-      super();
-      this._outsideInnerHtml = this.innerHTML;
+  /**
+   * Konstruktor
+   */
+  constructor() {
+    super();
+    this._outsideInnerHtml = this.innerHTML;
 
-      const self = this;
-      document.addEventListener('DOMContentLoaded', function() {
-        self._deactivatePageLoader();
-      }, false);
-    }
+    const self = this;
+    document.addEventListener('DOMContentLoaded', function () {
+      self._deactivatePageLoader();
+    }, false);
+  }
 
-    /**
-     * PUBLIC
-     * Getter for title of current layout
-     * @return {string}
-     */
-    get title() {
-      return this._title;
-    }
+  /**
+   * PUBLIC
+   * Getter for title of current layout
+   * @return {string}
+   */
+  get title() {
+    return this._title;
+  }
 
-    /**
-     * PUBLIC
-     * Setter for title of current layout
-     * @param {string} val
-     */
-    set title(val) {
-      if (val !== this.title) {
-        this._title = val;
-        this._updateRendering();
-      }
-    }
-
-    /**
-     * Callback after Render
-     */
-    connectedCallback() {
-      this._addCssClassToBody();
+  /**
+   * PUBLIC
+   * Setter for title of current layout
+   * @param {string} val
+   */
+  set title(val) {
+    if (val !== this.title) {
+      this._title = val;
       this._updateRendering();
-      this._addListenerToButton();
     }
+  }
 
-    /**
-     * CSS-Klasse an das Body-Element hängen, so dass Header fixed ist.
-     */
-    _addCssClassToBody() {
-      document.getElementsByTagName('body')[0]
-          .classList.add('has-navbar-fixed-top');
-    }
+  /**
+   * Callback after Render
+   */
+  connectedCallback() {
+    this._addCssClassToBody();
+    this._updateRendering();
+    this._addListenerToButton();
+  }
 
-    /**
-     * Listener for Button (Left/Right)
-     */
-    _addListenerToButton() {
-      ['left', 'right'].forEach((menuOrientation) => {
-        const button = document
-            .getElementById(menuOrientation + '-menu-open') as HTMLElement;
-        const sideMenu = document
-            .getElementById(menuOrientation + '-menu') as HTMLElement;
+  /**
+   * CSS-Klasse an das Body-Element hängen, so dass Header fixed ist.
+   */
+  _addCssClassToBody() {
+    document.getElementsByTagName('body')[0]
+      .classList.add('has-navbar-fixed-top');
+  }
+
+  /**
+   * Listener for Button (Left/Right)
+   */
+  _addListenerToButton() {
+    ['left', 'right'].forEach((menuOrientation) => {
+      const button = document
+        .getElementById(menuOrientation + '-menu-open') as HTMLElement;
+      const sideMenu = document
+        .getElementById(menuOrientation + '-menu') as HTMLElement;
+      if (button) {
         button.addEventListener('click', () => {
           sideMenu.dispatchEvent(new Event('toggle'));
         });
-      });
-    }
+      }
+    });
+  }
 
-    /**
-     * Hide pageloader
-     * @private
-     */
-    _deactivatePageLoader() {
-      const element = document.getElementById('pageloader') as HTMLElement;
-      setTimeout(
-          (_) => element.classList.remove('is-active'),
-          500);
-    }
+  /**
+   * Hide pageloader
+   * @private
+   */
+  _deactivatePageLoader() {
+    const element = document.getElementById('pageloader') as HTMLElement;
+    setTimeout(
+      (_) => element.classList.remove('is-active'),
+      500);
+  }
 
-    /**
-     * HTML-Output schreiben
-     * @private
-     */
-    _updateRendering() {
-      this.innerHTML = `
+  /**
+   * HTML-Output schreiben
+   * @private
+   */
+  _updateRendering() {
+    this.innerHTML = `
         <div id="pageloader" 
              class="pageloader is-active has-background-vetprovieh-light-blue">
              <span class="title">Ihre Daten werden geladen...</span>
@@ -184,7 +186,7 @@ export class VetproviehLayout extends VetproviehElement {
         
         <vetprovieh-footer></vetprovieh-footer>
             `;
-    }
+  }
 }
 
 

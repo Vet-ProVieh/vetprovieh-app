@@ -37,3 +37,7 @@ footer {
 vetprovieh-layout footer {
     border-top: 2px solid #fff;
 }
+
+.no-flex{
+    display: block !important;
+}
