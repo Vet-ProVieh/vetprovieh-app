@@ -1,16 +1,13 @@
 <article class="panel is-primary">
     <p class="panel-heading">
-        Primary
+        Ihr Prozess
     </p>
-    <a class="panel-block">
-        1. Schritt
-    </a>
-
-    <a class="panel-block">
-        2. Schritt
-    </a>
-
-    <a class="panel-block">
-        3. Schritt
-    </a>
+    <vp-repeat id="groups">
+        <template>
+            <a class="panel-block" href="?groupsId={{index}}">
+                {{position}}. {{name}}
+            </a>
+            
+        </template>
+    </vp-repeat>
 </article>

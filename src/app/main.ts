@@ -2,6 +2,7 @@
 export { VetproviehList } from '@tomuench/vetprovieh-list';
 export { VetproviehDetail } from '@tomuench/vetprovieh-detail';
 export { VetproviehSidemenu } from '@tomuench/vetprovieh-sidemenu';
+export { VetproviehRepeat, ViewHelper } from '@tomuench/vetprovieh-shared';
 
 // Interne Komponenten
 export * as Component from '../components/components.module.js';

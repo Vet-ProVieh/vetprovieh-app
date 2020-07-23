@@ -14,21 +14,41 @@
 
 <body>
     <vetprovieh-layout title="Neue Behandlung erstellen">
-        <vetprovieh-detail src="/service/operationcareplans">
+        <vp-operation-plan id="detail" src="/service/operationcareplans" onloadeddata="testOutput(event)" >
             <template>
                 <div class="columns">
                     <div class="column is-four-fifths">
-                        <!--#include file="_form.html"-->
+                        <div id="group"></div>
                     </div>
                     <div class="column">
                         <!--#include file="_sidemenu.html"-->
                     </div>
                 </div>
             </template>
-        </vetprovieh-detail>
+        </vp-operation-plan>
     </vetprovieh-layout>
 </body>
 
 <!--#include file="/includes/scripts.html"-->
+<script>
+
+    function getParameter(key) {
+    const urlString = window.location.href;
+    const url = new URL(urlString);
+    const value = url.searchParams.get(key);
+
+    return value;
+  }
+
+    function testOutput(event) {
+        let detail = document.getElementById("detail");
+        let groups = detail.shadowRoot.getElementById("groups");
+        groups.objects = event.data.groups;
+
+        console.log(getParameter("groupsId"))
+
+       // groups.shadowRoot.getElementById("listElements").children[0].children[0].classList.add("is-active");
+    }
+</script>
 
 </html>

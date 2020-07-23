@@ -5,7 +5,7 @@
     {
       "id": null,
       "position": 1,
-      "name": "Schritt 1",
+      "name": "Klinische Untersuchung",
       "fields": [
         {
           "id": null,
@@ -28,7 +28,7 @@
     {
       "id": null,
       "position": 2,
-      "name": "Schritt 2",
+      "name": "Probenahme",
       "fields": [
         {
           "id": null,
@@ -47,6 +47,24 @@
           "value": ""
         }
       ]
+    },
+    {
+      "id": null,
+      "position": 3,
+      "name": "Diagnose",
+      "fields": []
+    },
+    {
+      "id": null,
+      "position": 4,
+      "name": "Therapie",
+      "fields": []
+    }, 
+    {
+      "id": null,
+      "position": 3,
+      "name": "Handlungsempfehlungen",
+      "fields": []
     }
   ]
 }
