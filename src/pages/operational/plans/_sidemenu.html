@@ -2,12 +2,20 @@
     <p class="panel-heading">
         Ihr Prozess
     </p>
-    <vp-repeat id="groups">
-        <template>
-            <a class="panel-block" href="?groupsId={{index}}">
-                {{position}}. {{name}}
-            </a>
-            
-        </template>
-    </vp-repeat>
+    <div class="panel-block">
+        <aside class="menu">
+                <vp-repeat id="processMenu">
+                    <template>
+
+                        <ul class="menu-list">
+                        <li>
+                            <a href="?groupsId={{index}}">
+                                {{position}}. {{name}}
+                            </a>
+                        </li>
+                        </ul>
+                    </template>
+                </vp-repeat>
+        </aside>
+    </div>
 </article>

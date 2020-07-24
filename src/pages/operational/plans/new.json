@@ -1,12 +1,12 @@
 {
   "id": null,
   "name": null,
-  "groups": [
+  "opGroups": [
     {
       "id": null,
       "position": 1,
       "name": "Klinische Untersuchung",
-      "fields": [
+      "opFields": [
         {
           "id": null,
           "position": 1,
@@ -29,7 +29,7 @@
       "id": null,
       "position": 2,
       "name": "Probenahme",
-      "fields": [
+      "opFields": [
         {
           "id": null,
           "position": 1,
@@ -52,19 +52,19 @@
       "id": null,
       "position": 3,
       "name": "Diagnose",
-      "fields": []
+      "opFields": []
     },
     {
       "id": null,
       "position": 4,
       "name": "Therapie",
-      "fields": []
+      "opFields": []
     }, 
     {
       "id": null,
-      "position": 3,
+      "position": 5,
       "name": "Handlungsempfehlungen",
-      "fields": []
+      "opFields": []
     }
   ]
 }

@@ -3,5 +3,5 @@ import { OperationGroup } from "./group";
 
 export class OperationPlan extends BasicModel{
     public name: string = "";
-    public groups: OperationGroup[] = [];
+    public opGroups: OperationGroup[] = [];
 }

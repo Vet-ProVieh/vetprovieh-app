@@ -3,5 +3,5 @@ import { OperationField } from "./field";
 
 export class OperationGroup extends BasicModel{
     public name: string = "";
-    public fields: OperationField[] = [];
+    public opFields: OperationField[] = [];
 }

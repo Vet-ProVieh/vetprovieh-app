@@ -1,48 +1,38 @@
-import { VetproviehElement } from "@tomuench/vetprovieh-shared";
-import { OperationField } from "../../models/operations/field";
+import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
 
 /**
  * Pager OperationField
  */
-export class VpOperationField extends VetproviehElement {
+export class VpOperationField extends ElementBinding {
 
-    private _field: OperationField = new OperationField();
-
-    public get field(): OperationField {
-        return this._field;
-    }
-
-    public set field(value: OperationField) {
-        if (this._field != value) {
-            this._field = value;
+    get inputable(): string {
+        if(this.object.voiceInputable){
+            return 'is="voice-input"'
+        } else {
+            return "";
         }
     }
 
-    // -----------------
-    // CLASS METHODS
-    // -----------------
+    get isRequired(): string {
+        if(this.object.optional){
+            return "";
+        } else {
+            return "required";
+        }
+    }
+
 
     /**
      * Returning template
      * @return {string}
      */
-    static get template(): string {
-        return `
-            <template>
+    get template(): string {
+        return  super.template + `
                 <label class="label">{{name}}</label>
                 <div class="control">
-                    <input property="value" class="input " type="text">
+                    <textarea property="value" class="input" type="text" `+ this.inputable +` ` + this.isRequired +`></textarea>
                 </div>
-            </template>
         `;
-    }
-
-    /**
-     * Observed attributes
-     * @return {Array<string>}
-     */
-    static get observedAttributes() {
-        return ['field'];
     }
 }
 

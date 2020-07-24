@@ -90,7 +90,7 @@ export class VetproviehLayout extends VetproviehElement {
     const element = document.getElementById('pageloader') as HTMLElement;
     setTimeout(
       (_) => element.classList.remove('is-active'),
-      500);
+      100);
   }
 
   /**
@@ -138,7 +138,7 @@ export class VetproviehLayout extends VetproviehElement {
                    Behandlung
                 </p>
                 <ul class="menu-list">
-                    <li><a href="/operational/plans/new">Neue Behandlung</a></li>
+                    <li><a href="/operational/plans/new.html">Neue Behandlung</a></li>
                     <li><a href="/operational/plans">Behandlungen</a></li>
                 </ul>
                 

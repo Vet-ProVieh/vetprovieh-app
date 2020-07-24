@@ -98,12 +98,19 @@ export class VoiceInput extends HTMLTextAreaElement {
     constructor() {
         super();
         this._speechWrapper.onresult = function(result:string) {
-            this.value += result;
+            this.value += result; 
+            this.dispatchEvent(new Event("change"));
         }.bind(this);
-
-        this._addVoiceInputButton();
+        
     }
 
+
+    /**
+     * Connected Callback
+     */
+    public connectedCallback() {
+        this._addVoiceInputButton();
+    }
 
     /**
      * Adding Voice-Input Button to Text-Field

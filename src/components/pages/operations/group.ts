@@ -1,83 +1,44 @@
-import { VetproviehRepeat, ViewHelper } from "@tomuench/vetprovieh-shared";
-import { VetproviehElement } from "@tomuench/vetprovieh-shared";
-import { OperationGroup } from "../../models/operations/group";
+import { VpOperationField } from "./field";
+import { ElementGroupBinding } from "@tomuench/vetprovieh-shared/lib";
+import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
 
 /**
  * Pager OperationGroup
  */
-export class VpOperationGroup extends VetproviehElement {
-
-    private _group: OperationGroup = new OperationGroup();
-    //private _fieldsRepeater: VetproviehRepeat;
+export class VpOperationGroup extends ElementGroupBinding {
 
     /**
-     * Getter group 
-     * @property
-     * @return {OperationGroup}
-     */
-    public get group(): OperationGroup {
-        return this._group;
+   * Returns the subFields of the object
+   * must be overwritten in the children
+   * @protected
+   */
+    protected subFields(): Array<any> {
+        return this.object.opFields;
     }
+
 
     /**
-     * Setter group 
-     * @param {OperationGroup} value
+     * Generating new SubElement
+     * @param type 
      */
-    public set group(value: OperationGroup) {
-        if (this._group != value) {
-            this._group = value;
-        }
+    protected newElement(): ElementBinding {
+        return new VpOperationField();
     }
-
-    /**
-     * Connected Callback
-     */
-    public connectedCallback() {
-        if (!this.shadowRoot) {
-            super.attachShadow({
-                mode: 'open',
-            }).innerHTML = ''
-
-            this._renderTemplate();
-        }
-    }
-
-    _renderTemplate() {
-        if (this.shadowRoot) {
-            let div = document.createElement("div");
-            div.innerHTML = VpOperationGroup.template;
-            ViewHelper.replacePlaceholders(div, this.group);
-            this.shadowRoot.innerHTML = '';
-            this.shadowRoot.append(div);
-        }
-    }
-
-    // -----------------
-    // CLASS METHODS
-    // -----------------
 
     /**
      * Returning template
      * @return {string}
      */
-    static get template(): string {
+    get template(): string {
         return super.template + `
             <div id="group" class="panel">
                 <p class="panel-heading">
                     {{name}}
                 </p>
-                <div id="fields class="panel-block" style="display:block">
-                    Hier kommen die Felder rein.
+                <div id="fields" class="panel-block" style="display:block">
+                   
                 </div>
             </div>`;
-    }
-
-    /**
-       * Observed attributes
-       * @return {Array<string>}
-       */
-    static get observedAttributes() {
-        return ['group'];
     }
 }
 
