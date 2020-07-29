@@ -63,13 +63,22 @@ export class VpOperationPlan extends VetproviehDetail {
         this._setNavigation();
     }
 
+    _buildUrl(): string {
+        let currentUrl = new URL(window.location.href);
+
+        if (currentUrl.searchParams.has("groupsId")) {
+            currentUrl.searchParams.delete("groupsId");
+        }
+        currentUrl.searchParams.append("groupsId", '')
+        return currentUrl.toString();
+    }
 
     _setNavigation() {
         let processMenu = this.getByIdFromShadowRoot("processMenu") as VetproviehRepeat;
         if (processMenu) {
             processMenu.objects = this.currentObject.opGroups;
             let param = this.groupIdParam;
-            let link = processMenu.shadowRoot?.querySelector("[href='?groupsId=" + (param == 0 ? '' : param) + "']")
+            let link = processMenu.shadowRoot?.querySelector("[href='" + this._buildUrl() +  (param == 0 ? '' : param) + "']")
             if (link) {
                 link.classList.add("is-active");
             }

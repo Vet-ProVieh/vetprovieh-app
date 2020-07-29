@@ -1,10 +1,33 @@
 {
   "id": null,
-  "name": null,
+  "name": "Testbehandlung",
   "opGroups": [
     {
       "id": null,
       "position": 1,
+      "name": "Vorbericht",
+      "opFields": [
+        {
+          "id": null,
+          "position": 1,
+          "name": "Anzahl infizierte Tiere",
+          "optional": false,
+          "voiceInputable": true,
+          "value": ""
+        },
+        {
+          "id": null,
+          "position": 2,
+          "name": "Gesamte Anzahl Tiere",
+          "optional": true,
+          "voiceInputable": true,
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "position": 2,
       "name": "Klinische Untersuchung",
       "opFields": [
         {
@@ -27,7 +50,7 @@
     },
     {
       "id": null,
-      "position": 2,
+      "position": 3,
       "name": "Probenahme",
       "opFields": [
         {
@@ -50,19 +73,19 @@
     },
     {
       "id": null,
-      "position": 3,
+      "position": 4,
       "name": "Diagnose",
       "opFields": []
     },
     {
       "id": null,
-      "position": 4,
+      "position": 5,
       "name": "Therapie",
       "opFields": []
     }, 
     {
       "id": null,
-      "position": 5,
+      "position": 6,
       "name": "Handlungsempfehlungen",
       "opFields": []
     }

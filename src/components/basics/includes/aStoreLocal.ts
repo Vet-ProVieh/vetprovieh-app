@@ -31,6 +31,9 @@ export class AStoreLocal extends HTMLAnchorElement {
 
         this.addEventListener("click", (e) => {
             let target = e.target as AStoreLocal;
+            while(target.tagName != "A"){
+                target = target.parentElement as AStoreLocal;
+            }
             VetproviehNavParams.set(target.href, target.params);
         });
     }
