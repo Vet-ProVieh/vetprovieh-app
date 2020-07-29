@@ -6,6 +6,7 @@
 
 .has-background-vetprovieh-blue{
     background-color: #0a143a;
+    padding: 2px;
 }
 .has-background-vetprovieh-light-blue{
     background-color: #233f68;
@@ -25,7 +26,7 @@ footer {
 }
 
 .full-height {
-    min-height: calc(100vh - 230px);
+    min-height: calc(100vh - 92px);
 }
 
 

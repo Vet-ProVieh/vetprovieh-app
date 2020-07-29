@@ -7,7 +7,7 @@ export class VetproviehFooter extends HTMLElement {
      */
   static get template() : string {
     return `
-        <footer class="footer is-fixed-bottom has-background-vetprovieh-blue">
+        <footer class="is-fixed-bottom has-background-vetprovieh-blue">
             <div class="content has-text-centered">
                 <p>
                 <img src="/assets/imgs/icons/icon-72x72.png" 
