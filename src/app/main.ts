@@ -1,8 +1,9 @@
 // Externe Komponenten
 export { VetproviehList } from '@tomuench/vetprovieh-list';
-export { VetproviehDetail } from '@tomuench/vetprovieh-detail';
-export { VetproviehSidemenu } from '@tomuench/vetprovieh-sidemenu';
-export { VetproviehRepeat, ViewHelper } from '@tomuench/vetprovieh-shared';
+export { VetproviehSelect } from '@tomuench/vetprovieh-select';
+export { VetproviehDetail } from '@tomuench/vetprovieh-detail/lib/index';
+export { VetproviehSidemenu } from '@tomuench/vetprovieh-sidemenu/lib/vetprovieh-sidemenu';
+export { VetproviehRepeat, ViewHelper } from '@tomuench/vetprovieh-shared/lib/index';
 
 // Interne Komponenten
 export * as Component from '../components/components.module.js';

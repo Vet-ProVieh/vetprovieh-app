@@ -30,6 +30,7 @@
     "@tomuench/vetprovieh-list": "file:../vetprovieh-list",
     "@tomuench/vetprovieh-shared": "file:../vetprovieh-shared",
     "@tomuench/vetprovieh-sidemenu": "file:../vetprovieh-menu",
+    "@tomuench/vetprovieh-select": "file:../vetprovieh-select",
     "bulma": "^0.8.2",
     "bulma-pageloader": "^0.3.0",
     "date-fns": "^1.30.1",

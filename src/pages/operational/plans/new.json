@@ -13,7 +13,8 @@
           "name": "Anzahl infizierte Tiere",
           "optional": false,
           "voiceInputable": true,
-          "value": ""
+          "value": "",
+          "fieldType": "textArea"
         },
         {
           "id": null,
@@ -21,7 +22,63 @@
           "name": "Gesamte Anzahl Tiere",
           "optional": true,
           "voiceInputable": true,
-          "value": ""
+          "value": "",
+          "fieldType": "textArea"
+        },
+        {
+          "id": null,
+          "position": 3,
+          "name": "Futterart",
+          "optional": true,
+          "voiceInputable": true,
+          "value": "",
+          "fieldType": "choiceFields",
+          "choices": [
+            "Nassfutter",
+            "Trockenfutter"
+          ]
+        },
+        {
+          "id": null,
+          "position": 4,
+          "name": "Stallart",
+          "optional": false,
+          "voiceInputable": false,
+          "value": "",
+          "fieldType": "comboBox",
+          "choices": [
+            "offener Stall",
+            "geschlossener Stall",
+            "Quarantäne Stall"
+          ]
+        },
+        {
+          "id": null,
+          "position": 5,
+          "name": "Einstreu",
+          "optional": false,
+          "voiceInputable": false,
+          "value": "",
+          "fieldType": "list",
+          "choices": [
+            "keins / Betonbonden",
+            "Gitterboden",
+            "Stroh"
+          ]
+        },
+        {
+          "id": null,
+          "position": 6,
+          "name": "MultipleChoice",
+          "optional": false,
+          "voiceInputable": false,
+          "value": "",
+          "fieldType": "multipleChoiceFields",
+          "choices": [
+            "A",
+            "B",
+            "C"
+          ]
         }
       ]
     },

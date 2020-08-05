@@ -1,5 +1,5 @@
 import { ViewHelper } from "@tomuench/vetprovieh-shared";
-import { VetproviehDetail } from "@tomuench/vetprovieh-detail";
+import { VetproviehDetail } from "@tomuench/vetprovieh-detail/lib/index";
 import { OperationPlan } from "../../models/operations/plan";
 import { VpOperationGroup } from "./group";
 import { ProcessMenu } from "../../menus/menus.module";

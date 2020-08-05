@@ -1,16 +1,93 @@
 {
     "id": null,
-    "name": "",
-    "groups": [{
+    "name": "Testbehandlung",
+    "groups": [
+      {
         "id": null,
-        "name": "Testgruppe",
         "position": 1,
-        "fields": [{
+        "name": "Vorbericht",
+        "fields": [
+          {
             "id": null,
-            "name": "Feld 1",
             "position": 1,
+            "name": "Anzahl infizierte Tiere",
             "optional": false,
-            "voiceInputable": true
-        }]
-    }]
-}
+            "voiceInputable": true,
+            "value": ""
+          },
+          {
+            "id": null,
+            "position": 2,
+            "name": "Gesamte Anzahl Tiere",
+            "optional": true,
+            "voiceInputable": true,
+            "value": ""
+          }
+        ]
+      },
+      {
+        "id": null,
+        "position": 2,
+        "name": "Klinische Untersuchung",
+        "fields": [
+          {
+            "id": null,
+            "position": 1,
+            "name": "F1",
+            "optional": false,
+            "voiceInputable": true,
+            "value": ""
+          },
+          {
+            "id": null,
+            "position": 2,
+            "name": "F2 (opt)",
+            "optional": true,
+            "voiceInputable": false,
+            "value": ""
+          }
+        ]
+      },
+      {
+        "id": null,
+        "position": 3,
+        "name": "Probenahme",
+        "fields": [
+          {
+            "id": null,
+            "position": 1,
+            "name": "F3",
+            "optional": false,
+            "voiceInputable": false,
+            "value": ""
+          },
+          {
+            "id": null,
+            "position": 2,
+            "name": "F4 (opt)",
+            "optional": true,
+            "voiceInputable": true,
+            "value": ""
+          }
+        ]
+      },
+      {
+        "id": null,
+        "position": 4,
+        "name": "Diagnose",
+        "fields": []
+      },
+      {
+        "id": null,
+        "position": 5,
+        "name": "Therapie",
+        "fields": []
+      }, 
+      {
+        "id": null,
+        "position": 6,
+        "name": "Handlungsempfehlungen",
+        "fields": []
+      }
+    ]
+  }
