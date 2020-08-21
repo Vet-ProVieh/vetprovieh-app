@@ -1,9 +1,17 @@
-import { VetproviehRepeat, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { VetproviehRepeat, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 
 /**
  * Process-Menu 
  * is used to display the right menu inside some process.
  */
+@WebComponent({
+  template: VetproviehElement.template + `
+  <aside class="menu">
+    <ul id="listElements" class="menu-list">    
+    </ul>
+  </aside>`,
+  tag: 'process-menu'
+})
 export class ProcessMenu extends VetproviehRepeat {
 
   constructor() {
@@ -11,22 +19,10 @@ export class ProcessMenu extends VetproviehRepeat {
   }
 
   /**
-     * Getting View Template
-     * @return {string}
-     */
-  static get template() {
-    return VetproviehElement.template + `
-            <aside class="menu">
-              <ul id="listElements" class="menu-list">    
-              </ul>
-            </aside>`;
-  }
-
-  /**
    * Connected Callback
    */
   connectedCallback() {
-    this._initalizeShadowRoot(ProcessMenu.template);
+    this._initalizeShadowRoot(this.template);
     this.renderList();
   }
 
@@ -50,7 +46,3 @@ export class ProcessMenu extends VetproviehRepeat {
     return template;
   }
 }
-
-
-// Komponente registrieren
-customElements.define('process-menu', ProcessMenu);
