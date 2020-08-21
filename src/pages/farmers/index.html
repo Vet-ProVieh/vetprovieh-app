@@ -2,37 +2,40 @@
 <html lang="de" dir="ltr">
 
 <!-- Header -->
+
 <head>
-    <meta charset="utf-8">
-    <title>Vet:Provieh - Ihre Landwirte</title>
-    <link rel="manifest" href="/manifest.json">
-    <!--#include file="/includes/stylesheets.html"-->
+  <meta charset="utf-8">
+  <title>Vet:Provieh - Ihre Landwirte</title>
+  <link rel="manifest" href="/manifest.json">
+  <!--#include file="/includes/stylesheets.html"-->
 </head>
 
 <!-- Layout-Container -->
 
 <body>
   <vetprovieh-layout title="Ihre Landwirte">
-    <a class="button is-primary is-pulled-right" href="create.html">
-      Neuen Landwirt erstellen
-    </a>
-    <br/><br/>
-    <vetprovieh-list src="/service/farmers" pagesize="5">
-      <template>
-        <div>
-          <a href="/farmers/show.html?id={{vvvoNumber}}">
-            <strong>{{name}}</strong>
-          </a><br/>
-          <span>VVVO: {{vvvoNumber}}</span><br/>
-          <span>{{address.streetName}} {{address.streetNumber}}, {{address.postalCode}} {{address.city}}</span>
-        </div>
-        <hr />
-      </template>
-    </vetprovieh-list>
+    <vetprovieh-farmers>
+      <a class="button is-primary is-pulled-right" href="create.html">
+        Neuen Landwirt erstellen
+      </a>
+      <br /><br />
+      <vetprovieh-list pagesize="5">
+        <template>
+          <div>
+            <a href="/farmers/show.html?id={{vvvoNumber}}">
+              <strong>{{name}}</strong>
+            </a><br />
+            <span>VVVO: {{vvvoNumber}}</span><br />
+            <span>{{address.streetName}} {{address.streetNumber}}, {{address.postalCode}} {{address.city}}</span>
+          </div>
+          <hr />
+        </template>
+      </vetprovieh-list>
+    </vetprovieh-farmers>
   </vetprovieh-layout>
 </body>
 
 
-  <!--#include file="/includes/scripts.html"-->
+<!--#include file="/includes/scripts.html"-->
 
 </html>

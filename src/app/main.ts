@@ -1,6 +1,5 @@
 // Externe Komponenten
-export { VetproviehList } from '@tomuench/vetprovieh-list';
-export { VetproviehSelect } from '@tomuench/vetprovieh-select';
+export { VetproviehList } from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
 export { VetproviehDetail } from '@tomuench/vetprovieh-detail/lib/index';
 export { VetproviehSidemenu } from '@tomuench/vetprovieh-sidemenu/lib/vetprovieh-sidemenu';
 export { VetproviehRepeat, ViewHelper } from '@tomuench/vetprovieh-shared/lib/index';

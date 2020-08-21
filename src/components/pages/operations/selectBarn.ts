@@ -24,11 +24,11 @@ export class SelectBarn extends VetproviehList {
      * Calculation Distances with forceReload
      */
     private calculateDistances() {
-        setInterval(() => {
+    /*    setInterval(() => {
             if (this._data) {
                 this._data.forEach((b: Barn) => this.calcDistance(b, true));
             }
-        },60 * 1000);
+        },60 * 1000);*/
     }
 
     /**
@@ -80,3 +80,5 @@ export class SelectBarn extends VetproviehList {
     }
 
 }
+
+customElements.define('vp-select-barn', SelectBarn);
