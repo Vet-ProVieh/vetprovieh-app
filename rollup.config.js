@@ -12,7 +12,7 @@ import copy from 'rollup-plugin-copy'
 import typescript from 'rollup-plugin-typescript';
 
 
-var modules = ['farmers'];
+var modules = ['farmers', 'barns'];
 
 var targets = modules.map((m) => {
     return {

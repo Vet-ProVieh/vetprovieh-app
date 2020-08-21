@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo "What name your component should have?"
 read component
 
 echo "Creating FileStruktur for '"$component"'";
@@ -16,7 +17,17 @@ else
 
     for sub_path in "${sub_pathes[@]}"
     do :
-        mkdir $BASE_PATH"/"$sub_path
-        touch $BASE_PATH"/"$sub_path"/.keep"
+        path=$BASE_PATH"/"$sub_path
+        mkdir $path
+        touch $path"/.keep"
+        touch $path"/index.ts"
+
+        if [ "$sub_path" = "pages" ]; then
+            pages=("create" "index" "show" "_includes")
+            for page in "${pages[@]}"
+            do :
+                mkdir $path"/"$page
+            done
+        fi
     done
 fi

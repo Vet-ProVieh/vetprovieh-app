@@ -1,5 +1,5 @@
 import { BaseRepository } from "@tomuench/vetprovieh-shared/lib";
-import { Farmer } from "../model/farmer";
+import { Farmer } from "../models/farmer";
 
 export class FarmersRepository extends BaseRepository<Farmer>{
 
