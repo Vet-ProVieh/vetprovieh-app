@@ -1,22 +1,16 @@
 import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
 import { FarmersRepository } from "../../repository/farmers_repository";
+import { Farmer } from "../../models";
+import { BasicIndexPage } from "../../../components/pages/indexPage";
 
 
 @WebComponent({
     template: "",
     tag:"vetprovieh-farmers"
 })
-export class FarmersIndexPage extends HTMLElement {
-
-    private repository: FarmersRepository = new FarmersRepository();
-
+export class FarmersIndexPage extends BasicIndexPage<Farmer> {
     constructor() {
-        super();
+        super(new FarmersRepository());
     }
-    connectedCallback(){
-        let list = document.getElementsByTagName("vetprovieh-list")[0] as VetproviehList;
-        list.repository = this.repository;
-    }
-
 }
