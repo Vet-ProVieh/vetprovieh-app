@@ -1,6 +1,7 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 
+
 const {
     generateSW
 } = require('rollup-plugin-workbox');
@@ -10,6 +11,16 @@ const {
 import copy from 'rollup-plugin-copy'
 import typescript from 'rollup-plugin-typescript';
 
+
+var modules = ['farmers'];
+
+var targets = modules.map((m) => {
+    return {
+        src: 'src/' + m + '/**/*.(html|json)',
+        dest: 'www/' + m + '/',
+        flatten: true
+    }
+})
 
 import {
     terser
@@ -35,7 +46,7 @@ export default {
         ), // converts date-fns to ES modules
         production && terser(), // minify, but only in production
         copy({ // Copy HTML-Pages to Public Folder
-            targets: [{
+            targets: targets.concat([{
                     src: 'src/assets/*',
                     dest: 'www/assets'
                 },
@@ -55,7 +66,7 @@ export default {
                     src: 'node_modules/@fortawesome/fontawesome-free/*',
                     dest: 'www/node_modules/fontawesome'
                 }
-            ]
+            ])
         }),
         generateSW({
             swDest: 'www/wb_service_worker.js',

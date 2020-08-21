@@ -1,6 +1,6 @@
-import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
-import { FarmersRepository } from "../../repositories/farmers_repository";
+import { FarmersRepository } from "../../repository/farmers_repository";
 
 
 @WebComponent({
