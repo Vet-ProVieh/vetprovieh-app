@@ -1,10 +1,21 @@
 import { VpOperationField } from "./field";
-import { ElementGroupBinding } from "@tomuench/vetprovieh-shared/lib";
+import { ElementGroupBinding, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
 
 /**
  * Pager OperationGroup
  */
+@WebComponent({
+    template: `<div id="group" class="panel">
+                    <p class="panel-heading">
+                        {{name}}
+                    </p>
+                    <div id="fields" class="panel-block" style="display:block">
+                    
+                    </div>
+                </div>`,
+    tag: 'vp-operation-group'
+})
 export class VpOperationGroup extends ElementGroupBinding {
 
     /**
@@ -24,22 +35,4 @@ export class VpOperationGroup extends ElementGroupBinding {
     protected newElement(): ElementBinding {
         return new VpOperationField();
     }
-
-    /**
-     * Returning template
-     * @return {string}
-     */
-    get template(): string {
-        return super.template + `
-            <div id="group" class="panel">
-                <p class="panel-heading">
-                    {{name}}
-                </p>
-                <div id="fields" class="panel-block" style="display:block">
-                   
-                </div>
-            </div>`;
-    }
 }
-
-customElements.define('vp-operation-group', VpOperationGroup);

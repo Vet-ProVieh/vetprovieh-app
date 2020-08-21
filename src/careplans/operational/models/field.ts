@@ -1,4 +1,5 @@
-import { BasicModel } from "../basic";
+import { BasicModel } from "../../../shared";
+
 
 /**
  * Field in a OperationGroup

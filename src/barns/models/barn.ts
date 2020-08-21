@@ -1,7 +1,5 @@
-import { BasicModel } from "../../components/models/basic";
-import { Address } from "../../components/models/address";
-import { GpsCoordinates } from "../../components/models/gpsCoordinates";
 import { Farmer } from "../../farmers";
+import { BasicModel, Address, GpsCoordinates } from "../../shared";
 
 
 export class Barn extends BasicModel {

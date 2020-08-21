@@ -13,7 +13,8 @@ if [ -d "$BASE_PATH" ]; then
 else
     sub_pathes=("components" "models" "pages" "repository")
 
-    mkdir $BASE_PATH
+    mkdir -p $BASE_PATH
+    touch $BASE_PATH"/index.ts"
 
     for sub_path in "${sub_pathes[@]}"
     do :

@@ -1,14 +1,17 @@
-import { ViewHelper } from "@tomuench/vetprovieh-shared";
+import { ViewHelper, VetproviehRepeat } from "@tomuench/vetprovieh-shared";
 import { VetproviehDetail } from "@tomuench/vetprovieh-detail/lib/index";
-import { OperationPlan } from "../../models/operations/plan";
 import { VpOperationGroup } from "./group";
-import { ProcessMenu } from "../../menus/menus.module";
-import { VetproviehRepeat } from "../../../../www/bundle";
+import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { OperationPlan } from "../models";
 
 /**
  * Controller for Page
  * pages/operations/plans/create or edit
  */
+@WebComponent({
+    template: '',
+    tag: 'vp-operation-plan'
+})
 export class VpOperationPlan extends VetproviehDetail {
 
     private _groupElement: VpOperationGroup = new VpOperationGroup();
@@ -85,5 +88,3 @@ export class VpOperationPlan extends VetproviehDetail {
         }
     }
 }
-
-customElements.define('vp-operation-plan', VpOperationPlan);

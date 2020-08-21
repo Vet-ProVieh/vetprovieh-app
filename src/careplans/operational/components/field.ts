@@ -1,8 +1,12 @@
-import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
+import { ElementBinding, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 
 /**
  * Pager OperationField
  */
+@WebComponent({
+    template: undefined,
+    tag: 'vp-operation-field'
+})
 export class VpOperationField extends ElementBinding {
 
     get inputable(): string {
@@ -29,10 +33,10 @@ export class VpOperationField extends ElementBinding {
             case 'multipleChoiceFields':
             case 'choiceFields':
                 this.object.choices.forEach((choice: string) => {
-                    let  type = this.object.fieldType == 'multipleChoiceFields' ? 'checkbox' : 'radio';
-                    
+                    let type = this.object.fieldType == 'multipleChoiceFields' ? 'checkbox' : 'radio';
+
                     templateToBuild += `<label class="radio">
-                            <input type="`+ type +`" name="` + this.object.name + `" ` + this.isRequired + `>
+                            <input type="`+ type + `" name="` + this.object.name + `" ` + this.isRequired + `>
                             ` + choice + `
                             </label>`;
                 });
@@ -77,10 +81,13 @@ export class VpOperationField extends ElementBinding {
      * @return {string}
      */
     get template(): string {
-        return super.template + `
+        if (this.object) {
+            return super.template + `
                 <label class="label">{{name}}</label>` +
-            this.renderInput;
+                this.renderInput;
+
+        } else {
+            return '';
+        }
     }
 }
-
-customElements.define('vp-operation-field', VpOperationField);

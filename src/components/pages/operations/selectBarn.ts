@@ -1,6 +1,6 @@
 import { VetproviehList } from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
-import { Barn } from '../../models/barn';
-import { GpsCoordinates } from '../../models/gpsCoordinates';
+import { GpsCoordinates } from '../../../shared';
+import { Barn } from '../../../barns';
 
 
 

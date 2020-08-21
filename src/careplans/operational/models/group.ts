@@ -1,4 +1,4 @@
-import { BasicModel } from "../basic";
+import { BasicModel } from "../../../shared";
 import { OperationField } from "./field";
 
 export class OperationGroup extends BasicModel{

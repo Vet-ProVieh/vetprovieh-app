@@ -8,4 +8,5 @@ export { VetproviehRepeat, ViewHelper } from '@tomuench/vetprovieh-shared/lib/in
 export * as Component from '../components/components.module.js';
 export * as Farmers from '../farmers';
 export * as Barns from '../barns';
+export * as Careplans from '../careplans';
 
