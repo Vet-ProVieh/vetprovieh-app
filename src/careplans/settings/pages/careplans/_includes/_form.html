@@ -17,13 +17,13 @@
         <div class="card">
             <div class="card-content">
                 <p class="title is-4">Untergeordnete Gruppen</p>
-                <vetprovieh-list src="/service/careplans/{{id}}/groups" pagesize="10">
+                <vp-repeat id="groups">
                     <template>
                         <a href="groups/show.html?id={{id}}" is="local-store">
                             {{id}}. {{name}}
                         </a>
                     </template>
-                </vetprovieh-list>
+                </vp-repeat>
             </div>
         </div>
     </div>

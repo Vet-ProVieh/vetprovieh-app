@@ -12,15 +12,19 @@ import copy from 'rollup-plugin-copy'
 import typescript from 'rollup-plugin-typescript';
 
 
-var modules = [
-    'farmers', 
-    'barns',
-    'careplans/operational'];
+var modules = {
+    'farmers': 'farmers',
+    'barns': 'barns',
+    'careplans/operational': 'careplans/operational',
+    'careplans/settings/pages/careplans': 'settings/careplans',
+    'careplans/settings/pages/groups': 'settings/careplans/groups',
+    'careplans/settings/pages/fields': 'settings/careplans/fields'
+};
 
-var targets = modules.map((m) => {
+var targets = Object.keys(modules).map((source) => {
     return {
-        src: 'src/' + m + '/**/*.(html|json)',
-        dest: 'www/' + m + '/',
+        src: 'src/' + source + '/**/*.(html|json)',
+        dest: 'www/' + modules[source] + '/',
         flatten: true
     }
 })
