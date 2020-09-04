@@ -2,6 +2,7 @@
 <html lang="de" dir="ltr">
 
 <!-- Header -->
+
 <head>
     <meta charset="utf-8">
     <title>Vet:Provieh - Neuer Behandlungsplan</title>
@@ -12,11 +13,13 @@
 <!-- Layout-Container -->
 
 <body>
-<vetprovieh-layout title="Behandlungplan erstellen">
-    <vetprovieh-detail src="/service/careplans">
-        <!--#include file="_form.html"-->
-    </vetprovieh-detail>
-</vetprovieh-layout>
+    <vetprovieh-layout title="Behandlungplan erstellen">
+        <careplan-page>
+            <vetprovieh-detail src="/service/careplans">
+                <!--#include file="_form.html"-->
+            </vetprovieh-detail>
+        </careplan-page>
+    </vetprovieh-layout>
 </body>
 
 <!--#include file="/includes/scripts.html"-->

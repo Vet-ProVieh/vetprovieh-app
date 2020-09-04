@@ -1,7 +1,7 @@
 import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { BasicIndexPage } from "../../../../../components/pages/indexPage";
 import { CareplansRepository } from "../../../repository/carePlans_repository";
 import { Careplan } from "../../../models";
+import { BasicIndexPage } from "../../../../../shared";
 
 @WebComponent({
     template: "",

@@ -1,7 +1,7 @@
 import { ViewHelper, VetproviehRepeat } from "@tomuench/vetprovieh-shared";
-import { VetproviehDetail } from "@tomuench/vetprovieh-detail/lib/index";
+import { VetproviehBasicDetail, VetproviehDetail } from "@tomuench/vetprovieh-detail/lib/index";
 import { VpOperationGroup } from "./group";
-import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
 import { OperationPlan } from "../models";
 
 /**
@@ -9,18 +9,47 @@ import { OperationPlan } from "../models";
  * pages/operations/plans/create or edit
  */
 @WebComponent({
-    template: '',
+    template: VetproviehElement.template + ` 
+    <form id="form">
+        <vetprovieh-notification id="notification">
+        </vetprovieh-notification>
+        <div id="detail" class="container">
+        
+        </div>
+        <hr/>
+        <div class="container">
+        <div class="columns">
+            <div class="column">
+                <input id="abortButton" 
+                        class="button is-danger is-fullwidth" 
+                        type="reset" value="Abbrechen">                   
+            </div>
+            <div class="column">
+                <input id="saveButton" 
+                        class="button is-success is-fullwidth" 
+                        type="button" value="Speichern">
+            </div>
+        </div>
+        </div>
+    </form>
+    `,
     tag: 'vp-operation-plan'
 })
-export class VpOperationPlan extends VetproviehDetail {
+export class VpOperationPlan extends VetproviehBasicDetail {
 
     private _groupElement: VpOperationGroup = new VpOperationGroup();
+    private _fetched: boolean = false;
 
     constructor() {
         super();
         this.storeElement = true;
     }
 
+
+    render() {
+        if (!this._fetched) 
+            super.render();
+    }
 
     /**
      * Getting current selected OperationPlan
@@ -47,12 +76,8 @@ export class VpOperationPlan extends VetproviehDetail {
             let detail = this.getByIdFromShadowRoot("group") as HTMLElement;
 
             if (detail) {
-                console.log("FOUND");
                 detail.appendChild(this._groupElement);
-            } else {
-                console.log("not found");
             }
-
         }
     }
 
@@ -62,6 +87,7 @@ export class VpOperationPlan extends VetproviehDetail {
      * @protected
      */
     _afterFetch(data: any) {
+        this._fetched = true;
         this._setGroupComponent();
         this._setNavigation();
     }
@@ -81,7 +107,7 @@ export class VpOperationPlan extends VetproviehDetail {
         if (processMenu) {
             processMenu.objects = this.currentObject.opGroups;
             let param = this.groupIdParam;
-            let link = processMenu.shadowRoot?.querySelector("[href='" + this._buildUrl() +  (param == 0 ? '' : param) + "']")
+            let link = processMenu.shadowRoot?.querySelector("[href='" + this._buildUrl() + (param == 0 ? '' : param) + "']")
             if (link) {
                 link.classList.add("is-active");
             }

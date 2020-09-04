@@ -1,4 +1,4 @@
-import { VetproviehElement } from '@tomuench/vetprovieh-shared';
+import { VetproviehElement } from '@tomuench/vetprovieh-shared/lib';
 
 /**
  * Layout for Vet:ProVieh
@@ -18,7 +18,7 @@ export class VetproviehLayout extends VetproviehElement {
    * Konstruktor
    */
   constructor() {
-    super();
+    super(false, false);
     this._outsideInnerHtml = this.innerHTML;
 
     const self = this;
@@ -44,7 +44,7 @@ export class VetproviehLayout extends VetproviehElement {
   set title(val) {
     if (val !== this.title) {
       this._title = val;
-      this._updateRendering();
+      this.render();
     }
   }
 
@@ -53,7 +53,7 @@ export class VetproviehLayout extends VetproviehElement {
    */
   connectedCallback() {
     this._addCssClassToBody();
-    this._updateRendering();
+    this.render();
     this._addListenerToButton();
   }
 
@@ -97,8 +97,8 @@ export class VetproviehLayout extends VetproviehElement {
    * HTML-Output schreiben
    * @private
    */
-  _updateRendering() {
-    this.innerHTML = `
+  get template() :string  {
+    return `
         <div id="pageloader" 
              class="pageloader is-active has-background-vetprovieh-light-blue">
              <span class="title">Ihre Daten werden geladen...</span>

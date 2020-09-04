@@ -1,8 +1,7 @@
 import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
 import { BarnsRepository } from "../../repository";
-import { BasicIndexPage } from "../../../components/pages/indexPage";
 import { Barn } from "../../models";
+import { BasicIndexPage } from "../../../shared";
 
 
 @WebComponent({

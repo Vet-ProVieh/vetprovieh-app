@@ -9,6 +9,7 @@ import { ElementBinding, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 })
 export class VpOperationField extends ElementBinding {
 
+
     get inputable(): string {
         if (this.object.voiceInputable) {
             return 'is="voice-input"'

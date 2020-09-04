@@ -1,4 +1,4 @@
-import { VetproviehRepeat, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { VetproviehBasicRepeat, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 
 /**
  * Process-Menu 
@@ -12,7 +12,7 @@ import { VetproviehRepeat, VetproviehElement, WebComponent } from "@tomuench/vet
   </aside>`,
   tag: 'process-menu'
 })
-export class ProcessMenu extends VetproviehRepeat {
+export class ProcessMenu extends VetproviehBasicRepeat {
 
   constructor() {
     super(ProcessMenu.listTemplate);
@@ -36,9 +36,12 @@ export class ProcessMenu extends VetproviehRepeat {
     }
     currentUrl.searchParams.append("groupsId", '')
 
+    let urlString = currentUrl.toString();
+    urlString = urlString.replace("groupsId=", "groupsId={{index}}");
+
     template.innerHTML = `
                         <li>
-                            <a href="`+ currentUrl.toString() + `{{index}}">
+                            <a href="`+ urlString + `">
                                 {{position}}. {{name}}
                             </a>
                         </li>

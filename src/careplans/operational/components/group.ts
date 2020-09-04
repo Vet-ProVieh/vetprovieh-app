@@ -18,6 +18,12 @@ import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
 })
 export class VpOperationGroup extends ElementGroupBinding {
 
+    constructor() {
+        super();
+    }
+
+
+
     /**
    * Returns the subFields of the object
    * must be overwritten in the children

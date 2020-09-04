@@ -17,13 +17,30 @@
         <div class="card">
             <div class="card-content">
                 <p class="title is-4">Untergeordnete Gruppen</p>
-                <vp-repeat id="groups">
-                    <template>
-                        <a href="groups/show.html?id={{id}}" is="local-store">
-                            {{id}}. {{name}}
-                        </a>
-                    </template>
-                </vp-repeat>
+                <table class="table">
+                    <thead>
+                        <th>
+                            Pos
+                        </th>
+                        <th>
+                            Gruppe
+                        </th>
+                    </thead>
+                    <tbody>
+                        <tr id="groups" is="tr-repeat">
+                            <template>
+                                <td>
+                                    {{position}}
+                                </td>
+                                <td>
+                                    <a href="groups/show.html?id={{id}}" is="local-store">
+                                        {{name}}
+                                    </a>
+                                </td>
+                            </template>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
