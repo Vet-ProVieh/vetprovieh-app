@@ -1,8 +1,9 @@
-import { ViewHelper, VetproviehRepeat } from "@tomuench/vetprovieh-shared";
-import { VetproviehBasicDetail, VetproviehDetail } from "@tomuench/vetprovieh-detail/lib/index";
+import { ViewHelper } from "@tomuench/vetprovieh-shared";
+import { VetproviehBasicDetail } from "@tomuench/vetprovieh-detail/lib/index";
 import { VpOperationGroup } from "./group";
 import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
 import { OperationPlan } from "../models";
+import { ProcessMenu } from "./process-menu";
 
 /**
  * Controller for Page
@@ -47,7 +48,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
 
 
     render() {
-        if (!this._fetched) 
+        if (!this._fetched)
             super.render();
     }
 
@@ -89,7 +90,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
     _afterFetch(data: any) {
         this._fetched = true;
         this._setGroupComponent();
-        this._setNavigation();
+        setTimeout(() => this._setNavigation(), 500);
     }
 
     _buildUrl(): string {
@@ -102,15 +103,16 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         return currentUrl.toString();
     }
 
+
+    /**
+     * Setting Process-Menu Items and activate current Element
+     */
     _setNavigation() {
-        let processMenu = this.getByIdFromShadowRoot("processMenu") as VetproviehRepeat;
+        let processMenu = this.getByIdFromShadowRoot("processMenu") as ProcessMenu;
         if (processMenu) {
             processMenu.objects = this.currentObject.opGroups;
-            let param = this.groupIdParam;
-            let link = processMenu.shadowRoot?.querySelector("[href='" + this._buildUrl() + (param == 0 ? '' : param) + "']")
-            if (link) {
-                link.classList.add("is-active");
-            }
+            processMenu.activateElement(this.groupIdParam);
         }
     }
+
 }

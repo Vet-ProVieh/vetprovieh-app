@@ -78,6 +78,7 @@ class KeycloakHelper {
   }
 
   storeTokens() {
+    console.log("Storing Tokens");
     localStorage.setItem("kc_token", this.instance.token);
     localStorage.setItem("kc_refreshToken", this.instance.refreshToken);
   }

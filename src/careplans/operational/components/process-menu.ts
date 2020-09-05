@@ -1,4 +1,4 @@
-import { VetproviehBasicRepeat, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { VetproviehBasicRepeat, VetproviehElement, WebComponent, VetproviehRepeat, ViewHelper } from "@tomuench/vetprovieh-shared/lib";
 
 /**
  * Process-Menu 
@@ -24,9 +24,27 @@ export class ProcessMenu extends VetproviehBasicRepeat {
   connectedCallback() {
     this._initalizeShadowRoot(this.template);
     this.renderList();
+    
   }
 
 
+  /**
+   * Activate Element by Id
+   * @param {number} id 
+   */
+  public activateElement(id: number){
+    let param = (id == 0 ? '' : id);
+    let search = "[href*='groupsId=" + param + "']";
+    let link = this.shadowRoot?.querySelector(search);
+    if (link) {
+        link.classList.add("is-active");
+    }
+  }
+
+  /**
+   * Creating List-Template
+   * @return {HTMLTemplateElement}
+   */
   static get listTemplate(): HTMLTemplateElement {
     let template = document.createElement("template");
     let currentUrl = new URL(window.location.href);
