@@ -35,7 +35,7 @@ import { BarnsRepository } from '../repository';
                 <!-- Pager for Paging through List-->
                 <vetprovieh-pager id="pager" page="1" maximum="7">
                 </vetprovieh-pager>`,
-        tag: 'vp-select-barn'
+    tag: 'vp-select-barn'
 })
 export class SelectBarn extends VetproviehBasicList {
 
@@ -43,7 +43,7 @@ export class SelectBarn extends VetproviehBasicList {
 
     private calculatedDistances: { [key: number]: number } = {};
 
-    
+
     constructor() {
         super();
 
@@ -53,18 +53,21 @@ export class SelectBarn extends VetproviehBasicList {
             this.calculateDistances();
             this._filterObjects();
         });
-        
+
     }
 
     /**
      * Calculation Distances with forceReload
      */
     private calculateDistances() {
-    /*    setInterval(() => {
-            if (this._data) {
-                this._data.forEach((b: Barn) => this.calcDistance(b, true));
+        setInterval(() => {
+            if (this.objects) {
+                this._loadCurrentGpsCoordinates().then((res) => {
+                    this.objects.forEach((b: Barn) => this.calcDistance(b, true));
+                    this._filterObjects();
+                });
             }
-        },60 * 1000);*/
+        }, 10 * 1000);
     }
 
     /**
@@ -86,6 +89,7 @@ export class SelectBarn extends VetproviehBasicList {
                     this.currentGpsPosition.latitude,
                     this.currentGpsPosition.longitude)
                 this.calculatedDistances[barn.id] = distance;
+                console.log(distance);
                 (barn as any).distance = Math.round(distance / 10.00) / 100.00;
                 return distance;
             }
@@ -117,11 +121,11 @@ export class SelectBarn extends VetproviehBasicList {
     private _loadCurrentGpsCoordinates() {
         return new Promise((resolve, reject) => {
             GpsCoordinates.currentGpsCoordinates
-            .then((pos: GpsCoordinates) => {
-                this.currentGpsPosition = pos;
-                console.log(pos);
-                resolve();
-            })
+                .then((pos: GpsCoordinates) => {
+                    this.currentGpsPosition = pos;
+                    console.log(pos);
+                    resolve();
+                })
         });
     }
 
