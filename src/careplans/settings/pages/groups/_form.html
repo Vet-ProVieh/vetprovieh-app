@@ -15,14 +15,21 @@
         </div>
         <div class="card">
             <div class="card-content">
-                <p class="title is-4">Untegordnete Felder</p>
-                <vetprovieh-list src="/service/careplans/groups/{{id}}/fields" pagesize="10">
+                <p class="title is-4">Untergeordnete Felder</p>
+                <vp-table id="fields">
                     <template>
-                        <a href="../fields/show.html?id={{id}}" is="local-store">
-                            {{id}}. {{name}}
-                        </a>
+                        <tr>
+                            <td>
+                                {{position}}
+                            </td>
+                            <td>
+                                <a href="../fields/show.html?id={{id}}" is="local-store">
+                                    {{name}}
+                                </a>
+                            </td>
+                        </tr>
                     </template>
-                </vetprovieh-list>
+                </vp-table>
             </div>
         </div>
     </div>

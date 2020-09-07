@@ -24,7 +24,6 @@ export class ProcessMenu extends VetproviehBasicRepeat {
   connectedCallback() {
     this._initalizeShadowRoot(this.template);
     this.renderList();
-    
   }
 
 

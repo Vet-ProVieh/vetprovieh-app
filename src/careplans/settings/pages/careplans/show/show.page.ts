@@ -1,4 +1,4 @@
-import { WebComponent, VetproviehRepeat } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehTable } from "@tomuench/vetprovieh-shared/lib";
 import { Careplan } from "../../../models";
 import { VetproviehDetail } from "../../../../../app/main";
 import { LoadedEvent } from "@tomuench/vetprovieh-detail/lib/loaded-event";
@@ -29,8 +29,9 @@ export class CarePlanShowPage extends BasicShowPage {
      */
     private _showGroups(careplan: Careplan) {
         if(careplan){
-            let groupRepeater = this._detailContainer.getByIdFromShadowRoot("groups") as VetproviehRepeat;
+            let groupRepeater = this._detailContainer.getByIdFromShadowRoot("groups") as VetproviehTable;
             groupRepeater.objects = careplan.groups;
+            groupRepeater.clearAndRender();
         }
     }
 }

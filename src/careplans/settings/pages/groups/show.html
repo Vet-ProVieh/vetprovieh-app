@@ -2,6 +2,7 @@
 <html lang="de" dir="ltr">
 
 <!-- Header -->
+
 <head>
     <meta charset="utf-8">
     <title>Vet:Provieh - Ihr Behandlungsgruppe</title>
@@ -12,11 +13,13 @@
 <!-- Layout-Container -->
 
 <body>
-<vetprovieh-layout title="Ihr Behandlungsgruppe">
-    <vetprovieh-detail src="/service/careplans/groups">
-        <!--#include file="_form.html"-->
-    </vetprovieh-detail>
-</vetprovieh-layout>
+    <vetprovieh-layout title="Ihr Behandlungsgruppe">
+        <careplan-group-page>
+            <vetprovieh-detail src="/service/careplans/groups">
+                <!--#include file="_form.html"-->
+            </vetprovieh-detail>
+        </careplan-group-page>
+    </vetprovieh-layout>
 </body>
 
 <!--#include file="/includes/scripts.html"-->
