@@ -33,7 +33,7 @@ export class GpsCoordinates {
     public static get currentGpsCoordinates() : Promise<GpsCoordinates> {
         return new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition((result) => {
-                resolve(new GpsCoordinates())
+                resolve(new GpsCoordinates(result.coords.latitude, result.coords.longitude))
             }, (error) => {
                 reject(null);
             })

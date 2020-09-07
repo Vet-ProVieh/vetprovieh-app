@@ -1,7 +1,8 @@
 import { VetproviehBasicList } from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
 import { GpsCoordinates } from '../../shared';
 import { Barn } from '../models';
-import { WebComponent, VetproviehElement } from '@tomuench/vetprovieh-shared/lib';
+import { WebComponent, VetproviehElement, GeoHelper } from '@tomuench/vetprovieh-shared/lib';
+import { BarnsRepository } from '../repository';
 
 
 
@@ -42,11 +43,17 @@ export class SelectBarn extends VetproviehBasicList {
 
     private calculatedDistances: { [key: number]: number } = {};
 
+    
     constructor() {
         super();
 
-        this._loadCurrentGpsCoordinates();
-        this.calculateDistances();
+        this.repository = new BarnsRepository();
+
+        this._loadCurrentGpsCoordinates().then((res) => {
+            this.calculateDistances();
+            this._filterObjects();
+        });
+        
     }
 
     /**
@@ -70,16 +77,19 @@ export class SelectBarn extends VetproviehBasicList {
         if (barn && barn.id && this.currentGpsPosition) {
             let currentDistance = this.calculatedDistances[barn.id];
             if (!forceReload && currentDistance >= 0) {
-                console.log(currentDistance);
+                (barn as any).distance = Math.round(currentDistance / 10.00) / 100.00;
                 return currentDistance;
             } else {
-                const distance = barn.gpsCoordinates.distanceTo(this.currentGpsPosition);
+                const distance = GeoHelper.calculateDistance(
+                    barn.gpsCoordinates.latitude,
+                    barn.gpsCoordinates.longitude,
+                    this.currentGpsPosition.latitude,
+                    this.currentGpsPosition.longitude)
                 this.calculatedDistances[barn.id] = distance;
-                console.log(distance);
+                (barn as any).distance = Math.round(distance / 10.00) / 100.00;
                 return distance;
             }
         } else {
-            console.log("zero");
             return 0;
         }
     }
@@ -90,7 +100,7 @@ export class SelectBarn extends VetproviehBasicList {
      */
     protected _sort(data: Barn[]) {
         if (this.currentGpsPosition != undefined) {
-            data.sort((a: Barn, b: Barn) => {
+            return data.sort((a: Barn, b: Barn) => {
                 const distanceA = this.calcDistance(a);
                 const distanceB = this.calcDistance(b);
                 return distanceA - distanceB
@@ -105,10 +115,14 @@ export class SelectBarn extends VetproviehBasicList {
      * Loading current GPS-Coordinates
      */
     private _loadCurrentGpsCoordinates() {
-        GpsCoordinates.currentGpsCoordinates
+        return new Promise((resolve, reject) => {
+            GpsCoordinates.currentGpsCoordinates
             .then((pos: GpsCoordinates) => {
                 this.currentGpsPosition = pos;
+                console.log(pos);
+                resolve();
             })
+        });
     }
 
 }

@@ -18,16 +18,17 @@
         <p>Damit Sie eine Bahnldung erstellen können, wählen Sie zunächst ihren Stall aus. Die GPS-Suche ist automatisch aktiv
             und lässt sich durch den Button mit dem Globus deaktivieren.
         </p>
-        <vetprovieh-list src="/service/barns" pagesize="20">
+        <vp-select-barn pagesize="20">
             <template>
                 <div>
                     <a href="show.html?id={{id}}" is="local-store">
-                        <strong>{{name}}</strong>
+                        <strong>{{name}} ({{address.city}})</strong>
+                        <span class="tag is-primary">{{distance}} KM</span>
                     </a><br />
                 </div>
                 <hr />
             </template>
-        </vetprovieh-list>
+        </vp-select-barn>
     </vetprovieh-layout>
 </body>
 

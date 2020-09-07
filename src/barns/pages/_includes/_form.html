@@ -4,6 +4,11 @@
             <div class="card-content">
                 <p class="title is-4">Allgemeines</p>
                 <label class="label">Zugeordneter Landwirt</label>
+
+                <div class="control">
+                    <input property="farmer.vvvoNumber" pattern="276\\d{12}" placeholder="276..." class="input" type="text"
+                        required>
+                </div>
                 <div class="control">
                <!--     <vetprovieh-select id="farmer" property="vvvoNumber" display="name" src="/service/farmers">
                     <template>
@@ -18,10 +23,10 @@
                 <div class="control">
                     <input property="name" class="input " type="text" required>
                 </div>
-
+                
                 <label class="label">VVVO</label>
                 <div class="control">
-                    <input property="vvvoNumber" pattern="276\d{12}" placeholder="276..." class="input" type="text"
+                    <input property="vvvoNumber" pattern="276\\d{12}" placeholder="276..." class="input" type="text"
                         required>
                 </div>
             </div>
@@ -40,7 +45,7 @@
                     <div class="column">
                         <label class="label">Hausnummer</label>
                         <div class="control">
-                            <input property="address.streetNumber" pattern="\d+[ ]{0,1}[a-z]{0,2}" class="input "
+                            <input property="address.streetNumber" pattern="\\d+[ ]{0,1}[a-z]{0,2}" class="input "
                                 type="text">
                         </div>
                     </div>

@@ -4,6 +4,9 @@
   "animal": null,
   "veterinarian": null,
   "vet": null,
+  "farmer": {
+    "vvvoNumber": null
+  },
   "address": {
     "city": null,
     "postalCode": null,
