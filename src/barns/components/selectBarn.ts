@@ -1,13 +1,42 @@
-import { VetproviehList } from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
-import { GpsCoordinates } from '../../../shared';
-import { Barn } from '../../../barns';
+import { VetproviehBasicList } from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+import { GpsCoordinates } from '../../shared';
+import { Barn } from '../models';
+import { WebComponent, VetproviehElement } from '@tomuench/vetprovieh-shared/lib';
 
 
 
 /**
  * Barn Selection
  */
-export class SelectBarn extends VetproviehList {
+@WebComponent({
+    template: VetproviehElement.template + `<style>
+                :host {
+                    display: block;
+                }
+                #listElements div{
+                    cursor: pointer;
+                }
+                #listElements div:hover {
+                    background-color: #F0F0F0 !important;
+                }
+                </style>
+            
+                <!-- SearchControl on Top -->
+                <div id="searchControl" class="control">
+                <input id="search" class="input" type="text" 
+                        placeholder="Bitte Suchbegriff eingeben">
+                </div>
+            
+                <!-- Listing Elements here -->
+                <div id="listElements" style="margin-top:20px;">
+            
+                </div>
+                <!-- Pager for Paging through List-->
+                <vetprovieh-pager id="pager" page="1" maximum="7">
+                </vetprovieh-pager>`,
+        tag: 'vp-select-barn'
+})
+export class SelectBarn extends VetproviehBasicList {
 
     private currentGpsPosition: GpsCoordinates | undefined;
 
@@ -41,13 +70,16 @@ export class SelectBarn extends VetproviehList {
         if (barn && barn.id && this.currentGpsPosition) {
             let currentDistance = this.calculatedDistances[barn.id];
             if (!forceReload && currentDistance >= 0) {
+                console.log(currentDistance);
                 return currentDistance;
             } else {
                 const distance = barn.gpsCoordinates.distanceTo(this.currentGpsPosition);
                 this.calculatedDistances[barn.id] = distance;
+                console.log(distance);
                 return distance;
             }
         } else {
+            console.log("zero");
             return 0;
         }
     }
@@ -80,5 +112,3 @@ export class SelectBarn extends VetproviehList {
     }
 
 }
-
-customElements.define('vp-select-barn', SelectBarn);

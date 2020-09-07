@@ -58,7 +58,7 @@ export default {
                     dest: 'www/assets'
                 },
                 {
-                    src: 'src/pages/*',
+                    src: 'src/shared/pages/*',
                     dest: 'www'
                 },
                 {
