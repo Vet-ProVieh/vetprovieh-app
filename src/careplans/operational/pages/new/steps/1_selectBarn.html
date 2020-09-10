@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Vet:Provieh - Behandlungsvorlage wählen</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+    <vetprovieh-layout title="1. Stall auswählen">
+        <h1>1. Stall auswählen</h1>
+        <p>Damit Sie eine Bahnldung erstellen können, wählen Sie zunächst ihren Stall aus. Die GPS-Suche ist automatisch aktiv
+            und lässt sich durch den Button mit dem Globus deaktivieren.
+        </p>
+        <vp-select-barn pagesize="20">
+            <template>
+                <div>
+                    <a href="2_selectCareplan?barn_id={{id}}">
+                        <strong>{{name}} ({{address.city}})</strong>
+                        <span class="tag is-primary">{{distance}} KM</span>
+                    </a><br />
+                </div>
+                <hr />
+            </template>
+        </vp-select-barn>
+    </vetprovieh-layout>
+</body>
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>
