@@ -28,6 +28,7 @@
     "@tomuench/formt-validation": "file:../formt-validation",
     "@tomuench/vetprovieh-detail": "file:../vetprovieh-detail",
     "@tomuench/vetprovieh-list": "file:../vetprovieh-list",
+    "@tomuench/vetprovieh-select": "file:../vetprovieh-select",
     "@tomuench/vetprovieh-shared": "file:../vetprovieh-shared",
     "@tomuench/vetprovieh-sidemenu": "file:../vetprovieh-menu",
     "bulma": "^0.8.2",

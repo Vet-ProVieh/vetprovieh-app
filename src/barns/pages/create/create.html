@@ -2,6 +2,7 @@
 <html lang="de" dir="ltr">
 
 <!-- Header -->
+
 <head>
     <meta charset="utf-8">
     <title>Vet:Provieh - Ihr Stall</title>
@@ -12,11 +13,13 @@
 <!-- Layout-Container -->
 
 <body>
-<vetprovieh-layout title="Stall erstellen">
-    <vetprovieh-detail src="/service/barns">
-        <!--#include file="_form.html"-->
-    </vetprovieh-detail>
-</vetprovieh-layout>
+    <vetprovieh-layout title="Stall erstellen">
+        <vetprovieh-barn>
+            <vetprovieh-detail src="/service/barns">
+                <!--#include file="_form.html"-->
+            </vetprovieh-detail>
+        </vetprovieh-barn>
+    </vetprovieh-layout>
 </body>
 
 <!--#include file="/includes/scripts.html"-->

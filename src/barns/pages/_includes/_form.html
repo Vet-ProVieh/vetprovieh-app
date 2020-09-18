@@ -6,17 +6,13 @@
                 <label class="label">Zugeordneter Landwirt</label>
 
                 <div class="control">
-                    <input property="farmer.vvvoNumber" pattern="276\\d{12}" placeholder="276..." class="input" type="text"
-                        required>
-                </div>
-                <div class="control">
-               <!--     <vetprovieh-select id="farmer" property="vvvoNumber" display="name" src="/service/farmers">
+                   <vetprovieh-select id="farmer" property="farmer.vvvoNumber" display="name" required>
                     <template>
                       <div style="padding:15px">
                         <span>{{name}} ({{vvvoNumber}})</span>
                       </div>
                     </template>
-                  </vetprovieh-select>-->
+                  </vetprovieh-select>
                 </div>
 
                 <label class="label">Stall-Bezeichnung</label>
