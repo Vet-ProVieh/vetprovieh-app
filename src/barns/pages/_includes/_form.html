@@ -6,20 +6,20 @@
                 <label class="label">Zugeordneter Landwirt</label>
 
                 <div class="control">
-                   <vetprovieh-select id="farmer" property="farmer.vvvoNumber" display="name" required>
-                    <template>
-                      <div style="padding:15px">
-                        <span>{{name}} ({{vvvoNumber}})</span>
-                      </div>
-                    </template>
-                  </vetprovieh-select>
+                    <vetprovieh-select id="farmer" property="farmer.vvvoNumber" display="name" required>
+                        <template>
+                            <div style="padding:15px">
+                                <span>{{name}} ({{vvvoNumber}})</span>
+                            </div>
+                        </template>
+                    </vetprovieh-select>
                 </div>
 
                 <label class="label">Stall-Bezeichnung</label>
                 <div class="control">
                     <input property="name" class="input " type="text" required>
                 </div>
-                
+
                 <label class="label">VVVO</label>
                 <div class="control">
                     <input property="vvvoNumber" pattern="276\\d{12}" placeholder="276..." class="input" type="text"
@@ -30,35 +30,50 @@
         <br />
         <div class="card">
             <div class="card-content">
-                <p class="title is-4">Addresse</p>
-                <div class="columns">
-                    <div class="column is-four-fifths">
-                        <label class="label">Straße</label>
-                        <div class="control">
-                            <input property="address.streetName" class="input " type="text">
-                        </div>
-                    </div>
-                    <div class="column">
-                        <label class="label">Hausnummer</label>
-                        <div class="control">
-                            <input property="address.streetNumber" pattern="\\d+[ ]{0,1}[a-z]{0,2}" class="input "
-                                type="text">
-                        </div>
-                    </div>
-                </div>
+                <p class="title is-4">Addresse
+                    <button id="geoDeviceButton" is="geo-button" type="button" class="button is-info is-outlined">
+                        Aktuelle Position laden
+                    </button>
+                </p>
                 <div class="columns">
                     <div class="column">
-                        <label class="label">Postleitzahl</label>
-                        <div class="control">
-                            <input property="address.postalCode" pattern="^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$"
-                                class="input " type="text">
+                        <div class="columns">
+                            <div class="column is-four-fifths">
+                                <label class="label">Straße</label>
+                                <div class="control">
+                                    <input property="address.streetName" class="input " type="text">
+                                </div>
+                            </div>
+                            <div class="column">
+                                <label class="label">Hausnummer</label>
+                                <div class="control">
+                                    <input property="address.streetNumber" pattern="\\d+[ ]{0,1}[a-z]{0,2}"
+                                        class="input " type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="columns">
+                            <div class="column">
+                                <label class="label">Postleitzahl</label>
+                                <div class="control">
+                                    <input property="address.postalCode"
+                                        pattern="^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$" class="input "
+                                        type="text">
+                                </div>
+                            </div>
+                            <div class="column is-four-fifths">
+                                <label class="label">Stadt</label>
+                                <div class="control">
+                                    <input property="address.city" class="input" type="text">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="column is-four-fifths">
-                        <label class="label">Stadt</label>
-                        <div class="control">
-                            <input property="address.city" class="input" type="text">
-                        </div>
+
+                    <div class="column">
+                        <geo-map id="geoMap" width="300" height="400">
+
+                        </geo-map>
                     </div>
                 </div>
             </div>
@@ -71,8 +86,7 @@
                     <div class="column  is-four-fifths">
                         <label class="label">Betreuender Tierarzt</label>
                         <div class="control">
-                            <input property="lastVet" disabled
-                                class="input " type="text">
+                            <input property="lastVet" disabled class="input " type="text">
                         </div>
                     </div>
                     <div class="column">
@@ -86,9 +100,6 @@
         </div>
 
         <div class="card">
-            <button id="geoDeviceButton" is="geo-button" type="button" class="button is-info is-outlined">
-                Load Coordinates
-            </button>
         </div>
     </div>
 </template>

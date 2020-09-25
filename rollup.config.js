@@ -72,6 +72,10 @@ export default {
                 {
                     src: 'node_modules/@fortawesome/fontawesome-free/*',
                     dest: 'www/node_modules/fontawesome'
+                },
+                {
+                    src: 'node_modules/ol/ol.css',
+                    dest: 'www/assets/css'
                 }
             ])
         }),

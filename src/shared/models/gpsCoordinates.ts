@@ -1,4 +1,5 @@
 import { GeoHelper } from "@tomuench/vetprovieh-shared/lib";
+import { Coordinate } from "ol/coordinate";
 
 export class GpsCoordinates {
     latitude : number = 0;
@@ -12,6 +13,18 @@ export class GpsCoordinates {
     constructor(lat:number = 0, long:number = 0){
         this.latitude = lat;
         this.longitude = long;
+    }
+
+    public static createFromOpenLayers(input: Coordinate): GpsCoordinates {
+        return new GpsCoordinates(input[1], input[0])
+    }
+
+    /**
+     * Equals coordinate from OpenLayer?
+     * @param {Coordinate} input 
+     */
+    public equals(input:Coordinate) : boolean{
+        return (this.latitude === input[1]|| this.longitude === input[0]);
     }
 
     /**

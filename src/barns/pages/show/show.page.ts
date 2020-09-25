@@ -1,4 +1,4 @@
-import { BasicShowPage, GeoCoordButton } from "../../../shared";
+import { BasicShowPage, GeoCoordButton, GeoMap, GpsCoordinates } from "../../../shared";
 import { FarmersRepository } from "../../../farmers";
 import { VetproviehSelect, VetproviehDetail } from "../../../app/main";
 import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
@@ -45,14 +45,37 @@ export class BarnsShowPage extends BasicShowPage {
         if (geoButton) {
             let barn = this.detailElement.currentObject as Barn;
 
+            this.addToMap(barn.gpsCoordinates);
+
             geoButton.addEventListener("geo-loaded", (event: any) => {
                 let geoEvent = event as GeoEvent;
                 barn.gpsCoordinates.latitude = geoEvent.lat;
                 barn.gpsCoordinates.longitude = geoEvent.lon;
+
+                this.addToMap(barn.gpsCoordinates);
             });
         } else {
             console.log("GEOBUTTON NOT FOUND");
         }
+    }
+
+    /**
+     * Puts Coordinate to Map
+     * @param {GpsCoordinates} coords 
+     */
+    private addToMap(coords: GpsCoordinates){
+        let center = new GpsCoordinates(coords.latitude, coords.longitude);
+        this.geoMap.gpsCenter = center;
+        this.geoMap.clearMarkers();
+        this.geoMap.addMarker(center);
+    }
+
+    /**
+     * Getting GeoMap
+     * @return {GeoMap}
+     */
+    private get geoMap() : GeoMap{
+        return this.detailElement.getByIdFromShadowRoot("geoMap") as GeoMap;
     }
 
     /**
