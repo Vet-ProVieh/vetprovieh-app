@@ -138,7 +138,7 @@ export class VetproviehLayout extends VetproviehElement {
                    Behandlung
                 </p>
                 <ul class="menu-list">
-                    <li><a href="/careplans/operational/new.html">Neue Behandlung</a></li>
+                    <li><a href="/careplans/operational/1_selectBarn.html">Neue Behandlung</a></li>
                     <li><a href="/careplans/operational">Behandlungen</a></li>
                 </ul>
                 

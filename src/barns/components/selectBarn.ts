@@ -82,7 +82,7 @@ export class SelectBarn extends VetproviehBasicList {
             if (!forceReload && currentDistance >= 0) {
                 (barn as any).distance = Math.round(currentDistance / 10.00) / 100.00;
                 return currentDistance;
-            } else {
+            } else if (barn.gpsCoordinates){
                 const distance = GeoHelper.calculateDistance(
                     barn.gpsCoordinates.latitude,
                     barn.gpsCoordinates.longitude,
@@ -91,6 +91,9 @@ export class SelectBarn extends VetproviehBasicList {
                 this.calculatedDistances[barn.vvvoNumber] = distance;
                 (barn as any).distance = Math.round(distance / 10.00) / 100.00;
                 return distance;
+            } else {
+                // TODO Really Zero? Without GPS-Coordinates no destination
+                return 0;
             }
         } else {
             return 0;

@@ -13,20 +13,19 @@
 <!-- Layout-Container -->
 
 <body>
-    <vetprovieh-layout title="1. Stall auswählen">
+    <vetprovieh-layout title="2. Behandlung auswählen">
         <h1>2. Behandlung auswählen</h1>
-    
-        <vetprovieh-list pagesize="20">
-            <template>
-                <div>
-                    <a href="new.html?barn_id=x&id={{id}}" >
-                        <strong>{{name}}</strong>
-                    </a><br />
-                </div>
-                <hr />
-            </template>
-        </vetprovieh-list>
-    </vetprovieh-operation-plans>
+
+            <select-careplan pagesize="20">
+                <template>
+                    <div>
+                        <a href="new.html?barn_id=x&id={{id}}">
+                            <strong>{{name}}</strong>
+                        </a><br />
+                    </div>
+                    <hr />
+                </template>
+            </select-careplan>
     </vetprovieh-layout>
 </body>
 

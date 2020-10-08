@@ -20,6 +20,30 @@
                     <input property="name" class="input " type="text" required>
                 </div>
 
+
+                <label class="label">Tierart</label>
+                <div class="control">
+                    <select property="animal" class="input" required>
+                        <option value="SON">Sonstige Tier-/Nutzungsarten, nicht mitteilungspfl.</option>
+                        <option value="RM1">Rinder - Mastkälber bis 8 Mo, mitteilungspflichtig</option>
+                        <option value="RM2">Rinder - Mast ab 8 Mo, mitteilungspflichtig</option>
+                        <option value="RN1">Rinder - Mastkälber bis 8 Mo, nicht mitteilungspfl.</option>
+                        <option value="RN2">Rinder - Mast ab 8 Mo, nicht mitteilungspfl.</option>
+                        <option value="RN3">Rinder - sonstige, nicht mitteilungspflichtig</option>
+                        <option value="SM1">Schweine - Mastferkel bis 30 kg, mitteilungspflichtig</option>
+                        <option value="SM2">Schweine - Mast über 30 kg, mitteilungspflichtig</option>
+                        <option value="SN1">Schweine - Mastferkel bis 30 kg, nicht mitteilungspfl.</option>
+                        <option value="SN2">Schweine - Mast über 30 kg, nicht mitteilungspfl.</option>
+                        <option value="SN3">Schweine - sonstige, nicht mitteilungspfl.</option>
+                        <option value="HM1">Hühner - Mast, mitteilungspflichtig</option>
+                        <option value="HN1">Hühner - Mast, nicht mitteilungspfl.</option>
+                        <option value="HN2">Hühner - sonstige, nicht mitteilungspfl.</option>
+                        <option value="PM1">Puten - Mast, mitteilungspflichtig</option>
+                        <option value="PN1">Puten - Mast, nicht mitteilungspfl.</option>
+                        <option value="PN2">Puten - sonstige, nicht mitteilungspfl.</option>
+                    </select>
+                </div>
+
                 <label class="label">VVVO</label>
                 <div class="control">
                     <input property="vvvoNumber" pattern="276\\d{12}" placeholder="276..." class="input" type="text"

@@ -7,6 +7,6 @@ export class Barn extends BasicModel {
     deleted: number = 0;
     gpsCoordinates: GpsCoordinates = new GpsCoordinates();
     vvvoNumber: string = "";
-    animal = {}
+    animal: string = "";
     farmer: Farmer = new Farmer();
 }
