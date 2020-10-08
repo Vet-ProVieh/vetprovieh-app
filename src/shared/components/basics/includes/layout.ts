@@ -116,24 +116,7 @@ export class VetproviehLayout extends VetproviehElement {
         </nav>
         <vetprovieh-sidemenu id="left-menu" width="300px">
             <aside class="menu">
-                <div >
-                    <div class="card-content">
-                        <div class="media">
-                          <div class="media-left">
-                            <figure class="image is-48x48">
-                              <img src="https://bulma.io/images/placeholders/96x96.png" 
-                                   alt="Placeholder image">
-                            </figure>
-                          </div>
-                          <div class="media-content">
-                            <p class="title is-5">Stephan Göken</p>
-                            <p class="subtitle is-7">
-                                Gemeinschaftspraxis Göken & Braune
-                            </p>
-                          </div>
-                        </div>
-                    </div>
-                </div>
+                <profile-widget></profile-widget>
                 <p class="menu-label">
                    Behandlung
                 </p>
@@ -146,7 +129,6 @@ export class VetproviehLayout extends VetproviehElement {
                    Persönliche Einstellungen
                 </p>
                 <ul class="menu-list">
-                    <li><a href="#">Mein Profil</a></li>
                     <li><a href="#">Benachrichtigungen</a></li>
                     <li><a href="#">Termine</a></li>
                 </ul>
