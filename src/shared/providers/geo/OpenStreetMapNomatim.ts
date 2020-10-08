@@ -16,8 +16,8 @@ export class OpenStreetMapNomatim implements IGeoProvider{
         return new Promise((resolve, reject) => {
             fetch(`${SEARCH_ENDPOINT}?street=${street}&postalcode=${zip}&city=${city}&format=json`)
             .then((response => response.json()))
-            .then((object) => {
-                let event: GeoEvent = new GeoEvent(object.lat, object.lon);
+            .then((objects) => {
+                let event: GeoEvent = new GeoEvent(objects[0].lat, objects[0].lon);
                 resolve(event);
             })
             .catch(reject)

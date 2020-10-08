@@ -2,15 +2,15 @@ import { GeoHelper } from "@tomuench/vetprovieh-shared/lib";
 import { Coordinate } from "ol/coordinate";
 
 export class GpsCoordinates {
-    latitude : number = 0;
-    longitude : number = 0;
+    latitude: number = 0;
+    longitude: number = 0;
 
     /**
      * Default-Constructor
      * @param {number} lat 
      * @param {number} long 
      */
-    constructor(lat:number = 0, long:number = 0){
+    constructor(lat: number = 0, long: number = 0) {
         this.latitude = lat;
         this.longitude = long;
     }
@@ -23,15 +23,15 @@ export class GpsCoordinates {
      * Equals coordinate from OpenLayer?
      * @param {Coordinate} input 
      */
-    public equals(input:Coordinate) : boolean{
-        return (this.latitude === input[1]|| this.longitude === input[0]);
+    public equals(input: Coordinate): boolean {
+        return (this.latitude === input[1] || this.longitude === input[0]);
     }
 
     /**
      * Calculate Distance between two GpsCoordinates
      * @param {GpsCoordinates} b 
      */
-    public distanceTo(b: GpsCoordinates) : number{
+    public distanceTo(b: GpsCoordinates): number {
         return GeoHelper.calculateDistance(
             this.latitude,
             this.longitude,
@@ -43,7 +43,7 @@ export class GpsCoordinates {
     /**
      * Load current GPS-Koordinates
      */
-    public static get currentGpsCoordinates() : Promise<GpsCoordinates> {
+    public static get currentGpsCoordinates(): Promise<GpsCoordinates> {
         return new Promise((resolve, reject) => {
             navigator.geolocation.getCurrentPosition((result) => {
                 resolve(new GpsCoordinates(result.coords.latitude, result.coords.longitude))
@@ -51,6 +51,13 @@ export class GpsCoordinates {
                 reject(null);
             })
         });
-        
+    }
+
+    public static empty(coords: GpsCoordinates): boolean {
+        if (coords) {
+            return !!coords.latitude && coords.latitude === 0 || !!coords.longitude && coords.longitude === 0;
+        } else {
+            return false;
+        }
     }
 }

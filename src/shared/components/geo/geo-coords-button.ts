@@ -11,9 +11,6 @@ import { OpenStreetMapNomatim } from "../../providers/geo/OpenStreetMapNomatim";
 })
 export class GeoCoordButton extends HTMLButtonElement {
 
-    // GeoProvider to load remote-Coordinates
-    private geoProvider: IGeoProvider = new OpenStreetMapNomatim();
-
     // Type of loading
     private _loadType: GeoButtionType = GeoButtionType.device;
 
@@ -79,9 +76,6 @@ export class GeoCoordButton extends HTMLButtonElement {
             case GeoButtionType.device:
                 this.loadCoordinatesFromDevice();
                 break;
-            case GeoButtionType.openstreet:
-                this.loadCoordinatesFromService();
-                break;
         }
     }
 
@@ -96,13 +90,9 @@ export class GeoCoordButton extends HTMLButtonElement {
         }
     }
 
-    private loadCoordinatesFromService() {
-        // this.geoProvider.loadCoordinates()
-    }
 }
 
 
 enum GeoButtionType {
-    device = "device",
-    openstreet = "openstreet"
+    device = "device"
 }

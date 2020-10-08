@@ -58,15 +58,20 @@ class KeycloakHelper {
 
   attachToken(incomingArgs) {
     var args = incomingArgs;
+    var i = args.length;
 
-    if (!args[1]) {
-      args[1] = {
+    if (!args[i]) {
+      args[i] = {
         headers: {}
       }
     }
-    args[1].headers['Authorization'] = 'Bearer ' + this.instance.token;
+    args[i].headers['Authorization'] = 'Bearer ' + this.instance.token;
 
     return args;
+  }
+
+  setRequestHeader(request) {
+    request.setRequestHeader('Authorization','Bearer ' + this.instance.token);
   }
 
   set onAuthSuccess(callbackFunction) {

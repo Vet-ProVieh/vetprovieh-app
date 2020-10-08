@@ -24,3 +24,10 @@ window.fetch = function () {
   });
 
 };
+
+
+var proxiedOpen = window.XMLHttpRequest.prototype.send;
+window.XMLHttpRequest.prototype.send = function() {
+    keycloakHelper.setRequestHeader(this);
+    return proxiedOpen.apply(this, [].slice.call(arguments));
+};

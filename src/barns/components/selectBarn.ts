@@ -41,7 +41,7 @@ export class SelectBarn extends VetproviehBasicList {
 
     private currentGpsPosition: GpsCoordinates | undefined;
 
-    private calculatedDistances: { [key: number]: number } = {};
+    private calculatedDistances: { [key: string]: number } = {};
 
 
     constructor() {
@@ -77,8 +77,8 @@ export class SelectBarn extends VetproviehBasicList {
      * @return {number}
      */
     private calcDistance(barn: Barn, forceReload: Boolean = false): number {
-        if (barn && barn.id && this.currentGpsPosition) {
-            let currentDistance = this.calculatedDistances[barn.id];
+        if (barn && barn.vvvoNumber && this.currentGpsPosition) {
+            let currentDistance = this.calculatedDistances[barn.vvvoNumber];
             if (!forceReload && currentDistance >= 0) {
                 (barn as any).distance = Math.round(currentDistance / 10.00) / 100.00;
                 return currentDistance;
@@ -88,8 +88,7 @@ export class SelectBarn extends VetproviehBasicList {
                     barn.gpsCoordinates.longitude,
                     this.currentGpsPosition.latitude,
                     this.currentGpsPosition.longitude)
-                this.calculatedDistances[barn.id] = distance;
-                console.log(distance);
+                this.calculatedDistances[barn.vvvoNumber] = distance;
                 (barn as any).distance = Math.round(distance / 10.00) / 100.00;
                 return distance;
             }
@@ -123,7 +122,6 @@ export class SelectBarn extends VetproviehBasicList {
             GpsCoordinates.currentGpsCoordinates
                 .then((pos: GpsCoordinates) => {
                     this.currentGpsPosition = pos;
-                    console.log(pos);
                     resolve();
                 })
         });
