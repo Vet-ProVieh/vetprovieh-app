@@ -8,14 +8,36 @@
                     <input property="name" class="input " type="text" required>
                 </div>
 
+                <label class="label">FeldTyp</label>
+                <div class="control">
+                    <select id="fieldType" property="fieldType" class="input" required>
+                      <option value="textArea">Langtext</option>
+                      <option value="textFields">Kurzertext</option>
+                      <option value="video">Video</option>
+                      <option value="image">Bild</option>
+                      <option value="list">Liste</option>
+                      <option value="comboBox">Auswahlbox</option>
+                    </select>
+                </div>
+
+                <select-field-type id="extraFields"></select-field-type>
+            </div>
+        </div>
+        <br/>
+        <div class="card">
+            <div class="card-content">
+            </div>
+        </div>
+        <br/>
+        <div class="card">
+            <div class="card-content">
+                <p class="title is-4">Zusatz Einstellungen</p>
                 <div class="control">
                     <label class="checkbox">
                         <input property="voiceInputable" type="checkbox">
                         Spracheingabe?
                     </label>
                 </div>
-
-
                 <div class="control">
                     <label class="checkbox">
                         <input property="optional" type="checkbox">

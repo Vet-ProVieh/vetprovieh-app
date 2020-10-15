@@ -10,27 +10,20 @@ import { CareplanGroup } from "../../models/careplanGroup";
 })
 export class CarePlanGroupShowPage extends BasicShowPage {
 
-    private _detailContainer : VetproviehDetail;
-
-    constructor(){
-        super();
-        this._detailContainer = this.getElementsByTagName("vetprovieh-detail")[0] as VetproviehDetail;
-        this._showGroups(this._detailContainer.currentObject as CareplanGroup);
-        /*this._detailContainer.addEventListener("loadeddata", (event: any) => {
-            this._showGroups((event as LoadedEvent).data as CareplanGroup);
-        })*/
-    }
-
     connectedCallback(){
+        this.detailElement.addEventListener("loadeddata", (event: any) => {
+            this._showGroups(this.detailElement.currentObject as CareplanGroup);
+        });
     }
 
     /**
      * Showing Groups of a Careplan
+     * @param {CareplanGroup} careplan
      * @private
      */
     private _showGroups(careplan: CareplanGroup) {
         if(careplan){
-            let groupRepeater = this._detailContainer.getByIdFromShadowRoot("fields") as VetproviehTable;
+            let groupRepeater = this.detailElement.getByIdFromShadowRoot("fields") as VetproviehTable;
             groupRepeater.objects = careplan.fields;
             groupRepeater.clearAndRender();
         }

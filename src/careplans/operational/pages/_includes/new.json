@@ -1,12 +1,12 @@
 {
   "id": null,
   "name": "Testbehandlung",
-  "opGroups": [
+  "groups": [
     {
       "id": null,
       "position": 1,
       "name": "Vorbericht",
-      "opFields": [
+      "fields": [
         {
           "id": null,
           "position": 1,
@@ -86,7 +86,7 @@
       "id": null,
       "position": 2,
       "name": "Klinische Untersuchung",
-      "opFields": [
+      "fields": [
         {
           "id": null,
           "position": 1,
@@ -109,7 +109,7 @@
       "id": null,
       "position": 3,
       "name": "Probenahme",
-      "opFields": [
+      "fields": [
         {
           "id": null,
           "position": 1,
@@ -132,19 +132,19 @@
       "id": null,
       "position": 4,
       "name": "Diagnose",
-      "opFields": []
+      "fields": []
     },
     {
       "id": null,
       "position": 5,
       "name": "Therapie",
-      "opFields": []
+      "fields": []
     }, 
     {
       "id": null,
       "position": 6,
       "name": "Handlungsempfehlungen",
-      "opFields": []
+      "fields": []
     }
   ]
 }

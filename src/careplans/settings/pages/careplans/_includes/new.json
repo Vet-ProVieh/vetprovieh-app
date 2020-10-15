@@ -13,6 +13,7 @@
             "name": "Anzahl infizierte Tiere",
             "optional": false,
             "voiceInputable": true,
+            "fieldType": "textArea",
             "value": ""
           },
           {
@@ -21,6 +22,7 @@
             "name": "Gesamte Anzahl Tiere",
             "optional": true,
             "voiceInputable": true,
+            "fieldType": "textArea",
             "value": ""
           }
         ]
@@ -36,6 +38,7 @@
             "name": "F1",
             "optional": false,
             "voiceInputable": true,
+            "fieldType": "textArea",
             "value": ""
           },
           {
@@ -44,6 +47,7 @@
             "name": "F2 (opt)",
             "optional": true,
             "voiceInputable": false,
+            "fieldType": "textArea",
             "value": ""
           }
         ]
@@ -59,6 +63,7 @@
             "name": "F3",
             "optional": false,
             "voiceInputable": false,
+            "fieldType": "textArea",
             "value": ""
           },
           {
@@ -67,6 +72,7 @@
             "name": "F4 (opt)",
             "optional": true,
             "voiceInputable": true,
+            "fieldType": "textArea",
             "value": ""
           }
         ]

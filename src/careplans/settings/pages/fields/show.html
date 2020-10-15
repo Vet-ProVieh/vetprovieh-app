@@ -2,6 +2,7 @@
 <html lang="de" dir="ltr">
 
 <!-- Header -->
+
 <head>
     <meta charset="utf-8">
     <title>Vet:Provieh - Ihr Behandlungsfeld</title>
@@ -12,11 +13,13 @@
 <!-- Layout-Container -->
 
 <body>
-<vetprovieh-layout title="Ihr Behandlungsfeld">
-    <vetprovieh-detail src="/service/careplans/fields">
-        <!--#include file="_form.html"-->
-    </vetprovieh-detail>
-</vetprovieh-layout>
+    <vetprovieh-layout title="Ihr Behandlungsfeld">
+        <careplan-field-page>
+            <vetprovieh-detail src="/service/careplans/fields">
+                <!--#include file="_form.html"-->
+            </vetprovieh-detail>
+        </careplan-field-page>
+    </vetprovieh-layout>
 </body>
 
 <!--#include file="/includes/scripts.html"-->
