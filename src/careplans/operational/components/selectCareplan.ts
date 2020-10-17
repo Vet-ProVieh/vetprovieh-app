@@ -1,6 +1,6 @@
 import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
 import { VetproviehBasicList } from "@tomuench/vetprovieh-list/lib/vetprovieh-basic-list";
-import { CareplansRepository } from "../../settings/repository/carePlans_repository";
+import { OperationPlanBluerprintsRepository } from "../repository";
 
 
 @WebComponent({
@@ -37,7 +37,7 @@ export class SelectCareplan  extends VetproviehBasicList {
     constructor() {
         super();
 
-        this.repository = new CareplansRepository();
+        this.repository = new OperationPlanBluerprintsRepository();
     }
 
     /**
