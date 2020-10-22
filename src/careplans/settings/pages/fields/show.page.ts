@@ -1,4 +1,4 @@
-import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, Indexable } from "@tomuench/vetprovieh-shared/lib";
 import { BasicShowPage } from "../../../../shared";
 import { SelectFieldType } from "../../components";
 import { CareplanField } from "../../models/careplanField";
@@ -28,14 +28,25 @@ export class CarePlanFieldShowPage extends BasicShowPage {
     private attachListener() {
         this.fieldTypeSelect.addEventListener("change", (event) => {
 
-            var blankField = this.generateField(this.fieldTypeSelect.value);
-            this.detailElement.currentObject.fieldType = blankField.fieldType;
-            this.detailElement.currentObject = Object.assign(blankField, this.detailElement.currentObject);
-            
+            let newField = this.buildField(this.fieldTypeSelect.value);
+
+            this.detailElement.currentObject = newField;
+
             this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
 
             this.detailElement.rebindForm();
         })
+    }
+
+    private buildField(fieldType: string): CareplanField {
+        var blankField = this.generateField(fieldType);
+        let currentObject = this.detailElement.currentObject;
+        Object.keys(blankField).forEach((key) => {
+            if (key != "fieldType") {
+                (blankField as Indexable)[key] = currentObject[key];
+            }
+        });
+        return blankField;
     }
 
 
@@ -52,9 +63,9 @@ export class CarePlanFieldShowPage extends BasicShowPage {
             case "textFields":
                 return new TextFields();
             case "video":
-                //return new Video();
+            //return new Video();
             case "image":
-                //return new Image();
+            //return new Image();
             case "list":
             case "comboBox":
             default:
