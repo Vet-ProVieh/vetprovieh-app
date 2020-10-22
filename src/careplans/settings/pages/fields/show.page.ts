@@ -1,17 +1,15 @@
-import { WebComponent, VetproviehTable } from "@tomuench/vetprovieh-shared/lib";
-import { LoadedEvent } from "@tomuench/vetprovieh-detail/lib/loaded-event";
+import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { BasicShowPage } from "../../../../shared";
-import { VetproviehDetail } from "../../../../app/main";
-import { CareplanGroup } from "../../models/careplanGroup";
 import { SelectFieldType } from "../../components";
+import { CareplanField } from "../../models/careplanField";
 import { TextArea } from "../../models/fields";
+import { TextFields } from "../../models/fields/textFields";
 
 @WebComponent({
     template: "",
     tag: "careplan-field-page"
 })
 export class CarePlanFieldShowPage extends BasicShowPage {
-
 
     constructor() {
         super();
@@ -30,14 +28,38 @@ export class CarePlanFieldShowPage extends BasicShowPage {
     private attachListener() {
         this.fieldTypeSelect.addEventListener("change", (event) => {
 
-            console.log(Object.assign(new TextArea(), this.detailElement.currentObject))
-
-            this.detailElement.currentObject = Object.assign(new TextArea(), this.detailElement.currentObject);
-
+            var blankField = this.generateField(this.fieldTypeSelect.value);
+            this.detailElement.currentObject.fieldType = blankField.fieldType;
+            this.detailElement.currentObject = Object.assign(blankField, this.detailElement.currentObject);
+            
             this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
 
             this.detailElement.rebindForm();
         })
+    }
+
+
+
+    /**
+     * Generating Field 
+     * @param {string} type
+     * @return {CareplanField}
+     */
+    private generateField(type: string): CareplanField {
+        switch (type) {
+            case "textArea":
+                return new TextArea();
+            case "textFields":
+                return new TextFields();
+            case "video":
+                //return new Video();
+            case "image":
+                //return new Image();
+            case "list":
+            case "comboBox":
+            default:
+                return new CareplanField();
+        }
     }
 
     /**
