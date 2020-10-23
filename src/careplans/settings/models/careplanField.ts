@@ -30,10 +30,8 @@ export class CareplanField extends BasicModel {
             "multipleSelect": FieldOptions.INPUT_CHECKBOX
         },
         comboBox: {
-            "choices": {
-                tag: "?",
-                type: "text"
-            },
+            "choices": FieldOptions.CUSTOM_CHOICES,
+            "choiceSrc": FieldOptions.INPUT_TEXT,
             "multipleSelect": FieldOptions.INPUT_CHECKBOX
         }
     }

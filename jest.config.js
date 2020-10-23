@@ -6,6 +6,12 @@ module.exports = {
   moduleNameMapper: {
     '^lib/(.*)$': '<rootDir>/dist/$1'
   },
+  transformIgnorePatterns: [
+    "/node_modules/(?!(ol|labelgun|mapbox-to-ol-style|ol-mapbox-style)/).*/"
+  ],
+  coveragePathIgnorePatterns: [
+    "/node_modules/"
+  ],
   transform: {
     "^.+\\.tsx?$": "ts-jest",
     '^.+\\.jsx?$': 'babel-jest',

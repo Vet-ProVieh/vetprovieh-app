@@ -1,4 +1,5 @@
+import { ChoicesField } from "./choicesField";
 
-export class ComboBox {
+export class ComboBox extends ChoicesField{
     
 }
