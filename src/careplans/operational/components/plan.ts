@@ -1,7 +1,7 @@
 import { ViewHelper } from "@tomuench/vetprovieh-shared";
 import { VetproviehBasicDetail } from "@tomuench/vetprovieh-detail/lib/index";
 import { VpOperationGroup } from "./group";
-import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehElement, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
 import { OperationPlan } from "../models";
 import { ProcessMenu } from "./process-menu";
 
@@ -48,8 +48,10 @@ export class VpOperationPlan extends VetproviehBasicDetail {
 
 
     render() {
-        if (!this._fetched)
+        if (!this._fetched){
             super.render();
+            this._attachListenerToButtons();
+        }
     }
 
     /**
@@ -103,6 +105,24 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         return currentUrl.toString();
     }
 
+     /**
+     * Attaching Listener to Save and Abort Button
+     * @private
+     */
+  _attachListenerToButtons() {
+    const save = this.getByIdFromShadowRoot('saveButton') as HTMLElement;
+    const abort = this.getByIdFromShadowRoot('abortButton') as HTMLElement;
+    save.addEventListener('click', () => {
+        console.log("SAVE");
+        this.save()
+    });
+    abort.addEventListener('click', () => {
+      console.log("cancel");
+      // Destroy Cached local Data
+      VetproviehNavParams.delete(window.location.href);
+      window.history.back()
+    });
+  }
 
     /**
      * Setting Process-Menu Items and activate current Element

@@ -20,38 +20,48 @@ class SpeechWrapper {
         this._initRecognition();
     }
 
-    private getSpeechRecognition() :any{
-        return SpeechRecognition || (window as Indexable)['webkitSpeechRecognition'];
+    private getSpeechRecognition(): any {
+        return (window as Indexable)['webkitSpeechRecognition'] || SpeechRecognition;
     }
 
     private getSpeechRecognitionEvent(): any {
-        return SpeechRecognitionEvent || (window as Indexable)['webkitSpeechRecognitionEvent'];
+        return (window as Indexable)['webkitSpeechRecognitionEvent'] || SpeechRecognitionEvent;
     }
 
     private getGrammarList(): any {
-        return SpeechGrammarList || (window as Indexable)['webkitSpeechGrammarList'];
+        return (window as Indexable)['webkitSpeechGrammarList'] || SpeechGrammarList;
+    }
+
+    /**
+     * VoiceInput Ready?
+     * @return {boolean}
+     */
+    public get ready(): boolean {
+        return this._recognition !== undefined;
     }
 
     private _initRecognition() {
         try {
             var SpeechRecognition = this.getSpeechRecognition();
-            var SpeechRecognitionEvent = this.getSpeechRecognitionEvent;
+            var SpeechRecognitionEvent = this.getSpeechRecognitionEvent();
             this._recognition = new SpeechRecognition();
 
             this._initGrammar();
 
-            this._recognition.continuous = true;
-            this._recognition.lang = 'de-DE';
-            this._recognition.interimResults = false;
-            this._recognition.maxAlternatives = 1;
+            if (this.ready) {
+                this._recognition.continuous = true;
+                this._recognition.lang = 'de-DE';
+                this._recognition.interimResults = false;
+                this._recognition.maxAlternatives = 1;
 
-            this._recognition.onnomatch = function (event:any) {
-                console.log("I didn't recognise that color.");
-            }.bind(this as SpeechWrapper);
+                this._recognition.onnomatch = function (event: any) {
+                    console.log("I didn't recognise that color.");
+                }.bind(this as SpeechWrapper);
 
-            this._recognition.onerror = function (event:any) {
-                console.log('Error occurred in recognition:');
-                console.log(event);
+                this._recognition.onerror = function (event: any) {
+                    console.log('Error occurred in recognition:');
+                    console.log(event);
+                }
             }
         } catch (ex) {
             console.log("Could not init Speech-Recognition");
@@ -62,23 +72,25 @@ class SpeechWrapper {
      * Stop Speech Recognition
      */
     stop() {
-        this._recognition.stop();
+        if (this.ready) this._recognition.stop();
     }
 
     /**
      * Start Speech Recognition
      */
     start() {
-        this._recognition.start();
+        if (this.ready) this._recognition.start();
     }
 
     set onresult(func: Function) {
-        this._recognition.onresult = function (event:any) {
-            console.log("HEARED SOMETHING");
-            console.log(event);
-            func(event.results[0][0].transcript);
+        if (this.ready) {
+            this._recognition.onresult = function (event: any) {
+                console.log("HEARED SOMETHING");
+                console.log(event);
+                func(event.results[0][0].transcript);
 
-        }.bind(this);
+            }.bind(this);
+        }
     }
 
     /**
@@ -126,7 +138,8 @@ export class VoiceInput extends HTMLTextAreaElement {
      * Connected Callback
      */
     public connectedCallback() {
-        this._addVoiceInputButton();
+        if (this._speechWrapper.ready)
+            this._addVoiceInputButton();
     }
 
     /**

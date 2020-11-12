@@ -15,7 +15,7 @@ import { VetproviehBasicRepeat, VetproviehElement, WebComponent, VetproviehRepea
 export class ProcessMenu extends VetproviehBasicRepeat {
 
   constructor() {
-    super(ProcessMenu.listTemplate);
+    super(specialListTemplate());
   }
 
   /**
@@ -40,29 +40,32 @@ export class ProcessMenu extends VetproviehBasicRepeat {
     }
   }
 
-  /**
-   * Creating List-Template
-   * @return {HTMLTemplateElement}
-   */
-  static get listTemplate(): HTMLTemplateElement {
-    let template = document.createElement("template");
-    let currentUrl = new URL(window.location.href);
+  
+}
 
-    if (currentUrl.searchParams.has("groupsId")) {
-      currentUrl.searchParams.delete("groupsId");
-    }
-    currentUrl.searchParams.append("groupsId", '')
 
-    let urlString = currentUrl.toString();
-    urlString = urlString.replace("groupsId=", "groupsId={{index}}");
+/**
+* Creating List-Template
+* @return {HTMLTemplateElement}
+*/
+function specialListTemplate(): HTMLTemplateElement {
+ let template = document.createElement("template");
+ let currentUrl = new URL(window.location.href);
 
-    template.innerHTML = `
-                        <li>
-                            <a href="`+ urlString + `">
-                                {{position}}. {{name}}
-                            </a>
-                        </li>
-    `;
-    return template;
-  }
+ if (currentUrl.searchParams.has("groupsId")) {
+   currentUrl.searchParams.delete("groupsId");
+ }
+ currentUrl.searchParams.append("groupsId", '')
+
+ let urlString = currentUrl.toString();
+ urlString = urlString.replace("groupsId=", "groupsId={{index}}");
+
+ template.innerHTML = `
+                     <li>
+                         <a href="`+ urlString + `">
+                             {{position}}. {{name}}
+                         </a>
+                     </li>
+ `;
+ return template;
 }

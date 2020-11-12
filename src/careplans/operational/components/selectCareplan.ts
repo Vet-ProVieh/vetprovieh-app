@@ -1,6 +1,7 @@
-import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehElement, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
 import { VetproviehBasicList } from "@tomuench/vetprovieh-list/lib/vetprovieh-basic-list";
 import { OperationPlanBluerprintsRepository } from "../repository";
+import { Careplan } from "../../settings";
 
 
 @WebComponent({
@@ -40,11 +41,39 @@ export class SelectCareplan  extends VetproviehBasicList {
         this.repository = new OperationPlanBluerprintsRepository();
     }
 
+    private get selectedAnimalType() : string {
+        return VetproviehNavParams.getUrlParameter("animal");
+    }
+
+    private get selectedBarnId() : string {
+        return VetproviehNavParams.getUrlParameter("barn_id");
+    }
+    
+
+     /**
+     * Attach Data to List
+     * @param {Array} data
+     * @param {string} searchValue
+     * @param {boolean} clear
+     */
+    attachData(data :any[], searchValue: string, clear = false) {
+        super.attachData(this._filterCareplans(data), searchValue, clear);
+    }
+
     /**
      * Filter Careplans after animal-type
+     * @param {Array} data
+     * @return {Array}
      */
-    private _filterCareplans() {
-
+    private _filterCareplans(data: any[]) {
+        console.log(this.selectedAnimalType);
+        console.log(this.selectedBarnId);
+        
+        return data.filter((e: Careplan) => {
+            // TODO AnimalType muss im Backend gesetzt werden können
+            e.animal = this.selectedAnimalType;
+            return e.animal === this.selectedAnimalType;
+        });
     }
 
 }
