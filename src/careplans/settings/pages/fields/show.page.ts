@@ -2,7 +2,7 @@ import { WebComponent, Indexable } from "@tomuench/vetprovieh-shared/lib";
 import { BasicShowPage } from "../../../../shared";
 import { SelectFieldType } from "../../components";
 import { CareplanField } from "../../models/careplanField";
-import { TextArea } from "../../models/fields";
+import { TextArea, ComboBox } from "../../models/fields";
 import { TextFields } from "../../models/fields/textFields";
 
 @WebComponent({
@@ -30,6 +30,7 @@ export class CarePlanFieldShowPage extends BasicShowPage {
 
             let newField = this.buildField(this.fieldTypeSelect.value);
 
+            console.log("X");
             this.detailElement.currentObject = newField;
 
             this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
@@ -68,6 +69,7 @@ export class CarePlanFieldShowPage extends BasicShowPage {
             //return new Image();
             case "list":
             case "comboBox":
+                return new ComboBox();
             default:
                 return new CareplanField();
         }

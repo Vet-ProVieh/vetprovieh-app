@@ -6,6 +6,7 @@ var exampleValues = [
     'second value',
     'third value'
 ]
+var template = `<div>\${value}</div>`;
 
 describe('bind', () => {
     it('should set value correctly', () => {
@@ -26,6 +27,11 @@ describe('render', () => {
     it('should render attach button', () => {
         let customChoices = new CustomChoices();
 
+        exampleValues.forEach((value) => {
+            let x = eval('`' + template + '`');
+            console.log(x);
+            expect(customChoices.innerHTML).toMatch(x)
+        })
         expect(customChoices.innerHTML).toMatch(/<button/)
     });
 });

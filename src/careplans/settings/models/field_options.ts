@@ -10,15 +10,38 @@ export class FieldOptions {
         this.type = type;
     }
 
+    /**
+     * Is it an Input-Field?
+     * @return {boolean}
+     */
+    public get isInput(): boolean {
+        return this.tag === "input";
+    }
+
+    /**
+     * Css-Classes for Type
+     * @return {Array<string>}
+     */
+    public get classList(): string[] {
+        let list: string[] = []
+
+        if (this.isInput) {
+            if (this.type !== "checkbox") {
+                list.push("input");
+            }
+        }
+        return list;
+    }
+
 
     /**
      * Create a Field with Field-Options
      * @param {FieldOptions} options 
      * @return {HTMLInputElement}
      */
-    public static create(options: FieldOptions) : HTMLInputElement {
+    public static create(options: FieldOptions): HTMLInputElement {
         let element = document.createElement(options.tag) as HTMLInputElement;
-        if(options.type != "") {
+        if (options.type != "") {
             element.type = options.type;
         }
         return element;
@@ -26,7 +49,7 @@ export class FieldOptions {
 
 
     public static INPUT_NUMBER = new FieldOptions("input", "number");
-    public static INPUT_CHECKBOX = new FieldOptions("input","checkbox");
+    public static INPUT_CHECKBOX = new FieldOptions("input", "checkbox");
     public static INPUT_TEXT = new FieldOptions("input", "text");
     public static CUSTOM_CHOICES = new FieldOptions("custom-choices");
 }
