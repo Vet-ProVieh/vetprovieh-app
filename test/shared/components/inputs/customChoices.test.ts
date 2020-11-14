@@ -1,39 +1,33 @@
 
-import {CustomChoices} from '../../../../src/shared'
+import { CustomChoices } from '../../../../src/shared'
 
 var exampleValues = [
     'first value',
     'second value',
     'third value'
 ]
-var template = `<div>\${value}</div>`;
+var templateString = `<div>{{value}}</div>`;
 
+var buildTemplate = function () {
+    let newTemplate = document.createElement("template");
+    newTemplate.innerHTML = templateString;
+    return newTemplate;
+}
+/*
 describe('bind', () => {
     it('should set value correctly', () => {
         let customChoices = new CustomChoices();
         customChoices.value = exampleValues;
         expect(customChoices.value).toEqual(exampleValues)
     });
-});
+});*/
 
+let customChoices: CustomChoices;
 describe('render', () => {
-    it('should render value correctly', () => {
-        let customChoices = new CustomChoices();
-        customChoices.value = exampleValues;
+    beforeEach(() => {
+        customChoices = new CustomChoices();
 
-    });
-
-
-    it('should render attach button', () => {
-        let customChoices = new CustomChoices();
-
-        exampleValues.forEach((value) => {
-            let x = eval('`' + template + '`');
-            console.log(x);
-            expect(customChoices.innerHTML).toMatch(x)
-        })
-        expect(customChoices.innerHTML).toMatch(/<button/)
-    });
+    })
 });
 
 describe('attach', () => {

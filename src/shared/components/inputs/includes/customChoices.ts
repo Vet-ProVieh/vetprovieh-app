@@ -1,9 +1,10 @@
 import { WebComponent, VetproviehElement, VetproviehRepeat } from "@tomuench/vetprovieh-shared/lib";
+import { BulmaField } from "./bulmaField";
 
 @WebComponent({
     template: `
-        <vp-repeat id="repeater">
-        </vp-repeat>
+        <div id="choices">
+        </div>
         <button id="addElement" class="button" type="button">
             Element hinzufügen
         </button>
@@ -15,12 +16,16 @@ export class CustomChoices extends VetproviehElement {
     private _value: string[] = [];
 
 
+    constructor() {
+        super(true, true);
+    }
+
     /**
      * Get Repeater from Source-Code
      * @return {VetproviehRepeat}
      */
-    private get repeater(): VetproviehRepeat {
-        return this.getByIdFromShadowRoot("repeater") as VetproviehRepeat;
+    private get choicesDiv(): HTMLDivElement {
+        return this.getByIdFromShadowRoot("choices") as HTMLDivElement;
     }
 
     /**
@@ -31,29 +36,32 @@ export class CustomChoices extends VetproviehElement {
         return this.getByIdFromShadowRoot("addElement") as HTMLButtonElement;
     }
 
-    constructor() {
-        super(true, true);
-        this.fieldTemplate = this.buildDefaultTemplate();
-    }
-
     /**
-     * Generating Default-Template to set
-     * @return {DocumentFragment}
+     * Value is correctly set?
+     * @return {boolean}
      */
-    private buildDefaultTemplate(): DocumentFragment {
-        let e: HTMLTemplateElement = document.createElement("template");
-        e.innerHTML = DEFAULT_TEMPLATE;
-        return e.content;
+    private get valueIsSet() : boolean {
+        return this.value && Array.isArray(this.value)
     }
 
     public render() {
         super.render();
-        if(this.value && Array.isArray(this.value))
-            this.repeater.objects = this.value;
+
+        if(this.valueIsSet){
+            this.value.forEach((value) => {
+                let newInput = new BulmaField();
+                newInput.value = value;
+                newInput.render();
+                this.choicesDiv.appendChild(newInput);
+            })
+        }
         
         this.attachListenerToAddButton();
     }
 
+    /**
+     * Attaching Listener to Add-Button
+     */
     private attachListenerToAddButton() {
         if (this.addElementButton) {
             this.addElementButton.addEventListener("click", () => {
@@ -62,14 +70,6 @@ export class CustomChoices extends VetproviehElement {
                 this.render();
             })
         }
-    }
-
-    /**
-     * Setting FieldTemplate
-     * @param {DocumentFragment} val
-     */
-    set fieldTemplate(val: DocumentFragment) {
-        this.repeater.listTemplate = val;
     }
 
     /**
@@ -96,11 +96,3 @@ export class CustomChoices extends VetproviehElement {
     }
 
 }
-
-
-var DEFAULT_TEMPLATE =
-    `<div class="field">
-    <div class="control">
-        <input class="input" type="text" placeholder="Bitte Wert eingeben">
-    </div>
- </div>`;
