@@ -9,7 +9,7 @@ export class CareplanField extends BasicModel {
     position: number = 0;
     voiceInputable: boolean = false;
 
-
+    
     static TYPES: any = {
         textArea: {
             "rows": FieldOptions.INPUT_NUMBER,

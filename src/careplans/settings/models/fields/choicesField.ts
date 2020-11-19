@@ -5,7 +5,7 @@ import { CareplanField } from "../careplanField";
  */
 export class ChoicesField extends CareplanField {
 
-    public choices: string[] = []
+    private choices: string[] = []
     public choiceSrc: string = "";
 
     /**

@@ -100,7 +100,11 @@ export class BulmaField extends VetproviehElement {
      * @param {any} v
      */
     public set value(v: any) {
-        this._value = v;
+
+        if (this._value !== v) {
+            this._value = v;
+            this.dispatchEvent(new Event("change"));
+        }
     }
 
     /**

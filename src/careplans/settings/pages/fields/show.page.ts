@@ -19,6 +19,8 @@ export class CarePlanFieldShowPage extends BasicShowPage {
         this.detailElement.addEventListener("loadeddata", (event: any) => {
             this.attachListener();
             this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
+
+            this.fieldTypeSelect.dispatchEvent(new Event("change"));
         });
     }
 
@@ -27,24 +29,28 @@ export class CarePlanFieldShowPage extends BasicShowPage {
      */
     private attachListener() {
         this.fieldTypeSelect.addEventListener("change", (event) => {
-
             let newField = this.buildField(this.fieldTypeSelect.value);
-
-            console.log("X");
             this.detailElement.currentObject = newField;
-
             this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
-
             this.detailElement.rebindForm();
         })
     }
 
+    /**
+     * Building Careplan-Field with the help of its type
+     * @param {string} fieldType 
+     * @return {CareplanField}
+     */
     private buildField(fieldType: string): CareplanField {
         var blankField = this.generateField(fieldType);
         let currentObject = this.detailElement.currentObject;
         Object.keys(blankField).forEach((key) => {
             if (key != "fieldType") {
-                (blankField as Indexable)[key] = currentObject[key];
+                if (currentObject[key] != null) {
+                    (blankField as Indexable)[key] = currentObject[key];
+                } else {
+                    currentObject[key] = (blankField as Indexable)[key];
+                }
             }
         });
         return blankField;
@@ -76,7 +82,7 @@ export class CarePlanFieldShowPage extends BasicShowPage {
     }
 
     /**
-     * Getting Extra fields Presenter
+     * Getting WebComponent for Specific Field-Type
      * @return {SelectFieldType}
      */
     private get extraFields(): SelectFieldType {

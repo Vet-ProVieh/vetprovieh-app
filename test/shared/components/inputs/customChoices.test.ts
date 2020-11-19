@@ -5,32 +5,60 @@ var exampleValues = [
     'first value',
     'second value',
     'third value'
-]
-var templateString = `<div>{{value}}</div>`;
+];
 
-var buildTemplate = function () {
-    let newTemplate = document.createElement("template");
-    newTemplate.innerHTML = templateString;
-    return newTemplate;
-}
-/*
+let customChoices: CustomChoices;
+beforeEach(() => {
+    customChoices = new CustomChoices();
+})
+
 describe('bind', () => {
     it('should set value correctly', () => {
-        let customChoices = new CustomChoices();
         customChoices.value = exampleValues;
         expect(customChoices.value).toEqual(exampleValues)
     });
-});*/
+});
 
-let customChoices: CustomChoices;
+
 describe('render', () => {
-    beforeEach(() => {
-        customChoices = new CustomChoices();
 
-    })
+    it('should ', () => {
+
+    });
 });
 
 describe('attach', () => {
+    let button: HTMLButtonElement;
 
+    let setButton = () => {
+        button = customChoices.getByIdFromShadowRoot("addElement") as HTMLButtonElement;
+    };
+
+    it('should attach value', () => {
+        customChoices.value = exampleValues.map((e) => e);
+        customChoices.render();
+
+        setButton();
+        button.click();
+
+        expect(customChoices.value.length).toEqual(exampleValues.length + 1);
+    });
+
+    it('should change value', () => {
+        customChoices.value = exampleValues.map((e) => e);
+        customChoices.render();
+
+        setButton();
+        button.click();
+
+        let choices = customChoices.getByIdFromShadowRoot("choices") as HTMLDivElement;
+        let inputs = choices.querySelectorAll("input");
+        let input = inputs[inputs.length -1];
+
+        input.value = "Test";
+        input.dispatchEvent(new Event("change"));
+        expect(customChoices.value[3]).toEqual(input.value);
+
+    });
 })
 

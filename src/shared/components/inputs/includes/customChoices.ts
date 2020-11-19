@@ -2,7 +2,12 @@ import { WebComponent, VetproviehElement, VetproviehRepeat } from "@tomuench/vet
 import { BulmaField } from "./bulmaField";
 
 @WebComponent({
-    template: `
+    template: VetproviehElement.template + `
+    <style>
+     #choices {
+         margin-bottom: 20px;
+     }
+    </style>
         <div id="choices">
         </div>
         <button id="addElement" class="button" type="button">
@@ -19,6 +24,14 @@ export class CustomChoices extends VetproviehElement {
     constructor() {
         super(true, true);
     }
+
+    /**
+      * Observed Attributes
+      */
+     static get observedAttributes() {
+        return ['value'];
+    }
+
 
     /**
      * Get Repeater from Source-Code
@@ -48,16 +61,28 @@ export class CustomChoices extends VetproviehElement {
         super.render();
 
         if(this.valueIsSet){
-            this.value.forEach((value) => {
-                let newInput = new BulmaField();
-                newInput.value = value;
-                newInput.render();
-                this.choicesDiv.appendChild(newInput);
-            })
+            for (let i = 0; i < this.value.length; i++) {
+               this.renderChoice(i);
+            }
         }
         
         this.attachListenerToAddButton();
     }
+
+
+    /**
+     * Render Choice
+     * @param {number} index 
+     */
+    private renderChoice(index: number) {
+        const valueAtPos = this.value[index];
+        let newInput = new BulmaField();
+        newInput.value = valueAtPos;
+        newInput.addEventListener("change",() => this.value[index] = newInput.value );
+        newInput.render();
+        this.choicesDiv.appendChild(newInput);       
+    }
+    
 
     /**
      * Attaching Listener to Add-Button
@@ -65,9 +90,8 @@ export class CustomChoices extends VetproviehElement {
     private attachListenerToAddButton() {
         if (this.addElementButton) {
             this.addElementButton.addEventListener("click", () => {
-                console.log("hello");
-                this.value.push("Hello");
-                this.render();
+                this.value.push("");
+                this.renderChoice(this.value.length - 1);
             })
         }
     }
@@ -85,6 +109,8 @@ export class CustomChoices extends VetproviehElement {
      * @param {string[]} val
      */
     set value(val: string[]) {
+        console.log("VALUE");
+        console.log(val);
         if (val !== this._value) {
             if (Array.isArray(val)) {
                 this._value = val;

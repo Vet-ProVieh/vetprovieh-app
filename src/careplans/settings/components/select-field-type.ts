@@ -68,7 +68,7 @@ export class SelectFieldType extends VetproviehElement {
 
                 if (options.type === "checkbox") {
                     label.classList.add(options.type);
-                    label.classList.replace("label","checkbox");
+                    label.classList.replace("label", "checkbox");
                     label.insertBefore(field, label.firstChild);
                     this.specificFields.append(label);
                 } else {
@@ -105,7 +105,7 @@ export class SelectFieldType extends VetproviehElement {
     private createField(propertyKey: string, options: FieldOptions): HTMLInputElement {
         let field: HTMLInputElement = FieldOptions.create(options);
         field.classList.add(...field.classList);
-        
+
         field.setAttribute('property', propertyKey);
         return field;
     }
