@@ -10,14 +10,8 @@
                         <div class="control">
                             <input property="name" class="input " type="text" required>
                         </div>
-                        <label class="label">Für Tierart</label>
-                        <div class="control">
-                            <select property="animal" class="input" required>
-                                <option value="A">A</option>
-                                <option value="A">B</option>
-                                <option value="A">C</option>
-                            </select>
-                        </div>
+
+                        <select-animal property="animal" label="Für Tierart"></select-animal>
                     </div>
                 </div>
             </div>
@@ -32,7 +26,7 @@
                                 {{position}}
                             </td>
                             <td>
-                                <a href="groups/show.html?id={{id}}" is="local-store">
+                                <a href="groups/show.html?id={{id}}" >
                                     {{name}}
                                 </a>
                             </td>
