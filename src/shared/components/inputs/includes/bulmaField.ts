@@ -8,7 +8,7 @@ import { FieldWithLabel } from "./fieldWithLabel";
 @WebComponent({
     template: `
     <div class="field">
-        <label class="label">\${this.label}</label>
+        \${this.renderLabel()}
         <div class="control">
             <input class="input" type="\${this.type}" \${this.renderPlaceholder()}>
         </div>

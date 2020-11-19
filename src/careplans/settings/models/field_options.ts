@@ -33,6 +33,14 @@ export class FieldOptions {
         return list;
     }
 
+    /**
+     * It is a Text Input?
+     * @return {boolean}
+     */
+    public get isTextField(): boolean {
+        return this.tag === "input" && this.type !== "checkbox";
+    }
+
 
     /**
      * Create a Field with Field-Options
@@ -44,6 +52,7 @@ export class FieldOptions {
         if (options.type != "") {
             element.type = options.type;
         }
+        if(options.isTextField) element.classList.add("input");
         return element;
     }
 

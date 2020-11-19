@@ -26,7 +26,23 @@ export class FieldWithLabel extends VetproviehElement {
         return this.getElementsByTagName("input")[0] as HTMLElement;
     }
 
+    /**
+     * Render Label to show
+     * @return {string}
+     */
+    protected renderLabel() {
+        if (this.label !== "" && this.label) {
+            return ` <label class="label">${this.label}</label>`;
+        } else {
+            return "";
+        }
+    }
 
+
+    /**
+     * Render Placeholder to Show
+     * @return {string}
+     */
     protected renderPlaceholder() {
         if (this.placeholder !== "" && this.placeholder) {
             return `placeholder="${this.placeholder}"`;
@@ -53,7 +69,6 @@ export class FieldWithLabel extends VetproviehElement {
         }
     }
 
-
     /*
      * Get Type
      * @return {string}
@@ -72,7 +87,6 @@ export class FieldWithLabel extends VetproviehElement {
         }
     }
 
-
     /**
      * Get value
      * @return {any}
@@ -86,7 +100,6 @@ export class FieldWithLabel extends VetproviehElement {
      * @param {any} v
      */
     public set value(v: any) {
-
         if (this._value !== v) {
             this._value = v;
             this.dispatchEvent(new Event("change"));
