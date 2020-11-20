@@ -24,16 +24,6 @@ export class SelectAnimal extends FieldWithLabel {
         this.label = "Tierart";
     }
 
-    public connectedCallback() {
-        this.render();
-    }
-
-    /**
-      * Observed Attributes
-      */
-    static get observedAttributes() {
-        return ['value', 'label'];
-    }
 
 
     /**

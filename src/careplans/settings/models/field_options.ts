@@ -1,5 +1,8 @@
+import { BulmaField } from "../../../shared";
 
-
+/**
+ * FieldOptions for generating InputFields (Settings::Careplan)
+ */
 export class FieldOptions {
 
     public tag: string;
@@ -41,24 +44,35 @@ export class FieldOptions {
         return this.tag === "input" && this.type !== "checkbox";
     }
 
+    /**
+     * Our own Bulma Input?
+     * @return {boolean}
+     */
+    public get isBulmaInput(): boolean {
+        return this.tag.indexOf("bulma") >= 0;
+    }
 
     /**
      * Create a Field with Field-Options
      * @param {FieldOptions} options 
-     * @return {HTMLInputElement}
+     * @return {HTMLElement}
      */
-    public static create(options: FieldOptions): HTMLInputElement {
-        let element = document.createElement(options.tag) as HTMLInputElement;
-        if (options.type != "") {
-            element.type = options.type;
-        }
-        if(options.isTextField) element.classList.add("input");
+    public createInputField(propertyKey: string): HTMLElement {
+        let element = document.createElement(this.tag) as HTMLElement;
+        
+        if (this.type != "") element.setAttribute("type", this.type);
+        if (this.isTextField) element.classList.add("input");
+
+        element.setAttribute('property', propertyKey);
+        element.setAttribute("label", propertyKey);
+
+        if(this.isBulmaInput) (element as BulmaField).render();
         return element;
     }
 
 
-    public static INPUT_NUMBER = new FieldOptions("input", "number");
-    public static INPUT_CHECKBOX = new FieldOptions("input", "checkbox");
-    public static INPUT_TEXT = new FieldOptions("input", "text");
+    public static INPUT_NUMBER = new FieldOptions("bulma-input", "number");
+    public static INPUT_CHECKBOX = new FieldOptions("bulma-input-checkbox", "checkbox");
+    public static INPUT_TEXT = new FieldOptions("bulma-input", "text");
     public static CUSTOM_CHOICES = new FieldOptions("custom-choices");
 }

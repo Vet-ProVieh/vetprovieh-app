@@ -6,7 +6,7 @@ export class FieldWithLabel extends VetproviehElement {
     private _placeholder: string = "";
     private _type: string = "text";
     private _value: any;
-    private _binding: VetproviehBinding = new VetproviehBinding(this, "value");
+    protected _binding: VetproviehBinding = new VetproviehBinding(this, "value");
 
     constructor() {
         super(false, false);
@@ -16,6 +16,18 @@ export class FieldWithLabel extends VetproviehElement {
         this._binding.clear();
         super.render();
         this._binding.addBinding(this.inputField, "value", "change");
+    }
+
+
+    public connectedCallback() {
+        this.render();
+    }
+
+    /**
+      * Observed Attributes
+      */
+    static get observedAttributes() {
+        return ['value', 'label'];
     }
 
     /**
@@ -92,7 +104,11 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {any}
      */
     public get value(): any {
-        return this._value;
+        if(this._value){
+            return this._value;
+        } else {
+            return "";
+        }
     }
 
     /**

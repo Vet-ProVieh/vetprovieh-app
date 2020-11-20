@@ -8,31 +8,24 @@ export class CareplanField extends BasicModel {
     optional: boolean = true;
     position: number = 0;
     voiceInputable: boolean = false;
-
     
-    static TYPES: any = {
-        textArea: {
-            "rows": FieldOptions.INPUT_NUMBER,
-            "cols": FieldOptions.INPUT_NUMBER
-        },
-        textFields: {},
-        video: {
-            "multiple": FieldOptions.INPUT_CHECKBOX
-        },
-        image: {
-            "multiple": FieldOptions.INPUT_CHECKBOX
-        },
-        list: {
-            "choices": {
-                tag: "?",
-                type: "text"
-            },
-            "multipleSelect": FieldOptions.INPUT_CHECKBOX
-        },
-        comboBox: {
-            "choices": FieldOptions.CUSTOM_CHOICES,
-            "choiceSrc": FieldOptions.INPUT_TEXT,
-            "multipleSelect": FieldOptions.INPUT_CHECKBOX
+    /**
+     * Get FieldParams for creating Fields
+     * @return {{[Identifier: string]: FieldOptions}}
+     */
+    protected get fieldParams() : {[Identifier: string]: FieldOptions} {
+        return {
         }
+    }
+
+    /**
+     * Generate Additional Special Fields
+     * @return {HTMLElement[]}
+     */
+    public generateAdditionalFields() : HTMLElement[] {
+        let params = this.fieldParams;
+        return Object.keys(params).map((propertyKey) => {
+            return params[propertyKey].createInputField(propertyKey);
+        });
     }
 }

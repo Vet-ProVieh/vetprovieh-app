@@ -1,4 +1,17 @@
+import { FieldGenerator } from "../../helpers";
+import { MediaField } from "./mediaField";
 
-export class Image {
+/**
+ * SettingsField Image
+ */
+export class Image extends MediaField {
     
+    constructor() {
+        super();
+        this.fieldType = "image";
+    }
 }
+
+
+// Registration in FieldGenerator
+FieldGenerator.register(new Image());

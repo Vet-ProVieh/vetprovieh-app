@@ -1,12 +1,15 @@
+import { FieldGenerator } from "../../helpers";
 import { CareplanField } from "../careplanField";
+import { FieldOptions } from "../field_options";
 
 /**
  * Field to choose between values
  */
 export class ChoicesField extends CareplanField {
 
-    private choices: string[] = []
+    public choices: string[] = []
     public choiceSrc: string = "";
+    public multipleSelect: boolean = false;
 
     /**
      * Get Possible Choice-Sources to select
@@ -14,6 +17,19 @@ export class ChoicesField extends CareplanField {
      */
     public static get choiceSrcs() {
         return CHOICE_SRCS;
+    }
+
+
+    /**
+     * Get FieldParams for creating Fields
+     * @return {{[Identifier: string]: FieldOptions}}
+     */
+    protected get fieldParams() : {[Identifier: string]: FieldOptions} {
+        return {
+            "choices": FieldOptions.CUSTOM_CHOICES,
+            "choiceSrc": FieldOptions.INPUT_TEXT,
+            "multipleSelect": FieldOptions.INPUT_CHECKBOX
+        }
     }
 }
 

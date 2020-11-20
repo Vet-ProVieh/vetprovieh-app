@@ -134,7 +134,6 @@ export class CustomChoices extends VetproviehElement {
         newInput.placeholder = "Bitte Ihren gewünschten Wert eintragen.";
         newInput.value = valueAtPos;
         newInput.addEventListener("change", () => this.value[index] = newInput.value);
-        newInput.render();
         return newInput;
     }
 

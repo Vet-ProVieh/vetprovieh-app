@@ -1,3 +1,4 @@
+import { FieldGenerator } from "../../helpers";
 import { ChoicesField } from "./choicesField";
 
 export class ComboBox extends ChoicesField{
@@ -7,3 +8,6 @@ export class ComboBox extends ChoicesField{
         this.fieldType = "comboBox";
     }
 }
+
+// Registration in FieldGenerator
+FieldGenerator.register(new ComboBox());
