@@ -8,29 +8,71 @@ import { BulmaField } from "./bulmaField";
          margin-bottom: 20px;
      }
     </style>
+    <div class="control">
+        <div class="label">\${this.property}</div>
         <div id="choices">
             <p id="noChoicesAvailable">Noch keine Auswahlmöglichkeiten eingefügt</p>
         </div>
         <button id="addElement" class="button" type="button">
             Element hinzufügen
         </button>
+    </div>
         `,
     tag: 'custom-choices'
 })
 export class CustomChoices extends VetproviehElement {
 
     private _value: string[] = [];
+    private _property: string | undefined;
+    private _label: string = ""
 
 
     constructor() {
         super(true, true);
     }
 
+
+    /**
+     * Get Label
+     * @return {string}
+     */
+    public get label(): string {
+        return this._label;
+    }
+
+    /**
+     * Set Label
+     * @param {string} v
+     */
+    public set label(v: string) {
+        if (v !== this._label) {
+            this._label = v;
+        }
+    }
+
+    /**
+     * Getter Property
+     * @return {string | undefined}
+     */
+    public get property(): string | undefined {
+        return this._property;
+    }
+
+    /**
+     * Setter Property
+     * @param {string | undefined} val
+     */
+    public set property(val: string | undefined) {
+        if (this.property !== val) {
+            this._property = val;
+        }
+    }
+
     /**
       * Observed Attributes
       */
     static get observedAttributes() {
-        return ['value'];
+        return ['value', 'property', 'label'];
     }
 
 
