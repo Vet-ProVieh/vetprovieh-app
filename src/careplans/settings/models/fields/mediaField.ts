@@ -4,7 +4,6 @@ import { FieldOptions } from "../field_options";
 
 export class MediaField extends CareplanField{
 
-
     /**
      * Get FieldParams for creating Fields
      * @return {{[Identifier: string]: FieldOptions}}

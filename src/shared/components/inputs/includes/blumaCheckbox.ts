@@ -22,4 +22,30 @@ export class BulmaCheckbox extends FieldWithLabel {
         this.type = "checkbox";
     }
 
+
+    public get checked(): any {
+        return this.value;
+    }
+
+    public set checked(val: any) {
+        this.value = val;
+    }
+
+    /**
+     * Passthrough value to inputField
+     */
+    protected setInputField() {
+        let input = (this.inputField as HTMLInputElement)
+        if (input && input.checked !== this.value) {
+            input.checked = this.value;
+        }
+    }
+
+    /**
+     * Adding Binding
+     */
+    protected addBinding() {
+        this._binding.addBinding(this.inputField, "checked", "change");
+    }
+
 }

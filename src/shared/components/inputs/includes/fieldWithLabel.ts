@@ -6,6 +6,8 @@ export class FieldWithLabel extends VetproviehElement {
     private _placeholder: string = "";
     private _type: string = "text";
     private _value: any;
+    private _property: string | undefined;
+
     protected _binding: VetproviehBinding = new VetproviehBinding(this, "value");
 
     constructor() {
@@ -15,6 +17,13 @@ export class FieldWithLabel extends VetproviehElement {
     public render() {
         this._binding.clear();
         super.render();
+        this.addBinding();
+    }
+
+    /**
+     * Adding Binding
+     */
+    protected addBinding() {
         this._binding.addBinding(this.inputField, "value", "change");
     }
 
@@ -24,10 +33,28 @@ export class FieldWithLabel extends VetproviehElement {
     }
 
     /**
+     * Getter Property
+     * @return {string | undefined}
+     */
+    public get property(): string | undefined {
+        return this._property;
+    }
+
+    /**
+     * Setter Property
+     * @param {string | undefined} val
+     */
+    public set property(val: string | undefined) {
+        if (this.property !== val) {
+            this._property = val;
+        }
+    }
+
+    /**
       * Observed Attributes
       */
     static get observedAttributes() {
-        return ['value', 'label'];
+        return ['value', 'label', 'property'];
     }
 
     /**
@@ -104,7 +131,7 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {any}
      */
     public get value(): any {
-        if(this._value){
+        if (this._value !== null && this._value !== undefined) {
             return this._value;
         } else {
             return "";
@@ -117,8 +144,18 @@ export class FieldWithLabel extends VetproviehElement {
      */
     public set value(v: any) {
         if (this._value !== v) {
-            this._value = v;
-            this.dispatchEvent(new Event("change"));
+            this._value = v
+            this.setInputField();
+        }
+    }
+
+    /**
+     * Passthrough value to inputField
+     */
+    protected setInputField() {
+        let input = (this.inputField as HTMLInputElement);
+        if (input && input.value !== this.value) {
+            (this.inputField as HTMLInputElement).value = this.value;
         }
     }
 

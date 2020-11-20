@@ -3,11 +3,8 @@
         <div class="card">
             <div class="card-content">
                 <p class="title is-4">Allgemeines</p>
-                <label class="label">Bezeichnung</label>
-                <div class="control">
-                    <input property="name" class="input " type="text" required>
-                </div>
-
+                <bulma-input property="name" type="text" label="Bezeichnung"></bulma-input>
+             
                 <label class="label">FeldTyp</label>
                 <div class="control">
                     <select id="fieldType" property="fieldType" class="input" required>
@@ -15,7 +12,7 @@
                       <option value="textFields">Kurzertext</option>
                       <option value="video">Video</option>
                       <option value="image">Bild</option>
-                      <option value="list">Liste</option>
+                      <option value="careplanList">Liste</option>
                       <option value="comboBox">Auswahlbox</option>
                     </select>
                 </div>
@@ -31,18 +28,8 @@
         <div class="card">
             <div class="card-content">
                 <p class="title is-4">Zusatz Einstellungen</p>
-                <div class="control">
-                    <label class="checkbox">
-                        <input property="voiceInputable" type="checkbox">
-                        Spracheingabe?
-                    </label>
-                </div>
-                <div class="control">
-                    <label class="checkbox">
-                        <input property="optional" type="checkbox">
-                        Optional?
-                    </label>
-                </div>
+                <bulma-input-checkbox property="voiceInputable" label="Spracheingabe?"></bulma-input-checkbox>
+                <bulma-input-checkbox property="optional" label="Optional?"></bulma-input-checkbox>
             </div>
         </div>
     </div>
