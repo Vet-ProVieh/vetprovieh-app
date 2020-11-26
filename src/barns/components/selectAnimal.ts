@@ -11,7 +11,7 @@ import { Animal } from "../models";
             <div class="control">
                 <select class="input" type="\${this.type}">
 
-                </select
+                </select>
             </div>
         </div>`,
         tag: "select-animal"
