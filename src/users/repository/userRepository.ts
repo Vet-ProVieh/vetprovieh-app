@@ -3,8 +3,12 @@ import { BaseRepository } from "@tomuench/vetprovieh-shared/lib";
 
 export class UserRepository extends BaseRepository<User> {
 
+    private keycloakHelper = new KeycloakHelper();
     constructor(){
         super("/service/usermanagement/");
+
+        this.keycloakHelper.init().then(() => {
+        });
     }
     /**
      * Load User from Service
@@ -21,5 +25,12 @@ export class UserRepository extends BaseRepository<User> {
             user.tenant.name = "Gemeinschaftspraxis Göken & Braune";
             resolve(user);
         })
+    }
+
+    /**
+     * aktuellen Benutzer abmelden
+     */
+    public logout(): void {
+        this.keycloakHelper.logout();
     }
 }

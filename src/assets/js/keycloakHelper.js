@@ -4,14 +4,20 @@
 class KeycloakHelper {
   constructor() {
     this._keycloakInstance = Keycloak("/assets/config/keycloak.json");
+  }
+
+  init() {
     let token = this._token;
     let refreshToken = this._refreshToken;
-
-    let instance = this._keycloakInstance;
-    this._keycloakInstance.init({
+    return this._keycloakInstance.init({
       token,
       refreshToken
-    }).success(function (authenticated) {
+    });
+  }
+
+  connect() {
+    let instance = this._keycloakInstance;
+    this.init().success(function (authenticated) {
       if (!authenticated) {
         instance.login({
           scope: 'openid offline_access',
@@ -21,6 +27,10 @@ class KeycloakHelper {
       console.log(error);
       console.log('failed to initialize Keycloak');
     });
+  }
+
+  logout() {
+    this.instance.logout();
   }
 
   get instance() {
