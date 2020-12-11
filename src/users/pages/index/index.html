@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+  <meta charset="utf-8">
+  <title>Vet:Provieh - Ihre Mitarbeiter</title>
+  <link rel="manifest" href="/manifest.json">
+  <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+  <vetprovieh-layout title="Ihre Landwirte">
+    <vetprovieh-users>
+      <a class="button is-primary is-pulled-right" href="invite.html">
+        Neuen Mitarbeiter einladen
+      </a>
+      <br /><br />
+      <vetprovieh-list pagesize="5">
+        <template>
+          <div>
+            <a href="/users/show.html?id={{id}}">
+              <strong>{{userName}} ({{email}}</strong>
+            </a><br />
+            <span>{{firstName}} {{lastName}}</span>
+          </div>
+          <hr />
+        </template>
+      </vetprovieh-list>
+    </vetprovieh-users>
+  </vetprovieh-layout>
+</body>
+
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>

@@ -145,7 +145,7 @@ export class VetproviehLayout extends VetproviehElement {
                 </p>
                 <ul class="menu-list">
                     <li><a href="/settings/surgery">Basisdaten</a></li>
-                    <li><a href="#">Benutzer</a></li>
+                    <li><a href="/users">Mitarbeiter</a></li>
                     <li><a href="/settings/careplans">Behandlungspläne</a></li>
                 </ul>
                 
