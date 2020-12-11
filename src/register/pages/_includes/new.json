@@ -1,0 +1,17 @@
+{
+    "address": {
+      "city": null,
+      "country": "DE",
+      "postalCode": null,
+      "streetName": null,
+      "streetNumber": null
+    },
+    "user": {
+        "email": null,
+        "firstName": null,
+        "lastName": null
+    },
+    "name": null,
+    "name2": null,
+    "vvvoNumber": null
+  }

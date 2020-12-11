@@ -1,0 +1,90 @@
+<template>
+    <div class="field">
+        <div class="card">
+            <div class="card-content">
+                <p class="title is-4">Ihre Tierarztpraxis</p>
+
+                <label class="label">Bezeichnung 1</label>
+                <div class="control">
+                    <input property="name" class="input " type="text" required>
+                </div>
+
+                <label class="label">Bezeichnung 2</label>
+                <div class="control">
+                    <input property="name2" class="input " type="text">
+                </div>
+
+                <label class="label">VVVO</label>
+                <div class="control">
+                    <input property="vvvoNumber" pattern="276\\d{12}" placeholder="276..." class="input " type="text"
+                        required>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        
+        <div class="card">
+            <div class="card-content">
+                <p class="title is-4">Addresse</p>
+                <div class="columns">
+                    <div class="column is-four-fifths">
+                        <label class="label">Straße</label>
+                        <div class="control">
+                            <input property="address.streetName" class="input " type="text">
+                        </div>
+                    </div>
+                    <div class="column">
+                        <label class="label">Hausnummer</label>
+                        <div class="control">
+                            <input property="address.streetNumber" pattern="\\d+[ ]{0,1}[a-z]{0,2}" class="input "
+                                type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <label class="label">Postleitzahl</label>
+                        <div class="control">
+                            <input property="address.postalCode" pattern="^([0]{1}[1-9]{1}|[1-9]{1}[0-9]{1})[0-9]{3}$"
+                                class="input " type="text">
+                        </div>
+                    </div>
+                    <div class="column is-four-fifths">
+                        <label class="label">Stadt</label>
+                        <div class="control">
+                            <input property="address.city" class="input " type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <br />
+        <div class="card">
+            <div class="card-content">
+                <p class="title is-4">Ihr Benutzer</p>
+                <label class="label">Benutzername</label>
+                <div class="control">
+                    <input property="user.userName" class="input " type="text">
+                </div>
+
+                <label class="label">Vorname</label>
+                <div class="control">
+                    <input property="user.firstName" class="input " type="text">
+                </div>
+
+                <label class="label">Nachname</label>
+                <div class="control">
+                    <input property="user.lastName" class="input " type="text">
+                </div>
+
+                <label class="label">Email</label>
+                <div class="control">
+                    <input property="user.email" type="tel" class="input " type="text">
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

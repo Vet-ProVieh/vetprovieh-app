@@ -19,7 +19,8 @@ var modules = {
     'careplans/settings/pages/careplans': 'settings/careplans',
     'careplans/settings/pages/groups': 'settings/careplans/groups',
     'careplans/settings/pages/fields': 'settings/careplans/fields',
-    'users': 'users'
+    'users': 'users',
+    'register': 'register'
 };
 
 var targets = Object.keys(modules).map((source) => {
