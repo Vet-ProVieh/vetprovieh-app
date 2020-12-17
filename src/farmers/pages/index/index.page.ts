@@ -12,4 +12,5 @@ export class FarmersIndexPage extends BasicIndexPage<Farmer> {
     constructor() {
         super(new FarmersRepository());
     }
+
 }
