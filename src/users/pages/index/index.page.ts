@@ -10,6 +10,7 @@ import { UserRepository } from "../../repository";
 })
 export class UsersIndexPage extends BasicIndexPage<User> {
     constructor() {
+        console.log("UsersIndexPage");
         super(new UserRepository());
     }
 }

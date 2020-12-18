@@ -3,7 +3,29 @@
  */
 class KeycloakHelper {
   constructor() {
-    this._keycloakInstance = Keycloak("/assets/config/keycloak.json");
+    this._keycloakInstance = new Keycloak({
+      "realm": this.subdomain,
+      "auth-server-url": "/auth/",
+      "ssl-required": "none",
+      "clientId": "app",
+      "verify-token-audience": true,
+      "use-resource-role-mappings": true,
+      "confidential-port": 0
+    });
+    console.log(this._keycloakInstance);
+  }
+
+
+  /**
+   * Get current Subdomain
+   * @return {string}
+   */
+  get subdomain() {
+    try {
+      return window.location.hostname.split(".")[0];
+    } catch (ex) {
+      return "unknown";
+    }
   }
 
   init() {
@@ -81,7 +103,7 @@ class KeycloakHelper {
   }
 
   setRequestHeader(request) {
-    request.setRequestHeader('Authorization','Bearer ' + this.instance.token);
+    request.setRequestHeader('Authorization', 'Bearer ' + this.instance.token);
   }
 
   set onAuthSuccess(callbackFunction) {

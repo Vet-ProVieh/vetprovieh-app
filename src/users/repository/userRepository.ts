@@ -4,12 +4,25 @@ import { BaseRepository } from "@tomuench/vetprovieh-shared/lib";
 export class UserRepository extends BaseRepository<User> {
 
     private keycloakHelper = new KeycloakHelper();
-    constructor(){
-        super("/service/usermanagement/");
+    constructor() {
+        super(`/service/usermanagement/${UserRepository.subdomain}/`);
 
         this.keycloakHelper.init().then(() => {
         });
     }
+
+    /**
+     * Get current Subdomain
+     * @return {string}
+     */
+    public static get subdomain() {
+        try {
+            return window.location.hostname.split(".")[0];
+        } catch (ex) {
+            return "unknown";
+        }
+    }
+
     /**
      * Load User from Service
      * @return {Promise<User>}
