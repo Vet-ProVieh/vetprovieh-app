@@ -2,6 +2,7 @@
 <html lang="de" dir="ltr">
 
 <!-- Header -->
+
 <head>
     <meta charset="utf-8">
     <title>Vet:Provieh - Mitarbeiter einladen</title>
@@ -12,11 +13,13 @@
 <!-- Layout-Container -->
 
 <body>
-<vetprovieh-layout title="Mitarbeiter einladen">
-    <vetprovieh-detail src="/service/usermanagements/praxisa/">
-        <!--#include file="_form.html"-->
-    </vetprovieh-detail>
-</vetprovieh-layout>
+    <vetprovieh-layout title="Mitarbeiter einladen">
+        <vetprovieh-user>
+            <vetprovieh-detail>
+                <!--#include file="_form.html"-->
+            </vetprovieh-detail>
+        </vetprovieh-user>
+    </vetprovieh-layout>
 </body>
 
 <!--#include file="/includes/scripts.html"-->

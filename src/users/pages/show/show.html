@@ -2,6 +2,7 @@
 <html lang="de" dir="ltr">
 
 <!-- Header -->
+
 <head>
     <meta charset="utf-8">
     <title>Vet:Provieh - Mitarbeiter bearbeiten</title>
@@ -12,11 +13,13 @@
 <!-- Layout-Container -->
 
 <body>
-<vetprovieh-layout title="Mitarbeiter bearbeiten">
-    <vetprovieh-detail destroyable="true" src="/service/usermanagements/praxisa/">
-        <!--#include file="_form.html"-->
-    </vetprovieh-detail>
-</vetprovieh-layout>
+    <vetprovieh-layout title="Mitarbeiter bearbeiten">
+        <vetprovieh-user>
+            <vetprovieh-detail destroyable="true">
+                <!--#include file="_form.html"-->
+            </vetprovieh-detail>
+        </vetprovieh-user>
+    </vetprovieh-layout>
 </body>
 
 <!--#include file="/includes/scripts.html"-->
