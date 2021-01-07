@@ -5,7 +5,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Vet:Provieh - Ihre Mitarbeiter</title>
+  <title>Vet:Provieh - Ihre Dokumente für ?</title>
   <link rel="manifest" href="/manifest.json">
   <!--#include file="/includes/stylesheets.html"-->
 </head>
@@ -13,24 +13,25 @@
 <!-- Layout-Container -->
 
 <body>
-  <vetprovieh-layout title="Ihre Mitarbeiter">
-    <vetprovieh-users>
-      <a class="button is-primary is-pulled-right" href="invite.html">
-        Neuen Mitarbeiter einladen
+  <vetprovieh-layout title="Ihre Dokumente für ?">
+    <vetprovieh-documents>
+        <!-- 
+      <a class="button is-primary is-pulled-right" href="create.html">
+        Neues Dokument erstellen
       </a>
       <br /><br />
+      -->
       <vetprovieh-list pagesize="5">
         <template>
           <div>
-            <a href="/users/show.html?id={{id}}">
-              <strong>{{userName}} ({{email}})</strong>
-            </a><br />
-            <span>{{firstName}} {{lastName}}</span>
+            <a href="/documents/show.html?id={{id}}">
+              <strong>{{name}}</strong>
+            </a>
           </div>
           <hr />
         </template>
       </vetprovieh-list>
-    </vetprovieh-users>
+    </vetprovieh-documents>
   </vetprovieh-layout>
 </body>
 

@@ -5,7 +5,7 @@ export class UserRepository extends BaseRepository<User> {
 
     private keycloakHelper = new KeycloakHelper();
     constructor() {
-        super(`/service/usermanagement/${UserRepository.subdomain}/`);
+        super(`/service/usermanagements`);
 
         this.keycloakHelper.init().then(() => {
         });

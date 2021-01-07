@@ -20,6 +20,7 @@ var modules = {
     'careplans/settings/pages/groups': 'settings/careplans/groups',
     'careplans/settings/pages/fields': 'settings/careplans/fields',
     'users': 'users',
+    'documents': 'documents',
     'register': 'register'
 };
 

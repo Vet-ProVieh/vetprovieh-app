@@ -16,7 +16,7 @@
 
                 <label class="label">VVVO</label>
                 <div class="control">
-                    <input property="vvvoNumber" pattern="276\\d{12}" placeholder="276..." class="input " type="text"
+                    <input property="vvvoNumber" pattern="276\d{12}" placeholder="276..." class="input " type="text"
                         required>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                     <div class="column">
                         <label class="label">Hausnummer</label>
                         <div class="control">
-                            <input property="address.streetNumber" pattern="\\d+[ ]{0,1}[a-z]{0,2}" class="input "
+                            <input property="address.streetNumber" pattern="\d+[ ]{0,1}[a-z]{0,2}" class="input "
                                 type="text">
                         </div>
                     </div>
@@ -67,22 +67,22 @@
                 <p class="title is-4">Ihr Benutzer</p>
                 <label class="label">Benutzername</label>
                 <div class="control">
-                    <input property="user.userName" class="input " type="text">
+                    <input property="users[0].userName" class="input " type="text">
                 </div>
 
                 <label class="label">Vorname</label>
                 <div class="control">
-                    <input property="user.firstName" class="input " type="text">
+                    <input property="users[0].firstName" class="input " type="text">
                 </div>
 
                 <label class="label">Nachname</label>
                 <div class="control">
-                    <input property="user.lastName" class="input " type="text">
+                    <input property="users[0].lastName" class="input " type="text">
                 </div>
 
                 <label class="label">Email</label>
                 <div class="control">
-                    <input property="user.email" type="tel" class="input " type="text">
+                    <input property="users[0].email" type="tel" class="input " type="text">
                 </div>
             </div>
         </div>

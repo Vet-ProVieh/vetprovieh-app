@@ -5,7 +5,7 @@
   "veterinarian": null,
   "vet": null,
   "farmer": {
-    "vvvoNumber": null
+    "id": null
   },
   "address": {
     "city": null,

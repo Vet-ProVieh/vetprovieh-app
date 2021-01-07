@@ -37,7 +37,7 @@ export class BarnsShowPage extends BasicShowPage {
 
     private _disableFarmerSelect(loadEvent: LoadedEvent, selectField: VetproviehSelect) {
         let event = loadEvent as LoadedEvent;
-        if ((event.data as Barn).vvvoNumber) {
+        if ((event.data as Barn).id) {
             selectField.disable();
         }
     }

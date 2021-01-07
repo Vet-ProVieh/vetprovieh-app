@@ -6,11 +6,12 @@
       "streetName": null,
       "streetNumber": null
     },
-    "user": {
+    "users": [{
+        "userName": null,
         "email": null,
         "firstName": null,
         "lastName": null
-    },
+    }],
     "name": null,
     "name2": null,
     "vvvoNumber": null
