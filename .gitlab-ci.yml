@@ -7,37 +7,37 @@ cache:
   key: node_modules
   paths:
     - .npm/
-  
+
+before_script:
+  - \[ -d "../vetprovieh-shared/" ] && rm -R ../vetprovieh-shared/
+  - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-shared ../vetprovieh-shared
+  - \[ -d "../vetprovieh-pager/" ] && rm -R ../vetprovieh-pager/
+  - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-pager ../vetprovieh-pager
+  - cd ../vetprovieh-pager
+  - npm install
+  - \[ -d "../formt-validation/" ] && rm -R ../formt-validation/
+  - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/formt-validation ../formt-validation
+  - cd ../formt-validation
+  - npm install
+  - \[ -d "../vetprovieh-detail/" ] && rm -R ../vetprovieh-detail/
+  - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-detail ../vetprovieh-detail
+  - cd ../vetprovieh-detail
+  - npm install
+  - \[ -d "../vetprovieh-list/" ] && rm -R ../vetprovieh-list/
+  - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-list ../vetprovieh-list
+  - cd ../vetprovieh-list
+  - npm install
+  - \[ -d "../vetprovieh-select/" ] && rm -R ../vetprovieh-select/
+  - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-select ../vetprovieh-select
+  - cd ../vetprovieh-select
+  - npm install
+  - \[ -d "../vetprovieh-menu/" ] && rm -R ../vetprovieh-menu/
+  - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-menu ../vetprovieh-menu
+  - cd ../vetprovieh-menu
+  - npm install
+  - cd ../vetprovieh-app
+  - npm ci --cache .npm --prefer-offline
 build:
-  before_script:
-    - \[ -d "../vetprovieh-shared/" ] && rm -R ../vetprovieh-shared/
-    - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-shared ../vetprovieh-shared
-    - \[ -d "../vetprovieh-pager/" ] && rm -R ../vetprovieh-pager/
-    - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-pager ../vetprovieh-pager
-    - cd ../vetprovieh-pager
-    - npm install
-    - \[ -d "../formt-validation/" ] && rm -R ../formt-validation/
-    - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/formt-validation ../formt-validation
-    - cd ../formt-validation
-    - npm install
-    - \[ -d "../vetprovieh-detail/" ] && rm -R ../vetprovieh-detail/
-    - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-detail ../vetprovieh-detail
-    - cd ../vetprovieh-detail
-    - npm install
-    - \[ -d "../vetprovieh-list/" ] && rm -R ../vetprovieh-list/
-    - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-list ../vetprovieh-list
-    - cd ../vetprovieh-list
-    - npm install
-    - \[ -d "../vetprovieh-select/" ] && rm -R ../vetprovieh-select/
-    - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-select ../vetprovieh-select
-    - cd ../vetprovieh-select
-    - npm install
-    - \[ -d "../vetprovieh-menu/" ] && rm -R ../vetprovieh-menu/
-    - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-menu ../vetprovieh-menu
-    - cd ../vetprovieh-menu
-    - npm install
-    - cd ../vetprovieh-app
-    - npm ci --cache .npm --prefer-offline
   stage: build
   script:
     - npm install
