@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+  <meta charset="utf-8">
+  <title>Vet:Provieh - Tenants</title>
+  <link rel="manifest" href="/manifest.json">
+  <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+  <vetprovieh-layout title="Tenants">
+    <vetprovieh-tenants>
+      <vetprovieh-list pagesize="10">
+        <template>
+          <div>
+            <a href="/admin/tenants/show.html?id={{id}}">
+              <strong>{{name1}} ({{name2}})</strong>
+            </a>
+          </div>
+          <hr />
+        </template>
+      </vetprovieh-list>
+    </vetprovieh-tenants>
+  </vetprovieh-layout>
+</body>
+
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>

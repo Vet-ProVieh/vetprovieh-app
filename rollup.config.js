@@ -13,6 +13,7 @@ import typescript from 'rollup-plugin-typescript';
 
 
 var modules = {
+    'admin/tenants' : 'admin/tenants',
     'farmers': 'farmers',
     'barns': 'barns',
     'careplans/operational': 'careplans/operational',

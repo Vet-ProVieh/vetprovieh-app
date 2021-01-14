@@ -148,6 +148,13 @@ export class VetproviehLayout extends VetproviehElement {
                     <li><a href="/users">Mitarbeiter</a></li>
                     <li><a href="/settings/careplans">Behandlungspläne</a></li>
                 </ul>
+                <p class="menu-label">
+                  Administration
+                </p>
+                <ul class="menu-list">
+                  <li><a href="/admin/tenants/requests.html">Tenant-Requests</a></li>
+                  <li><a href="/admin/tenants">Tenants</a></li>
+                </ul>
                 
             </aside>
         </vetprovieh-sidemenu>
