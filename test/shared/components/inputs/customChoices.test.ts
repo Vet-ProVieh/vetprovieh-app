@@ -1,5 +1,5 @@
 
-import { CustomChoices } from '../../../../src/shared'
+import { BulmaField, CustomChoices } from '../../../../src/shared'
 
 var exampleValues = [
     'first value',
@@ -52,8 +52,8 @@ describe('attach', () => {
         button.click();
 
         let choices = customChoices.getByIdFromShadowRoot("choices") as HTMLDivElement;
-        let inputs = choices.querySelectorAll("input");
-        let input = inputs[inputs.length -1];
+        let inputs = choices.querySelectorAll("bulma-input");
+        let input = inputs[inputs.length -1] as BulmaField;
 
         input.value = "Test";
         input.dispatchEvent(new Event("change"));
