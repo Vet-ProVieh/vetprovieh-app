@@ -15,6 +15,7 @@ cache:
   key: node_modules
   paths:
     - .npm/
+    - node_modules/
     - www/
     - ../vetprovieh-shared
     - ../vetprovieh-pager
