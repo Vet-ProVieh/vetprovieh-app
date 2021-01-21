@@ -1,6 +1,7 @@
-import { WebComponent, VetproviehTable } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehTable, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
 import { BasicShowPage } from "../../../../shared";
 import { CareplanGroup } from "../../models/careplanGroup";
+import { CareplanFieldRepository } from "../../repository";
 
 @WebComponent({
     template: "",
@@ -9,9 +10,17 @@ import { CareplanGroup } from "../../models/careplanGroup";
 export class CarePlanGroupShowPage extends BasicShowPage {
 
     connectedCallback() {
+
         this.detailElement.addEventListener("loadeddata", (event: any) => {
             this._setTemplateForFields();
             this._showGroups(this.detailElement.currentObject as CareplanGroup);
+
+            this.addFieldButton.disabled = !(this.detailElement.currentObject.id)
+
+            let careplanId = VetproviehNavParams.get("careplanId");
+            if (careplanId) {
+                this.detailElement.currentObject.careplan_id = careplanId;
+            }    
         });
     }
 
@@ -19,7 +28,7 @@ export class CarePlanGroupShowPage extends BasicShowPage {
         let template: HTMLTemplateElement = document.createElement("template");
         template.innerHTML = `
                                 <tr class="item">
-                                    <td class="dragable">
+                                    <td class="dragable small-td">
                                         {{item.position}}
                                     </td>
                                     <td>
@@ -27,16 +36,17 @@ export class CarePlanGroupShowPage extends BasicShowPage {
                                             {{item.name}}
                                         </a>
                                     </td>
-                                    <td>
-                                        <button data-action="delete" type="button">Löschen</button>
+                                    <td class="small-td">
+                                        <button data-action="delete" type="button" class="button is-danger is-small">Löschen</button>
                                     </td>
                                 </tr>`;
         let groupRepeater = this.getGroupRepeater();
         groupRepeater.listTemplate = template.content;
+        groupRepeater.repository = new CareplanFieldRepository();
     }
 
 
-    private getGroupRepeater() : VetproviehTable {
+    private getGroupRepeater(): VetproviehTable {
         return this.detailElement.getByIdFromShadowRoot("fields") as VetproviehTable;
     }
 
@@ -51,5 +61,9 @@ export class CarePlanGroupShowPage extends BasicShowPage {
             groupRepeater.objects = careplan.fields;
             groupRepeater.clearAndRender();
         }
+    }
+
+    private get addFieldButton(): HTMLButtonElement {
+        return this.detailElement.getByIdFromShadowRoot("addFieldButton") as HTMLButtonElement;
     }
 }

@@ -1,8 +1,9 @@
-import { WebComponent, VetproviehTable } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehTable, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
 import { Careplan } from "../../../models";
 import { VetproviehDetail } from "../../../../../app/main";
 import { LoadedEvent } from "@tomuench/vetprovieh-detail/lib/loaded-event";
 import { BasicShowPage } from "../../../../../shared";
+import { CareplanGroupRepository } from "../../../repository";
 
 @WebComponent({
     template: "",
@@ -18,6 +19,7 @@ export class CarePlanShowPage extends BasicShowPage {
         this._detailContainer.addEventListener("loadeddata", (event: any) => {
             this._setTemplateForGroups();
             this._showGroups((event as LoadedEvent).data as Careplan);
+            this.addGroupButton.disabled = !(this.detailElement.currentObject.id)
         })
     }
 
@@ -25,11 +27,15 @@ export class CarePlanShowPage extends BasicShowPage {
     }
 
 
+    private get addGroupButton(): HTMLButtonElement {
+        return this.detailElement.getByIdFromShadowRoot("addGroupButton") as HTMLButtonElement;
+    }
+
     private _setTemplateForGroups() {
         let template: HTMLTemplateElement = document.createElement("template");
         template.innerHTML = `
                             <tr class="item">
-                                <td class="dragable">
+                                <td class="dragable small-td">
                                     {{item.position}}
                                 </td>
                                 <td>
@@ -37,9 +43,13 @@ export class CarePlanShowPage extends BasicShowPage {
                                         {{item.name}}
                                     </a>
                                 </td>
+                                <td class="small-td">
+                                    <button data-action="delete" type="button" class="button is-danger is-small">Löschen</button>
+                                </td>
                             </tr>`;
         let groupRepeater = this.getGroupRepeater();
         groupRepeater.listTemplate = template.content;
+        groupRepeater.repository = new CareplanGroupRepository();
     }
 
     private getGroupRepeater() : VetproviehTable {

@@ -1,0 +1,11 @@
+{
+    "choices": [],
+    "fieldType": "textFields",
+    "id": null,
+    "name": "Neues Feld",
+    "optional": false,
+    "position": null,
+    "validators": [],
+    "voiceInputable": false,
+    "group_id": null
+}

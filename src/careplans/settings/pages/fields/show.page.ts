@@ -1,4 +1,4 @@
-import { WebComponent, Indexable } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, Indexable, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
 import { BasicShowPage } from "../../../../shared";
 import { SelectFieldType } from "../../components";
 import { CareplanField } from "../../models/careplanField";
@@ -19,6 +19,11 @@ export class CarePlanFieldShowPage extends BasicShowPage {
         this.detailElement.addEventListener("loadeddata", (event: any) => {
             this.attachListener();
             this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
+
+            let group_id = VetproviehNavParams.get("groupId");
+            if (group_id) {
+                this.detailElement.currentObject.group_id = group_id;
+            }
 
             this.fieldTypeSelect.dispatchEvent(new Event("change"));
         });
