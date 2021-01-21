@@ -3,5 +3,6 @@
   "firstName": null,
   "lastName": null,
   "userName": null,
-  "deleted": 0
+  "deleted": 0,
+  "tenant": {"id": 1}
 }

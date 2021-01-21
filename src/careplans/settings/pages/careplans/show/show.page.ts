@@ -16,11 +16,34 @@ export class CarePlanShowPage extends BasicShowPage {
         super();
         this._detailContainer = this.getElementsByTagName("vetprovieh-detail")[0] as VetproviehDetail;
         this._detailContainer.addEventListener("loadeddata", (event: any) => {
+            this._setTemplateForGroups();
             this._showGroups((event as LoadedEvent).data as Careplan);
         })
     }
 
     connectedCallback(){
+    }
+
+
+    private _setTemplateForGroups() {
+        let template: HTMLTemplateElement = document.createElement("template");
+        template.innerHTML = `
+                            <tr class="item">
+                                <td class="dragable">
+                                    {{item.position}}
+                                </td>
+                                <td>
+                                    <a href="groups/show.html?id={{item.id}}" >
+                                        {{item.name}}
+                                    </a>
+                                </td>
+                            </tr>`;
+        let groupRepeater = this.getGroupRepeater();
+        groupRepeater.listTemplate = template.content;
+    }
+
+    private getGroupRepeater() : VetproviehTable {
+        return this.detailElement.getByIdFromShadowRoot("groups") as VetproviehTable;
     }
 
     /**
@@ -29,7 +52,7 @@ export class CarePlanShowPage extends BasicShowPage {
      */
     private _showGroups(careplan: Careplan) {
         if(careplan){
-            let groupRepeater = this._detailContainer.getByIdFromShadowRoot("groups") as VetproviehTable;
+            let groupRepeater = this.getGroupRepeater();
             groupRepeater.objects = careplan.groups;
             groupRepeater.clearAndRender();
         }

@@ -1,7 +1,5 @@
 import { WebComponent, VetproviehTable } from "@tomuench/vetprovieh-shared/lib";
-import { LoadedEvent } from "@tomuench/vetprovieh-detail/lib/loaded-event";
 import { BasicShowPage } from "../../../../shared";
-import { VetproviehDetail } from "../../../../app/main";
 import { CareplanGroup } from "../../models/careplanGroup";
 
 @WebComponent({
@@ -10,10 +8,36 @@ import { CareplanGroup } from "../../models/careplanGroup";
 })
 export class CarePlanGroupShowPage extends BasicShowPage {
 
-    connectedCallback(){
+    connectedCallback() {
         this.detailElement.addEventListener("loadeddata", (event: any) => {
+            this._setTemplateForFields();
             this._showGroups(this.detailElement.currentObject as CareplanGroup);
         });
+    }
+
+    private _setTemplateForFields() {
+        let template: HTMLTemplateElement = document.createElement("template");
+        template.innerHTML = `
+                                <tr class="item">
+                                    <td class="dragable">
+                                        {{item.position}}
+                                    </td>
+                                    <td>
+                                        <a href="../fields/show.html?id={{item.id}}">
+                                            {{item.name}}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <button data-action="delete" type="button">Löschen</button>
+                                    </td>
+                                </tr>`;
+        let groupRepeater = this.getGroupRepeater();
+        groupRepeater.listTemplate = template.content;
+    }
+
+
+    private getGroupRepeater() : VetproviehTable {
+        return this.detailElement.getByIdFromShadowRoot("fields") as VetproviehTable;
     }
 
     /**
@@ -22,8 +46,8 @@ export class CarePlanGroupShowPage extends BasicShowPage {
      * @private
      */
     private _showGroups(careplan: CareplanGroup) {
-        if(careplan){
-            let groupRepeater = this.detailElement.getByIdFromShadowRoot("fields") as VetproviehTable;
+        if (careplan) {
+            let groupRepeater = this.getGroupRepeater();
             groupRepeater.objects = careplan.fields;
             groupRepeater.clearAndRender();
         }
