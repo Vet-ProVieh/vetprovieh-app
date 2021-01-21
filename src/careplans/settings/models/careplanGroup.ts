@@ -7,4 +7,5 @@ export class CareplanGroup extends BasicModel {
     name: string = "";
     position: number = 0;
     fields: CareplanField[] = []
+    active: boolean = true;
 }

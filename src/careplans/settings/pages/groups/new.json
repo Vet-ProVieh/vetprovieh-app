@@ -3,5 +3,6 @@
     "name": "Neue Behandlungsgruppe",
     "position": null,
     "sGroups": [],
-    "fields": []
+    "fields": [],
+    "active": true
 }

@@ -11,9 +11,9 @@ import { CareplanGroupRepository } from "../../../repository";
 })
 export class CarePlanShowPage extends BasicShowPage {
 
-    private _detailContainer : VetproviehDetail;
+    private _detailContainer: VetproviehDetail;
 
-    constructor(){
+    constructor() {
         super();
         this._detailContainer = this.getElementsByTagName("vetprovieh-detail")[0] as VetproviehDetail;
         this._detailContainer.addEventListener("loadeddata", (event: any) => {
@@ -23,7 +23,7 @@ export class CarePlanShowPage extends BasicShowPage {
         })
     }
 
-    connectedCallback(){
+    connectedCallback() {
     }
 
 
@@ -34,7 +34,7 @@ export class CarePlanShowPage extends BasicShowPage {
     private _setTemplateForGroups() {
         let template: HTMLTemplateElement = document.createElement("template");
         template.innerHTML = `
-                            <tr class="item">
+                            <tr data-index="{{item.index}}" class="item {{item.active}}">
                                 <td class="dragable small-td">
                                     {{item.position}}
                                 </td>
@@ -42,6 +42,7 @@ export class CarePlanShowPage extends BasicShowPage {
                                     <a href="groups/show.html?id={{item.id}}" >
                                         {{item.name}}
                                     </a>
+                                    <input type="checkbox" disabled/>
                                 </td>
                                 <td class="small-td">
                                     <button data-action="delete" type="button" class="button is-danger is-small">Löschen</button>
@@ -52,7 +53,7 @@ export class CarePlanShowPage extends BasicShowPage {
         groupRepeater.repository = new CareplanGroupRepository();
     }
 
-    private getGroupRepeater() : VetproviehTable {
+    private getGroupRepeater(): VetproviehTable {
         return this.detailElement.getByIdFromShadowRoot("groups") as VetproviehTable;
     }
 
@@ -61,10 +62,23 @@ export class CarePlanShowPage extends BasicShowPage {
      * @private
      */
     private _showGroups(careplan: Careplan) {
-        if(careplan){
+        if (careplan) {
             let groupRepeater = this.getGroupRepeater();
             groupRepeater.objects = careplan.groups;
             groupRepeater.clearAndRender();
+
+            for (let i = 0; i < careplan.groups.length; i++) {
+                const group = careplan.groups[i];
+                if (group.active) {
+                    let element = groupRepeater.getElementByIndex(i)
+                    console.log(element);
+                    let input = element?.querySelector("input")
+                    if (input) {
+                        input.checked = true;
+                    }
+                }
+
+            }
         }
     }
 }

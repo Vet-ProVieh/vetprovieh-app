@@ -9,6 +9,11 @@
                         <div class="control">
                             <input property="name" class="input " type="text" required>
                         </div>
+                        <br/>
+                        <label class="checkbox">
+                            <input property="active" type="checkbox">
+                            Aktiv?
+                        </label>
                     </div>
                 </div>
             </div>
@@ -18,7 +23,7 @@
                 <p class="title is-4">Untergeordnete Behandlungsfelder</p>
                 <vp-table id="fields">
                 </vp-table>
-                <br/>
+                <br />
                 <div class="buttons">
                     <a id="addFieldButton" class="button is-link is-small" href="../fields/new.html?groupId={{id}}">
                         Neues Behandlungsfeld einfügen

@@ -11,6 +11,7 @@ window.fetch = function () {
   return new Promise((resolve, reject) => {
     if (!keycloakHelper.authenticated) {
       keycloakHelper.onAuthSuccess = function () {
+        console.log(args);
         var args = keycloakHelper.attachToken(_args);
         let request = new Request(args[0], args[1])
         proxied(request).then(resolve).catch(reject);

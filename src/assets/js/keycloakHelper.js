@@ -92,11 +92,15 @@ class KeycloakHelper {
     var args = incomingArgs;
     var i = args.length;
 
-    if (!args[i]) {
+    if (i > 1 && args[i-1]) {
+      args[i-1] = Object.assign({}, args[i-1], {headers:{}});
+      i--;
+    } else {
       args[i] = {
         headers: {}
       }
     }
+    
     args[i].headers['Authorization'] = 'Bearer ' + this.instance.token;
 
     return args;
