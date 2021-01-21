@@ -1,5 +1,5 @@
 import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
-import { User, Tenant } from "../models";
+import { User } from "../models";
 import { UserRepository } from "../repository";
 
 @WebComponent({
@@ -18,7 +18,7 @@ import { UserRepository } from "../repository";
                             </p>
                         </a>
                         <p class="subtitle is-7">
-                            \${this.currentUser.tenant.name} 
+                            \${this.currentUser.tenant.name} \${this.currentUser.tenant.name2}
                         </p>
                     </div>
                 </div>
