@@ -2,7 +2,7 @@ import { WebComponent, Indexable } from "@tomuench/vetprovieh-shared/lib";
 import { BasicShowPage } from "../../../../shared";
 import { SelectFieldType } from "../../components";
 import { CareplanField } from "../../models/careplanField";
-import { TextArea, ComboBox } from "../../models/fields";
+import { TextArea, ComboBox, Video, ImageField, List } from "../../models/fields";
 import { TextFields } from "../../models/fields/textFields";
 
 @WebComponent({
@@ -53,6 +53,7 @@ export class CarePlanFieldShowPage extends BasicShowPage {
                 }
             }
         });
+        console.log(blankField);
         return blankField;
     }
 
@@ -70,10 +71,11 @@ export class CarePlanFieldShowPage extends BasicShowPage {
             case "textFields":
                 return new TextFields();
             case "video":
-            //return new Video();
+                return new Video();
             case "image":
-            //return new Image();
+                return new ImageField();
             case "list":
+                return new List();
             case "comboBox":
                 return new ComboBox();
             default:

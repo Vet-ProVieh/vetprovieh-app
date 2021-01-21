@@ -64,6 +64,10 @@ export class VpOperationField extends ElementBinding {
             case 'textArea':
                 templateToBuild += `<textarea property="value" name="` + this.object.name + `" class="input" type="text" ` + this.inputable + ` ` + this.isRequired + `></textarea>`;
                 break;
+
+            case 'video': 
+                templateToBuild +=`<vetprovieh-video name="${this.object.name}"></vetprovieh-video`;
+                break;
             case 'textFields':
                 break;
             default:

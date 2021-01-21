@@ -4,7 +4,7 @@ import { MediaField } from "./mediaField";
 /**
  * SettingsField Image
  */
-export class Image extends MediaField {
+export class ImageField extends MediaField {
     
     constructor() {
         super();
@@ -14,4 +14,4 @@ export class Image extends MediaField {
 
 
 // Registration in FieldGenerator
-FieldGenerator.register(new Image());
+FieldGenerator.register(new ImageField());
