@@ -5,3 +5,4 @@ export * from './list';
 export * from './textArea';
 export * from './textFields';
 export * from './video';
+export * from './speechField';

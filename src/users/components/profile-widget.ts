@@ -42,6 +42,10 @@ export class ProfileWidget extends VetproviehElement {
      */
     constructor() {
         super(true, false);
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
         this.loadUser();
     }
 

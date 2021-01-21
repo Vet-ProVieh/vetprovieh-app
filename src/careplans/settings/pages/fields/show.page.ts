@@ -2,7 +2,7 @@ import { WebComponent, Indexable, VetproviehNavParams } from "@tomuench/vetprovi
 import { BasicShowPage } from "../../../../shared";
 import { SelectFieldType } from "../../components";
 import { CareplanField } from "../../models/careplanField";
-import { TextArea, ComboBox, Video, ImageField, List } from "../../models/fields";
+import { TextArea, ComboBox, Video, ImageField, List, SpeechField } from "../../models/fields";
 import { TextFields } from "../../models/fields/textFields";
 
 @WebComponent({
@@ -48,6 +48,9 @@ export class CarePlanFieldShowPage extends BasicShowPage {
      */
     private buildField(fieldType: string): CareplanField {
         var blankField = this.generateField(fieldType);
+
+        this.hideAdditionalFields(fieldType === "speech");
+
         let currentObject = this.detailElement.currentObject;
         Object.keys(blankField).forEach((key) => {
             if (key != "fieldType") {
@@ -58,11 +61,22 @@ export class CarePlanFieldShowPage extends BasicShowPage {
                 }
             }
         });
-        console.log(blankField);
+        
         return blankField;
     }
 
-
+    /**
+     * Zusatzfelder verstecken
+     * @param {boolean} hide 
+     */
+    private hideAdditionalFields(hide: boolean) {
+        let addBox = this.detailElement.getByIdFromShadowRoot("additional");
+        if (hide) {
+            addBox?.classList.add("is-hidden");
+        } else {
+            addBox?.classList.remove("is-hidden");
+        }
+    }
 
     /**
      * Generating Field 
@@ -83,6 +97,8 @@ export class CarePlanFieldShowPage extends BasicShowPage {
                 return new List();
             case "comboBox":
                 return new ComboBox();
+            case "speech":
+                return new SpeechField();
             default:
                 return new CareplanField();
         }
