@@ -1,15 +1,15 @@
-import { WebComponent, VetproviehTable, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehTable } from "@tomuench/vetprovieh-shared/lib";
 import { Careplan } from "../../../models";
 import { VetproviehDetail } from "../../../../../app/main";
 import { LoadedEvent } from "@tomuench/vetprovieh-detail/lib/loaded-event";
-import { BasicShowPage } from "../../../../../shared";
 import { CareplanGroupRepository } from "../../../repository";
+import { PageWithReadOnly } from "../../../components";
 
 @WebComponent({
     template: "",
     tag: "careplan-page"
 })
-export class CarePlanShowPage extends BasicShowPage {
+export class CarePlanShowPage extends PageWithReadOnly {
 
     private _detailContainer: VetproviehDetail;
 
@@ -19,42 +19,46 @@ export class CarePlanShowPage extends BasicShowPage {
         this._detailContainer.addEventListener("loadeddata", (event: any) => {
             this._setTemplateForGroups();
             this._showGroups((event as LoadedEvent).data as Careplan);
-            this.addGroupButton.disabled = !(this.detailElement.currentObject.id)
+            this.addButton.disabled = !(this.detailElement.currentObject.id);
+            this.markAsReadOnly();
         })
     }
 
     connectedCallback() {
     }
 
-
-    private get addGroupButton(): HTMLButtonElement {
-        return this.detailElement.getByIdFromShadowRoot("addGroupButton") as HTMLButtonElement;
+    /**
+     * CurrentView Readonly?
+     * @return {boolean}
+     */
+    protected get readOnly(): boolean{
+        return this.detailElement.currentObject.readOnly;
     }
 
+
+    /**
+     * Template für die Gruppen setzen
+     */
     private _setTemplateForGroups() {
-        let template: HTMLTemplateElement = document.createElement("template");
-        template.innerHTML = `
-                            <tr data-index="{{item.index}}" class="item {{item.active}}">
-                                <td class="dragable small-td">
-                                    {{item.position}}
-                                </td>
-                                <td>
-                                    <a href="groups/show.html?id={{item.id}}" >
-                                        {{item.name}}
-                                    </a>
-                                    <input type="checkbox" disabled/>
-                                </td>
-                                <td class="small-td">
-                                    <button data-action="delete" type="button" class="button is-danger is-small">Löschen</button>
-                                </td>
-                            </tr>`;
-        let groupRepeater = this.getGroupRepeater();
-        groupRepeater.listTemplate = template.content;
-        groupRepeater.repository = new CareplanGroupRepository();
-    }
 
-    private getGroupRepeater(): VetproviehTable {
-        return this.detailElement.getByIdFromShadowRoot("groups") as VetproviehTable;
+        this.setTemplateForTable(`
+        <tr data-index="{{item.index}}" class="item {{item.active}}">
+            <td class="dragable small-td">
+                {{item.position}}
+            </td>
+            <td>
+                <a href="groups/show.html?id={{item.id}}${this.readOnlyLinkAttached}" >
+                    {{item.name}}
+                </a>
+                <input type="checkbox" disabled/>
+            </td>
+            <td class="small-td">
+                <button data-action="delete" type="button" 
+                        class="button is-danger is-small ${this.readOnly ? 'is-hidden' : ''}">
+                        Löschen
+                </button>
+            </td>
+        </tr>`, new CareplanGroupRepository());
     }
 
     /**
@@ -63,22 +67,23 @@ export class CarePlanShowPage extends BasicShowPage {
      */
     private _showGroups(careplan: Careplan) {
         if (careplan) {
-            let groupRepeater = this.getGroupRepeater();
-            groupRepeater.objects = careplan.groups;
-            groupRepeater.clearAndRender();
+            let groupRepeater = this.getTable();
 
-            for (let i = 0; i < careplan.groups.length; i++) {
-                const group = careplan.groups[i];
-                if (group.active) {
-                    let element = groupRepeater.getElementByIndex(i)
-                    console.log(element);
-                    let input = element?.querySelector("input")
-                    if (input) {
-                        input.checked = true;
+            groupRepeater.afterClearAndRender = function () {
+                for (let i = 0; i < this.objects.length; i++) {
+                    const group = this.objects[i];
+                    if (group.active) {
+                        let element = groupRepeater.getElementByIndex(i)
+                        console.log(element);
+                        let input = element?.querySelector("input")
+                        if (input) {
+                            input.checked = true;
+                        }
                     }
                 }
-
             }
+            groupRepeater.afterClearAndRender.bind(groupRepeater)
+            groupRepeater.objects = careplan.groups;
         }
     }
 }

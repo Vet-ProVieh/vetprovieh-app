@@ -1,6 +1,5 @@
 import { WebComponent, Indexable, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
-import { BasicShowPage } from "../../../../shared";
-import { SelectFieldType } from "../../components";
+import { PageWithReadOnly, SelectFieldType } from "../../components";
 import { CareplanField } from "../../models/careplanField";
 import { TextArea, ComboBox, Video, ImageField, List, SpeechField } from "../../models/fields";
 import { TextFields } from "../../models/fields/textFields";
@@ -9,7 +8,7 @@ import { TextFields } from "../../models/fields/textFields";
     template: "",
     tag: "careplan-field-page"
 })
-export class CarePlanFieldShowPage extends BasicShowPage {
+export class CarePlanFieldShowPage extends PageWithReadOnly {
 
     constructor() {
         super();
@@ -25,6 +24,7 @@ export class CarePlanFieldShowPage extends BasicShowPage {
                 this.detailElement.currentObject.group_id = group_id;
             }
 
+            this.markAsReadOnly();
             this.fieldTypeSelect.dispatchEvent(new Event("change"));
         });
     }
