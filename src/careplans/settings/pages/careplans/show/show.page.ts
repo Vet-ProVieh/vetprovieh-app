@@ -11,27 +11,29 @@ import { PageWithReadOnly } from "../../../components";
 })
 export class CarePlanShowPage extends PageWithReadOnly {
 
-    private _detailContainer: VetproviehDetail;
+    /**
+   * Lifecycle
+   * Executed after Data is loaded
+   */
+    protected afterDataLoaded() {
+        super.afterDataLoaded();
 
-    constructor() {
-        super();
-        this._detailContainer = this.getElementsByTagName("vetprovieh-detail")[0] as VetproviehDetail;
-        this._detailContainer.addEventListener("loadeddata", (event: any) => {
-            this._setTemplateForGroups();
-            this._showGroups((event as LoadedEvent).data as Careplan);
-            this.addButton.disabled = !(this.detailElement.currentObject.id);
-            this.markAsReadOnly();
-        })
+        this._setTemplateForGroups();
+        this._showGroups((event as LoadedEvent).data as Careplan);
+        (this.addButton as any)["disabled"] = !(this.currentObject.id);
+        this.markAsReadOnly();
+        this.addPositionToAddButton();
     }
 
-    connectedCallback() {
+    private addPositionToAddButton(){
+        (this.addButton as HTMLAnchorElement).href += `&position=${this.maxPosition(this.currentObject.groups)}`
     }
 
     /**
      * CurrentView Readonly?
      * @return {boolean}
      */
-    protected get readOnly(): boolean{
+    protected get readOnly(): boolean {
         return this.detailElement.currentObject.readOnly;
     }
 

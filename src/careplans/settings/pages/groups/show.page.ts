@@ -1,5 +1,4 @@
-import { WebComponent, VetproviehTable, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
-import { BasicShowPage } from "../../../../shared";
+import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { PageWithReadOnly } from "../../components";
 import { CareplanGroup } from "../../models/careplanGroup";
 import { CareplanFieldRepository } from "../../repository";
@@ -10,20 +9,27 @@ import { CareplanFieldRepository } from "../../repository";
 })
 export class CarePlanGroupShowPage extends PageWithReadOnly {
 
-    connectedCallback() {
+    /**
+     * Lifecycle
+     * Executed after Data is loaded
+     */
+    protected afterDataLoaded() {
+        super.afterDataLoaded();
+        this._setTemplateForFields();
+        this._showGroups(this.detailElement.currentObject as CareplanGroup);
 
-        this.detailElement.addEventListener("loadeddata", (event: any) => {
-            this._setTemplateForFields();
-            this._showGroups(this.detailElement.currentObject as CareplanGroup);
+        (this.addButton as any).disabled = !(this.detailElement.currentObject.id);
+        this.markAsReadOnly();
 
-            this.addButton.disabled = !(this.detailElement.currentObject.id);
-            this.markAsReadOnly();
+        this.setUrlParameter(this.currentObject, "careplanId", "carePlans", (i: string) => {return {id: parseInt(i) }})
+        this.setUrlParameter(this.currentObject, "position", "position", parseInt);
+        
+        this.addPositionToAddButton();
+    }
 
-            let careplanId = VetproviehNavParams.getUrlParameter("careplanId");
-            if (careplanId) {
-                this.detailElement.currentObject.carePlans = {id: parseInt(careplanId) };
-            }
-        });
+
+    private addPositionToAddButton(){
+        (this.addButton as HTMLAnchorElement).href += `&position=${this.maxPosition(this.currentObject.fields)}`
     }
 
     private _setTemplateForFields() {

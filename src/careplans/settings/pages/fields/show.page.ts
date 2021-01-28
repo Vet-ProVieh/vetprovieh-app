@@ -9,18 +9,27 @@ import { TextFields } from "../../models/fields/textFields";
     tag: "careplan-field-page"
 })
 export class CarePlanFieldShowPage extends PageWithReadOnly {
+    /**
+    * Lifecycle
+    * Executed after Data is loaded
+    */
+    protected afterDataLoaded() {
+        super.afterDataLoaded();
 
-    constructor() {
-        super();
+        this.attachListener();
+        this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
+        this.markAsReadOnly();
+        this.fieldTypeSelect.dispatchEvent(new Event("change"));
+
+        this.setParams();
     }
 
-    connectedCallback() {
-        this.detailElement.addEventListener("loadeddata", (event: any) => {
-            this.attachListener();
-            this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
-            this.markAsReadOnly();
-            this.fieldTypeSelect.dispatchEvent(new Event("change"));
-        });
+    /**
+     * Setting Params
+     */
+    private setParams() {
+        this.setUrlParameter(this.currentObject, "groupId", "groups", (i: string) => { return { id: parseInt(i) } })
+        this.setUrlParameter(this.currentObject, "position", "position", parseInt);
     }
 
     /**
@@ -30,6 +39,7 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
         this.fieldTypeSelect.addEventListener("change", (event) => {
             let newField = this.buildField(this.fieldTypeSelect.value);
             this.detailElement.currentObject = newField;
+            this.setParams();
             this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
             this.detailElement.rebindForm();
         })
@@ -56,21 +66,7 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
             }
         });
 
-        this.tryToSetGroupId(blankField);
-        
         return blankField;
-    }
-
-    /**
-     * Try Setting Field by Parameter
-     * @param {CareplanField} field 
-     */
-    private tryToSetGroupId(field: CareplanField){
-        let groupId = VetproviehNavParams.getUrlParameter("groupId");
-        if (groupId) {
-            console.info("Found Parameter GroupId. Setting GroupId to Field.")
-            field.groups = { id: groupId };
-        }
     }
 
     /**
