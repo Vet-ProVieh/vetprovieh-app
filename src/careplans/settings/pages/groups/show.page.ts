@@ -18,10 +18,10 @@ export class CarePlanGroupShowPage extends PageWithReadOnly {
 
             this.addButton.disabled = !(this.detailElement.currentObject.id);
             this.markAsReadOnly();
-            
-            let careplanId = VetproviehNavParams.get("careplanId");
+
+            let careplanId = VetproviehNavParams.getUrlParameter("careplanId");
             if (careplanId) {
-                this.detailElement.currentObject.careplan_id = careplanId;
+                this.detailElement.currentObject.carePlans = {id: parseInt(careplanId) };
             }
         });
     }

@@ -1,7 +1,7 @@
 {
     "id": null,
     "name": "Neue Behandlungsgruppe",
-    "position": null,
+    "position": 1,
     "sGroups": [],
     "fields": [],
     "active": true

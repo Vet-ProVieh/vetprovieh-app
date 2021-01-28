@@ -18,12 +18,6 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
         this.detailElement.addEventListener("loadeddata", (event: any) => {
             this.attachListener();
             this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
-
-            let group_id = VetproviehNavParams.get("groupId");
-            if (group_id) {
-                this.detailElement.currentObject.group_id = group_id;
-            }
-
             this.markAsReadOnly();
             this.fieldTypeSelect.dispatchEvent(new Event("change"));
         });
@@ -61,8 +55,22 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
                 }
             }
         });
+
+        this.tryToSetGroupId(blankField);
         
         return blankField;
+    }
+
+    /**
+     * Try Setting Field by Parameter
+     * @param {CareplanField} field 
+     */
+    private tryToSetGroupId(field: CareplanField){
+        let groupId = VetproviehNavParams.getUrlParameter("groupId");
+        if (groupId) {
+            console.info("Found Parameter GroupId. Setting GroupId to Field.")
+            field.groups = { id: groupId };
+        }
     }
 
     /**

@@ -8,6 +8,7 @@ export class CareplanField extends BasicModel {
     optional: boolean = true;
     position: number = 0;
     voiceInputable: boolean = false;
+    groups: any;
     
     /**
      * Get FieldParams for creating Fields

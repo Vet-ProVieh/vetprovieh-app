@@ -8,6 +8,7 @@
         "id": null,
         "position": 1,
         "name": "Vorbericht",
+        "sGroups": [],
         "fields": [
           {
             "id": null,
@@ -33,6 +34,7 @@
         "id": null,
         "position": 2,
         "name": "Klinische Untersuchung",
+        "sGroups": [],
         "fields": [
           {
             "id": null,
@@ -58,6 +60,7 @@
         "id": null,
         "position": 3,
         "name": "Probenahme",
+        "sGroups": [],
         "fields": [
           {
             "id": null,
@@ -83,18 +86,21 @@
         "id": null,
         "position": 4,
         "name": "Diagnose",
+        "sGroups": [],
         "fields": []
       },
       {
         "id": null,
         "position": 5,
         "name": "Therapie",
+        "sGroups": [],
         "fields": []
       }, 
       {
         "id": null,
         "position": 6,
         "name": "Handlungsempfehlungen",
+        "sGroups": [],
         "fields": []
       }
     ]
