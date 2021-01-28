@@ -14,11 +14,11 @@ import { UserRepository } from "../repository";
                     <div class="media-content">
                         <a href="/users/profile.html">
                             <p class="username is-5">
-                                \${this.currentUser.firstName} \${this.currentUser.lastName}
+                                \${this.currentUser?.firstName} \${this.currentUser?.lastName}
                             </p>
                         </a>
                         <p class="subtitle is-7">
-                            \${this.currentUser.tenant.name} \${this.currentUser.tenant.name2}
+                            \${this.currentUser?.tenant?.name} \${this.currentUser?.tenant?.name2}
                         </p>
                     </div>
                 </div>

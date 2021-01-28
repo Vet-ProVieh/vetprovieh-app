@@ -92,15 +92,17 @@ class KeycloakHelper {
     var args = incomingArgs;
     var i = args.length;
 
-    if (i > 1 && args[i-1]) {
-      args[i-1] = Object.assign({}, args[i-1], {headers:{}});
+    if (i > 1 && args[i - 1]) {
+      args[i - 1] = Object.assign({}, args[i - 1], {
+        headers: {}
+      });
       i--;
     } else {
       args[i] = {
         headers: {}
       }
     }
-    
+
     args[i].headers['Authorization'] = 'Bearer ' + this.instance.token;
 
     return args;
@@ -112,9 +114,13 @@ class KeycloakHelper {
 
   set onAuthSuccess(callbackFunction) {
     var _self = this;
-    this._keycloakInstance.onAuthSuccess = function () {
-      _self.storeTokens();
+    if (this.authenticated) {
       callbackFunction();
+    } else {
+      this._keycloakInstance.onAuthSuccess = function () {
+        _self.storeTokens();
+        callbackFunction();
+      }
     }
   }
 

@@ -29,22 +29,23 @@ export class UserRepository extends BaseRepository<User> {
      * @return {Promise<User>}
      */
     public loadProfile(): Promise<User> {
-/*
-        return fetch(`${this.endpoint}/current`)
-        .then((response) => {
-                return response.json()
-            }
-        });*/
 
         return new Promise((resolve, reject) => {
-            let user = new User();
-            user.firstName = "Stephan";
-            user.lastName = "Göken";
-            user.email = "test@test.de";
-            user.tenant = new Tenant();
-            user.tenant.name = "Gemeinschaftspraxis Göken & Braune";
-            resolve(user);
-        })
+            fetch(`${this.endpoint}/current`)
+                .then((response) => {
+                    response.json().then(resolve);
+                })
+        });
+        /*
+                return new Promise((resolve, reject) => {
+                    let user = new User();
+                    user.firstName = "Stephan";
+                    user.lastName = "Göken";
+                    user.email = "test@test.de";
+                    user.tenant = new Tenant();
+                    user.tenant.name = "Gemeinschaftspraxis Göken & Braune";
+                    resolve(user);
+                })*/
     }
 
     /**

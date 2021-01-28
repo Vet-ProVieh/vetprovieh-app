@@ -1,8 +1,87 @@
-import { VetproviehElement } from '@tomuench/vetprovieh-shared/lib';
+import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib';
 
 /**
  * Layout for Vet:ProVieh
  */
+@WebComponent({
+  tag: "vetprovieh-layout",
+  template: ` <div id="pageloader" 
+      class="pageloader is-active has-background-vetprovieh-light-blue">
+            <span class="title">Ihre Daten werden geladen...</span>
+          </div>
+          <nav class="navbar is-fixed-top has-shadow 
+                  has-background-vetprovieh-light-blue" 
+            role="navigation" aria-label="main navigation">
+          <div class="navbar-brand">
+              <a id="left-menu-open" class="navbar-item has-text-white" >
+                  <i class="fas fa-bars"></i>
+              </a>
+              <h1 id="title" class="has-text-white"> \${this.title} </h1>
+          </div>
+          <!-- <button id="right-menu-open">open right</button> -->
+          </nav>
+          <vetprovieh-sidemenu id="left-menu" width="300px">
+          <aside class="menu">
+              <profile-widget></profile-widget>
+              <p class="menu-label">
+                  Behandlung
+              </p>
+              <ul class="menu-list">
+                  <li><a href="/careplans/operational/1_selectBarn.html">Neue Behandlung</a></li>
+                  <li><a href="/careplans/operational">Behandlungen</a></li>
+              </ul>
+              
+              <p class="menu-label">
+                  Persönliche Einstellungen
+              </p>
+              <ul class="menu-list">
+                  <li><a href="#">Benachrichtigungen</a></li>
+                  <li><a href="#">Termine</a></li>
+              </ul>
+          
+              <p class="menu-label">
+                Meine Stammdaten
+              </p>
+              <ul class="menu-list">
+                  <li><a href="/farmers">Landwirte</a></li>
+                  <li><a href="/barns">Ställe</a></li>
+              </ul>
+              <p class="menu-label">
+                Meine Praxis
+              </p>
+              <ul class="menu-list">
+                  <li><a href="/settings/surgery">Basisdaten</a></li>
+                  <li><a href="/users">Mitarbeiter</a></li>
+                  <li><a href="/settings/careplans">Behandlungspläne</a></li>
+              </ul>
+              <p class="menu-label">
+                Administration
+              </p>
+              <ul class="menu-list">
+                <li><a href="/admin/tenants/requests.html">Tenant-Requests</a></li>
+                <li><a href="/admin/tenants">Tenants</a></li>
+              </ul>
+              
+          </aside>
+          </vetprovieh-sidemenu>
+          <!--  <vetprovieh-sidemenu id="right-menu" 
+                  orientation="right" width="300px">
+          <h2> Right </h2>
+          <ul>
+              <li><a href="#">Item 1</a></li>
+              <li><a href="#">Item 2</a></li>
+              <li><a href="#">Item 3</a></li>
+          </ul>
+          </vetprovieh-sidemenu> -->
+          <section class="section full-height">
+          <div class="container">
+            \${this._outsideInnerHtml}
+          </div>
+          </section>
+
+          <vetprovieh-footer></vetprovieh-footer>
+            `
+})
 export class VetproviehLayout extends VetproviehElement {
   /**
        * Observed Attributes
@@ -44,7 +123,6 @@ export class VetproviehLayout extends VetproviehElement {
   set title(val) {
     if (val !== this.title) {
       this._title = val;
-      this.render();
     }
   }
 
@@ -57,6 +135,13 @@ export class VetproviehLayout extends VetproviehElement {
     this._addListenerToButton();
   }
 
+  public render() {
+    super.render();
+    console.log("RENDERING");
+  }
+  protected get skipRenderOnCallback() : boolean {
+    return true;
+  }
   /**
    * CSS-Klasse an das Body-Element hängen, so dass Header fixed ist.
    */
@@ -93,91 +178,4 @@ export class VetproviehLayout extends VetproviehElement {
       100);
   }
 
-  /**
-   * HTML-Output schreiben
-   * @private
-   */
-  get template() :string  {
-    return `
-        <div id="pageloader" 
-             class="pageloader is-active has-background-vetprovieh-light-blue">
-             <span class="title">Ihre Daten werden geladen...</span>
-        </div>
-        <nav class="navbar is-fixed-top has-shadow 
-                    has-background-vetprovieh-light-blue" 
-             role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a id="left-menu-open" class="navbar-item has-text-white" >
-                    <i class="fas fa-bars"></i>
-                </a>
-                <h1 id="title" class="has-text-white">` + this.title + `</h1>
-            </div>
-           <!-- <button id="right-menu-open">open right</button> -->
-        </nav>
-        <vetprovieh-sidemenu id="left-menu" width="300px">
-            <aside class="menu">
-                <profile-widget></profile-widget>
-                <p class="menu-label">
-                   Behandlung
-                </p>
-                <ul class="menu-list">
-                    <li><a href="/careplans/operational/1_selectBarn.html">Neue Behandlung</a></li>
-                    <li><a href="/careplans/operational">Behandlungen</a></li>
-                </ul>
-                
-                <p class="menu-label">
-                   Persönliche Einstellungen
-                </p>
-                <ul class="menu-list">
-                    <li><a href="#">Benachrichtigungen</a></li>
-                    <li><a href="#">Termine</a></li>
-                </ul>
-            
-                <p class="menu-label">
-                  Meine Stammdaten
-                </p>
-                <ul class="menu-list">
-                    <li><a href="/farmers">Landwirte</a></li>
-                    <li><a href="/barns">Ställe</a></li>
-                </ul>
-                <p class="menu-label">
-                  Meine Praxis
-                </p>
-                <ul class="menu-list">
-                    <li><a href="/settings/surgery">Basisdaten</a></li>
-                    <li><a href="/users">Mitarbeiter</a></li>
-                    <li><a href="/settings/careplans">Behandlungspläne</a></li>
-                </ul>
-                <p class="menu-label">
-                  Administration
-                </p>
-                <ul class="menu-list">
-                  <li><a href="/admin/tenants/requests.html">Tenant-Requests</a></li>
-                  <li><a href="/admin/tenants">Tenants</a></li>
-                </ul>
-                
-            </aside>
-        </vetprovieh-sidemenu>
-      <!--  <vetprovieh-sidemenu id="right-menu" 
-                   orientation="right" width="300px">
-        <h2> Right </h2>
-            <ul>
-                <li><a href="#">Item 1</a></li>
-                <li><a href="#">Item 2</a></li>
-                <li><a href="#">Item 3</a></li>
-            </ul>
-        </vetprovieh-sidemenu> -->
-        <section class="section full-height">
-            <div class="container">
-            ` + this._outsideInnerHtml + `
-            </div>
-        </section>
-        
-        <vetprovieh-footer></vetprovieh-footer>
-            `;
-  }
 }
-
-
-// Komponente registrieren
-customElements.define('vetprovieh-layout', VetproviehLayout);
