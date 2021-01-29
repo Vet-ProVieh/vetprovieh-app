@@ -71,8 +71,16 @@ publish:
   stage: publish
   image: docker:19.03.0
   before_script:
-    - export TAGNAME="mitsgermany/vetprovieh-app"
+    - export BASE_IMAGE="mitsgermany/vetprovieh-app"
     - docker login -u $CI_REGISTRY_USER -p$CI_REGISTRY_PASSWORD
   script:
+    - export TAGNAME=$BASE_IMAGE":development"
+    - echo "1. Publishing Image "$TAGNAME
+    - docker build . -t $TAGNAME
+    - docker push $TAGNAME
+    - export TAGNAME=$BASE_IMAGE":production"
+    - echo "1. Publishing Image "$TAGNAME
+    - rm ./config/nginx.conf
+    - mv ./config/nginx.production.conf ./config/nginx.conf
     - docker build . -t $TAGNAME
     - docker push $TAGNAME

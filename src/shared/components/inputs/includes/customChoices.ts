@@ -175,7 +175,9 @@ export class CustomChoices extends VetproviehElement {
         let newInput = new BulmaField();
         newInput.placeholder = "Bitte Ihren gewünschten Wert eintragen.";
         newInput.value = valueAtPos;
-        newInput.addEventListener("change", () => this.value[index] = newInput.value);
+        newInput.addEventListener("change", () => {
+            this.value[index] = newInput.value
+        });
         return newInput;
     }
 
