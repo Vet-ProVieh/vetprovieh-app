@@ -32,6 +32,7 @@ build:
   before_script:
     - \[ -d "../vetprovieh-shared/" ] && rm -R ../vetprovieh-shared/
     - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-shared ../vetprovieh-shared
+    - npm install
     - \[ -d "../vetprovieh-pager/" ] && rm -R ../vetprovieh-pager/
     - git clone https://tomuench:${CI_JOB_TOKEN}@gitlab.edvsz.hs-osnabrueck.de/vetprovieh/core/web-application/vetprovieh-pager ../vetprovieh-pager
     - cd ../vetprovieh-pager
