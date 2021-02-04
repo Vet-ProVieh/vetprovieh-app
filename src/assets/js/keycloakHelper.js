@@ -22,7 +22,11 @@ class KeycloakHelper {
    */
   get subdomain() {
     try {
-      return window.location.hostname.split(".")[0];
+      let domain = window.location.hostname.split(".")[0];
+      if(domain == "localhost"){
+        return "praxisa";
+      }
+      return domain;
     } catch (ex) {
       return "unknown";
     }

@@ -16,6 +16,7 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
     protected afterDataLoaded() {
         super.afterDataLoaded();
 
+        this.fieldTypeSelect.value = this.currentObject.fieldType;
         this.attachListener();
         this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
         this.markAsReadOnly();
