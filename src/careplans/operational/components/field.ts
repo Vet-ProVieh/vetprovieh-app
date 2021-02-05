@@ -45,7 +45,7 @@ export class VpOperationField extends ElementBinding {
             case 'comboBox':
                 templateToBuild = `<div class="select">
                                         <select name="` + this.object.name + `" ` + this.isRequired + `>`;
-
+                console.log(this.object);
                 this.object.choices.forEach((choice: string) => {
                     templateToBuild += `<option value="` + choice + `">` + choice + `</option>`;
                 });

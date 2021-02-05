@@ -68,7 +68,6 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
             }
         });
 
-        (blankField as any).choices = [];
 
         return blankField;
     }

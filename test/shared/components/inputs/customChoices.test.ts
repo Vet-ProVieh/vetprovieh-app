@@ -44,8 +44,29 @@ describe('attach', () => {
         expect(customChoices.value.length).toEqual(exampleValues.length + 1);
     });
 
+    it('should attach value and change', () => {
+        let values: string[] = [];
+        customChoices.value = values;
+        customChoices.render();
+
+        setButton();
+        button.click();
+
+        expect(customChoices.value.length).toEqual(1);
+        expect(values[0]).toEqual("");
+
+        let choices = customChoices.getByIdFromShadowRoot("choices") as HTMLDivElement;
+        let inputs = choices.querySelectorAll("bulma-input");
+        let input = inputs[inputs.length -1] as BulmaField;
+
+        input.value = "Test";
+        input.dispatchEvent(new Event("change"));
+        expect(values[0]).toEqual(input.value);
+    });
+
     it('should change value', () => {
-        customChoices.value = exampleValues.map((e) => e);
+        let values = exampleValues.map((e) => e);
+        customChoices.value = values;
         customChoices.render();
 
         setButton();
@@ -57,7 +78,7 @@ describe('attach', () => {
 
         input.value = "Test";
         input.dispatchEvent(new Event("change"));
-        expect(customChoices.value[3]).toEqual(input.value);
+        expect(values[3]).toEqual(input.value);
 
     });
 })
