@@ -4,6 +4,6 @@ import { TenantRequest } from "../models";
 export class TenantRequestRepository extends BaseRepository<TenantRequest>{
 
     constructor(){
-        super("/service/tenantsmanagements/requests");
+        super("/service/tenantmanagements/requests");
     }
 }
