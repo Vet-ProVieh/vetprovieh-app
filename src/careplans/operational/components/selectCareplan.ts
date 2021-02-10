@@ -32,7 +32,7 @@ import { Careplan } from "../../settings";
             </vetprovieh-pager>`,
     tag: "select-careplan"
 })
-export class SelectCareplan  extends VetproviehBasicList {
+export class SelectCareplan extends VetproviehBasicList {
 
 
     constructor() {
@@ -41,22 +41,22 @@ export class SelectCareplan  extends VetproviehBasicList {
         this.repository = new OperationPlanBluerprintsRepository();
     }
 
-    private get selectedAnimalType() : string {
+    private get selectedAnimalType(): string {
         return VetproviehNavParams.getUrlParameter("animal");
     }
 
-    private get selectedBarnId() : string {
+    private get selectedBarnId(): string {
         return VetproviehNavParams.getUrlParameter("barn_id");
     }
-    
 
-     /**
-     * Attach Data to List
-     * @param {Array} data
-     * @param {string} searchValue
-     * @param {boolean} clear
-     */
-    attachData(data :any[], searchValue: string, clear = false) {
+
+    /**
+    * Attach Data to List
+    * @param {Array} data
+    * @param {string} searchValue
+    * @param {boolean} clear
+    */
+    attachData(data: any[], searchValue: string, clear = false) {
         super.attachData(this._filterCareplans(data), searchValue, clear);
     }
 
@@ -68,12 +68,23 @@ export class SelectCareplan  extends VetproviehBasicList {
     private _filterCareplans(data: any[]) {
         console.log(this.selectedAnimalType);
         console.log(this.selectedBarnId);
-        
+
         return data.filter((e: Careplan) => {
             // TODO AnimalType muss im Backend gesetzt werden können
             e.animal = this.selectedAnimalType;
             return e.animal === this.selectedAnimalType;
         });
+    }
+
+
+    public setlistTemplate(template: HTMLTemplateElement) {
+        if (template && this._listTemplate !== template.content) {
+            let anchor = template.content.querySelector("a");
+            if (anchor) {
+                anchor.href += `?barn_id=${VetproviehNavParams.getUrlParameter("barn_id")}`;
+            }
+            this._listTemplate = template.content;
+        }
     }
 
 }

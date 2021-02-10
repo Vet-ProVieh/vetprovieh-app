@@ -75,6 +75,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
      */
     _setGroupComponent() {
         if (this.currentObject.opGroups.length > this.groupIdParam) {
+            console.log(`Setting Current-OperationGroup=${this.groupIdParam}`);
             this._groupElement.object = this.currentObject.opGroups[this.groupIdParam];
             let detail = this.getByIdFromShadowRoot("group") as HTMLElement;
 
@@ -84,6 +85,11 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         }
     }
 
+    protected get _storeKey(): string {
+        let url = super._storeKey;
+        return `${url}?barn_id=${VetproviehNavParams.getUrlParameter("barn_id")}`;
+      }
+
     /**
      * Overwriteable Callback
      * @param {any} data
@@ -91,6 +97,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
      */
     _afterFetch(data: any) {
         this._fetched = true;
+        this.currentObject.barnId = parseInt(VetproviehNavParams.getUrlParameter("barn_id"));
         this._setGroupComponent();
         setTimeout(() => this._setNavigation(), 500);
     }
