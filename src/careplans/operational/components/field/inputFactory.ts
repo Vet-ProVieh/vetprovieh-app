@@ -29,18 +29,16 @@ export class InputFactory {
     }
 
     /**
-     * Generating a TextArea
-     * @param options 
+     * Mehrfachauswahl möglich
+     * @param {boolean} multiple 
+     * @return {string}
      */
-    private static buildTextArea(options: any): string {
-
-        return `<textarea property="value" ` +
-            this.genTag("name", options.name) +
-            this.genTag("cols", options.cols) +
-            this.genTag("rows", options.rows) +
-            this.isRequired(options.optional == false) +
-            this.isVoiceInputable(options.voiceInputable) + 
-            `class="input" type="text"></textarea>`;
+    private static isMultiple(multiple: boolean): string {
+        if (multiple) {
+            return this.genTag("multiple", "");
+        } else {
+            return "";
+        }
     }
 
     /**
@@ -59,6 +57,15 @@ export class InputFactory {
     }
 
     /**
+     * Wrap FromControl around the input
+     * @param {string} input 
+     * @return {string}
+     */
+    private static wrapFormControl(input: string): string {
+        return `<div class="control">${input}</div>`;
+    }
+
+    /**
      * Generating a InputField
      * @param {string} fieldType 
      * @param {any} options 
@@ -66,51 +73,115 @@ export class InputFactory {
     static generateField(fieldType: string, options: any): string {
         let response = "";
         switch (fieldType) {
-            /*
-                        case 'multipleChoiceFields':
-                        case 'choiceFields':
-                            this.object.choices.forEach((choice: string) => {
-                                let type = this.object.fieldType == 'multipleChoiceFields' ? 'checkbox' : 'radio';
-            
-                                templateToBuild += `<label class="radio">
-                                        <input type="`+ type + `" name="` + this.object.name + `" ` + this.isRequired + `>
-                                        ` + choice + `
-                                        </label>`;
-                            });
-                            break;
-                        case 'comboBox':
-                            templateToBuild = `<div class="select">
-                                                    <select name="` + this.object.name + `" ` + this.isRequired + `>`;
-                            console.log(this.object);
-                            this.object.choices.forEach((choice: string) => {
-                                templateToBuild += `<option value="` + choice + `">` + choice + `</option>`;
-                            });
-                            templateToBuild += `</select>`;
-                            break;
-            
-                        case 'list':
-                            templateToBuild = `<div class="select is-multiple" >
-                                                    <select size="8" style="height: 10em" name="` + this.object.name + `" ` + this.isRequired + `>`;
-            
-                            this.object.choices.forEach((choice: string) => {
-                                templateToBuild += `<option value="` + choice + `">` + choice + `</option>`;
-                            });
-                            templateToBuild += `</select>`;
-                            break;*/
-            case 'textArea':
-                response += InputFactory.buildTextArea(options);
+            case "textFields": 
+                response = this.buildTextField(options);
                 break;
-            /*
-                        case 'video': 
-                            templateToBuild +=`<vetprovieh-video name="${this.object.name}"></vetprovieh-video`;
-                            break;
-                        case 'textFields':
-                            break;
-                            */
+            case "image": break;
+            case "speech": break;
+            case 'comboBox':
+                response = this.buildCombo(options);
+                break;
+            case 'careplanList':
+                response = this.buildList(options);
+                break;
+            case 'video':
+                response = this.buildVideo(options);
+                break;
+            case 'textArea':
+                response = this.buildTextArea(options);
+                break;
             default:
                 response = "<p>Unknown Input</p>";
                 break;
         }
-        return response;
+        return this.wrapFormControl(response);
+    }
+
+    /**
+     * Generating a VideoArea
+     * @param {any} options 
+     */
+    private static buildVideo(options: any): string {
+        return `<vetprovieh-video ${this.genTag("name", options.name)}></vetprovieh-video>`;
+    }
+
+    /**
+     * Generating a TextArea
+     * @param {any} options 
+     */
+    private static buildTextArea(options: any): string {
+        return `<textarea ` +
+            this.genTag("property", "value") +
+            this.genTag("name", options.name) +
+            this.genTag("cols", options.cols) +
+            this.genTag("rows", options.rows) +
+            this.isVoiceInputable(options.voiceInputable) +
+            `class="input" type="text" ` + 
+            this.isRequired(options.optional != true) +
+            `></textarea>`;
+    }
+
+    /**
+     * Generating a Combobox
+     * @param {any} options 
+     * @return {string}
+     */
+    private static buildCombo(options: any): string {
+        return this.buildSelect(options)
+    }
+
+    /**
+     * Generating a List
+     * @param {string} options 
+     * @return {string}
+     */
+    private static buildList(options: any): string {
+        options["style"] = "height: 10em";
+        options["size"] = 8;
+
+        return this.buildSelect(options)
+    }
+
+    /**
+     * Building a Text Input
+     * @param {any} options
+     * @return {string}
+     */
+    private static buildTextField(options: any): string {
+        return `<input ` +
+                this.genTag("property", "value") +
+                this.isVoiceInputable(options.voiceInputable) + 
+                `class="input" type="text">`;
+    }
+
+    /**
+    * Generating a Select-Element
+    * @param {string} options 
+    * @return {string}
+    */
+    private static buildSelect(options: any): string {
+        return `<div class="select ${options.multiple ? "is-multiple" : ""}">` +
+            `<select ` +
+            this.genTag("property", "value") +
+            this.genTag("size", options.size) +
+            this.genTag("style", options.style) +
+            this.genTag("name", options.name) +
+            this.isMultiple(options.multiple) +
+            this.isRequired(options.optional != true) +
+            `>${this.buildOptionTags(options.choices)}</select></div>`;
+    }
+
+    /**
+     * Building Option Tags
+     * @param {string[]} choices 
+     * @return {string}
+     */
+    private static buildOptionTags(choices: string[]): string {
+        if (choices) {
+            return choices.map((choice) => `<option value="` + choice + `">` + choice + `</option>`)
+                .join("\r\n");
+        } else {
+            return "";
+        }
     }
 }
