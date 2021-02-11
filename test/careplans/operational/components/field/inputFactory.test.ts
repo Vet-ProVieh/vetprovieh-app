@@ -65,7 +65,6 @@ describe('generateField', () => {
         it('should render without options', () => {
             let video = genVideo({});
             expect(video).toMatch(`<vetprovieh-video ></vetprovieh-video>`);
-            
         });
 
         it('should have name', () => {
@@ -81,7 +80,7 @@ describe('generateField', () => {
 
         it('should have not a multiple tag', () => {
             let list = genList({name: "testlist"});
-            expect(list).not.toMatch("multiple");
+            expect(list).not.toMatch(" multiple");
         });
 
         it('should have name tag', () => {
@@ -99,7 +98,7 @@ describe('generateField', () => {
         });
 
         it('should be marked as multiple', () => {
-            let list = genList({multiple: true});
+            let list = genList({multipleSelect: true});
             expect(list).toMatch("is-multiple");
             expect(list).toMatch(`<select property="value" size="8" style="height: 10em" multiple required ></select>`);
         });
@@ -150,6 +149,29 @@ describe('generateField', () => {
         it('should set voiceable', () => {
             let textArea = genTextField({voiceInputable: true});
             expect(textArea).toMatch(`<input property="value" is="voice-input" class="input" type="text">`);
+        });
+    });
+
+    describe('speech', () => {
+        let genSpeech = (opts={}) => {
+            return InputFactory.generateField("speech", opts);
+        }
+
+        it('should generate expected', () => {
+            let speech = genSpeech({});
+            expect(speech).toMatch("<vetprovieh-speech ></vetprovieh-speech>");
+        });
+        
+    });
+
+    describe('image', () => {
+        let genImage = (opts={}) => {
+            return InputFactory.generateField("image", opts);
+        }
+
+        it('should render with name', () => {
+            let image = genImage({name: "test"});
+            expect(image).toMatch(`<vetprovieh-video type="image" name="test" ></vetprovieh-video>`);
         });
     });
 })

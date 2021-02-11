@@ -73,11 +73,15 @@ export class InputFactory {
     static generateField(fieldType: string, options: any): string {
         let response = "";
         switch (fieldType) {
-            case "textFields": 
+            case "textFields":
                 response = this.buildTextField(options);
                 break;
-            case "image": break;
-            case "speech": break;
+            case "image":
+                response = this.buildImage(options);
+                break;
+            case "speech":
+                response = this.buildSpeech(options);
+                break;
             case 'comboBox':
                 response = this.buildCombo(options);
                 break;
@@ -106,6 +110,27 @@ export class InputFactory {
     }
 
     /**
+     * Generating a SpeechArea
+     * @param {any} options 
+     * @return {string}
+     */
+    private static buildSpeech(options: any) : string {
+        return `<vetprovieh-speech ` +
+                `></vetprovieh-speech>`
+    }
+
+    /**
+     * Generating a VideoArea
+     * @param {any} options 
+     */
+    private static buildImage(options: any): string {
+        return `<vetprovieh-video ` +
+            this.genTag("type", "image") +
+            this.genTag("name", options.name) +
+            `></vetprovieh-video>`;
+    }
+
+    /**
      * Generating a TextArea
      * @param {any} options 
      */
@@ -116,7 +141,7 @@ export class InputFactory {
             this.genTag("cols", options.cols) +
             this.genTag("rows", options.rows) +
             this.isVoiceInputable(options.voiceInputable) +
-            `class="input" type="text" ` + 
+            `class="input" type="text" ` +
             this.isRequired(options.optional != true) +
             `></textarea>`;
     }
@@ -149,9 +174,9 @@ export class InputFactory {
      */
     private static buildTextField(options: any): string {
         return `<input ` +
-                this.genTag("property", "value") +
-                this.isVoiceInputable(options.voiceInputable) + 
-                `class="input" type="text">`;
+            this.genTag("property", "value") +
+            this.isVoiceInputable(options.voiceInputable) +
+            `class="input" type="text">`;
     }
 
     /**
@@ -160,13 +185,13 @@ export class InputFactory {
     * @return {string}
     */
     private static buildSelect(options: any): string {
-        return `<div class="select ${options.multiple ? "is-multiple" : ""}">` +
+        return `<div class="select is-multiple">` +
             `<select ` +
             this.genTag("property", "value") +
             this.genTag("size", options.size) +
             this.genTag("style", options.style) +
             this.genTag("name", options.name) +
-            this.isMultiple(options.multiple) +
+            this.isMultiple(options.multipleSelect) +
             this.isRequired(options.optional != true) +
             `>${this.buildOptionTags(options.choices)}</select></div>`;
     }

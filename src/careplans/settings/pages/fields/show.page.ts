@@ -97,7 +97,7 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
                 return new Video();
             case "image":
                 return new ImageField();
-            case "list":
+            case "careplanList":
                 return new List();
             case "comboBox":
                 return new ComboBox();
