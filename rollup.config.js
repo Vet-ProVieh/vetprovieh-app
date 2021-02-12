@@ -8,7 +8,8 @@ const {
 const {
     injectManifest
 } = require('rollup-plugin-workbox');
-import copy from 'rollup-plugin-copy'
+import copy from 'rollup-plugin-copy';
+import replace from '@rollup/plugin-replace';
 import typescript from 'rollup-plugin-typescript';
 
 
@@ -56,6 +57,9 @@ export default {
 
         ), // converts date-fns to ES modules
         production && terser(), // minify, but only in production
+        replace({
+            'process.env.NODE_ENV': '"development"',
+          }),
         copy({ // Copy HTML-Pages to Public Folder
             targets: targets.concat([{
                     src: 'src/assets/*',

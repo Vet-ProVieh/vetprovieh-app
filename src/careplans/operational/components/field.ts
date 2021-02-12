@@ -16,8 +16,15 @@ export class VpOperationField extends ElementBinding {
     get template(): string {
         if (this.object) {
             return super.template + `
-                <label class="label">{{name}}</label>` +
-                InputFactory.generateField(this.object.fieldType, this.object);
+            <div class="field is-horizontal" style="margin-top:5px; margin-bottom:5px">
+                <div class="field-label">
+                    <label class="label">{{name}}</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">` +
+                InputFactory.generateField(this.object.fieldType, this.object) + 
+                `   </div>
+                </div>`;
 
         } else {
             return '';
