@@ -156,6 +156,8 @@ export class RecordingModal extends VetproviehElement {
         })
 
         let closeFuncTakeover = () => {
+            this._content = this.recorder?.getBlob() || null;
+            this.recordedContent = this._content;
             this.close(true);
         }
         closeFuncTakeover.bind(this);
@@ -166,22 +168,36 @@ export class RecordingModal extends VetproviehElement {
     private addImageButtons() {
         let b = this.getByIdFromShadowRoot("takeSnapshotButton") as HTMLButtonElement;
         let takeSnapshot = () => {
-            this.snapshot();
-            this.close(true);
+            this.snapshot().then(() => {
+
+                this.close(true);
+            })
         }
         takeSnapshot.bind(this);
         b.addEventListener("click", takeSnapshot)
     }
 
-    private snapshot() {
-        var canvas = document.createElement('canvas');
-        canvas.width = 640;
-        canvas.height = 480;
-        var ctx = canvas.getContext('2d');
-        if (ctx) {
-            ctx.drawImage(this.mediaElement, 0, 0, canvas.width, canvas.height);
-            this.recordedContent = canvas.toDataURL('image/png');
-        }
+    private snapshot(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            var canvas = document.createElement('canvas');
+            canvas.width = 640;
+            canvas.height = 480;
+            var ctx = canvas.getContext('2d');
+            if (ctx) {
+                ctx.drawImage(this.mediaElement, 0, 0, canvas.width, canvas.height);
+                this.recordedContent = canvas.toDataURL('image/png');
+                canvas.toBlob((blob: Blob | null) => {
+                    this._content = blob;
+                    resolve();
+                })
+            }
+        })
+    }
+
+    private _content: Blob | null = null;
+
+    public loadContent(): Blob | null {
+        return this._content;
     }
 
     /**

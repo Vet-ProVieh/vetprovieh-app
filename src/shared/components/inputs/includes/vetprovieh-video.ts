@@ -1,4 +1,6 @@
 import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { Document } from "../../../../documents/models/document";
+import { DocumentRepository } from "../../../../documents/repository/documentRepository";
 import { RecordingModal } from './recording-modal';
 
 @WebComponent({
@@ -20,6 +22,7 @@ export class VetproviehVideo extends VetproviehElement {
     private _type: string = "video";
     private _name: string = "";
     private _thumbnail: string | undefined;
+    private _repository: DocumentRepository = new DocumentRepository();
 
     constructor() {
         super(true, false);
@@ -70,6 +73,18 @@ export class VetproviehVideo extends VetproviehElement {
 
     }
 
+    private sendToServer() {
+        let document = new Document();
+        document.barnId = 1;
+        document.content = this.recordingModal.loadContent();
+        document.name = "testfile";
+        this._repository.create(document).then((r) => {
+            this._thumbnail = `/service/upload/uploadFile/${document.id}`;
+
+            this.renderContentBox();
+        });
+    }
+
     private attachListener() {
         let button = this.getByIdFromShadowRoot("openButton") as HTMLButtonElement;
         let clickFunction = () => {
@@ -82,13 +97,18 @@ export class VetproviehVideo extends VetproviehElement {
         let modalCloseFunction = (event:any) => {
             if(event.detail.takeover) {
                 this._thumbnail = event.detail.content;
-
-                let contentBox = this.getByIdFromShadowRoot("content")
-                if(contentBox) contentBox.innerHTML = this.content;
+                this.sendToServer();
+                this.renderContentBox();
             }
         }
         modalCloseFunction.bind(this);
         this.recordingModal.addEventListener("change", modalCloseFunction);
+    }
+
+
+    private renderContentBox() {
+        let contentBox = this.getByIdFromShadowRoot("content")
+        if(contentBox) contentBox.innerHTML = this.content;
     }
 
     /**
@@ -97,7 +117,11 @@ export class VetproviehVideo extends VetproviehElement {
      */
     protected get content(): string {
         if (this.thumbnail) {
-            return `<img src="${this.thumbnail}" alt="Vorschaubild">`;
+            if(this.type == "image"){
+                return `<img src="${this.thumbnail}" alt="Vorschaubild">`;
+            } else {
+                return `<video controls> <source src="${this.thumbnail}" type="video/mp4> </video>`;
+            }
         } else {
             return "<p>Es wurde noch nichts aufgenommen.</p>";
         }

@@ -51,7 +51,9 @@ export default {
     },
     plugins: [
         typescript(),
-        resolve(), // tells Rollup how to find date-fns in node_modules
+        resolve({
+            browser: true
+        }), // tells Rollup how to find date-fns in node_modules
         commonjs(
 
 

@@ -12,4 +12,3 @@ export * as Barns from '../barns';
 export * as Careplans from '../careplans';
 export * as Users from '../users';
 export * as Tenants from '../admin/tenants';
-

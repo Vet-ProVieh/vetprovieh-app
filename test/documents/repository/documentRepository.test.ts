@@ -1,5 +1,5 @@
 
-import { DocumentRepository } from '../../../src/documents';
+import { Document, DocumentRepository } from '../../../src/documents';
 
 describe('generate UUID', () => {
     let regex = new RegExp(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
