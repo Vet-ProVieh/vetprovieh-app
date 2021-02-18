@@ -2,23 +2,70 @@
 <html lang="de" dir="ltr">
 
 <!-- Header -->
+
 <head>
-    <meta charset="utf-8">
-    <title>vetprovieh</title>
-    <link rel="manifest" href="/manifest.json">
-    <!--#include file="/includes/stylesheets.html"-->
+  <meta charset="utf-8">
+  <title>vetprovieh</title>
+  <link rel="manifest" href="/manifest.json">
+  <!--#include file="/includes/stylesheets.html"-->
 </head>
 
 <!-- Layout-Container -->
 
 <body>
   <vetprovieh-layout title="Vetprovieh::Dashboard">
-    <h1>Test</h1>
-
+    <div class="tile is-ancestor">
+      <div class="tile is-vertical is-8">
+        <div class="tile is-parent">
+          <article class="tile is-child box">
+            <p class="title">Meine letzten Behandlungen</p>
+            <div class="content">
+              <vetprovieh-operation-plans>
+                <vetprovieh-list pagesize="10" searchable="false" pageable=false">
+                  <template>
+                    <div>
+                      <a href="show.html?id={{id}}" is="local-store">
+                        <strong>{{name}}</strong>
+                      </a><br />
+                    </div>
+                    <hr />
+                  </template>
+                </vetprovieh-list>
+              </vetprovieh-operation-plans>
+            </div>
+          </article>
+        </div>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <div class="content">
+            <p class="title">Ställe in der Umgebung</p>
+            <div class="content">
+              <vp-select-barn pagesize="10" searchable="false" pageable=false">
+                <template>
+                  <div style="margin-bottom: 1em">
+                    <a href="/barns/show.html?id={{id}}">
+                      <strong>{{name}} </strong>
+                    </a>
+                    <p style="font-size:0.9em;">
+                      <span class="tag is-pulled-right is-primary">{{distance}} KM</span>
+                      <strong>VVVO:</strong> {{vvvoNumber}}<br />
+                      <strong>Landwirt:</strong> {{farmer.name}} ({{farmer.contactPerson.firstName}}
+                      {{farmer.contactPerson.lastName}})<br />
+                      <strong>Letzter Besuch:</strong> {{lastVisit}}
+                    </p>
+                  </div>
+                </template>
+              </vp-select-barn>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
   </vetprovieh-layout>
 </body>
 
- <!--#include file="/includes/scripts.html"-->
+<!--#include file="/includes/scripts.html"-->
 
 
 </html>

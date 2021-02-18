@@ -23,6 +23,9 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
           <vetprovieh-sidemenu id="left-menu" width="300px">
           <aside class="menu">
               <profile-widget></profile-widget>
+              <ul class="menu-list">
+                  <li><a href="/index.html">Dashboard</a></li>
+              </ul>
               <p class="menu-label">
                   Behandlung
               </p>
@@ -30,7 +33,7 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
                   <li><a href="/careplans/operational/1_selectBarn.html">Neue Behandlung</a></li>
                   <li><a href="/careplans/operational">Behandlungen</a></li>
               </ul>
-              
+              <!--
               <p class="menu-label">
                   Persönliche Einstellungen
               </p>
@@ -38,6 +41,7 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
                   <li><a href="#">Benachrichtigungen</a></li>
                   <li><a href="#">Termine</a></li>
               </ul>
+              -->
           
               <p class="menu-label">
                 Meine Stammdaten

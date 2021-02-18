@@ -14,17 +14,30 @@
 
 <body>
     <vetprovieh-layout title="1. Stall auswählen">
-        <h1>1. Stall auswählen</h1>
-        <p>Damit Sie eine Bahnldung erstellen können, wählen Sie zunächst ihren Stall aus. Die GPS-Suche ist automatisch aktiv
-            und lässt sich durch den Button mit dem Globus deaktivieren.
-        </p>
+        <h1 class="title">
+            <p>
+                1. Stall auswählen
+            </p>
+        </h1>
+        <div class="content">
+            <p>
+                Damit Sie eine Behandlung erstellen können, wählen Sie zunächst ihren Stall aus. Die GPS-Suche ist
+                automatisch aktiv und lässt sich durch den Button mit dem Globus deaktivieren.
+            </p>
+        </div>
         <vp-select-barn pagesize="20">
             <template>
                 <div>
                     <a href="2_selectCareplan.html?barn_id={{id}}&animal={{animal}}">
-                        <strong>{{name}} ({{address.city}})</strong>
-                        <span class="tag is-primary">{{distance}} KM</span>
-                    </a><br />
+                        <strong>{{name}} </strong>
+                    </a>
+                    <p style="font-size:0.9em;">
+                        <span class="tag is-pulled-right is-primary">{{distance}} KM</span>
+                        <strong>VVVO:</strong> {{vvvoNumber}}<br />
+                        <strong>Landwirt:</strong> {{farmer.name}} ({{farmer.contactPerson.firstName}}
+                        {{farmer.contactPerson.lastName}})<br />
+                        <strong>Letzter Besuch:</strong> {{lastVisit}}
+                    </p>
                 </div>
                 <hr />
             </template>

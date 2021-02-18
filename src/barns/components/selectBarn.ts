@@ -82,7 +82,7 @@ export class SelectBarn extends VetproviehBasicList {
             if (!forceReload && currentDistance >= 0) {
                 (barn as any).distance = Math.round(currentDistance / 10.00) / 100.00;
                 return currentDistance;
-            } else if (barn.gpsCoordinates){
+            } else if (barn.gpsCoordinates) {
                 const distance = GeoHelper.calculateDistance(
                     barn.gpsCoordinates.latitude,
                     barn.gpsCoordinates.longitude,
