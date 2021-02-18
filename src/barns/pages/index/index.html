@@ -25,9 +25,13 @@
                         <a href="/barns/show.html?id={{id}}">
                             <strong>{{name}}</strong>
                         </a><br />
-                        <span>VVVO: {{vvvoNumber}}</span><br />
-                        <span>{{address.streetName}} {{address.streetNumber}}, {{address.postalCode}}
-                            {{address.city}}</span>
+                        <p style="font-size:0.9em;">
+                            <strong>VVVO:</strong> {{vvvoNumber}}<br />
+                            <strong>Adresse:</strong>{{address.streetName}} {{address.streetNumber}}, {{address.postalCode}}
+                            {{address.city}} <br/>
+                            <strong>Landwirt:</strong> {{farmer.name}} ({{farmer.contactPerson.firstName}}
+                            {{farmer.contactPerson.lastName}})<br />
+                        </p>
                     </div>
                     <hr />
                 </template>

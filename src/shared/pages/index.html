@@ -23,12 +23,13 @@
               <vetprovieh-operation-plans>
                 <vetprovieh-list pagesize="10" searchable="false" pageable=false">
                   <template>
-                    <div>
+                    <div style="margin-bottom: 1em">
                       <a href="show.html?id={{id}}" is="local-store">
                         <strong>{{name}}</strong>
-                      </a><br />
+                      </a>
+                      <span class="tag is-pulled-right is-primary">{{updatedAt}}</span>
+                      <barn-list-show barnid="{{barnId}}"></barn-list-show>
                     </div>
-                    <hr />
                   </template>
                 </vetprovieh-list>
               </vetprovieh-operation-plans>

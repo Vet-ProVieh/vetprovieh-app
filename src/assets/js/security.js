@@ -13,10 +13,8 @@ window.fetch = function () {
     setTimeout(() => {
 
       keycloakHelper.onAuthSuccess = function () {
-        console.log("auth success");
         var args = keycloakHelper.attachToken(_args);
         let request = new Request(args[0], args[1])
-        console.log(args);
         proxied(request).then(resolve).catch(reject);
       };
     }, keycloakHelper.authenticated ? 0 : 500);

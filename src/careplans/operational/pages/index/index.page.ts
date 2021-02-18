@@ -1,4 +1,4 @@
-import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { OperationPlan } from "../../models";
 import { OperationPlansRepository } from "../../repository/plans_repository";
 import { BasicIndexPage } from "../../../../shared";
@@ -10,5 +10,15 @@ import { BasicIndexPage } from "../../../../shared";
 export class OpertionPlanIndexPage extends BasicIndexPage<OperationPlan> {
     constructor() {
         super(new OperationPlansRepository());
+    }
+
+
+    connectedCallback() {
+        super.connectedCallback();
+
+        let barnId = VetproviehNavParams.getUrlParameter("barn_id");
+        if (barnId) {
+            this.searchByParams({ "barnId": barnId });
+        }
     }
 }

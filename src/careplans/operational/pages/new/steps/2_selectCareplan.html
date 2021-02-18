@@ -14,29 +14,37 @@
 
 <body>
     <vetprovieh-layout title="2. Behandlung auswählen">
-        <h1 class="title">
-            <p>
-                2. Behandlung auswählen
-            </p>
-        </h1>
+        <select-careplans-page>
+            <h1 class="title">
+                <p>
+                    2. Behandlung auswählen
+                </p>
+            </h1>
 
-        <div class="content">
-            <p>
-                Für Ihren ausgewählten Stall wurden folgende Behandlungspläne gefunden zum Ausfüllen. Bitte wählen
-                Sie einen Behandlungsplan aus.
-            </p>
-        </div>
+            <div class="content">
+                <p>
+                    Sie haben folgenden Stall ausgewählt, um eine Behandlung durchzuführen:
+                </p>
+                <p>
+                    <barn-list-show id="barnShower"></barn-list-show>
+                </p>
+                <p>
+                    Für Ihren ausgewählten Stall wurden folgende Behandlungspläne gefunden zum Ausfüllen. Bitte wählen
+                    Sie einen Behandlungsplan aus.
+                </p>
+            </div>
 
-        <select-careplan id="careplanSelect" pagesize="20">
-            <template>
-                <div>
-                    <a href="new.html" is="local-store">
-                        <strong>{{name}}</strong>
-                    </a><br />
-                </div>
-                <hr />
-            </template>
-        </select-careplan>
+            <select-careplan id="careplanSelect" pagesize="20">
+                <template>
+                    <div>
+                        <a href="new.html" is="local-store">
+                            <strong>{{name}}</strong>
+                        </a><br />
+                    </div>
+                    <hr />
+                </template>
+            </select-careplan>
+        </select-careplans-page>
     </vetprovieh-layout>
 </body>
 
