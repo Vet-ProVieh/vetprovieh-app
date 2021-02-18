@@ -35,7 +35,7 @@ export class DocumentRepository extends BaseRepository<Document>{
         let formData = new FormData();
         formData.append("barnId", (document.barnId as number).toString());
         if (document.content) formData.append("file", document.content);
-        formData.append("filenName", document.name as string);
+        formData.append("fileName", document.name as string);
         formData.append("id", document.id as string);
         return formData;
     }

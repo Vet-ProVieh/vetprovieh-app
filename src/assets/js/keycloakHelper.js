@@ -48,6 +48,7 @@ class KeycloakHelper {
         instance.login({
           scope: 'openid offline_access',
         });
+        
       }
     }).catch(function (error) {
       console.log(error);
@@ -131,6 +132,7 @@ class KeycloakHelper {
   storeTokens() {
     console.log("Storing Tokens");
     localStorage.setItem("kc_token", this.instance.token);
+    localStorage.setItem("kc_token_parsed", JSON.stringify(this.instance.tokenParsed));
     localStorage.setItem("kc_refreshToken", this.instance.refreshToken);
   }
 }

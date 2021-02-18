@@ -25,6 +25,16 @@ export class UserRepository extends BaseRepository<User> {
     }
 
     /**
+     * Check if User is in a specific Role
+     * Uses Keycloak JWT-Token to answer
+     * @param {string} name 
+     * @return {boolean}
+     */
+    public isInRole(name: string) : boolean {
+        return this.roles.indexOf(name)  >= 0
+    }
+
+    /**
      * Load User from Service
      * @return {Promise<User>}
      */
@@ -53,5 +63,27 @@ export class UserRepository extends BaseRepository<User> {
      */
     public logout(): void {
         this.keycloakHelper.logout();
+    }
+
+    /**
+     * Gettings Roles from JWT
+     * @return {string[]}
+     */
+    private get roles() : string[] {
+        let token = this.jwtToken;
+        if(token) {
+            token = JSON.parse(token);
+            return token.realm_access.roles;
+        } else {
+            return [];
+        }
+    }
+
+    /**
+     * Getting Stored JWT Token
+     * @return {any}
+     */
+    private get jwtToken(): any {
+        return localStorage.getItem("kc_token_parsed");
     }
 }

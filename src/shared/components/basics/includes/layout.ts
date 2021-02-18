@@ -5,7 +5,7 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
  */
 @WebComponent({
   tag: "vetprovieh-layout",
-  template: ` <div id="pageloader" 
+  template: `<div id="pageloader" 
       class="pageloader is-active has-background-vetprovieh-light-blue">
             <span class="title">Ihre Daten werden geladen...</span>
           </div>
@@ -46,21 +46,26 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
                   <li><a href="/farmers">Landwirte</a></li>
                   <li><a href="/barns">Ställe</a></li>
               </ul>
-              <p class="menu-label">
-                Meine Praxis
-              </p>
-              <ul class="menu-list">
-                  <li><a href="/settings/surgery">Basisdaten</a></li>
-                  <li><a href="/users">Mitarbeiter</a></li>
-                  <li><a href="/settings/careplans">Behandlungspläne</a></li>
-              </ul>
-              <p class="menu-label">
-                Administration
-              </p>
-              <ul class="menu-list">
-                <li><a href="/admin/tenants/requests.html">Tenant-Requests</a></li>
-                <li><a href="/admin/tenants">Tenants</a></li>
-              </ul>
+              <div is="div-access" roles="admin">
+                <p class="menu-label" style="margin-top: 1em;">
+                  Meine Praxis
+                </p>
+                <ul class="menu-list">
+                    <li><a href="/settings/surgery">Basisdaten</a></li>
+                    <li><a href="/users">Mitarbeiter</a></li>
+                    <li><a href="/settings/careplans">Behandlungspläne</a></li>
+                </ul>
+              </div>
+
+              <div is="div-access" roles="global-admin">
+                <p class="menu-label" style="margin-top: 1em;">
+                  Administration
+                </p>
+                <ul class="menu-list">
+                  <li><a href="/admin/tenants/requests.html">Tenant-Requests</a></li>
+                  <li><a href="/admin/tenants">Tenants</a></li>
+                </ul>
+              </div>
               
           </aside>
           </vetprovieh-sidemenu>
