@@ -1,16 +1,28 @@
-<article class="panel is-primary">
-    <p class="panel-heading">
-        Ihr Prozess
-    </p>
-    <div class="panel-block">
-        <process-menu id="processMenu">
-        </process-menu>
-    </div>
-    <div class="panel-block">
-        
-    </div>
-</article>
+<div id="processMenuDiv" class="is-hidden-mobile">
+    <article class="panel">
+        <p id="closeButton" class="panel-heading" style="cursor: pointer;">
+            Aktueller Stall <span class="is-hidden-tablet"><i class="fas fa-arrow-circle-right"></i></span>
+        </p>
+        <div class="panel-block">
+            <barn-list-show barnid="{{barnId}}"></barn-list-show>
+        </div>
+    </article>
 
-<script>
+    <article class="panel">
+        <p class="panel-heading">
+            Ihr Prozess
+        </p>
+        <div class="panel-block">
+            <process-menu id="processMenu">
+            </process-menu>
+        </div>
+    </article>
+</div>
 
-</script>
+<div id="processMenuPlaceholder" class="is-hidden-tablet">
+    <article class="panel">
+        <p id="openButton" class="panel-heading" style="cursor: pointer;">
+            <i class="fas fa-arrow-circle-left"></i>
+        </p>
+    </article>
+</div>

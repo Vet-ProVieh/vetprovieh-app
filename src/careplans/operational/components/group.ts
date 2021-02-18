@@ -6,9 +6,9 @@ import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
  * Pager OperationGroup
  */
 @WebComponent({
-    template: `<div id="group" class="panel">
+    template: `<div id="group" class="panel is-primary">
                     <p class="panel-heading">
-                        {{name}}
+                       {{position}}. {{name}}
                     </p>
                     <div id="fields" class="panel-block" style="display:block">
                     

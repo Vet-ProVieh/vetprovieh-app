@@ -139,7 +139,52 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         if (processMenu) {
             processMenu.objects = this.currentObject.opGroups;
             processMenu.activateElement(this.groupIdParam);
+            this.registerResponsiveButtons();
         }
     }
 
+
+    private registerResponsiveButtons() {
+        
+        let openFunc = () => {
+            this.processMenuDiv.classList.remove("is-hidden-mobile");
+            this.processMenuPlaceholder.classList.add("is-hidden-mobile");
+            this.mainCol.classList.remove("is-11-mobile");
+            this.mainCol.classList.add("is-3-mobile");
+        };
+        openFunc.bind(this);
+        this.openButton.addEventListener("click", openFunc);
+        
+        let closeFunc = () => {
+            this.processMenuDiv.classList.add("is-hidden-mobile");
+            this.processMenuPlaceholder.classList.remove("is-hidden-mobile");
+            this.mainCol.classList.add("is-11-mobile");
+            this.mainCol.classList.remove("is-3-mobile");
+        };
+        closeFunc.bind(this);
+        this.closeButton.addEventListener("click", closeFunc);
+    }
+
+    private get openButton() : HTMLElement {
+        return this.getByIdFromShadowRoot("openButton") as HTMLElement;
+    }
+    
+
+    private get closeButton() : HTMLElement {
+        return this.getByIdFromShadowRoot("closeButton") as HTMLElement;
+    }
+    
+    
+
+    private get mainCol() : HTMLElement{
+        return this.getByIdFromShadowRoot("mainCol") as HTMLElement;
+    }
+
+    private get processMenuDiv() : HTMLElement{
+        return this.getByIdFromShadowRoot("processMenuDiv") as HTMLElement;
+    }
+    
+    private get processMenuPlaceholder() : HTMLElement{
+        return this.getByIdFromShadowRoot("processMenuPlaceholder") as HTMLElement;
+    }
 }
