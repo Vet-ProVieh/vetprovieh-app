@@ -23,16 +23,46 @@ export class VetproviehVideo extends VetproviehElement {
     private _name: string = "";
     private _thumbnail: string | undefined;
     private _repository: DocumentRepository = new DocumentRepository();
+    private _value: string | undefined;
 
     constructor() {
         super(true, false);
     }
 
 
+    /**
+     * Getter value
+     * @return {string | undefined}
+     */
+    public get value(): string | undefined {
+        return this._value;
+    }
+
+    /**
+     * Setter value
+     * @param {string | undefined} v
+     */
+    public set value(v: string | undefined) {
+        if (this._value !== v && v !== undefined) {
+            this._value = v;
+            this._thumbnail = v;
+            this.renderContentBox();
+            this.dispatchEvent(new Event("change"));
+        }
+    }
+
+    /**
+     * Getter name
+     * @return {string}
+     */
     public get name(): string {
         return this._name;
     }
-    
+
+    /**
+     * Setter name 
+     * @param {string} v
+     */
     public set name(v: string) {
         if (this._name !== v) {
             this._name = v;
@@ -78,10 +108,9 @@ export class VetproviehVideo extends VetproviehElement {
         document.barnId = 1;
         document.content = this.recordingModal.loadContent();
         document.name = "testfile";
-        this._repository.create(document).then((r) => {
-            this._thumbnail = `/service/upload/uploadFile/${document.id}`;
-
-            this.renderContentBox();
+        this._repository.create(document).then((url) => {
+            console.log("Setting value");
+            this.value = url;
         });
     }
 
@@ -94,11 +123,10 @@ export class VetproviehVideo extends VetproviehElement {
         clickFunction.bind(this);
         button.addEventListener("click", clickFunction);
 
-        let modalCloseFunction = (event:any) => {
-            if(event.detail.takeover) {
-                this._thumbnail = event.detail.content;
+        let modalCloseFunction = (event: any) => {
+            if (event.detail.takeover) {
+                //this._thumbnail = event.detail.content;
                 this.sendToServer();
-                this.renderContentBox();
             }
         }
         modalCloseFunction.bind(this);
@@ -108,7 +136,7 @@ export class VetproviehVideo extends VetproviehElement {
 
     private renderContentBox() {
         let contentBox = this.getByIdFromShadowRoot("content")
-        if(contentBox) contentBox.innerHTML = this.content;
+        if (contentBox) contentBox.innerHTML = this.content;
     }
 
     /**
@@ -117,10 +145,10 @@ export class VetproviehVideo extends VetproviehElement {
      */
     protected get content(): string {
         if (this.thumbnail) {
-            if(this.type == "image"){
+            if (this.type == "image") {
                 return `<img src="${this.thumbnail}" alt="Vorschaubild">`;
             } else {
-                return `<video controls> <source src="${this.thumbnail}" type="video/mp4> </video>`;
+                return `<video controls> <source src="${this.thumbnail}" type="video/webm;codecs=vp8,opus"></source </video>`;
             }
         } else {
             return "<p>Es wurde noch nichts aufgenommen.</p>";
@@ -151,7 +179,7 @@ export class VetproviehVideo extends VetproviehElement {
      * Observed Attributes
      */
     static get observedAttributes() {
-        return ['type', 'name'];
+        return ['type', 'name', 'value'];
     }
 
     /**

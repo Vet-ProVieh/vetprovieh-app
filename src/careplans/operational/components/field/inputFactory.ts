@@ -106,7 +106,7 @@ export class InputFactory {
      * @param {any} options 
      */
     private static buildVideo(options: any): string {
-        return `<vetprovieh-video ${this.genTag("name", options.name)}></vetprovieh-video>`;
+        return `<vetprovieh-video ${this.genTag("property", "value")} ${this.genTag("name", options.name)}></vetprovieh-video>`;
     }
 
     /**
@@ -125,6 +125,7 @@ export class InputFactory {
      */
     private static buildImage(options: any): string {
         return `<vetprovieh-video ` +
+            this.genTag("property", "value") +
             this.genTag("type", "image") +
             this.genTag("name", options.name) +
             `></vetprovieh-video>`;

@@ -19,18 +19,18 @@ import { ProcessMenu } from "./process-menu";
         </div>
         <hr/>
         <div class="container">
-        <div class="columns">
-            <div class="column">
-                <input id="abortButton" 
-                        class="button is-danger is-fullwidth" 
-                        type="reset" value="Abbrechen">                   
+            <div class="columns is-mobile">
+                <div class="column">
+                    <input id="abortButton" 
+                            class="button is-danger is-fullwidth" 
+                            type="reset" value="Abbrechen">                   
+                </div>
+                <div class="column">
+                    <input id="saveButton" 
+                            class="button is-success is-fullwidth" 
+                            type="button" value="Speichern">
+                </div>
             </div>
-            <div class="column">
-                <input id="saveButton" 
-                        class="button is-success is-fullwidth" 
-                        type="button" value="Speichern">
-            </div>
-        </div>
         </div>
     </form>
     `,
@@ -48,9 +48,8 @@ export class VpOperationPlan extends VetproviehBasicDetail {
 
 
     render() {
-        if (!this._fetched){
+        if (!this._fetched) {
             super.render();
-            this._attachListenerToButtons();
         }
     }
 
@@ -88,7 +87,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
     protected get _storeKey(): string {
         let url = super._storeKey;
         return `${url}?barn_id=${VetproviehNavParams.getUrlParameter("barn_id")}`;
-      }
+    }
 
     /**
      * Overwriteable Callback
@@ -97,7 +96,11 @@ export class VpOperationPlan extends VetproviehBasicDetail {
      */
     _afterFetch(data: any) {
         this._fetched = true;
-        this.currentObject.barnId = parseInt(VetproviehNavParams.getUrlParameter("barn_id"));
+        let barnUrlId = VetproviehNavParams.getUrlParameter("barn_id");
+        console.log("Setting barnid")
+        if (barnUrlId != null && barnUrlId != undefined) {
+            this.currentObject.barnId = parseInt(barnUrlId);
+        }
         this._setGroupComponent();
         setTimeout(() => this._setNavigation(), 500);
     }
@@ -112,24 +115,30 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         return currentUrl.toString();
     }
 
-     /**
-     * Attaching Listener to Save and Abort Button
-     * @private
-     */
-  _attachListenerToButtons() {
-    const save = this.getByIdFromShadowRoot('saveButton') as HTMLElement;
-    const abort = this.getByIdFromShadowRoot('abortButton') as HTMLElement;
-    save.addEventListener('click', () => {
-        console.log("SAVE");
-        this.save()
-    });
-    abort.addEventListener('click', () => {
-      console.log("cancel");
-      // Destroy Cached local Data
-      VetproviehNavParams.delete(window.location.href);
-      window.history.back()
-    });
-  }
+    /**
+    * Attaching Listener to Save and Abort Button
+    * @private
+    */
+    _attachListenerToButtons() {
+        console.log("Plan: Listener to Button");
+        const saveButton = this.getByIdFromShadowRoot('saveButton') as HTMLElement;
+        const abort = this.getByIdFromShadowRoot('abortButton') as HTMLElement;
+
+        saveButton.addEventListener('click', () => {
+            this.save()
+        });
+        abort.addEventListener('click', () => {
+            console.log("cancel");
+            // Destroy Cached local Data
+            VetproviehNavParams.delete(window.location.href);
+            window.history.back()
+        });
+    }
+
+    save() {
+        console.log("Saving");
+        super.save();
+    }
 
     /**
      * Setting Process-Menu Items and activate current Element
@@ -145,7 +154,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
 
 
     private registerResponsiveButtons() {
-        
+
         let openFunc = () => {
             this.processMenuDiv.classList.remove("is-hidden-mobile");
             this.processMenuPlaceholder.classList.add("is-hidden-mobile");
@@ -154,7 +163,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         };
         openFunc.bind(this);
         this.openButton.addEventListener("click", openFunc);
-        
+
         let closeFunc = () => {
             this.processMenuDiv.classList.add("is-hidden-mobile");
             this.processMenuPlaceholder.classList.remove("is-hidden-mobile");
@@ -165,26 +174,26 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         this.closeButton.addEventListener("click", closeFunc);
     }
 
-    private get openButton() : HTMLElement {
+    private get openButton(): HTMLElement {
         return this.getByIdFromShadowRoot("openButton") as HTMLElement;
     }
-    
 
-    private get closeButton() : HTMLElement {
+
+    private get closeButton(): HTMLElement {
         return this.getByIdFromShadowRoot("closeButton") as HTMLElement;
     }
-    
-    
 
-    private get mainCol() : HTMLElement{
+
+
+    private get mainCol(): HTMLElement {
         return this.getByIdFromShadowRoot("mainCol") as HTMLElement;
     }
 
-    private get processMenuDiv() : HTMLElement{
+    private get processMenuDiv(): HTMLElement {
         return this.getByIdFromShadowRoot("processMenuDiv") as HTMLElement;
     }
-    
-    private get processMenuPlaceholder() : HTMLElement{
+
+    private get processMenuPlaceholder(): HTMLElement {
         return this.getByIdFromShadowRoot("processMenuPlaceholder") as HTMLElement;
     }
 }

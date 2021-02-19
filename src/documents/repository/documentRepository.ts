@@ -9,7 +9,7 @@ export class DocumentRepository extends BaseRepository<Document>{
         super("/service/upload/uploadFile");
     }
 
-    create(document: Document): Promise<boolean> {
+    create(document: Document): Promise<any> {
         return new Promise((resolve, reject) => {
             if (document.id == undefined) {
                 document.id = DocumentRepository.generateUUID();
@@ -20,7 +20,11 @@ export class DocumentRepository extends BaseRepository<Document>{
 
                     },
                     body: requestData
-                }).then((response) => resolve(true))
+                }).then((response) => {
+                    let location = response.headers.get("location") || "";
+                    location = location?.substr(location.lastIndexOf("/") + 1);
+                    resolve(`/service/upload/uploadFile/${location}`);
+                })
                     .catch((e) => reject(false))
             }
         })
