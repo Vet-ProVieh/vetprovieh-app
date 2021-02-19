@@ -13,7 +13,6 @@ import RecordRTC from "recordrtc";
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-           
             <video id="media" width="600" height="400">
             </video>
         </section>

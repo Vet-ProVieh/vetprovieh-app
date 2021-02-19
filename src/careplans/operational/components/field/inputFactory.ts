@@ -106,7 +106,7 @@ export class InputFactory {
      * @param {any} options 
      */
     private static buildVideo(options: any): string {
-        return `<vetprovieh-video ${this.genTag("property", "value")} ${this.genTag("name", options.name)}></vetprovieh-video>`;
+        return `<vetprovieh-video ${this.genTag("barnid", options.barnId)} ${this.genTag("property", "value")} ${this.genTag("name", options.name)}></vetprovieh-video>`;
     }
 
     /**
@@ -124,11 +124,12 @@ export class InputFactory {
      * @param {any} options 
      */
     private static buildImage(options: any): string {
-        return `<vetprovieh-video ` +
+        return `<vetprovieh-image ` +
+            this.genTag("barnid", options.barnId) +
             this.genTag("property", "value") +
             this.genTag("type", "image") +
             this.genTag("name", options.name) +
-            `></vetprovieh-video>`;
+            `></vetprovieh-image>`;
     }
 
     /**

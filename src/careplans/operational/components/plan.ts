@@ -38,7 +38,7 @@ import { ProcessMenu } from "./process-menu";
 })
 export class VpOperationPlan extends VetproviehBasicDetail {
 
-    private _groupElement: VpOperationGroup = new VpOperationGroup();
+    private _groupElement: VpOperationGroup | undefined;
     private _fetched: boolean = false;
 
     constructor() {
@@ -75,6 +75,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
     _setGroupComponent() {
         if (this.currentObject.opGroups.length > this.groupIdParam) {
             console.log(`Setting Current-OperationGroup=${this.groupIdParam}`);
+            this._groupElement = new VpOperationGroup(this.currentObject.barnId as any);
             this._groupElement.object = this.currentObject.opGroups[this.groupIdParam];
             let detail = this.getByIdFromShadowRoot("group") as HTMLElement;
 

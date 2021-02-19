@@ -2,14 +2,18 @@ import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { VetproviehMedia } from "./vetprovieh-media";
 
 @WebComponent({
-    tag: "vetprovieh-video",
+    tag: "vetprovieh-image",
     template: VetproviehMedia.template
 })
-export class VetproviehVideo extends VetproviehMedia {
+export class VetproviehImage extends VetproviehMedia {
 
-    constructor() {
+    constructor(){
         super();
-        this.type = "video";
+        this.type = "image";
+    }
+
+    protected afterModalClose(event:any) {
+        this.thumbnail = event.detail.content;
     }
 
     /**
@@ -18,7 +22,7 @@ export class VetproviehVideo extends VetproviehMedia {
      */
     protected get content(): string {
         if (this.thumbnail) {
-            return `<video controls> <source src="${this.thumbnail}" type="video/webm;codecs=vp8,opus"></source </video>`;
+            return `<img width="200px" src="${this.thumbnail}" alt="Vorschaubild">`;
         } else {
             return super.content;
         }
@@ -29,7 +33,7 @@ export class VetproviehVideo extends VetproviehMedia {
      * @return {string}
      */
     protected get buttonname(): string {
-        return "Video";
+        return "Bild";
     }
 
     /**
@@ -39,12 +43,12 @@ export class VetproviehVideo extends VetproviehMedia {
         return ['type', 'name', 'value', 'barnid'];
     }
 
-
      /**
      * Generating a filename
      * @return {string}
      */
     protected generateFilename() : string {
-        return `${super.generateFilename()}.webm`;
+        return `${super.generateFilename()}.png`;
     }
+
 }

@@ -1,5 +1,5 @@
 import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { BasicIndexPage } from "../../../shared";
+import { BasicIndexPage } from "../../../shared/components/pages";
 import { Document } from "../../models";
 import { DocumentRepository } from "../../repository";
 

@@ -8,3 +8,4 @@ export { BulmaCheckbox } from './includes/blumaCheckbox';
 export { FieldWithLabel } from './includes/fieldWithLabel';
 export { RecordingModal} from './includes/recording-modal';
 export { VetproviehVideo } from './includes/vetprovieh-video';
+export { VetproviehImage } from './includes/vetprovieh-image';

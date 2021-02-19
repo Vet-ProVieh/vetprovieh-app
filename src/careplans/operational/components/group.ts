@@ -18,11 +18,12 @@ import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
 })
 export class VpOperationGroup extends ElementGroupBinding {
 
-    constructor() {
+    private barnId: string = "";
+
+    constructor(barnId: string){
         super();
+        this.barnId = barnId;
     }
-
-
 
     /**
    * Returns the subFields of the object
@@ -39,6 +40,6 @@ export class VpOperationGroup extends ElementGroupBinding {
      * @param type 
      */
     protected newElement(): ElementBinding {
-        return new VpOperationField();
+        return new VpOperationField(this.barnId);
     }
 }
