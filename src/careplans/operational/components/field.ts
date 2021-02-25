@@ -32,7 +32,9 @@ export class VpOperationField extends ElementBinding {
                     <div class="field">` +
                 InputFactory.generateField(this.object.fieldType, this.object) + 
                 `   </div>
-                </div>`;
+                </div>
+            </div>
+            <hr/>`;
 
         } else {
             return '';

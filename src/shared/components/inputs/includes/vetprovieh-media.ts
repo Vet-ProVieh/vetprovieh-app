@@ -25,8 +25,10 @@ export class VetproviehMedia extends VetproviehElement {
             <div id="content" class="card-content">
                 \${this.content}
             </div>
-            <footer class="card-footer">
+            <footer class="card-footer" style="border-top: 0px">
+                <div class="field" style="width:100%">
                 \${this.openButton}
+                </div>
             </footer>
         </div>
         <recording-\${this.type}-modal id="recordingModal" title="\${this.name}" active="false"></recording-modal>
@@ -159,7 +161,7 @@ export class VetproviehMedia extends VetproviehElement {
      * @return {string}
      */
     protected get openButton(): string {
-        return `<button id="openButton" class="button">${this.buttonname} aufnehmen</button>`
+        return `<button id="openButton" class="button is-pulled-right">${this.buttonname} aufnehmen</button>`
     }
 
       /**
