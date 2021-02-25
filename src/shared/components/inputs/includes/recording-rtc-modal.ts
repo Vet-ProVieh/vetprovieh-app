@@ -63,13 +63,24 @@ export class RecordingRtcModal extends RecordingModal {
         })
 
         let closeFuncTakeover = () => {
-            this._content = this.recorder?.getBlob() || null;
             this.recordedContent = this._content;
             this.close(true);
         }
         closeFuncTakeover.bind(this);
         this.takeoverButton.addEventListener("click", closeFuncTakeover);
 
+    }
+
+    protected reset() {
+        URL.revokeObjectURL(this.mediaElement.src);
+        this.mediaElement.src = "";
+        this.mediaElement.autoplay = true;
+        this.mediaElement.controls = false;
+        this._content = null;
+        this.recordedContent = null;
+        this.stopButton.classList.remove("is-hidden");
+        this.startButton.classList.remove("is-hidden");
+        this.takeoverButton.classList.add("is-hidden");
     }
 
     /**
@@ -96,8 +107,19 @@ export class RecordingRtcModal extends RecordingModal {
      * @param {RecordingModal} self
      */
     private stopRecording(self: RecordingRtcModal) {
-        self.recorder?.stopRecording();
-        self.mediaElement.srcObject = null;
+       
+        if(self.recorder){
+            self.recorder.stopRecording(() => {
+                // @ts-ignore
+                self._content = this.recorder.getBlob()
+                self.mediaElement.srcObject = null;
+                self.mediaElement.src = URL.createObjectURL(self._content);
+                self.mediaElement.controls = true;
+                self.mediaElement.autoplay = false;
+            });
+        } else {
+            self.mediaElement.srcObject = null;
+        }
         self.recording = false;
     }
 

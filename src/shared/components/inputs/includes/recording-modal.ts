@@ -92,6 +92,15 @@ export class RecordingModal extends VetproviehElement {
         });
         this.closeStreams();
         this.dispatchEvent(event);
+        this.reset();
+    }
+
+    /**
+     * Overwrite in Subclasses
+     * Resets Modal
+     */
+    protected reset() {
+        
     }
 
     private closeStreams() {
