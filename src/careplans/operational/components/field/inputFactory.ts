@@ -115,8 +115,12 @@ export class InputFactory {
      * @return {string}
      */
     private static buildSpeech(options: any) : string {
-        return `<vetprovieh-speech ` +
-                `></vetprovieh-speech>`
+        return `<vetprovieh-audio ` +
+                    this.genTag("barnid", options.barnId) +
+                    this.genTag("property", "value") +
+                    this.genTag("type", "audio") +
+                    this.genTag("name", options.name) +
+                `></vetprovieh-audio>`
     }
 
     /**

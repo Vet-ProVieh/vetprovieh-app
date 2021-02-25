@@ -1,11 +1,10 @@
 import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import RecordRTC from "recordrtc";
-import { RecordingModal } from "./recording-modal";
 import { RecordingRtcModal } from "./recording-rtc-modal";
 
 
 @WebComponent({
-    tag: "recording-video-modal",
+    tag: "recording-audio-modal",
     template: VetproviehElement.template + `
     <div id="modal" class="modal">
         <div class="modal-background"></div>
@@ -15,8 +14,8 @@ import { RecordingRtcModal } from "./recording-rtc-modal";
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <video style="object-fit: fill;" id="media">
-            </video>
+            <audio style="object-fit: fill;" id="media">
+            </audio>
         </section>
         <footer class="modal-card-foot"> 
             ${RecordingRtcModal.buttonsTemplate}
@@ -25,7 +24,7 @@ import { RecordingRtcModal } from "./recording-rtc-modal";
         </div>
     </div>`
 })
-export class RecordingVideoModal extends RecordingRtcModal {
+export class RecordingAudioModal extends RecordingRtcModal {
 
 
     /**
@@ -34,7 +33,8 @@ export class RecordingVideoModal extends RecordingRtcModal {
      */
     protected afterStreamStarted(stream: MediaStream){
         this.recorder = new RecordRTC(stream, {
-            type: 'video',
+            type: 'audio',
+            mimeType: 'audio/webm',
         });
     }
 
