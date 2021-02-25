@@ -5,6 +5,7 @@ import { WebComponent, VetproviehElement, VetproviehNavParams } from "@tomuench/
 import { OperationPlan } from "../models";
 import { ProcessMenu } from "./process-menu";
 import { VetproviehSidemenu } from "../../../app/main";
+import { BarnListShow } from "../../../barns";
 
 /**
  * Controller for Page
@@ -102,9 +103,15 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         console.log("Setting barnid")
         if (barnUrlId != null && barnUrlId != undefined) {
             this.currentObject.barnId = parseInt(barnUrlId);
+            this.shadowRoot?.querySelectorAll("barn-list-show").forEach((barnShow: any) => {
+                barnShow.barnid = barnUrlId;
+            })
+            this.rightMenu.shadowRoot?.querySelectorAll("barn-list-show").forEach((barnShow: any) => {
+                barnShow.barnid = barnUrlId;
+            })
         }
         this._setGroupComponent();
-        setTimeout(() => this._setNavigation(), 1000);
+        setTimeout(() => this._setNavigation(), 300);
     }
 
     _buildUrl(): string {
