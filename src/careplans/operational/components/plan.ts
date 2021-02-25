@@ -4,6 +4,7 @@ import { VpOperationGroup } from "./group";
 import { WebComponent, VetproviehElement, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
 import { OperationPlan } from "../models";
 import { ProcessMenu } from "./process-menu";
+import { VetproviehSidemenu } from "../../../app/main";
 
 /**
  * Controller for Page
@@ -145,56 +146,33 @@ export class VpOperationPlan extends VetproviehBasicDetail {
      * Setting Process-Menu Items and activate current Element
      */
     _setNavigation() {
-        let processMenu = this.getByIdFromShadowRoot("processMenu") as ProcessMenu;
-        if (processMenu) {
-            processMenu.objects = this.currentObject.opGroups;
-            processMenu.activateElement(this.groupIdParam);
-            this.registerResponsiveButtons();
-        }
+        let processMenu1 = this.getByIdFromShadowRoot("processMenu") as ProcessMenu;
+        let processMenu2 = this.rightMenu.getByIdFromShadowRoot("processMenu2") as ProcessMenu;
+        [processMenu1, processMenu2].forEach((processMenu) => {
+            if (processMenu) {
+                processMenu.objects = this.currentObject.opGroups;
+                processMenu.activateElement(this.groupIdParam);
+            }
+        });
+
+        this.registerResponsiveButtons();
     }
 
+    private get rightMenu(): VetproviehSidemenu {
+        return this.getByIdFromShadowRoot("right-menu") as VetproviehSidemenu;
+    }
 
     private registerResponsiveButtons() {
 
         let openFunc = () => {
-            this.processMenuDiv.classList.remove("is-hidden-mobile");
-            this.processMenuPlaceholder.classList.add("is-hidden-mobile");
-            this.mainCol.classList.remove("is-10-mobile");
-            this.mainCol.classList.add("is-3-mobile");
+            this.rightMenu.dispatchEvent(new Event('toggle'));
         };
         openFunc.bind(this);
         this.openButton.addEventListener("click", openFunc);
 
-        let closeFunc = () => {
-            this.processMenuDiv.classList.add("is-hidden-mobile");
-            this.processMenuPlaceholder.classList.remove("is-hidden-mobile");
-            this.mainCol.classList.add("is-10-mobile");
-            this.mainCol.classList.remove("is-3-mobile");
-        };
-        closeFunc.bind(this);
-        this.closeButton.addEventListener("click", closeFunc);
     }
 
     private get openButton(): HTMLElement {
         return this.getByIdFromShadowRoot("openButton") as HTMLElement;
-    }
-
-
-    private get closeButton(): HTMLElement {
-        return this.getByIdFromShadowRoot("closeButton") as HTMLElement;
-    }
-
-
-
-    private get mainCol(): HTMLElement {
-        return this.getByIdFromShadowRoot("mainCol") as HTMLElement;
-    }
-
-    private get processMenuDiv(): HTMLElement {
-        return this.getByIdFromShadowRoot("processMenuDiv") as HTMLElement;
-    }
-
-    private get processMenuPlaceholder(): HTMLElement {
-        return this.getByIdFromShadowRoot("processMenuPlaceholder") as HTMLElement;
     }
 }

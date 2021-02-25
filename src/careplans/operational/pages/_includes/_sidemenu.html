@@ -1,13 +1,12 @@
 <div id="processMenuDiv" class="is-hidden-mobile">
     <article class="panel">
-        <p id="closeButton" class="panel-heading" style="cursor: pointer;">
-            Aktueller Stall <span class="is-hidden-tablet"><i class="fas fa-arrow-circle-right"></i></span>
+        <p class="panel-heading" style="cursor: pointer;">
+            Aktueller Stall
         </p>
         <div class="panel-block">
             <barn-list-show barnid="{{barnId}}"></barn-list-show>
         </div>
     </article>
-
     <article class="panel">
         <p class="panel-heading">
             Ihr Prozess
@@ -19,12 +18,16 @@
     </article>
 </div>
 
-<div id="processMenuPlaceholder" class="is-hidden-tablet">
-    <article class="panel">
-        <p  class="panel-heading" style="cursor: pointer;">
-            <button id="openButton" class="button" type="button">
-                <i class="fas fa-arrow-circle-left"></i>
-            </button>
-        </p>
-    </article>
-</div>
+
+<vetprovieh-sidemenu id="right-menu" orientation="right" width="300px">
+    <p class="menu-label">
+        Aktueller Stall
+    </p>
+    <barn-list-show barnid="{{barnId}}"></barn-list-show>
+    
+    <p class="menu-label">
+        Behandlungsprozess
+    </p>
+    <process-menu id="processMenu2">
+    </process-menu>
+</vetprovieh-sidemenu>

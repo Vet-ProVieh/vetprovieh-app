@@ -82,7 +82,7 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
               <li><a href="#">Item 3</a></li>
           </ul>
           </vetprovieh-sidemenu> -->
-          <section class="section full-height">
+          <section class="section full-height" style="padding-top: 1rem">
           <div class="container">
             \${this._outsideInnerHtml}
           </div>
