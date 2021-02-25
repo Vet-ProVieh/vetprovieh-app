@@ -147,23 +147,30 @@ export class VoiceInput extends HTMLTextAreaElement {
      */
     _addVoiceInputButton() {
         let button: HTMLButtonElement = document.createElement("button");
-        button.textContent = "Aufnahme starten";
+        button.innerHTML = `<i class="fas fa-microphone-alt"/>`;
         button.type = "button";
+        button.classList.add("button");
         let _self = this;
 
         button.addEventListener("click", (e) => {
             _self._started = !_self._started;
-            button.textContent = "Aufnahme " + (_self._started ? "stoppen" : "starten");
             if (_self._started) {
-                _self._speechWrapper.speak("Aufnahme gestartet");
+                button.classList.add("is-primary");
                 _self._speechWrapper.start();
             } else {
-                _self._speechWrapper.speak("Aufnahme gestoppt");
+                button.classList.remove("is-primary");
                 _self._speechWrapper.stop();
             }
         })
 
-        this.parentElement?.appendChild(button);
+        let div = document.createElement("div");
+        div.classList.add("control");
+        div.appendChild(button);
+
+        let grandParent = this.parentElement?.parentElement;
+        this.parentElement?.classList.add("is-expanded");
+        grandParent?.classList.add("has-addons");
+        grandParent?.appendChild(div);
     }
 }
 
