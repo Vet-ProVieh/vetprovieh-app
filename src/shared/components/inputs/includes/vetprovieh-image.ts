@@ -22,11 +22,66 @@ export class VetproviehImage extends VetproviehMedia {
      */
     protected get content(): string {
         if (this.thumbnail) {
-            return `<img width="200px" src="${this.thumbnail}" alt="Vorschaubild">`;
+            return `<img id="thumb" style="cursor:pointer" width="200px" src="${this.thumbnail}" alt="Vorschaubild">
+            
+                    <div id="imageModal" class="modal">
+                        <div id="imageModalCloseBackground" class="modal-background"></div>
+                        <div class="modal-content">
+                            <p class="image is-4by3">
+                                ${this.modalContent}
+                            </p>
+                        </div>
+                    <button id="imageModalCloseButton" class="modal-close is-large" aria-label="close"></button>
+                    </div>`;
         } else {
             return super.content;
         }
     }
+
+    protected get modalContent(): string {
+        return `<img src="${this.thumbnail}" alt="Vorschaubild">`;
+    }
+
+    protected closeImageModal() {
+        let modal = this.getByIdFromShadowRoot("imageModal") as HTMLElement;
+        if(modal){
+            modal.classList.remove("is-active");
+        }
+    }
+
+     /**
+     * Rendering ContentBox again
+     */
+    protected renderContentBox() {
+        super.renderContentBox();
+        let img = this.getByIdFromShadowRoot("thumb") as HTMLImageElement;
+        if(img){
+            img.addEventListener("click", () => {
+                this.openImageModal();
+            })
+        }
+
+        let closeElements = [
+            this.getByIdFromShadowRoot("imageModalCloseButton"),
+            this.getByIdFromShadowRoot("imageModalCloseBackground")
+        ];
+        closeElements.forEach((e) => {
+            e?.addEventListener("click", () => {
+                this.closeImageModal();
+            })
+        })
+    }
+
+    /**
+     * Image Modal öffnen
+     */
+    private openImageModal() {
+        let modal = this.getByIdFromShadowRoot("imageModal") as HTMLElement;
+        if(modal){
+            modal.classList.add("is-active");
+        }
+    }
+
 
     /**
      * Generate Button name

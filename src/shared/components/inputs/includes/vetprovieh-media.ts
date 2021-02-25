@@ -21,7 +21,7 @@ export class VetproviehMedia extends VetproviehElement {
 
     public static get template() {
         return VetproviehElement.template + `
-        <div class="card">
+        <div>
             <div id="content" class="card-content">
                 \${this.content}
             </div>
@@ -29,7 +29,7 @@ export class VetproviehMedia extends VetproviehElement {
                 \${this.openButton}
             </footer>
         </div>
-        <recording-modal id="recordingModal" title="\${this.name}" type="\${this.type}" active="false"></recording-modal>
+        <recording-\${this.type}-modal id="recordingModal" title="\${this.name}" active="false"></recording-modal>
         `
     }
 

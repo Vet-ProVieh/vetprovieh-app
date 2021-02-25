@@ -103,7 +103,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
             this.currentObject.barnId = parseInt(barnUrlId);
         }
         this._setGroupComponent();
-        setTimeout(() => this._setNavigation(), 500);
+        setTimeout(() => this._setNavigation(), 1000);
     }
 
     _buildUrl(): string {
@@ -159,7 +159,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         let openFunc = () => {
             this.processMenuDiv.classList.remove("is-hidden-mobile");
             this.processMenuPlaceholder.classList.add("is-hidden-mobile");
-            this.mainCol.classList.remove("is-11-mobile");
+            this.mainCol.classList.remove("is-10-mobile");
             this.mainCol.classList.add("is-3-mobile");
         };
         openFunc.bind(this);
@@ -168,7 +168,7 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         let closeFunc = () => {
             this.processMenuDiv.classList.add("is-hidden-mobile");
             this.processMenuPlaceholder.classList.remove("is-hidden-mobile");
-            this.mainCol.classList.add("is-11-mobile");
+            this.mainCol.classList.add("is-10-mobile");
             this.mainCol.classList.remove("is-3-mobile");
         };
         closeFunc.bind(this);
