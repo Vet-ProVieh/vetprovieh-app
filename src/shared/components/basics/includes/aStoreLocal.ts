@@ -1,9 +1,16 @@
 import { VetproviehNavParams } from "@tomuench/vetprovieh-shared";
+import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 
 /**
  * Extension for a Link Tag (a-element)
  */
-export class AStoreLocal extends HTMLAnchorElement {
+@WebComponent({
+    tag: 'store-local-link',
+    template:  VetproviehElement.template + `
+    <a href="\${this.href}"> \${this.content}</a>
+    `
+})
+export class AStoreLocal extends VetproviehElement {
 
 
     private _params: any;
@@ -18,8 +25,35 @@ export class AStoreLocal extends HTMLAnchorElement {
         }
     }
 
+    
+    private _href : string ="";
+    public get href() : string {
+        return this._href;
+    }
+
+    public set href(v : string) {
+        this._href = v;
+    }
+
+    static get observedAttributes() {
+        return ['href']
+    }
+    
+    
+    private _content : string = "";
+    
+    public get content() : string {
+        return this._content;
+    }
+
+    public set content(v : string) {
+        this._content = v;
+    }
+    
     constructor() {
-        super();
+        super(true, false);
+        this.content = this.innerHTML;
+        this.render();
     }
 
     connectedCallback() {
@@ -30,16 +64,9 @@ export class AStoreLocal extends HTMLAnchorElement {
         var _self = this;
 
         this.addEventListener("click", (e) => {
-            let target = e.target as AStoreLocal;
-            while(target.tagName != "A"){
-                target = target.parentElement as AStoreLocal;
-            }
-            VetproviehNavParams.set(target.href, target.params);
+            let location = window.location.href.substr(0, window.location.href.lastIndexOf("/")+1);
+            VetproviehNavParams.set(location + this.href, this.params);
+            window.open(this.href,"_self");
         });
     }
 }
-
-
-
-// Komponente registrieren
-customElements.define("local-store", AStoreLocal, { extends: "a" });

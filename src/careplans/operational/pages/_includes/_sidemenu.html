@@ -16,6 +16,27 @@
             </process-menu>
         </div>
     </article>
+    <article class="panel">
+        <p class="panel-heading">
+            Bestandsdaten
+        </p>
+        <div class="panel-block">
+            <ul class="menu-list">
+                <li>
+                    <a href="/documents/index.html?barnId={{barnId}}">
+                        <i class="fas fa-file-alt"></i>
+                        Dokumente
+                    </a>
+                </li>
+                <li>
+                    <a href="/careplans/operational/index.html?barn_id={{barnId}}">
+                        <i class="fas fa-hand-holding-medical"></i>
+                        Behandlungen
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </article>
 </div>
 
 
@@ -24,10 +45,27 @@
         Aktueller Stall
     </p>
     <barn-list-show barnid="{{barnId}}"></barn-list-show>
-    
+
     <p class="menu-label">
         Behandlungsprozess
     </p>
     <process-menu id="processMenu2">
     </process-menu>
+    <p class="menu-label">
+        Bestandsdaten
+    </p>
+    <ul class="menu-list">
+        <li>
+            <a href="/documents/index.html?barnId={{barnId}}">
+                <i class="fas fa-file-alt"></i>
+                Dokumente
+            </a>
+        </li>
+        <li>
+            <a href="/careplans/operational/index.html?barn_id={{barnId}}">
+                <i class="fas fa-hand-holding-medical"></i>
+                Behandlungen
+            </a>
+        </li>
+    </ul>
 </vetprovieh-sidemenu>

@@ -3,7 +3,7 @@ import { CareplanGroup } from "./careplanGroup";
 
 export class Careplan extends BasicModel {
 
-    groups: CareplanGroup[] = [];
+    opGroups: CareplanGroup[] = [];
     animal: string = "";
     readOnly: boolean = false;
 }

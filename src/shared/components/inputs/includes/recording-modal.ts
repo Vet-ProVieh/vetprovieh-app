@@ -136,11 +136,11 @@ export class RecordingModal extends VetproviehElement {
                 facingMode: "environment"
             }
         }
-        navigator.getUserMedia({ 
+        navigator.getUserMedia = navigator.mediaDevices.getUserMedia
+
+        navigator.mediaDevices.getUserMedia({ 
             video: videoOptions, 
-            audio: true },
-            streamFunc,
-            (error) => this.bindingFailed(error));
+            audio: true }).then(streamFunc, this.bindingFailed);
     }
 
     protected afterStreamStarted(stream: MediaStream){

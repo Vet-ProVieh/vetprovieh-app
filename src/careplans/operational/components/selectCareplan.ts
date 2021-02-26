@@ -2,6 +2,7 @@ import { WebComponent, VetproviehElement, VetproviehNavParams } from "@tomuench/
 import { VetproviehBasicList } from "@tomuench/vetprovieh-list/lib/vetprovieh-basic-list";
 import { OperationPlanBluerprintsRepository } from "../repository";
 import { Careplan } from "../../settings";
+import { AStoreLocal } from "../../../shared";
 
 
 @WebComponent({
@@ -70,8 +71,6 @@ export class SelectCareplan extends VetproviehBasicList {
         console.log(this.selectedBarnId);
 
         return data.filter((e: Careplan) => {
-            // TODO AnimalType muss im Backend gesetzt werden können
-            e.animal = this.selectedAnimalType;
             return e.animal === this.selectedAnimalType;
         });
     }
@@ -79,9 +78,10 @@ export class SelectCareplan extends VetproviehBasicList {
 
     public setlistTemplate(template: HTMLTemplateElement) {
         if (template && this._listTemplate !== template.content) {
-            let anchor = template.content.querySelector("a");
+            let anchor = template.content.querySelector("store-local-link") as HTMLElement;
             if (anchor) {
-                anchor.href += `?barn_id=${VetproviehNavParams.getUrlParameter("barn_id")}`;
+                let href = anchor.getAttribute("href")
+                anchor.setAttribute("href",href + `?barn_id=${VetproviehNavParams.getUrlParameter("barn_id")}`);
             }
             this._listTemplate = template.content;
         }
