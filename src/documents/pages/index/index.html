@@ -13,14 +13,17 @@
 <!-- Layout-Container -->
 
 <body>
-  <vetprovieh-layout title="Ihre Dokumente für ?">
+  <vetprovieh-layout title="Ihre Dokumente für ...">
     <vetprovieh-documents>
-        <!-- 
-      <a class="button is-primary is-pulled-right" href="create.html">
+
+      <p>
+        <barn-list-show id="barnShower"></barn-list-show>
+      </p>
+
+      <a id="createLink" class="button is-primary is-pulled-right" href="create.html">
         Neues Dokument erstellen
       </a>
       <br /><br />
-      -->
       <vetprovieh-list pagesize="5">
         <template>
           <div>

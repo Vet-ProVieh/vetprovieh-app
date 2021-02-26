@@ -24,14 +24,17 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
           <aside class="menu">
               <profile-widget></profile-widget>
               <ul class="menu-list">
-                  <li><a href="/index.html">Dashboard</a></li>
+                  <li><a href="/index.html">
+                  <i class="fas fa-compass"></i> Dashboard</a></li>
               </ul>
               <p class="menu-label">
                   Behandlung
               </p>
               <ul class="menu-list">
-                  <li><a href="/careplans/operational/1_selectBarn.html">Neue Behandlung</a></li>
-                  <li><a href="/careplans/operational">Behandlungen</a></li>
+                  <li><a href="/careplans/operational/1_selectBarn.html">
+                  <i class="fas fa-hand-holding-medical"></i> Neue Behandlung</a></li>
+                  <li><a href="/careplans/operational">
+                  <i class="fas fa-hand-holding-medical"></i> Behandlungen</a></li>
               </ul>
               <!--
               <p class="menu-label">
@@ -47,8 +50,10 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
                 Meine Stammdaten
               </p>
               <ul class="menu-list">
-                  <li><a href="/farmers">Landwirte</a></li>
-                  <li><a href="/barns">Ställe</a></li>
+                  <li><a href="/farmers">
+                  <i class="fas fa-warehouse"></i> Landwirte</a></li>
+                  <li><a href="/barns">
+                  <i class="fas fa-paw"></i> Ställe</a></li>
               </ul>
               <div is="div-access" roles="admin">
                 <p class="menu-label" style="margin-top: 1em;">

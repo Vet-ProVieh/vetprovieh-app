@@ -1,1 +1,22 @@
-???
+<template>
+    <div class="field">
+        <div class="card">
+            <div class="card-content">
+                <p class="title is-4">Dokument erstellen</p>
+
+                <label class="label">Stall-Bezeichnung</label>
+                <div class="control">
+                    <input property="name" class="input " type="text" required>
+                </div>
+
+                <select-animal property="animal" label="Tierart"></select-animal>
+
+                <label class="label">Datei auswählen</label>
+                <div class="control">
+                    <input property="file" pattern="276\d{12}" placeholder="276..." class="input" type="text"
+                        required>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

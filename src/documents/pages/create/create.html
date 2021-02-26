@@ -2,6 +2,7 @@
 <html lang="de" dir="ltr">
 
 <!-- Header -->
+
 <head>
     <meta charset="utf-8">
     <title>Vet:Provieh - Dokument erstellen</title>
@@ -12,11 +13,39 @@
 <!-- Layout-Container -->
 
 <body>
-<vetprovieh-layout title="Dokument erstellen">
-    <vetprovieh-detail destroyable="true" src="/service/documents">
-        <!--#include file="_form.html"-->
-    </vetprovieh-detail>
-</vetprovieh-layout>
+    <vetprovieh-layout title="Neue Dokumente bereitstellen für...">
+        <document-create>
+            <div class="field">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title is-4">Neue Dokumente bereitstellen für...</p>
+
+                        <p>
+                            <barn-list-show id="barnShower"></barn-list-show>
+                        </p>
+                        <br/>
+
+                        <label class="label">Dateien auswählen</label>
+                        <div class="control">
+                            <input id="fileInput" accept="image/*,.pdf" type="file" multiple name="file[]" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="columns is-mobile">
+                <div class="column">
+                    <button id="back" type="button" class="button is-fullwidth is-danger">
+                        Zurück
+                    </button>
+                </div>
+                <div class="column">
+                    <button id="upload" type="button" disabled class="button is-fullwidth is-primary">
+                        Dokumente hochladen
+                    </button>
+                </div>
+            </div>
+        </document-create>
+    </vetprovieh-layout>
 </body>
 
 <!--#include file="/includes/scripts.html"-->

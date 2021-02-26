@@ -19,7 +19,7 @@ export class BarnListShow extends VetproviehElement {
 
     private repository: BarnsRepository = new BarnsRepository();
 
-    private _barnId: string = "";
+    private _barnid: string = "";
 
     private barn: Barn | undefined= undefined;
 
@@ -28,7 +28,7 @@ export class BarnListShow extends VetproviehElement {
     }
 
     public get barnid(): string {
-        return this._barnId;
+        return this._barnid;
     }
 
     static get observedAttributes() {
@@ -36,15 +36,15 @@ export class BarnListShow extends VetproviehElement {
     }
 
     public set barnid(v: string) {
-        if (this._barnId !== v) {
-            this._barnId = v;
+        if (this._barnid !== v) {
+            this._barnid = v;
             this.loadBarn();
         }
     }
 
     private loadBarn() {
-        if (this._barnId && !isNaN(parseInt(this._barnId))) {
-            this.repository.find(parseInt(this._barnId)).then((barn) => {
+        if (this.barnid && !isNaN(parseInt(this.barnid))) {
+            this.repository.find(parseInt(this.barnid)).then((barn) => {
                 this.barn = barn;
                 this.render();
             }).catch((error) => {
