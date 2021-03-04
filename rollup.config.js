@@ -17,6 +17,7 @@ var modules = {
     'admin/tenants' : 'admin/tenants',
     'farmers': 'farmers',
     'barns': 'barns',
+    'drugs': 'drugs',
     'careplans/operational': 'careplans/operational',
     'careplans/settings/pages/careplans': 'settings/careplans',
     'careplans/settings/pages/groups': 'settings/careplans/groups',

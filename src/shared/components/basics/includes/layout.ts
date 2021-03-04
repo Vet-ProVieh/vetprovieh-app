@@ -54,6 +54,8 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
                   <i class="fas fa-warehouse"></i> Landwirte</a></li>
                   <li><a href="/barns">
                   <i class="fas fa-paw"></i> Ställe</a></li>
+                  <li><a href="/drugs">
+                  <i class="fas fa-tablets"></i> Medikamente</a></li>
               </ul>
               <div is="div-access" roles="admin">
                 <p class="menu-label" style="margin-top: 1em;">
