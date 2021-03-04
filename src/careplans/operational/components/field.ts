@@ -1,4 +1,6 @@
-import { ElementBinding, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { BaseRepository, ElementBinding, IRepository, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { VetproviehSelect } from "../../../app/main";
+import { DrugsRepository } from "../../../drugs";
 import { InputFactory } from "./field/inputFactory";
 
 /**
@@ -14,6 +16,36 @@ export class VpOperationField extends ElementBinding {
     constructor(barnId: string){
         super();
         this.barnId = barnId;
+    }
+
+
+    /**
+     * Getting Repository for element
+     * @param {string} src 
+     * @return {BaseRepository | undefined}
+     */
+    private getChoiceRepository(src: string) : BaseRepository<any> | undefined {
+        switch (src) {
+            case "drugs":
+                return new DrugsRepository();
+        
+            default:
+                return undefined;
+        }
+    }
+
+     /**
+     * Callback to Overwrite
+     * @protected
+     */
+    protected _afterRender() {
+        if(this.object.choiceSrc){
+            let vetproviehSelect = this.querySelector("vetprovieh-select") as VetproviehSelect;
+            if(vetproviehSelect){
+                let repository = this.getChoiceRepository(this.object.choiceSrc);
+                if(repository) vetproviehSelect.repository = repository;
+            }
+        }
     }
 
     /**

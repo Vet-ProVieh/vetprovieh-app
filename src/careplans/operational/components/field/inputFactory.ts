@@ -158,7 +158,11 @@ export class InputFactory {
      * @return {string}
      */
     private static buildCombo(options: any): string {
-        return this.buildSelect(options)
+        if(options.choiceSrc){
+            return this.buildVetproviehSelect(options);
+        } else {
+            return this.buildSelect(options)
+        }
     }
 
     /**
@@ -200,6 +204,24 @@ export class InputFactory {
             this.isMultiple(options.multipleSelect) +
             this.isRequired(options.optional != true) +
             `>${this.buildOptionTags(options.choices)}</select></div>`;
+    }
+
+    private static buildVetproviehSelect(options: any): string {
+        return `<div class="select is-multiple" style="width:100%;">` +
+            `<vetprovieh-select display="name" internalprop="registrationNumber" ` +
+            this.genTag("property", "value") +
+            this.genTag("size", options.size) +
+            this.genTag("style", options.style) +
+            this.genTag("name", options.name) +
+            this.isMultiple(options.multipleSelect) +
+            this.isRequired(options.optional != true) +
+            `>
+            <template>
+                <div style="padding:5px">
+                    <span>{{name}} ({{registrationNumber}}), {{manufacturer}}</span>
+                </div>
+            </template>
+            </vetprovieh-select></div>`;
     }
 
     /**
