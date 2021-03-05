@@ -15,7 +15,7 @@ import { RecordingRtcModal } from "./recording-rtc-modal";
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <video style="object-fit: fill;" playsinline="true" id="media">
+            <video style="object-fit: fill;" muted playsinline="true" id="media">
             </video>
         </section>
         <footer class="modal-card-foot"> 
@@ -27,12 +27,11 @@ import { RecordingRtcModal } from "./recording-rtc-modal";
 })
 export class RecordingVideoModal extends RecordingRtcModal {
 
-
     /**
      * After Stream started, bind recorder
      * @param {MediaStream} stream 
      */
-    protected afterStreamStarted(stream: MediaStream){
+    protected afterStreamStarted(stream: MediaStream) {
         this.recorder = new RecordRTC(stream, {
             type: 'video',
         });
