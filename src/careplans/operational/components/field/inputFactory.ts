@@ -185,6 +185,7 @@ export class InputFactory {
     private static buildTextField(options: any): string {
         return `<input ` +
             this.genTag("property", "value") +
+            this.genTag("name", options.name) +
             this.isVoiceInputable(options.voiceInputable) +
             `class="input" type="text">`;
     }

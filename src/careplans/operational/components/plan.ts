@@ -6,6 +6,7 @@ import { OperationPlan } from "../models";
 import { ProcessMenu } from "./process-menu";
 import { VetproviehSidemenu } from "../../../app/main";
 import { BarnListShow } from "../../../barns";
+import { SpeechAssistant } from "../../../shared";
 
 /**
  * Controller for Page
@@ -163,6 +164,11 @@ export class VpOperationPlan extends VetproviehBasicDetail {
         });
 
         this.registerResponsiveButtons();
+
+        let assistant = this.getByIdFromShadowRoot("speechAssistant") as SpeechAssistant
+        if(assistant){
+            assistant.activate();
+        }
     }
 
     private get rightMenu(): VetproviehSidemenu {
