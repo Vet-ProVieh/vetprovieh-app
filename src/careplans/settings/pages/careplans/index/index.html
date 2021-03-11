@@ -21,13 +21,18 @@
       <br /><br />
       <vetprovieh-list pagesize="5">
         <template>
-          <div>
-            <a href="/settings/careplans/show.html?id={{id}}">
-              <strong>{{name}}</strong>
-            </a>
-            <p>
-              {{animal}}
-            </p>
+          <div class="columns is-mobile">
+            <div class="column">
+              <a href="/settings/careplans/show.html?id={{id}}">
+                <strong>{{name}}</strong>
+              </a>
+              <p class="animal">{{animal}}</p>
+            </div>
+            <div class="column is-2">
+              <button class="button" type="button" data-id="{{id}}">
+                Duplizieren
+              </button>
+            </div>
           </div>
           <hr />
         </template>

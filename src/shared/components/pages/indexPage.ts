@@ -4,7 +4,7 @@ import { VetproviehList } from "../../../app/main";
 
 export class BasicIndexPage<T> extends HTMLElement {
 
-    private repository: IRepository<T>;
+    protected repository: IRepository<T>;
 
     constructor(repository: IRepository<T>) {
         super();
@@ -35,7 +35,7 @@ export class BasicIndexPage<T> extends HTMLElement {
      * Load VetproviehList Element from DOM
      * @return {VetproviehList}
      */
-    private getVetproviehList() : VetproviehList {
+    protected getVetproviehList() : VetproviehList {
         return document.getElementsByTagName("vetprovieh-list")[0] as VetproviehList;
     }
 
