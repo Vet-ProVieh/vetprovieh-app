@@ -6,7 +6,7 @@ import { Indexable } from "@tomuench/vetprovieh-shared/lib";
 export class SpeechWrapper {
     private _recognition: any;
     private _speechRecognitionList: any;
-    private _continous: boolean = false;
+    private _interimResults: boolean = false;
 
     public get synth() {
         return window.speechSynthesis;
@@ -16,8 +16,8 @@ export class SpeechWrapper {
      * Default-Constructor
      * @param element 
      */
-    constructor(continous: boolean = false) {
-        this._continous = continous;
+    constructor(interimResults: boolean = false) {
+        this._interimResults = interimResults;
         this._initRecognition();
     }
 
@@ -52,7 +52,7 @@ export class SpeechWrapper {
             if (this.ready) {
                 this._recognition.continuous = true;
                 this._recognition.lang = 'de-DE';
-                this._recognition.interimResults = true;
+                this._recognition.interimResults = this._interimResults;
                 this._recognition.maxAlternatives = 1;
             }
         } catch (ex) {

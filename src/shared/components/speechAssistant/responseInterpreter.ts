@@ -43,7 +43,7 @@ export class ResponseInterpreter {
         let sentences = transcript.split("weiter");
 
         sentences.forEach((sentence: string) => {
-            let match = sentence.match(/^([a-zA-Z ]+): ([a-zA-Z0-9 ]+)$/);
+            let match = sentence.match(/^([a-zA-Z ]+): ([a-zA-Z0-9\., ]+)$/);
             if (match && match.length >= 2) {
                 let field = match[1].toLowerCase().trim();
                 let value = match[2].trim();

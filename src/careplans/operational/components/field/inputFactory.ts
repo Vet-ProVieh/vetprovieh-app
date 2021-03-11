@@ -147,7 +147,7 @@ export class InputFactory {
             this.genTag("cols", options.cols) +
             this.genTag("rows", options.rows) +
             this.isVoiceInputable(options.voiceInputable) +
-            `class="input" type="text" ` +
+            `class="textarea" type="text" ` +
             this.isRequired(options.optional != true) +
             `></textarea>`;
     }
@@ -183,11 +183,11 @@ export class InputFactory {
      * @return {string}
      */
     private static buildTextField(options: any): string {
-        return `<input ` +
+        return `<textarea ` +
             this.genTag("property", "value") +
             this.genTag("name", options.name) +
             this.isVoiceInputable(options.voiceInputable) +
-            `class="input" type="text">`;
+            `class="input" type="text"></textarea>`;
     }
 
     /**

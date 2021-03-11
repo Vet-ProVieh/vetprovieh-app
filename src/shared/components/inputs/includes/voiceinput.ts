@@ -10,12 +10,6 @@ export class VoiceInput extends HTMLTextAreaElement {
 
     constructor() {
         super();
-        let self = this;
-        this._speechWrapper.onresult = function (result: string) {
-            self.value += result;
-            self.dispatchEvent(new Event("change"));
-        };
-
     }
 
 
@@ -23,8 +17,17 @@ export class VoiceInput extends HTMLTextAreaElement {
      * Connected Callback
      */
     public connectedCallback() {
-        if (this._speechWrapper.ready)
+        if (this._speechWrapper.ready) {
             this._addVoiceInputButton();
+
+
+            let self = this;
+            this._speechWrapper.onresultRaw = (result: any) => {
+                self.value = result[0].transcript;
+                self.dispatchEvent(new Event("change"));
+                self.dispatchEvent(new Event("keyup"));
+            };
+        }
     }
 
     /**

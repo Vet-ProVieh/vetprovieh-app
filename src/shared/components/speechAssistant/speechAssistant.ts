@@ -20,7 +20,7 @@ export class SpeechAssistant extends VetproviehElement {
 
     private fieldMarker: FieldMarker = new FieldMarker();
     private responseInterpreter: ResponseInterpreter | undefined;
-    private speechWrapper = new SpeechWrapper();
+    private speechWrapper = new SpeechWrapper(true);
 
     private _active: boolean = false;
 

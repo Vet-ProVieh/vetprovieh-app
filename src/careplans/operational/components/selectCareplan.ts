@@ -20,8 +20,13 @@ import { AStoreLocal } from "../../../shared";
 
             <!-- SearchControl on Top -->
             <div id="searchControl" class="control">
-            <input id="search" class="input" type="text" 
-                    placeholder="Bitte Suchbegriff eingeben">
+                <div class="field">
+                    <div class="field-body">
+                        <textarea id="search" class="input" type="text" is="voice-input" 
+                                placeholder="Bitte Suchbegriff eingeben">
+                        </textarea>
+                    </div>
+                </div>
             </div>
 
             <!-- Listing Elements here -->
