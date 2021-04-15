@@ -14,6 +14,9 @@
 
 <body>
     <vetprovieh-layout title="Ihre Behandlungen">
+        <p>
+            <barn-list-show id="barnShower"></barn-list-show>
+        </p>
         <vetprovieh-operation-plans>
             <a class="button is-primary is-pulled-right" href="create.html">
                 Neuen Behandlung erstellen
@@ -24,7 +27,12 @@
                     <div>
                         <a href="show.html?id={{id}}">
                             <strong>{{name}}</strong>
-                        </a><br />
+                        </a>
+                        <barn-list-show barnid="{{barnId}}"></barn-list-show>
+                        <p style="font-size:0.9em;">
+                            <strong>Erstellt am:</strong> {{createdAt}}<br />
+                            <strong>Letztes Update am:</strong> {{updatedAt}}<br />
+                        </p>
                     </div>
                     <hr />
                 </template>

@@ -44,3 +44,7 @@ vetprovieh-layout footer {
 .panel-block.is-active {
     background-color:  #3273dc !important;
 }
+
+body {
+    visibility: hidden;
+}

@@ -90,7 +90,7 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
           </ul>
           </vetprovieh-sidemenu> -->
           <section class="section full-height" style="padding-top: 1rem">
-          <div class="container">
+          <div id="mainContainer" class="container">
             \${this._outsideInnerHtml}
           </div>
           </section>
@@ -164,6 +164,8 @@ export class VetproviehLayout extends VetproviehElement {
   _addCssClassToBody() {
     document.getElementsByTagName('body')[0]
       .classList.add('has-navbar-fixed-top');
+
+    document.body.style.visibility = "visible";
   }
 
   /**
@@ -189,8 +191,11 @@ export class VetproviehLayout extends VetproviehElement {
    */
   _deactivatePageLoader() {
     const element = document.getElementById('pageloader') as HTMLElement;
+    const mainContainer = document.getElementById('mainContainer') as HTMLElement;
     setTimeout(
-      (_) => element.classList.remove('is-active'),
+      (_) => {
+        element.classList.remove('is-active')
+      },
       100);
   }
 

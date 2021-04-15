@@ -5,6 +5,8 @@ export { VetproviehDetail } from '@tomuench/vetprovieh-detail/lib/index';
 export { VetproviehSidemenu } from '@tomuench/vetprovieh-sidemenu/lib/vetprovieh-sidemenu';
 export { VetproviehRepeat, ViewHelper } from '@tomuench/vetprovieh-shared/lib/index';
 
+
+
 // Interne Komponenten
 export * as Shared from '../shared';
 export * as Farmers from '../farmers';
@@ -13,3 +15,4 @@ export * as Careplans from '../careplans';
 export * as Users from '../users';
 export * as Tenants from '../admin/tenants';
 export * as Drugs from '../drugs';
+export * as SyncComp from '../shared/components/basics/includes/sync';

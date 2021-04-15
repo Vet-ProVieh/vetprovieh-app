@@ -16,7 +16,7 @@ export class DocumentsIndexPage extends BasicIndexPage<Document> {
     constructor() {
         let rep = new DocumentRepository();
         let barnId = VetproviehNavParams.getUrlParameter("barnId");
-        rep.barnId = "";;
+        rep.barnId = barnId;
         super(rep);
         this.barnId = barnId;
     }
