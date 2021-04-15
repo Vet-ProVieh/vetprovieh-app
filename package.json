@@ -49,7 +49,7 @@
     "workbox-background-sync": "^6.1.0"
   },
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c serviceworker.rollup.config.js && rollup -c",
     "watch": "rollup -c -w",
     "test": "jest --colors --coverage test",
     "start": "./build_and_run.sh",

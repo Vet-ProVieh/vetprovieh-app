@@ -99,6 +99,7 @@ export default {
             clientsClaim: true,
             skipWaiting: true,
             ignoreURLParametersMatching: [/.*/],
+            importScripts: ['./request_store.js'],
             runtimeCaching: [{
                     urlPattern: /service/,
                     handler: "NetworkFirst",
