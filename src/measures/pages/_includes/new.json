@@ -1,0 +1,130 @@
+{
+    "animal": "HM1",
+    "animalNumber": "string",
+    "barn": {
+        "id": 1
+    },
+    "data": [
+      {
+        "active": true,
+        "details": [
+          {
+            "choices": [
+              "Zwangslüftung",
+              "Deckenlüftung",
+              "Türganglüftung",
+              "freie Lüftung"
+            ],
+            "detailsType": "detailsList",        
+            "name": "Lüftungstechnik",
+            "optional": true,
+            "position": 1,
+            "value": "Zwangslüftung",
+            "voiceInputable": true
+          },
+          {
+            "choices": [
+              "Zwangslüftung",
+              "Deckenlüftung",
+              "Türganglüftung",
+              "freie Lüftung"
+            ],
+            "detailsType": "detailsList",        
+            "name": "Lüftungstechnik",
+            "optional": true,
+            "position": 2,
+            "value": "Deckenöüftung",
+            "voiceInputable": true
+          }
+        ],     
+        "name": "Angaben zur Klimatechnik",
+        "position": 1
+      },
+      {
+        "active": true,
+        "details": [
+          {
+            "choices": [
+              "Breiautomat",
+              "Trockenautomat",
+              "Flüssigfütterung",
+              "mehlförmig",
+              "granuliert",
+              "pelletiert"
+            ],
+            "detailsType": "detailsList",        
+            "name": "Fütterversorgung",
+            "optional": true,
+            "position": 1,
+            "value": "Breiautomat",
+            "voiceInputable": true
+          },
+          {
+            "choices": [
+              "Breiautomat",
+              "Trockenautomat",
+              "Flüssigfütterung",
+              "mehlförmig",
+              "granuliert",
+              "pelletiert"
+            ],
+            "detailsType": "detailsList",        
+            "name": "Fütterversorgung",
+            "optional": true,
+            "position": 2,
+            "value": "granuliert",
+            "voiceInputable": true
+          },
+          {
+            "choices": [
+              "Brunnenwasser",
+              "Stadtwasser",
+              "Wasseruntersuchung"           
+            ],
+            "detailsType": "detailsList",        
+            "name": "Wasserversorgung",
+            "optional": true,
+            "position": 3,
+            "value": "Stadtwasser",
+            "voiceInputable": true
+          }
+        ],     
+        "name": "Angaben zu Futter und Wasserversorgung",
+        "position": 2
+      }
+    ],
+    "focusOfDiseases": "string",
+    "isBlueprint": true,
+    "measuresDate": "2021-06-05",
+    "objectives": [
+      {
+        "active": true,    
+        "keyResults": [
+          {
+            "active": true,      
+            "milestones": "Current",
+            "name": "Einstreuwchsel",
+            "value": "100",
+            "position": 0
+          },
+           {
+            "active": true,      
+            "milestones": "Start",
+            "name": "Klimakontrolle",
+            "value": "0",
+            "position": 1
+          },
+          {
+            "active": true,      
+            "milestones": "Target",
+            "name": "Futterumstellung",
+            "value": "1000",
+            "position": 2
+          }
+        ],
+        "name": "Fußballengesundheit verbessern",
+        "position": 0
+      }
+    ],
+    "therapyFrequency": "string"
+  }

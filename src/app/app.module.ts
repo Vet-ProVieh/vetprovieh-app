@@ -12,6 +12,7 @@ export * as Shared from '../shared';
 export * as Farmers from '../farmers';
 export * as Barns from '../barns';
 export * as Careplans from '../careplans';
+export * as Measures from '../measures';
 export * as Users from '../users';
 export * as Tenants from '../admin/tenants';
 export * as Drugs from '../drugs';

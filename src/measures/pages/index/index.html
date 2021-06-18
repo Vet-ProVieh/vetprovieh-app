@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Vet:Provieh - Ihre Maßnahmenpläne</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+    <vetprovieh-layout title="Ihre Maßnahmenpläne">
+        <vetprovieh-measures>
+            <a class="button is-primary is-pulled-right" href="1_selectBarn.html">
+                Neuen Maßnahmenplan erstellen
+            </a>
+            <br /><br />
+            <vetprovieh-list pagesize="20">
+                <template>
+                    <div>
+                        <a href="show.html?id={{id}}">
+                            <strong>{{barn.farmer.address.city}}</strong> 
+                        </a>
+                        <p style="font-size:0.9em;">
+                            <strong>Erstellt am:</strong> {{measuresDate}}<br />
+                            <strong>Stall:</strong> {{barn.animal}}:{{barn.vvvoNumber}}<br />
+                            <strong>Ausgefüllt von:</strong> {{barn.farmer.veterinarian.firstName}} {{barn.farmer.veterinarian.lastName}}<br />
+                            <strong>Ausführungsstatus:</strong> {{ }}<br />
+                        </p>
+                    </div>
+                    <hr />
+                </template>
+            </vetprovieh-list>
+        </vetprovieh-measures>
+    </vetprovieh-layout>
+</body>
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>

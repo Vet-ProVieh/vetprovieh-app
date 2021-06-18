@@ -15,6 +15,7 @@ import typescript from 'rollup-plugin-typescript';
 
 var modules = {
     'admin/tenants' : 'admin/tenants',
+    'measures' : 'measures',
     'farmers': 'farmers',
     'barns': 'barns',
     'drugs': 'drugs',

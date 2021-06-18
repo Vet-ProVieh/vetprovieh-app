@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Vet:Provieh - Neuer Maßnahmenplan</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+    <vetprovieh-layout title="Neuer Maßnahmenplan">
+        <!-- <vetprovieh-detail> -->
+            <h1 class="title">
+                <p>
+                    2. Eigenschaften auswählen
+                </p>
+            </h1>
+            <label for="measures-date">Datum </label>
+            <input type="date" id="measures-date" name="measures-date"><br>
+            <label for="therapy-frequency">Therapiehäufigkeit</label>
+            <input type="range" id="therapy-frequency"><br>
+            <a class="button is-primary" href="1_selectBarn.html">Erfassung starten</a>
+        <!-- </vetprovieh-detail> -->
+    </vetprovieh-layout>
+</body>
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>

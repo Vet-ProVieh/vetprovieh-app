@@ -36,6 +36,15 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
                   <li><a href="/careplans/operational">
                   <i class="fas fa-hand-holding-medical"></i> Behandlungen</a></li>
               </ul>
+              <p class="menu-label">
+                Maßnahmenplanung
+              </p>
+              <ul class="menu-list">
+                  <li><a href="/measures">
+                  <i class="fas fa-warehouse"></i> Maßnahmenpläne</a></li>
+                  <li><a href="/measures">
+                  <i class="fas fa-paw"></i> Maßnahmen</a></li>
+              </ul>
               <!--
               <p class="menu-label">
                   Persönliche Einstellungen
@@ -45,7 +54,6 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
                   <li><a href="#">Termine</a></li>
               </ul>
               -->
-          
               <p class="menu-label">
                 Meine Stammdaten
               </p>

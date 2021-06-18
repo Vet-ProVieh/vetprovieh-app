@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Vet:Provieh - Neuer Maßnahmenplan</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+    <vetprovieh-layout title="Neuer Maßnahmenplan">
+        <h1 class="title">
+            <p>
+                1. Stall auswählen
+            </p>
+        </h1>
+        <vp-select-barn pagesize="20">
+            <template>
+                <div>
+                    <a href="2_initializeMeasure.html?barn_id={{id}}&animal={{animal}}">
+                        <strong>{{name}} </strong>
+                    </a>
+                    <p style="font-size:0.9em;">
+                        <span class="tag is-pulled-right is-primary">{{distance}} KM</span>
+                        <strong>VVVO:</strong> {{vvvoNumber}}<br />
+                        <strong>Landwirt:</strong> {{farmer.name}} ({{farmer.contactPerson.firstName}}
+                        {{farmer.contactPerson.lastName}})<br />
+                        <strong>Letzter Besuch:</strong> {{lastVisit}}
+                    </p>
+                </div>
+                <hr />
+            </template>
+        </vp-select-barn>
+    </vetprovieh-layout>
+</body>
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>
