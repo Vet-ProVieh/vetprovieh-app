@@ -33,7 +33,7 @@
             "name": "Lüftungstechnik",
             "optional": true,
             "position": 2,
-            "value": "Deckenöüftung",
+            "value": "Deckenlüftung",
             "voiceInputable": true
           }
         ],     

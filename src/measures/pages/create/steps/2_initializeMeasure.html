@@ -14,18 +14,28 @@
 
 <body>
     <vetprovieh-layout title="Neuer Maßnahmenplan">
-        <!-- <vetprovieh-detail> -->
+        <initialize-measure>
             <h1 class="title">
                 <p>
                     2. Eigenschaften auswählen
                 </p>
             </h1>
+            <p>
+                Sie haben folgenden Stall ausgewählt, um einen Maßnahmenplan zu erstellen:
+            </p>
+            <p>
+                <barn-list-show id="barnShower"></barn-list-show>
+            </p>
+            <br>
             <label for="measures-date">Datum </label>
             <input type="date" id="measures-date" name="measures-date"><br>
+            <br>
             <label for="therapy-frequency">Therapiehäufigkeit</label>
-            <input type="range" id="therapy-frequency"><br>
-            <a class="button is-primary" href="1_selectBarn.html">Erfassung starten</a>
-        <!-- </vetprovieh-detail> -->
+            <input type="range" min="0" max="40" value="20" id="therapy-frequency"><br>
+            <input type="text" id="therapy-frequency-text" value="20">
+            <br><br>
+            <a id="btn-new" class="button is-primary" href="./new.html">Erfassung starten</a>
+        </initialize-measure>
     </vetprovieh-layout>
 </body>
 

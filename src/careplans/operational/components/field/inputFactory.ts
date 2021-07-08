@@ -85,6 +85,9 @@ export class InputFactory {
             case 'comboBox':
                 response = this.buildCombo(options);
                 break;
+            case 'detailsList':
+                response = this.buildList(options);
+                break;
             case 'careplanList':
                 response = this.buildList(options);
                 break;
