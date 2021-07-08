@@ -1,5 +1,6 @@
 import { Farmer } from "../../farmers";
 import { BasicModel, Address, GpsCoordinates } from "../../shared";
+import { User } from "../../users/models";
 
 
 export class Barn extends BasicModel {
@@ -8,5 +9,6 @@ export class Barn extends BasicModel {
     gpsCoordinates: GpsCoordinates = new GpsCoordinates();
     vvvoNumber: string = "";
     animal: string = "";
+    lastVet: User | undefined;
     farmer: Farmer = new Farmer();
 }

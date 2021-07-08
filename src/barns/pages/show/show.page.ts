@@ -8,6 +8,8 @@ import { GeoEvent } from "../../../shared/models/geo";
 import { OpenStreetMapNomatim } from "../../../shared/providers/geo/OpenStreetMapNomatim";
 import { IGeoProvider } from "../../../shared/providers/geo/IGeoProvider";
 import { textHeights } from "ol/render/canvas";
+import { UserRepository } from "../../../users";
+import { User } from "../../../users/models";
 
 
 /**
@@ -21,6 +23,8 @@ export class BarnsShowPage extends BasicShowPage {
 
     private geoProvider: IGeoProvider = new OpenStreetMapNomatim();
 
+    private userRepository: UserRepository = new UserRepository();
+
     constructor() {
         super();
     }
@@ -30,6 +34,12 @@ export class BarnsShowPage extends BasicShowPage {
         this.detailElement.addEventListener("loadeddata", (loadEvent: any) => {
             if(this.barn.gpsCoordinates == null) this.barn.gpsCoordinates = new GpsCoordinates(0,0);
             this.detailElement.addBeforeSavePromise(() => { return this.loadGeoCoordinates(this.barn) })
+
+            if(this.barn.lastVet == undefined) {
+                this.userRepository.loadProfile().then((user) => {
+                    this.barn.lastVet = user;
+                })
+            }
             this.bindFarmerSelectField(loadEvent);
             this.bindGeoButton(loadEvent);
         });
@@ -51,10 +61,10 @@ export class BarnsShowPage extends BasicShowPage {
                     barn.address.postalCode,
                     barn.address.city).then((event) => {
                         this.processGeoEvent(event as GeoEvent);
-                        resolve();
+                        resolve(true);
                     });
             } else {
-                resolve();
+                resolve(false);
             }
         });
     }
