@@ -23,10 +23,11 @@
                 <template>
                     <div>
                         <a href="show.html?id={{id}}">
-                            <strong>{{barn.farmer.address.city}}</strong> 
+                            <strong>{{barn.farmer.name}}</strong>
                         </a>
                         <p style="font-size:0.9em;">
                             <strong>Erstellt am:</strong> {{measuresDate}}<br />
+                            <strong>VVVO:</strong> {{barn.farmer.vvvo}}<br />
                             <strong>Stall:</strong> {{barn.animal}}:{{barn.vvvoNumber}}<br />
                             <strong>Ausgefüllt von:</strong> {{barn.farmer.veterinarian.firstName}} {{barn.farmer.veterinarian.lastName}}<br />
                             <strong>Ausführungsstatus:</strong> {{ }}<br />

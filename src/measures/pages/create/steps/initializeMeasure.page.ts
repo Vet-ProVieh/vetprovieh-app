@@ -27,7 +27,7 @@ export class InitializeMeasurePage extends HTMLElement {
             });
         });
 
-        this.therapyFrequencySlider.addEventListener("input", () => {
+        this.therapyFrequencySlider.addEventListener("change", () => {
             this.therapyFrequencyText.value = this.therapyFrequencySlider.value;
         })
 

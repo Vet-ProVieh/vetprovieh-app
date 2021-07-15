@@ -94,7 +94,7 @@
       }
     ],
     "focusOfDiseases": "string",
-    "isBlueprint": true,
+    "isBlueprint": false,
     "measuresDate": "2021-06-05",
     "objectives": [
       {
