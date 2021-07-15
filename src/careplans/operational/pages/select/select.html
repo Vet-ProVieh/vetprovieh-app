@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Vet:Provieh - Krankheitsgeschehen wählen</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+    <vetprovieh-layout title="Krankheitsgeschehen wählen">
+        <vp-opplan-select>
+            <vetprovieh-operation-plans>
+                <vetprovieh-list pagesize="20">
+                    <template>
+                        <div>
+                            <a href="show.html?id={{id}}">
+                                <strong>{{name}}</strong>
+                            </a>
+                            <barn-list-show barnid="{{barnId}}"></barn-list-show>
+                            <p style="font-size:0.9em;">
+                                <strong>Erstellt am:</strong> {{createdAt}}<br />
+                                <strong>Letztes Update am:</strong> {{updatedAt}}<br />
+                            </p>
+                        </div>
+                        <hr />
+                    </template>
+                </vetprovieh-list>
+            </vetprovieh-operation-plans>
+            <div class="container">
+                <div class="columns is-mobile">
+                    <div class="column">
+                        <input id="abortButton" 
+                                class="button is-danger is-fullwidth" 
+                                type="reset" value="Abbrechen">                   
+                    </div>
+                    <div class="column">
+                        <input id="saveButton" 
+                                class="button is-success is-fullwidth" 
+                                type="button" value="Übernehmen">
+                    </div>
+                </div>
+            </div>
+        </vp-opplan-select>
+    </vetprovieh-layout>
+</body>
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>

@@ -18,7 +18,7 @@ export class OpertionPlanIndexPage extends BasicIndexPage<OperationPlan> {
 
         let barnId = VetproviehNavParams.getUrlParameter("barn_id");
         if (barnId) {
-            this.searchByParams({ "barnId": barnId });
+            this.searchByParams({ "barnId": barnId }); 
         }
     }
 }

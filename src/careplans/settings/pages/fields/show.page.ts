@@ -116,7 +116,6 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
         return this.detailElement.getByIdFromShadowRoot("extraFields") as SelectFieldType;
     }
 
-
     /**
      * Getting Select field
      * @return {HTMLSelectElement}

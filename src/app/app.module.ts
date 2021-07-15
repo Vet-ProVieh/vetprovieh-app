@@ -16,4 +16,5 @@ export * as Measures from '../measures';
 export * as Users from '../users';
 export * as Tenants from '../admin/tenants';
 export * as Drugs from '../drugs';
+export * as DrugTreatments from '../drugtreatments';
 export * as SyncComp from '../shared/components/basics/includes/sync';

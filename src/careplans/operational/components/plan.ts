@@ -5,7 +5,7 @@ import { WebComponent, VetproviehElement, VetproviehNavParams, ElementGroupBindi
 import { OperationGroup, OperationPlan } from "../models";
 import { ProcessMenu } from "./process-menu";
 import { VetproviehSidemenu } from "../../../app/main";
-import { BarnListShow } from "../../../barns";
+import { Barn, BarnListShow } from "../../../barns";
 import { SpeechAssistant } from "../../../shared";
 import { DynamicForm } from "../../../shared/components/forms/dynamicForm";
 
@@ -55,7 +55,12 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
    * @return {ElementGroupBinding}
    */
   protected buildGroupComponent(): ElementGroupBinding {
-    return new VpOperationGroup(this.currentObject.barnId as any);
+    if(this.currentObject.barn){
+      return new VpOperationGroup(this.currentObject.barn.id as any);
+    } else{
+      console.log("Could not render GroupElement. Barn is not set")
+      return new VpOperationGroup(0 as any);
+    }
   }
 
   /**
@@ -77,7 +82,7 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
     console.log("Setting barnid");
 
     if (barnUrlId != null && barnUrlId != undefined) {
-        this.currentObject.barnId = parseInt(barnUrlId);
+        this.currentObject.barn = {id: parseInt(barnUrlId)};
         this.shadowRoot?.querySelectorAll("barn-list-show").forEach((barnShow: any) => {
           barnShow.barnid = barnUrlId;
         });

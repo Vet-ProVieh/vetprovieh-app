@@ -17,7 +17,8 @@
             "optional": false,
             "voiceInputable": true,
             "fieldType": "textArea",
-            "value": ""
+            "value": "",
+            "treatmentKeys": ""
           },
           {
             "id": null,
@@ -26,7 +27,8 @@
             "optional": true,
             "voiceInputable": true,
             "fieldType": "textArea",
-            "value": ""
+            "value": "",
+            "treatmentKeys": ""
           }
         ]
       },
@@ -43,7 +45,8 @@
             "optional": false,
             "voiceInputable": true,
             "fieldType": "textArea",
-            "value": ""
+            "value": "",
+            "treatmentKeys": ""
           },
           {
             "id": null,
@@ -52,7 +55,8 @@
             "optional": true,
             "voiceInputable": false,
             "fieldType": "textArea",
-            "value": ""
+            "value": "",
+            "treatmentKeys": ""
           }
         ]
       },
@@ -69,7 +73,8 @@
             "optional": false,
             "voiceInputable": false,
             "fieldType": "textArea",
-            "value": ""
+            "value": "",
+            "treatmentKeys": ""
           },
           {
             "id": null,
@@ -78,7 +83,8 @@
             "optional": true,
             "voiceInputable": true,
             "fieldType": "textArea",
-            "value": ""
+            "value": "",
+            "treatmentKeys": ""
           }
         ]
       },
