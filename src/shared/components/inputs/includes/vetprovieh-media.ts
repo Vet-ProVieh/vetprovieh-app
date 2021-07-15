@@ -31,7 +31,7 @@ export class VetproviehMedia extends VetproviehElement {
                 </div>
             </footer>
         </div>
-        <recording-\${this.type}-modal id="recordingModal" title="\${this.name}" active="false"></recording-modal>
+        <recording-\${this.type}-modal id="recordingModal" title="\${this.name}" active="false"></recording-\${this.type}-modal>
         `
     }
 

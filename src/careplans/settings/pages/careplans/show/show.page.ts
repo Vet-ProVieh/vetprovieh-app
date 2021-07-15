@@ -1,6 +1,5 @@
 import { WebComponent, VetproviehTable } from "@tomuench/vetprovieh-shared/lib";
 import { Careplan } from "../../../models";
-import { VetproviehDetail } from "../../../../../app/main";
 import { LoadedEvent } from "@tomuench/vetprovieh-detail/lib/loaded-event";
 import { CareplanGroupRepository } from "../../../repository";
 import { PageWithReadOnly } from "../../../components";
