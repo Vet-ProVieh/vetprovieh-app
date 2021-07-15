@@ -7,6 +7,7 @@ export class MeasuresRepository extends BaseRepository<Measure>{
         super("/service/measures");
     }
 
+    /*
     all(): Promise<Measure[]>{
         const tmp = new Promise<Measure[]>((resolve, reject) => {
             resolve(JSON.parse(`[{
@@ -251,5 +252,5 @@ export class MeasuresRepository extends BaseRepository<Measure>{
               }]`));
         })
         return tmp;
-    }
+    }*/
 }
