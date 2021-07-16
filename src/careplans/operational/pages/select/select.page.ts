@@ -1,5 +1,6 @@
 import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
-import { VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { BasicSelectPage } from "../../../../shared";
 import { OperationPlan } from "../../models";
 import { OperationPlansRepository } from "../../repository";
 
@@ -42,53 +43,20 @@ import { OperationPlansRepository } from "../../repository";
       `,
     tag: "vp-opplan-select"
 })
-export class OperationPlanSelectPage extends VetproviehElement {
-    public static PARAM_KEY = "measures.selectedOperationPlans";
-    
+export class OperationPlanSelectPage extends BasicSelectPage {
     private repository: OperationPlansRepository = new OperationPlansRepository();
 
-    constructor() {
-        super(false, false)
-        this.loadOperationPlans();
-    }
-
     connectedCallback() {
-        this.render();
-        this.registerEventListener();
+        super.connectedCallback();
         let list: VetproviehList = this.vetproviehList;
-        if(list) list.repository = this.repository;
+        if (list) list.repository = this.repository;
     }
-
     /**
-     * Load OperationPlans to present them
+     * Return Value
+     * @return {any}
      */
-    private loadOperationPlans() {
-
-    }
-
-    /**
-     * Register different Event-Listener
-     */
-    private registerEventListener() {
-        this.takeoverButton.addEventListener('click', (event) => {
-            VetproviehNavParams.set(OperationPlanSelectPage.PARAM_KEY, this.selectedOperationPlans);
-        })
-    }
-
-    /**
-     * Load Takeover-Button from DOM
-     * @return {HTMLButtonElement}
-     */
-    private get takeoverButton(): HTMLButtonElement {
-        return document.getElementById("takeoverButton") as HTMLButtonElement;
-    }
-
-    /**
-     * Load Abort-Button from DOM
-     * @return {HTMLButtonElement}
-     */
-    private get abortButton(): HTMLButtonElement {
-        return document.getElementById("abortButton") as HTMLButtonElement;
+    protected get returnValue(): any {
+        return this.selectedOperationPlans;
     }
 
     /**
@@ -114,9 +82,9 @@ export class OperationPlanSelectPage extends VetproviehElement {
      */
     public get selectedOperationPlanIds(): Array<number> {
         let inputCheckboxes = this.vetproviehList.shadowRoot?.querySelectorAll("input[type='checkbox']");
-        let returnValue : number[]= [];
+        let returnValue: number[] = [];
         inputCheckboxes?.forEach((checkbox) => {
-            if((checkbox as any).checked){
+            if ((checkbox as any).checked) {
                 returnValue.push(+(checkbox as any).value);
             }
         })

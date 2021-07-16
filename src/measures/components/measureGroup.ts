@@ -1,12 +1,17 @@
 import { MeasureFieldComponent } from "./measureField";
-import { ElementGroupBinding, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { ElementGroupBinding, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
+import { OperationPlanSelectPage } from "../../careplans";
+import { SelectButton } from "../../shared";
 
 /**
  * Pager OperationGroup
  */
 @WebComponent({
     template: `<div id="group" class="panel is-primary">
+                    <select-button href="/careplans/operational/select.html" name="Test-Button">
+                        
+                    </select-button>
                     <p class="panel-heading">
                        {{position}}. {{name}}
 
@@ -24,6 +29,10 @@ import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
 export class MeasureGroupComponent extends ElementGroupBinding {
 
 
+    connectedCallback() {
+        super.connectedCallback();
+    }
+
     /**
    * Returns the subFields of the object
    * must be overwritten in the children
@@ -40,5 +49,14 @@ export class MeasureGroupComponent extends ElementGroupBinding {
      */
     protected newElement(): ElementBinding {
         return new MeasureFieldComponent();
+    }
+
+    _afterRender() {
+        super._afterRender();
+        let selectButton = this.querySelector("select-button") as SelectButton;
+        if(selectButton){
+            console.log("Antwort vom Select-button")
+            console.log(selectButton.recievedParam);
+        }
     }
 }
