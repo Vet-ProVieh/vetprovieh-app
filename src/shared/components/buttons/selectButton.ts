@@ -2,9 +2,13 @@ import { VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/
 import { BasicSelectPage } from "../pages";
 
 @WebComponent({
-    template: `
+    template: 
+        VetproviehElement.template + `
         <a href="\${this.href}?returnUrl=\${this.currentAbsoluteUrl}" class="button is-link">
-        \${this.name}
+            <span class="icon is-small">
+                <i class="fas fa-search"></i>
+            </span>
+            <span>\${this.name}</span>
         </a>
     `,
     tag: `select-button`

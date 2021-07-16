@@ -51,12 +51,14 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         return new MeasureFieldComponent();
     }
 
+
     _afterRender() {
         super._afterRender();
         let selectButton = this.querySelector("select-button") as SelectButton;
-        if(selectButton){
+        if (selectButton) {
             console.log("Antwort vom Select-button")
             console.log(selectButton.recievedParam);
+            selectButton.hidden = true;
         }
     }
 }
