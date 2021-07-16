@@ -5,11 +5,11 @@
 }
 
 .has-background-vetprovieh-blue{
-    background-color: #0a143a;
+    background-color: #0a143a !important;
     padding: 2px;
 }
 .has-background-vetprovieh-light-blue{
-    background-color: #233f68;
+    background-color: #233f68 !important;
 }
 
 .navbar-center {

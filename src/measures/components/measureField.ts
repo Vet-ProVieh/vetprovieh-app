@@ -42,6 +42,15 @@ export class MeasureFieldComponent extends ElementBinding {
         }
     }
 
+    public attachValue(value: any){
+        if(this.object.detailsType == "textArea"){
+            let inputfield = this.querySelector("textarea") as HTMLTextAreaElement;
+            if(inputfield){
+                inputfield.value += `${value}\r\n`;
+            }
+        }
+    }
+
     /**
      * Returning template
      * @return {string}

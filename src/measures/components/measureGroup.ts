@@ -9,9 +9,7 @@ import { SelectButton } from "../../shared";
  */
 @WebComponent({
     template: `<div id="group" class="panel is-primary">
-                    <select-button href="/careplans/operational/select.html" name="Test-Button">
                         
-                    </select-button>
                     <p class="panel-heading">
                        {{position}}. {{name}}
 
@@ -20,9 +18,14 @@ import { SelectButton } from "../../shared";
                         <i class="fas fa-bars"></i>
                         </button>
                     </p>
-                    <div id="fields" class="panel-block" style="display:block">
-                    
+                    <div class="panel-block" style="display:block">
+                       <div id="selectField"></div>
+
+                        <div id="fields" >
+                        
+                        </div>
                     </div>
+
                 </div>`,
     tag: 'vp-measure-group'
 })
@@ -51,13 +54,35 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         return new MeasureFieldComponent();
     }
 
+    renderselectButton() {
+        if (this.object.name == "Gründe für das Überschreiten der Kennzahl 2") {
+            let button = ` <select-button href="/careplans/operational/select.html" name="Übernahme aus Betreuungsmanagement">
+                 </select-button>
+                 <hr/>`;
+
+            let selectFieldWrapper = this.querySelector('#selectField') as HTMLElement
+            if (selectFieldWrapper) selectFieldWrapper.innerHTML = button;
+
+        }
+    }
+
+    private processSelectButtonAnswer(answer: any[]){
+        let sektion : MeasureFieldComponent = this._subfieldBindings.filter((x) => x.object.name == "Sektion")[0];
+        console.log(sektion);
+        answer.forEach((part:any) => {
+            sektion.attachValue(`${part.id}: ${part.name}`);
+        })
+    }
+
 
     _afterRender() {
         super._afterRender();
+        this.renderselectButton();
         let selectButton = this.querySelector("select-button") as SelectButton;
         if (selectButton) {
             console.log("Antwort vom Select-button")
-            console.log(selectButton.recievedParam);
+            this.processSelectButtonAnswer(selectButton.recievedParam);
+            selectButton.scrollIntoView();
         }
     }
 }

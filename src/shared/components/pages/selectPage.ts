@@ -38,8 +38,12 @@ export class BasicSelectPage extends VetproviehElement {
         });
 
         this.takeoverButton.addEventListener('click', () => {
-            this.setReturnValue();
-            this.navigateBack();
+            if (this.hasSelectedItems()) {
+                this.setReturnValue();
+                this.navigateBack();
+            } else {
+                alert("Es wurden keine Einträge markiert");
+            }
         })
     }
 
@@ -59,11 +63,21 @@ export class BasicSelectPage extends VetproviehElement {
     }
 
     /**
+     * Checks if items where selcted
+     * @returns {boolean}
+     */
+    protected hasSelectedItems(): boolean {
+        return Array.isArray(this.returnValue) && this.returnValue.length > 0 || 
+        !Array.isArray(this.returnValue) && this.returnValue != undefined;
+    }
+
+
+    /**
      * Setting ReturnValue
      */
     private setReturnValue() {
-        let current : Array<any> = VetproviehNavParams.get(BasicSelectPage.PARAM_KEY)
-        if(!Array.isArray(current) || current == null || current == undefined) current = [];
+        let current: Array<any> = VetproviehNavParams.get(BasicSelectPage.PARAM_KEY)
+        if (!Array.isArray(current) || current == null || current == undefined) current = [];
         current.push(this.returnValue);
         VetproviehNavParams.set(BasicSelectPage.PARAM_KEY, current);
     }
