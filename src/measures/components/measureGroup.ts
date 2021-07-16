@@ -58,7 +58,6 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         if (selectButton) {
             console.log("Antwort vom Select-button")
             console.log(selectButton.recievedParam);
-            selectButton.hidden = true;
         }
     }
 }
