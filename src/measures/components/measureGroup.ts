@@ -1,5 +1,5 @@
 import { MeasureFieldComponent } from "./measureField";
-import { ElementGroupBinding, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
 import { OperationPlanSelectPage } from "../../careplans";
 import { SelectButton } from "../../shared";
@@ -8,15 +8,12 @@ import { SelectButton } from "../../shared";
  * Pager OperationGroup
  */
 @WebComponent({
-    template: `<div id="group" class="panel is-primary">
+    template: VetproviehElement.template + 
+              `<div id="group" class="panel is-primary" style="margin-bottom: 20px">
                         
-                    <p class="panel-heading">
+                    <p class="panel-heading" style="cursor:pointer">
                        {{position}}. {{name}}
 
-                        <button id="openButton" class="button is-primary is-hidden-tablet" type="button"
-                        style="right: 0.8em;position: absolute;top: 1.2em;">
-                        <i class="fas fa-bars"></i>
-                        </button>
                     </p>
                     <div class="panel-block" style="display:block">
                        <div id="selectField"></div>
@@ -66,12 +63,28 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         }
     }
 
-    private processSelectButtonAnswer(answer: any[]){
-        let sektion : MeasureFieldComponent = this._subfieldBindings.filter((x) => x.object.name == "Sektion")[0];
+    private processSelectButtonAnswer(answer: any[]) {
+        let sektion: MeasureFieldComponent = this._subfieldBindings.filter((x) => x.object.name == "Sektion")[0];
         console.log(sektion);
-        answer.forEach((part:any) => {
+        answer.forEach((part: any) => {
             sektion.attachValue(`${part.id}: ${part.name}`);
         })
+    }
+
+    /**
+     * Getting Panel Heading
+     * @return {HTMLElement}
+     */
+    private get panelHeading(): HTMLElement {
+        return this.querySelector(".panel-heading") as HTMLElement;
+    }
+
+    /**
+    * Getting Panel Block
+    * @return {HTMLElement}
+    */
+    private get panelBlock(): HTMLElement {
+        return this.querySelector(".panel-block") as HTMLElement;
     }
 
 
@@ -83,6 +96,13 @@ export class MeasureGroupComponent extends ElementGroupBinding {
             console.log("Antwort vom Select-button")
             this.processSelectButtonAnswer(selectButton.recievedParam);
             selectButton.scrollIntoView();
+        }
+
+        let panelHeading = this.panelHeading;
+        if (panelHeading) {
+            panelHeading.addEventListener("click", () => {
+                this.hideElement(this.panelBlock);
+            });
         }
     }
 }
