@@ -36,8 +36,8 @@ export class TreatmentKeysSelect extends FieldWithLabel {
     private renderOptions(): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             this.optionsAsHtml = `<option value="">Keine Behandlung</option>`;
-            this.repository.keys().then((keys: TreatmentKeys) => {
-                keys.enums.forEach((value: string) => {
+            this.repository.keys().then((keys: string[]) => {
+                keys.forEach((value: string) => {
                     let option = document.createElement("option") as HTMLOptionElement;
                     option.value = value;
                     option.innerHTML = value;

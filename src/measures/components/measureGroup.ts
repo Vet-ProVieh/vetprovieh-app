@@ -8,8 +8,8 @@ import { SelectButton } from "../../shared";
  * Pager OperationGroup
  */
 @WebComponent({
-    template: VetproviehElement.template + 
-              `<div id="group" class="panel is-primary" style="margin-bottom: 20px">
+    template: VetproviehElement.template +
+        `<div id="group" class="panel is-primary" style="margin-bottom: 20px">
                         
                     <p class="panel-heading" style="cursor:pointer">
                        {{position}}. {{name}}
@@ -66,9 +66,11 @@ export class MeasureGroupComponent extends ElementGroupBinding {
     private processSelectButtonAnswer(answer: any[]) {
         let sektion: MeasureFieldComponent = this._subfieldBindings.filter((x) => x.object.name == "Sektion")[0];
         console.log(sektion);
-        answer.forEach((part: any) => {
-            sektion.attachValue(`${part.id}: ${part.name}`);
-        })
+        if (answer) {
+            answer.forEach((part: any) => {
+                sektion.attachValue(`${part.id}: ${part.name}`);
+            })
+        }
     }
 
     /**

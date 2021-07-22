@@ -10,7 +10,7 @@ export class DrugTreatmentKeysRepository extends BaseRepository<TreatmentKeys> {
      * Getting All
      * @returns Promise<T[]>
      */
-     keys(): Promise<TreatmentKeys> {
+     keys(): Promise<string[]> {
         return fetch(this.endpoint).then((response) => {
             if(response.status === 404){
                 return [];

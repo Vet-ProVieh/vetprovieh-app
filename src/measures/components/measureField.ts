@@ -11,8 +11,18 @@ import { InputFactory } from "../../careplans/operational/components/field/input
 })
 export class MeasureFieldComponent extends ElementBinding {
 
+    private _isValid: boolean = false;
+
     constructor(){
         super();
+    }
+
+    /**
+     * is MeasureField valid
+     * @return {Boolean}
+     */
+    get isValid(): boolean {
+        return this._isValid;
     }
 
 
@@ -39,6 +49,16 @@ export class MeasureFieldComponent extends ElementBinding {
                 let repository = this.getChoiceRepository(this.object.choiceSrc);
                 if(repository) vetproviehSelect.repository = repository;
             }
+        }
+    }
+
+    private addValidListener() {
+        let field = this.querySelector(".field") as HTMLElement
+        let input = field.children[0] as HTMLInputElement;
+        if(input){
+            input.addEventListener("change", () => {
+                this._isValid = input.checkValidity()
+            });
         }
     }
 
