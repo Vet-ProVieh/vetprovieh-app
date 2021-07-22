@@ -5,8 +5,9 @@ import { WebComponent, VetproviehElement, VetproviehNavParams, ElementGroupBindi
 import { Measure, MeasureGroup } from "../models";
 import { Barn, BarnListShow } from "../../barns";
 import { DynamicForm } from "../../shared/components/forms/dynamicForm";
-import { RenderType } from "../../shared";
+import { ObjectiveModal, RecordingVideoModal, RenderType } from "../../shared";
 import { Objective } from "../models/objective";
+import { ObjectiveItemComponent } from "./objectiveItem";
 
 /**
  * Controller for Page
@@ -34,8 +35,10 @@ import { Objective } from "../models/objective";
         <hr/>
         <div id="objectives">
           <vp-objective-item></vp-objective-item>
+          <vp-objective-item></vp-objective-item>
+          <vp-objective-item></vp-objective-item>
         </div>
-        
+        <objective-modal id="modal"></objective-modal>
     </div>
     `,
   tag: "vp-objectives",
@@ -44,14 +47,14 @@ export class ObjectivesComponent extends VetproviehElement {
 
   private _objectives:Objective[] = [];
   
+  
   public get objectives() : Objective[] {
     return this._objectives;
   }
 
   public set objectives(val: Objective[]){
     this._objectives = val;
-    //UI kann auf Veränderungen reagieren
-    this.render();
+    this.renderObjectives();
   }
 
 
@@ -59,8 +62,45 @@ export class ObjectivesComponent extends VetproviehElement {
     super();
   }
 
+  renderObjectives() {
+
+    let container = this.objectivesContainer();
+    container.innerHTML = "";
+    if(this.objectives){
+      this.objectives.forEach((objective) => this.addObjective(objective));
+    }
+  }
+
+  private addObjective(objective: Objective){
+    let container = this.objectivesContainer();
+    let objectiveItem = new ObjectiveItemComponent();
+    objectiveItem.objective = objective;
+    container.appendChild(objectiveItem);
+
+  }
+
+  private objectivesContainer() : HTMLElement {
+    return this.shadowRoot?.getElementById("objectives") as HTMLElement;
+  }
+
   connectedCallback(){
     console.log(this.objectives);
+    let btnAddMeasure = this.shadowRoot?.getElementById("addMeasure") as HTMLButtonElement;
+    btnAddMeasure.addEventListener("click", () => {
+      let modal = this.shadowRoot?.getElementById("modal") as ObjectiveModal;
+      modal.active = true;
+    });
+
+    
+
+
+    let modal = this.shadowRoot?.getElementById("modal") as HTMLButtonElement;
+    modal.addEventListener("save", (event: Event) => {
+      let object = (event as CustomEvent).detail;
+      if(object){
+        this.addObjective(object);
+      }
+    });
   }
 
 

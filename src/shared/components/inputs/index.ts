@@ -12,3 +12,5 @@ export { RecordingImageModal} from './includes/recording-image-modal';
 export { VetproviehVideo } from './includes/vetprovieh-video';
 export { VetproviehImage } from './includes/vetprovieh-image';
 export { VetproviehAudio } from './includes/vetprovieh-audio';
+export { SimpleModal } from './includes/simple-modal';
+export { ObjectiveModal } from './includes/objective-modal';

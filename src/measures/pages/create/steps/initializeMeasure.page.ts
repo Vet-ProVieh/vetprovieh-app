@@ -15,7 +15,7 @@ export class InitializeMeasurePage extends HTMLElement {
     }
 
     connectedCallback() {
-        this.barnShower.attributeChangedCallback("barnid","", VetproviehNavParams.getUrlParameter("barn_id"));
+        this.barnShower.barnid = VetproviehNavParams.getUrlParameter("barn_id");
 
         this.initializeButton.addEventListener("click", () => {
             let date = (document.getElementById("measures-date") as HTMLInputElement).value;
@@ -27,19 +27,25 @@ export class InitializeMeasurePage extends HTMLElement {
             });
         });
 
-        this.therapyFrequencySlider.addEventListener("change", () => {
+        this.therapyFrequencySlider.addEventListener("input", () => {
             this.therapyFrequencyText.value = this.therapyFrequencySlider.value;
+            console.log("slider input");
         })
 
         this.therapyFrequencyText.addEventListener("keyup", () => {
             this.therapyFrequencySlider.value = this.therapyFrequencyText.value;
             console.log(this.therapyFrequencySlider.value);
+            console.log("textinput");
         })
     }
 
 
     private get initializeButton(): HTMLButtonElement {
         return document.getElementById("btn-new") as HTMLButtonElement;
+    }
+
+    private get datePicker(): HTMLElement {
+        return document.getElementById("measures-date") as HTMLElement;
     }
 
     private get therapyFrequencySlider(): HTMLInputElement {
