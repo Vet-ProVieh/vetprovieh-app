@@ -8,7 +8,7 @@ export class Measure extends BasicModel{
     public animalNumber: string = "";
     public barnId: number | undefined;
     public barn: Barn | undefined;
-    public measureGroups: MeasureGroup[] = [];
+    public data: MeasureGroup[] = [];
     public isBlueprint: boolean = true;
     public measuresDate: string = "";
     public objectives: Objective[] = [];

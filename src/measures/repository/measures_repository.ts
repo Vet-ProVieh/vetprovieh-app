@@ -7,6 +7,22 @@ export class MeasuresRepository extends BaseRepository<Measure>{
         super("/service/measures");
     }
 
+    /**
+     * Get last filledout Measure for Barn
+     * @param {number} barnId
+     * @returns {Promise<Measure>}
+     */
+    lastforBarn(barnId: number): Promise<Measure>{
+      return fetch(`${this.endpoint}/barn/${barnId}/last`)
+            .then((response) => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    throw Error(response.statusText);
+                }
+            });
+    }
+
     /*
     all(): Promise<Measure[]>{
         const tmp = new Promise<Measure[]>((resolve, reject) => {
