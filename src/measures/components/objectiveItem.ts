@@ -1,6 +1,8 @@
 
 import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { KeyResult } from "../models/keyresult";
 import { Objective } from "../models/objective";
+import { KeyResultComponent } from "./keyResult";
 
 /**
  * Controller for Page
@@ -48,10 +50,7 @@ import { Objective } from "../models/objective";
                     </p>
                 </header>
                 <div class="card-content dropdown-content" id="content">
-                    <div class="content">
-                        <vp-key-result></vp-key-result>
-                        <vp-key-result></vp-key-result>
-                        <vp-key-result></vp-key-result>
+                    <div class="content" id="keyResults">
                     </div>
                     <div class="columns is-gapless">
                         <div class="column">
@@ -83,7 +82,22 @@ export class ObjectiveItemComponent extends VetproviehElement {
   public set objective(val: Objective){
     this._objective = val;
     //UI kann auf Veränderungen reagieren
-    this.render();
+    this.renderKeyResults();
+  }
+
+  private renderKeyResults(){
+    let container = this.keyResultsContainer();
+    container.innerHTML = "";
+    this.objective.keyResults.forEach((keyResult) => {
+        this.addKeyResult(keyResult);
+    })
+  }
+
+  private addKeyResult(keyResult: KeyResult){
+    let container = this.keyResultsContainer();
+    let keyResultItem = new KeyResultComponent();
+    keyResultItem.keyResult = keyResult;
+    container.appendChild(keyResultItem);
   }
 
 
@@ -99,7 +113,6 @@ export class ObjectiveItemComponent extends VetproviehElement {
     cardBody.style.display = "none";
 
     btn.addEventListener("click", () => {
-        console.log(cardBody.style.display);
         if(cardBody.style.display == "none"){
             cardBody.style.display = "block";
             arrow.style.transform = "rotate(180deg)";
@@ -107,15 +120,17 @@ export class ObjectiveItemComponent extends VetproviehElement {
             cardBody.style.display = "none";
             arrow.style.transform = "rotate(0deg)";
         }
-        
-        console.log("changed to " + cardBody.style.display);
     });
     console.log(this.objective);
     this.setAttributes();
   }
 
   private setAttributes(){
-      (this.shadowRoot?.getElementById("name") as HTMLElement).innerText = this.objective.name
+      (this.shadowRoot?.getElementById("name") as HTMLElement).innerText = this.objective.name;
+  }
+
+  private keyResultsContainer(){
+      return this.shadowRoot?.getElementById("keyResults") as HTMLElement;
   }
 
 

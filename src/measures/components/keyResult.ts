@@ -12,7 +12,7 @@ import { Objective } from "../models/objective";
     VetproviehElement.template +
     `
     <div class="columns">
-        <div class="column">
+        <div class="column" id="name">
             Ich bin ein KeyResult
         </div>
         <div class="column is-one-third" style="text-align: right;">
@@ -44,36 +44,38 @@ export class KeyResultComponent extends VetproviehElement {
   }
 
   connectedCallback(){
+    (this.shadowRoot?.getElementById("name") as HTMLElement).innerText = this.keyResult.name;
     let checkKeyResult = this.shadowRoot?.getElementById("check") as HTMLElement;
     checkKeyResult.addEventListener("click", () => {
-        console.log(this._keyResult.value);
-        switch(this._keyResult.value){
-            case 0:
-                this.keyResult.value++;
-                checkKeyResult.classList.remove(...checkKeyResult.classList);
-                checkKeyResult.classList.add("fas");
-                checkKeyResult.classList.add("fa-check-double");
-                break;
-            case 1:
-                this._keyResult.value++;
-                checkKeyResult.classList.remove(...checkKeyResult.classList);
-                checkKeyResult.classList.add("fas");
-                checkKeyResult.classList.add("fa-check-double");
-                checkKeyResult.style.color = "#03fc07";
-                break;
-            case 2:
-                this._keyResult.value = 0;
-                checkKeyResult.classList.remove(...checkKeyResult.classList);
-                checkKeyResult.classList.add("fas");
-                checkKeyResult.classList.add("fa-check");
-                checkKeyResult.style.color = "black";
-                break;
-        }
-        
+      this.toggleState();
     });
   }
 
-
+  private toggleState(){
+    let checkKeyResult = this.shadowRoot?.getElementById("check") as HTMLElement;
+    switch(this._keyResult.value){
+      case 0:
+          this.keyResult.value++;
+          checkKeyResult.classList.remove(...checkKeyResult.classList);
+          checkKeyResult.classList.add("fas");
+          checkKeyResult.classList.add("fa-check-double");
+          break;
+      case 1:
+          this._keyResult.value++;
+          checkKeyResult.classList.remove(...checkKeyResult.classList);
+          checkKeyResult.classList.add("fas");
+          checkKeyResult.classList.add("fa-check-double");
+          checkKeyResult.style.color = "#03fc07";
+          break;
+      case 2:
+          this._keyResult.value = 0;
+          checkKeyResult.classList.remove(...checkKeyResult.classList);
+          checkKeyResult.classList.add("fas");
+          checkKeyResult.classList.add("fa-check");
+          checkKeyResult.style.color = "black";
+          break;
+      }
+  }
 
   
 

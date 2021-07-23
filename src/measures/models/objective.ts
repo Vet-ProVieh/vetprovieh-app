@@ -6,5 +6,6 @@ export class Objective extends BasicModel{
     public date: string = "";
     public position: number = 0;
     public active: boolean = true;
+    public welfare: boolean = false;
     public keyResults: KeyResult[] = [];
 }
