@@ -19,6 +19,11 @@ import { SimpleModal } from "./simple-modal";
                     <div class="control">
                         <input class="input" type="text" placeholder="" id="objectiveName">
                 </div>
+                
+                <label class="checkbox">
+                <input type="checkbox" id="welfare">
+                Tierwohl
+            </label>
             </div>
             <div class="field">
                 <label class="label">Durchzuführen bis:</label>
@@ -45,6 +50,7 @@ import { SimpleModal } from "./simple-modal";
                             </button>
                         </div>
                     </div>
+                    
             </div>
         </section>
         <footer class="modal-card-foot"> 
@@ -68,8 +74,6 @@ import { SimpleModal } from "./simple-modal";
 })
 export class ObjectiveModal extends SimpleModal {
 
-    public static NAVIGATION_KEY :string = "NewObjective";
-
     private _objective:Objective = new Objective();
 
 
@@ -80,11 +84,13 @@ export class ObjectiveModal extends SimpleModal {
 
         let btnSave = this.shadowRoot?.getElementById("save") as HTMLButtonElement;
         btnSave.addEventListener("click", () => {
-            this._objective.name = (this.shadowRoot?.getElementById("objectiveName") as HTMLInputElement).value;
-            this._objective.date = (this.shadowRoot?.getElementById("objectiveDate") as HTMLInputElement).value;
+            this._objective.name = this.objectiveName;
+            this._objective.date = this.objectiveDate;
+            this._objective.welfare = this.objectiveWelfare;
+            (this.shadowRoot?.getElementById("objectiveDate") as HTMLInputElement).value = "";
             this._objective.keyResults = this.getKeyResults();
-            // VetproviehNavParams.set(ObjectiveModal.NAVIGATION_KEY, this._objective);
             this.dispatchEvent(new CustomEvent("save", {detail: this._objective}));
+            this.resetFields();
             this.close();
         });
         
@@ -104,32 +110,71 @@ export class ObjectiveModal extends SimpleModal {
         });
 
         (this.shadowRoot?.getElementById("cancel") as HTMLButtonElement).addEventListener("click", () => {
+            this.resetFields();
             this.close();
         });
 
         (this.shadowRoot?.getElementById("closeButton") as HTMLButtonElement).addEventListener("click", () => {
+            this.resetFields();
             this.close();
         });
     }
 
     private getKeyResults(){
         let keyResults:KeyResult[] = []
-        let elems = this.keyResults;
         let pos = 0;
-        for(let i=0; i<elems.childNodes.length; i++){ 
-            if(elems.childNodes[i].nodeName == "INPUT" && (elems.childNodes[i] as HTMLInputElement).value != ""){
+        this.keyResults.childNodes.forEach((node)=>{
+            if(node.nodeName == "INPUT" && (node as HTMLInputElement).value != ""){
                 let kr = new KeyResult();
-                kr.name = (elems.childNodes[i] as HTMLInputElement).value;
+                kr.name = (node as HTMLInputElement).value;
                 kr.position = pos;
                 pos++;
                 keyResults.push(kr);
             }
-        }
+        });
         return keyResults;
     }
 
     private get keyResults(){
         return this.shadowRoot?.getElementById("keyResults") as HTMLElement;
+    }
+
+    private get objectiveName(){
+        return (this.shadowRoot?.getElementById("objectiveName") as HTMLInputElement).value;
+    }
+
+    private set objectiveName(val: string){
+        (this.shadowRoot?.getElementById("objectiveName") as HTMLInputElement).value = val;
+    }
+
+    private get objectiveDate(){
+        return (this.shadowRoot?.getElementById("objectiveDate") as HTMLInputElement).value;
+    }
+
+    private set objectiveDate(val: string){
+        (this.shadowRoot?.getElementById("objectiveDate") as HTMLInputElement).value = val;
+    }
+
+    private get objectiveWelfare(){
+        return (this.shadowRoot?.getElementById("welfare") as HTMLInputElement).checked;
+    }
+
+    private set objectiveWelfare(val: boolean){
+        (this.shadowRoot?.getElementById("welfare") as HTMLInputElement).checked = val;
+    }
+
+    
+
+    private resetFields(){
+        //Reset all input fields
+        this.objectiveName = "";
+        this.objectiveDate = "";
+        this.objectiveWelfare = false;
+        this.keyResults.childNodes.forEach((node)=>{
+            if(node.nodeName == "INPUT"){
+                (node as HTMLInputElement).value = "";
+            }
+        });
     }
 
 }

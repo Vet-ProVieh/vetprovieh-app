@@ -34,9 +34,15 @@ import { ObjectiveItemComponent } from "./objectiveItem";
         </div>
         <hr/>
         <div id="objectives">
-          <vp-objective-item></vp-objective-item>
-          <vp-objective-item></vp-objective-item>
-          <vp-objective-item></vp-objective-item>
+          <h4 class="subtitle is-4">Antibiotika Maßnahmen</h4>
+          <div id="antibiotics">
+
+          </div>
+          <br>
+          <h4 class="subtitle is-4">Tierwohl Maßnahmen</h4>
+          <div id="welfare">
+
+          </div>
         </div>
         <objective-modal id="modal"></objective-modal>
     </div>
@@ -72,7 +78,12 @@ export class ObjectivesComponent extends VetproviehElement {
   }
 
   private addObjective(objective: Objective){
-    let container = this.objectivesContainer();
+    let container = undefined;
+    if(objective.welfare){
+      container = this.welfareContainer();
+    }else{
+      container = this.antibioticsContainer();
+    }
     let objectiveItem = new ObjectiveItemComponent();
     objectiveItem.objective = objective;
     container.appendChild(objectiveItem);
@@ -81,6 +92,14 @@ export class ObjectivesComponent extends VetproviehElement {
 
   private objectivesContainer() : HTMLElement {
     return this.shadowRoot?.getElementById("objectives") as HTMLElement;
+  }
+
+  private welfareContainer() : HTMLElement {
+    return this.shadowRoot?.getElementById("welfare") as HTMLElement;
+  }
+
+  private antibioticsContainer() : HTMLElement {
+    return this.shadowRoot?.getElementById("antibiotics") as HTMLElement;
   }
 
   connectedCallback(){
