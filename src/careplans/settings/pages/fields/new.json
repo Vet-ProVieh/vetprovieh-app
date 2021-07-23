@@ -7,6 +7,6 @@
     "position": null,
     "validators": [],
     "voiceInputable": false,
-    "treatmentKeys": "",
+    "treatmentKeys": "Diagnose",
     "groups": {}
 }

@@ -9,6 +9,7 @@ export class CareplanField extends BasicModel {
     position: number = 0;
     voiceInputable: boolean = false;
     validators: any[] = [];
+    treatmentKeys: string = "";
     groups: any;
     
     /**

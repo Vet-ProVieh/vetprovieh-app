@@ -19,7 +19,7 @@ import { ObjectiveItemComponent } from "./objectiveItem";
     ` 
     <div id="group">
         <div id="detail" class="container">
-        <div class="columns is-mobile">
+          <div class="columns is-mobile mx-2">
               <div class="column">
                 <input id="loadMeasure" 
                         class="button is-link is-fullwidth" 
@@ -51,14 +51,14 @@ import { ObjectiveItemComponent } from "./objectiveItem";
 })
 export class ObjectivesComponent extends VetproviehElement {
 
-  private _objectives:Objective[] = [];
-  
-  
-  public get objectives() : Objective[] {
+  private _objectives: Objective[] = [];
+
+
+  public get objectives(): Objective[] {
     return this._objectives;
   }
 
-  public set objectives(val: Objective[]){
+  public set objectives(val: Objective[]) {
     this._objectives = val;
     this.renderObjectives();
   }
@@ -68,61 +68,108 @@ export class ObjectivesComponent extends VetproviehElement {
     super();
   }
 
-  renderObjectives() {
 
+  /**
+   * Connected-Callback
+   */
+  connectedCallback() {
+    this.bindManualAddButton();
+    this.configureModal();
+  }
+
+  /**
+   * Rendering objectives First Time
+   */
+  renderObjectives() {
     let container = this.objectivesContainer();
     container.innerHTML = "";
-    if(this.objectives){
-      this.objectives.forEach((objective) => this.addObjective(objective));
-    }
+    this.objectives?.forEach((objective) => this.addObjective(objective));
   }
 
-  private addObjective(objective: Objective){
-    let container = undefined;
-    if(objective.welfare){
-      container = this.welfareContainer();
-    }else{
-      container = this.antibioticsContainer();
-    }
+  /**
+   * Adding Objective to Container
+   * @param {Objective} objective 
+   */
+  private addObjective(objective: Objective) {
     let objectiveItem = new ObjectiveItemComponent();
     objectiveItem.objective = objective;
-    container.appendChild(objectiveItem);
-
+    this.selectContainer(objective)?.appendChild(objectiveItem);
   }
 
-  private objectivesContainer() : HTMLElement {
+  /**
+   * Select Display-Container
+   * @param {Objective} objective 
+   * @returns {HTMLElement}
+   */
+  private selectContainer(objective: Objective): HTMLElement {
+    if (objective.welfare) {
+      return this.welfareContainer();
+    } else {
+      return this.antibioticsContainer();
+    }
+  }
+
+  /**
+   * Get Objectives-DOM-Element
+   * @returns {HTMLElement}
+   */
+  private objectivesContainer(): HTMLElement {
     return this.shadowRoot?.getElementById("objectives") as HTMLElement;
   }
 
-  private welfareContainer() : HTMLElement {
+  /**
+   * Get Welfare-DOM-Element
+   * @returns {HTMLElement}
+   */
+  private welfareContainer(): HTMLElement {
     return this.shadowRoot?.getElementById("welfare") as HTMLElement;
   }
 
-  private antibioticsContainer() : HTMLElement {
+  /**
+   * Get Antibiotics-DOM-Element
+   * @returns {HTMLElement}
+   */
+  private antibioticsContainer(): HTMLElement {
     return this.shadowRoot?.getElementById("antibiotics") as HTMLElement;
   }
 
-  connectedCallback(){
-    console.log(this.objectives);
-    let btnAddMeasure = this.shadowRoot?.getElementById("addMeasure") as HTMLButtonElement;
-    btnAddMeasure.addEventListener("click", () => {
-      let modal = this.shadowRoot?.getElementById("modal") as ObjectiveModal;
-      modal.active = true;
+  /**
+  * Get Manual-AddButton-DOM-Element
+  * @returns {HTMLElement}
+  */
+  private get manualAddButton(): HTMLButtonElement {
+    return this.shadowRoot?.getElementById("addMeasure") as HTMLButtonElement;
+  }
+
+
+  /**
+  * Get Objectives-Modal-DOM-Element
+  * @returns {HTMLElement}
+  */
+  private get objectivesModal(): ObjectiveModal {
+    return this.shadowRoot?.getElementById("modal") as ObjectiveModal;
+  }
+
+  /**
+   * Bind Click Event to Manual Add button
+   */
+  private bindManualAddButton() {
+    this.manualAddButton?.addEventListener("click", () => {
+      this.objectivesModal.active = true;
     });
+  }
 
-    
-
-
-    let modal = this.shadowRoot?.getElementById("modal") as HTMLButtonElement;
-    modal.addEventListener("save", (event: Event) => {
+  /**
+   * Configuring Callback from Modal
+   */
+  private configureModal() {
+    this.objectivesModal?.addEventListener("save", (event: Event) => {
       let object = (event as CustomEvent).detail;
-      if(object){
+      if (object) {
         this.addObjective(object);
       }
     });
   }
 
-
-  
 
 }
