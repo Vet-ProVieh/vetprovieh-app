@@ -1,17 +1,19 @@
 
 import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { ObjectiveModal } from "./objective-modal";
 import { KeyResult } from "../models/keyresult";
 import { Objective } from "../models/objective";
 import { KeyResultComponent } from "./keyResult";
+import { QuestionModal } from "../../shared";
 
 /**
  * Controller for Page
  * pages/operations/plans/create or edit
  */
 @WebComponent({
-  template:
-    VetproviehElement.template +
-    ` 
+    template:
+        VetproviehElement.template +
+        ` 
     <style>
         .dropdown {
             position: relative;
@@ -19,7 +21,6 @@ import { KeyResultComponent } from "./keyResult";
         }
 
         .dropdown-content {
-            display: none;
             position: relative;
             background-color: #f9f9f9;
             min-width: 160px;
@@ -28,38 +29,41 @@ import { KeyResultComponent } from "./keyResult";
             z-index: 1;
         }
 
+        #btn-dropdown {
+            cursor: pointer;
+        }
+
         
     </style>
 
+    <objective-modal id="modal"></objective-modal>
     <div class="columns is-centered">
         <div class="column is-two-thirds is-centered">
             <div class="card dropdown">
-                <header class="card-header">
-                    <p class="card-header-title" id="name">
-                        Card header
+                <header id="btn-dropdown" class="card-header">
+                    <p class="card-header-title">
+                        \${this.objective.name}
                     </p>
-                    <p class="card-header-title">Bis:&nbsp;&nbsp; 
-                    <input type="date" id="until" name="trip-start" style="border: none;"
-                        value="2018-07-22">
-                    
+                    <p class="card-header-title">
+                        Bis:&nbsp;&nbsp; \${this.objective.date}
                     </p>
-                    <p class="card-header-icon" aria-label="more options" id="btn-dropdown">
+                    <p class="card-header-icon" aria-label="more options">
                         <span class="icon">
                             <i class="fas fa-angle-down" aria-hidden="true" id="arrow"></i>
                         </span>
                     </p>
                 </header>
-                <div class="card-content dropdown-content" id="content">
+                <div id="content" class="card-content dropdown-content is-hidden">
                     <div class="content" id="keyResults">
                     </div>
-                    <div class="columns is-gapless">
+                    <div class="columns">
                         <div class="column">
-                            <button class="button is-danger is-fullwidth">
+                            <button id="deleteButton" class="button is-danger is-fullwidth">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
                         <div class="column">
-                            <button class="button is-info is-fullwidth">
+                            <button id="editButton" class="button is-info is-fullwidth">
                                 <i class="fas fa-edit"></i>
                             </button>
                         </div>
@@ -69,71 +73,142 @@ import { KeyResultComponent } from "./keyResult";
         </div>
     </div>
     `,
-  tag: "vp-objective-item",
+    tag: "vp-objective-item",
 })
 export class ObjectiveItemComponent extends VetproviehElement {
 
-  private _objective:Objective = new Objective();
-  
-  public get objective() : Objective {
-    return this._objective;
-  }
+    private _objective: Objective = new Objective();
 
-  public set objective(val: Objective){
-    this._objective = val;
-    //UI kann auf Veränderungen reagieren
-    this.renderKeyResults();
-  }
+    /**
+     * @property {Objective}
+     */
+    public get objective(): Objective {
+        return this._objective;
+    }
 
-  private renderKeyResults(){
-    let container = this.keyResultsContainer();
-    container.innerHTML = "";
-    this.objective.keyResults.forEach((keyResult) => {
-        this.addKeyResult(keyResult);
-    })
-  }
+    public set objective(val: Objective) {
+        if (this._objective !== val) {
+            this._objective = val;
+            this.render();
+        }
+    }
 
-  private addKeyResult(keyResult: KeyResult){
-    let container = this.keyResultsContainer();
-    let keyResultItem = new KeyResultComponent();
-    keyResultItem.keyResult = keyResult;
-    container.appendChild(keyResultItem);
-  }
+    public render() {
+        super.render();
+        this.renderKeyResults();
+
+        let btn = this.shadowRoot?.getElementById("btn-dropdown") as HTMLElement;
+
+        btn.addEventListener("click", () => this.toggleDetails());
+
+        this.registerDeleteButton();
+        this.registerEditButton();
+        this.configureModal();
+    }
+
+    /**
+     * Render KeyResults
+     */
+    private renderKeyResults() {
+        let container = this.keyResultsContainer();
+        container.innerHTML = "";
+        this.objective.keyResults.forEach((keyResult) => {
+            this.addKeyResult(keyResult);
+        })
+    }
+
+    private addKeyResult(keyResult: KeyResult) {
+        let container = this.keyResultsContainer();
+        let keyResultItem = new KeyResultComponent();
+        keyResultItem.keyResult = keyResult;
+        container.appendChild(keyResultItem);
+    }
 
 
-  constructor() {
-    super();
-  }
+    constructor() {
+        super(true, false);
+    }
 
-  connectedCallback(){
-    /*Styling of dropdowns*/
-    let cardBody = this.shadowRoot?.getElementById("content") as HTMLElement;
-    let btn = this.shadowRoot?.getElementById("btn-dropdown") as HTMLElement;
-    let arrow = this.shadowRoot?.getElementById("arrow") as HTMLElement;
-    cardBody.style.display = "none";
+    private registerDeleteButton() {
+        this.deleteButton.addEventListener("click", () => {
+            QuestionModal.askQuestion("Sind Sie sicher?", "Möchten Sie die Maßnahme entfernen?").then((result) => {
+                console.log(result);
+                if (result) {
+                    this.dispatchEvent(new CustomEvent("delete", {detail: this.objective}));
+                }
+            })
+        });
+    }
 
-    btn.addEventListener("click", () => {
-        if(cardBody.style.display == "none"){
-            cardBody.style.display = "block";
+    private registerEditButton() {
+        this.editButton.addEventListener("click", () => {
+            this.objectivesModal.objective = this._objective;
+            this.objectivesModal.active = true;
+        });
+    }
+
+    /**
+     * Toggle-Details for ObjectiveItem
+     */
+    private toggleDetails() {
+        let cardBody = this.contentContainer;
+        let arrow = this.shadowRoot?.getElementById("arrow") as HTMLElement;
+
+        if (cardBody.classList.contains("is-hidden")) {
+            cardBody.classList.remove("is-hidden");
             arrow.style.transform = "rotate(180deg)";
-        }else{
-            cardBody.style.display = "none";
+        } else {
+            cardBody.classList.add("is-hidden")
             arrow.style.transform = "rotate(0deg)";
         }
-    });
-    console.log(this.objective);
-    this.setAttributes();
-  }
+    }
 
-  private setAttributes(){
-      (this.shadowRoot?.getElementById("name") as HTMLElement).innerText = this.objective.name;
-  }
+    /**
+     * Getting Content-Container
+     * @return {HTMLElement}
+     */
+    private get contentContainer(): HTMLElement {
+        return this.shadowRoot?.getElementById("content") as HTMLElement;
+    }
 
-  private keyResultsContainer(){
-      return this.shadowRoot?.getElementById("keyResults") as HTMLElement;
-  }
+    private keyResultsContainer() {
+        return this.shadowRoot?.getElementById("keyResults") as HTMLElement;
+    }
 
 
-  
+    /**
+     * Load Delete-Button from DOM
+     * @return {HTMLButtonElement}
+     */
+    private get deleteButton(): HTMLButtonElement {
+        return this.shadowRoot?.getElementById("deleteButton") as HTMLButtonElement;
+    }
+
+    /**
+     * Load Edit-Button from DOM
+     * @return {HTMLButtonElement}
+     */
+    private get editButton(): HTMLButtonElement {
+        return this.shadowRoot?.getElementById("editButton") as HTMLButtonElement;
+    }
+
+    /**
+     * Get Objectives-Modal-DOM-Element
+     * @returns {ObjectiveModal}
+     */
+    private get objectivesModal(): ObjectiveModal {
+        return this.shadowRoot?.getElementById("modal") as ObjectiveModal;
+    }
+
+
+    /**
+     * Configuring Callback from Modal
+     */
+    private configureModal() {
+        this.objectivesModal.addEventListener("save", (event: Event) => {
+            console.log(event);
+            this.render();
+        });
+    }
 
 }

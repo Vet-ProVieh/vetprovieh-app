@@ -1,8 +1,8 @@
 import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
-import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { BasicSelectPage } from "../../../../shared";
 import { OperationPlan } from "../../models";
-import { OperationPlansRepository } from "../../repository";
+import { MeasureOperationPlansRepository, OperationPlansRepository } from "../../repository";
 
 @WebComponent({
     template:
@@ -44,10 +44,18 @@ import { OperationPlansRepository } from "../../repository";
     tag: "vp-opplan-select"
 })
 export class OperationPlanSelectPage extends BasicSelectPage {
-    private repository: OperationPlansRepository = new OperationPlansRepository();
+    private repository: MeasureOperationPlansRepository;
 
+    constructor() {
+        super();
+        this.repository = new MeasureOperationPlansRepository(
+            VetproviehNavParams.getUrlParameter("barnId")
+        );
+    }
     connectedCallback() {
         super.connectedCallback();
+
+
         let list: VetproviehList = this.vetproviehList;
         if (list) list.repository = this.repository;
     }

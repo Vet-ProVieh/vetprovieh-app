@@ -53,7 +53,9 @@ export class MeasureGroupComponent extends ElementGroupBinding {
 
     renderselectButton() {
         if (this.object.name == "Gründe für das Überschreiten der Kennzahl 2") {
-            let button = ` <select-button href="/careplans/operational/select.html" name="Übernahme aus Betreuungsmanagement">
+            let params = VetproviehNavParams.get("MeasureIntializeParams");
+            
+            let button = ` <select-button href="/careplans/operational/select.html?barnId=${params.barnId}" name="Übernahme aus Betreuungsmanagement">
                  </select-button>
                  <hr/>`;
 

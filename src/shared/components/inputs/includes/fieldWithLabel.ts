@@ -54,7 +54,7 @@ export class FieldWithLabel extends VetproviehElement {
       * Observed Attributes
       */
     static get observedAttributes() {
-        return ['value', 'label', 'property'];
+        return ['value', 'label', 'property', 'type'];
     }
 
     /**

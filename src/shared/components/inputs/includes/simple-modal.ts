@@ -78,6 +78,8 @@ export class SimpleModal extends VetproviehElement {
      */
     public close(takeover: boolean = false) {
         this.active = false;
+
+        this.dispatchEvent(new CustomEvent("close"));
         this.reset();
     }
 
@@ -89,6 +91,12 @@ export class SimpleModal extends VetproviehElement {
         
     }
 
+    /**
+     * Get Save-Button
+     */
+    protected get saveButton(): HTMLButtonElement {
+        return this.shadowRoot?.getElementById("save") as HTMLButtonElement;
+    }
 
 
     /**

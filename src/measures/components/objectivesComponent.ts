@@ -1,11 +1,5 @@
-import { ViewHelper } from "@tomuench/vetprovieh-shared";
-import { VetproviehBasicDetail } from "@tomuench/vetprovieh-detail/lib/index";
-import { MeasureGroupComponent } from "./measureGroup";
-import { WebComponent, VetproviehElement, VetproviehNavParams, ElementGroupBinding } from "@tomuench/vetprovieh-shared/lib";
-import { Measure, MeasureGroup } from "../models";
-import { Barn, BarnListShow } from "../../barns";
-import { DynamicForm } from "../../shared/components/forms/dynamicForm";
-import { ObjectiveModal, RecordingVideoModal, RenderType } from "../../shared";
+import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { ObjectiveModal } from "./objective-modal";
 import { Objective } from "../models/objective";
 import { ObjectiveItemComponent } from "./objectiveItem";
 
@@ -44,7 +38,6 @@ import { ObjectiveItemComponent } from "./objectiveItem";
 
           </div>
         </div>
-        <objective-modal id="modal"></objective-modal>
     </div>
     `,
   tag: "vp-objectives",
@@ -74,7 +67,6 @@ export class ObjectivesComponent extends VetproviehElement {
    */
   connectedCallback() {
     this.bindManualAddButton();
-    this.configureModal();
   }
 
   /**
@@ -92,7 +84,15 @@ export class ObjectivesComponent extends VetproviehElement {
    */
   private addObjective(objective: Objective) {
     let objectiveItem = new ObjectiveItemComponent();
+    this.objectives.push(objective);
     objectiveItem.objective = objective;
+    objectiveItem.addEventListener("delete", (event) => {
+      let index = this.objectives.findIndex((x) => x == (event as CustomEvent).detail)
+      if (index >= 0) {
+        this.objectives.splice(index, 1);
+        objectiveItem.remove();
+      }
+    });
     this.selectContainer(objective)?.appendChild(objectiveItem);
   }
 
@@ -111,10 +111,10 @@ export class ObjectivesComponent extends VetproviehElement {
 
   /**
    * Get Objectives-DOM-Element
-   * @returns {HTMLElement}
+   * @returns {HTMLDivElement}
    */
-  private objectivesContainer(): HTMLElement {
-    return this.shadowRoot?.getElementById("objectives") as HTMLElement;
+  private objectivesContainer(): HTMLDivElement {
+    return this.shadowRoot?.getElementById("objectives") as HTMLDivElement;
   }
 
   /**
@@ -141,33 +141,29 @@ export class ObjectivesComponent extends VetproviehElement {
     return this.shadowRoot?.getElementById("addMeasure") as HTMLButtonElement;
   }
 
-
-  /**
-  * Get Objectives-Modal-DOM-Element
-  * @returns {HTMLElement}
-  */
-  private get objectivesModal(): ObjectiveModal {
-    return this.shadowRoot?.getElementById("modal") as ObjectiveModal;
-  }
-
   /**
    * Bind Click Event to Manual Add button
    */
   private bindManualAddButton() {
     this.manualAddButton?.addEventListener("click", () => {
-      this.objectivesModal.active = true;
+      let modal = new ObjectiveModal();
+      this.shadowRoot?.getElementById("group")?.append(modal);
+      modal.active = true;
+      this.configureModal(modal);
     });
   }
 
   /**
    * Configuring Callback from Modal
+   * @param {ObjectiveModal} modal
    */
-  private configureModal() {
-    this.objectivesModal?.addEventListener("save", (event: Event) => {
+  private configureModal(modal: ObjectiveModal) {
+    modal.addEventListener("save", (event: Event) => {
       let object = (event as CustomEvent).detail;
       if (object) {
         this.addObjective(object);
       }
+      modal.remove();
     });
   }
 
