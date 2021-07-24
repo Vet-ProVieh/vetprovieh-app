@@ -15,17 +15,17 @@ import { SimpleModal } from "./simple-modal";
             <p>\${this.message}</p>
         </section>
         <footer class="modal-card-foot"> 
-        <div class="field is-grouped">
-            <p class="control">
-                <button class="button is-danger" id="closeButton">
-                    <span>Ablehen</span>
+         <div class="columns is-mobile">
+            <div class="column">
+                <button class="button is-danger is-fullwidth" id="closeButton">
+                    <span>Ablehnen</span>
                 </button>
-            </p>
-            <p class="control">
-                <button class="button is-primary" id="save">
+            </div>
+            <div class="column">
+                <button class="button is-primary is-fullwidth" id="save">
                     <span>Bestätigen</span>
                 </button>
-            </p>
+            </div>
           </div>
         </footer>
         </div>

@@ -7,5 +7,5 @@ export class Objective extends BasicModel{
     public position: number = 0;
     public active: boolean = true;
     public welfare: boolean = false;
-    public keyResults: KeyResult[] = [];
+    public keyResults: KeyResult[] = [new KeyResult()];
 }

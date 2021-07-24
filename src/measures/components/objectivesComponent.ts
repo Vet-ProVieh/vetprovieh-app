@@ -11,23 +11,29 @@ import { ObjectiveItemComponent } from "./objectiveItem";
   template:
     VetproviehElement.template +
     ` 
+    <style>
+      .padding-15{
+        padding: 15px;
+      }
+    </style>
     <div id="group">
         <div id="detail" class="container">
-          <div class="columns is-mobile mx-2">
+          <div class="columns is-mobile padding-15">
               <div class="column">
-                <input id="loadMeasure" 
-                        class="button is-link is-fullwidth" 
-                        type="button" value="Maßnahmen laden">                   
+                <select-button id="loadMeasure" href="/measures/select.html?x=a" name="Maßnahmen laden">
+                </select-button>              
               </div>
               <div class="column">
-                <input id="addMeasure" 
+                <button id="addMeasure" 
                         class="button is-info is-fullwidth" 
-                        type="button" value="Maßnahme manuell einfügen">
+                        type="button">
+                        Maßnahme manuell einfügen
+                </button>
               </div>
             </div>
         </div>
         <hr/>
-        <div id="objectives">
+        <div id="objectives" class="padding-15">
           <h4 class="subtitle is-4">Antibiotika Maßnahmen</h4>
           <div id="antibiotics">
 

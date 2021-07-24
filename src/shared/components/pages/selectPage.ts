@@ -42,7 +42,7 @@ export class BasicSelectPage extends VetproviehElement {
                 this.setReturnValue();
                 this.navigateBack();
             } else {
-                alert("Es wurden keine Einträge markiert");
+                
             }
         })
     }

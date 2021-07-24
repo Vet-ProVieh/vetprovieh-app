@@ -5,12 +5,12 @@ export class MeasureOperationPlansRepository extends BaseRepository<any>{
     private barnId: number;
 
     constructor(barnId: number){
-        super("/service/measures/operationplans/");
+        super("/service/measures/operationplans/barn");
         this.barnId = barnId;
     }
 
     private buildQueryUrl() : string {
-        return `${this.endpoint}?barnId=${this.barnId}`;
+        return `${this.endpoint}/${this.barnId}`;
     }
 
       /**

@@ -2,6 +2,7 @@ import { VetproviehBinding, VetproviehElement, WebComponent } from "@tomuench/ve
 import { SimpleModal } from "../../shared";
 import { Objective } from "../models";
 import { KeyResult } from "../models/keyresult";
+import { KeyResultEditComponent } from "./keyResultEdit";
 
 @WebComponent({
     tag: "objective-modal",
@@ -14,32 +15,26 @@ import { KeyResult } from "../models/keyresult";
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <bulma-input property="name" label="Bezeichnung der Maßnahme">
-            </bulma-input>
-            
-            <bulma-input-checkbox property="welfare" label="Tierwohl?"></bulma-input-checkbox>
+            <div id="objective">
+                <bulma-input property="name" label="Bezeichnung der Maßnahme">
+                </bulma-input>
+                
+                <bulma-input-checkbox property="welfare" label="Tierwohl?"></bulma-input-checkbox>
 
-            <bulma-input property="name" type="date" property="date" label="Durchzuführen bis">
-            </bulma-input>
+                <bulma-input property="name" type="date" property="date" label="Durchzuführen bis">
+                </bulma-input>
+            </div>
 
             <div class="field">
                     <label class="label">Zwischenziele:</label>
-                    <div class="control" id="keyResults">
-                        <input class="input" type="text" placeholder="">
-                        
+                    <div class="control" id="keyResults">                        
                     </div>
-                    <div class="columns is-gapless">
-                        <div class="column" style="text-align: right;">
-                            
-                            <button class="button is-success" id="addKeyResult">
-                                <i class="fas fa-plus"></i>
-                            </button>
-                        </div>
-                        <div class="column" style="text-align: left;">
-                            <button class="button is-danger" id="deleteKeyResult">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
+                    <hr/>
+                    <div>
+                        <button class="button is-success" id="addKeyResult">
+                            <i class="fas fa-plus"></i>
+                            Neues Zwischenziel hinzufügen
+                        </button>
                     </div>
                     
             </div>
@@ -72,17 +67,43 @@ export class ObjectiveModal extends SimpleModal {
 
 
     // @ts-ignore
-    private _objective: Objective; 
+    private _objective: Objective;
 
     public set objective(v: Objective) {
-        if(this._objective !== v){
+        if (this._objective !== v) {
             this._objective = v;
-            VetproviehBinding.bindFormElements(this.shadowRoot, this._objective);
+            VetproviehBinding.bindFormElements(this.getByIdFromShadowRoot("objective"), this._objective);
+            this.renderKeyResults();
         }
     }
 
     public get objective(): Objective {
         return this._objective;
+    }
+
+    /**
+     * Rendering KeyResults to KeyResultEditComponent
+     */
+    private renderKeyResults() {
+        this.keyResults.innerHTML = "";
+        this.objective.keyResults.forEach((keyResult) => {
+            this.appendKeyResult(keyResult);
+        });
+    }
+
+    /**
+     * Adding KeyResult to Dom and bind Listener
+     * @param {KeyResult} keyResult 
+     */
+    private appendKeyResult(keyResult: KeyResult) {
+        let keyResultEdit = new KeyResultEditComponent();
+        keyResultEdit.keyResult = keyResult;
+        keyResultEdit.addEventListener("delete", (e: Event) => {
+            let obj = (e as CustomEvent).detail as KeyResult;
+            let index = this.objective.keyResults.indexOf(obj);
+            this.objective.keyResults.splice(index, 1);
+        })
+        this.keyResults.append(keyResultEdit);
     }
 
     connectedCallback() {
@@ -91,53 +112,32 @@ export class ObjectiveModal extends SimpleModal {
 
         let btnSave = this.shadowRoot?.getElementById("save") as HTMLButtonElement;
         btnSave.addEventListener("click", () => {
-            this._objective.keyResults = this.getKeyResults();
+            console.log(this.objective);
             this.dispatchEvent(new CustomEvent("save", { detail: this._objective }));
             this.close();
         });
 
         let addKeyResult = this.shadowRoot?.getElementById("addKeyResult") as HTMLButtonElement;
         addKeyResult.addEventListener("click", () => {
-            
-            let elems = this.keyResults;
-            let input = document.createElement("input");
-            input.setAttribute("type", "text");
-            input.setAttribute("class", "input");
-            elems.appendChild(input);
-        });
-
-        let deleteKeyResult = this.shadowRoot?.getElementById("deleteKeyResult") as HTMLButtonElement;
-        deleteKeyResult.addEventListener("click", () => {
-            let elems = this.keyResults;
-            elems.removeChild(elems.lastChild as Node);
+            let keyResult = new KeyResult();
+            this.objective.keyResults.push(keyResult);
+            this.appendKeyResult(keyResult);
         });
 
         (this.shadowRoot?.getElementById("cancel") as HTMLButtonElement).addEventListener("click", () => {
             this.close();
         });
-
-        (this.shadowRoot?.getElementById("closeButton") as HTMLButtonElement).addEventListener("click", () => {
-            this.close();
-        });
     }
 
-    private getKeyResults() {
-        let keyResults: KeyResult[] = []
-        let pos = 0;
-        this.keyResults.childNodes.forEach((node) => {
-            if (node.nodeName == "INPUT" && (node as HTMLInputElement).value != "") {
-                let kr = new KeyResult();
-                kr.name = (node as HTMLInputElement).value;
-                kr.position = pos;
-                pos++;
-                keyResults.push(kr);
-            }
-        });
-        return keyResults;
-    }
-
+    /**
+     * Get KeyResults-Container Dom Element
+     * @return {HTMLElement}
+     */
     private get keyResults() {
         return this.shadowRoot?.getElementById("keyResults") as HTMLElement;
     }
 
+    static get observedAttributes() {
+        return ["objective"];
+    }
 }

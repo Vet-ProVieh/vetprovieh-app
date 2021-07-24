@@ -1,12 +1,9 @@
-import { ViewHelper } from "@tomuench/vetprovieh-shared";
-import { VetproviehBasicDetail } from "@tomuench/vetprovieh-detail/lib/index";
 import { MeasureGroupComponent } from "./measureGroup";
 import { WebComponent, VetproviehElement, VetproviehNavParams, ElementGroupBinding } from "@tomuench/vetprovieh-shared/lib";
-import { Measure, MeasureField, MeasureGroup, Objective } from "../models";
-import { Barn, BarnListShow } from "../../barns";
+import { Measure, MeasureField, MeasureGroup } from "../models";
+import { Barn } from "../../barns";
 import { DynamicForm } from "../../shared/components/forms/dynamicForm";
 import { RenderType } from "../../shared";
-import { ObjectivesComponent } from "./objectivesComponent";
 import { MeasuresRepository } from "../repository";
 
 /**
@@ -121,8 +118,10 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
   }
 
+  /**
+   * Tab-Buttons registrieren. 
+   */
   private registerTabEvents() {
-    console.log("REGISTER TAB EVENTS");
     this.shadowRoot?.querySelectorAll("a").forEach((a: HTMLAnchorElement) => {
       if (a) {
         this.categories.push(a);
@@ -182,7 +181,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
         })
       }).catch((error) => {
-        alert("Es ist ein Fehler aufgetreten beim Abruf");
+        console.log("Es wrude kein vorheriger Maßnahmenplan gefunden");
       })
     }
   }
