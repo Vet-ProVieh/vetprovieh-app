@@ -15,18 +15,20 @@ import { SimpleModal } from "./simple-modal";
             <p>\${this.message}</p>
         </section>
         <footer class="modal-card-foot"> 
-         <div class="columns is-mobile">
-            <div class="column">
-                <button class="button is-danger is-fullwidth" id="closeButton">
-                    <span>Ablehnen</span>
-                </button>
+            <div class="container">
+                <div class="columns is-mobile">
+                    <div class="column">
+                        <button class="button is-danger is-fullwidth" id="closeButton">
+                            <span>Ablehnen</span>
+                        </button>
+                    </div>
+                    <div class="column">
+                        <button class="button is-primary is-fullwidth" id="save">
+                            <span>Bestätigen</span>
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="column">
-                <button class="button is-primary is-fullwidth" id="save">
-                    <span>Bestätigen</span>
-                </button>
-            </div>
-          </div>
         </footer>
         </div>
     </div>`

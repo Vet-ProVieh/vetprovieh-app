@@ -21,7 +21,7 @@ import { KeyResultEditComponent } from "./keyResultEdit";
                 
                 <bulma-input-checkbox property="welfare" label="Tierwohl?"></bulma-input-checkbox>
 
-                <bulma-input property="name" type="date" property="date" label="Durchzuführen bis">
+                <bulma-input type="date" property="date" label="Durchzuführen bis">
                 </bulma-input>
             </div>
 
@@ -40,20 +40,23 @@ import { KeyResultEditComponent } from "./keyResultEdit";
             </div>
         </section>
         <footer class="modal-card-foot"> 
-        <div class="field is-grouped">
-            <p class="control">
-                <button class="button is-danger" id="cancel">
-                    <span class="icon"><i class="fas fa-trash-alt"></i></span>
-                    <span>Abbrechen</span>
-                </button>
-            </p>
-            <p class="control">
-                <button class="button is-primary" id="save">
-                    <span class="icon"><i class="far fa-save"></i></span>
-                    <span>Übernehmen</span>
-                </button>
-            </p>
-          </div>
+
+            <div class="container">
+                <div class="columns">
+                    <div class="column">
+                        <button class="button is-danger is-fullwidth" id="cancel">
+                            <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                            <span>Abbrechen</span>
+                        </button>
+                    </div>
+                    <div class="column">
+                        <button class="button is-primary is-fullwidth" id="save">
+                            <span class="icon"><i class="far fa-save"></i></span>
+                            <span>Übernehmen</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </footer>
         </div>
     </div>`
@@ -106,10 +109,7 @@ export class ObjectiveModal extends SimpleModal {
         this.keyResults.append(keyResultEdit);
     }
 
-    connectedCallback() {
-        this.render();
-        this.objective = new Objective();
-
+    protected addButtonListeners() {
         let btnSave = this.shadowRoot?.getElementById("save") as HTMLButtonElement;
         btnSave.addEventListener("click", () => {
             console.log(this.objective);
@@ -127,6 +127,11 @@ export class ObjectiveModal extends SimpleModal {
         (this.shadowRoot?.getElementById("cancel") as HTMLButtonElement).addEventListener("click", () => {
             this.close();
         });
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.objective = new Objective();
     }
 
     /**
