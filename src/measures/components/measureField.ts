@@ -22,6 +22,7 @@ export class MeasureFieldComponent extends ElementBinding {
      * @return {Boolean}
      */
     get isValid(): boolean {
+        let x : HTMLFormElement;
         return this._isValid;
     }
 

@@ -9,22 +9,34 @@ import { MeasureOperationPlansRepository, OperationPlansRepository } from "../..
         VetproviehElement.template +
         ` 
       <form id="form">
-            <vetprovieh-list id="opPlanList" pagesize="20" pageable="false">
+            <opplan-table id="opPlanList" pagesize="20" pageable="false">
                 <template>
-                    <div>
-                        <input value="{{id}}" type="checkbox">
-                        <a href="show.html?id={{id}}">
+                    <div class="columns">
+                        <div class="column is-1">
+                            <input value="{{id}}" type="checkbox">
+                        </div>
+                        <div class="column is-1">
+                            {{updatedAt}}
+                        </div>
+                        <div class="column">
                             <strong>{{name}}</strong>
-                        </a>
-                        <barn-list-show barnid="{{barn.id}}"></barn-list-show>
-                        <p style="font-size:0.9em;">
-                            <strong>Erstellt am:</strong> {{createdAt}}<br />
-                            <strong>Letztes Update am:</strong> {{updatedAt}}<br />
-                        </p>
+                        </div>
+                        <div class="column">
+                            <barn-list-show barnid="{{barn.id}}"></barn-list-show>
+                        </div>
+                        <div class="column">
+                            {{values.Diagnose}}
+                        </div>
+                        <div class="column">
+                            {{values.Behandlung}}
+                        </div>
+                        <div class="column">
+                            {{lastVet.userName}}
+                        </div>
                     </div>
                     <hr />
                 </template>
-            </vetprovieh-list>
+            </opplan-table>
             <div class="container">
                 <div class="columns is-mobile">
                     <div class="column">

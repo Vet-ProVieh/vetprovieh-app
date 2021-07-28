@@ -1,8 +1,9 @@
 import { MeasureFieldComponent } from "./measureField";
-import { ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { ElementGroupBinding, ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
 import { OperationPlanSelectPage } from "../../careplans";
 import { SelectButton } from "../../shared";
+import { PlanMeasureModel } from "../../careplans/operational/models/planMeasure";
 
 /**
  * Pager OperationGroup
@@ -35,9 +36,9 @@ export class MeasureGroupComponent extends ElementGroupBinding {
     }
 
     private set isValid(v: boolean) {
-        if(this._isValid !== v){
+        if (this._isValid !== v) {
             this._isValid = v;
-            if(v) {
+            if (v) {
                 this.querySelector("#group")?.classList.add("is-primary");
                 this.hideElement(this.panelBlock);
             } else {
@@ -107,14 +108,47 @@ export class MeasureGroupComponent extends ElementGroupBinding {
      * @param answer 
      */
     private processSelectButtonAnswer(answer: any[]) {
-        let sektion: MeasureFieldComponent = this._subfieldBindings.filter((x) => x.object.name == "Sektion")[0];
+        console.log(answer);
+        let fields = this.loadSubFields();
+
         if (answer) {
-            answer.forEach((part: any) => {
-                sektion.attachValue(`${part.id}: ${part.name}`);
+            answer.forEach((part: PlanMeasureModel) => {
+                if (part.values) {
+                    Object.keys(part.values).forEach((paramKey: string) => {
+                        let field = (fields as any)[paramKey];
+                        if(field){
+                            let value = (part.values as any)[paramKey];
+                            if(value) field.attachValue(`${ObjectHelper.formatDate(part.updatedAt)} ${part.name} ${part.id}:\r\n${value}\r\n`);
+                        }
+                    })
+                }
             })
         }
     }
 
+    /**
+     * Find fields to fill
+     * Key ist expected returnValue key from opPlan
+     * @returns 
+     */
+    private loadSubFields() : any {
+        return {
+            Behandlung: this.loadSubField("Angaben zu Krankheitsgeschehen"),
+            //Diagnose: this.loadSubField("Angaben zu Krankheitsgeschehen"),
+            Erregernachweis: this.loadSubField("Erregernachweis / Resistenztest"),
+            Sektion: this.loadSubField("Sektion"),
+            Sonstiges: this.loadSubField("Sonstiges")
+        }
+    }
+
+    /**
+     * Subfield laden zum füllen
+     * @param {string} name 
+     * @returns {MeasureFieldComponent}
+     */
+    private loadSubField(name: string) {
+        return this._subfieldBindings.filter((x) => x.object.name == name)[0];
+    }
 
 
     /**
