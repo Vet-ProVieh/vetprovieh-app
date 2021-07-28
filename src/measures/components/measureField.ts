@@ -13,7 +13,7 @@ export class MeasureFieldComponent extends ElementBinding {
 
     private _isValid: boolean = false;
 
-    constructor(){
+    constructor() {
         super();
     }
 
@@ -31,41 +31,44 @@ export class MeasureFieldComponent extends ElementBinding {
      * @param {string} src 
      * @return {BaseRepository | undefined}
      */
-    private getChoiceRepository(src: string) : BaseRepository<any> | undefined {
+    private getChoiceRepository(src: string): BaseRepository<any> | undefined {
         switch (src) {
             default:
                 return undefined;
         }
     }
 
-     /**
-     * Callback to Overwrite
-     * @protected
-     */
+    /**
+    * Callback to Overwrite
+    * @protected
+    */
     protected _afterRender() {
-        if(this.object.choiceSrc){
+        if (this.object.choiceSrc) {
             let vetproviehSelect = this.querySelector("vetprovieh-select") as VetproviehSelect;
-            if(vetproviehSelect){
+            if (vetproviehSelect) {
                 let repository = this.getChoiceRepository(this.object.choiceSrc);
-                if(repository) vetproviehSelect.repository = repository;
+                if (repository) vetproviehSelect.repository = repository;
             }
         }
+
+        this.addValidListener();
     }
 
     private addValidListener() {
-        let field = this.querySelector(".field") as HTMLElement
-        let input = field.children[0] as HTMLInputElement;
-        if(input){
-            input.addEventListener("change", () => {
+            let input = this.querySelector("[property='value']") as HTMLTextAreaElement;
+            if (input) {
+                this.addEventListener("change", () => {
+                    console.log("changef field measure: " + input.checkValidity());
+                    this._isValid = input.checkValidity()
+                });
                 this._isValid = input.checkValidity()
-            });
-        }
+            }
     }
 
-    public attachValue(value: any){
-        if(this.object.detailsType == "textArea"){
+    public attachValue(value: any) {
+        if (this.object.detailsType == "textArea") {
             let inputfield = this.querySelector("textarea") as HTMLTextAreaElement;
-            if(inputfield){
+            if (inputfield) {
                 inputfield.value += `${value}\r\n`;
             }
         }
@@ -84,7 +87,7 @@ export class MeasureFieldComponent extends ElementBinding {
                 </div>
                 <div class="field-body">
                     <div class="field">` +
-                InputFactory.generateField(this.object.detailsType, this.object) + 
+                InputFactory.generateField(this.object.detailsType, this.object) +
                 `   </div>
                 </div>
             </div>

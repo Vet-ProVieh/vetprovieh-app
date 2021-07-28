@@ -11,7 +11,7 @@
       "details": [{
           "detailsType": "textArea",
           "name": "Anschrift des Betriebsstandortes",
-          "optional": true,
+          "optional": false,
           "position": 1,
           "value": "",
           "voiceInputable": true
@@ -19,7 +19,7 @@
         {
           "detailsType": "textFields",
           "name": "Plätze in Stall 1",
-          "optional": true,
+          "optional": false,
           "position": 2,
           "value": "",
           "voiceInputable": true
@@ -28,7 +28,7 @@
         {
           "detailsType": "textFields",
           "name": "Plätze in Stall 2",
-          "optional": true,
+          "optional": false,
           "position": 3,
           "value": "",
           "voiceInputable": true
@@ -36,7 +36,7 @@
         {
           "detailsType": "textFields",
           "name": "Plätze in Stall 3",
-          "optional": true,
+          "optional": false,
           "position": 4,
           "value": "",
           "voiceInputable": true
@@ -44,7 +44,7 @@
         {
           "detailsType": "textFields",
           "name": "Plätze in Stall 4",
-          "optional": true,
+          "optional": false,
           "position": 5,
           "value": "",
           "voiceInputable": true
@@ -58,7 +58,7 @@
       "details": [{
           "detailsType": "textFields",
           "name": "Name des Tierarztes",
-          "optional": true,
+          "optional": false,
           "position": 1,
           "value": "",
           "voiceInputable": true
@@ -66,7 +66,7 @@
         {
           "detailsType": "textArea",
           "name": "Anschrift",
-          "optional": true,
+          "optional": false,
           "position": 2,
           "value": "",
           "voiceInputable": true
@@ -75,7 +75,7 @@
         {
           "detailsType": "textFields",
           "name": "VVVO-Number",
-          "optional": true,
+          "optional": false,
           "position": 3,
           "value": "",
           "voiceInputable": true
@@ -87,7 +87,7 @@
           ],
           "detailsType": "comboBox",
           "name": "Betreuungs-Vertrag",
-          "optional": true,
+          "optional": false,
           "position": 4,
           "value": "",
           "voiceInputable": true
@@ -99,7 +99,7 @@
           ],
           "detailsType": "comboBox",
           "name": "Weitere Tierärzte:",
-          "optional": true,
+          "optional": false,
           "position": 5,
           "value": "",
           "voiceInputable": true
@@ -107,7 +107,7 @@
         {
           "detailsType": "textArea",
           "name": "Weitere Tierärzte (Name, Anschrift)",
-          "optional": true,
+          "optional": false,
           "position": 6,
           "value": "",
           "voiceInputable": true
@@ -119,7 +119,7 @@
           ],
           "detailsType": "comboBox",
           "name": "Weitere Berater:",
-          "optional": true,
+          "optional": false,
           "position": 7,
           "value": "",
           "voiceInputable": true
@@ -127,7 +127,7 @@
         {
           "detailsType": "textArea",
           "name": "Weitere Berater (Name, Anschrift)",
-          "optional": true,
+          "optional": false,
           "position": 6,
           "value": "",
           "voiceInputable": true
@@ -139,7 +139,7 @@
           ],
           "detailsType": "comboBox",
           "name": "Integration:",
-          "optional": true,
+          "optional": false,
           "position": 7,
           "value": "",
           "voiceInputable": true
@@ -153,7 +153,7 @@
       "details": [{
           "detailsType": "textFields",
           "name": "Mastverfahren",
-          "optional": true,
+          "optional": false,
           "position": 1,
           "value": "",
           "voiceInputable": true
@@ -161,7 +161,7 @@
         {
           "detailsType": "textFields",
           "name": "Mastdauer (Tage)",
-          "optional": true,
+          "optional": false,
           "position": 2,
           "value": "",
           "voiceInputable": true
@@ -173,7 +173,7 @@
           ],
           "detailsType": "comboBox",
           "name": "Vorgriff",
-          "optional": true,
+          "optional": false,
           "position": 3,
           "value": "",
           "voiceInputable": true
@@ -181,7 +181,7 @@
         {
           "detailsType": "textFields",
           "name": "Gewicht bei Endausstallung (kg / Tier)",
-          "optional": true,
+          "optional": false,
           "position": 4,
           "value": "",
           "voiceInputable": true
@@ -193,7 +193,7 @@
           ],
           "detailsType": "comboBox",
           "name": "QS-System-Teilnehmer",
-          "optional": true,
+          "optional": false,
           "position": 5,
           "value": "",
           "voiceInputable": true
@@ -201,7 +201,7 @@
         {
           "detailsType": "textFields",
           "name": "Biosiegel",
-          "optional": true,
+          "optional": false,
           "position": 6,
           "value": "",
           "voiceInputable": true
@@ -209,7 +209,7 @@
         {
           "detailsType": "textArea",
           "name": "Sonstiges",
-          "optional": true,
+          "optional": false,
           "position": 7,
           "value": "",
           "voiceInputable": true
@@ -217,7 +217,7 @@
         {
           "detailsType": "textFields",
           "name": "Besatzdichte (kg / qm)",
-          "optional": true,
+          "optional": false,
           "position": 8,
           "value": "",
           "voiceInputable": true
@@ -225,7 +225,7 @@
         {
           "detailsType": "textFields",
           "name": "Leerstandszeit / Serviceperiode",
-          "optional": true,
+          "optional": false,
           "position": 9,
           "value": "",
           "voiceInputable": true
@@ -233,7 +233,7 @@
         {
           "detailsType": "textArea",
           "name": "Art und Ausstattung der Ställe ",
-          "optional": true,
+          "optional": false,
           "position": 10,
           "value": "",
           "voiceInputable": true
@@ -247,7 +247,7 @@
       "details": [{
         "detailsType": "textArea",
         "name": "Heizung und Lüftung",
-        "optional": true,
+        "optional": false,
         "position": 1,
         "value": "",
         "voiceInputable": true
@@ -260,7 +260,7 @@
       "details": [{
           "detailsType": "textArea",
           "name": "Art der Fütterung",
-          "optional": true,
+          "optional": false,
           "position": 1,
           "value": "",
           "voiceInputable": true
@@ -268,7 +268,7 @@
         {
           "detailsType": "textFields",
           "name": "Anzahl der Tiere pro Futterplatz",
-          "optional": true,
+          "optional": false,
           "position": 2,
           "value": "",
           "voiceInputable": true
@@ -277,7 +277,7 @@
           "choices": ["Brunnenwasser", "Stadtwasser", "Wasseruntersuchung"],
           "detailsType": "detailsList",
           "name": "Wasserversorgung",
-          "optional": true,
+          "optional": false,
           "position": 3,
           "value": "",
           "voiceInputable": true
@@ -285,7 +285,7 @@
         {
           "detailsType": "textFields",
           "name": "Zusätzliche Angabe zur Wasserversorgung",
-          "optional": true,
+          "optional": false,
           "position": 4,
           "value": "",
           "voiceInputable": true
@@ -293,7 +293,7 @@
         {
           "detailsType": "textFields",
           "name": "Anzahl Tiere pro Tränke",
-          "optional": true,
+          "optional": false,
           "position": 5,
           "value": "",
           "voiceInputable": true
@@ -301,7 +301,7 @@
         {
           "detailsType": "textFields",
           "name": "Art der Tränke",
-          "optional": true,
+          "optional": false,
           "position": 6,
           "value": "",
           "voiceInputable": true
@@ -316,7 +316,7 @@
           "choices": ["Futter", "Wasser", "Injektion", "Sonstiges"],
           "detailsType": "detailsList",
           "name": "Verabreichungsart",
-          "optional": true,
+          "optional": false,
           "position": 1,
           "value": "",
           "voiceInputable": true
@@ -324,7 +324,7 @@
         {
           "detailsType": "textFields",
           "name": "Kommentar bei Sonstiges",
-          "optional": true,
+          "optional": false,
           "position": 2,
           "value": "",
           "voiceInputable": true
@@ -333,7 +333,7 @@
           "choices": ["Ja", "Nein"],
           "detailsType": "comboBox",
           "name": "Leitfaden „Orale Anwendung von Tierarzneimitteln“  bekannt?",
-          "optional": true,
+          "optional": false,
           "position": 3,
           "value": "",
           "voiceInputable": true
@@ -342,7 +342,7 @@
           "choices": ["Ja", "Nein"],
           "detailsType": "comboBox",
           "name": "Risikomanagementplan vorhanden?",
-          "optional": true,
+          "optional": false,
           "position": 4,
           "value": "",
           "voiceInputable": true
@@ -356,7 +356,7 @@
       "details": [{
           "detailsType": "textFields",
           "name": "Art der Schutzkleidung",
-          "optional": true,
+          "optional": false,
           "position": 1,
           "value": "",
           "voiceInputable": true
@@ -364,7 +364,7 @@
         {
           "detailsType": "textFields",
           "name": "Art der Hygieneschleuse",
-          "optional": true,
+          "optional": false,
           "position": 2,
           "value": "",
           "voiceInputable": true
@@ -373,7 +373,7 @@
           "choices": ["Reinigung Stall", "Desinfektion Stall"],
           "detailsType": "comboBox",
           "name": "Art und Umfang der internen Biosicherheit",
-          "optional": true,
+          "optional": false,
           "position": 3,
           "value": "",
           "voiceInputable": true
@@ -382,7 +382,7 @@
           "choices": ["Reinigung", "Desinfektion", "routinemäig", "nach Antibiotika-Gabe"],
           "detailsType": "detailsList",
           "name": "Wasserleitungen",
-          "optional": true,
+          "optional": false,
           "position": 4,
           "value": "",
           "voiceInputable": true
@@ -391,7 +391,7 @@
           "choices": ["Reinigung Futterleitungen", "Reinigung Futterschalen", "Reinigung Futtersilo"],
           "detailsType": "detailsList",
           "name": "Fütterungseinrichtungen",
-          "optional": true,
+          "optional": false,
           "position": 5,
           "value": "",
           "voiceInputable": true
@@ -400,7 +400,7 @@
           "choices": ["Keine", "selbst", "durch Fremdfirma"],
           "detailsType": "detailsList",
           "name": "Schädlingsbekämpfung",
-          "optional": true,
+          "optional": false,
           "position": 6,
           "value": "",
           "voiceInputable": true
@@ -414,7 +414,7 @@
       "details": [{
           "detailsType": "textArea",
           "name": "Immunprophylaxe",
-          "optional": true,
+          "optional": false,
           "position": 1,
           "value": "",
           "voiceInputable": true
@@ -422,7 +422,7 @@
         {
           "detailsType": "textArea",
           "name": "Parasitenbekämpfung",
-          "optional": true,
+          "optional": false,
           "position": 2,
           "value": "",
           "voiceInputable": true
@@ -430,7 +430,7 @@
         {
           "detailsType": "textArea",
           "name": "Sonstiges",
-          "optional": true,
+          "optional": false,
           "position": 3,
           "value": "",
           "voiceInputable": true
@@ -445,7 +445,7 @@
           "choices": ["Atmewege", "Verdauungsapparat", "Bewegungsapparat", "Sonstiges"],
           "detailsType": "detailsList",
           "name": "Schwerpunkt(e)  der Erkrankung",
-          "optional": true,
+          "optional": false,
           "position": 1,
           "value": "",
           "voiceInputable": true
@@ -453,7 +453,7 @@
         {
           "detailsType": "textFields",
           "name": "Kommentar bei Sonstiges",
-          "optional": true,
+          "optional": false,
           "position": 2,
           "value": "",
           "voiceInputable": true
@@ -461,7 +461,7 @@
         {
           "detailsType": "textArea",
           "name": "Tierverluste für das Kalenderhalbjahr",
-          "optional": true,
+          "optional": false,
           "position": 2,
           "value": "",
           "voiceInputable": true
@@ -469,7 +469,7 @@
         {
           "detailsType": "textArea",
           "name": "Angaben zu Krankheitsgeschehen",
-          "optional": true,
+          "optional": false,
           "position": 3,
           "value": "",
           "voiceInputable": true
@@ -477,7 +477,7 @@
         {
           "detailsType": "textArea",
           "name": "Erregernachweis / Resistenztest ",
-          "optional": true,
+          "optional": false,
           "position": 4,
           "value": "",
           "voiceInputable": true
@@ -485,7 +485,7 @@
         {
           "detailsType": "textArea",
           "name": "Sektion",
-          "optional": true,
+          "optional": false,
           "position": 5,
           "value": "",
           "voiceInputable": true
@@ -493,7 +493,7 @@
         {
           "detailsType": "textArea",
           "name": "Sonstiges",
-          "optional": true,
+          "optional": false,
           "position": 6,
           "value": "",
           "voiceInputable": true
@@ -508,7 +508,7 @@
         {
           "detailsType": "textArea",
           "name": "Ergebnis der Beratung",
-          "optional": true,
+          "optional": false,
           "position": 6,
           "value": "",
           "voiceInputable": true

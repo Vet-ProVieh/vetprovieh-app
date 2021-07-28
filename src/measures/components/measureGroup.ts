@@ -9,7 +9,7 @@ import { SelectButton } from "../../shared";
  */
 @WebComponent({
     template: VetproviehElement.template +
-        `<div id="group" class="panel is-primary" style="margin-bottom: 20px">
+        `<div id="group" class="panel" style="margin-bottom: 20px">
                         
                     <p class="panel-heading" style="cursor:pointer">
                        {{position}}. {{name}}
@@ -28,9 +28,42 @@ import { SelectButton } from "../../shared";
 })
 export class MeasureGroupComponent extends ElementGroupBinding {
 
+    private _isValid: boolean = false;
 
     connectedCallback() {
         super.connectedCallback();
+    }
+
+    private set isValid(v: boolean) {
+        if(this._isValid !== v){
+            this._isValid = v;
+            if(v) {
+                this.querySelector("#group")?.classList.add("is-primary");
+                this.hideElement(this.panelBlock);
+            } else {
+                this.querySelector("#group")?.classList.remove("is-primary");
+            }
+        }
+    }
+
+
+    /**
+     * Is Group Valid
+     * @return {boolean}
+     */
+    public get isValid(): boolean {
+        return this._isValid;
+    }
+
+    /**
+     * Calculate value of subfields
+     * @returns {boolean}
+     */
+    private calculateValidation(): boolean {
+        return this._subfieldBindings.map((field) => {
+            let measureField = field as MeasureFieldComponent;
+            return measureField.isValid
+        }).reduce((pv: boolean, cv: boolean) => pv && cv, true)
     }
 
     /**
@@ -51,10 +84,13 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         return new MeasureFieldComponent();
     }
 
-    renderselectButton() {
+    /**
+     * Rendering of select button für Gründe Überschreiten der Kennzahl 2
+     */
+    renderSelectButton() {
         if (this.object.name == "Gründe für das Überschreiten der Kennzahl 2") {
             let params = VetproviehNavParams.get("MeasureIntializeParams");
-            
+
             let button = ` <select-button href="/careplans/operational/select.html?barnId=${params.barnId}" name="Übernahme aus Betreuungsmanagement">
                  </select-button>
                  <hr/>`;
@@ -65,15 +101,21 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         }
     }
 
+    /**
+     * Process answer of select-Button.
+     * TODO unterschiedliche Fälle implementieren
+     * @param answer 
+     */
     private processSelectButtonAnswer(answer: any[]) {
         let sektion: MeasureFieldComponent = this._subfieldBindings.filter((x) => x.object.name == "Sektion")[0];
-        console.log(sektion);
         if (answer) {
             answer.forEach((part: any) => {
                 sektion.attachValue(`${part.id}: ${part.name}`);
             })
         }
     }
+
+
 
     /**
      * Getting Panel Heading
@@ -94,7 +136,7 @@ export class MeasureGroupComponent extends ElementGroupBinding {
 
     _afterRender() {
         super._afterRender();
-        this.renderselectButton();
+        this.renderSelectButton();
         let selectButton = this.querySelector("select-button") as SelectButton;
         if (selectButton) {
             console.log("Antwort vom Select-button")
@@ -108,5 +150,22 @@ export class MeasureGroupComponent extends ElementGroupBinding {
                 this.hideElement(this.panelBlock);
             });
         }
+
+        this.initValidation();
+    }
+
+    /**
+     * Intialising Validation and Bind EventListener to Fields
+     * Calculate Validation for first time
+     */
+    private initValidation() {
+        this._subfieldBindings.forEach((subfield) => {
+            subfield.addEventListener("change", (subfield: MeasureFieldComponent) => {
+                this.isValid = this.calculateValidation()
+            });
+        });
+
+        this.isValid = this.calculateValidation();
+
     }
 }

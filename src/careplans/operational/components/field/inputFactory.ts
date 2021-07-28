@@ -190,6 +190,7 @@ export class InputFactory {
             this.genTag("property", "value") +
             this.genTag("name", options.name) +
             this.isVoiceInputable(options.voiceInputable) +
+            this.isRequired(options.optional != true) +
             `class="input" type="text"></textarea>`;
     }
 
