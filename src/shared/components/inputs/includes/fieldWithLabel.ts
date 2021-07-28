@@ -7,6 +7,7 @@ export class FieldWithLabel extends VetproviehElement {
     private _type: string = "text";
     private _value: any;
     private _property: string | undefined;
+    private _required: boolean = false;
 
     protected _binding: VetproviehBinding = new VetproviehBinding(this, "value");
 
@@ -51,10 +52,29 @@ export class FieldWithLabel extends VetproviehElement {
     }
 
     /**
+     * Getter Property
+     * @return {string | undefined}
+     */
+     public get required(): string | undefined {
+        return this._property;
+    }
+
+    /**
+     * Setter Property
+     * @param {string | undefined} val
+     */
+    public set required(val: string | undefined) {
+        let valAsBool = val?.toString().toLowerCase() === "";
+        if (this._required !== valAsBool) {
+            this._required = valAsBool;
+        }
+    }
+
+    /**
       * Observed Attributes
       */
     static get observedAttributes() {
-        return ['value', 'label', 'property', 'type'];
+        return ['value', 'label', 'property', 'type', 'required'];
     }
 
     /**

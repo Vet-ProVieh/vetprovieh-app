@@ -16,7 +16,7 @@ import { KeyResultEditComponent } from "./keyResultEdit";
         </header>
         <section class="modal-card-body">
             <div id="objective">
-                <bulma-input property="name" label="Bezeichnung der Maßnahme">
+                <bulma-input property="name" label="Bezeichnung der Maßnahme" required>
                 </bulma-input>
                 
                 <bulma-input-checkbox property="welfare" label="Tierwohl?"></bulma-input-checkbox>
