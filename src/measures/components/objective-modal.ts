@@ -1,5 +1,5 @@
 import { VetproviehBinding, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { SimpleModal } from "../../shared";
+import { BulmaField, SimpleModal } from "../../shared";
 import { Objective } from "../models";
 import { KeyResult } from "../models/keyresult";
 import { KeyResultEditComponent } from "./keyResultEdit";
@@ -15,29 +15,31 @@ import { KeyResultEditComponent } from "./keyResultEdit";
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <div id="objective">
-                <bulma-input property="name" label="Bezeichnung der Maßnahme" required>
-                </bulma-input>
-                
-                <bulma-input-checkbox property="welfare" label="Tierwohl?"></bulma-input-checkbox>
-
-                <bulma-input type="date" property="date" label="Durchzuführen bis">
-                </bulma-input>
-            </div>
-
-            <div class="field">
-                    <label class="label">Zwischenziele:</label>
-                    <div class="control" id="keyResults">                        
-                    </div>
-                    <hr/>
-                    <div>
-                        <button class="button is-success" id="addKeyResult">
-                            <i class="fas fa-plus"></i>
-                            Neues Zwischenziel hinzufügen
-                        </button>
-                    </div>
+            <form id="form">
+                <div id="objective">
+                    <bulma-input property="name" label="Bezeichnung der Maßnahme" required>
+                    </bulma-input>
                     
-            </div>
+                    <bulma-input-checkbox property="welfare" label="Tierwohl?"></bulma-input-checkbox>
+
+                    <bulma-input type="date" property="date" label="Durchzuführen bis" required>
+                    </bulma-input>
+                </div>
+
+                <div class="field">
+                        <label class="label">Zwischenziele:</label>
+                        <div class="control" id="keyResults">                        
+                        </div>
+                        <hr/>
+                        <div>
+                            <div class="button is-success" id="addKeyResult">
+                                <i class="fas fa-plus"></i>
+                                Neues Zwischenziel hinzufügen
+                            </div>
+                        </div>
+                        
+                </div>
+            </form>
         </section>
         <footer class="modal-card-foot"> 
 
@@ -113,11 +115,14 @@ export class ObjectiveModal extends SimpleModal {
         let btnSave = this.shadowRoot?.getElementById("save") as HTMLButtonElement;
         btnSave.addEventListener("click", () => {
             console.log(this.objective);
-            this.dispatchEvent(new CustomEvent("save", { detail: this._objective }));
-            this.close();
+            if(this.validateInputs()){
+
+                this.dispatchEvent(new CustomEvent("save", { detail: this._objective }));
+                this.close();
+            }
         });
 
-        let addKeyResult = this.shadowRoot?.getElementById("addKeyResult") as HTMLButtonElement;
+        let addKeyResult = this.shadowRoot?.getElementById("addKeyResult") as HTMLElement;
         addKeyResult.addEventListener("click", () => {
             let keyResult = new KeyResult();
             this.objective.keyResults.push(keyResult);
@@ -126,6 +131,32 @@ export class ObjectiveModal extends SimpleModal {
 
         (this.shadowRoot?.getElementById("cancel") as HTMLButtonElement).addEventListener("click", () => {
             this.close();
+        });
+    }
+
+    //Return True if Inputs are valid - return false and render Inputs in red if invalid
+    private validateInputs(){
+        let form = this.getByIdFromShadowRoot("form") as HTMLFormElement;
+        if(form.checkValidity()){
+            return true;
+        }else{
+            let invalid = form.querySelectorAll(':invalid');
+            let valid = form.querySelectorAll(':valid');
+            this.renderAsInvalid(invalid);
+            this.renderAsValid(valid);
+            return false;
+        }
+    }
+
+    private renderAsInvalid(invalid: NodeListOf<Element>){
+        invalid.forEach((elem)=>{
+            (elem as HTMLInputElement).classList.add("is-danger");
+        });
+    }
+
+    private renderAsValid(valid: NodeListOf<Element>){
+        valid.forEach((elem)=>{
+            (elem as HTMLInputElement).classList.remove("is-danger");
         });
     }
 

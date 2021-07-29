@@ -58,6 +58,7 @@ export class ObjectivesComponent extends VetproviehElement {
   }
 
   public set objectives(val: Objective[]) {
+    console.log("set objectives");
     this._objectives = val;
     this.renderObjectives();
   }
@@ -66,6 +67,11 @@ export class ObjectivesComponent extends VetproviehElement {
   constructor() {
     super();
   }
+
+  
+  static get observedAttributes() {
+    return  ["objectives"];
+}
 
 
   /**
@@ -79,8 +85,9 @@ export class ObjectivesComponent extends VetproviehElement {
    * Rendering objectives First Time
    */
   renderObjectives() {
-    let container = this.objectivesContainer();
+    let container = this.antibioticsContainer();
     container.innerHTML = "";
+    // TODO welfare container
     this.objectives?.forEach((objective) => this.addObjective(objective));
   }
 

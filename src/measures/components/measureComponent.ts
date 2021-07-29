@@ -5,6 +5,7 @@ import { Barn } from "../../barns";
 import { DynamicForm } from "../../shared/components/forms/dynamicForm";
 import { RenderType } from "../../shared";
 import { MeasuresRepository } from "../repository";
+import { ObjectivesComponent } from "./objectivesComponent";
 
 /**
  * Controller for Page
@@ -48,9 +49,6 @@ import { MeasuresRepository } from "../repository";
           Maßnahmen zur Verringerung des Antibiotika-Einsatzes
           </p>
           <br>
-          
-          <vp-objectives id="objectives">
-          </vp-objectives>
         </div>
         
         <hr/>
@@ -116,6 +114,14 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
       this.takeoverLastMeasure()
     }
 
+    console.log("afterFetch");
+    let objectivesContainer = this.shadowRoot?.querySelector("#objectives") as HTMLElement;
+    let objectivesComponent = new ObjectivesComponent();
+    
+    if(!Array.isArray(this.currentObject.objectives)) this.currentObject.objectives = [];
+    objectivesComponent.objectives = this.currentObject.objectives;
+
+    objectivesContainer.append(objectivesComponent);
   }
 
   /**
