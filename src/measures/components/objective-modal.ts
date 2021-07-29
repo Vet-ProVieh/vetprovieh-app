@@ -137,7 +137,9 @@ export class ObjectiveModal extends SimpleModal {
     //Return True if Inputs are valid - return false and render Inputs in red if invalid
     private validateInputs(){
         let form = this.getByIdFromShadowRoot("form") as HTMLFormElement;
-        if(form.checkValidity()){
+
+        let validityOfKeyResults = this.checkValidityOfKeyResults();
+        if(form.checkValidity() && validityOfKeyResults){
             return true;
         }else{
             let invalid = form.querySelectorAll(':invalid');
@@ -146,6 +148,14 @@ export class ObjectiveModal extends SimpleModal {
             this.renderAsValid(valid);
             return false;
         }
+    }
+
+    private checkValidityOfKeyResults(): boolean {
+        let validity = true;
+        this.shadowRoot?.querySelectorAll("vp-edit-key-result").forEach((e: any) => {
+            validity = validity && (e as KeyResultEditComponent).checkVailidity();
+        });
+        return validity;
     }
 
     private renderAsInvalid(invalid: NodeListOf<Element>){

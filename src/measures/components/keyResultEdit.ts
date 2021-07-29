@@ -44,6 +44,20 @@ export class KeyResultEditComponent extends VetproviehElement {
     this.registerButtons();
   }
 
+  public checkVailidity() : boolean {
+    console.log("CHECK_VALIDITY KeyResultEdit");
+    let input = this.shadowRoot?.querySelector("input");
+    if(input){
+      let valid = input.checkValidity();
+      if(valid) input.classList.remove("is-danger");
+      else input.classList.add("is-danger")
+
+      return valid;
+    } else {
+      return false;
+    }
+  }
+
   /**
    * Delete KeyResult, Dispatch Event and delete DOM-Element
    */
