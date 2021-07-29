@@ -45,7 +45,7 @@ import { QuestionModal } from "../../shared";
                         \${this.objective.name}
                     </p>
                     <p class="card-header-title">
-                        Bis:&nbsp;&nbsp; \${this.objective.date}
+                        Bis:&nbsp;&nbsp; \${ObjectHelper.formatDate(this.objective.date)}
                     </p>
                     <p class="card-header-icon" aria-label="more options">
                         <span class="icon">
