@@ -53,22 +53,22 @@ export class KeyResultComponent extends VetproviehElement {
 
   private toggleState(){
     let checkKeyResult = this.shadowRoot?.getElementById("check") as HTMLElement;
-    switch(this._keyResult.value){
-      case 0:
-          this.keyResult.value++;
+    switch(this._keyResult.milestones){
+      case "Start":
+          this.keyResult.milestones = "Current";
           checkKeyResult.classList.remove(...checkKeyResult.classList);
           checkKeyResult.classList.add("fas");
           checkKeyResult.classList.add("fa-check-double");
           break;
-      case 1:
-          this._keyResult.value++;
+      case "Current":
+          this._keyResult.milestones = "Target";
           checkKeyResult.classList.remove(...checkKeyResult.classList);
           checkKeyResult.classList.add("fas");
           checkKeyResult.classList.add("fa-check-double");
           checkKeyResult.style.color = "#03fc07";
           break;
-      case 2:
-          this._keyResult.value = 0;
+      case "Target":
+          this._keyResult.milestones = "Start";
           checkKeyResult.classList.remove(...checkKeyResult.classList);
           checkKeyResult.classList.add("fas");
           checkKeyResult.classList.add("fa-check");
