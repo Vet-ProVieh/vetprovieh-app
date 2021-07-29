@@ -48,6 +48,14 @@ export class BasicSelectPage extends VetproviehElement {
     }
 
     /**
+     * Getting ParamKey; Can be overriden in subclasses
+     * @return {string}
+     */
+    protected get paramKey() : string {
+        return BasicSelectPage.PARAM_KEY;
+    }
+
+    /**
      * Navigate Back and set params
      */
     protected navigateBack() {
@@ -76,10 +84,10 @@ export class BasicSelectPage extends VetproviehElement {
      * Setting ReturnValue
      */
     private setReturnValue() {
-        let current: Array<any> = VetproviehNavParams.get(BasicSelectPage.PARAM_KEY)
+        let current: Array<any> = VetproviehNavParams.get(this.paramKey)
         if (!Array.isArray(current) || current == null || current == undefined) current = [];
         current.push(this.returnValue);
-        VetproviehNavParams.set(BasicSelectPage.PARAM_KEY, current);
+        VetproviehNavParams.set(this.paramKey, current);
     }
 
 

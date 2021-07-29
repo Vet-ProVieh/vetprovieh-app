@@ -17,6 +17,8 @@ export class SelectButton extends VetproviehElement {
 
     public href: string = "";
     public name: string = "";
+    public param: string = "";
+
     private _recievedParam: any;
 
     public get recievedParam() : any {
@@ -43,13 +45,23 @@ export class SelectButton extends VetproviehElement {
      * @returns {any}
      */
     private popLastParam(): any {
-        let params: Array<any> = VetproviehNavParams.get(BasicSelectPage.PARAM_KEY);
+        let paramKey = this.getParam();
+        console.log(paramKey);
+        let params: Array<any> = VetproviehNavParams.get(paramKey);
         if (params && Array.isArray(params)) {
             let lastParam = params.pop();
-            VetproviehNavParams.set(BasicSelectPage.PARAM_KEY, params);
+            VetproviehNavParams.set(paramKey, params);
             return lastParam;
         } else {
             return undefined;
+        }
+    }
+
+    private getParam(): string {
+        if(this.param != "" && this.param != null && this.param != undefined){
+            return this.param;
+        } else {
+            return BasicSelectPage.PARAM_KEY;
         }
     }
 
@@ -58,7 +70,7 @@ export class SelectButton extends VetproviehElement {
      * @return {string[]}
      */
     static get observedAttributes(): string[] {
-        return ['href', 'name'];
+        return ['href', 'name', 'param'];
     }
 
     /**

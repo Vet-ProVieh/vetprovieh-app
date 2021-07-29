@@ -94,7 +94,6 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {string}
      */
     protected renderRequired() {
-        console.log(this._required);
         if (this._required) {
             return ` required`;
         } else {

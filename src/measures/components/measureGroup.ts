@@ -107,11 +107,12 @@ export class MeasureGroupComponent extends ElementGroupBinding {
      * TODO unterschiedliche Fälle implementieren
      * @param answer 
      */
-    private processSelectButtonAnswer(answer: any[]) {
-        console.log(answer);
+    private processSelectButtonAnswer(selectButton : SelectButton) {
+        let answer = selectButton.recievedParam;
         let fields = this.loadSubFields();
 
         if (answer) {
+            selectButton.scrollIntoView();
             answer.forEach((part: PlanMeasureModel) => {
                 if (part.values) {
                     Object.keys(part.values).forEach((paramKey: string) => {
@@ -173,9 +174,7 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         this.renderSelectButton();
         let selectButton = this.querySelector("select-button") as SelectButton;
         if (selectButton) {
-            console.log("Antwort vom Select-button")
-            this.processSelectButtonAnswer(selectButton.recievedParam);
-            selectButton.scrollIntoView();
+            this.processSelectButtonAnswer(selectButton);
         }
 
         let panelHeading = this.panelHeading;

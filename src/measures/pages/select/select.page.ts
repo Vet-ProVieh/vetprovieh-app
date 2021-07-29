@@ -103,6 +103,15 @@ export class MeasuresSelectPage extends BasicSelectPage {
             VetproviehNavParams.getUrlParameter("barnId")
         );
     }
+
+     /**
+     * Getting ParamKey; Can be overriden in subclasses
+     * @return {string}
+     */
+      protected get paramKey() : string {
+        return "selectPageMeasure.return";
+    }
+
     connectedCallback() {
         super.connectedCallback();
 

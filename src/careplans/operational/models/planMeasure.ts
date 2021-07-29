@@ -10,7 +10,8 @@ export class PlanMeasureModel extends BasicModel {
         Diagnose: string,
         Erregernachweis: string,
         Sektion: string,
-        Sonstiges: string
+        Sonstiges: string,
+        EmpfohleneMaßnahme: string;
     } | undefined;
 
     public updatedAt: string | undefined;

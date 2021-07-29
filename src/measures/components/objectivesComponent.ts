@@ -1,8 +1,11 @@
-import { WebComponent, VetproviehElement, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehElement, VetproviehNavParams, ObjectHelper } from "@tomuench/vetprovieh-shared/lib";
 import { ObjectiveModal } from "./objective-modal";
 import { Objective } from "../models/objective";
 import { ObjectiveItemComponent } from "./objectiveItem";
 import { toStringHDMS } from "ol/coordinate";
+import { PlanMeasureModel } from "../../careplans/operational/models/planMeasure";
+import { SelectButton } from "../../shared";
+import { KeyResult } from "../models/keyresult";
 
 /**
  * Controller for Page
@@ -21,7 +24,7 @@ import { toStringHDMS } from "ol/coordinate";
         <div id="detail" class="container">
           <div class="columns is-mobile padding-15">
               <div class="column">
-                <select-button id="loadMeasure" href="/measures/select.html?barnId=\${this.barnId}" name="Maßnahmen laden">
+                <select-button id="loadMeasure" param="selectPageMeasure.return" href="/measures/select.html?barnId=\${this.barnId}" name="Maßnahmen laden">
                 </select-button>              
               </div>
               <div class="column">
@@ -60,26 +63,24 @@ export class ObjectivesComponent extends VetproviehElement {
   }
 
   public set objectives(val: Objective[]) {
-    console.log("set objectives");
     this._objectives = val;
     this.renderObjectives();
   }
 
 
   constructor() {
-    super(true,false);
+    super(true, false);
 
     let params = VetproviehNavParams.get("MeasureIntializeParams");
-    console.log(params);
     this.barnId = params.barnId;
-    
+
     this.render();
   }
 
-  
+
   static get observedAttributes() {
-    return  ["objectives"];
-}
+    return ["objectives"];
+  }
 
 
   /**
@@ -87,7 +88,11 @@ export class ObjectivesComponent extends VetproviehElement {
    */
   connectedCallback() {
     this.bindManualAddButton();
+  }
 
+  public render() {
+    super.render();
+    this._afterRender();
   }
 
 
@@ -108,7 +113,7 @@ export class ObjectivesComponent extends VetproviehElement {
     let container = this.antibioticsContainer();
     container.innerHTML = "";
     // TODO welfare container
-    this.objectives?.forEach((objective) => this.addObjective(objective));
+    this.objectives?.forEach((objective) => this.addObjectiveToDom(objective));
   }
 
   /**
@@ -116,8 +121,12 @@ export class ObjectivesComponent extends VetproviehElement {
    * @param {Objective} objective 
    */
   private addObjective(objective: Objective) {
-    let objectiveItem = new ObjectiveItemComponent();
     this.objectives.push(objective);
+    this.addObjectiveToDom(objective);
+  }
+
+  private addObjectiveToDom(objective: Objective) {
+    let objectiveItem = new ObjectiveItemComponent();
     objectiveItem.objective = objective;
     objectiveItem.addEventListener("delete", (event) => {
       let index = this.objectives.findIndex((x) => x == (event as CustomEvent).detail)
@@ -199,6 +208,52 @@ export class ObjectivesComponent extends VetproviehElement {
       modal.remove();
     });
   }
+
+
+  _afterRender() {
+
+    let selectButton = this.shadowRoot?.querySelector("select-button") as SelectButton;
+    setTimeout(() => {
+      if (selectButton) {
+        console.log("FOUND SELECTBUTTON");
+        console.log(selectButton);
+        this.processSelectButtonAnswer(selectButton);
+      }
+    }, 1000);
+  }
+
+
+  /**
+     * Process answer of select-Button.
+     * TODO unterschiedliche Fälle implementieren
+     * @param answer 
+     */
+  private processSelectButtonAnswer(selectButton: SelectButton) {
+    let answer = selectButton.recievedParam;
+
+    console.log(answer);
+    if (answer) {
+      selectButton.scrollIntoView();
+      answer.forEach((part: PlanMeasureModel) => {
+        if (part.values) {
+          let tokenMeasure = part.values.EmpfohleneMaßnahme;
+
+          let objective = new Objective();
+          objective.name = `Maßnahmen aus ${part.name} vom ${ObjectHelper.formatDate(part.updatedAt)}`;
+          objective.keyResults = [];
+          tokenMeasure.split("\r\n").forEach((measureLine: string) => {
+            let keyResult = new KeyResult();
+            keyResult.name = measureLine;
+            objective.keyResults.push(keyResult);
+          })
+
+          this.addObjective(objective);
+        }
+      })
+    }
+  }
+
+
 
 
 }
