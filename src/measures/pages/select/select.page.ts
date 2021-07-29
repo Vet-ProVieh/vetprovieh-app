@@ -57,7 +57,7 @@ import { ObjectivesRepository } from "../../repository";
                                 <input value="{{id}}" type="checkbox">
                             </div>
                             <div class="column is-1">
-                                {{updatedAt}}
+                                {{updatedAt|date}}
                             </div>
                             <div class="column">
                                 {{values.Diagnose}}
@@ -66,7 +66,7 @@ import { ObjectivesRepository } from "../../repository";
                                 {{values.Behandlung}}
                             </div>
                             <div class="column">
-                                {{name}}
+                                {{values.EmpfohleneMaßnahme}}
                             </div>
                             <div class="column">
                                 {{lastVet.userName}}
