@@ -1,5 +1,6 @@
 import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
 import { VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { MeasureOperationPlansRepository } from "../../../careplans/operational/repository";
 import { BasicSelectPage } from "../../../shared";
 import { Objective } from "../../models";
 import { ObjectivesRepository } from "../../repository";
@@ -8,46 +9,99 @@ import { ObjectivesRepository } from "../../repository";
     template:
         VetproviehElement.template +
         ` 
-      <form id="form">
-            <vetprovieh-list id="measuresList" pagesize="20" pageable="false">
-                <template>
-                    <div>
-                        <input value="{{id}}" type="checkbox">
-                        <a href="show.html?id={{id}}">
-                            <strong>{{name}}</strong>
-                        </a>
-                        <barn-list-show barnid="{{barn.id}}"></barn-list-show>
-                        <p style="font-size:0.9em;">
-                            <strong>Erstellt am:</strong> {{createdAt}}<br />
-                            <strong>Letztes Update am:</strong> {{updatedAt}}<br />
-                        </p>
+
+        <div class="tabs  is-toggle is-fullwidth is-large">
+            <ul>
+                <li >
+                <a data-id="detail">
+                    <span class="icon is-small"><i class="fas fa-scroll" aria-hidden="true"></i></span>
+                    <span>Maßnahmen</span>
+                </a>
+                </li>
+                <li class="is-active">
+                <a data-id="objectives">
+                    <span class="icon is-small"><i class="fas fa-toolbox" aria-hidden="true"></i></span>
+                    <span>Maßnahmen aus Betreuung</span>
+                </a>
+                </li>
+            </ul>   
+        </div>
+
+        <form id="form">
+                <opplan-table id="measuresList" pagesize="20" pageable="false">
+                    <div id="header">
+                        <div class="columns">
+                            <div class="column is-1">
+                                <strong>Auswahl?</strong>
+                            </div>
+                            <div class="column is-1">
+                                <strong>Datum</strong>
+                            </div>
+                            <div class="column">
+                                <strong>Diagnose</strong>
+                            </div>
+                            <div class="column">
+                                <strong>Behandlung</strong>
+                            </div>
+                            <div class="column">
+                                <strong>Empfohlene Maßnahmen</strong>
+                            </div>
+                            <div class="column">
+                                <strong>Ausgeführt von</strong>
+                            </div>
+                        </div>
                     </div>
-                    <hr />
-                </template>
-            </vetprovieh-list>
-            <div class="container">
-                <div class="columns is-mobile">
-                    <div class="column">
-                        <input id="abortButton" 
-                                class="button is-danger is-fullwidth" 
-                                type="reset" value="Abbrechen">                   
-                    </div>
-                    <div class="column">
-                        <input id="takeoverButton" 
-                                class="button is-success is-fullwidth" 
-                                type="button" value="Übernehmen">
+                    <template>
+                        <div class="columns">
+                            <div class="column is-1">
+                                <input value="{{id}}" type="checkbox">
+                            </div>
+                            <div class="column is-1">
+                                {{updatedAt}}
+                            </div>
+                            <div class="column">
+                                {{values.Diagnose}}
+                            </div>
+                            <div class="column">
+                                {{values.Behandlung}}
+                            </div>
+                            <div class="column">
+                                {{name}}
+                            </div>
+                            <div class="column">
+                                {{lastVet.userName}}
+                            </div>
+                        </div>
+                        <hr />
+                    </template>
+                </opplan-table>
+                <div class="container">
+                    <div class="columns is-mobile">
+                        <div class="column">
+                            <input id="abortButton" 
+                                    class="button is-danger is-fullwidth" 
+                                    type="reset" value="Abbrechen">                   
+                        </div>
+                        <div class="column">
+                            <input id="takeoverButton" 
+                                    class="button is-success is-fullwidth" 
+                                    type="button" value="Übernehmen">
+                        </div>
                     </div>
                 </div>
-            </div>
-      </form>
+        </form>
       `,
     tag: "vp-measures-select"
 })
-export class OperationPlanSelectPage extends BasicSelectPage {
-    private repository: ObjectivesRepository = new ObjectivesRepository();
+export class MeasuresSelectPage extends BasicSelectPage {
+    private repository: MeasureOperationPlansRepository;
 
     constructor() {
         super();
+
+        this.repository = new MeasureOperationPlansRepository(
+            VetproviehNavParams.getUrlParameter("barnId")
+        );
     }
     connectedCallback() {
         super.connectedCallback();

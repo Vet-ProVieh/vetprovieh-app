@@ -1,7 +1,8 @@
-import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehElement, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
 import { ObjectiveModal } from "./objective-modal";
 import { Objective } from "../models/objective";
 import { ObjectiveItemComponent } from "./objectiveItem";
+import { toStringHDMS } from "ol/coordinate";
 
 /**
  * Controller for Page
@@ -20,7 +21,7 @@ import { ObjectiveItemComponent } from "./objectiveItem";
         <div id="detail" class="container">
           <div class="columns is-mobile padding-15">
               <div class="column">
-                <select-button id="loadMeasure" href="/measures/select.html?x=a" name="Maßnahmen laden">
+                <select-button id="loadMeasure" href="/measures/select.html?barnId=\${this.barnId}" name="Maßnahmen laden">
                 </select-button>              
               </div>
               <div class="column">
@@ -51,6 +52,7 @@ import { ObjectiveItemComponent } from "./objectiveItem";
 export class ObjectivesComponent extends VetproviehElement {
 
   private _objectives: Objective[] = [];
+  private _barnId: string = "";
 
 
   public get objectives(): Objective[] {
@@ -64,7 +66,13 @@ export class ObjectivesComponent extends VetproviehElement {
 
 
   constructor() {
-    super();
+    super(true,false);
+
+    let params = VetproviehNavParams.get("MeasureIntializeParams");
+    console.log(params);
+    this.barnId = params.barnId;
+    
+    this.render();
   }
 
 
@@ -73,6 +81,18 @@ export class ObjectivesComponent extends VetproviehElement {
    */
   connectedCallback() {
     this.bindManualAddButton();
+
+  }
+
+
+  private set barnId(value: string) {
+    if (this._barnId !== value) {
+      this._barnId = value;
+    }
+  }
+
+  public get barnId(): string {
+    return this._barnId;
   }
 
   /**

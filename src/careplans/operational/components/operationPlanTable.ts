@@ -23,29 +23,7 @@ import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib
                         placeholder="Bitte Suchbegriff eingeben">
                 </div>
                 <div id="header">
-                    <div class="columns">
-                        <div class="column is-1">
-                            <strong>Auswahl?</strong>
-                        </div>
-                        <div class="column is-1">
-                            <strong>Datum</strong>
-                        </div>
-                        <div class="column">
-                            <strong>Behandlungsplan</strong>
-                        </div>
-                        <div class="column">
-                            <strong>Landwirt/Stall</strong>
-                        </div>
-                        <div class="column">
-                            <strong>Diagnose</strong>
-                        </div>
-                        <div class="column">
-                            <strong>Behandlung</strong>
-                        </div>
-                        <div class="column">
-                            <strong>Ausgeführt von</strong>
-                        </div>
-                    </div>
+                </div>
                 <!-- Listing Elements here -->
                 <div id="listElements" style="margin-top:20px;">
             
@@ -57,4 +35,20 @@ import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib
 })
 export class OperationPlanTable extends VetproviehBasicList {
   
+    private _header: HTMLElement;
+    constructor(){
+        super();
+
+        console.log("HIER DEBUGGEN");
+        this._header = this.querySelector('#header') as HTMLElement;
+
+    }
+
+     /**
+     * Connected Callback
+     */
+      connectedCallback() {
+        super.connectedCallback();
+        if(this._header) this.shadowRoot?.getElementById("header")?.appendChild(this._header);
+      }
 }

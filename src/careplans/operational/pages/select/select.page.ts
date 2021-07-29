@@ -10,6 +10,32 @@ import { MeasureOperationPlansRepository, OperationPlansRepository } from "../..
         ` 
       <form id="form">
             <opplan-table id="opPlanList" pagesize="20" pageable="false">
+
+                <div id="header">
+                    <div class="columns">
+                        <div class="column is-1">
+                            <strong>Auswahl?</strong>
+                        </div>
+                        <div class="column is-1">
+                            <strong>Datum</strong>
+                        </div>
+                        <div class="column">
+                            <strong>Behandlungsplan</strong>
+                        </div>
+                        <div class="column">
+                            <strong>Landwirt/Stall</strong>
+                        </div>
+                        <div class="column">
+                            <strong>Diagnose</strong>
+                        </div>
+                        <div class="column">
+                            <strong>Behandlung</strong>
+                        </div>
+                        <div class="column">
+                            <strong>Ausgeführt von</strong>
+                        </div>
+                    </div>
+                </div>
                 <template>
                     <div class="columns">
                         <div class="column is-1">
