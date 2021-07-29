@@ -11,7 +11,7 @@ import { KeyResult } from "../models/keyresult";
     `
       <div class="columns">
           <div class="column">
-              <input property="name" class="input" placeholder="Bitte geben Sie ihr Zwischenziel ein" type="text" />
+              <input property="name" class="input" placeholder="Bitte geben Sie ihr Zwischenziel ein" type="text" required/>
           </div>
           <div class="column is-2">
             <div class="buttons">                      
@@ -37,11 +37,6 @@ export class KeyResultEditComponent extends VetproviehElement {
       this._keyResult = val;
       VetproviehBinding.bindFormElements(this.shadowRoot, this.keyResult);
     }
-  }
-
-  constructor() {
-    super();
-
   }
 
   public render() {

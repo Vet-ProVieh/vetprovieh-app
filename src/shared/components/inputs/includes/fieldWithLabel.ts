@@ -52,14 +52,6 @@ export class FieldWithLabel extends VetproviehElement {
     }
 
     /**
-     * Getter Property
-     * @return {string | undefined}
-     */
-     public get required(): string | undefined {
-        return this._property;
-    }
-
-    /**
      * Setter Property
      * @param {string | undefined} val
      */
@@ -97,6 +89,18 @@ export class FieldWithLabel extends VetproviehElement {
         }
     }
 
+        /**
+     * Render required field
+     * @return {string}
+     */
+    protected renderRequired() {
+        console.log(this._required);
+        if (this._required) {
+            return ` required`;
+        } else {
+            return "";
+        }
+    }
 
     /**
      * Render Placeholder to Show
