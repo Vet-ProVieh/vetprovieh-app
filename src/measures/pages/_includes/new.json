@@ -451,14 +451,6 @@
           "voiceInputable": true
         },
         {
-          "detailsType": "textFields",
-          "name": "Kommentar bei Sonstiges",
-          "optional": false,
-          "position": 2,
-          "value": "",
-          "voiceInputable": true
-        },
-        {
           "detailsType": "textArea",
           "name": "Tierverluste für das Kalenderhalbjahr",
           "optional": false,
@@ -497,6 +489,14 @@
           "position": 6,
           "value": "",
           "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Kommentar bei Sonstiges",
+          "optional": true,
+          "position": 7,
+          "value": "",
+          "voiceInputable": true
         }
       ]
     },
@@ -519,32 +519,6 @@
   "focusOfDiseases": "string",
   "isBlueprint": false,
   "measuresDate": "2021-06-05",
-  "objectives": [{
-    "active": true,
-    "keyResults": [{
-        "active": true,
-        "milestones": "Current",
-        "name": "Einstreuwchsel",
-        "value": "100",
-        "position": 0
-      },
-      {
-        "active": true,
-        "milestones": "Start",
-        "name": "Klimakontrolle",
-        "value": "0",
-        "position": 1
-      },
-      {
-        "active": true,
-        "milestones": "Target",
-        "name": "Futterumstellung",
-        "value": "1000",
-        "position": 2
-      }
-    ],
-    "name": "Fußballengesundheit verbessern",
-    "position": 0
-  }],
+  "objectives": [],
   "therapyFrequency": "string"
 }

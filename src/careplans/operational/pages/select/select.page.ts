@@ -42,7 +42,7 @@ import { MeasureOperationPlansRepository, OperationPlansRepository } from "../..
                             <input value="{{id}}" type="checkbox">
                         </div>
                         <div class="column is-1">
-                            {{updatedAt}}
+                            {{updatedAt|date}}
                         </div>
                         <div class="column">
                             <strong>{{name}}</strong>
