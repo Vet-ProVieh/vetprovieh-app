@@ -4,7 +4,7 @@ import { ObjectiveModal } from "./objective-modal";
 import { KeyResult } from "../models/keyresult";
 import { Objective } from "../models/objective";
 import { KeyResultComponent } from "./keyResult";
-import { QuestionModal } from "../../shared";
+import { QuestionModal, StarsComponent } from "../../shared";
 
 /**
  * Controller for Page
@@ -40,14 +40,18 @@ import { QuestionModal } from "../../shared";
     <div class="columns is-centered">
         <div class="column is-two-thirds is-centered">
             <div class="card dropdown">
-                <header id="btn-dropdown" class="card-header">
+                <header class="card-header">
                     <p class="card-header-title">
                         \${this.objective.name}
                     </p>
                     <p class="card-header-title">
+                        <vp-stars amount="5" id="stars">
+                        </vp-stars>
+                    </p>
+                    <p class="card-header-title">
                         Bis:&nbsp;&nbsp; \${ObjectHelper.formatDate(this.objective.date)}
                     </p>
-                    <p class="card-header-icon" aria-label="more options">
+                    <p class="card-header-icon" id="btn-dropdown" aria-label="more options">
                         <span class="icon">
                             <i class="fas fa-angle-down" aria-hidden="true" id="arrow"></i>
                         </span>
@@ -93,12 +97,20 @@ export class ObjectiveItemComponent extends VetproviehElement {
         }
     }
 
+    connectedCallback(){
+        let stars = this.getByIdFromShadowRoot("stars") as StarsComponent;
+       // this.objective.rating = stars.score;
+        stars.score = this.objective.rating;
+        stars.addEventListener("click", () => {
+            this.objective.rating = stars.score;
+        })
+    } 
+
     public render() {
         super.render();
         this.renderKeyResults();
 
         let btn = this.shadowRoot?.getElementById("btn-dropdown") as HTMLElement;
-
         btn.addEventListener("click", () => this.toggleDetails());
 
         this.registerDeleteButton();
