@@ -14,3 +14,4 @@ export { VetproviehImage } from './includes/vetprovieh-image';
 export { VetproviehAudio } from './includes/vetprovieh-audio';
 export { SimpleModal } from './includes/simple-modal';
 export * from './includes/question-modal';
+export * from './includes/vetprovieh-stars';

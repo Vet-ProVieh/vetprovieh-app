@@ -8,4 +8,5 @@ export class Objective extends BasicModel{
     public active: boolean = true;
     public welfare: boolean = false;
     public keyResults: KeyResult[] = [new KeyResult()];
+    public rating: number = 0;
 }

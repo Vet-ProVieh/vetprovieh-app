@@ -44,37 +44,47 @@ export class KeyResultComponent extends VetproviehElement {
   }
 
   connectedCallback(){
+    this.renderCurrentState();
     (this.shadowRoot?.getElementById("name") as HTMLElement).innerText = this.keyResult.name;
     let checkKeyResult = this.shadowRoot?.getElementById("check") as HTMLElement;
     checkKeyResult.addEventListener("click", () => {
       this.toggleState();
+      this.renderCurrentState();
     });
   }
 
   private toggleState(){
-    let checkKeyResult = this.shadowRoot?.getElementById("check") as HTMLElement;
     switch(this._keyResult.milestones){
       case "Start":
           this.keyResult.milestones = "Current";
-          checkKeyResult.classList.remove(...checkKeyResult.classList);
-          checkKeyResult.classList.add("fas");
-          checkKeyResult.classList.add("fa-check-double");
           break;
       case "Current":
           this._keyResult.milestones = "Target";
-          checkKeyResult.classList.remove(...checkKeyResult.classList);
-          checkKeyResult.classList.add("fas");
-          checkKeyResult.classList.add("fa-check-double");
-          checkKeyResult.style.color = "#03fc07";
           break;
       case "Target":
           this._keyResult.milestones = "Start";
-          checkKeyResult.classList.remove(...checkKeyResult.classList);
-          checkKeyResult.classList.add("fas");
-          checkKeyResult.classList.add("fa-check");
-          checkKeyResult.style.color = "black";
           break;
       }
+  }
+
+  private renderCurrentState(){
+    switch(this._keyResult.milestones){
+      case "Start":
+          this.checkKeyResult.className = "fas fa-check-double";
+          break;
+      case "Current":
+          this.checkKeyResult.className = "fas fa-check-double";
+          this.checkKeyResult.style.color = "#03fc07";
+          break;
+      case "Target":
+          this.checkKeyResult.className = "fas fa-check";
+          this.checkKeyResult.style.color = "black";
+          break;
+      }
+  }
+
+  private get checkKeyResult() {
+    return this.shadowRoot?.getElementById("check") as HTMLElement;
   }
 
   
