@@ -1,10 +1,9 @@
 import { User } from "../models";
 import { BaseRepository } from "@tomuench/vetprovieh-shared/lib";
-import { Tenant } from "../../admin/tenants/models";
 
 export class UserRepository extends BaseRepository<User> {
 
-    private keycloakHelper = new KeycloakHelper();
+    private keycloakHelper = KeycloakHelper.instance();
     constructor() {
         super(`/service/usermanagements`);
 

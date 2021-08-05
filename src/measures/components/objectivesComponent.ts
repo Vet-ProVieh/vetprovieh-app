@@ -72,7 +72,7 @@ export class ObjectivesComponent extends VetproviehElement {
     super(true, false);
 
     let params = VetproviehNavParams.get("MeasureIntializeParams");
-    this.barnId = params.barnId;
+    this.internalBarnId = params.barnId;
 
     this.render();
   }
@@ -96,7 +96,7 @@ export class ObjectivesComponent extends VetproviehElement {
   }
 
 
-  private set barnId(value: string) {
+  private set internalBarnId(value: string) {
     if (this._barnId !== value) {
       this._barnId = value;
     }

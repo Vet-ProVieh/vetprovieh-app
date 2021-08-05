@@ -35,7 +35,7 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         super.connectedCallback();
     }
 
-    private set isValid(v: boolean) {
+    private set internalIsValid(v: boolean) {
         if (this._isValid !== v) {
             this._isValid = v;
             if (v) {
@@ -194,11 +194,11 @@ export class MeasureGroupComponent extends ElementGroupBinding {
     private initValidation() {
         this._subfieldBindings.forEach((subfield) => {
             subfield.addEventListener("change", (subfield: MeasureFieldComponent) => {
-                this.isValid = this.calculateValidation()
+                this.internalIsValid = this.calculateValidation()
             });
         });
 
-        this.isValid = this.calculateValidation();
+        this.internalIsValid = this.calculateValidation();
 
     }
 }

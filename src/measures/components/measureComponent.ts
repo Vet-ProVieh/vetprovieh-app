@@ -114,7 +114,6 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
       this.takeoverLastMeasure()
     }
 
-    console.log("afterFetch");
     let objectivesContainer = this.shadowRoot?.querySelector("#objectives") as HTMLElement;
     let objectivesComponent = new ObjectivesComponent();
     
@@ -200,23 +199,17 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   }
 
   private setParamsToComponent(params: any) {
-
-    console.log("Setting barnid");
     if (params != null && params != undefined) {
       if (params.barnId != null && params.barnId != undefined) {
         this.currentObject.barn = { id: parseInt(params.barnId) } as Barn;
-        console.log("barnid set");
       }
       if (params.measuresDate != null && params.measuresDate != undefined) {
         this.currentObject.measuresDate = params.measuresDate;
-        console.log("measuresDate set");
       }
       if (params.therapyFrequency != null && params.therapyFrequency != undefined) {
         this.currentObject.therapyFrequency = params.therapyFrequency;
-        console.log("TF set");
       }
     }
-    console.log("OBJ:" + JSON.stringify(this.currentObject));
   }
 
 }

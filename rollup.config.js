@@ -1,6 +1,6 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-
+import { uglify } from "rollup-plugin-uglify";
 
 const {
     generateSW
@@ -51,14 +51,16 @@ export default {
         format: 'es', // immediately-invoked function expression — suitable for <script> tags
         sourcemap: true
     },
+    cache: true,
+    treeshake: true,
     plugins: [
         typescript(),
+        production && uglify(),
         resolve({
             browser: true
         }), // tells Rollup how to find date-fns in node_modules
         commonjs(
-
-
+            { sourceMap: false }
         ), // converts date-fns to ES modules
         production && terser(), // minify, but only in production
         replace({
@@ -74,16 +76,20 @@ export default {
                     dest: 'www'
                 },
                 {
-                    src: 'node_modules/bulma/*',
-                    dest: 'www/node_modules/bulma'
+                    src: 'node_modules/bulma/css/bulma.min.css',
+                    dest: 'www/node_modules/bulma/css/'
                 },
                 {
-                    src: 'node_modules/bulma-pageloader/*',
-                    dest: 'www/node_modules/bulma-pageloader'
+                    src: 'node_modules/bulma-pageloader/dist/css/bulma-pageloader.min.css',
+                    dest: 'www/node_modules/bulma-pageloader/dist/css'
                 },
                 {
-                    src: 'node_modules/@fortawesome/fontawesome-free/*',
-                    dest: 'www/node_modules/fontawesome'
+                    src: 'node_modules/@fortawesome/fontawesome-free/css/all.min.css*',
+                    dest: 'www/node_modules/fontawesome/css/'
+                },
+                {
+                    src: 'node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2',
+                    dest: 'www/node_modules/fontawesome/webfonts/'
                 },
                 {
                     src: 'node_modules/ol/ol.css',
@@ -96,7 +102,7 @@ export default {
             globDirectory: 'www/',
             globPatterns: ['**/*'],
             directoryIndex: "index.html",
-            globIgnores: ['auth/**/*', 'injectManifest_sw.js'],
+            globIgnores: ['auth/**/*', 'injectManifest_sw.js', 'fontawesome/js/*.js'],
             clientsClaim: true,
             skipWaiting: true,
             ignoreURLParametersMatching: [/.*/],

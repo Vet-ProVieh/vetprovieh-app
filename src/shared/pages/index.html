@@ -27,7 +27,7 @@
                       <a href="/careplans/operational/show.html?id={{id}}">
                         <strong>{{name}}</strong>
                       </a>
-                      <span class="tag is-pulled-right is-primary">{{updatedAt}}</span>
+                      <span class="tag is-pulled-right is-primary">{{updatedAt|date}}</span>
                       <barn-list-show barnid="{{barnId}}"></barn-list-show>
                     </div>
                   </template>
@@ -53,7 +53,7 @@
                       <strong>VVVO:</strong> {{vvvoNumber}}<br />
                       <strong>Landwirt:</strong> {{farmer.name}} ({{farmer.contactPerson.firstName}}
                       {{farmer.contactPerson.lastName}})<br />
-                      <strong>Letzter Besuch:</strong> {{lastVisit}}
+                      <strong>Letzter Besuch:</strong> {{lastVisit|date}}
                     </p>
                   </div>
                 </template>

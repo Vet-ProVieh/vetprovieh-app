@@ -21,6 +21,7 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
           <!-- <button id="right-menu-open">open right</button> -->
           </nav>
           <vetprovieh-sidemenu id="left-menu" width="300px">
+          <template>
           <aside class="menu">
               <profile-widget></profile-widget>
               <ul class="menu-list">
@@ -87,6 +88,7 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
               </div>
               
           </aside>
+          </template>
           </vetprovieh-sidemenu>
           <!--  <vetprovieh-sidemenu id="right-menu" 
                   orientation="right" width="300px">

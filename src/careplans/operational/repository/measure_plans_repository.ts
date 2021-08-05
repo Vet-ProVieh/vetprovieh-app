@@ -17,7 +17,7 @@ export class MeasureOperationPlansRepository extends BaseRepository<any>{
      * Getting All
      * @returns Promise<T[]>
      */
-       all(): Promise<T[]> {
+       all(): Promise<any[]> {
         return fetch(this.buildQueryUrl()).then((response) => {
             if(response.status === 404){
                 return [];

@@ -1,7 +1,18 @@
 /**
  * Helper for Keycloak
  */
+var KEYCLOAK_HELPER = undefined;
+
 class KeycloakHelper {
+
+  static instance() {
+    if(!KEYCLOAK_HELPER){
+      KEYCLOAK_HELPER = new KeycloakHelper();
+    }
+
+    return KEYCLOAK_HELPER;
+  }
+
   constructor() {
     this._keycloakInstance = new Keycloak({
       "realm": this.subdomain,
@@ -45,6 +56,7 @@ class KeycloakHelper {
     let token = this._token;
     let refreshToken = this._refreshToken;
     return this._keycloakInstance.init({
+      onLoad: 'login-required',
       token,
       refreshToken
     });
@@ -52,7 +64,8 @@ class KeycloakHelper {
 
   connect() {
     let instance = this._keycloakInstance;
-    this.init().success(function (authenticated) {
+    console.log("KeycloakHelper: Connecting");
+    this.init().then(function (authenticated) {
       if (!authenticated) {
         instance.login({
           scope: 'openid offline_access',
@@ -116,6 +129,7 @@ class KeycloakHelper {
   };
 
   updateToken(amount) {
+    console.log("KeycloakHelper: UpdateToken");
     var _self = this;
     return new Promise((resolve, reject) => {
       _self.instance.updateToken(amount)
