@@ -7,7 +7,8 @@ var page: OperationPlanSelectPage;
 var genTestPlan = function (id: number) {
     let testPlan = new OperationPlan();
     testPlan.id = id;
-    testPlan.name = `Testplan ${id}`
+    testPlan.barn = {id: id};
+    testPlan.name = `Testplan ${id}`;
     return testPlan
 }
 

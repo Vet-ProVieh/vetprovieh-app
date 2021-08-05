@@ -38,10 +38,7 @@ export class OperationPlanTable extends VetproviehBasicList {
     private _header: HTMLElement;
     constructor(){
         super();
-
-        console.log("HIER DEBUGGEN");
         this._header = this.querySelector('#header') as HTMLElement;
-
     }
 
      /**

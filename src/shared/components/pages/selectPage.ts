@@ -33,11 +33,11 @@ export class BasicSelectPage extends VetproviehElement {
      * Register different Event-Listener
      */
     private registerEventListener() {
-        this.abortButton.addEventListener('click', () => {
+        this.abortButton?.addEventListener('click', () => {
             this.navigateBack();
         });
 
-        this.takeoverButton.addEventListener('click', () => {
+        this.takeoverButton?.addEventListener('click', () => {
             if (this.hasSelectedItems()) {
                 this.setReturnValue();
                 this.navigateBack();

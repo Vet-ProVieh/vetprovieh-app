@@ -1,8 +1,8 @@
-import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
+import { VetproviehBasicList } from "@tomuench/vetprovieh-list/lib/vetprovieh-basic-list";
 import { VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { BasicSelectPage } from "../../../../shared";
 import { OperationPlan } from "../../models";
-import { MeasureOperationPlansRepository, OperationPlansRepository } from "../../repository";
+import { MeasureOperationPlansRepository } from "../../repository";
 
 @WebComponent({
     template:
@@ -94,7 +94,8 @@ export class OperationPlanSelectPage extends BasicSelectPage {
         super.connectedCallback();
 
 
-        let list: VetproviehList = this.vetproviehList;
+        let list: VetproviehBasicList = this.vetproviehList;
+        console.log(list);
         if (list) list.repository = this.repository;
     }
     /**
@@ -109,8 +110,8 @@ export class OperationPlanSelectPage extends BasicSelectPage {
      * Loading Liste von Operation-Plan
      * @return {VetproviehList}
      */
-    private get vetproviehList(): VetproviehList {
-        return document.getElementById("opPlanList") as VetproviehList;
+    private get vetproviehList(): VetproviehBasicList {
+        return this.querySelector("#opPlanList") as VetproviehBasicList;
     }
 
     /**

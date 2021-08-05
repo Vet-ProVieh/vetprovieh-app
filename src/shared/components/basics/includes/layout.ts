@@ -5,10 +5,7 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
  */
 @WebComponent({
   tag: "vetprovieh-layout",
-  template: `<div id="pageloader" 
-      class="pageloader is-active has-background-vetprovieh-light-blue">
-            <span class="title">Ihre Daten werden geladen...</span>
-          </div>
+  template: `
           <nav class="navbar is-fixed-top has-shadow 
                   has-background-vetprovieh-light-blue" 
             role="navigation" aria-label="main navigation">
@@ -126,10 +123,6 @@ export class VetproviehLayout extends VetproviehElement {
     super(false, false);
     this._outsideInnerHtml = this.innerHTML;
 
-    const self = this;
-    document.addEventListener('DOMContentLoaded', function () {
-      self._deactivatePageLoader();
-    }, false);
   }
 
   /**
@@ -193,20 +186,6 @@ export class VetproviehLayout extends VetproviehElement {
         });
       }
     });
-  }
-
-  /**
-   * Hide pageloader
-   * @private
-   */
-  _deactivatePageLoader() {
-    const element = document.getElementById('pageloader') as HTMLElement;
-    const mainContainer = document.getElementById('mainContainer') as HTMLElement;
-    setTimeout(
-      (_) => {
-        element.classList.remove('is-active')
-      },
-      100);
   }
 
 }
