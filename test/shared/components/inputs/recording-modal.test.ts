@@ -1,10 +1,10 @@
 
 
-import { RecordingModal } from '../../../../src/shared/components/inputs/includes/recording-modal';
+import { RecordingImageModal } from '../../../../src/shared';
 
 describe('close', () => {
     let genModal = function () {
-        let modal = new RecordingModal();
+        let modal = new RecordingImageModal();
         modal.connectedCallback();
         modal.active = true;
         return modal;

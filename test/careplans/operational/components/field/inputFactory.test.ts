@@ -12,93 +12,93 @@ describe('generateField', () => {
 
     describe('textArea', () => {
 
-        let genTextArea = (opts={}) => {
+        let genTextArea = (opts = {}) => {
             return InputFactory.generateField("textArea", opts);
         }
 
         let random = () => {
-            return  Math.floor((Math.random() * 10)) +1;
+            return Math.floor((Math.random() * 10)) + 1;
         }
 
         it('should return a text-area', () => {
             let textArea = genTextArea();
-            expect(textArea).toMatch(`<textarea property="value" class="input" type="text" required ></textarea>`);
+            expect(textArea).toMatch("<textarea property=\"value\" class=\"textarea\" type=\"text\" required ></textarea>");
         });
 
         it('should have name', () => {
-            let textArea = genTextArea({name: "test"});
-            expect(textArea).toMatch(`<textarea property="value" name="test" class="input" type="text" required ></textarea>`);
+            let textArea = genTextArea({ name: "test" });
+            expect(textArea).toMatch("<textarea property=\"value\" name=\"test\" class=\"textarea\" type=\"text\" required ></textarea>");
         });
 
         it('should set cols', () => {
             let colAmount = random();
-            let textArea = genTextArea({cols: colAmount});
-            expect(textArea).toMatch(`<textarea property="value" cols="${colAmount}" class="input" type="text" required ></textarea>`);
+            let textArea = genTextArea({ cols: colAmount });
+            expect(textArea).toMatch("<textarea property=\"value\" cols=\"" + colAmount + "\" class=\"textarea\" type=\"text\" required ></textarea>");
         });
 
         it('should set rows', () => {
             let rowAmount = random();
-            let textArea = genTextArea({rows: rowAmount});
-            expect(textArea).toMatch(`<textarea property="value" rows="${rowAmount}" class="input" type="text" required ></textarea>`);
+            let textArea = genTextArea({ rows: rowAmount });
+            expect(textArea).toMatch("<textarea property=\"value\" rows=\"" + rowAmount + "\" class=\"textarea\" type=\"text\" required ></textarea>");
         });
 
         it('should set required', () => {
-            let textArea = genTextArea({optional: false});
-            expect(textArea).toMatch(`<textarea property="value" class="input" type="text" required ></textarea>`);
+            let textArea = genTextArea({ optional: false });
+            expect(textArea).toMatch("<textarea property=\"value\" class=\"textarea\" type=\"text\" required ></textarea>");
         });
 
         it('should set voiceable', () => {
-            let textArea = genTextArea({voiceInputable: true});
-            expect(textArea).toMatch(`<textarea property="value" is="voice-input" class="input" type="text" required ></textarea>`);
+            let textArea = genTextArea({ voiceInputable: true });
+            expect(textArea).toMatch("<textarea property=\"value\" is=\"voice-input\" class=\"textarea\" type=\"text\" required ></textarea>");
         });
 
         it('should not attach invalid option', () => {
-            let textArea = genTextArea({somethingStrange: 'blabla'});
-            expect(textArea).toMatch(`<textarea property="value" class="input" type="text" required ></textarea>`);
+            let textArea = genTextArea({ somethingStrange: 'blabla' });
+            expect(textArea).toMatch("<textarea property=\"value\" class=\"textarea\" type=\"text\" required ></textarea>");
         });
     });
 
     describe('video', () => {
-        let genVideo = (opts={}) => {
+        let genVideo = (opts = {}) => {
             return InputFactory.generateField("video", opts);
         }
         it('should render without options', () => {
             let video = genVideo({});
-            expect(video).toMatch(`<vetprovieh-video ></vetprovieh-video>`);
+            expect(video).toMatch("<vetprovieh-video  property=\"value\"  ></vetprovieh-video>");
         });
 
         it('should have name', () => {
-            let video = genVideo({name: "testvideo"});
-            expect(video).toMatch(`<vetprovieh-video name="testvideo" ></vetprovieh-video>`);
+            let video = genVideo({ name: "testvideo" });
+            expect(video).toMatch("<vetprovieh-video  property=\"value\"  name=\"testvideo\" ></vetprovieh-video>");
         });
     });
 
     describe('careplanList', () => {
-        let genList = (opts={}) => {
+        let genList = (opts = {}) => {
             return InputFactory.generateField("careplanList", opts);
         }
 
         it('should have not a multiple tag', () => {
-            let list = genList({name: "testlist"});
+            let list = genList({ name: "testlist" });
             expect(list).not.toMatch(" multiple");
         });
 
         it('should have name tag', () => {
-            let list = genList({name: "testlist"});
+            let list = genList({ name: "testlist" });
 
             expect(list).toMatch(`<select property="value" size="8" style="height: 10em" name="testlist" required ></select>`)
         });
 
         it('should have options', () => {
-            let choices = ["a","b","c"];
-            let list = genList({choices: choices});
+            let choices = ["a", "b", "c"];
+            let list = genList({ choices: choices });
             choices.forEach((choice) => {
                 expect(list).toMatch(`<option value="` + choice + `">` + choice + `</option>`);
             })
         });
 
         it('should be marked as multiple', () => {
-            let list = genList({multipleSelect: true});
+            let list = genList({ multipleSelect: true });
             expect(list).toMatch("is-multiple");
             expect(list).toMatch(`<select property="value" size="8" style="height: 10em" multiple required ></select>`);
         });
@@ -109,18 +109,18 @@ describe('generateField', () => {
         });
 
         it('should not set required', () => {
-            let list = genList({optional: true});
+            let list = genList({ optional: true });
             expect(list).not.toMatch(`required`);
         });
     });
 
     describe('comboBox', () => {
-        let genCombo = (opts={}) => {
+        let genCombo = (opts = {}) => {
             return InputFactory.generateField("comboBox", opts);
         }
 
         it('should have name tag', () => {
-            let combo = genCombo({name: "test"});
+            let combo = genCombo({ name: "test" });
             expect(combo).toMatch(`<select property="value" name="test" required ></select>`);
         });
 
@@ -132,13 +132,13 @@ describe('generateField', () => {
     });
 
     describe('textFields', () => {
-        let genTextField = (opts={}) => {
+        let genTextField = (opts = {}) => {
             return InputFactory.generateField("textFields", opts);
         }
 
         it('should generate ', () => {
             let textField = genTextField();
-            expect(textField).toMatch(`<input property="value" class="input" type="text">`)
+            expect(textField).toMatch("<textarea property=\"value\" required class=\"input\" type=\"text\"></textarea>")
         });
 
         it('should have property', () => {
@@ -147,31 +147,31 @@ describe('generateField', () => {
         });
 
         it('should set voiceable', () => {
-            let textArea = genTextField({voiceInputable: true});
-            expect(textArea).toMatch(`<input property="value" is="voice-input" class="input" type="text">`);
+            let textArea = genTextField({ voiceInputable: true });
+            expect(textArea).toMatch("<textarea property=\"value\" is=\"voice-input\" required class=\"input\" type=\"text\"></textarea>");
         });
     });
 
     describe('speech', () => {
-        let genSpeech = (opts={}) => {
+        let genSpeech = (opts = {}) => {
             return InputFactory.generateField("speech", opts);
         }
 
         it('should generate expected', () => {
             let speech = genSpeech({});
-            expect(speech).toMatch("<vetprovieh-speech ></vetprovieh-speech>");
+            expect(speech).toMatch("<vetprovieh-audio property=\"value\" type=\"audio\" ></vetprovieh-audio>");
         });
-        
+
     });
 
     describe('image', () => {
-        let genImage = (opts={}) => {
+        let genImage = (opts = {}) => {
             return InputFactory.generateField("image", opts);
         }
 
         it('should render with name', () => {
-            let image = genImage({name: "test"});
-            expect(image).toMatch(`<vetprovieh-video type="image" name="test" ></vetprovieh-video>`);
+            let image = genImage({ name: "test" });
+            expect(image).toMatch(`<vetprovieh-image property="value" type="image" name="test" ></vetprovieh-image>`);
         });
     });
 })

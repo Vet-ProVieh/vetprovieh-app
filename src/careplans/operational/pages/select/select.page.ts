@@ -48,7 +48,7 @@ import { MeasureOperationPlansRepository } from "../../repository";
                             <strong>{{name}}</strong>
                         </div>
                         <div class="column">
-                            <barn-list-show barnid="{{barn.id}}"></barn-list-show>
+                            <barn-list-show barnid="{{barnIid}}"></barn-list-show>
                         </div>
                         <div class="column">
                             {{values.Diagnose}}
@@ -95,7 +95,6 @@ export class OperationPlanSelectPage extends BasicSelectPage {
 
 
         let list: VetproviehBasicList = this.vetproviehList;
-        console.log(list);
         if (list) list.repository = this.repository;
     }
     /**

@@ -1,6 +1,12 @@
 import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
+import { BarnListShow } from "../../../../src/barns";
 import { OperationPlan, OperationPlanSelectPage } from "../../../../src/careplans";
 import { OperationPlansRepository } from "../../../../src/careplans/operational/repository";
+
+import { enableFetchMocks } from 'jest-fetch-mock'
+import fetch from 'jest-fetch-mock';
+enableFetchMocks();
+
 
 var page: OperationPlanSelectPage;
 
@@ -45,17 +51,6 @@ describe('operationPlans', () => {
 describe('selectedOperationPlans', () => {
 
     describe('mocked', () => {
-        it('should return expected amount of operationPlans', () => {
-            let spy = jest.spyOn(page, 'operationPlans', 'get')
-                 .mockImplementation(() => testPlans);
-            let spy2 = jest.spyOn(page, 'selectedOperationPlanIds', 'get')
-                .mockImplementation(() => [1]);
-            
-            expect(page.selectedOperationPlans.length).toEqual(1);
-    
-            spy.mockRestore();
-            spy2.mockRestore();
-        });
     
         it('should return expected operationPlan content', () => {
             let spy = jest.spyOn(page, 'operationPlans', 'get')
@@ -63,6 +58,7 @@ describe('selectedOperationPlans', () => {
     
             let spy2 = jest.spyOn(page, 'selectedOperationPlanIds', 'get')
                 .mockImplementation(() => [1]);
+
             let opPlan = page.selectedOperationPlans[0];
             expect(opPlan).not.toEqual(undefined);
             expect(opPlan.id).toEqual(1);
@@ -75,18 +71,18 @@ describe('selectedOperationPlans', () => {
    
     describe('with vetprovieh-list', () => {
         it('should return expected amount of operationPlans', () => {
-            let rep = (page as any)["repository"] as OperationPlansRepository;
-            let repMock = jest.spyOn<any,any>(rep, 'all')
-            .mockImplementation(() => new Promise((resolve, reject) =>{ resolve(testPlans) }));
-
+            
+            page = new OperationPlanSelectPage();
+            fetch.mockIf(/service\/measures\/operationplans\/barn/,JSON.stringify(testPlans));
             page.connectedCallback();
 
             let spy2 = jest.spyOn(page, 'selectedOperationPlanIds', 'get')
                 .mockImplementation(() => [1]);
             
-            expect(page.selectedOperationPlans.length).toEqual(1);
+                setTimeout(() => {
+                    expect(page.selectedOperationPlans.length).toEqual(1);
+                  }, 500);
     
-            repMock.mockRestore();
             spy2.mockRestore();
         });
     });

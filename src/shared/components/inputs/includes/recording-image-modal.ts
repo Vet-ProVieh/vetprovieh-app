@@ -58,7 +58,7 @@ export class RecordingImageModal extends RecordingModal {
                 this.recordedContent = canvas.toDataURL('image/png');
                 canvas.toBlob((blob: Blob | null) => {
                     this._content = blob;
-                    resolve();
+                    resolve(true);
                 })
             }
         })

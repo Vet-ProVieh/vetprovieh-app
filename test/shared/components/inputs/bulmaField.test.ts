@@ -32,7 +32,7 @@ describe('render', () => {
     });
 
     it('should render default as a textfield', () => {
-        let expectedContent = `<input class="input" type="text">`;
+        let expectedContent = `<input class="input" id="input" type="text">`;
 
         expect(field.type).toEqual("text");
         expect(field.innerHTML).toMatch(expectedContent);
@@ -43,14 +43,14 @@ describe('render', () => {
         field.placeholder = placeholder;
         field.render();
 
-        let expectedContent = `<input class="input" type="text" placeholder="${placeholder}">`;
+        let expectedContent = `<input class="input" id="input" type="text" placeholder="${placeholder}">`;
 
         expect(field.innerHTML).toMatch(expectedContent);
     });
 
     describe('type', () => {
         it('should render a number', () => {
-            let expectedContent = `<input class="input" type="number">`;
+            let expectedContent = `<input class="input" id="input" type="number">`;
             field.type = "number";
             field.render();
             expect(field.type).toEqual("number");

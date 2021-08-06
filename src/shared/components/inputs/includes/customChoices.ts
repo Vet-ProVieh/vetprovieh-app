@@ -39,7 +39,6 @@ export class CustomChoices extends VetproviehElement {
      */
     attributeChangedCallback(name: string, old: any, value: any) {
         super.attributeChangedCallback(name, old, value);
-        console.log(`Callback ${name}=${value}`);
       }
     /**
      * Get Label

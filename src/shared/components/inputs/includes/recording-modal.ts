@@ -100,11 +100,10 @@ export class RecordingModal extends VetproviehElement {
      * Resets Modal
      */
     protected reset() {
-        
+
     }
 
     private closeStreams() {
-        console.log("Stopping open Streams");
         this.mediaElement.srcObject = null;
 
         this._stream?.getTracks().forEach((track) => {
@@ -131,19 +130,22 @@ export class RecordingModal extends VetproviehElement {
 
         let videoOptions: any = true;
 
-        if(this.isMobile){
+        if (this.isMobile) {
             videoOptions = {
                 facingMode: "environment"
             }
         }
-        navigator.getUserMedia = navigator.mediaDevices.getUserMedia
+        if (navigator.mediaDevices) {
+            navigator.getUserMedia = navigator.mediaDevices.getUserMedia
 
-        navigator.mediaDevices.getUserMedia({ 
-            video: videoOptions, 
-            audio: true }).then(streamFunc, this.bindingFailed);
+            navigator.mediaDevices.getUserMedia({
+                video: videoOptions,
+                audio: true
+            }).then(streamFunc, this.bindingFailed);
+        }
     }
 
-    protected afterStreamStarted(stream: MediaStream){
+    protected afterStreamStarted(stream: MediaStream) {
 
     }
 

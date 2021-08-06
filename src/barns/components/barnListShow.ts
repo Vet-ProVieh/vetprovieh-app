@@ -42,6 +42,11 @@ export class BarnListShow extends VetproviehElement {
         }
     }
 
+
+    protected get skipRenderOnCallback(): boolean {
+        return true;
+    }
+
     private loadBarn() {
         try {
             if (this.barnid && !isNaN(parseInt(this.barnid))) {
@@ -52,10 +57,9 @@ export class BarnListShow extends VetproviehElement {
                     console.warn("Could not load Barn")
                 })
             }
-        } catch(ex) {
-            console.log(ex.message);
+        } catch (ex) {
         }
-        
+
     }
 
 
