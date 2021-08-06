@@ -1,0 +1,34 @@
+import { OpenObjectivesButton } from "../../../src/measures";
+import { BulmaFabButton } from "../../../src/shared";
+
+
+describe('amount', () => {
+
+    let button: OpenObjectivesButton;
+
+    beforeEach(() => {
+        button = new OpenObjectivesButton();
+    });
+
+    it('should be hidden if amount is empty', () => {
+        button.render();
+        let a = button.shadowRoot?.querySelector("bulma-fab-button") as BulmaFabButton;
+        expect(a.classList.contains("is-hidden")).toEqual(true);
+    });
+
+
+    it('should be hidden if amount is 0', () => {
+        button.amount = 0;
+        button.render();
+        let a = button.shadowRoot?.querySelector("bulma-fab-button") as BulmaFabButton;
+        expect(a.classList.contains("is-hidden")).toEqual(true);
+    });
+
+    it('should be visibile if amonut > 0', () => {
+        button.amount = 1;
+        button.render();
+        let a = button.shadowRoot?.querySelector("bulma-fab-button") as BulmaFabButton;
+        console.log("now test");
+        expect(a.classList.contains("is-hidden")).toEqual(false);
+    });
+});

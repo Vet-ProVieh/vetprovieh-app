@@ -7,3 +7,4 @@ export * from './keyResult';
 export * from './measuresList';
 export * from './objective-modal';
 export * from './keyResultEdit';
+export * from './openObjectivesButton';
