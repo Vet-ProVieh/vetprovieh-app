@@ -2,13 +2,26 @@ import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib
 
 @WebComponent({
     template: `
-        <bulma-fab-button class="\${this.renderVisiblity()}" href="\${this.href}" icon="fa-info" size="small"></bulma-fab-button>
+        <bulma-fab-button href="\${this.href}" icon="fa-info" size="small"></bulma-fab-button>
     `,
     tag: 'open-objectives'
 })
 export class OpenObjectivesButton extends VetproviehElement {
 
     private _amount: number = 0;
+    private _barnId : number = 0;
+
+
+    public get barnId() : number {
+        return this._barnId;
+    }
+    public set barnId(v : number) {
+        if(this._barnId !== v){
+            this._barnId = v;
+            this.render();
+        }
+    }
+    
 
     /**
      * Amount of open Objectives
@@ -19,15 +32,28 @@ export class OpenObjectivesButton extends VetproviehElement {
     }
 
     public set amount(v: number) {
-        this._amount = v;
+        if (this.amount != +v) {
+            this._amount = +v;
+            this.setVisibility();
+        }
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+
+        this.setVisibility();
     }
 
     /**
      * Rendering Visibility for fab button
      * @returns {string}
      */
-    public renderVisiblity(): string {
-        return +this.amount > 0 ? '' : 'is-hidden';
+    public setVisibility() {
+        if (+this.amount > 0) {
+            this.classList.remove("is-hidden");
+        } else {
+            this.classList.add("is-hidden");
+        }
     }
 
     /**
@@ -35,7 +61,7 @@ export class OpenObjectivesButton extends VetproviehElement {
      * @return {string}
      */
     public get href(): string {
-        return "/measures/open.html";
+        return `/measures/open.html?barnId=${this.barnId}`;
     }
 
 
@@ -43,8 +69,8 @@ export class OpenObjectivesButton extends VetproviehElement {
      * Observed Attributes
      * @return {Array<string>}
      */
-     static get observedAttributes() {
-        return ['amount']
+    static get observedAttributes() {
+        return ['amount', 'barnId']
     }
 
 }

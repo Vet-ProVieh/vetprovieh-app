@@ -10,5 +10,8 @@ export class Barn extends BasicModel {
     vvvoNumber: string = "";
     animal: string = "";
     lastVet: User | undefined;
+
+    // Amount of open Measures
+    currentMeasure: number = 0;
     farmer: Farmer = new Farmer();
 }

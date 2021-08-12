@@ -4,7 +4,7 @@ import { Objective } from "../models";
 export class ObjectivesRepository extends BaseRepository<Objective>{
 
     constructor(barnid: string){
-        super(`/service/measures/objectives/${barnid}`);
+        super(`/service/measures/objectives/barn/${barnid}`);
     }
 
 }

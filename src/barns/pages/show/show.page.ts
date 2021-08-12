@@ -10,6 +10,7 @@ import { IGeoProvider } from "../../../shared/providers/geo/IGeoProvider";
 import { textHeights } from "ol/render/canvas";
 import { UserRepository } from "../../../users";
 import { User } from "../../../users/models";
+import { OpenObjectivesButton } from "../../../measures";
 
 
 /**
@@ -42,6 +43,12 @@ export class BarnsShowPage extends BasicShowPage {
             }
             this.bindFarmerSelectField(loadEvent);
             this.bindGeoButton(loadEvent);
+
+            this.detailElement.shadowRoot?.querySelectorAll("open-objectives").forEach((element: any) => {
+                let button = element as OpenObjectivesButton;
+                button.amount = this.barn.currentMeasure;
+                if(this.barn.id) button.barnId = +this.barn.id;
+            })
         });
     }
 
