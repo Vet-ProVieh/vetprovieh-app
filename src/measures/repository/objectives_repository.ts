@@ -3,8 +3,8 @@ import { Objective } from "../models";
 
 export class ObjectivesRepository extends BaseRepository<Objective>{
 
-    constructor(){
-        super("/service/measures/objectives");
+    constructor(barnid: string){
+        super(`/service/measures/objectives/${barnid}`);
     }
 
 }

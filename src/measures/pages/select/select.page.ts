@@ -31,7 +31,16 @@ import { ObjectivesRepository } from "../../repository";
 
         <form id="form">
             <div id="measures" class="is-hidden">
-                <p> hier kommt nochwas </p>
+                <objectives-list id="objectivesList" pagesize="20">
+                        <template>
+                        <div class="columns is-mobile">
+                            <div class="column is-1">
+                                <input value="{{id}}" type="checkbox">
+                            </div>
+                        </div>
+                        <hr style="margin:0px;" />
+                    </template>
+                </objectives-list>
             </div>
             <div id="opplans">
                 <opplan-table id="measuresList" pagesize="20" pageable="false">
@@ -105,7 +114,6 @@ export class MeasuresSelectPage extends BasicSelectPage {
 
     constructor() {
         super();
-
         this.repository = new MeasureOperationPlansRepository(
             VetproviehNavParams.getUrlParameter("barnId")
         );
