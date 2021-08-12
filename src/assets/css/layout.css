@@ -26,9 +26,13 @@ footer {
 .full-height {
     min-height: calc(100vh - 92px);
 }
-
 vetprovieh-layout footer {
     border-top: 2px solid #fff;
+}
+
+hr {
+    margin-top:0px !important;
+    margin-bottom: 0.5rem !important;
 }
 
 .no-flex{

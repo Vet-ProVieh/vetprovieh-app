@@ -28,14 +28,20 @@ export class KeyResultEditComponent extends VetproviehElement {
 
   private _keyResult: KeyResult = new KeyResult();
 
+  constructor() {
+    super();
+  }
   public get keyResult(): KeyResult {
     return this._keyResult;
   }
 
   public set keyResult(val: KeyResult) {
-    if(this._keyResult !== val) {
+    if (this._keyResult !== val) {
       this._keyResult = val;
-      VetproviehBinding.bindFormElements(this.shadowRoot, this.keyResult);
+      
+      if (this.shadowRoot) {
+        VetproviehBinding.bindFormElements(this.shadowRoot.querySelector(".columns"), this.keyResult,);
+      }
     }
   }
 
@@ -44,12 +50,12 @@ export class KeyResultEditComponent extends VetproviehElement {
     this.registerButtons();
   }
 
-  public checkVailidity() : boolean {
+  public checkVailidity(): boolean {
     console.log("CHECK_VALIDITY KeyResultEdit");
     let input = this.shadowRoot?.querySelector("input");
-    if(input){
+    if (input) {
       let valid = input.checkValidity();
-      if(valid) input.classList.remove("is-danger");
+      if (valid) input.classList.remove("is-danger");
       else input.classList.add("is-danger")
 
       return valid;
@@ -62,7 +68,7 @@ export class KeyResultEditComponent extends VetproviehElement {
    * Delete KeyResult, Dispatch Event and delete DOM-Element
    */
   public delete() {
-    this.dispatchEvent(new CustomEvent("delete", {detail: this.keyResult}));
+    this.dispatchEvent(new CustomEvent("delete", { detail: this.keyResult }));
     this.remove();
   }
 
@@ -71,11 +77,11 @@ export class KeyResultEditComponent extends VetproviehElement {
    */
   private registerButtons() {
     this.deleteButton.addEventListener("click", () => {
-        QuestionModal.askQuestion("Entfernen?", "Möchten Sie das Zwischenziel entfernen?").then((result) => {
-          if(result) {
-            this.delete();
-          }
-        })
+      QuestionModal.askQuestion("Entfernen?", "Möchten Sie das Zwischenziel entfernen?").then((result) => {
+        if (result) {
+          this.delete();
+        }
+      })
     });
   }
 
@@ -83,7 +89,7 @@ export class KeyResultEditComponent extends VetproviehElement {
    * Delete-Button from DOM
    * @return {HTMLButtonElement}
    */
-  private get deleteButton() : HTMLButtonElement {
+  private get deleteButton(): HTMLButtonElement {
     return this.getByIdFromShadowRoot("delete") as HTMLButtonElement;
   }
 

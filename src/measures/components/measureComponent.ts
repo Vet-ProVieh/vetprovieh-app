@@ -23,19 +23,19 @@ import { ObjectivesComponent } from "./objectivesComponent";
             <li class="is-active">
               <a data-id="detail">
                 <span class="icon is-small"><i class="fas fa-scroll" aria-hidden="true"></i></span>
-                <span>Planung</span>
+                <span class="is-hidden-touch">Planung</span>
               </a>
             </li>
             <li>
               <a data-id="objectives">
                 <span class="icon is-small"><i class="fas fa-toolbox" aria-hidden="true"></i></span>
-                <span>Durchführung</span>
+                <span class="is-hidden-touch">Durchführung</span>
               </a>
             </li>
             <li>
               <a data-id="objectives">
                 <span class="icon is-small"><i class="fas fa-star" aria-hidden="true"></i></span>
-                <span>Bewertung</span>
+                <span class="is-hidden-touch">Bewertung</span>
               </a>
             </li>
           </ul>

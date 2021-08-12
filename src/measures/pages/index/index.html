@@ -16,33 +16,29 @@
     <vetprovieh-layout title="Ihre Maßnahmenpläne">
         <vetprovieh-measures>
             <a class="button is-primary is-pulled-right" href="1_selectBarn.html">
-                Neuen Maßnahmenplan erstellen
+                <i class="fa fa-plug"></i>
+                <span class="is-hidden-touch">Neuen Maßnahmenplan erstellen</span>
             </a>
             <br /><br />
             <measures-list pagesize="20">
                 <template>
-                    <div class="columns">
+                    <div class="columns is-gapless">
                         <div class="column">
-                            {{measuresDate|date}}
+                            <strong class="is-hidden-desktop">Id:</strong> {{id}}
                         </div>
                         <div class="column">
-                            <a href="show.html?id={{id}}">
-                                <strong>{{barn.farmer.name}}</strong>
-                            </a>
+                           <strong class="is-hidden-desktop">Datum:</strong> {{measuresDate|date}}
                         </div>
                         <div class="column">
-                            <strong>VVVO:</strong> {{barn.vvvoNumber}}<br />
-                            <strong>Stall:</strong> {{barn.animal}}:{{barn.vvvoNumber}}<br />
+                            <strong class="is-hidden-desktop">Tierhalter</strong>{{barn.farmer.name}} <br />
+                            <strong class="is-hidden-desktop">Stall:</strong> {{barn.animal}}:{{barn.vvvoNumber}}
                         </div>
 
                         <div class="column">
-                            {{createdBy.userName}}
+                            <strong class="is-hidden-desktop">Bearbeiter:</strong>{{createdBy.userName}}
                         </div>
 
-                        <div class="column">
-                            x %
-                        </div>
-                        <div class="column is-1">
+                        <div class="column is-1 is-hidden-touch">
                             <button class="button is-light" aria-label="Load PDF file">
                                 <i class="fas fa-file-pdf"></i>
                             </button>
