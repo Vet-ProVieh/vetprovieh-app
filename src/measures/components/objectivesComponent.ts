@@ -22,16 +22,20 @@ import { KeyResult } from "../models/keyresult";
     </style>
     <div id="group">
         <div id="detail" class="container">
-          <div class="columns is-mobile padding-15">
+          <div class="columns padding-15">
               <div class="column">
-                <select-button id="loadMeasure" param="selectPageMeasure.return" href="/measures/select.html?barnId=\${this.barnId}" name="Maßnahmen laden">
+                <select-button id="loadMeasure" param="selectPageMeasure.return" href="/measures/select.html?barnId=\${this.barnId}" 
+                  name="Maßnahmen laden">
                 </select-button>              
               </div>
               <div class="column">
                 <button id="addMeasure" 
                         class="button is-info is-fullwidth" 
                         type="button">
-                        Maßnahme manuell einfügen
+                        <span class="icon is-small">
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span>Maßnahme erstellen</span>
                 </button>
               </div>
             </div>
@@ -40,12 +44,12 @@ import { KeyResult } from "../models/keyresult";
         <div id="objectives" class="padding-15">
           <h4 class="subtitle is-4">Antibiotika Maßnahmen</h4>
           <div id="antibiotics">
-
+            \${this.renderNoMeasures()}
           </div>
-          <br>
+          <hr/>
           <h4 class="subtitle is-4">Tierwohl Maßnahmen</h4>
           <div id="welfare">
-
+            \${this.renderNoMeasures()}
           </div>
         </div>
     </div>
@@ -95,6 +99,10 @@ export class ObjectivesComponent extends VetproviehElement {
     this._afterRender();
   }
 
+  public renderNoMeasures(visible = true){
+    return `<p class="${visible ? '' : 'is-hidden'}"><i>Keine Maßnahmen angegeben</i></p>`;
+  }
+
 
   private set internalBarnId(value: string) {
     if (this._barnId !== value) {
@@ -111,7 +119,7 @@ export class ObjectivesComponent extends VetproviehElement {
    */
   renderObjectives() {
     let container = this.antibioticsContainer();
-    container.innerHTML = "";
+    container.innerHTML = this.renderNoMeasures(!this.objectives || this.objectives.length > 0);
     // TODO welfare container
     this.objectives?.forEach((objective) => this.addObjectiveToDom(objective));
   }
@@ -125,6 +133,10 @@ export class ObjectivesComponent extends VetproviehElement {
     this.addObjectiveToDom(objective);
   }
 
+  /**
+   * Adding objective to Dom
+   * @param {Objective} objective 
+   */
   private addObjectiveToDom(objective: Objective) {
     let objectiveItem = new ObjectiveItemComponent();
     objectiveItem.objective = objective;
@@ -133,9 +145,29 @@ export class ObjectivesComponent extends VetproviehElement {
       if (index >= 0) {
         this.objectives.splice(index, 1);
         objectiveItem.remove();
+
+        if(this.objectives.length == 0){
+          let container = this.selectContainer(objective);
+          if(container) container.querySelector("p")?.classList.remove("is-hidden");
+        }
       }
     });
-    this.selectContainer(objective)?.appendChild(objectiveItem);
+
+    this.appendToContainer(objective, objectiveItem);
+  }
+
+  /**
+   * Append to specific container and toggle placeholder text
+   * @param {Objective} objective 
+   * @param {ObjectiveItemComponent} item 
+   */
+  private appendToContainer(objective: Objective, item: ObjectiveItemComponent) {
+    let container = this.selectContainer(objective);
+
+    if(container) {
+      container.querySelector("p")?.classList.add("is-hidden");
+      container.appendChild(item);
+    }
   }
 
   /**
@@ -149,14 +181,6 @@ export class ObjectivesComponent extends VetproviehElement {
     } else {
       return this.antibioticsContainer();
     }
-  }
-
-  /**
-   * Get Objectives-DOM-Element
-   * @returns {HTMLDivElement}
-   */
-  private objectivesContainer(): HTMLDivElement {
-    return this.shadowRoot?.getElementById("objectives") as HTMLDivElement;
   }
 
   /**

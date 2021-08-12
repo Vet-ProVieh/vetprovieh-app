@@ -60,15 +60,17 @@ import { QuestionModal, StarsComponent } from "../../shared";
                 <div id="content" class="card-content dropdown-content is-hidden">
                     <div class="content" id="keyResults">
                     </div>
-                    <div class="columns">
+                    <div class="columns is-mobile">
                         <div class="column">
                             <button id="deleteButton" class="button is-danger is-fullwidth">
                                 <i class="fas fa-trash-alt"></i>
+                                <span> Entfernen</span>
                             </button>
                         </div>
                         <div class="column">
                             <button id="editButton" class="button is-info is-fullwidth">
                                 <i class="fas fa-edit"></i>
+                                <span> Bearbeiten</span>
                             </button>
                         </div>
                     </div>

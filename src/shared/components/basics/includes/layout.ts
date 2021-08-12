@@ -101,8 +101,6 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
             \${this._outsideInnerHtml}
           </div>
           </section>
-
-          <vetprovieh-footer></vetprovieh-footer>
             `
 })
 export class VetproviehLayout extends VetproviehElement {

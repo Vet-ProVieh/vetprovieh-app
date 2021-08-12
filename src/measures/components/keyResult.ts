@@ -10,7 +10,7 @@ import { KeyResult, KeyResultMilestones } from "../models/keyresult";
   template:
     VetproviehElement.template +
     `
-    <div class="columns">
+    <div class="columns is-mobile">
         <div class="column" id="name">
             \${this.keyResult.name}
         </div>

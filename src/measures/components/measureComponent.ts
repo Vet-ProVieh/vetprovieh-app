@@ -51,8 +51,7 @@ import { ObjectivesComponent } from "./objectivesComponent";
           <br>
         </div>
         
-        <hr/>
-        <div class="container">
+        <div class="container sticky-footer">
             <div class="columns is-mobile">
                 <div class="column">
                     <input id="abortButton" 

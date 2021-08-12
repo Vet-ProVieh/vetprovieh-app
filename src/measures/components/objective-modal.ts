@@ -25,7 +25,7 @@ import { KeyResultEditComponent } from "./keyResultEdit";
                     <bulma-input type="date" property="date" label="Durchzuführen bis" required>
                     </bulma-input>
                 </div>
-
+                <hr/>
                 <div class="field">
                         <label class="label">Zwischenziele:</label>
                         <div class="control" id="keyResults">                        
@@ -34,7 +34,7 @@ import { KeyResultEditComponent } from "./keyResultEdit";
                         <div>
                             <div class="button is-success" id="addKeyResult">
                                 <i class="fas fa-plus"></i>
-                                Neues Zwischenziel hinzufügen
+                                <span>Neues Zwischenziel hinzufügen</span>
                             </div>
                         </div>
                         
@@ -44,7 +44,7 @@ import { KeyResultEditComponent } from "./keyResultEdit";
         <footer class="modal-card-foot"> 
 
             <div class="container">
-                <div class="columns">
+                <div class="columns is-mobile">
                     <div class="column">
                         <button class="button is-danger is-fullwidth" id="cancel">
                             <span class="icon"><i class="fas fa-trash-alt"></i></span>
@@ -53,7 +53,7 @@ import { KeyResultEditComponent } from "./keyResultEdit";
                     </div>
                     <div class="column">
                         <button class="button is-primary is-fullwidth" id="save">
-                            <span class="icon"><i class="far fa-save"></i></span>
+                            <span class="icon"><i class="fas fa-save"></i></span>
                             <span>Übernehmen</span>
                         </button>
                     </div>

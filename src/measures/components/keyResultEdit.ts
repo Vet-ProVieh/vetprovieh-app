@@ -9,7 +9,7 @@ import { KeyResult } from "../models/keyresult";
   template:
     VetproviehElement.template +
     `
-      <div class="columns">
+      <div class="columns is-mobile">
           <div class="column">
               <input property="name" class="input" placeholder="Bitte geben Sie ihr Zwischenziel ein" type="text" required/>
           </div>
