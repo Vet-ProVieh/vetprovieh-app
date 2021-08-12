@@ -10,31 +10,37 @@ import { ObjectivesRepository } from "../../repository";
         VetproviehElement.template +
         ` 
 
-        <div class="tabs  is-toggle is-fullwidth is-large">
+        <div class="tabs is-toggle is-fullwidth">
             <ul>
                 <li >
-                <a data-id="detail">
+                <a data-id="measures">
                     <span class="icon is-small"><i class="fas fa-scroll" aria-hidden="true"></i></span>
                     <span>Maßnahmen</span>
                 </a>
                 </li>
                 <li class="is-active">
-                <a data-id="objectives">
+                <a data-id="opplans">
                     <span class="icon is-small"><i class="fas fa-toolbox" aria-hidden="true"></i></span>
-                    <span>Maßnahmen aus Betreuung</span>
+                    <span class="is-hidden-touch">Maßnahmen aus Betreuung</span>
+                    <span class="is-hidden-desktop">Betreuung</span>
+                    ( <span id="selectedObjectives">0</span> )
                 </a>
                 </li>
             </ul>   
         </div>
 
         <form id="form">
+            <div id="measures" class="is-hidden">
+                <p> hier kommt nochwas </p>
+            </div>
+            <div id="opplans">
                 <opplan-table id="measuresList" pagesize="20" pageable="false">
                     <div id="header">
-                        <div class="columns">
+                        <div class="columns is-mobile">
                             <div class="column is-1">
-                                <strong>Auswahl?</strong>
+                                <strong class="is-hidden-touch">Auswahl?</strong>
                             </div>
-                            <div class="column is-1">
+                            <div class="column is-1-desktop is-3-mobile">
                                 <strong>Datum</strong>
                             </div>
                             <div class="column">
@@ -43,20 +49,20 @@ import { ObjectivesRepository } from "../../repository";
                             <div class="column">
                                 <strong>Behandlung</strong>
                             </div>
-                            <div class="column">
+                            <div class="column is-hidden-touch">
                                 <strong>Empfohlene Maßnahmen</strong>
                             </div>
-                            <div class="column">
+                            <div class="column is-hidden-touch">
                                 <strong>Ausgeführt von</strong>
                             </div>
                         </div>
                     </div>
                     <template>
-                        <div class="columns">
+                        <div class="columns is-mobile">
                             <div class="column is-1">
                                 <input value="{{id}}" type="checkbox">
                             </div>
-                            <div class="column is-1">
+                            <div class="column is-1-desktop is-3-mobile">
                                 {{updatedAt|date}}
                             </div>
                             <div class="column">
@@ -65,17 +71,18 @@ import { ObjectivesRepository } from "../../repository";
                             <div class="column">
                                 {{values.Behandlung}}
                             </div>
-                            <div class="column">
+                            <div class="column is-hidden-touch">
                                 {{values.EmpfohleneMaßnahme}}
                             </div>
-                            <div class="column">
+                            <div class="column is-hidden-touch">
                                 {{lastVet.userName}}
                             </div>
                         </div>
-                        <hr />
+                        <hr style="margin:0px;" />
                     </template>
                 </opplan-table>
-                <div class="container">
+            </div>
+                <div class="container sticky-footer">
                     <div class="columns is-mobile">
                         <div class="column">
                             <input id="abortButton" 
@@ -83,7 +90,7 @@ import { ObjectivesRepository } from "../../repository";
                                     type="reset" value="Abbrechen">                   
                         </div>
                         <div class="column">
-                            <input id="takeoverButton" 
+                            <input id="takeoverButton" disabled
                                     class="button is-success is-fullwidth" 
                                     type="button" value="Übernehmen">
                         </div>
@@ -104,21 +111,54 @@ export class MeasuresSelectPage extends BasicSelectPage {
         );
     }
 
-     /**
-     * Getting ParamKey; Can be overriden in subclasses
-     * @return {string}
-     */
-      protected get paramKey() : string {
+    /**
+    * Getting ParamKey; Can be overriden in subclasses
+    * @return {string}
+    */
+    protected get paramKey(): string {
         return "selectPageMeasure.return";
     }
 
     connectedCallback() {
         super.connectedCallback();
 
-
         let list: VetproviehList = this.vetproviehList;
-        if (list) list.repository = this.repository;
+        if (list) {
+            list.repository = this.repository;
+            list.addEventListener("selected", () => {
+                this.updateSelectedAmount();
+            })
+        }
+
+
+        let tabs = this.querySelector(".tabs");
+
+        if (tabs) {
+            console.log("tabs")
+            let anchors = tabs.querySelectorAll("a");
+            anchors.forEach((element: HTMLAnchorElement) => {
+                element.addEventListener("click", () => {
+                    console.log("CLIKED");
+                    let id = element.dataset.id;
+
+                    anchors.forEach((a) => {
+                        a.parentElement?.classList.remove("is-active");
+                    });
+
+                    element.parentElement?.classList.add("is-active");
+
+                    [this.querySelector("#measures"), this.querySelector("#opplans")].forEach((content) => {
+                        if (content?.id == id) {
+                            content?.classList.remove("is-hidden");
+                        } else if (content) {
+                            content?.classList.add("is-hidden");
+                        }
+                    })
+                })
+            })
+        }
     }
+
     /**
      * Return Value
      * @return {any}
@@ -165,5 +205,27 @@ export class MeasuresSelectPage extends BasicSelectPage {
      */
     public get operationPlans(): Array<Objective> {
         return this.vetproviehList?.objects || [];
+    }
+
+    /**
+     * Updating Tab Element Selected Amount
+     */
+    private updateSelectedAmount() {
+        let selectedAmount = this.selectedOperationPlanIds.length;
+
+        // Activate takeover Button
+        this.takeoverButton.disabled = selectedAmount == 0;
+
+        // Updating amount in Tab
+        let span = this.selectedObjectives;
+        if (span) span.textContent = selectedAmount.toString();
+    }
+
+    /**
+     * Badge Amount in Tab-Header
+     * @return {HTMLSpanElement}
+     */
+    private get selectedObjectives(): HTMLSpanElement {
+        return document.getElementById("selectedObjectives") as HTMLSpanElement;
     }
 }

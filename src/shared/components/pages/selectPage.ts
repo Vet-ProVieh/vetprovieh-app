@@ -95,7 +95,7 @@ export class BasicSelectPage extends VetproviehElement {
      * Load Takeover-Button from DOM
      * @return {HTMLButtonElement}
      */
-    private get takeoverButton(): HTMLButtonElement {
+    protected get takeoverButton(): HTMLButtonElement {
         return document.getElementById("takeoverButton") as HTMLButtonElement;
     }
 

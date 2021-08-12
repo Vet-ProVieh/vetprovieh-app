@@ -48,4 +48,12 @@ export class OperationPlanTable extends VetproviehBasicList {
         super.connectedCallback();
         if(this._header) this.shadowRoot?.getElementById("header")?.appendChild(this._header);
       }
+
+
+    protected elementSelected(event:any) {
+        let checkbox = event.target.querySelector("input[type='checkbox']")
+        if(checkbox) checkbox.checked = !checkbox.checked;
+
+        super.elementSelected(event);
+    }
 }
