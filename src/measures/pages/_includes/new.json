@@ -85,7 +85,7 @@
             "Ja",
             "Nein"
           ],
-          "detailsType": "comboBox",
+          "detailsType": "checkBox",
           "name": "Betreuungs-Vertrag",
           "optional": false,
           "position": 4,

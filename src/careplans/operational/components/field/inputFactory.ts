@@ -85,6 +85,9 @@ export class InputFactory {
             case 'comboBox':
                 response = this.buildCombo(options);
                 break;
+            case 'checkBox':
+                response = this.buildCheckbox(options);
+                break;
             case 'detailsList':
                 response = this.buildList(options);
                 break;
@@ -110,6 +113,19 @@ export class InputFactory {
      */
     private static buildVideo(options: any): string {
         return `<vetprovieh-video ${this.genTag("barnid", options.barnId)} ${this.genTag("property", "value")} ${this.genTag("name", options.name)}></vetprovieh-video>`;
+    }
+
+    /**
+     * Creating Bulma Checkbox
+     * @param options 
+     * @returns 
+     */
+    private static buildCheckbox(options: any): string {
+        return `<bulma-multi-checkbox 
+                choicesasstring="${options.choices.join(",")}" 
+                type="${options.multipleSelect ? 'checkbox' : 'radio'}" 
+                ${this.genTag("property", "value")}>
+                </bulma-multi-checkbox>`
     }
 
     /**

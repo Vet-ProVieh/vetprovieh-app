@@ -11,8 +11,8 @@ export class FieldWithLabel extends VetproviehElement {
 
     protected _binding: VetproviehBinding = new VetproviehBinding(this, "value");
 
-    constructor() {
-        super(false, false);
+    constructor(shadowed = false, render = false){
+        super(shadowed, render);
     }
 
     public render() {
