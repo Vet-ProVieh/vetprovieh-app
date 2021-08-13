@@ -64,8 +64,13 @@ export class BulmaMultiCheckbox extends FieldWithLabel {
     }
 
     public checkValidity(): boolean {
-        return !!this.value;
+        return this.required ? !!this.value : true;
     }
+
+    public reportValidity(): boolean {
+        return this.checkValidity();
+    }
+
 
     /**
      * Render Choices for UI 

@@ -1,8 +1,10 @@
 import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
-import { VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { PlanMeasureModel } from "../../../careplans/operational/models/planMeasure";
 import { MeasureOperationPlansRepository } from "../../../careplans/operational/repository";
 import { BasicSelectPage } from "../../../shared";
 import { Objective } from "../../models";
+import { KeyResult } from "../../models/keyresult";
 import { ObjectivesRepository } from "../../repository";
 
 @WebComponent({
@@ -37,6 +39,12 @@ import { ObjectivesRepository } from "../../repository";
                             <div class="column is-1">
                                 <input value="{{id}}" type="checkbox">
                             </div>
+                            <div class="column">
+                                {{name}}
+                            </div>
+                            <div class="column  is-2">
+                                <vp-stars editable="false" score="{{rating}}"></vp-stars>
+                            </div>
                         </div>
                         <hr style="margin:0px;" />
                     </template>
@@ -52,9 +60,7 @@ import { ObjectivesRepository } from "../../repository";
                             <div class="column is-1-desktop is-3-mobile">
                                 <strong>Datum</strong>
                             </div>
-                            <div class="column">
-                                <strong>Diagnose</strong>
-                            </div>
+                            <div clasvetproviehList
                             <div class="column">
                                 <strong>Behandlung</strong>
                             </div>
@@ -138,15 +144,20 @@ export class MeasuresSelectPage extends BasicSelectPage {
             })
         }
 
+        let list2: VetproviehList = this.objectivesList;
+        if (list2) {
+            list2.addEventListener("selected", () => {
+                this.updateSelectedAmount();
+            })
+        }
+
 
         let tabs = this.querySelector(".tabs");
 
         if (tabs) {
-            console.log("tabs")
             let anchors = tabs.querySelectorAll("a");
             anchors.forEach((element: HTMLAnchorElement) => {
                 element.addEventListener("click", () => {
-                    console.log("CLIKED");
                     let id = element.dataset.id;
 
                     anchors.forEach((a) => {
@@ -172,7 +183,7 @@ export class MeasuresSelectPage extends BasicSelectPage {
      * @return {any}
      */
     protected get returnValue(): any {
-        return this.selectedOperationPlans;
+        return this.selectedOperationPlans.concat(this.selectedCurrentObjectives);
     }
 
     /**
@@ -184,12 +195,52 @@ export class MeasuresSelectPage extends BasicSelectPage {
     }
 
     /**
+    * Loading Liste von Operation-Plan
+    * @return {VetproviehList}
+    */
+    private get objectivesList(): VetproviehList {
+        return document.getElementById("objectivesList") as VetproviehList;
+    }
+
+    /**
      * Get selected OperationPlans
-     * @return {Array<Objective>}
+     * @return {Array<Objective | undefined>}
      */
-    public get selectedOperationPlans(): Array<Objective> {
+    public get selectedOperationPlans(): Array<Objective | undefined> {
         return this.operationPlans
-            .filter((operationPlan: Objective) => !!operationPlan.id && this.selectedOperationPlanIds.includes(+operationPlan.id));
+            .filter((operationPlan: PlanMeasureModel) => !!operationPlan.id && operationPlan.values && this.selectedOperationPlanIds.includes(+operationPlan.id))
+            .map((part: PlanMeasureModel) => this.opPlanToObjective(part));
+    }
+
+    /**
+     * Transform Opplan to Objective
+     * @param {PlanMeasureModel} part 
+     * @returns {Objective | undefined}
+     */
+    private opPlanToObjective(part: PlanMeasureModel): Objective | undefined {
+        if (part.values) {
+            let tokenMeasure = part.values.EmpfohleneMaßnahme;
+            let objective = new Objective();
+            objective.name = `Maßnahmen aus ${part.name} vom ${ObjectHelper.formatDate(part.updatedAt)}`;
+            objective.keyResults = [];
+            tokenMeasure.split("\r\n").forEach((measureLine: string) => {
+                let keyResult = new KeyResult();
+                keyResult.name = measureLine;
+                objective.keyResults.push(keyResult);
+            })
+            return objective;
+        } else {
+            return undefined;
+        }
+    }
+
+    /**
+    * Get selected OperationPlans
+    * @return {Array<Objective>}
+    */
+    public get selectedCurrentObjectives(): Array<Objective> {
+        return this.objectives
+            .filter((objective: Objective) => !!objective.id && this.selectedObjectivesIds.includes(+objective.id));
     }
 
     /**
@@ -208,18 +259,44 @@ export class MeasuresSelectPage extends BasicSelectPage {
     }
 
     /**
+    * Get selected objectiveIds
+    * @return {Array<number>} 
+    */
+    public get selectedObjectivesIds(): Array<number> {
+        let inputCheckboxes = this.objectivesList.shadowRoot?.querySelectorAll("input[type='checkbox']");
+        let returnValue: number[] = [];
+        inputCheckboxes?.forEach((checkbox) => {
+            if ((checkbox as any).checked) {
+                returnValue.push(+(checkbox as any).value);
+            }
+        })
+        return returnValue;
+    }
+
+
+    /**
      * Get All visible OperationPlans
-     * @return {Array<Objective>}
+     * @return {Array<PlanMeasureModel>}
      */
-    public get operationPlans(): Array<Objective> {
+    public get operationPlans(): Array<PlanMeasureModel> {
         return this.vetproviehList?.objects || [];
     }
+
+    /**
+    * Get All visible Objectives
+    * @return {Array<Objective>}
+    */
+    public get objectives(): Array<Objective> {
+        return this.objectivesList?.objects || [];
+    }
+
 
     /**
      * Updating Tab Element Selected Amount
      */
     private updateSelectedAmount() {
         let selectedAmount = this.selectedOperationPlanIds.length;
+        selectedAmount += this.selectedObjectivesIds.length;
 
         // Activate takeover Button
         this.takeoverButton.disabled = selectedAmount == 0;

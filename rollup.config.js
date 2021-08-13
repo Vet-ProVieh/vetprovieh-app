@@ -88,7 +88,7 @@ export default {
                     dest: 'www/node_modules/fontawesome/css/'
                 },
                 {
-                    src: 'node_modules/@fortawesome/fontawesome-free/webfonts/fa-solid-900.woff2',
+                    src: 'node_modules/@fortawesome/fontawesome-free/webfonts/*',
                     dest: 'www/node_modules/fontawesome/webfonts/'
                 },
                 {

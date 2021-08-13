@@ -239,8 +239,6 @@ export class ObjectivesComponent extends VetproviehElement {
     let selectButton = this.shadowRoot?.querySelector("select-button") as SelectButton;
     setTimeout(() => {
       if (selectButton) {
-        console.log("FOUND SELECTBUTTON");
-        console.log(selectButton);
         this.processSelectButtonAnswer(selectButton);
       }
     }, 1000);
@@ -258,26 +256,10 @@ export class ObjectivesComponent extends VetproviehElement {
     console.log(answer);
     if (answer) {
       selectButton.scrollIntoView();
-      answer.forEach((part: PlanMeasureModel) => {
-        if (part.values) {
-          let tokenMeasure = part.values.EmpfohleneMaßnahme;
-
-          let objective = new Objective();
-          objective.name = `Maßnahmen aus ${part.name} vom ${ObjectHelper.formatDate(part.updatedAt)}`;
-          objective.keyResults = [];
-          tokenMeasure.split("\r\n").forEach((measureLine: string) => {
-            let keyResult = new KeyResult();
-            keyResult.name = measureLine;
-            objective.keyResults.push(keyResult);
-          })
-
+      answer.forEach((objective: Objective) => {
+          objective.id = undefined;
           this.addObjective(objective);
-        }
       })
     }
   }
-
-
-
-
 }

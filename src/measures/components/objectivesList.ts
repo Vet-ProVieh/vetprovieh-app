@@ -26,20 +26,14 @@ import { ObjectivesRepository } from "../repository";
                 </div>
                 <div id="header" class="is-hidden-touch">
                     <div class="columns is-mobile">
-                        <div class="column">
+                        <div class="column is-1">
                             <strong>Id</strong>
                         </div>
                         <div class="column">
-                            <strong>Datum</strong>
+                            <strong>Name</strong>
                         </div>
-                        <div class="column">
-                            <strong>Tierhalter / Stall</strong>
-                        </div>
-                        <div class="column">
-                            <strong>Ausgefüllt von</strong>
-                        </div>
-                        <div class="column is-1">
-                            <strong>Aktionen</strong>
+                        <div class="column is-2">
+                            <strong>Bewertung</strong>
                         </div>
                     </div>
                 </div>
@@ -59,13 +53,13 @@ export class ObjectivesListComponent extends VetproviehBasicList {
 
     connectedCallback(){
         super.connectedCallback();
-        console.log("XXX");
         this.repository = new ObjectivesRepository(VetproviehNavParams.getUrlParameter("barnId"));
-        console.log(this._readyToFetch);
-        this.addEventListener("selected",(event) => {
-            let target = event.target as HTMLElement;
-            let customEvent = (event as CustomEvent);
-            window.location.href = `show.html?id=${customEvent.detail.id}`
-        })
+    }
+
+    protected elementSelected(event:any) {
+        let checkbox = event.target.querySelector("input[type='checkbox']")
+        if(checkbox) checkbox.checked = !checkbox.checked;
+
+        super.elementSelected(event);
     }
 }

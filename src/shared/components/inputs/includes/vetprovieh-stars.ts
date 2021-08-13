@@ -25,66 +25,92 @@ export class StarsComponent extends VetproviehElement {
 
     private _score: number = 0;
     private _amount: number = 5;
+    private _editable: boolean = true;
 
-    connectedCallback(){
-        this.render();
-        this.renderCurrentState();
-        this.registerHoverEvents();
-        this.registerClickEvents();
+
+    public get editable(): string {
+        return `${this._editable}`;
     }
 
-    render(){
-        super.render();
-        for(let i=0; i<this._amount; i++){
-            this.wrapper.innerHTML += `<i class="far fa-star"></i>`;
+    public set editable(v: string) {
+        if (this.editable !== v) {
+            this._editable = v === "true";
         }
     }
 
-    
+    constructor() {
+        super(true, false);
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+        this.render();
+    }
+
+    render() {
+        super.render();
+        for (let i = 0; i < this._amount; i++) {
+            this.wrapper.innerHTML += `<i class="far fa-star"></i>`;
+        }
+
+        this.renderCurrentState();
+
+        if (this._editable) {
+            this.registerHoverEvents();
+            this.registerClickEvents();
+        }
+    }
+
+
     /*  FILL ALL STARS UNTIL THE HOVERED ONE AND GO
         BACK TO CURRENT STATE AFTER LEAVING WRAPPER
     */
-    private registerHoverEvents(){
-        this.stars.forEach((node, i)=>{
-            node.addEventListener("mouseover",()=>{
-                this.stars.forEach((star, j)=>{
-                    if(j <= i){
-                        star.className = STAR_FULL;
-                    }else{
-                        star.className = STAR_OPEN;
-                    }
+    private registerHoverEvents() {
+        this.stars.forEach((node, i) => {
+            node.addEventListener("mouseover", () => {
+                this.stars.forEach((star, j) => {
+                    star.className = this.getStarClass(j <= i);
                 })
             });
         });
-        this.wrapper.addEventListener("mouseleave", ()=>{
+        this.wrapper.addEventListener("mouseleave", () => {
             this.renderCurrentState();
         });
     }
 
     /* RENDER CURRENT STATE DEPENDING ON this._score */
-    private renderCurrentState(){
-        this.stars.forEach((node, i)=>{
-            if(i < this._score){
-                (node as HTMLElement).className = STAR_FULL;
-            }else{
-                (node as HTMLElement).className = STAR_OPEN;
-            }
+    private renderCurrentState() {
+        this.stars.forEach((node, i) => {
+            node.className = this.getStarClass(i < this._score);
         });
     }
 
+    /**
+     * Getting CSS Class for Stars
+     * @param {boolean} showFull 
+     * @returns {string}
+     */
+    private getStarClass(showFull: boolean): string {
+        return showFull ? STAR_FULL : STAR_OPEN;
+    }
+
     /* SET VALUE FOR this._score DEPENDING ON STAR */
-    private registerClickEvents(){
-        this.stars.forEach((node, index)=>{
-            (node as HTMLElement).addEventListener("click", ()=>{
-                this._score = index+1;
+    private registerClickEvents() {
+        this.stars.forEach((node, index) => {
+            (node as HTMLElement).addEventListener("click", () => {
+                this._score = index + 1;
             })
         });
     }
 
     static get observedAttributes() {
-        return ['amount'];
+        return ['amount', 'score', 'editable'];
     }
 
+    /**
+     * Amount of Stars to click
+     * @property {number} amount
+     */
     public set amount(val: number | undefined) {
         (val != undefined) ? this._amount = val : this._amount = 5;
     }
@@ -93,6 +119,10 @@ export class StarsComponent extends VetproviehElement {
         return this._amount;
     }
 
+    /**
+     * Current Visible Score
+     * @property {number} score
+     */
     public set score(val: number) {
         this._score = val;
     }
@@ -101,11 +131,19 @@ export class StarsComponent extends VetproviehElement {
         return this._score;
     }
 
-    private get wrapper(){
+    /**
+     * Getting Content Elemen
+     * @return {HTMLElement}
+     */
+    private get wrapper() {
         return this.getByIdFromShadowRoot("content") as HTMLElement;
     }
-    
-    private get stars(){
+
+    /**
+     * Getting all Stars from DOM
+     * @return {NodeListOf<HTMLElement>}
+     */
+    private get stars() {
         return this.wrapper.querySelectorAll('i');
     }
 

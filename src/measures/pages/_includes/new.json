@@ -97,7 +97,7 @@
             "Ja",
             "Nein"
           ],
-          "detailsType": "comboBox",
+          "detailsType": "checkBox",
           "name": "Weitere Tierärzte:",
           "optional": false,
           "position": 5,
@@ -117,7 +117,7 @@
             "Ja",
             "Nein"
           ],
-          "detailsType": "comboBox",
+          "detailsType": "checkBox",
           "name": "Weitere Berater:",
           "optional": false,
           "position": 7,
@@ -137,7 +137,7 @@
             "Ja",
             "Nein"
           ],
-          "detailsType": "comboBox",
+          "detailsType": "checkBox",
           "name": "Integration:",
           "optional": false,
           "position": 7,
@@ -171,7 +171,7 @@
             "Ja",
             "Nein"
           ],
-          "detailsType": "comboBox",
+          "detailsType": "checkBox",
           "name": "Vorgriff",
           "optional": false,
           "position": 3,
@@ -191,7 +191,7 @@
             "Ja",
             "Nein"
           ],
-          "detailsType": "comboBox",
+          "detailsType": "checkBox",
           "name": "QS-System-Teilnehmer",
           "optional": false,
           "position": 5,
@@ -275,7 +275,8 @@
         },
         {
           "choices": ["Brunnenwasser", "Stadtwasser", "Wasseruntersuchung"],
-          "detailsType": "detailsList",
+          "detailsType": "checkBox",
+          "multipleSelect": true,
           "name": "Wasserversorgung",
           "optional": false,
           "position": 3,
@@ -314,7 +315,7 @@
       "active": true,
       "details": [{
           "choices": ["Futter", "Wasser", "Injektion", "Sonstiges"],
-          "detailsType": "detailsList",
+          "detailsType": "checkBox",
           "name": "Verabreichungsart",
           "optional": false,
           "position": 1,
@@ -331,7 +332,7 @@
         },
         {
           "choices": ["Ja", "Nein"],
-          "detailsType": "comboBox",
+          "detailsType": "checkBox",
           "name": "Leitfaden „Orale Anwendung von Tierarzneimitteln“  bekannt?",
           "optional": false,
           "position": 3,
@@ -340,7 +341,7 @@
         },
         {
           "choices": ["Ja", "Nein"],
-          "detailsType": "comboBox",
+          "detailsType": "checkBox",
           "name": "Risikomanagementplan vorhanden?",
           "optional": false,
           "position": 4,
@@ -371,8 +372,9 @@
         },
         {
           "choices": ["Reinigung Stall", "Desinfektion Stall"],
-          "detailsType": "comboBox",
+          "detailsType": "checkBox",
           "name": "Art und Umfang der internen Biosicherheit",
+          "multipleSelect": true,
           "optional": false,
           "position": 3,
           "value": "",
@@ -380,7 +382,7 @@
         },
         {
           "choices": ["Reinigung", "Desinfektion", "routinemäig", "nach Antibiotika-Gabe"],
-          "detailsType": "detailsList",
+          "detailsType": "checkBox",
           "name": "Wasserleitungen",
           "optional": false,
           "position": 4,
@@ -389,7 +391,7 @@
         },
         {
           "choices": ["Reinigung Futterleitungen", "Reinigung Futterschalen", "Reinigung Futtersilo"],
-          "detailsType": "detailsList",
+          "detailsType": "checkBox",
           "name": "Fütterungseinrichtungen",
           "optional": false,
           "position": 5,
@@ -398,7 +400,7 @@
         },
         {
           "choices": ["Keine", "selbst", "durch Fremdfirma"],
-          "detailsType": "detailsList",
+          "detailsType": "checkBox",
           "name": "Schädlingsbekämpfung",
           "optional": false,
           "position": 6,
@@ -443,8 +445,9 @@
       "active": true,
       "details": [{
           "choices": ["Atmewege", "Verdauungsapparat", "Bewegungsapparat", "Sonstiges"],
-          "detailsType": "detailsList",
+          "detailsType": "checkBox",
           "name": "Schwerpunkt(e)  der Erkrankung",
+          "multipleSelect": true,
           "optional": false,
           "position": 1,
           "value": "",
