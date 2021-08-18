@@ -20,6 +20,8 @@ var genTestPlan = function (id: number) {
 
 var testPlans = [genTestPlan(1), genTestPlan(2)]
 
+fetch.mockIf(/service\/measures\/operationplans\/barn/,JSON.stringify(testPlans));
+
 
 beforeEach(() => {
     page = new OperationPlanSelectPage();
@@ -73,7 +75,6 @@ describe('selectedOperationPlans', () => {
         it('should return expected amount of operationPlans', () => {
             
             page = new OperationPlanSelectPage();
-            fetch.mockIf(/service\/measures\/operationplans\/barn/,JSON.stringify(testPlans));
             page.connectedCallback();
 
             let spy2 = jest.spyOn(page, 'selectedOperationPlanIds', 'get')
