@@ -52,6 +52,7 @@ export class OpenObjectivesButton extends VetproviehElement {
         if (+this.amount > 0) {
             this.classList.remove("is-hidden");
         } else {
+            console.log("add hidden");
             this.classList.add("is-hidden");
         }
     }

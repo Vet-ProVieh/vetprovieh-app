@@ -52,7 +52,7 @@ export default {
         sourcemap: true
     },
     cache: true,
-    treeshake: true,
+   // treeshake: true,
     plugins: [
         typescript(),
         production && uglify(),
