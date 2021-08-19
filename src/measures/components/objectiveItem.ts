@@ -1,5 +1,5 @@
 
-import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehElement, ObjectHelper } from "@tomuench/vetprovieh-shared/lib";
 import { ObjectiveModal } from "./objective-modal";
 import { KeyResult } from "../models/keyresult";
 import { Objective } from "../models/objective";
@@ -49,7 +49,7 @@ import { QuestionModal, StarsComponent } from "../../shared";
                         </vp-stars>
                     </p>
                     <p class="card-header-title">
-                        Bis:&nbsp;&nbsp; \${ObjectHelper.formatDate(this.objective.date)}
+                        Bis:&nbsp;&nbsp; \${this.formatDate(this.objective.date)}
                     </p>
                     <p class="card-header-icon" id="btn-dropdown" aria-label="more options">
                         <span class="icon">
@@ -60,15 +60,17 @@ import { QuestionModal, StarsComponent } from "../../shared";
                 <div id="content" class="card-content dropdown-content is-hidden">
                     <div class="content" id="keyResults">
                     </div>
-                    <div class="columns is-mobile">
+                    <div class="columns is-mobile \${this.cssHidden(this.editable != 'true')}">
                         <div class="column">
-                            <button id="deleteButton" class="button is-danger is-fullwidth">
+                            <button id="deleteButton" class="button is-danger is-fullwidth 
+                                \${this.cssHidden(this.editable != 'true')}">
                                 <i class="fas fa-trash-alt"></i>
                                 <span> Entfernen</span>
                             </button>
                         </div>
                         <div class="column">
-                            <button id="editButton" class="button is-info is-fullwidth">
+                            <button id="editButton" class="button is-info is-fullwidth
+                                \${this.cssHidden(this.editable != 'true')}">
                                 <i class="fas fa-edit"></i>
                                 <span> Bearbeiten</span>
                             </button>
@@ -84,6 +86,42 @@ import { QuestionModal, StarsComponent } from "../../shared";
 export class ObjectiveItemComponent extends VetproviehElement {
 
     private _objective: Objective = new Objective();
+    private _valuation: boolean = false;
+    private _editable: boolean = false;
+
+    /**
+     * Show editable Buttons or not
+     * @property {string} editable
+     */
+    public get editable(): string {
+        return this._editable.toString();
+    }
+    public set editable(v: string) {
+        let vAsBool = ObjectHelper.stringToBool(v);
+        if (this._editable !== vAsBool) {
+            this._editable = vAsBool;
+        }
+    }
+
+
+    /**
+     * Show Valuation Items or not
+     * @property {string} valuation
+     */
+    public get valuation(): string {
+        return this._valuation.toString();
+    }
+
+    public set valuation(v: string) {
+        let vAsBool = ObjectHelper.stringToBool(v);
+        if (this._valuation !== vAsBool) {
+            this._valuation = vAsBool;
+        }
+    }
+
+    public formatDate(v: string): string {
+        return ObjectHelper.formatDate(v);
+    }
 
     /**
      * @property {Objective}
@@ -99,14 +137,14 @@ export class ObjectiveItemComponent extends VetproviehElement {
         }
     }
 
-    connectedCallback(){
+    connectedCallback() {
         let stars = this.getByIdFromShadowRoot("stars") as StarsComponent;
-       // this.objective.rating = stars.score;
+        // this.objective.rating = stars.score;
         stars.score = this.objective.rating;
         stars.addEventListener("click", () => {
             this.objective.rating = stars.score;
         })
-    } 
+    }
 
     public render() {
         super.render();
@@ -135,6 +173,7 @@ export class ObjectiveItemComponent extends VetproviehElement {
         let container = this.keyResultsContainer();
         let keyResultItem = new KeyResultComponent();
         keyResultItem.keyResult = keyResult;
+        keyResultItem.editable = this.editable;
         container.appendChild(keyResultItem);
     }
 
@@ -148,7 +187,7 @@ export class ObjectiveItemComponent extends VetproviehElement {
             QuestionModal.askQuestion("Sind Sie sicher?", "Möchten Sie die Maßnahme entfernen?").then((result) => {
                 console.log(result);
                 if (result) {
-                    this.dispatchEvent(new CustomEvent("delete", {detail: this.objective}));
+                    this.dispatchEvent(new CustomEvent("delete", { detail: this.objective }));
                 }
             })
         });
@@ -225,4 +264,7 @@ export class ObjectiveItemComponent extends VetproviehElement {
         });
     }
 
+    static get observedAttributes() {
+        return ["valuation"];
+    }
 }

@@ -1,5 +1,5 @@
 
-import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehElement, ObjectHelper } from "@tomuench/vetprovieh-shared/lib";
 import { KeyResult, KeyResultMilestones } from "../models/keyresult";
 
 /**
@@ -15,7 +15,9 @@ import { KeyResult, KeyResultMilestones } from "../models/keyresult";
             \${this.keyResult.name}
         </div>
         <div class="column is-one-third" style="text-align: right;">
-            <i class="fas fa-check" id="check" style="cursor: pointer;"></i>
+            <button \${this._editable ? '' : 'disabled'} type="button" class="button small">
+              <i class="fas fa-check" id="check" style="cursor: pointer;"></i>
+            </button>
         </div>   
              
     </div>
@@ -26,6 +28,21 @@ import { KeyResult, KeyResultMilestones } from "../models/keyresult";
 export class KeyResultComponent extends VetproviehElement {
 
   private _keyResult: KeyResult = new KeyResult();
+  private _editable: boolean = false;
+
+  /**
+   * Show editable Buttons or not
+   * @property {string} editable
+   */
+  public get editable(): string {
+    return this._editable.toString();
+  }
+  public set editable(v: string) {
+    let vAsBool = ObjectHelper.stringToBool(v);
+    if (this._editable !== vAsBool) {
+      this._editable = vAsBool;
+    }
+  }
 
   public get keyResult(): KeyResult {
     return this._keyResult;

@@ -1,11 +1,8 @@
-import { WebComponent, VetproviehElement, VetproviehNavParams, ObjectHelper } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehElement, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
 import { ObjectiveModal } from "./objective-modal";
 import { Objective } from "../models/objective";
 import { ObjectiveItemComponent } from "./objectiveItem";
-import { toStringHDMS } from "ol/coordinate";
-import { PlanMeasureModel } from "../../careplans/operational/models/planMeasure";
 import { SelectButton } from "../../shared";
-import { KeyResult } from "../models/keyresult";
 
 /**
  * Controller for Page
@@ -24,13 +21,17 @@ import { KeyResult } from "../models/keyresult";
         <div id="detail" class="container">
           <div class="columns padding-15">
               <div class="column">
-                <select-button id="loadMeasure" param="selectPageMeasure.return" href="/measures/select.html?barnId=\${this.barnId}" 
+                <select-button 
+                  id="loadMeasure" 
+                  param="selectPageMeasure.return" 
+                  href="/measures/select.html?barnId=\${this.barnId}" 
+                  class="\${this.cssHidden(this.state == 'valuation')}"
                   name="Maßnahmen laden">
                 </select-button>              
               </div>
               <div class="column">
                 <button id="addMeasure" 
-                        class="button is-info is-fullwidth" 
+                        class="button is-info is-fullwidth \${this.cssHidden(this.state == 'valuation')}" 
                         type="button">
                         <span class="icon is-small">
                             <i class="fas fa-edit"></i>
@@ -57,10 +58,27 @@ import { KeyResult } from "../models/keyresult";
   tag: "vp-objectives",
 })
 export class ObjectivesComponent extends VetproviehElement {
+  static readonly possibleStates = ["execution", "valuation"];
 
   private _objectives: Objective[] = [];
   private _barnId: string = "";
+  private _state : string = "execution";
 
+  /**
+   * State shows or hide different inputs.
+   * Expected Values: execution, valuation
+   * @property {string} state
+   */
+  public get state() : string {
+    return this._state;
+  }
+
+  public set state(v : string) {
+    if(ObjectivesComponent.possibleStates.includes(v) && this._state !== v) {
+      this._state = v;
+    }
+  }
+  
 
   public get objectives(): Objective[] {
     return this._objectives;
@@ -83,7 +101,7 @@ export class ObjectivesComponent extends VetproviehElement {
 
 
   static get observedAttributes() {
-    return ["objectives"];
+    return ["objectives", "state"];
   }
 
 
@@ -140,6 +158,11 @@ export class ObjectivesComponent extends VetproviehElement {
   private addObjectiveToDom(objective: Objective) {
     let objectiveItem = new ObjectiveItemComponent();
     objectiveItem.objective = objective;
+    
+    let valuation = (this.state === "valuation");
+    objectiveItem.valuation = valuation.toString();
+    objectiveItem.editable = (!valuation).toString();
+
     objectiveItem.addEventListener("delete", (event) => {
       let index = this.objectives.findIndex((x) => x == (event as CustomEvent).detail)
       if (index >= 0) {

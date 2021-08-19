@@ -2,14 +2,14 @@ import { KeyResultComponent } from '../../../src/measures';
 import { KeyResult } from '../../../src/measures/models/keyresult';
 
 
+let field: KeyResultComponent;
+
+let keyResult = new KeyResult();
+keyResult.name = "Beispielresult";
+keyResult.active = true;
+keyResult.position = 1;
+
 describe('render', () => {
-
-    let field: KeyResultComponent;
-
-    let keyResult = new KeyResult();
-    keyResult.name = "Beispielresult";
-    keyResult.active = true;
-    keyResult.position = 1;
 
     beforeEach(() => {
         field = new KeyResultComponent();
@@ -28,12 +28,45 @@ describe('render', () => {
     });
 
     it('should have expected states', () => {
-        field.toggleState(); 
+        field.toggleState();
         field.render();
         let expectedContent = `<i class="fas fa-check-double" id="check" style="cursor: pointer; color: black;"></i>`;
         expect(field.shadowRoot?.innerHTML).toMatch(expectedContent);
     });
 });
+
+describe('editable', () => {
+
+    var getButton = function() : HTMLButtonElement | null | undefined {
+        return field.shadowRoot?.querySelector("button");
+    }
+
+    beforeEach(() => {
+        field = new KeyResultComponent();
+        field.keyResult = keyResult;
+    });
+
+    describe('be editable', () => {
+        it('shoud enable the state button', () => {
+            field.editable = "true";
+            field.render();
+
+            let button = getButton();
+
+            expect(button?.disabled).toBeFalsy();
+        });
+    });
+
+    describe('not be editable', () => {
+        it('shoud disable the state button', () => {
+            field.render();
+            let button = getButton();
+
+            expect(button?.disabled).toBeTruthy();
+        });
+    });
+});
+
 /*
 describe('value and binding', () => {
 
