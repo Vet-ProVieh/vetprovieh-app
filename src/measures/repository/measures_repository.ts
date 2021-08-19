@@ -20,6 +20,8 @@ export class MeasuresRepository extends BaseRepository<Measure>{
         } else {
           throw Error(response.statusText);
         }
+      }).catch((error) => {
+        return [];
       });
   }
   /**
@@ -48,6 +50,8 @@ export class MeasuresRepository extends BaseRepository<Measure>{
         } else {
           throw Error(response.statusText);
         }
+      }).catch((error) => {
+        return undefined;
       });
   }
 

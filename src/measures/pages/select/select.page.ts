@@ -18,6 +18,7 @@ import { ObjectivesRepository } from "../../repository";
                 <a data-id="measures">
                     <span class="icon is-small"><i class="fas fa-scroll" aria-hidden="true"></i></span>
                     <span>Maßnahmen</span>
+                    ( <span id="selectedObjectives">0</span> )
                 </a>
                 </li>
                 <li class="is-active">
@@ -25,7 +26,7 @@ import { ObjectivesRepository } from "../../repository";
                     <span class="icon is-small"><i class="fas fa-toolbox" aria-hidden="true"></i></span>
                     <span class="is-hidden-touch">Maßnahmen aus Betreuung</span>
                     <span class="is-hidden-desktop">Betreuung</span>
-                    ( <span id="selectedObjectives">0</span> )
+                    ( <span id="selectedOpPlans">0</span> )
                 </a>
                 </li>
             </ul>   
@@ -295,15 +296,25 @@ export class MeasuresSelectPage extends BasicSelectPage {
      * Updating Tab Element Selected Amount
      */
     private updateSelectedAmount() {
-        let selectedAmount = this.selectedOperationPlanIds.length;
-        selectedAmount += this.selectedObjectivesIds.length;
+        let amountOpPlans = this.selectedOperationPlanIds.length;
+        let amountObjectives = this.selectedObjectivesIds.length;
 
         // Activate takeover Button
-        this.takeoverButton.disabled = selectedAmount == 0;
+        this.takeoverButton.disabled = amountOpPlans + amountObjectives == 0;
 
-        // Updating amount in Tab
-        let span = this.selectedObjectives;
-        if (span) span.textContent = selectedAmount.toString();
+        this.updateSelectAmountBadge(this.selectedOpPlans, amountOpPlans);
+        this.updateSelectAmountBadge(this.selectedObjectives, amountObjectives);
+    }
+
+    /**
+     * Update Span Element with Amount
+     * @param {HTMLSpanElement} span 
+     * @param {number} selectedAmount 
+     */
+    private updateSelectAmountBadge(span: HTMLSpanElement, selectedAmount: number){
+        if (span) {
+            span.textContent = selectedAmount.toString();
+        }
     }
 
     /**
@@ -313,4 +324,14 @@ export class MeasuresSelectPage extends BasicSelectPage {
     private get selectedObjectives(): HTMLSpanElement {
         return document.getElementById("selectedObjectives") as HTMLSpanElement;
     }
+
+     /**
+     * Badge Amount in Tab-Header
+     * @return {HTMLSpanElement}
+     */
+      private get selectedOpPlans(): HTMLSpanElement {
+        return document.getElementById("selectedOpPlans") as HTMLSpanElement;
+    }
+
+    
 }
