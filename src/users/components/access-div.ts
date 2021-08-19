@@ -1,4 +1,5 @@
 import { UserRepository } from "../repository";
+import { ViewHelper } from "@tomuench/vetprovieh-shared/lib";
 
 /**
  * Access for Specific Anchor
@@ -40,7 +41,7 @@ export class AccessDiv extends HTMLDivElement {
                 .map((key) => this.repository.isInRole(key))
                 .reduce((a, b) => a && b, true);
             if (!isInOneRole) {
-                this.classList.add("is-hidden");
+                ViewHelper.toggleVisibility(this, false);
             }
         }
     }

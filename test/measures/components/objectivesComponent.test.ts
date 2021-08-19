@@ -7,7 +7,7 @@ var objectiv = new Objective();
 objectiv.name = "TestObjective";
 objectiv.id = 1;
 
-var objectives : any[] = [objectiv];
+var objectives: any[] = [objectiv];
 
 
 describe('visiblity by state', () => {
@@ -16,7 +16,7 @@ describe('visiblity by state', () => {
      * Loading Add-Buttons from objectivesComponent
      * @returns {any[]}
      */
-    var getAddButtons = function() : any[] {
+    var getAddButtons = function (): any[] {
         return [
             objectivesComponent.shadowRoot?.getElementById("addMeasure"),
             objectivesComponent.shadowRoot?.getElementById("loadMeasure")
@@ -27,92 +27,179 @@ describe('visiblity by state', () => {
      * Loading ObjectiveItems from DOM
      * @returns {NodeListOf<Element>}
      */
-    var loadObjectiveItems = function() : NodeListOf<Element> | undefined {
+    var loadObjectiveItems = function (): NodeListOf<Element> | undefined {
         return objectivesComponent.shadowRoot?.querySelectorAll("vp-objective-item");
     }
 
     describe('valuation', () => {
+        describe('before render', () => {
 
-        beforeEach(() => {
-            objectivesComponent = new ObjectivesComponent();
-            objectivesComponent.state = "valuation";
-            objectivesComponent.render();
-            objectivesComponent.objectives = objectives;
-        });
+            beforeEach(() => {
+                objectivesComponent = new ObjectivesComponent();
+                objectivesComponent.state = "valuation";
+                objectivesComponent.objectives = objectives;
+                objectivesComponent.render();
+            });
 
-        it('should set objective-item to show valuation', () => {
-            let objectiveItems = loadObjectiveItems();
 
-            expect(objectiveItems?.length).toBeGreaterThan(0);
+            it('should have objectiveItems', () => {
+                let objectiveItems = loadObjectiveItems();
+                expect(objectiveItems?.length).toBeGreaterThan(0);
+            });
 
-            objectiveItems?.forEach((objectiveItem) => {
-                let e = objectiveItem as ObjectiveItemComponent;
-                expect(e.valuation).toEqual("true");
-            })
-        });
+            it('should set objective-item to show valuation', () => {
+                let objectiveItems = loadObjectiveItems();
 
-        it('should hide creation buttons', () => {
-            let buttons = getAddButtons();
+                objectiveItems?.forEach((objectiveItem) => {
+                    let e = objectiveItem as ObjectiveItemComponent;
+                    expect(e.valuation).toEqual("true");
+                })
+            });
 
-            expect(buttons.length).toBeGreaterThan(0);
+            it('should hide creation buttons', () => {
+                let buttons = getAddButtons();
 
-            buttons.forEach((button) => {
-                expect(button).toBeDefined();
-                expect(button?.classList.contains("is-hidden")).toBeTruthy();
+                expect(buttons.length).toBeGreaterThan(0);
+
+                buttons.forEach((button) => {
+                    expect(button).toBeDefined();
+                    expect(button?.classList.contains("is-hidden")).toBeTruthy();
+                });
+            });
+
+            it('should disable edit of objective-items', () => {
+                let objectiveItems = loadObjectiveItems();
+
+                objectiveItems?.forEach((objectiveItem) => {
+                    let e = objectiveItem as ObjectiveItemComponent;
+                    expect(e.editable).toEqual("false");
+                })
             });
         });
 
-        it('should disable edit of objective-items', () => {
-            let objectiveItems = loadObjectiveItems();
+        describe('on demand', () => {
+            beforeEach(() => {
+                objectivesComponent = new ObjectivesComponent();
+                objectivesComponent.objectives = objectives;
+                objectivesComponent.render();
+                objectivesComponent.state = "valuation";
+            });
 
-            expect(objectiveItems?.length).toBeGreaterThan(0);
+            it('should set objective-item to show valuation', () => {
+                let objectiveItems = loadObjectiveItems();
 
-            objectiveItems?.forEach((objectiveItem) => {
-                let e = objectiveItem as ObjectiveItemComponent;
-                expect(e.editable).toEqual("false");
-            })
+                objectiveItems?.forEach((objectiveItem) => {
+                    let e = objectiveItem as ObjectiveItemComponent;
+                    expect(e.valuation).toEqual("true");
+                })
+            });
+
+            it('should hide creation buttons', () => {
+                let buttons = getAddButtons();
+
+                expect(buttons.length).toBeGreaterThan(0);
+
+                buttons.forEach((button) => {
+                    expect(button).toBeDefined();
+                    expect(button?.classList.contains("is-hidden")).toBeTruthy();
+                });
+            });
+
+            it('should disable edit of objective-items', () => {
+                let objectiveItems = loadObjectiveItems();
+
+                objectiveItems?.forEach((objectiveItem) => {
+                    let e = objectiveItem as ObjectiveItemComponent;
+                    expect(e.editable).toEqual("false");
+                })
+            });
         });
     });
 
     describe('planing or exectuion', () => {
 
-        beforeEach(() => {
-            objectivesComponent = new ObjectivesComponent();
-            objectivesComponent.render();
-            objectivesComponent.objectives = objectives;
-        });
+        describe('before render', () => {
 
-        it('should set objective-item to no Valuation', () => {
-            let objectiveItems = loadObjectiveItems();
+            beforeEach(() => {
+                objectivesComponent = new ObjectivesComponent();
+                objectivesComponent.objectives = objectives;
+                objectivesComponent.render();
+            });
 
-            expect(objectiveItems?.length).toBeGreaterThan(0);
 
-            objectiveItems?.forEach((objectiveItem) => {
-                let e = objectiveItem as ObjectiveItemComponent;
-                expect(e.valuation).toEqual("false");
-            })
-        });
+            it('should have objectiveItems', () => {
+                let objectiveItems = loadObjectiveItems();
+                expect(objectiveItems?.length).toBeGreaterThan(0);
+            });
 
-        it('should show creation buttons', () => {
-            let buttons = getAddButtons();
+            it('should set objective-item to no Valuation', () => {
+                let objectiveItems = loadObjectiveItems();
 
-            expect(buttons.length).toBeGreaterThan(0);
+                objectiveItems?.forEach((objectiveItem) => {
+                    let e = objectiveItem as ObjectiveItemComponent;
+                    expect(e.valuation).toEqual("false");
+                })
+            });
 
-            buttons.forEach((button) => {
-                expect(button).toBeDefined();
-                expect(button?.classList.contains("is-hidden")).toBeFalsy();
+            it('should show creation buttons', () => {
+                let buttons = getAddButtons();
+
+                expect(buttons.length).toBeGreaterThan(0);
+
+                buttons.forEach((button) => {
+                    expect(button).toBeDefined();
+                    expect(button?.classList.contains("is-hidden")).toBeFalsy();
+                });
+            });
+
+            it('should edit objectives', () => {
+                let objectiveItems = loadObjectiveItems();
+
+                objectiveItems?.forEach((objectiveItem) => {
+                    let e = objectiveItem as ObjectiveItemComponent;
+                    expect(e.editable).toEqual("true");
+                })
             });
         });
 
-        it('should edit objectives', () => {
-            let objectiveItems = loadObjectiveItems();
+        describe('after render', () => {
+            beforeEach(() => {
+                objectivesComponent = new ObjectivesComponent();
+                objectivesComponent.objectives = objectives;
+                objectivesComponent.state = "valuation";
+                objectivesComponent.render();
+                objectivesComponent.state = "execution";
+            });
 
-            expect(objectiveItems?.length).toBeGreaterThan(0);
 
-            objectiveItems?.forEach((objectiveItem) => {
-                let e = objectiveItem as ObjectiveItemComponent;
-                expect(e.editable).toEqual("true");
-            })
+            it('should set objective-item to no Valuation', () => {
+                let objectiveItems = loadObjectiveItems();
+
+                objectiveItems?.forEach((objectiveItem) => {
+                    let e = objectiveItem as ObjectiveItemComponent;
+                    expect(e.valuation).toEqual("false");
+                })
+            });
+
+            it('should show creation buttons', () => {
+                let buttons = getAddButtons();
+
+                expect(buttons.length).toBeGreaterThan(0);
+
+                buttons.forEach((button) => {
+                    expect(button).toBeDefined();
+                    expect(button?.classList.contains("is-hidden")).toBeFalsy();
+                });
+            });
+
+            it('should edit objectives', () => {
+                let objectiveItems = loadObjectiveItems();
+
+                objectiveItems?.forEach((objectiveItem) => {
+                    let e = objectiveItem as ObjectiveItemComponent;
+                    expect(e.editable).toEqual("true");
+                })
+            });
         });
     });
 

@@ -1,4 +1,4 @@
-import { WebComponent, VetproviehElement, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehElement, VetproviehNavParams, ViewHelper } from "@tomuench/vetprovieh-shared/lib";
 import { ObjectiveModal } from "./objective-modal";
 import { Objective } from "../models/objective";
 import { ObjectiveItemComponent } from "./objectiveItem";
@@ -25,13 +25,13 @@ import { SelectButton } from "../../shared";
                   id="loadMeasure" 
                   param="selectPageMeasure.return" 
                   href="/measures/select.html?barnId=\${this.barnId}" 
-                  class="\${this.cssHidden(this.state == 'valuation')}"
+                  class="\${this.cssHidden(this.isHidden)}"
                   name="Maßnahmen laden">
                 </select-button>              
               </div>
               <div class="column">
                 <button id="addMeasure" 
-                        class="button is-info is-fullwidth \${this.cssHidden(this.state == 'valuation')}" 
+                        class="button is-info is-fullwidth \${this.cssHidden(this.isHidden)}" 
                         type="button">
                         <span class="icon is-small">
                             <i class="fas fa-edit"></i>
@@ -76,9 +76,35 @@ export class ObjectivesComponent extends VetproviehElement {
   public set state(v : string) {
     if(ObjectivesComponent.possibleStates.includes(v) && this._state !== v) {
       this._state = v;
+      this.toggleVisibility();
     }
   }
+
+  /**
+   * Change Visibility of relevant DOM-Objects
+   */
+  private toggleVisibility(){
+    let buttons = [this.manualAddButton, this.selectButton];
+    buttons.forEach((button) => {
+      if(button){
+        ViewHelper.toggleVisibility(button, !this.isHidden);
+      }
+    })
+
+    this.shadowRoot?.querySelectorAll("vp-objective-item").forEach((item) => {
+      let e = item as ObjectiveItemComponent;
+      e.valuation = this.isHidden.toString();
+      e.editable = (!this.isHidden).toString();
+    })
+  }
   
+  /**
+   * Is Component hidden
+   * @return {boolean}
+   */
+  public get isHidden() : boolean {
+    return this.state == 'valuation'
+  }
 
   public get objectives(): Objective[] {
     return this._objectives;
@@ -86,7 +112,6 @@ export class ObjectivesComponent extends VetproviehElement {
 
   public set objectives(val: Objective[]) {
     this._objectives = val;
-    this.renderObjectives();
   }
 
 
@@ -109,11 +134,12 @@ export class ObjectivesComponent extends VetproviehElement {
    * Connected-Callback
    */
   connectedCallback() {
-    this.bindManualAddButton();
+    this.render();
   }
 
   public render() {
     super.render();
+    this.renderObjectives();
     this._afterRender();
   }
 
@@ -188,7 +214,8 @@ export class ObjectivesComponent extends VetproviehElement {
     let container = this.selectContainer(objective);
 
     if(container) {
-      container.querySelector("p")?.classList.add("is-hidden");
+      let p = container.querySelector("p");
+      if(p) ViewHelper.toggleVisibility(p, false);
       container.appendChild(item);
     }
   }
@@ -258,8 +285,16 @@ export class ObjectivesComponent extends VetproviehElement {
 
 
   _afterRender() {
+    this.bindManualAddButton();
+    this.bindSelectButton();
+  }
 
-    let selectButton = this.shadowRoot?.querySelector("select-button") as SelectButton;
+
+  /**
+   * Binding SelectButton to Answer
+   */
+  private bindSelectButton() {
+    let selectButton = this.selectButton;
     setTimeout(() => {
       if (selectButton) {
         this.processSelectButtonAnswer(selectButton);
@@ -267,6 +302,14 @@ export class ObjectivesComponent extends VetproviehElement {
     }, 1000);
   }
 
+
+  /**
+   * Loading Select-Button frm DOM
+   * @return {SelectButton}
+   */
+  private get selectButton(): SelectButton {
+    return this.shadowRoot?.querySelector("select-button") as SelectButton;
+  }
 
   /**
      * Process answer of select-Button.

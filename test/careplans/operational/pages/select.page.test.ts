@@ -1,10 +1,6 @@
-import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
-import { BarnListShow } from "../../../../src/barns";
+import fetch, { enableFetchMocks } from 'jest-fetch-mock';
 import { OperationPlan, OperationPlanSelectPage } from "../../../../src/careplans";
-import { OperationPlansRepository } from "../../../../src/careplans/operational/repository";
 
-import { enableFetchMocks } from 'jest-fetch-mock'
-import fetch from 'jest-fetch-mock';
 enableFetchMocks();
 
 

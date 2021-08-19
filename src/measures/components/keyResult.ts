@@ -1,5 +1,6 @@
 
 import { WebComponent, VetproviehElement, ObjectHelper } from "@tomuench/vetprovieh-shared/lib";
+import { ViewHelper } from "../../../www/bundle";
 import { KeyResult, KeyResultMilestones } from "../models/keyresult";
 
 /**
@@ -15,8 +16,8 @@ import { KeyResult, KeyResultMilestones } from "../models/keyresult";
             \${this.keyResult.name}
         </div>
         <div class="column is-one-third" style="text-align: right;">
-            <button \${this._editable ? '' : 'disabled'} type="button" class="button small">
-              <i class="fas fa-check" id="check" style="cursor: pointer;"></i>
+            <button id="check" \${this._editable ? '' : 'disabled'} type="button" class="button small">
+              <i class="fas fa-check"></i>
             </button>
         </div>   
              
@@ -41,7 +42,15 @@ export class KeyResultComponent extends VetproviehElement {
     let vAsBool = ObjectHelper.stringToBool(v);
     if (this._editable !== vAsBool) {
       this._editable = vAsBool;
+      this.toggleEditable();
     }
+  }
+
+  /**
+   * Toggle internal DOM
+   */
+  private toggleEditable() {
+    this.checkKeyResultButton.disabled = !this._editable;
   }
 
   public get keyResult(): KeyResult {
@@ -65,12 +74,22 @@ export class KeyResultComponent extends VetproviehElement {
     this.bindCheckKeyResultButton();
   }
 
+  /**
+   * Binding KeyResultButton
+   */
   private bindCheckKeyResultButton() {
-    let checkKeyResult = this.shadowRoot?.getElementById("check") as HTMLElement;
-    checkKeyResult.addEventListener("click", () => {
+    this.checkKeyResultButton.addEventListener("click", () => {
       this.toggleState();
       this.renderCurrentState();
     });
+  }
+
+  /**
+   * Button to Change key Result
+   * @return {HTMLButtonElement}
+   */
+  private get checkKeyResultButton() : HTMLButtonElement{
+    return this.shadowRoot?.getElementById("check") as HTMLButtonElement;;
   }
 
   /**
@@ -113,6 +132,6 @@ export class KeyResultComponent extends VetproviehElement {
    * @return {HTMLElement}
    */
   private get checkKeyResult() {
-    return this.shadowRoot?.getElementById("check") as HTMLElement;
+    return this.checkKeyResultButton.querySelector("i") as HTMLElement;
   }
 }

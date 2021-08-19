@@ -1,4 +1,4 @@
-import { WebComponent, Indexable, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, Indexable, VetproviehNavParams, ViewHelper } from "@tomuench/vetprovieh-shared/lib";
 import { PageWithReadOnly, SelectFieldType } from "../../components";
 import { CareplanField } from "../../models/careplanField";
 import { TextArea, ComboBox, Video, ImageField, List, SpeechField } from "../../models/fields";
@@ -75,11 +75,7 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
      */
     private hideAdditionalFields(hide: boolean) {
         let addBox = this.detailElement.getByIdFromShadowRoot("additional");
-        if (hide) {
-            addBox?.classList.add("is-hidden");
-        } else {
-            addBox?.classList.remove("is-hidden");
-        }
+        if(addBox) ViewHelper.toggleVisibility(addBox, !hide);
     }
 
     /**

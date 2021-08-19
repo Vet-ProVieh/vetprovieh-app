@@ -1,3 +1,4 @@
+import { ViewHelper } from "@tomuench/vetprovieh-shared/lib";
 import { UserRepository } from "../repository";
 
 /**
@@ -40,18 +41,18 @@ export class AccessAnchor extends HTMLAnchorElement {
                 .map((key) => this.repository.isInRole(key))
                 .reduce((a, b) => a && b, true);
             if (!isInOneRole) {
-                this.classList.add("is-hidden");
+                ViewHelper.toggleVisibility(this, false);
             }
         }
     }
 
-     /**
-       * Callback Implementation
-       * @param {string} name
-       * @param {any} old
-       * @param {any} value
-       */
-      attributeChangedCallback(name: string, old: any, value: any) {
+    /**
+      * Callback Implementation
+      * @param {string} name
+      * @param {any} old
+      * @param {any} value
+      */
+    attributeChangedCallback(name: string, old: any, value: any) {
         if (old !== value) {
             (this as any)[name] = value;
         }

@@ -1,5 +1,5 @@
 
-import { WebComponent, VetproviehElement, ObjectHelper } from "@tomuench/vetprovieh-shared/lib";
+import { WebComponent, VetproviehElement, ObjectHelper, ViewHelper } from "@tomuench/vetprovieh-shared/lib";
 import { ObjectiveModal } from "./objective-modal";
 import { KeyResult } from "../models/keyresult";
 import { Objective } from "../models/objective";
@@ -45,7 +45,7 @@ import { QuestionModal, StarsComponent } from "../../shared";
                         \${this.objective.name}
                     </p>
                     <p class="card-header-title">
-                        <vp-stars amount="5" id="stars">
+                        <vp-stars amount="5" id="stars" class="\${this.cssHidden(this.valuation != 'true')}">
                         </vp-stars>
                     </p>
                     <p class="card-header-title">
@@ -60,7 +60,7 @@ import { QuestionModal, StarsComponent } from "../../shared";
                 <div id="content" class="card-content dropdown-content is-hidden">
                     <div class="content" id="keyResults">
                     </div>
-                    <div class="columns is-mobile \${this.cssHidden(this.editable != 'true')}">
+                    <div id="buttonsRow" class="columns is-mobile \${this.cssHidden(this.editable != 'true')}">
                         <div class="column">
                             <button id="deleteButton" class="button is-danger is-fullwidth 
                                 \${this.cssHidden(this.editable != 'true')}">
@@ -100,6 +100,33 @@ export class ObjectiveItemComponent extends VetproviehElement {
         let vAsBool = ObjectHelper.stringToBool(v);
         if (this._editable !== vAsBool) {
             this._editable = vAsBool;
+            this.toggleEditableFields();
+        }
+    }
+
+    /**
+     * Toggle Editable fields
+     */
+    private toggleEditableFields() {
+        let elements = [this.deleteButton, this.editButton, this.shadowRoot?.querySelector("#buttonsRow")];
+        elements.forEach((element) => {
+            if(element){
+                ViewHelper.toggleVisibility(element as HTMLElement, this._editable);
+            }
+        })
+
+        this.shadowRoot?.querySelectorAll("vp-key-result").forEach((keyResult) => {
+            let e = keyResult as KeyResultComponent;
+            e.editable = this.editable;
+        })
+    }
+
+    /**
+     * Toggle Rating Component
+     */
+    private toggleValuationFields() {
+        if(this.ratingComponent){
+            ViewHelper.toggleVisibility(this.ratingComponent, this._valuation);
         }
     }
 
@@ -116,6 +143,7 @@ export class ObjectiveItemComponent extends VetproviehElement {
         let vAsBool = ObjectHelper.stringToBool(v);
         if (this._valuation !== vAsBool) {
             this._valuation = vAsBool;
+            this.toggleValuationFields();
         }
     }
 
@@ -182,6 +210,14 @@ export class ObjectiveItemComponent extends VetproviehElement {
         super(true, false);
     }
 
+    /**
+     * Load Rating Component
+     * @return {StarsComponent}
+     */
+    private get ratingComponent() : StarsComponent {
+        return this.getByIdFromShadowRoot("stars") as StarsComponent;
+    }
+
     private registerDeleteButton() {
         this.deleteButton.addEventListener("click", () => {
             QuestionModal.askQuestion("Sind Sie sicher?", "Möchten Sie die Maßnahme entfernen?").then((result) => {
@@ -207,13 +243,9 @@ export class ObjectiveItemComponent extends VetproviehElement {
         let cardBody = this.contentContainer;
         let arrow = this.shadowRoot?.getElementById("arrow") as HTMLElement;
 
-        if (cardBody.classList.contains("is-hidden")) {
-            cardBody.classList.remove("is-hidden");
-            arrow.style.transform = "rotate(180deg)";
-        } else {
-            cardBody.classList.add("is-hidden")
-            arrow.style.transform = "rotate(0deg)";
-        }
+        let show = cardBody.classList.contains("is-hidden");
+        ViewHelper.toggleVisibility(cardBody, show);
+        arrow.style.transform = `rotate(${show ? 180 : 0}deg)`;
     }
 
     /**

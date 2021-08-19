@@ -1,4 +1,4 @@
-import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { VetproviehElement, ViewHelper, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 
 @WebComponent({
     template: `
@@ -49,12 +49,7 @@ export class OpenObjectivesButton extends VetproviehElement {
      * @returns {string}
      */
     public setVisibility() {
-        if (+this.amount > 0) {
-            this.classList.remove("is-hidden");
-        } else {
-            console.log("add hidden");
-            this.classList.add("is-hidden");
-        }
+        ViewHelper.toggleVisibility(this, +this.amount > 0);
     }
 
     /**

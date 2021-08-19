@@ -1,0 +1,527 @@
+{
+  "animal": "HM1",
+  "animalNumber": "string",
+  "barn": {
+    "id": 1
+  },
+  "data": [{
+      "name": "Angaben zum Betrieb",
+      "position": 1,
+      "active": true,
+      "details": [{
+          "detailsType": "textArea",
+          "name": "Anschrift des Betriebsstandortes",
+          "optional": false,
+          "position": 1,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Plätze in Stall 1",
+          "optional": false,
+          "position": 2,
+          "value": "",
+          "voiceInputable": true
+        },
+
+        {
+          "detailsType": "textFields",
+          "name": "Plätze in Stall 2",
+          "optional": false,
+          "position": 3,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Plätze in Stall 3",
+          "optional": false,
+          "position": 4,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Plätze in Stall 4",
+          "optional": false,
+          "position": 5,
+          "value": "",
+          "voiceInputable": true
+        }
+      ]
+    },
+    {
+      "name": "Angaben zur tierärztlichen Betreuung",
+      "position": 2,
+      "active": true,
+      "details": [{
+          "detailsType": "textFields",
+          "name": "Name des Tierarztes",
+          "optional": false,
+          "position": 1,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Anschrift",
+          "optional": false,
+          "position": 2,
+          "value": "",
+          "voiceInputable": true
+        },
+
+        {
+          "detailsType": "textFields",
+          "name": "VVVO-Number",
+          "optional": false,
+          "position": 3,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": [
+            "Ja",
+            "Nein"
+          ],
+          "detailsType": "checkBox",
+          "name": "Betreuungs-Vertrag",
+          "optional": false,
+          "position": 4,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": [
+            "Ja",
+            "Nein"
+          ],
+          "detailsType": "checkBox",
+          "name": "Weitere Tierärzte:",
+          "optional": false,
+          "position": 5,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Weitere Tierärzte (Name, Anschrift)",
+          "optional": false,
+          "position": 6,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": [
+            "Ja",
+            "Nein"
+          ],
+          "detailsType": "checkBox",
+          "name": "Weitere Berater:",
+          "optional": false,
+          "position": 7,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Weitere Berater (Name, Anschrift)",
+          "optional": false,
+          "position": 6,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": [
+            "Ja",
+            "Nein"
+          ],
+          "detailsType": "checkBox",
+          "name": "Integration:",
+          "optional": false,
+          "position": 7,
+          "value": "",
+          "voiceInputable": true
+        }
+      ]
+    },
+    {
+      "name": "Angaben zur Tierhaltung",
+      "position": 3,
+      "active": true,
+      "details": [{
+          "detailsType": "textFields",
+          "name": "Mastverfahren",
+          "optional": false,
+          "position": 1,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Mastdauer (Tage)",
+          "optional": false,
+          "position": 2,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": [
+            "Ja",
+            "Nein"
+          ],
+          "detailsType": "checkBox",
+          "name": "Vorgriff",
+          "optional": false,
+          "position": 3,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Gewicht bei Endausstallung (kg / Tier)",
+          "optional": false,
+          "position": 4,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": [
+            "Ja",
+            "Nein"
+          ],
+          "detailsType": "checkBox",
+          "name": "QS-System-Teilnehmer",
+          "optional": false,
+          "position": 5,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Biosiegel",
+          "optional": false,
+          "position": 6,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Sonstiges",
+          "optional": false,
+          "position": 7,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Besatzdichte (kg / qm)",
+          "optional": false,
+          "position": 8,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Leerstandszeit / Serviceperiode",
+          "optional": false,
+          "position": 9,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Art und Ausstattung der Ställe ",
+          "optional": false,
+          "position": 10,
+          "value": "",
+          "voiceInputable": true
+        }
+      ]
+    },
+    {
+      "name": "Angaben zur Klimatechnik",
+      "position": 4,
+      "active": true,
+      "details": [{
+        "detailsType": "textArea",
+        "name": "Heizung und Lüftung",
+        "optional": false,
+        "position": 1,
+        "value": "",
+        "voiceInputable": true
+      }]
+    },
+    {
+      "name": "Angaben zu Futter- und Wasserversorgung",
+      "position": 4,
+      "active": true,
+      "details": [{
+          "detailsType": "textArea",
+          "name": "Art der Fütterung",
+          "optional": false,
+          "position": 1,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Anzahl der Tiere pro Futterplatz",
+          "optional": false,
+          "position": 2,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": ["Brunnenwasser", "Stadtwasser", "Wasseruntersuchung"],
+          "detailsType": "checkBox",
+          "multipleSelect": true,
+          "name": "Wasserversorgung",
+          "optional": false,
+          "position": 3,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Zusätzliche Angabe zur Wasserversorgung",
+          "optional": false,
+          "position": 4,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Anzahl Tiere pro Tränke",
+          "optional": false,
+          "position": 5,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Art der Tränke",
+          "optional": false,
+          "position": 6,
+          "value": "",
+          "voiceInputable": true
+        }
+      ]
+    },
+    {
+      "name": "Art und Weise der Verabreichung von Antibiotika",
+      "position": 5,
+      "active": true,
+      "details": [{
+          "choices": ["Futter", "Wasser", "Injektion", "Sonstiges"],
+          "detailsType": "checkBox",
+          "name": "Verabreichungsart",
+          "optional": false,
+          "position": 1,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Kommentar bei Sonstiges",
+          "optional": false,
+          "position": 2,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": ["Ja", "Nein"],
+          "detailsType": "checkBox",
+          "name": "Leitfaden „Orale Anwendung von Tierarzneimitteln“  bekannt?",
+          "optional": false,
+          "position": 3,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": ["Ja", "Nein"],
+          "detailsType": "checkBox",
+          "name": "Risikomanagementplan vorhanden?",
+          "optional": false,
+          "position": 4,
+          "value": "",
+          "voiceInputable": true
+        }
+      ]
+    },
+    {
+      "name": "Angaben zur Hygiene",
+      "position": 6,
+      "active": true,
+      "details": [{
+          "detailsType": "textFields",
+          "name": "Art der Schutzkleidung",
+          "optional": false,
+          "position": 1,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Art der Hygieneschleuse",
+          "optional": false,
+          "position": 2,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": ["Reinigung Stall", "Desinfektion Stall"],
+          "detailsType": "checkBox",
+          "name": "Art und Umfang der internen Biosicherheit",
+          "multipleSelect": true,
+          "optional": false,
+          "position": 3,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": ["Reinigung", "Desinfektion", "routinemäig", "nach Antibiotika-Gabe"],
+          "detailsType": "checkBox",
+          "name": "Wasserleitungen",
+          "optional": false,
+          "position": 4,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": ["Reinigung Futterleitungen", "Reinigung Futterschalen", "Reinigung Futtersilo"],
+          "detailsType": "checkBox",
+          "name": "Fütterungseinrichtungen",
+          "optional": false,
+          "position": 5,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "choices": ["Keine", "selbst", "durch Fremdfirma"],
+          "detailsType": "checkBox",
+          "name": "Schädlingsbekämpfung",
+          "optional": false,
+          "position": 6,
+          "value": "",
+          "voiceInputable": true
+        }
+      ]
+    },
+    {
+      "name": "Gesundheitsmanagement",
+      "position": 7,
+      "active": true,
+      "details": [{
+          "detailsType": "textArea",
+          "name": "Immunprophylaxe",
+          "optional": false,
+          "position": 1,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Parasitenbekämpfung",
+          "optional": false,
+          "position": 2,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Sonstiges",
+          "optional": false,
+          "position": 3,
+          "value": "",
+          "voiceInputable": true
+        }
+      ]
+    },
+    {
+      "name": "Gründe für das Überschreiten der Kennzahl 2",
+      "position": 8,
+      "active": true,
+      "details": [{
+          "choices": ["Atmewege", "Verdauungsapparat", "Bewegungsapparat", "Sonstiges"],
+          "detailsType": "checkBox",
+          "name": "Schwerpunkt(e)  der Erkrankung",
+          "multipleSelect": true,
+          "optional": false,
+          "position": 1,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Tierverluste für das Kalenderhalbjahr",
+          "optional": false,
+          "position": 2,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Angaben zu Krankheitsgeschehen",
+          "optional": false,
+          "position": 3,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Erregernachweis / Resistenztest ",
+          "optional": false,
+          "position": 4,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Sektion",
+          "optional": false,
+          "position": 5,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textArea",
+          "name": "Sonstiges",
+          "optional": false,
+          "position": 6,
+          "value": "",
+          "voiceInputable": true
+        },
+        {
+          "detailsType": "textFields",
+          "name": "Kommentar bei Sonstiges",
+          "optional": true,
+          "position": 7,
+          "value": "",
+          "voiceInputable": true
+        }
+      ]
+    },
+    {
+      "name": "Angaben zur tierärztlichen Beratung",
+      "position": 9,
+      "active": true,
+      "details": [
+        {
+          "detailsType": "textArea",
+          "name": "Ergebnis der Beratung",
+          "optional": false,
+          "position": 6,
+          "value": "",
+          "voiceInputable": true
+        }
+      ]
+    }
+  ],
+  "focusOfDiseases": "string",
+  "isBlueprint": false,
+  "measuresDate": "2021-06-05",
+  "objectives": [],
+  "therapyFrequency": "string"
+}

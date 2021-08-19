@@ -1,10 +1,10 @@
-import { MeasureGroupComponent } from "./measureGroup";
-import { WebComponent, VetproviehElement, VetproviehNavParams, ElementGroupBinding } from "@tomuench/vetprovieh-shared/lib";
-import { Measure, MeasureField, MeasureGroup } from "../models";
+import { ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { Barn } from "../../barns";
-import { DynamicForm } from "../../shared/components/forms/dynamicForm";
 import { RenderType } from "../../shared";
+import { DynamicForm } from "../../shared/components/forms/dynamicForm";
+import { Measure, MeasureField, MeasureGroup } from "../models";
 import { MeasuresRepository } from "../repository";
+import { MeasureGroupComponent } from "./measureGroup";
 import { ObjectivesComponent } from "./objectivesComponent";
 
 /**
@@ -21,19 +21,19 @@ import { ObjectivesComponent } from "./objectivesComponent";
         <div class="tabs  is-toggle is-fullwidth is-large">
           <ul>
             <li class="is-active">
-              <a data-id="detail">
+              <a data-id="detail" data-state="execution">
                 <span class="icon is-small"><i class="fas fa-scroll" aria-hidden="true"></i></span>
                 <span class="is-hidden-touch">Planung</span>
               </a>
             </li>
             <li>
-              <a data-id="objectives">
+              <a data-id="objectives" data-state="execution">
                 <span class="icon is-small"><i class="fas fa-toolbox" aria-hidden="true"></i></span>
                 <span class="is-hidden-touch">Durchführung</span>
               </a>
             </li>
             <li>
-              <a data-id="objectives">
+              <a data-id="objectives" data-state="valuation">
                 <span class="icon is-small"><i class="fas fa-star" aria-hidden="true"></i></span>
                 <span class="is-hidden-touch">Bewertung</span>
               </a>
@@ -73,10 +73,12 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
   private repository: MeasuresRepository = new MeasuresRepository();
   private categories: HTMLAnchorElement[] = [];
+  private objectivesComponent: ObjectivesComponent | undefined;
 
   constructor() {
     super("data", RenderType.Multiple);
     this.storeElement = true;
+    this.src = "/service/measures";
   }
 
   /**
@@ -113,13 +115,21 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
       this.takeoverLastMeasure()
     }
 
-    let objectivesContainer = this.shadowRoot?.querySelector("#objectives") as HTMLElement;
-    let objectivesComponent = new ObjectivesComponent();
-    
-    if(!Array.isArray(this.currentObject.objectives)) this.currentObject.objectives = [];
-    objectivesComponent.objectives = this.currentObject.objectives;
+    this.attachObjectivesComponent();
+  }
 
-    objectivesContainer.append(objectivesComponent);
+  /**
+   * Adding ObjectivesComponent to DOM
+   */
+  private attachObjectivesComponent() {
+    this.objectivesComponent = new ObjectivesComponent();
+
+    if (!Array.isArray(this.currentObject.objectives)) {
+      this.currentObject.objectives = [];
+    }
+    this.objectivesComponent.objectives = this.currentObject.objectives;
+
+    this.objectivesContainer.append(this.objectivesComponent);
   }
 
   /**
@@ -147,6 +157,10 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     let element = this.shadowRoot?.querySelector(`#${showId}`);
     if (element) {
       element.classList.remove("is-hidden");
+    }
+
+    if (this.objectivesComponent) {
+      this.objectivesComponent.state = a.dataset.state as string;
     }
   }
 
@@ -188,6 +202,14 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
         console.log("Es wrude kein vorheriger Maßnahmenplan gefunden");
       })
     }
+  }
+
+  /**
+   * Get Objectives Container
+   * @return {HTMLElement}
+   */
+  private get objectivesContainer(): HTMLElement {
+    return this.shadowRoot?.querySelector("#objectives") as HTMLElement;
   }
 
   /**
