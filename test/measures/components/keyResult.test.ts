@@ -34,6 +34,13 @@ describe('render', () => {
     });
 });
 
+describe('change milestone by click', () => {
+    
+    it('should have normal-state', () => {
+        
+    });
+});
+
 describe('editable', () => {
 
     beforeEach(() => {

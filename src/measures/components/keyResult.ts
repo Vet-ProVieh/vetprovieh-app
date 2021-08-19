@@ -98,18 +98,24 @@ export class KeyResultComponent extends VetproviehElement {
    */
   public toggleState() {
     switch (this._keyResult.milestones) {
+      case "Start":
       case KeyResultMilestones.Start:
         this.keyResult.milestones = KeyResultMilestones.Current;
         break;
+      case "Current":
       case KeyResultMilestones.Current:
         this._keyResult.milestones = KeyResultMilestones.Target;
         break;
+      case "Target":
       case KeyResultMilestones.Target:
         this._keyResult.milestones = KeyResultMilestones.Start;
         break;
     }
   }
 
+  /**
+   * Current Status rendern
+   */
   private renderCurrentState() {
     switch (this._keyResult.milestones) {
       case KeyResultMilestones.Start:
@@ -132,6 +138,6 @@ export class KeyResultComponent extends VetproviehElement {
    * @return {HTMLElement}
    */
   private get checkKeyResult() {
-    return this.checkKeyResultButton.querySelector("i") as HTMLElement;
+    return this.shadowRoot?.querySelector("i") as HTMLElement;
   }
 }
