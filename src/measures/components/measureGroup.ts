@@ -1,9 +1,7 @@
-import { MeasureFieldComponent } from "./measureField";
-import { ElementGroupBinding, ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
-import { OperationPlanSelectPage } from "../../careplans";
-import { SelectButton } from "../../shared";
+import { ElementBinding, ElementGroupBinding, ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { PlanMeasureModel } from "../../careplans/operational/models/planMeasure";
+import { SelectButton } from "../../shared";
+import { MeasureFieldComponent } from "./measureField";
 
 /**
  * Pager OperationGroup

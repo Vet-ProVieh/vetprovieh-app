@@ -1,4 +1,4 @@
-import { KeyResultComponent } from '../../../src/measures';
+import { KeyResultComponent } from '../../../src/measures/';
 import { KeyResult } from '../../../src/measures/models/keyresult';
 
 

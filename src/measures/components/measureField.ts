@@ -1,4 +1,4 @@
-import { BaseRepository, ElementBinding, IRepository, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { BaseRepository, ElementBinding, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { VetproviehSelect } from "../../app/main";
 import { InputFactory } from "../../careplans/operational/components/field/inputFactory";
 

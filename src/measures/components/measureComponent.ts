@@ -5,7 +5,7 @@ import { DynamicForm } from "../../shared/components/forms/dynamicForm";
 import { Measure, MeasureField, MeasureGroup } from "../models";
 import { MeasuresRepository } from "../repository";
 import { MeasureGroupComponent } from "./measureGroup";
-import { ObjectivesComponent } from "./objectivesComponent";
+import { ObjectivesComponent } from "./objective";
 
 /**
  * Controller for Page

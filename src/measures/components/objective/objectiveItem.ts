@@ -1,10 +1,9 @@
 
 import { WebComponent, VetproviehElement, ObjectHelper, ViewHelper } from "@tomuench/vetprovieh-shared/lib";
 import { ObjectiveModal } from "./objective-modal";
-import { KeyResult } from "../models/keyresult";
-import { Objective } from "../models/objective";
+import { Objective, KeyResult } from "../../models/";
 import { KeyResultComponent } from "./keyResult";
-import { QuestionModal, StarsComponent } from "../../shared";
+import { QuestionModal, StarsComponent } from "../../../shared";
 
 /**
  * Controller for Page

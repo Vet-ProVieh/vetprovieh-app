@@ -1,7 +1,6 @@
 import { VetproviehBinding, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { BulmaField, SimpleModal } from "../../shared";
-import { Objective } from "../models";
-import { KeyResult } from "../models/keyresult";
+import { SimpleModal } from "../../../shared";
+import { Objective, KeyResult } from "../../models";
 import { KeyResultEditComponent } from "./keyResultEdit";
 
 @WebComponent({

@@ -1,6 +1,6 @@
 import { VetproviehBasicList } from "@tomuench/vetprovieh-list/lib/vetprovieh-basic-list";
 import { VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { ObjectivesRepository } from "../repository";
+import { ObjectivesRepository } from "../../repository";
 
 @WebComponent({
     template: VetproviehElement.template + `<style>

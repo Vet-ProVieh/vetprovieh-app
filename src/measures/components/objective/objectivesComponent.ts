@@ -1,8 +1,8 @@
-import { WebComponent, VetproviehElement, VetproviehNavParams, ViewHelper } from "@tomuench/vetprovieh-shared/lib";
+import { VetproviehElement, VetproviehNavParams, ViewHelper, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { SelectButton } from "../../../shared";
+import { Objective } from "../../models/objective";
 import { ObjectiveModal } from "./objective-modal";
-import { Objective } from "../models/objective";
 import { ObjectiveItemComponent } from "./objectiveItem";
-import { SelectButton } from "../../shared";
 
 /**
  * Controller for Page

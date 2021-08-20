@@ -1,6 +1,6 @@
-import { WebComponent, VetproviehElement, VetproviehBinding } from "@tomuench/vetprovieh-shared/lib";
-import { QuestionModal } from "../../shared";
-import { KeyResult } from "../models/keyresult";
+import { VetproviehBinding, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { QuestionModal } from "../../../shared";
+import { KeyResult } from "../../models";
 
 /**
  * Component to Edit KeyResult

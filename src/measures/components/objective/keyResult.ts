@@ -1,7 +1,6 @@
 
-import { WebComponent, VetproviehElement, ObjectHelper } from "@tomuench/vetprovieh-shared/lib";
-import { ViewHelper } from "../../../www/bundle";
-import { KeyResult, KeyResultMilestones } from "../models/keyresult";
+import { ObjectHelper, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import { KeyResult, KeyResultMilestones } from "../../models/keyresult";
 
 /**
  * Controller for Page

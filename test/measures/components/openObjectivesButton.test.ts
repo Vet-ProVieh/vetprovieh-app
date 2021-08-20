@@ -1,5 +1,4 @@
 import { OpenObjectivesButton } from "../../../src/measures";
-import { BulmaFabButton } from "../../../src/shared";
 
 
 describe('amount', () => {
