@@ -31,7 +31,7 @@ import { SelectButton } from "../../shared";
               </div>
               <div class="column">
                 <button id="addMeasure" 
-                        class="button is-info is-fullwidth \${this.cssHidden(this.isHidden)}" 
+                        class="button is-info is-light is-fullwidth \${this.cssHidden(this.isHidden)}" 
                         type="button">
                         <span class="icon is-small">
                             <i class="fas fa-edit"></i>
@@ -41,7 +41,6 @@ import { SelectButton } from "../../shared";
               </div>
             </div>
         </div>
-        <hr/>
         <div id="objectives" class="padding-15">
           <h4 class="subtitle is-4">Antibiotika Maßnahmen</h4>
           <div id="antibiotics">

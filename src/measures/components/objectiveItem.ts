@@ -62,14 +62,14 @@ import { QuestionModal, StarsComponent } from "../../shared";
                     </div>
                     <div id="buttonsRow" class="columns is-mobile \${this.cssHidden(this.editable != 'true')}">
                         <div class="column">
-                            <button id="deleteButton" class="button is-danger is-fullwidth 
+                            <button id="deleteButton" class="button is-danger is-light is-fullwidth 
                                 \${this.cssHidden(this.editable != 'true')}">
                                 <i class="fas fa-trash-alt"></i>
                                 <span> Entfernen</span>
                             </button>
                         </div>
                         <div class="column">
-                            <button id="editButton" class="button is-info is-fullwidth
+                            <button id="editButton" class="button is-info is-light is-fullwidth
                                 \${this.cssHidden(this.editable != 'true')}">
                                 <i class="fas fa-edit"></i>
                                 <span> Bearbeiten</span>

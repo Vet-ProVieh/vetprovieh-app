@@ -48,7 +48,6 @@ import { ObjectivesComponent } from "./objectivesComponent";
           <p class="panel-heading">
           Maßnahmen zur Verringerung des Antibiotika-Einsatzes
           </p>
-          <br>
         </div>
         
         <div class="container sticky-footer">

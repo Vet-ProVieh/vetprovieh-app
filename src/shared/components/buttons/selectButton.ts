@@ -4,7 +4,7 @@ import { BasicSelectPage } from "../pages";
 @WebComponent({
     template: 
         VetproviehElement.template + `
-        <a href="\${this.href}&returnUrl=\${this.currentAbsoluteUrl}" class="button is-link is-fullwidth">
+        <a href="\${this.href}&returnUrl=\${this.currentAbsoluteUrl}" class="button is-link is-light is-fullwidth">
             <span class="icon is-small">
                 <i class="fas fa-search"></i>
             </span>
