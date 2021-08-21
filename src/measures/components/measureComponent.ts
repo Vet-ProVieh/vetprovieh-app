@@ -2,6 +2,7 @@ import { ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebCompone
 import { Barn } from "../../barns";
 import { RenderType } from "../../shared";
 import { DynamicForm } from "../../shared/components/forms/dynamicForm";
+import { TakeoverFactory } from "../factories";
 import { Measure, MeasureField, MeasureGroup } from "../models";
 import { InitializeMeasurePage } from "../pages";
 import { MeasuresRepository } from "../repository";
@@ -105,8 +106,8 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    */
   _afterFetch(data: any) {
     let params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
-    
-    if(data?.barn?.id){
+
+    if (data ?.barn ?.id) {
       params = {
         barnId: data.barn.id,
       };
@@ -142,7 +143,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    * Tab-Buttons registrieren. 
    */
   private registerTabEvents() {
-    this.shadowRoot?.querySelectorAll("a").forEach((a: HTMLAnchorElement) => {
+    this.shadowRoot ?.querySelectorAll("a").forEach((a: HTMLAnchorElement) => {
       if (a) {
         this.categories.push(a);
         a.addEventListener("click", (event) => {
@@ -159,8 +160,8 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    */
   private activateTabAnchor(a: HTMLAnchorElement) {
     let showId = a.dataset.id;
-    a.parentElement?.classList.add("is-active");
-    let element = this.shadowRoot?.querySelector(`#${showId}`);
+    a.parentElement ?.classList.add("is-active");
+    let element = this.shadowRoot ?.querySelector(`#${showId}`);
     if (element) {
       element.classList.remove("is-hidden");
     }
@@ -178,10 +179,10 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     let showId = a.dataset.id;
     this.categories.filter((x) => x != a).forEach((otherA) => {
       let showCatId = otherA.dataset.id;
-      otherA.parentElement?.classList.remove("is-active");
+      otherA.parentElement ?.classList.remove("is-active");
 
       if (showId !== showCatId) {
-        let element = this.shadowRoot?.querySelector(`#${showCatId}`);
+        let element = this.shadowRoot ?.querySelector(`#${showCatId}`);
         if (element) {
           element.classList.add("is-hidden");
         }
@@ -189,25 +190,16 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     }, false);
   }
 
+  /**
+   * Last Measure Takeover
+   */
   private takeoverLastMeasure() {
-    if (this.currentObject?.barn?.id) {
-      this.repository.lastforBarn(+this.currentObject.barn.id).then((oldMeasure: Measure) => {
-        oldMeasure.data.forEach((group: MeasureGroup) => {
-          let currentGroup = this.currentObject.data.filter((g: MeasureGroup) => g.position === group.position)[0];
-          if (currentGroup) {
-            group.details.forEach((field: MeasureField) => {
-              let currentField = currentGroup.details.filter((f) => f.position == field.position)[0];
-              if (currentField) {
-                currentField.value = field.value;
-              }
-            })
-          }
+    let takeoverFactory = new TakeoverFactory(this.currentObject, this.repository);
+    takeoverFactory.takeoverFromLatestMeasure().then((result) => {
 
-        })
-      }).catch((error) => {
-        console.log("Es wrude kein vorheriger Maßnahmenplan gefunden");
-      })
-    }
+    }).catch((error) => {
+
+    });
   }
 
   /**
@@ -215,7 +207,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    * @return {HTMLElement}
    */
   private get objectivesContainer(): HTMLElement {
-    return this.shadowRoot?.querySelector("#objectives") as HTMLElement;
+    return this.shadowRoot ?.querySelector("#objectives") as HTMLElement;
   }
 
   /**

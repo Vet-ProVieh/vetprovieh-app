@@ -3,6 +3,7 @@ import { PlanMeasureModel } from "../../careplans/operational/models/planMeasure
 import { SelectButton } from "../../shared";
 import { InitializeMeasurePage } from "../pages";
 import { MeasureFieldComponent } from "./measureField";
+import { TakeoverFactory } from "../factories";
 
 /**
  * Pager OperationGroup

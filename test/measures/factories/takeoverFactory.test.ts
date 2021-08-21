@@ -27,17 +27,17 @@ let buildGroup = function (name: string, position: number, withData: boolean): M
     return group;
 }
 
-let buildMeasure = function (barnId: number, withData: boolean = false): Measure {
+let buildMeasure = function (barnId: number, withData: boolean = false, animalNumber: string = "SON"): Measure {
     let measure = new Measure();
     measure.id = 1;
     measure.therapyFrequency = "1";
     measure.measuresDate = "2021-08-21";
-    measure.animalNumber = "SON";
+    measure.animalNumber = animalNumber;
     measure.barn = new Barn();
     measure.barn.id = barnId;
     measure.data = [
         buildGroup("gruppe1", 1, withData),
-        buildGroup("gruppe2", 1, withData)
+        buildGroup("gruppe2", 2, withData)
     ];
     return measure;
 }
@@ -47,39 +47,71 @@ let oldMeasure: Measure = buildMeasure(1, true);
 let differentMeasure = buildMeasure(2, true);
 
 let repository = new MeasuresRepository();
-let factory : TakeoverFactory;
+let factory: TakeoverFactory;
 
 describe('takeover from last measure', () => {
+    let expectFields = function (done: Function, expecationFunction: Function) {
+        factory.takeoverFromLatestMeasure().then((result) => {
+            result.data.forEach((group) => {
+                group.details.forEach((field) => {
+                    expecationFunction(field);
+                })
+            })
+            done();
+        }).catch((error) => {
+            done(error);
+        })
+    }
+
     describe('found last measure', () => {
         beforeAll(() => {
-            fetch.mockIf(/service\/measures\/barn\/1\/last/,JSON.stringify(oldMeasure));
+            fetch.mockIf(/service\/measures\/barn\/1\/last/, JSON.stringify(oldMeasure));
             factory = new TakeoverFactory(buildMeasure(1, false), repository);
         });
 
         describe('validate data', () => {
-            it('should assign right field values', () => {
-                factory.takeoverFromLatestMeasure()
+            it('should assign right field values', (done) => {
+                expectFields(done, (field: MeasureField) => {
+                    expect(field.value).toEqual(`${field.name}${field.position}`);
+                })
             });
         });
     });
 
     describe('found a different last measure', () => {
         describe('different barn', () => {
-            it('should not add anything', () => {
-
+            beforeAll(() => {
+                fetch.mockIf(/service\/measures\/barn\/2\/last/, JSON.stringify(oldMeasure));
+                factory = new TakeoverFactory(buildMeasure(2, false), repository);
+            });
+            it('should not add anything', (done) => {
+                expectFields(done, (field: MeasureField) => {
+                    expect(field.value).toEqual(undefined);
+                })
             });
         });
 
         describe('different animal Type', () => {
-            it('should not add anything', () => {
-
+            beforeAll(() => {
+                fetch.mockIf(/service\/measures\/barn\/2\/last/, JSON.stringify(differentMeasure));
+                factory = new TakeoverFactory(buildMeasure(2, false, "XX"), repository);
+            });
+            it('should not add anything', (done) => {
+                expectFields(done, (field: MeasureField) => {
+                    expect(field.value).toEqual(undefined);
+                })
             });
         });
     });
 
     describe('found no measure', () => {
-        it('should not add anything', () => {
-
+        beforeAll(() => {
+            factory = new TakeoverFactory(buildMeasure(3, false), repository);
+        });
+        it('should not add anything', (done) => {
+            expectFields(done, (field: MeasureField) => {
+                expect(field.value).toEqual(undefined);
+            })
         });
     });
 });
