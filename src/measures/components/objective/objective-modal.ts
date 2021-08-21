@@ -1,6 +1,7 @@
 import { VetproviehBinding, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { SimpleModal } from "../../../shared";
 import { Objective, KeyResult } from "../../models";
+import {  } from "../../models/keyresult";
 import { KeyResultEditComponent } from "./keyResultEdit";
 
 @WebComponent({
@@ -10,7 +11,7 @@ import { KeyResultEditComponent } from "./keyResultEdit";
         <div class="modal-background"></div>
         <div class="modal-card">
         <header class="modal-card-head">
-            <p class="modal-card-title">\${this.title}</p>
+            <p class="modal-card-title">Maßnahme bearbeiten</p>
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
@@ -66,7 +67,6 @@ export class ObjectiveModal extends SimpleModal {
 
     constructor() {
         super();
-        this.title = "Neue Maßnahme hinzufügen";
     }
 
 

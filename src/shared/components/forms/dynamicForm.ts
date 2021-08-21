@@ -1,9 +1,6 @@
-import { ViewHelper } from "@tomuench/vetprovieh-shared";
 import { VetproviehBasicDetail } from "@tomuench/vetprovieh-detail/lib/index";
-import { WebComponent, VetproviehElement, VetproviehNavParams, ElementGroupBinding } from "@tomuench/vetprovieh-shared/lib";
-import { VetproviehSidemenu } from "../../../app/main";
-import { BarnListShow } from "../../../barns";
-import { SpeechAssistant } from "../../../shared";
+import { ViewHelper } from "@tomuench/vetprovieh-shared";
+import { ElementGroupBinding, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
 import { BasicModel, RenderType } from "../../models";
 
 

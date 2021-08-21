@@ -125,7 +125,7 @@ export class SelectBarn extends VetproviehBasicList {
             GpsCoordinates.currentGpsCoordinates
                 .then((pos: GpsCoordinates) => {
                     this.currentGpsPosition = pos;
-                    resolve();
+                    resolve(true);
                 })
         });
     }

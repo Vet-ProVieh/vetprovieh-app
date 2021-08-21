@@ -1,5 +1,4 @@
-import { VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { BasicShowPage } from "../../../../shared";
+import { ObjectHelper, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { BarnListShow } from "../../../../barns";
 
 @WebComponent({
@@ -14,30 +13,10 @@ export class InitializeMeasurePage extends HTMLElement {
         super();
     }
 
-    /**
-     * Format Date
-     * @param {Date} date 
-     * @returns {string}
-     */
-    private formatDate(date: Date) {
-        var d = new Date(date),
-            month = '' + (d.getMonth() + 1),
-            day = '' + d.getDate(),
-            year = d.getFullYear();
-    
-        if (month.length < 2) 
-            month = '0' + month;
-        if (day.length < 2) 
-            day = '0' + day;
-    
-        return [year, month, day].join('-');
-    }
-     
-
     connectedCallback() {
         this.barnShower.barnid = VetproviehNavParams.getUrlParameter("barn_id");
 
-        this.datePicker.value = this.formatDate(new Date());
+        this.datePicker.value = ObjectHelper.dateToString(new Date());
         
         this.initializeButton.addEventListener("click", () => {
             let date = this.datePicker.value;

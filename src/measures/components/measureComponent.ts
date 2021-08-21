@@ -3,6 +3,7 @@ import { Barn } from "../../barns";
 import { RenderType } from "../../shared";
 import { DynamicForm } from "../../shared/components/forms/dynamicForm";
 import { Measure, MeasureField, MeasureGroup } from "../models";
+import { InitializeMeasurePage } from "../pages";
 import { MeasuresRepository } from "../repository";
 import { MeasureGroupComponent } from "./measureGroup";
 import { ObjectivesComponent } from "./objective";
@@ -103,8 +104,14 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    * @protected 
    */
   _afterFetch(data: any) {
-
-    let params = VetproviehNavParams.get("MeasureIntializeParams");
+    let params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
+    
+    if(data?.barn?.id){
+      params = {
+        barnId: data.barn.id,
+      };
+      VetproviehNavParams.set(InitializeMeasurePage.NAVIGATION_KEY, params);
+    }
 
     this.setParamsToComponent(params);
 
@@ -218,6 +225,10 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     return window.location.href.includes("new");
   }
 
+  /**
+   * Initialising Object with Params
+   * @param {any} params 
+   */
   private setParamsToComponent(params: any) {
     if (params != null && params != undefined) {
       if (params.barnId != null && params.barnId != undefined) {

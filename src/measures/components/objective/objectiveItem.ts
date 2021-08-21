@@ -109,7 +109,7 @@ export class ObjectiveItemComponent extends VetproviehElement {
     private toggleEditableFields() {
         let elements = [this.deleteButton, this.editButton, this.shadowRoot?.querySelector("#buttonsRow")];
         elements.forEach((element) => {
-            if(element){
+            if (element) {
                 ViewHelper.toggleVisibility(element as HTMLElement, this._editable);
             }
         })
@@ -124,7 +124,7 @@ export class ObjectiveItemComponent extends VetproviehElement {
      * Toggle Rating Component
      */
     private toggleValuationFields() {
-        if(this.ratingComponent){
+        if (this.ratingComponent) {
             ViewHelper.toggleVisibility(this.ratingComponent, this._valuation);
         }
     }
@@ -213,14 +213,16 @@ export class ObjectiveItemComponent extends VetproviehElement {
      * Load Rating Component
      * @return {StarsComponent}
      */
-    private get ratingComponent() : StarsComponent {
+    private get ratingComponent(): StarsComponent {
         return this.getByIdFromShadowRoot("stars") as StarsComponent;
     }
 
+    /**
+     * Register Delete Button
+     */
     private registerDeleteButton() {
         this.deleteButton.addEventListener("click", () => {
             QuestionModal.askQuestion("Sind Sie sicher?", "Möchten Sie die Maßnahme entfernen?").then((result) => {
-                console.log(result);
                 if (result) {
                     this.dispatchEvent(new CustomEvent("delete", { detail: this.objective }));
                 }
@@ -228,17 +230,27 @@ export class ObjectiveItemComponent extends VetproviehElement {
         });
     }
 
+    /**
+     * Register Edit Button
+     */
     private registerEditButton() {
         this.editButton.addEventListener("click", () => {
-            this.objectivesModal.objective = this._objective;
-            this.objectivesModal.active = true;
+            this.openEditModal();
         });
+    }
+
+    /**
+     * Open Edit Modal
+     */
+    public openEditModal() {
+        this.objectivesModal.objective = this._objective;
+        this.objectivesModal.active = true;
     }
 
     /**
      * Toggle-Details for ObjectiveItem
      */
-    private toggleDetails() {
+    public toggleDetails() {
         let cardBody = this.contentContainer;
         let arrow = this.shadowRoot?.getElementById("arrow") as HTMLElement;
 
@@ -290,7 +302,6 @@ export class ObjectiveItemComponent extends VetproviehElement {
      */
     private configureModal() {
         this.objectivesModal.addEventListener("save", (event: Event) => {
-            console.log(event);
             this.render();
         });
     }

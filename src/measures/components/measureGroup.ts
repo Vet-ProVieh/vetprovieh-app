@@ -1,6 +1,7 @@
 import { ElementBinding, ElementGroupBinding, ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { PlanMeasureModel } from "../../careplans/operational/models/planMeasure";
 import { SelectButton } from "../../shared";
+import { InitializeMeasurePage } from "../pages";
 import { MeasureFieldComponent } from "./measureField";
 
 /**
@@ -88,7 +89,7 @@ export class MeasureGroupComponent extends ElementGroupBinding {
      */
     renderSelectButton() {
         if (this.object.name == "Gründe für das Überschreiten der Kennzahl 2") {
-            let params = VetproviehNavParams.get("MeasureIntializeParams");
+            let params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
 
             let button = ` <select-button href="/careplans/operational/select.html?barnId=${params.barnId}" name="Übernahme aus Betreuungsmanagement">
                  </select-button>

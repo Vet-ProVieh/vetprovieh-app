@@ -1,6 +1,7 @@
 import { VetproviehElement, VetproviehNavParams, ViewHelper, WebComponent } from "@tomuench/vetprovieh-shared/lib";
 import { SelectButton } from "../../../shared";
 import { Objective } from "../../models/objective";
+import { InitializeMeasurePage } from "../../pages";
 import { ObjectiveModal } from "./objective-modal";
 import { ObjectiveItemComponent } from "./objectiveItem";
 
@@ -117,7 +118,7 @@ export class ObjectivesComponent extends VetproviehElement {
   constructor() {
     super(true, false);
 
-    let params = VetproviehNavParams.get("MeasureIntializeParams");
+    let params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
     this.internalBarnId = params.barnId;
 
     this.render();
@@ -170,17 +171,19 @@ export class ObjectivesComponent extends VetproviehElement {
   /**
    * Adding Objective to Container
    * @param {Objective} objective 
+   * @param {boolean} openDirectly
    */
-  private addObjective(objective: Objective) {
+  private addObjective(objective: Objective, openDirectly: boolean = false) {
     this.objectives.push(objective);
-    this.addObjectiveToDom(objective);
+    this.addObjectiveToDom(objective, openDirectly);
   }
 
   /**
    * Adding objective to Dom
    * @param {Objective} objective 
+   * @param {boolean} openDirectly
    */
-  private addObjectiveToDom(objective: Objective) {
+  private addObjectiveToDom(objective: Objective, openDirectly: boolean = false) {
     let objectiveItem = new ObjectiveItemComponent();
     objectiveItem.objective = objective;
     
@@ -202,6 +205,10 @@ export class ObjectivesComponent extends VetproviehElement {
     });
 
     this.appendToContainer(objective, objectiveItem);
+
+    if(openDirectly){
+      objectiveItem.openEditModal();
+    }
   }
 
   /**
@@ -318,12 +325,11 @@ export class ObjectivesComponent extends VetproviehElement {
   private processSelectButtonAnswer(selectButton: SelectButton) {
     let answer = selectButton.recievedParam;
 
-    console.log(answer);
     if (answer) {
       selectButton.scrollIntoView();
       answer.forEach((objective: Objective) => {
-          objective.id = undefined;
-          this.addObjective(objective);
+          Objective.reset(objective);
+          this.addObjective(objective, answer.length == 1);
       })
     }
   }
