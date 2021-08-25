@@ -103,6 +103,7 @@ export class BulmaMultiCheckbox extends FieldWithLabel {
                 this.value = this.inputFields
                     .filter((f) => f.checked)
                     .map((f) => f.value).join(",");
+                this.dispatchEvent(new Event("change"));
             })
         })
     }

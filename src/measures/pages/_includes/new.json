@@ -118,7 +118,7 @@
             "Nein"
           ],
           "detailsType": "checkBox",
-          "name": "Weitere Berater:",
+          "name": "Weitere Berater",
           "optional": false,
           "position": 7,
           "value": "",
@@ -128,7 +128,7 @@
           "detailsType": "textArea",
           "name": "Weitere Berater (Name, Anschrift)",
           "optional": false,
-          "position": 6,
+          "position": 8,
           "value": "",
           "voiceInputable": true
         },
@@ -140,7 +140,7 @@
           "detailsType": "checkBox",
           "name": "Integration:",
           "optional": false,
-          "position": 7,
+          "position": 9,
           "value": "",
           "voiceInputable": true
         }
