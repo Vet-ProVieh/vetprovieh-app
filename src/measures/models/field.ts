@@ -8,5 +8,5 @@ export class MeasureField extends BasicModel {
     public detailsType: string | undefined;
     public optional: boolean = false;
     public voiceInputable: boolean = true;
-    public linkPosition: { id: number, value: any, compare: string } | undefined;
+    public link_position: { id: number, value: any, compare: string } | undefined;
 }

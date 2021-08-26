@@ -20,7 +20,7 @@ group.details = [
         "optional": false,
         "position": 8,
         "value": "",
-        "linkPosition": {
+        "link_position": {
             "id": 7,
             "value": "Ja"
         },
@@ -51,8 +51,8 @@ describe('link fields', () => {
 
     describe('incorrect link', () => {
         beforeAll(() => {
-            if (group.details[1].linkPosition) {
-                group.details[1].linkPosition.id = 200;
+            if (group.details[1].link_position) {
+                group.details[1].link_position.id = 200;
             }
             groupComponent = new MeasureGroupComponent();
             groupComponent.object = group;

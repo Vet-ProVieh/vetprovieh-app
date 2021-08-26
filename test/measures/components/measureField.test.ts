@@ -24,7 +24,7 @@ function buildMeasureTextField(): MeasureField{
         "optional": false,
         "position": 8,
         "value": "",
-        "linkPosition": {
+        "link_position": {
             "id": 7,
             "value": "Ja"
         },
@@ -107,8 +107,8 @@ describe('linkToField', () => {
 
                 let textField = buildMeasureTextField();
                 field3.connectedCallback();
-                if (textField.linkPosition)
-                textField.linkPosition.compare = "!=";
+                if (textField.link_position)
+                textField.link_position.compare = "!=";
 
                 field4 = new MeasureFieldComponent();
                 field4.object = textField;

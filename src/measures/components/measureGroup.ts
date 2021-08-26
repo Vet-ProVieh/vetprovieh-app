@@ -177,9 +177,9 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         fields.forEach((field: MeasureField) => {
             const newField: MeasureFieldComponent = this.newElement();
             newField.object = field;
-            if (field.linkPosition) {
+            if (field.link_position) {
                 const prevField = this._subfieldBindings.filter((v) => {
-                    return v.object?.position === field.linkPosition?.id
+                    return v.object?.position === field.link_position?.id
                 })[0];
                 if (prevField) {
                     newField.linkToField(prevField);

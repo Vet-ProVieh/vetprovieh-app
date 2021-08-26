@@ -32,7 +32,7 @@
           "position": 3,
           "value": "",
           "voiceInputable": true,
-          "linkPosition": {
+          "link_position": {
               "id": 2,
               "compare": "!=",
               "value": ""
@@ -45,7 +45,7 @@
           "position": 4,
           "value": "",
           "voiceInputable": true,
-          "linkPosition": {
+          "link_position": {
               "id": 3,
               "compare": "!=",
               "value": ""
@@ -58,7 +58,7 @@
           "position": 5,
           "value": "",
           "voiceInputable": true,
-          "linkPosition": {
+          "link_position": {
               "id": 4,
               "compare": "!=",
               "value": ""
@@ -126,7 +126,7 @@
           "position": 6,
           "value": "",
           "voiceInputable": true,
-          "linkPosition": {
+          "link_position": {
               "id": 5,
               "value": "Ja"
           }
@@ -150,7 +150,7 @@
           "position": 8,
           "value": "",
           "voiceInputable": true,
-          "linkPosition": {
+          "link_position": {
               "id": 7,
               "value": "Ja"
           }
