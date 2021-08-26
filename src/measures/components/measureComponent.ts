@@ -2,7 +2,7 @@ import { ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebCompone
 import { Barn } from "../../barns";
 import { RenderType } from "../../shared";
 import { DynamicForm } from "../../shared/components/forms/dynamicForm";
-import { TakeoverFactory } from "../factories";
+import { ReplaceFactory, TakeoverFactory } from "../factories";
 import { Measure, MeasureField, MeasureGroup } from "../models";
 import { InitializeMeasurePage } from "../pages";
 import { MeasuresRepository } from "../repository";
@@ -107,7 +107,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   _afterFetch(data: any) {
     let params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
 
-    if (data ?.barn ?.id) {
+    if (data?.barn?.id) {
       params = {
         barnId: data.barn.id,
       };
@@ -116,12 +116,14 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
     this.setParamsToComponent(params);
 
-    super._afterFetch(data);
 
     if (this.isNew()) {
-      this.takeoverLastMeasure()
+      this.takeoverLastMeasure().then(() => {
+        super._afterFetch(data);
+      })
+    } else {
+      super._afterFetch(data);
     }
-
     this.attachObjectivesComponent();
   }
 
@@ -143,7 +145,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    * Tab-Buttons registrieren. 
    */
   private registerTabEvents() {
-    this.shadowRoot ?.querySelectorAll("a").forEach((a: HTMLAnchorElement) => {
+    this.shadowRoot?.querySelectorAll("a").forEach((a: HTMLAnchorElement) => {
       if (a) {
         this.categories.push(a);
         a.addEventListener("click", (event) => {
@@ -160,8 +162,8 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    */
   private activateTabAnchor(a: HTMLAnchorElement) {
     let showId = a.dataset.id;
-    a.parentElement ?.classList.add("is-active");
-    let element = this.shadowRoot ?.querySelector(`#${showId}`);
+    a.parentElement?.classList.add("is-active");
+    let element = this.shadowRoot?.querySelector(`#${showId}`);
     if (element) {
       element.classList.remove("is-hidden");
     }
@@ -179,10 +181,10 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     let showId = a.dataset.id;
     this.categories.filter((x) => x != a).forEach((otherA) => {
       let showCatId = otherA.dataset.id;
-      otherA.parentElement ?.classList.remove("is-active");
+      otherA.parentElement?.classList.remove("is-active");
 
       if (showId !== showCatId) {
-        let element = this.shadowRoot ?.querySelector(`#${showCatId}`);
+        let element = this.shadowRoot?.querySelector(`#${showCatId}`);
         if (element) {
           element.classList.add("is-hidden");
         }
@@ -193,13 +195,22 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   /**
    * Last Measure Takeover
    */
-  private takeoverLastMeasure() {
+  private takeoverLastMeasure(): Promise<any> {
     let takeoverFactory = new TakeoverFactory(this.currentObject, this.repository);
-    takeoverFactory.takeoverFromLatestMeasure().then((result) => {
-
+    return takeoverFactory.takeoverFromLatestMeasure().then((result) => {
+      return this.loadBasicData();
     }).catch((error) => {
-
+      return this.loadBasicData();
     });
+  }
+
+  /**
+   * Loading Basic Data for Barn and User
+   */
+  private loadBasicData(): Promise<any> {
+    let replaceFactory = new ReplaceFactory();
+    return replaceFactory.replacePlaceholders(this.currentObject).then(() => {
+    }).catch((error) => console.log(error));
   }
 
   /**
@@ -207,7 +218,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    * @return {HTMLElement}
    */
   private get objectivesContainer(): HTMLElement {
-    return this.shadowRoot ?.querySelector("#objectives") as HTMLElement;
+    return this.shadowRoot?.querySelector("#objectives") as HTMLElement;
   }
 
   /**

@@ -13,7 +13,7 @@
           "name": "Anschrift des Betriebsstandortes",
           "optional": false,
           "position": 1,
-          "value": "",
+          "value": "{{barn.name}}\r\n{{barn.address.streetName}}\r\n{{barn.address.streetNumber}}\r\n{{barn.address.postalCode}} {{barn.address.city}}",
           "voiceInputable": true
         },
         {
@@ -60,7 +60,7 @@
           "name": "Name des Tierarztes",
           "optional": false,
           "position": 1,
-          "value": "",
+          "value": "{{user.firstName}} {{user.lastName}}",
           "voiceInputable": true
         },
         {
@@ -68,7 +68,7 @@
           "name": "Anschrift",
           "optional": false,
           "position": 2,
-          "value": "",
+          "value": "{{user.tenant.name}} {{user.tenant.name2}}\r\n{{user.tenant.address.streetName}}\r\n{{user.tenant.address.streetNumber}}\r\n{{user.tenant.address.postalCode}} {{user.tenant.address.city}}",
           "voiceInputable": true
         },
 
@@ -77,7 +77,7 @@
           "name": "VVVO-Number",
           "optional": false,
           "position": 3,
-          "value": "",
+          "value": "{{user.tenant.vvvoNumber}}",
           "voiceInputable": true
         },
         {

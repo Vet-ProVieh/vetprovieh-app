@@ -21,6 +21,7 @@ export class InitializeMeasurePage extends HTMLElement {
         this.initializeButton.addEventListener("click", () => {
             let date = this.datePicker.value;
             let freq = this.therapyFrequencySlider.value;
+            this.resetNewPage();
             VetproviehNavParams.set(InitializeMeasurePage.NAVIGATION_KEY, {
                 barnId : VetproviehNavParams.getUrlParameter("barn_id"),
                 therapyFrequency: freq,
@@ -38,6 +39,12 @@ export class InitializeMeasurePage extends HTMLElement {
             console.log(this.therapyFrequencySlider.value);
             console.log("textinput");
         })
+    }
+
+    private resetNewPage() {
+        let key = `${window.location.protocol}//${window.location.hostname}`;
+        key += "/measures/new.html?barn_id=null";
+        VetproviehNavParams.delete(key);
     }
 
 

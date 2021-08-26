@@ -13,7 +13,7 @@
           "name": "Anschrift des Betriebsstandortes",
           "optional": false,
           "position": 1,
-          "value": "",
+          "value": "{{barn.name}}\r\n{{barn.address.streetName}} {{barn.address.streetNumber}}\r\n{{barn.address.postalCode}} {{barn.address.city}}",
           "voiceInputable": true
         },
         {
@@ -33,9 +33,9 @@
           "value": "",
           "voiceInputable": true,
           "link_position": {
-              "id": 2,
-              "compare": "!=",
-              "value": ""
+            "id": 2,
+            "compare": "!=",
+            "value": ""
           }
         },
         {
@@ -46,9 +46,9 @@
           "value": "",
           "voiceInputable": true,
           "link_position": {
-              "id": 3,
-              "compare": "!=",
-              "value": ""
+            "id": 3,
+            "compare": "!=",
+            "value": ""
           }
         },
         {
@@ -59,9 +59,9 @@
           "value": "",
           "voiceInputable": true,
           "link_position": {
-              "id": 4,
-              "compare": "!=",
-              "value": ""
+            "id": 4,
+            "compare": "!=",
+            "value": ""
           }
         }
       ]
@@ -75,7 +75,7 @@
           "name": "Name des Tierarztes",
           "optional": false,
           "position": 1,
-          "value": "",
+          "value": "{{user.firstName}} {{user.lastName}}",
           "voiceInputable": true
         },
         {
@@ -83,7 +83,7 @@
           "name": "Anschrift",
           "optional": false,
           "position": 2,
-          "value": "",
+          "value": "{{user.tenant.name}} {{user.tenant.name2}}\r\n{{user.tenant.address.streetName}} {{user.tenant.address.streetNumber}}\r\n{{user.tenant.address.postalCode}} {{user.tenant.address.city}}",
           "voiceInputable": true
         },
 
@@ -92,7 +92,7 @@
           "name": "VVVO-Number",
           "optional": false,
           "position": 3,
-          "value": "",
+          "value": "{{user.tenant.vvvoNumber}}",
           "voiceInputable": true
         },
         {
@@ -127,8 +127,8 @@
           "value": "",
           "voiceInputable": true,
           "link_position": {
-              "id": 5,
-              "value": "Ja"
+            "id": 5,
+            "value": "Ja"
           }
         },
         {
@@ -151,8 +151,8 @@
           "value": "",
           "voiceInputable": true,
           "link_position": {
-              "id": 7,
-              "value": "Ja"
+            "id": 7,
+            "value": "Ja"
           }
         },
         {
@@ -530,16 +530,14 @@
       "name": "Angaben zur tierärztlichen Beratung",
       "position": 9,
       "active": true,
-      "details": [
-        {
-          "detailsType": "textArea",
-          "name": "Ergebnis der Beratung",
-          "optional": false,
-          "position": 6,
-          "value": "",
-          "voiceInputable": true
-        }
-      ]
+      "details": [{
+        "detailsType": "textArea",
+        "name": "Ergebnis der Beratung",
+        "optional": false,
+        "position": 6,
+        "value": "",
+        "voiceInputable": true
+      }]
     }
   ],
   "focusOfDiseases": "string",
