@@ -2,7 +2,7 @@ import { MeasureField, MeasureFieldComponent } from '../../../src/measures';
 import { BulmaMultiCheckbox } from '../../../src/shared';
 
 
-function buildMeasureChoiceField() : MeasureField {
+function buildMeasureChoiceField(): MeasureField {
     return {
         "choices": [
             "Ja",
@@ -17,20 +17,24 @@ function buildMeasureChoiceField() : MeasureField {
     } as MeasureField;
 }
 
+function buildMeasureTextField(): MeasureField{
+    return {
+        "detailsType": "textArea",
+        "name": "Weitere Berater (Name, Anschrift)",
+        "optional": false,
+        "position": 8,
+        "value": "",
+        "linkPosition": {
+            "id": 7,
+            "value": "Ja"
+        },
+        "voiceInputable": false
+    } as MeasureField;    
+}
+
 let measureFieldChoice: MeasureField = buildMeasureChoiceField();
 
-let measureFieldText: MeasureField = {
-    "detailsType": "textArea",
-    "name": "Weitere Berater (Name, Anschrift)",
-    "optional": false,
-    "position": 8,
-    "value": "",
-    "linkPosition": {
-        "id": 7,
-        "value": "Ja"
-    },
-    "voiceInputable": false
-} as MeasureField;
+let measureFieldText: MeasureField = buildMeasureTextField();
 
 
 let field1: MeasureFieldComponent;
@@ -82,12 +86,45 @@ describe('linkToField', () => {
         })
 
         it('should show field', () => {
-            expect(field2.classList.contains("is-hidden")).toBeFalsy();            
+            expect(field2.classList.contains("is-hidden")).toBeFalsy();
         });
 
         it('should require field', () => {
             let textarea = field2.querySelector("textarea") as HTMLTextAreaElement;
             expect(textarea.required).toBeTruthy();
+        });
+    });
+
+    describe('with compareOperator', () => {
+        describe('!=', () => {
+            let field3 = new MeasureFieldComponent();
+            let field4 = new MeasureFieldComponent();
+            beforeAll(() => {
+                let choice = buildMeasureChoiceField();
+                choice.value = "Ja";
+                field3 = new MeasureFieldComponent();
+                field3.object = choice;
+
+                let textField = buildMeasureTextField();
+                field3.connectedCallback();
+                if (textField.linkPosition)
+                textField.linkPosition.compare = "!=";
+
+                field4 = new MeasureFieldComponent();
+                field4.object = textField;
+                field4.connectedCallback();
+                field4.linkToField(field3);
+            })
+
+            it('should not show field', () => {
+                expect(field4.classList.contains("is-hidden")).toBeTruthy();
+            });
+    
+            it('should not require field', () => {
+                let textarea = field4.querySelector("textarea") as HTMLTextAreaElement;
+                expect(textarea.required).toBeFalsy();
+            });
+
         });
     });
 
@@ -106,6 +143,7 @@ describe('linkToField', () => {
                 });
 
                 it('should mark as required', () => {
+                    console.log("required");
                     loadBox().click();
                     let textarea = field2.querySelector("textarea") as HTMLTextAreaElement;
                     expect(textarea.required).toBeTruthy();

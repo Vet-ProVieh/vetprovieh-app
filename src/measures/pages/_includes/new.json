@@ -28,26 +28,41 @@
         {
           "detailsType": "textFields",
           "name": "Plätze in Stall 2",
-          "optional": false,
+          "optional": true,
           "position": 3,
           "value": "",
-          "voiceInputable": true
+          "voiceInputable": true,
+          "linkPosition": {
+              "id": 2,
+              "compare": "!=",
+              "value": ""
+          }
         },
         {
           "detailsType": "textFields",
           "name": "Plätze in Stall 3",
-          "optional": false,
+          "optional": true,
           "position": 4,
           "value": "",
-          "voiceInputable": true
+          "voiceInputable": true,
+          "linkPosition": {
+              "id": 3,
+              "compare": "!=",
+              "value": ""
+          }
         },
         {
           "detailsType": "textFields",
           "name": "Plätze in Stall 4",
-          "optional": false,
+          "optional": true,
           "position": 5,
           "value": "",
-          "voiceInputable": true
+          "voiceInputable": true,
+          "linkPosition": {
+              "id": 4,
+              "compare": "!=",
+              "value": ""
+          }
         }
       ]
     },
@@ -110,7 +125,11 @@
           "optional": false,
           "position": 6,
           "value": "",
-          "voiceInputable": true
+          "voiceInputable": true,
+          "linkPosition": {
+              "id": 5,
+              "value": "Ja"
+          }
         },
         {
           "choices": [
@@ -130,7 +149,11 @@
           "optional": false,
           "position": 8,
           "value": "",
-          "voiceInputable": true
+          "voiceInputable": true,
+          "linkPosition": {
+              "id": 7,
+              "value": "Ja"
+          }
         },
         {
           "choices": [

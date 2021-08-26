@@ -39,9 +39,7 @@ export class MeasureFieldComponent extends ElementBinding {
 
             field.addEventListener("change", (event) => {
                 let e = event as CustomEvent;
-                if (e) {
-                    this.evaluteLinkedValue(e.detail);
-                }
+                this.evaluteLinkedValue(e?.detail);
             })
         }
     }
@@ -52,9 +50,29 @@ export class MeasureFieldComponent extends ElementBinding {
      */
     private evaluteLinkedValue(value: any) {
         let obj = this.object as MeasureField
-        let shouldShow = obj.linkPosition?.value == value;
+        let shouldShow = this.compareLinkedPos(
+            obj.linkPosition?.value, value,
+            obj.linkPosition?.compare);
+            console.log(shouldShow);
         ViewHelper.toggleVisibility(this, shouldShow);
-        this.inputField.required = shouldShow;
+        if (this.inputField) this.inputField.required = shouldShow;
+    }
+
+    /**
+     * Compares two Linked Positions
+     * @param {any} value1
+     * @param {any} value2 
+     * @param {string} operator 
+     */
+    private compareLinkedPos(value1: any, value2: any, operator: string = "=="): boolean {
+        switch (operator) {
+            case "==":
+                return value1 == value2;
+            case "!=":
+                return value1 != value2;
+            default:
+                return value1 == value2;
+        }
     }
 
     /**

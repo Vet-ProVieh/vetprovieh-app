@@ -1,4 +1,4 @@
-import { KeyResultComponent, Objective, ObjectiveItemComponent } from "../../../src/measures";
+import { KeyResultComponent, Objective, ObjectiveItemComponent } from "../../../../src/measures";
 
 
 var objectiveItem: ObjectiveItemComponent;

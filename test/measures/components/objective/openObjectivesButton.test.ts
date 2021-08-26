@@ -1,4 +1,4 @@
-import { OpenObjectivesButton } from "../../../src/measures";
+import { OpenObjectivesButton } from "../../../../src/measures";
 
 
 describe('amount', () => {

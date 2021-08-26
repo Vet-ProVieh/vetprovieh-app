@@ -4,6 +4,7 @@ import { SelectButton } from "../../shared";
 import { InitializeMeasurePage } from "../pages";
 import { MeasureFieldComponent } from "./measureField";
 import { TakeoverFactory } from "../factories";
+import { MeasureField } from "../models";
 
 /**
  * Pager OperationGroup
@@ -77,11 +78,12 @@ export class MeasureGroupComponent extends ElementGroupBinding {
     }
 
 
+
     /**
      * Generating new SubElement
      * @param type 
      */
-    protected newElement(): ElementBinding {
+    protected newElement(): MeasureFieldComponent {
         return new MeasureFieldComponent();
     }
 
@@ -107,7 +109,7 @@ export class MeasureGroupComponent extends ElementGroupBinding {
      * TODO unterschiedliche Fälle implementieren
      * @param answer 
      */
-    private processSelectButtonAnswer(selectButton : SelectButton) {
+    private processSelectButtonAnswer(selectButton: SelectButton) {
         let answer = selectButton.recievedParam;
         let fields = this.loadSubFields();
 
@@ -117,9 +119,9 @@ export class MeasureGroupComponent extends ElementGroupBinding {
                 if (part.values) {
                     Object.keys(part.values).forEach((paramKey: string) => {
                         let field = (fields as any)[paramKey];
-                        if(field){
+                        if (field) {
                             let value = (part.values as any)[paramKey];
-                            if(value) field.attachValue(`${ObjectHelper.formatDate(part.updatedAt)} ${part.name} ${part.id}:\r\n${value}\r\n`);
+                            if (value) field.attachValue(`${ObjectHelper.formatDate(part.updatedAt)} ${part.name} ${part.id}:\r\n${value}\r\n`);
                         }
                     })
                 }
@@ -132,7 +134,7 @@ export class MeasureGroupComponent extends ElementGroupBinding {
      * Key ist expected returnValue key from opPlan
      * @returns 
      */
-    private loadSubFields() : any {
+    private loadSubFields(): any {
         return {
             Behandlung: this.loadSubField("Angaben zu Krankheitsgeschehen"),
             //Diagnose: this.loadSubField("Angaben zu Krankheitsgeschehen"),
@@ -170,7 +172,23 @@ export class MeasureGroupComponent extends ElementGroupBinding {
 
 
     _afterRender() {
-        super._afterRender();
+        this._subfieldBindings = [];
+        let fields = this.subFields();
+        fields.forEach((field: MeasureField) => {
+            const newField: MeasureFieldComponent = this.newElement();
+            newField.object = field;
+            if (field.linkPosition) {
+                const prevField = this._subfieldBindings.filter((v) => {
+                    return v.object?.position === field.linkPosition?.id
+                })[0];
+                if (prevField) {
+                    newField.linkToField(prevField);
+                }
+            }
+            super.attachField(newField);
+        });
+        //super._afterRender();
+
         this.renderSelectButton();
         let selectButton = this.querySelector("select-button") as SelectButton;
         if (selectButton) {

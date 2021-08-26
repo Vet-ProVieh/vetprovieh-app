@@ -1,4 +1,4 @@
-import { Objective, ObjectiveItemComponent, ObjectivesComponent } from "../../../src/measures";
+import { Objective, ObjectiveItemComponent, ObjectivesComponent } from "../../../../src/measures";
 
 
 var objectivesComponent: ObjectivesComponent;
