@@ -1,13 +1,13 @@
 
-import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import {WebComponent, VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
 
-const STAR_FULL: string = "fas fa-star";
-const STAR_OPEN: string = "far fa-star";
+const STAR_FULL = 'fas fa-star';
+const STAR_OPEN = 'far fa-star';
 
 @WebComponent({
-    template:
+  template:
         VetproviehElement.template +
-        ` 
+        `
     <style>
         #content {
             color: red;
@@ -15,120 +15,153 @@ const STAR_OPEN: string = "far fa-star";
         }
     </style>
 
-    <div id="content"> 
+    <div id="content">
     </div>
     `,
-    tag: "vp-stars",
+  tag: 'vp-stars',
 })
-
+/**
+ * Star-Component
+ */
 export class StarsComponent extends VetproviehElement {
+    private _score = 0;
+    private _amount = 5;
+    private _editable = true;
 
-    private _score: number = 0;
-    private _amount: number = 5;
-    private _editable: boolean = true;
-
-
-    public get editable(): string {
-        return `${this._editable}`;
-    }
-
-    public set editable(v: string) {
-        if (this.editable !== v) {
-            this._editable = v === "true";
-        }
-    }
-
+    /**
+     * Default-Constructor
+     */
     constructor() {
-        super(true, false);
+      super(true, false);
     }
 
+    /**
+     * Connected-Callback for Web-Component
+     */
     connectedCallback() {
-        super.connectedCallback();
-        this.render();
+      super.connectedCallback();
+      this.render();
     }
 
+    /**
+     * Is editable?
+     * @return {string}
+     */
+    public get editable(): string {
+      return `${this._editable}`;
+    }
+
+    /**
+     * Set editable
+     * @param {string} v
+     */
+    public set editable(v: string) {
+      if (this.editable !== v) {
+        this._editable = v === 'true';
+      }
+    }
+
+    /**
+     * Rendering
+     */
     render() {
-        super.render();
-        for (let i = 0; i < this._amount; i++) {
-            this.wrapper.innerHTML += `<i class="far fa-star"></i>`;
-        }
+      super.render();
+      for (let i = 0; i < this._amount; i++) {
+        this.wrapper.innerHTML += `<i class="far fa-star"></i>`;
+      }
 
-        this.renderCurrentState();
+      this.renderCurrentState();
 
-        if (this._editable) {
-            this.registerHoverEvents();
-            this.registerClickEvents();
-        }
+      if (this._editable) {
+        this.registerHoverEvents();
+        this.registerClickEvents();
+      }
     }
 
 
-    /*  FILL ALL STARS UNTIL THE HOVERED ONE AND GO
-        BACK TO CURRENT STATE AFTER LEAVING WRAPPER
+    /**
+     * FILL ALL STARS UNTIL THE HOVERED ONE AND GO
+     * BACK TO CURRENT STATE AFTER LEAVING WRAPPER
     */
     private registerHoverEvents() {
-        this.stars.forEach((node, i) => {
-            node.addEventListener("mouseover", () => {
-                this.stars.forEach((star, j) => {
-                    star.className = this.getStarClass(j <= i);
-                })
-            });
+      this.stars.forEach((node, i) => {
+        node.addEventListener('mouseover', () => {
+          this.stars.forEach((star, j) => {
+            star.className = this.getStarClass(j <= i);
+          });
         });
-        this.wrapper.addEventListener("mouseleave", () => {
-            this.renderCurrentState();
-        });
+      });
+      this.wrapper.addEventListener('mouseleave', () => {
+        this.renderCurrentState();
+      });
     }
 
-    /* RENDER CURRENT STATE DEPENDING ON this._score */
+    /**
+     * RENDER CURRENT STATE DEPENDING ON this._score
+     */
     private renderCurrentState() {
-        this.stars.forEach((node, i) => {
-            node.className = this.getStarClass(i < this._score);
-        });
+      this.stars.forEach((node, i) => {
+        node.className = this.getStarClass(i < this._score);
+      });
     }
 
     /**
      * Getting CSS Class for Stars
-     * @param {boolean} showFull 
-     * @returns {string}
+     * @param {boolean} showFull
+     * @return {string}
      */
     private getStarClass(showFull: boolean): string {
-        return showFull ? STAR_FULL : STAR_OPEN;
+      return showFull ? STAR_FULL : STAR_OPEN;
     }
 
-    /* SET VALUE FOR this._score DEPENDING ON STAR */
+    /**
+     * SET VALUE FOR this._score DEPENDING ON STAR
+     */
     private registerClickEvents() {
-        this.stars.forEach((node, index) => {
-            (node as HTMLElement).addEventListener("click", () => {
-                this._score = index + 1;
-            })
+      this.stars.forEach((node, index) => {
+        (node as HTMLElement).addEventListener('click', () => {
+          this._score = index + 1;
         });
+      });
     }
 
+    /**
+     * Observed Attributes (Web-Component)
+     */
     static get observedAttributes() {
-        return ['amount', 'score', 'editable'];
+      return ['amount', 'score', 'editable'];
     }
 
     /**
      * Amount of Stars to click
-     * @property {number} amount
+     * @param {number | undefined} val
      */
     public set amount(val: number | undefined) {
         (val != undefined) ? this._amount = val : this._amount = 5;
     }
 
+    /**
+     * Get Amount
+     * @retrun {number}
+     */
     public get amount() {
-        return this._amount;
+      return this._amount;
     }
 
     /**
      * Current Visible Score
-     * @property {number} score
+     * @param {number} val
      */
     public set score(val: number) {
-        this._score = val;
+      this._score = val;
     }
 
+    /**
+     * Get Score
+     * @return {number}
+     */
     public get score() {
-        return this._score;
+      return this._score;
     }
 
     /**
@@ -136,7 +169,7 @@ export class StarsComponent extends VetproviehElement {
      * @return {HTMLElement}
      */
     private get wrapper() {
-        return this.getByIdFromShadowRoot("content") as HTMLElement;
+      return this.getByIdFromShadowRoot('content') as HTMLElement;
     }
 
     /**
@@ -144,7 +177,6 @@ export class StarsComponent extends VetproviehElement {
      * @return {NodeListOf<HTMLElement>}
      */
     private get stars() {
-        return this.wrapper.querySelectorAll('i');
+      return this.wrapper.querySelectorAll('i');
     }
-
 }

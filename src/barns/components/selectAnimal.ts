@@ -1,11 +1,11 @@
-import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { FieldWithLabel } from "../../shared";
-import { Animal } from "../models";
+import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {FieldWithLabel} from '../../shared';
+import {Animal} from '../models';
 
 
 @WebComponent(
     {
-        template: `
+      template: `
         <div class="field">
             <label class="label">\${this.label}</label>
             <div class="control">
@@ -14,46 +14,54 @@ import { Animal } from "../models";
                 </select>
             </div>
         </div>`,
-        tag: "select-animal"
+      tag: 'select-animal',
     }
 )
+/**
+ * Select Animal
+ */
 export class SelectAnimal extends FieldWithLabel {
+  /**
+   * Default-Contructor
+   */
+  constructor() {
+    super();
+    this.label = 'Tierart';
+  }
 
-    constructor() {
-        super();
-        this.label = "Tierart";
-    }
 
-
-
-    /**
+  /**
      * Load HTMl-Input-Field
      * @return {HTMLElement}
      */
-    protected get inputField(): HTMLElement {
-        return this.getElementsByTagName("select")[0] as HTMLElement;
+  protected get inputField(): HTMLElement {
+    return this.getElementsByTagName('select')[0] as HTMLElement;
+  }
+
+  /**
+   * Rendering
+   */
+  public render() {
+    super.render();
+
+    if (this.inputField) {
+      this.renderOptions().forEach((option) => {
+        this.inputField.appendChild(option);
+      });
     }
-
-    public render() {
-        super.render();
-
-        if (this.inputField) {
-            this.renderOptions().forEach(option => {
-                this.inputField.appendChild(option);
-            });
-        }
-    }
+  }
 
 
-    /**
-     * Attach selectable Options
-     */
-    private renderOptions() {
-        return Animal.all().map(animal => {
-            let option = document.createElement("option");
-            option.value = animal.code;
-            option.innerHTML = animal.name;
-            return option
-        });
-    }
+  /**
+   * Attach selectable Options
+   * @return {Array<any>}
+   */
+  private renderOptions() : Array<any> {
+    return Animal.all().map((animal) => {
+      const option = document.createElement('option');
+      option.value = animal.code;
+      option.innerHTML = animal.name;
+      return option;
+    });
+  }
 }

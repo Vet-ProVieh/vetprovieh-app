@@ -1,26 +1,25 @@
-import { VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
-import { Document, DocumentRepository } from "../../../../documents";
-import { RecordingModal } from "./recording-modal";
+import {VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
+import {Document, DocumentRepository} from '../../../../documents';
+import {RecordingModal} from './recording-modal';
 
 /**
- * Media Element. 
+ * Media Element.
  * Abstract Class for Video, Image and Speech
  */
 export class VetproviehMedia extends VetproviehElement {
-
-    private _type: string = "video";
-    private _name: string = "";
-    private _barnid : string = "";
+    private _type = 'video';
+    private _name = '';
+    private _barnid = '';
     private _thumbnail: string | undefined;
     private _repository: DocumentRepository = new DocumentRepository();
     private _value: string | undefined;
 
     constructor() {
-        super(true, false);
+      super(true, false);
     }
 
     public static get template() {
-        return VetproviehElement.template + `
+      return VetproviehElement.template + `
         <div>
             <div id="content" class="card-content">
                 \${this.content}
@@ -32,7 +31,7 @@ export class VetproviehMedia extends VetproviehElement {
             </footer>
         </div>
         <recording-\${this.type}-modal id="recordingModal" title="\${this.name}" active="false"></recording-\${this.type}-modal>
-        `
+        `;
     }
 
     /**
@@ -40,22 +39,22 @@ export class VetproviehMedia extends VetproviehElement {
      * @param {string} filename
      */
     protected sendToServer(filename: string) {
-        let document = new Document();
-        document.barnId = this.barnid;
-        document.content = this.recordingModal.loadContent();
-        document.name = filename;
-        this._repository.create(document).then((url) => {
-            this.value = url;
-        });
+      const document = new Document();
+      document.barnId = this.barnid;
+      document.content = this.recordingModal.loadContent();
+      document.name = filename;
+      this._repository.create(document).then((url) => {
+        this.value = url;
+      });
     }
 
-    
+
     /**
      * Getter barnid
      * @return {string}
      */
     public get barnid() : string {
-        return this._barnid;
+      return this._barnid;
     }
 
     /**
@@ -63,9 +62,9 @@ export class VetproviehMedia extends VetproviehElement {
      * @param {string} v
      */
     public set barnid(v : string) {
-        if(this._barnid !== v) {
-            this._barnid = v;
-        }    
+      if (this._barnid !== v) {
+        this._barnid = v;
+      }
     }
 
     /**
@@ -73,7 +72,7 @@ export class VetproviehMedia extends VetproviehElement {
      * @return {string | undefined}
      */
     public get value(): string | undefined {
-        return this._value;
+      return this._value;
     }
 
     /**
@@ -81,12 +80,12 @@ export class VetproviehMedia extends VetproviehElement {
      * @param {string | undefined} v
      */
     public set value(v: string | undefined) {
-        if (this._value !== v && v !== undefined) {
-            this._value = v;
-            this._thumbnail = v;
-            this.renderContentBox();
-            this.dispatchEvent(new Event("change"));
-        }
+      if (this._value !== v && v !== undefined) {
+        this._value = v;
+        this._thumbnail = v;
+        this.renderContentBox();
+        this.dispatchEvent(new Event('change'));
+      }
     }
 
     /**
@@ -94,17 +93,17 @@ export class VetproviehMedia extends VetproviehElement {
      * @return {string}
      */
     public get name(): string {
-        return this._name;
+      return this._name;
     }
 
     /**
-     * Setter name 
+     * Setter name
      * @param {string} v
      */
     public set name(v: string) {
-        if (this._name !== v) {
-            this._name = v;
-        }
+      if (this._name !== v) {
+        this._name = v;
+      }
     }
 
     /**
@@ -112,7 +111,7 @@ export class VetproviehMedia extends VetproviehElement {
      * @return {string}
      */
     public get type(): string {
-        return this._type;
+      return this._type;
     }
 
     /**
@@ -120,9 +119,9 @@ export class VetproviehMedia extends VetproviehElement {
      * @param {string} v
      */
     public set type(v: string) {
-        if (this._type !== v) {
-            this._type = v;
-        }
+      if (this._type !== v) {
+        this._type = v;
+      }
     }
 
     /**
@@ -130,21 +129,21 @@ export class VetproviehMedia extends VetproviehElement {
      * @return {string | undefined}
      */
     protected get thumbnail(): string | undefined {
-        return this._thumbnail;
+      return this._thumbnail;
     }
 
     protected set thumbnail(v: string | undefined) {
-        if(this._thumbnail !== v){
-            this._thumbnail = v;
-        }
+      if (this._thumbnail !== v) {
+        this._thumbnail = v;
+      }
     }
 
     /**
      * Connected-Callback
      */
     public connectedCallback() {
-        this.render();
-        this.attachListener();
+      this.render();
+      this.attachListener();
     }
 
 
@@ -153,7 +152,7 @@ export class VetproviehMedia extends VetproviehElement {
      * @return {string}
      */
     protected get content(): string {
-        return "<p>Es wurde noch nichts aufgenommen.</p>";
+      return '<p>Es wurde noch nichts aufgenommen.</p>';
     }
 
     /**
@@ -161,15 +160,15 @@ export class VetproviehMedia extends VetproviehElement {
      * @return {string}
      */
     protected get openButton(): string {
-        return `<button id="openButton" class="button is-pulled-right">${this.buttonname} aufnehmen</button>`
+      return `<button id="openButton" class="button is-pulled-right">${this.buttonname} aufnehmen</button>`;
     }
 
-      /**
+    /**
      * Generate Button name
      * @return {string}
      */
     protected get buttonname(): string {
-        return "Unknown";
+      return 'Unknown';
     }
 
 
@@ -178,42 +177,42 @@ export class VetproviehMedia extends VetproviehElement {
      * @return {RecordingModal}
      */
     private get recordingModal(): RecordingModal {
-        return this.getByIdFromShadowRoot("recordingModal") as RecordingModal;
+      return this.getByIdFromShadowRoot('recordingModal') as RecordingModal;
     }
 
     /**
      * Attaching Event-Listener to Contnet
      */
     private attachListener() {
-        this.bindOpenButton();
-        this.bindModal();
+      this.bindOpenButton();
+      this.bindModal();
     }
 
     /**
      * Binding OpenButton
      */
     private bindOpenButton() {
-        let button = this.getByIdFromShadowRoot("openButton") as HTMLButtonElement;
-        let clickFunction = () => {
-            console.log("Activating Recording modal");
-            this.recordingModal.active = true;
-        }
-        clickFunction.bind(this);
-        button.addEventListener("click", clickFunction);
+      const button = this.getByIdFromShadowRoot('openButton') as HTMLButtonElement;
+      const clickFunction = () => {
+        console.log('Activating Recording modal');
+        this.recordingModal.active = true;
+      };
+      clickFunction.bind(this);
+      button.addEventListener('click', clickFunction);
     }
 
     /**
      * Binding Modal
      */
     private bindModal() {
-        let modalCloseFunction = (event: any) => {
-            if (event.detail.takeover) {
-                this.afterModalClose(event);
-                this.sendToServer(this.generateFilename());
-            }
+      const modalCloseFunction = (event: any) => {
+        if (event.detail.takeover) {
+          this.afterModalClose(event);
+          this.sendToServer(this.generateFilename());
         }
-        modalCloseFunction.bind(this);
-        this.recordingModal.addEventListener("change", modalCloseFunction);
+      };
+      modalCloseFunction.bind(this);
+      this.recordingModal.addEventListener('change', modalCloseFunction);
     }
 
     /**
@@ -221,20 +220,20 @@ export class VetproviehMedia extends VetproviehElement {
      * @return {string}
      */
     protected generateFilename() : string {
-        return `barn_${this.barnid}_${this.buttonname}`;
+      return `barn_${this.barnid}_${this.buttonname}`;
     }
- 
+
     /**
      * Rendering ContentBox again
      */
     protected renderContentBox() {
-        let contentBox = this.getByIdFromShadowRoot("content")
-        if (contentBox) contentBox.innerHTML = this.content;
+      const contentBox = this.getByIdFromShadowRoot('content');
+      if (contentBox) contentBox.innerHTML = this.content;
     }
 
     /**
      * After Recording Modal is closed
-     * @param {any} event 
+     * @param {any} event
      */
     protected afterModalClose(event:any) {
 

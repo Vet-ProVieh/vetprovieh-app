@@ -1,6 +1,6 @@
 
-import { ObjectHelper, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { KeyResult, KeyResultMilestones } from "../../models/keyresult";
+import {ObjectHelper, VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {KeyResult, KeyResultMilestones} from '../../models/keyresult';
 
 /**
  * Controller for Page
@@ -18,17 +18,16 @@ import { KeyResult, KeyResultMilestones } from "../../models/keyresult";
             <button id="check" \${this._editable ? '' : 'disabled'} type="button" class="button small">
               <i class="fas fa-check"></i>
             </button>
-        </div>   
-             
+        </div>
+
     </div>
     <hr>
     `,
-  tag: "vp-key-result",
+  tag: 'vp-key-result',
 })
 export class KeyResultComponent extends VetproviehElement {
-
   private _keyResult: KeyResult = new KeyResult();
-  private _editable: boolean = false;
+  private _editable = false;
 
   /**
    * Show editable Buttons or not
@@ -38,7 +37,7 @@ export class KeyResultComponent extends VetproviehElement {
     return this._editable.toString();
   }
   public set editable(v: string) {
-    let vAsBool = ObjectHelper.stringToBool(v);
+    const vAsBool = ObjectHelper.stringToBool(v);
     if (this._editable !== vAsBool) {
       this._editable = vAsBool;
       this.toggleEditable();
@@ -77,7 +76,7 @@ export class KeyResultComponent extends VetproviehElement {
    * Binding KeyResultButton
    */
   private bindCheckKeyResultButton() {
-    this.checkKeyResultButton.addEventListener("click", () => {
+    this.checkKeyResultButton.addEventListener('click', () => {
       this.toggleState();
       this.renderCurrentState();
     });
@@ -87,8 +86,8 @@ export class KeyResultComponent extends VetproviehElement {
    * Button to Change key Result
    * @return {HTMLButtonElement}
    */
-  private get checkKeyResultButton() : HTMLButtonElement{
-    return this.shadowRoot?.getElementById("check") as HTMLButtonElement;;
+  private get checkKeyResultButton() : HTMLButtonElement {
+    return this.shadowRoot?.getElementById('check') as HTMLButtonElement;
   }
 
   /**
@@ -97,15 +96,15 @@ export class KeyResultComponent extends VetproviehElement {
    */
   public toggleState() {
     switch (this._keyResult.milestones) {
-      case "Start":
+      case 'Start':
       case KeyResultMilestones.Start:
         this.keyResult.milestones = KeyResultMilestones.Current;
         break;
-      case "Current":
+      case 'Current':
       case KeyResultMilestones.Current:
         this._keyResult.milestones = KeyResultMilestones.Target;
         break;
-      case "Target":
+      case 'Target':
       case KeyResultMilestones.Target:
         this._keyResult.milestones = KeyResultMilestones.Start;
         break;
@@ -118,16 +117,16 @@ export class KeyResultComponent extends VetproviehElement {
   private renderCurrentState() {
     switch (this._keyResult.milestones) {
       case KeyResultMilestones.Start:
-        this.checkKeyResult.className = "fas fa-check";
-        this.checkKeyResult.style.color = "black";
+        this.checkKeyResult.className = 'fas fa-check';
+        this.checkKeyResult.style.color = 'black';
         break;
       case KeyResultMilestones.Current:
-        this.checkKeyResult.className = "fas fa-check-double";
-        this.checkKeyResult.style.color = "black";
+        this.checkKeyResult.className = 'fas fa-check-double';
+        this.checkKeyResult.style.color = 'black';
         break;
       case KeyResultMilestones.Target:
-        this.checkKeyResult.className = "fas fa-check-double";
-        this.checkKeyResult.style.color = "#03fc07";
+        this.checkKeyResult.className = 'fas fa-check-double';
+        this.checkKeyResult.style.color = '#03fc07';
         break;
     }
   }
@@ -137,6 +136,6 @@ export class KeyResultComponent extends VetproviehElement {
    * @return {HTMLElement}
    */
   private get checkKeyResult() {
-    return this.shadowRoot?.querySelector("i") as HTMLElement;
+    return this.shadowRoot?.querySelector('i') as HTMLElement;
   }
 }

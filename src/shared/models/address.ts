@@ -1,7 +1,10 @@
 
+/**
+ * Address-Model
+ */
 export class Address {
-    city: string = "";
-    postalCode: string = "";
-    streetName: string = "";
-    streetNumber: string = "";
+    public city = '';
+    public postalCode = '';
+    public streetName = '';
+    public streetNumber = '';
 }

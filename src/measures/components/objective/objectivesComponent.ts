@@ -1,9 +1,9 @@
-import { VetproviehElement, VetproviehNavParams, ViewHelper, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { SelectButton } from "../../../shared";
-import { Objective } from "../../models/objective";
-import { InitializeMeasurePage } from "../../pages";
-import { ObjectiveModal } from "./objective-modal";
-import { ObjectiveItemComponent } from "./objectiveItem";
+import {VetproviehElement, VetproviehNavParams, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {SelectButton} from '../../../shared';
+import {Objective} from '../../models/objective';
+import {InitializeMeasurePage} from '../../pages';
+import {ObjectiveModal} from './objective-modal';
+import {ObjectiveItemComponent} from './objectiveItem';
 
 /**
  * Controller for Page
@@ -12,7 +12,7 @@ import { ObjectiveItemComponent } from "./objectiveItem";
 @WebComponent({
   template:
     VetproviehElement.template +
-    ` 
+    `
     <style>
       .padding-15{
         padding: 15px;
@@ -22,17 +22,17 @@ import { ObjectiveItemComponent } from "./objectiveItem";
         <div id="detail" class="container">
           <div class="columns padding-15">
               <div class="column">
-                <select-button 
-                  id="loadMeasure" 
-                  param="selectPageMeasure.return" 
-                  href="/measures/select.html?barnId=\${this.barnId}" 
+                <select-button
+                  id="loadMeasure"
+                  param="selectPageMeasure.return"
+                  href="/measures/select.html?barnId=\${this.barnId}"
                   class="\${this.cssHidden(this.isHidden)}"
                   name="Maßnahmen laden">
-                </select-button>              
+                </select-button>
               </div>
               <div class="column">
-                <button id="addMeasure" 
-                        class="button is-info is-light is-fullwidth \${this.cssHidden(this.isHidden)}" 
+                <button id="addMeasure"
+                        class="button is-info is-light is-fullwidth \${this.cssHidden(this.isHidden)}"
                         type="button">
                         <span class="icon is-small">
                             <i class="fas fa-edit"></i>
@@ -55,14 +55,14 @@ import { ObjectiveItemComponent } from "./objectiveItem";
         </div>
     </div>
     `,
-  tag: "vp-objectives",
+  tag: 'vp-objectives',
 })
 export class ObjectivesComponent extends VetproviehElement {
-  static readonly possibleStates = ["execution", "valuation"];
+  static readonly possibleStates = ['execution', 'valuation'];
 
   private _objectives: Objective[] = [];
-  private _barnId: string = "";
-  private _state : string = "execution";
+  private _barnId = '';
+  private _state = 'execution';
 
   /**
    * State shows or hide different inputs.
@@ -74,7 +74,7 @@ export class ObjectivesComponent extends VetproviehElement {
   }
 
   public set state(v : string) {
-    if(ObjectivesComponent.possibleStates.includes(v) && this._state !== v) {
+    if (ObjectivesComponent.possibleStates.includes(v) && this._state !== v) {
       this._state = v;
       this.toggleVisibility();
     }
@@ -83,27 +83,27 @@ export class ObjectivesComponent extends VetproviehElement {
   /**
    * Change Visibility of relevant DOM-Objects
    */
-  private toggleVisibility(){
-    let buttons = [this.manualAddButton, this.selectButton];
+  private toggleVisibility() {
+    const buttons = [this.manualAddButton, this.selectButton];
     buttons.forEach((button) => {
-      if(button){
+      if (button) {
         ViewHelper.toggleVisibility(button, !this.isHidden);
       }
-    })
+    });
 
-    this.shadowRoot?.querySelectorAll("vp-objective-item").forEach((item) => {
-      let e = item as ObjectiveItemComponent;
+    this.shadowRoot?.querySelectorAll('vp-objective-item').forEach((item) => {
+      const e = item as ObjectiveItemComponent;
       e.valuation = this.isHidden.toString();
       e.editable = (!this.isHidden).toString();
-    })
+    });
   }
-  
+
   /**
    * Is Component hidden
    * @return {boolean}
    */
   public get isHidden() : boolean {
-    return this.state == 'valuation'
+    return this.state == 'valuation';
   }
 
   public get objectives(): Objective[] {
@@ -118,7 +118,7 @@ export class ObjectivesComponent extends VetproviehElement {
   constructor() {
     super(true, false);
 
-    let params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
+    const params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
     this.internalBarnId = params.barnId;
 
     this.render();
@@ -126,7 +126,7 @@ export class ObjectivesComponent extends VetproviehElement {
 
 
   static get observedAttributes() {
-    return ["objectives", "state"];
+    return ['objectives', 'state'];
   }
 
 
@@ -143,7 +143,7 @@ export class ObjectivesComponent extends VetproviehElement {
     this._afterRender();
   }
 
-  public renderNoMeasures(visible = true){
+  public renderNoMeasures(visible = true) {
     return `<p class="${visible ? '' : 'is-hidden'}"><i>Keine Maßnahmen angegeben</i></p>`;
   }
 
@@ -162,7 +162,7 @@ export class ObjectivesComponent extends VetproviehElement {
    * Rendering objectives First Time
    */
   renderObjectives() {
-    let container = this.antibioticsContainer();
+    const container = this.antibioticsContainer();
     container.innerHTML = this.renderNoMeasures(!this.objectives || this.objectives.length > 0);
     // TODO welfare container
     this.objectives?.forEach((objective) => this.addObjectiveToDom(objective));
@@ -170,66 +170,66 @@ export class ObjectivesComponent extends VetproviehElement {
 
   /**
    * Adding Objective to Container
-   * @param {Objective} objective 
+   * @param {Objective} objective
    * @param {boolean} openDirectly
    */
-  private addObjective(objective: Objective, openDirectly: boolean = false) {
+  private addObjective(objective: Objective, openDirectly = false) {
     this.objectives.push(objective);
     this.addObjectiveToDom(objective, openDirectly);
   }
 
   /**
    * Adding objective to Dom
-   * @param {Objective} objective 
+   * @param {Objective} objective
    * @param {boolean} openDirectly
    */
-  private addObjectiveToDom(objective: Objective, openDirectly: boolean = false) {
-    let objectiveItem = new ObjectiveItemComponent();
+  private addObjectiveToDom(objective: Objective, openDirectly = false) {
+    const objectiveItem = new ObjectiveItemComponent();
     objectiveItem.objective = objective;
-    
-    let valuation = (this.state === "valuation");
+
+    const valuation = (this.state === 'valuation');
     objectiveItem.valuation = valuation.toString();
     objectiveItem.editable = (!valuation).toString();
 
-    objectiveItem.addEventListener("delete", (event) => {
-      let index = this.objectives.findIndex((x) => x == (event as CustomEvent).detail)
+    objectiveItem.addEventListener('delete', (event) => {
+      const index = this.objectives.findIndex((x) => x == (event as CustomEvent).detail);
       if (index >= 0) {
         this.objectives.splice(index, 1);
         objectiveItem.remove();
 
-        if(this.objectives.length == 0){
-          let container = this.selectContainer(objective);
-          if(container) container.querySelector("p")?.classList.remove("is-hidden");
+        if (this.objectives.length == 0) {
+          const container = this.selectContainer(objective);
+          if (container) container.querySelector('p')?.classList.remove('is-hidden');
         }
       }
     });
 
     this.appendToContainer(objective, objectiveItem);
 
-    if(openDirectly){
+    if (openDirectly) {
       objectiveItem.openEditModal();
     }
   }
 
   /**
    * Append to specific container and toggle placeholder text
-   * @param {Objective} objective 
-   * @param {ObjectiveItemComponent} item 
+   * @param {Objective} objective
+   * @param {ObjectiveItemComponent} item
    */
   private appendToContainer(objective: Objective, item: ObjectiveItemComponent) {
-    let container = this.selectContainer(objective);
+    const container = this.selectContainer(objective);
 
-    if(container) {
-      let p = container.querySelector("p");
-      if(p) ViewHelper.toggleVisibility(p, false);
+    if (container) {
+      const p = container.querySelector('p');
+      if (p) ViewHelper.toggleVisibility(p, false);
       container.appendChild(item);
     }
   }
 
   /**
    * Select Display-Container
-   * @param {Objective} objective 
-   * @returns {HTMLElement}
+   * @param {Objective} objective
+   * @return {HTMLElement}
    */
   private selectContainer(objective: Objective): HTMLElement {
     if (objective.welfare) {
@@ -241,35 +241,35 @@ export class ObjectivesComponent extends VetproviehElement {
 
   /**
    * Get Welfare-DOM-Element
-   * @returns {HTMLElement}
+   * @return {HTMLElement}
    */
   private welfareContainer(): HTMLElement {
-    return this.shadowRoot?.getElementById("welfare") as HTMLElement;
+    return this.shadowRoot?.getElementById('welfare') as HTMLElement;
   }
 
   /**
    * Get Antibiotics-DOM-Element
-   * @returns {HTMLElement}
+   * @return {HTMLElement}
    */
   private antibioticsContainer(): HTMLElement {
-    return this.shadowRoot?.getElementById("antibiotics") as HTMLElement;
+    return this.shadowRoot?.getElementById('antibiotics') as HTMLElement;
   }
 
   /**
   * Get Manual-AddButton-DOM-Element
-  * @returns {HTMLElement}
+  * @return {HTMLElement}
   */
   private get manualAddButton(): HTMLButtonElement {
-    return this.shadowRoot?.getElementById("addMeasure") as HTMLButtonElement;
+    return this.shadowRoot?.getElementById('addMeasure') as HTMLButtonElement;
   }
 
   /**
    * Bind Click Event to Manual Add button
    */
   private bindManualAddButton() {
-    this.manualAddButton?.addEventListener("click", () => {
-      let modal = new ObjectiveModal();
-      this.shadowRoot?.getElementById("group")?.append(modal);
+    this.manualAddButton?.addEventListener('click', () => {
+      const modal = new ObjectiveModal();
+      this.shadowRoot?.getElementById('group')?.append(modal);
       modal.active = true;
       this.configureModal(modal);
     });
@@ -280,8 +280,8 @@ export class ObjectivesComponent extends VetproviehElement {
    * @param {ObjectiveModal} modal
    */
   private configureModal(modal: ObjectiveModal) {
-    modal.addEventListener("save", (event: Event) => {
-      let object = (event as CustomEvent).detail;
+    modal.addEventListener('save', (event: Event) => {
+      const object = (event as CustomEvent).detail;
       if (object) {
         this.addObjective(object);
       }
@@ -300,7 +300,7 @@ export class ObjectivesComponent extends VetproviehElement {
    * Binding SelectButton to Answer
    */
   private bindSelectButton() {
-    let selectButton = this.selectButton;
+    const selectButton = this.selectButton;
     setTimeout(() => {
       if (selectButton) {
         this.processSelectButtonAnswer(selectButton);
@@ -314,23 +314,23 @@ export class ObjectivesComponent extends VetproviehElement {
    * @return {SelectButton}
    */
   private get selectButton(): SelectButton {
-    return this.shadowRoot?.querySelector("select-button") as SelectButton;
+    return this.shadowRoot?.querySelector('select-button') as SelectButton;
   }
 
   /**
      * Process answer of select-Button.
      * TODO unterschiedliche Fälle implementieren
-     * @param answer 
+     * @param answer
      */
   private processSelectButtonAnswer(selectButton: SelectButton) {
-    let answer = selectButton.recievedParam;
+    const answer = selectButton.recievedParam;
 
     if (answer) {
       selectButton.scrollIntoView();
       answer.forEach((objective: Objective) => {
-          Objective.reset(objective);
-          this.addObjective(objective, answer.length == 1);
-      })
+        Objective.reset(objective);
+        this.addObjective(objective, answer.length == 1);
+      });
     }
   }
 }

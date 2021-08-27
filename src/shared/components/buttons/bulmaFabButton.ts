@@ -1,8 +1,8 @@
 
-import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
 @WebComponent({
-    template: VetproviehElement.template + `
+  template: VetproviehElement.template + `
                 <style>
                   .button.is-floating{
                       position:fixed;
@@ -23,33 +23,32 @@ import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib
                <a href="\${this.href}" type="button" class="button is-floating is-warning is-\${this.size}">
                     <i class="fas \${this.icon}"></i>
                </a>`,
-    tag: 'bulma-fab-button'
+  tag: 'bulma-fab-button',
 })
 export class BulmaFabButton extends VetproviehElement {
-
-    private _icon: string = "";
-    private _size: string = "medium";
-    private _href: string = "";
+    private _icon = '';
+    private _size = 'medium';
+    private _href = '';
 
     /**
      * Icon from Fontawesome to show
      * @property icon
      */
     public get icon(): string {
-        return this._icon;
+      return this._icon;
     }
 
     public set icon(v: string) {
-        if (v !== this._icon) {
-            this._icon = v;
-        }
+      if (v !== this._icon) {
+        this._icon = v;
+      }
     }
 
     /**
      * Rendering Element
      */
     public render() {
-        super.render();
+      super.render();
     }
 
     /**
@@ -57,12 +56,12 @@ export class BulmaFabButton extends VetproviehElement {
      * @property size
      */
     public get size(): string {
-        return this._size;
+      return this._size;
     }
     public set size(v: string) {
-        if (this._size !== v) {
-            this._size = v;
-        }
+      if (this._size !== v) {
+        this._size = v;
+      }
     }
 
 
@@ -71,14 +70,13 @@ export class BulmaFabButton extends VetproviehElement {
      * @property {string}
      */
     public get href(): string {
-        return this._href;
+      return this._href;
     }
     public set href(v: string) {
-        if (this.href !== v) {
-            this._href = v;
-        }
+      if (this.href !== v) {
+        this._href = v;
+      }
     }
-
 
 
     /**
@@ -86,7 +84,6 @@ export class BulmaFabButton extends VetproviehElement {
      * @return {Array<string>}
      */
     static get observedAttributes() {
-        return ['icon', 'size', 'href']
+      return ['icon', 'size', 'href'];
     }
-
 }

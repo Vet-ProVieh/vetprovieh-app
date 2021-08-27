@@ -1,1 +1,1 @@
-export * from "./treatmentKeys";
+export * from './treatmentKeys';

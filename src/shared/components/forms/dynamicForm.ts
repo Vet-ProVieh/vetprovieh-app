@@ -1,7 +1,7 @@
-import { VetproviehBasicDetail } from "@tomuench/vetprovieh-detail/lib/index";
-import { ViewHelper } from "@tomuench/vetprovieh-shared";
-import { ElementGroupBinding, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
-import { BasicModel, RenderType } from "../../models";
+import {VetproviehBasicDetail} from '@tomuench/vetprovieh-detail/lib/index';
+import {ViewHelper} from '@tomuench/vetprovieh-shared';
+import {ElementGroupBinding, VetproviehNavParams} from '@tomuench/vetprovieh-shared/lib';
+import {BasicModel, RenderType} from '../../models';
 
 
 /**
@@ -10,9 +10,8 @@ import { BasicModel, RenderType } from "../../models";
  * wiederum n-Felder. Die Komponenten sind analog dazu aufgebaut
  */
 export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> extends VetproviehBasicDetail {
-
     private _groupElements: ElementGroupBinding[] | any[] = [];
-    private _fetched: boolean = false;
+    private _fetched = false;
     private groupAttributeName: string;
     private renderType: RenderType;
 
@@ -20,17 +19,17 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
      * Default-Konstruktor
      */
     constructor(groupAttributeName: string, renderType: RenderType = RenderType.Single) {
-        super();
-        this.storeElement = true;
-        this.groupAttributeName = groupAttributeName;
-        this.renderType = renderType;
+      super();
+      this.storeElement = true;
+      this.groupAttributeName = groupAttributeName;
+      this.renderType = renderType;
     }
 
 
     render() {
-        if (!this._fetched) {
-            super.render();
-        }
+      if (!this._fetched) {
+        super.render();
+      }
     }
 
     /**
@@ -38,7 +37,7 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
      * @return {T}
      */
     public get currentObject(): TObject {
-        return this._currentObject as TObject;
+      return this._currentObject as TObject;
     }
 
     /**
@@ -47,7 +46,7 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
      * @return {number}
      */
     public get groupIdParam(): number {
-        return parseInt(ViewHelper.getParameter("groupsId") as string) || 0;
+      return parseInt(ViewHelper.getParameter('groupsId') as string) || 0;
     }
 
     /**
@@ -55,25 +54,25 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
      * @return {TGroup}
      */
     private get groupsFromObject(): TGroup[] {
-        return (this.currentObject as any)[this.groupAttributeName];
+      return (this.currentObject as any)[this.groupAttributeName];
     }
 
     /**
      * Setting group Component
      */
     _setGroupComponent() {
-        if(this.renderType === RenderType.Single){
-            if (this.groupsFromObject.length > this.groupIdParam) {
-                console.log(`Setting Current-Group=${this.groupIdParam}`);
-                let group = this.buildSingleGroup(this.groupsFromObject[this.groupIdParam]);
-                this.appendGroupToDetail(group);
-            }
-        } else {
-            this.groupsFromObject.forEach((groupObject) => {
-                let group = this.buildSingleGroup(groupObject);
-                this.appendGroupToDetail(group);
-            })
+      if (this.renderType === RenderType.Single) {
+        if (this.groupsFromObject.length > this.groupIdParam) {
+          console.log(`Setting Current-Group=${this.groupIdParam}`);
+          const group = this.buildSingleGroup(this.groupsFromObject[this.groupIdParam]);
+          this.appendGroupToDetail(group);
         }
+      } else {
+        this.groupsFromObject.forEach((groupObject) => {
+          const group = this.buildSingleGroup(groupObject);
+          this.appendGroupToDetail(group);
+        });
+      }
     }
 
     /**
@@ -82,7 +81,7 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
      * @return {ElementGroupBinding}
      */
     protected buildGroupComponent(): ElementGroupBinding {
-        throw new Error("Please define buildGroupComponent in your Child-Class");
+      throw new Error('Please define buildGroupComponent in your Child-Class');
     }
 
     /**
@@ -90,27 +89,27 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
      * @return {ElementGroupBinding}
      */
     protected buildSingleGroup(groupObject: any) : ElementGroupBinding {
-        let group = this.buildGroupComponent();
-        group.object = groupObject;
+      const group = this.buildGroupComponent();
+      group.object = groupObject;
 
-        return group;
+      return group;
     }
 
     /**
      * Append Group-Component to HTML-Container
      */
     private appendGroupToDetail(group: ElementGroupBinding) {
-        let detail = this.getByIdFromShadowRoot("group") as HTMLElement;
-        
-        if (detail) {
-            this._groupElements.push(group);
-            detail.appendChild(group);
-        }
+      const detail = this.getByIdFromShadowRoot('group') as HTMLElement;
+
+      if (detail) {
+        this._groupElements.push(group);
+        detail.appendChild(group);
+      }
     }
 
     protected get _storeKey(): string {
-        let url = super._storeKey;
-        return `${url}?barn_id=${VetproviehNavParams.getUrlParameter("barn_id")}`;
+      const url = super._storeKey;
+      return `${url}?barn_id=${VetproviehNavParams.getUrlParameter('barn_id')}`;
     }
 
     /**
@@ -119,18 +118,18 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
      * @protected
      */
     _afterFetch(data: any) {
-        this._fetched = true;
-        this._setGroupComponent();
+      this._fetched = true;
+      this._setGroupComponent();
     }
 
     _buildUrl(): string {
-        let currentUrl = new URL(window.location.href);
+      const currentUrl = new URL(window.location.href);
 
-        if (currentUrl.searchParams.has("groupsId")) {
-            currentUrl.searchParams.delete("groupsId");
-        }
-        currentUrl.searchParams.append("groupsId", '')
-        return currentUrl.toString();
+      if (currentUrl.searchParams.has('groupsId')) {
+        currentUrl.searchParams.delete('groupsId');
+      }
+      currentUrl.searchParams.append('groupsId', '');
+      return currentUrl.toString();
     }
 
     /**
@@ -138,26 +137,26 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
     * @private
     */
     _attachListenerToButtons() {
-        console.log("Plan: Listener to Button");
-        const saveButton = this.getByIdFromShadowRoot('saveButton') as HTMLElement;
-        const abort = this.getByIdFromShadowRoot('abortButton') as HTMLElement;
+      console.log('Plan: Listener to Button');
+      const saveButton = this.getByIdFromShadowRoot('saveButton') as HTMLElement;
+      const abort = this.getByIdFromShadowRoot('abortButton') as HTMLElement;
 
-        saveButton.addEventListener('click', () => {
-            this.save()
-        });
-        abort.addEventListener('click', () => {
-            console.log("cancel");
-            // Destroy Cached local Data
-            VetproviehNavParams.delete(window.location.href);
-            window.history.back()
-        });
+      saveButton.addEventListener('click', () => {
+        this.save();
+      });
+      abort.addEventListener('click', () => {
+        console.log('cancel');
+        // Destroy Cached local Data
+        VetproviehNavParams.delete(window.location.href);
+        window.history.back();
+      });
     }
 
     /**
      * Fireing Save Event
      */
     save() {
-        console.log("Saving");
-        super.save();
+      console.log('Saving');
+      super.save();
     }
 }

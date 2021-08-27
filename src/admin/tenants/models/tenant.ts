@@ -1,9 +1,13 @@
-import { BaseModel } from "@tomuench/vetprovieh-shared/lib/orm/baseModel";
-import { Address } from "../../../shared";
+import {BaseModel} from '@tomuench/vetprovieh-shared/lib/orm/baseModel';
+import {Address} from '../../../shared';
 
-export class Tenant extends BaseModel{
-    public name: string = "";
-    public name2: string = "";
-    public vvvoNumber: string = "";
+/**
+ * Model of Tenant
+ * a Tenant is a vet-company
+ */
+export class Tenant extends BaseModel {
+    public name = '';
+    public name2 = '';
+    public vvvoNumber = '';
     public address: Address = new Address();
 }

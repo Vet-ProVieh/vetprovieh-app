@@ -1,13 +1,12 @@
-import { FieldGenerator } from "../../helpers";
-import { FieldOptions } from "../field_options";
-import { MediaField } from "./mediaField";
+import {FieldGenerator} from '../../helpers';
+import {FieldOptions} from '../field_options';
+import {MediaField} from './mediaField';
 
 export class Video extends MediaField {
-
-    constructor() {
-        super();
-        this.fieldType = "video";
-    }
+  constructor() {
+    super();
+    this.fieldType = 'video';
+  }
 }
 
 

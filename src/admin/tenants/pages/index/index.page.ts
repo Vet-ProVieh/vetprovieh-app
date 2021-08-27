@@ -1,15 +1,21 @@
-import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { BasicIndexPage } from "../../../../shared";
-import { Tenant } from "../../models";
-import { TenantRepository } from "../../repository";
+import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {BasicIndexPage} from '../../../../shared';
+import {Tenant} from '../../models';
+import {TenantRepository} from '../../repository';
 
 
 @WebComponent({
-    template: "",
-    tag:"vetprovieh-tenants"
+  template: '',
+  tag: 'vetprovieh-tenants',
 })
+/**
+ * Index Page for Tenants
+ */
 export class TenantsIndexPage extends BasicIndexPage<Tenant> {
-    constructor() {
-        super(new TenantRepository());
-    }
+  /**
+   * Default_Constructor
+   */
+  constructor() {
+    super(new TenantRepository());
+  }
 }

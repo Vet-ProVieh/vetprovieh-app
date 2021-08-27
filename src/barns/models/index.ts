@@ -1,2 +1,2 @@
 export * from './barn';
-export {Animal} from './animal'
+export {Animal} from './animal';

@@ -1,8 +1,7 @@
-import { BasicModel } from "../../../shared";
+import {BasicModel} from '../../../shared';
 
 export class PlanMeasureModel extends BasicModel {
-
-    public name: string = "";
+    public name = '';
     public barn: any;
     public lastVet: any;
     public values: {

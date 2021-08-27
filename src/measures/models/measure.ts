@@ -1,16 +1,16 @@
-import { Barn } from "../../barns";
-import { BasicModel } from "../../shared";
-import { MeasureGroup } from "./group";
-import { Objective } from "./objective";
+import {Barn} from '../../barns';
+import {BasicModel} from '../../shared';
+import {MeasureGroup} from './group';
+import {Objective} from './objective';
 
-export class Measure extends BasicModel{
-    public animal: string = "";
-    public animalNumber: string = "";
+export class Measure extends BasicModel {
+    public animal = '';
+    public animalNumber = '';
     public barnId: number | undefined;
     public barn: Barn | undefined;
     public data: MeasureGroup[] = [];
-    public isBlueprint: boolean = true;
-    public measuresDate: string = "";
+    public isBlueprint = true;
+    public measuresDate = '';
     public objectives: Objective[] = [];
-    public therapyFrequency: string = "";
+    public therapyFrequency = '';
 }

@@ -1,12 +1,12 @@
-import { VpOperationField } from "./field";
-import { ElementGroupBinding, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
+import {VpOperationField} from './field';
+import {ElementGroupBinding, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {ElementBinding} from '@tomuench/vetprovieh-shared/lib';
 
 /**
  * Pager OperationGroup
  */
 @WebComponent({
-    template: `<div id="group" class="panel is-primary">
+  template: `<div id="group" class="panel is-primary">
                     <p class="panel-heading">
                        {{position}}. {{name}}
 
@@ -16,18 +16,17 @@ import { ElementBinding } from "@tomuench/vetprovieh-shared/lib";
                         </button>
                     </p>
                     <div id="fields" class="panel-block" style="display:block">
-                    
+
                     </div>
                 </div>`,
-    tag: 'vp-operation-group'
+  tag: 'vp-operation-group',
 })
 export class VpOperationGroup extends ElementGroupBinding {
+    private barnId = '';
 
-    private barnId: string = "";
-
-    constructor(barnId: string){
-        super();
-        this.barnId = barnId;
+    constructor(barnId: string) {
+      super();
+      this.barnId = barnId;
     }
 
     /**
@@ -36,15 +35,15 @@ export class VpOperationGroup extends ElementGroupBinding {
    * @protected
    */
     protected subFields(): Array<any> {
-        return this.object.opFields;
+      return this.object.opFields;
     }
 
 
     /**
      * Generating new SubElement
-     * @param type 
+     * @param type
      */
     protected newElement(): ElementBinding {
-        return new VpOperationField(this.barnId);
+      return new VpOperationField(this.barnId);
     }
 }

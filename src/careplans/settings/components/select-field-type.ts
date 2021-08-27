@@ -1,20 +1,19 @@
-import { WebComponent, VetproviehElement, Indexable, VetproviehBinding } from "@tomuench/vetprovieh-shared/lib";
-import { FieldGenerator } from "../helpers";
-import { CareplanField } from "../models/careplanField";
-import { FieldOptions } from "../models/field_options";
+import {WebComponent, VetproviehElement, Indexable, VetproviehBinding} from '@tomuench/vetprovieh-shared/lib';
+import {FieldGenerator} from '../helpers';
+import {CareplanField} from '../models/careplanField';
+import {FieldOptions} from '../models/field_options';
 
 
 @WebComponent({
-    template: VetproviehElement.template + `
+  template: VetproviehElement.template + `
 
     <div id="specificFields">
 
     </div>
     `,
-    tag: 'select-field-type'
+  tag: 'select-field-type',
 })
 export class SelectFieldType extends VetproviehElement {
-
     private _fieldType: string | undefined;
 
 
@@ -22,12 +21,12 @@ export class SelectFieldType extends VetproviehElement {
       * Observed Attributes
       */
     static get observedAttributes() {
-        return ['fieldtype'];
+      return ['fieldtype'];
     }
 
     constructor() {
-        super(false, false);
-        this.render();
+      super(false, false);
+      this.render();
     }
 
 
@@ -36,7 +35,7 @@ export class SelectFieldType extends VetproviehElement {
      * @return {string}
      */
     public get fieldtype(): string {
-        return this._fieldType || "";
+      return this._fieldType || '';
     }
 
     /**
@@ -44,26 +43,26 @@ export class SelectFieldType extends VetproviehElement {
      * @param {string} val
      */
     public set fieldtype(val: string) {
-        if (val !== this._fieldType) {
-            this._fieldType = val;
-        }
+      if (val !== this._fieldType) {
+        this._fieldType = val;
+      }
     }
 
     public render() {
-        super.render();
-        this.createAndAttachFields(this.fieldtype);
+      super.render();
+      this.createAndAttachFields(this.fieldtype);
     }
 
     /**
      * Creating fields for a CareplanFieldType
-     * @param {string} fieldType 
+     * @param {string} fieldType
      */
     private createAndAttachFields(fieldType: string) {
-        if (this.fieldtype) {
-            FieldGenerator.generate(fieldType).forEach((field: HTMLElement) => {
-                this.specificFields.append(field);
-            })
-        }
+      if (this.fieldtype) {
+        FieldGenerator.generate(fieldType).forEach((field: HTMLElement) => {
+          this.specificFields.append(field);
+        });
+      }
     }
 
     /**
@@ -71,7 +70,6 @@ export class SelectFieldType extends VetproviehElement {
      * @return {HTMLElement}
      */
     private get specificFields(): HTMLElement {
-        return this.querySelector("#specificFields") as HTMLElement;
+      return this.querySelector('#specificFields') as HTMLElement;
     }
-
 }

@@ -1,16 +1,16 @@
-import { VetproviehList } from "@tomuench/vetprovieh-list/lib/vetprovieh-list";
-import { ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { PlanMeasureModel } from "../../../careplans/operational/models/planMeasure";
-import { MeasureOperationPlansRepository } from "../../../careplans/operational/repository";
-import { BasicSelectPage } from "../../../shared";
-import { Objective } from "../../models";
-import { KeyResult } from "../../models/keyresult";
-import { ObjectivesRepository } from "../../repository";
+import {VetproviehList} from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
+import {ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {PlanMeasureModel} from '../../../careplans/operational/models/planMeasure';
+import {MeasureOperationPlansRepository} from '../../../careplans/operational/repository';
+import {BasicSelectPage} from '../../../shared';
+import {Objective} from '../../models';
+import {KeyResult} from '../../models/keyresult';
+import {ObjectivesRepository} from '../../repository';
 
 @WebComponent({
-    template:
+  template:
         VetproviehElement.template +
-        ` 
+        `
 
         <div class="tabs is-toggle is-fullwidth">
             <ul>
@@ -29,7 +29,7 @@ import { ObjectivesRepository } from "../../repository";
                     ( <span id="selectedOpPlans">0</span> )
                 </a>
                 </li>
-            </ul>   
+            </ul>
         </div>
 
         <form id="form">
@@ -101,29 +101,29 @@ import { ObjectivesRepository } from "../../repository";
                 <div class="container sticky-footer">
                     <div class="columns is-mobile">
                         <div class="column">
-                            <input id="abortButton" 
-                                    class="button is-danger is-fullwidth" 
-                                    type="reset" value="Abbrechen">                   
+                            <input id="abortButton"
+                                    class="button is-danger is-fullwidth"
+                                    type="reset" value="Abbrechen">
                         </div>
                         <div class="column">
                             <input id="takeoverButton" disabled
-                                    class="button is-success is-fullwidth" 
+                                    class="button is-success is-fullwidth"
                                     type="button" value="Übernehmen">
                         </div>
                     </div>
                 </div>
         </form>
       `,
-    tag: "vp-measures-select"
+  tag: 'vp-measures-select',
 })
 export class MeasuresSelectPage extends BasicSelectPage {
     private repository: MeasureOperationPlansRepository;
 
     constructor() {
-        super();
-        this.repository = new MeasureOperationPlansRepository(
-            VetproviehNavParams.getUrlParameter("barnId")
-        );
+      super();
+      this.repository = new MeasureOperationPlansRepository(
+          VetproviehNavParams.getUrlParameter('barnId')
+      );
     }
 
     /**
@@ -131,52 +131,52 @@ export class MeasuresSelectPage extends BasicSelectPage {
     * @return {string}
     */
     protected get paramKey(): string {
-        return "selectPageMeasure.return";
+      return 'selectPageMeasure.return';
     }
 
     connectedCallback() {
-        super.connectedCallback();
+      super.connectedCallback();
 
-        let list: VetproviehList = this.vetproviehList;
-        if (list) {
-            list.repository = this.repository;
-            list.addEventListener("selected", () => {
-                this.updateSelectedAmount();
-            })
-        }
+      const list: VetproviehList = this.vetproviehList;
+      if (list) {
+        list.repository = this.repository;
+        list.addEventListener('selected', () => {
+          this.updateSelectedAmount();
+        });
+      }
 
-        let list2: VetproviehList = this.objectivesList;
-        if (list2) {
-            list2.addEventListener("selected", () => {
-                this.updateSelectedAmount();
-            })
-        }
+      const list2: VetproviehList = this.objectivesList;
+      if (list2) {
+        list2.addEventListener('selected', () => {
+          this.updateSelectedAmount();
+        });
+      }
 
 
-        let tabs = this.querySelector(".tabs");
+      const tabs = this.querySelector('.tabs');
 
-        if (tabs) {
-            let anchors = tabs.querySelectorAll("a");
-            anchors.forEach((element: HTMLAnchorElement) => {
-                element.addEventListener("click", () => {
-                    let id = element.dataset.id;
+      if (tabs) {
+        const anchors = tabs.querySelectorAll('a');
+        anchors.forEach((element: HTMLAnchorElement) => {
+          element.addEventListener('click', () => {
+            const id = element.dataset.id;
 
-                    anchors.forEach((a) => {
-                        a.parentElement?.classList.remove("is-active");
+            anchors.forEach((a) => {
+                        a.parentElement?.classList.remove('is-active');
+            });
+
+                    element.parentElement?.classList.add('is-active');
+
+                    [this.querySelector('#measures'), this.querySelector('#opplans')].forEach((content) => {
+                      if (content?.id == id) {
+                            content?.classList.remove('is-hidden');
+                      } else if (content) {
+                            content?.classList.add('is-hidden');
+                      }
                     });
-
-                    element.parentElement?.classList.add("is-active");
-
-                    [this.querySelector("#measures"), this.querySelector("#opplans")].forEach((content) => {
-                        if (content?.id == id) {
-                            content?.classList.remove("is-hidden");
-                        } else if (content) {
-                            content?.classList.add("is-hidden");
-                        }
-                    })
-                })
-            })
-        }
+          });
+        });
+      }
     }
 
     /**
@@ -184,7 +184,7 @@ export class MeasuresSelectPage extends BasicSelectPage {
      * @return {any}
      */
     protected get returnValue(): any {
-        return this.selectedOperationPlans.concat(this.selectedCurrentObjectives);
+      return this.selectedOperationPlans.concat(this.selectedCurrentObjectives);
     }
 
     /**
@@ -192,7 +192,7 @@ export class MeasuresSelectPage extends BasicSelectPage {
      * @return {VetproviehList}
      */
     private get vetproviehList(): VetproviehList {
-        return document.getElementById("measuresList") as VetproviehList;
+      return document.getElementById('measuresList') as VetproviehList;
     }
 
     /**
@@ -200,7 +200,7 @@ export class MeasuresSelectPage extends BasicSelectPage {
     * @return {VetproviehList}
     */
     private get objectivesList(): VetproviehList {
-        return document.getElementById("objectivesList") as VetproviehList;
+      return document.getElementById('objectivesList') as VetproviehList;
     }
 
     /**
@@ -208,31 +208,31 @@ export class MeasuresSelectPage extends BasicSelectPage {
      * @return {Array<Objective | undefined>}
      */
     public get selectedOperationPlans(): Array<Objective | undefined> {
-        return this.operationPlans
-            .filter((operationPlan: PlanMeasureModel) => !!operationPlan.id && operationPlan.values && this.selectedOperationPlanIds.includes(+operationPlan.id))
-            .map((part: PlanMeasureModel) => this.opPlanToObjective(part));
+      return this.operationPlans
+          .filter((operationPlan: PlanMeasureModel) => !!operationPlan.id && operationPlan.values && this.selectedOperationPlanIds.includes(+operationPlan.id))
+          .map((part: PlanMeasureModel) => this.opPlanToObjective(part));
     }
 
     /**
      * Transform Opplan to Objective
-     * @param {PlanMeasureModel} part 
-     * @returns {Objective | undefined}
+     * @param {PlanMeasureModel} part
+     * @return {Objective | undefined}
      */
     private opPlanToObjective(part: PlanMeasureModel): Objective | undefined {
-        if (part.values) {
-            let tokenMeasure = part.values.EmpfohleneMaßnahme;
-            let objective = new Objective();
-            objective.name = `Maßnahmen aus ${part.name} vom ${ObjectHelper.formatDate(part.updatedAt)}`;
-            objective.keyResults = [];
-            tokenMeasure.split("\r\n").forEach((measureLine: string) => {
-                let keyResult = new KeyResult();
-                keyResult.name = measureLine;
-                objective.keyResults.push(keyResult);
-            })
-            return objective;
-        } else {
-            return undefined;
-        }
+      if (part.values) {
+        const tokenMeasure = part.values.EmpfohleneMaßnahme;
+        const objective = new Objective();
+        objective.name = `Maßnahmen aus ${part.name} vom ${ObjectHelper.formatDate(part.updatedAt)}`;
+        objective.keyResults = [];
+        tokenMeasure.split('\r\n').forEach((measureLine: string) => {
+          const keyResult = new KeyResult();
+          keyResult.name = measureLine;
+          objective.keyResults.push(keyResult);
+        });
+        return objective;
+      } else {
+        return undefined;
+      }
     }
 
     /**
@@ -240,37 +240,37 @@ export class MeasuresSelectPage extends BasicSelectPage {
     * @return {Array<Objective>}
     */
     public get selectedCurrentObjectives(): Array<Objective> {
-        return this.objectives
-            .filter((objective: Objective) => !!objective.id && this.selectedObjectivesIds.includes(+objective.id));
+      return this.objectives
+          .filter((objective: Objective) => !!objective.id && this.selectedObjectivesIds.includes(+objective.id));
     }
 
     /**
      * Get selected operationPlanIds
-     * @return {Array<number>} 
+     * @return {Array<number>}
      */
     public get selectedOperationPlanIds(): Array<number> {
-        let inputCheckboxes = this.vetproviehList.shadowRoot?.querySelectorAll("input[type='checkbox']");
-        let returnValue: number[] = [];
+      const inputCheckboxes = this.vetproviehList.shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
+      const returnValue: number[] = [];
         inputCheckboxes?.forEach((checkbox) => {
-            if ((checkbox as any).checked) {
-                returnValue.push(+(checkbox as any).value);
-            }
-        })
+          if ((checkbox as any).checked) {
+            returnValue.push(+(checkbox as any).value);
+          }
+        });
         return returnValue;
     }
 
     /**
     * Get selected objectiveIds
-    * @return {Array<number>} 
+    * @return {Array<number>}
     */
     public get selectedObjectivesIds(): Array<number> {
-        let inputCheckboxes = this.objectivesList.shadowRoot?.querySelectorAll("input[type='checkbox']");
-        let returnValue: number[] = [];
+      const inputCheckboxes = this.objectivesList.shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
+      const returnValue: number[] = [];
         inputCheckboxes?.forEach((checkbox) => {
-            if ((checkbox as any).checked) {
-                returnValue.push(+(checkbox as any).value);
-            }
-        })
+          if ((checkbox as any).checked) {
+            returnValue.push(+(checkbox as any).value);
+          }
+        });
         return returnValue;
     }
 
@@ -280,7 +280,7 @@ export class MeasuresSelectPage extends BasicSelectPage {
      * @return {Array<PlanMeasureModel>}
      */
     public get operationPlans(): Array<PlanMeasureModel> {
-        return this.vetproviehList?.objects || [];
+      return this.vetproviehList?.objects || [];
     }
 
     /**
@@ -288,7 +288,7 @@ export class MeasuresSelectPage extends BasicSelectPage {
     * @return {Array<Objective>}
     */
     public get objectives(): Array<Objective> {
-        return this.objectivesList?.objects || [];
+      return this.objectivesList?.objects || [];
     }
 
 
@@ -296,25 +296,25 @@ export class MeasuresSelectPage extends BasicSelectPage {
      * Updating Tab Element Selected Amount
      */
     private updateSelectedAmount() {
-        let amountOpPlans = this.selectedOperationPlanIds.length;
-        let amountObjectives = this.selectedObjectivesIds.length;
+      const amountOpPlans = this.selectedOperationPlanIds.length;
+      const amountObjectives = this.selectedObjectivesIds.length;
 
-        // Activate takeover Button
-        this.takeoverButton.disabled = amountOpPlans + amountObjectives == 0;
+      // Activate takeover Button
+      this.takeoverButton.disabled = amountOpPlans + amountObjectives == 0;
 
-        this.updateSelectAmountBadge(this.selectedOpPlans, amountOpPlans);
-        this.updateSelectAmountBadge(this.selectedObjectives, amountObjectives);
+      this.updateSelectAmountBadge(this.selectedOpPlans, amountOpPlans);
+      this.updateSelectAmountBadge(this.selectedObjectives, amountObjectives);
     }
 
     /**
      * Update Span Element with Amount
-     * @param {HTMLSpanElement} span 
-     * @param {number} selectedAmount 
+     * @param {HTMLSpanElement} span
+     * @param {number} selectedAmount
      */
-    private updateSelectAmountBadge(span: HTMLSpanElement, selectedAmount: number){
-        if (span) {
-            span.textContent = selectedAmount.toString();
-        }
+    private updateSelectAmountBadge(span: HTMLSpanElement, selectedAmount: number) {
+      if (span) {
+        span.textContent = selectedAmount.toString();
+      }
     }
 
     /**
@@ -322,16 +322,14 @@ export class MeasuresSelectPage extends BasicSelectPage {
      * @return {HTMLSpanElement}
      */
     private get selectedObjectives(): HTMLSpanElement {
-        return document.getElementById("selectedObjectives") as HTMLSpanElement;
+      return document.getElementById('selectedObjectives') as HTMLSpanElement;
     }
 
-     /**
+    /**
      * Badge Amount in Tab-Header
      * @return {HTMLSpanElement}
      */
-      private get selectedOpPlans(): HTMLSpanElement {
-        return document.getElementById("selectedOpPlans") as HTMLSpanElement;
+    private get selectedOpPlans(): HTMLSpanElement {
+      return document.getElementById('selectedOpPlans') as HTMLSpanElement;
     }
-
-    
 }

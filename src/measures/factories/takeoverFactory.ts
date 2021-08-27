@@ -1,18 +1,17 @@
-import { Measure, MeasureGroup, MeasureField } from "../models";
-import { MeasuresRepository } from "../repository";
-import { throwStatement } from "@babel/types";
+import {Measure, MeasureGroup, MeasureField} from '../models';
+import {MeasuresRepository} from '../repository';
+import {throwStatement} from '@babel/types';
 
 /**
  * Takeover from one measure to another
  */
 export class TakeoverFactory {
-
     private currentObject: Measure;
     private repository: MeasuresRepository
 
     constructor(measure: Measure, repository: MeasuresRepository) {
-        this.currentObject = measure;
-        this.repository = repository;
+      this.currentObject = measure;
+      this.repository = repository;
     }
 
     /**
@@ -20,40 +19,40 @@ export class TakeoverFactory {
      * @return {boolean}
      */
     private get canLoadMeasure(): boolean {
-        return !!this.currentObject ?.barn ?.id;
+      return !!this.currentObject ?.barn ?.id;
     }
 
     /**
      * Checks if the incoming Measure is valid
      * @param {Measure} measure
-     * @return {boolean} 
+     * @return {boolean}
      */
     private isValidMeasure(measure: Measure): boolean {
-        return this.currentObject.barn ?.id == measure.barn ?.id &&
+      return this.currentObject.barn ?.id == measure.barn ?.id &&
             this.currentObject.animalNumber == measure.animalNumber;
     }
 
     /**
      * Loading latest Measure from server and transfer it to the current
-     * @returns {Promise<Measure>}
+     * @return {Promise<Measure>}
      */
     public takeoverFromLatestMeasure(): Promise<Measure> {
-        return new Promise((resolve, reject) => {
-            if (this.canLoadMeasure) {
-                // @ts-ignore get checked by canLoadMeasure
-                this.repository.lastforBarn(+this.currentObject.barn.id)
-                    .then((oldMeasure: Measure) => {
-                        if (this.isValidMeasure(oldMeasure)) {
-                            this.takeoverFrom(oldMeasure);
-                        }
-                        resolve(this.currentObject);
-                    }).catch((error) => {
-                        resolve(this.currentObject);
-                    });
-            } else {
+      return new Promise((resolve, reject) => {
+        if (this.canLoadMeasure) {
+          // @ts-ignore get checked by canLoadMeasure
+          this.repository.lastforBarn(+this.currentObject.barn.id)
+              .then((oldMeasure: Measure) => {
+                if (this.isValidMeasure(oldMeasure)) {
+                  this.takeoverFrom(oldMeasure);
+                }
                 resolve(this.currentObject);
-            }
-        });
+              }).catch((error) => {
+                resolve(this.currentObject);
+              });
+        } else {
+          resolve(this.currentObject);
+        }
+      });
     }
 
     /**
@@ -61,9 +60,9 @@ export class TakeoverFactory {
      * @param {Measure} oldMeasure
      */
     private takeoverFrom(oldMeasure: Measure) {
-        oldMeasure.data.forEach((group: MeasureGroup) => {
-            this.takeoverGroup(group);
-        });
+      oldMeasure.data.forEach((group: MeasureGroup) => {
+        this.takeoverGroup(group);
+      });
     }
 
     /**
@@ -71,23 +70,23 @@ export class TakeoverFactory {
      * @param {MeasureGroup} group
      */
     private takeoverGroup(group: MeasureGroup) {
-        let currentGroup = this.getGroupFromObject(group);
-        if (currentGroup) {
-            group.details.forEach((field: MeasureField) => {
-                this.takeOverField(currentGroup, field);
-            })
-        }
+      const currentGroup = this.getGroupFromObject(group);
+      if (currentGroup) {
+        group.details.forEach((field: MeasureField) => {
+          this.takeOverField(currentGroup, field);
+        });
+      }
     }
 
     /**
      * Getting Group by Position from currentObject
-     * @param {MeasureGroup} group 
+     * @param {MeasureGroup} group
      * @return {MeasureGroup}
      */
     private getGroupFromObject(group: MeasureGroup): MeasureGroup {
-        return this.currentObject.data.filter((g: MeasureGroup) => {
-            return g.position === group.position;
-        })[0];
+      return this.currentObject.data.filter((g: MeasureGroup) => {
+        return g.position === group.position;
+      })[0];
     }
 
     /**
@@ -96,9 +95,9 @@ export class TakeoverFactory {
      * @param {MeasureField} field
      */
     private takeOverField(currentGroup: MeasureGroup, field: MeasureField) {
-        let currentField = currentGroup.details.filter((f) => f.position == field.position)[0];
-        if (currentField) {
-            currentField.value = field.value;
-        }
+      const currentField = currentGroup.details.filter((f) => f.position == field.position)[0];
+      if (currentField) {
+        currentField.value = field.value;
+      }
     }
 }

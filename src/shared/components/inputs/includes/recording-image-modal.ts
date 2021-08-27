@@ -1,10 +1,10 @@
-import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { RecordingModal } from './recording-modal';
+import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {RecordingModal} from './recording-modal';
 
 
 @WebComponent({
-    tag: "recording-image-modal",
-    template: VetproviehElement.template + `
+  tag: 'recording-image-modal',
+  template: VetproviehElement.template + `
     <div id="modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
@@ -16,7 +16,7 @@ import { RecordingModal } from './recording-modal';
             <video id="media" width="600" height="400">
             </video>
         </section>
-        <footer class="modal-card-foot"> 
+        <footer class="modal-card-foot">
             <div class="field is-grouped">
                 <p class="control">
                     <button class="button is-primary" id="takeSnapshotButton">Aufnehmen</button>
@@ -24,43 +24,41 @@ import { RecordingModal } from './recording-modal';
             </div>
         </footer>
         </div>
-    </div>`
+    </div>`,
 })
 export class RecordingImageModal extends RecordingModal {
-
-    /**
+  /**
      * Adding Listener to Buttons
      */
-    protected addButtonListeners() {
-        let b = this.getByIdFromShadowRoot("takeSnapshotButton") as HTMLButtonElement;
-        let takeSnapshot = () => {
-            this.snapshot().then(() => {
+  protected addButtonListeners() {
+    const b = this.getByIdFromShadowRoot('takeSnapshotButton') as HTMLButtonElement;
+    const takeSnapshot = () => {
+      this.snapshot().then(() => {
+        this.close(true);
+      });
+    };
+    takeSnapshot.bind(this);
+    b.addEventListener('click', takeSnapshot);
+  }
 
-                this.close(true);
-            })
-        }
-        takeSnapshot.bind(this);
-        b.addEventListener("click", takeSnapshot)
-    }
-
-    /**
+  /**
      * Taking a Snapshot from Canvas
      * @return {Promise<any>}
      */
-    private snapshot(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            var canvas = document.createElement('canvas');
-            canvas.width = 1280;
-            canvas.height = 720;
-            var ctx = canvas.getContext('2d');
-            if (ctx) {
-                ctx.drawImage(this.mediaElement, 0, 0, canvas.width, canvas.height);
-                this.recordedContent = canvas.toDataURL('image/png');
-                canvas.toBlob((blob: Blob | null) => {
-                    this._content = blob;
-                    resolve(true);
-                })
-            }
-        })
-    }
+  private snapshot(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      const canvas = document.createElement('canvas');
+      canvas.width = 1280;
+      canvas.height = 720;
+      const ctx = canvas.getContext('2d');
+      if (ctx) {
+        ctx.drawImage(this.mediaElement, 0, 0, canvas.width, canvas.height);
+        this.recordedContent = canvas.toDataURL('image/png');
+        canvas.toBlob((blob: Blob | null) => {
+          this._content = blob;
+          resolve(true);
+        });
+      }
+    });
+  }
 }

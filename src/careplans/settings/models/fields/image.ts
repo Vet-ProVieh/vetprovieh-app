@@ -1,15 +1,14 @@
-import { FieldGenerator } from "../../helpers";
-import { MediaField } from "./mediaField";
+import {FieldGenerator} from '../../helpers';
+import {MediaField} from './mediaField';
 
 /**
  * SettingsField Image
  */
 export class ImageField extends MediaField {
-    
-    constructor() {
-        super();
-        this.fieldType = "image";
-    }
+  constructor() {
+    super();
+    this.fieldType = 'image';
+  }
 }
 
 

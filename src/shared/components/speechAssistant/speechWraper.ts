@@ -1,4 +1,4 @@
-import { Indexable } from "@tomuench/vetprovieh-shared/lib";
+import {Indexable} from '@tomuench/vetprovieh-shared/lib';
 
 /**
  * Wrapper for the Speech API
@@ -6,31 +6,50 @@ import { Indexable } from "@tomuench/vetprovieh-shared/lib";
 export class SpeechWrapper {
     private _recognition: any;
     private _speechRecognitionList: any;
-    private _interimResults: boolean = false;
+    private _interimResults = false;
 
+    /**
+     * Getting Speech-Synh
+     * @return {SpeechSynthesis}
+     */
     public get synth() {
-        return window.speechSynthesis;
+      return window.speechSynthesis;
     }
 
     /**
      * Default-Constructor
-     * @param element 
+     * @param {boolean} interimResults
      */
-    constructor(interimResults: boolean = false) {
-        this._interimResults = interimResults;
-        this._initRecognition();
+    constructor(interimResults = false) {
+      this._interimResults = interimResults;
+      this._initRecognition();
     }
 
+    /**
+     * Loading Speech Recognition
+     * @return {SpeechRecognition}
+     */
     private getSpeechRecognition(): any {
-        return (window as Indexable)['webkitSpeechRecognition'] || SpeechRecognition;
+      return (window as Indexable)['webkitSpeechRecognition'] ||
+      SpeechRecognition;
     }
 
+    /**
+     * Get SpeechRecognitionEvent
+     * @return {SpeechRecognitionEvent}
+     */
     private getSpeechRecognitionEvent(): any {
-        return (window as Indexable)['webkitSpeechRecognitionEvent'] || SpeechRecognitionEvent;
+      return (window as Indexable)['webkitSpeechRecognitionEvent'] ||
+      SpeechRecognitionEvent;
     }
 
+    /**
+     * Loading Grammer
+     * @return {SpeechGrammarList}
+     */
     private getGrammarList(): any {
-        return (window as Indexable)['webkitSpeechGrammarList'] || SpeechGrammarList;
+      return (window as Indexable)['webkitSpeechGrammarList'] ||
+      SpeechGrammarList;
     }
 
     /**
@@ -38,86 +57,98 @@ export class SpeechWrapper {
      * @return {boolean}
      */
     public get ready(): boolean {
-        return this._recognition !== undefined;
+      return this._recognition !== undefined;
     }
 
+    /**
+     * Initialise Recognition
+     */
     private _initRecognition() {
-        try {
-            var SpeechRecognition = this.getSpeechRecognition();
-            var SpeechRecognitionEvent = this.getSpeechRecognitionEvent();
-            this._recognition = new SpeechRecognition();
+      try {
+        const SpeechRecognition = this.getSpeechRecognition();
+        this._recognition = new SpeechRecognition();
 
-            this._initGrammar();
+        this._initGrammar();
 
-            if (this.ready) {
-                this._recognition.continuous = true;
-                this._recognition.lang = 'de-DE';
-                this._recognition.interimResults = this._interimResults;
-                this._recognition.maxAlternatives = 1;
-            }
-        } catch (ex) {
-            console.log("Could not init Speech-Recognition");
+        if (this.ready) {
+          this._recognition.continuous = true;
+          this._recognition.lang = 'de-DE';
+          this._recognition.interimResults = this._interimResults;
+          this._recognition.maxAlternatives = 1;
         }
+      } catch (ex) {
+        console.log('Could not init Speech-Recognition');
+      }
     }
 
     /**
      * Stop Speech Recognition
      */
     stop() {
-        if (this.ready) this._recognition.stop();
+      if (this.ready) this._recognition.stop();
     }
 
     /**
      * Start Speech Recognition
      */
     start() {
-        if (this.ready) this._recognition.start();
+      if (this.ready) this._recognition.start();
     }
 
+    /**
+     * On Result Callback
+     * @param {Function} func
+     */
     set onresult(func: Function) {
-        if (this.ready) {
-            this._recognition.onresult = function (event: any) {
-                console.log("HEARED SOMETHING");
-                console.log(event);
-                if (event.isFinal) {
-                    func(event.results[0][0].transcript);
-                }
-
-            }.bind(this);
-        }
+      if (this.ready) {
+        this._recognition.onresult = function(event: any) {
+          console.log('HEARED SOMETHING');
+          console.log(event);
+          if (event.isFinal) {
+            func(event.results[0][0].transcript);
+          }
+        };
+      }
     }
 
+    /**
+     * On Results Raw Callback
+     * @param {Function} func
+     */
     set onresultRaw(func: Function) {
-        if (this.ready) {
-            this._recognition.onresult = function (event: any) {
-                func(event.results[0]);
-            }.bind(this);
-        }
+      if (this.ready) {
+        this._recognition.onresult = function(event: any) {
+          func(event.results[0]);
+        };
+      }
     }
 
     /**
      * Init Grammar for Speech Recognition
      */
     _initGrammar() {
-        var grammar = '#JSGF V1.0;'
-        var SpeechGrammarList: any = this.getGrammarList();
-        this._speechRecognitionList = new SpeechGrammarList();
-        this._speechRecognitionList.addFromString(grammar, 1);
-        this._recognition.grammars = this._speechRecognitionList;
+      const grammar = '#JSGF V1.0;';
+      const SpeechGrammarList: any = this.getGrammarList();
+      this._speechRecognitionList = new SpeechGrammarList();
+      this._speechRecognitionList.addFromString(grammar, 1);
+      this._recognition.grammars = this._speechRecognitionList;
     }
 
     /**
      * Speaking something
-     * @param {string} input 
+     * @param {string} input
      */
     speak(input: string) {
-        var utterThis = new SpeechSynthesisUtterance(input);
-        this.synth.speak(utterThis);
+      const utterThis = new SpeechSynthesisUtterance(input);
+      this.synth.speak(utterThis);
     }
 
+    /**
+     * Add new Grammar
+     * @param {string} grammarText
+     */
     addGrammar(grammarText: string) {
-        console.log(grammarText);
-        this._speechRecognitionList.addFromString(grammarText, 2);
+      console.log(grammarText);
+      this._speechRecognitionList.addFromString(grammarText, 2);
     }
-
 }

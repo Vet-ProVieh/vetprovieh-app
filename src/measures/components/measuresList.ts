@@ -1,8 +1,8 @@
-import { VetproviehBasicList } from "@tomuench/vetprovieh-list/lib/vetprovieh-basic-list";
-import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
 @WebComponent({
-    template: VetproviehElement.template + `<style>
+  template: VetproviehElement.template + `<style>
                 :host {
                     display: block;
                 }
@@ -15,12 +15,12 @@ import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib
                 #header {
                     margin-top: 15px;
                 }
-    
+
                 </style>
-            
+
                 <!-- SearchControl on Top -->
                 <div id="searchControl" class="control">
-                    <input id="search" class="input" type="text" 
+                    <input id="search" class="input" type="text"
                             placeholder="Bitte Suchbegriff eingeben">
                 </div>
                 <div id="header" class="is-hidden-touch">
@@ -48,16 +48,15 @@ import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib
                 <!-- Pager for Paging through List-->
                 <vetprovieh-pager id="pager" page="1" maximum="7">
                 </vetprovieh-pager>`,
-    tag: "measures-list"
+  tag: 'measures-list',
 })
 export class MeasuresList extends VetproviehBasicList {
-  
-    connectedCallback(){
-        super.connectedCallback();
-        this.addEventListener("selected",(event) => {
-            let target = event.target as HTMLElement;
-            let customEvent = (event as CustomEvent);
-            window.location.href = `show.html?id=${customEvent.detail.id}`;
-        })
-    }
+  connectedCallback() {
+    super.connectedCallback();
+    this.addEventListener('selected', (event) => {
+      const target = event.target as HTMLElement;
+      const customEvent = (event as CustomEvent);
+      window.location.href = `show.html?id=${customEvent.detail.id}`;
+    });
+  }
 }

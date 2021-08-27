@@ -1,10 +1,10 @@
-import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { SimpleModal } from "./simple-modal";
+import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {SimpleModal} from './simple-modal';
 
 
 @WebComponent({
-    tag: "question-modal",
-    template: VetproviehElement.template + `
+  tag: 'question-modal',
+  template: VetproviehElement.template + `
     <div id="modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
@@ -14,7 +14,7 @@ import { SimpleModal } from "./simple-modal";
         <section class="modal-card-body">
             <p>\${this.message}</p>
         </section>
-        <footer class="modal-card-foot"> 
+        <footer class="modal-card-foot">
             <div class="container">
                 <div class="columns is-mobile">
                     <div class="column">
@@ -31,68 +31,68 @@ import { SimpleModal } from "./simple-modal";
             </div>
         </footer>
         </div>
-    </div>`
+    </div>`,
 })
 export class QuestionModal extends SimpleModal {
-    private _message: string = "";
+    private _message = '';
 
-    private _result: boolean = false;
+    private _result = false;
 
     public get result(): boolean {
-        return this._result;
+      return this._result;
     }
 
     public get message(): string {
-        return this._message;
+      return this._message;
     }
 
     public set message(v: string) {
-        if(v !== this._message) {
-            this._message = v;
-        }
+      if (v !== this._message) {
+        this._message = v;
+      }
     }
 
     constructor(title: string, message: string) {
-        super();
-        this.message = message;
-        this.title = title;
+      super();
+      this.message = message;
+      this.title = title;
     }
 
     connectedCallback() {
-        super.connectedCallback();
+      super.connectedCallback();
     }
 
     protected addButtonListeners() {
-        this.saveButton.addEventListener("click", (event) => {
-            this._result = true;
-            this.close();
-        });
+      this.saveButton.addEventListener('click', (event) => {
+        this._result = true;
+        this.close();
+      });
     }
 
 
     /**
      * Open QuestionModal and Ask Message
      * @param {string} title
-     * @param {string} message 
+     * @param {string} message
      */
     public static askQuestion(title: string, message: string): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            let modal = new QuestionModal(title, message);
-            modal.render();
-            document.children[0].append(modal);
-            modal.active = true;
-            modal.addEventListener("close", () => {
-                resolve(modal.result);
-                modal.remove();
-            });
-        })
+      return new Promise<boolean>((resolve, reject) => {
+        const modal = new QuestionModal(title, message);
+        modal.render();
+        document.children[0].append(modal);
+        modal.active = true;
+        modal.addEventListener('close', () => {
+          resolve(modal.result);
+          modal.remove();
+        });
+      });
     }
 
 
     /**
      * Observed Attributes
      */
-     static get observedAttributes() {
-        return ['type', 'title', 'message'];
+    static get observedAttributes() {
+      return ['type', 'title', 'message'];
     }
 }

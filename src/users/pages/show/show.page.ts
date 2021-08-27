@@ -1,18 +1,21 @@
-import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { BasicIndexPage, BasicShowPage } from "../../../shared";
-import { User } from "../../models";
-import { UserRepository } from "../../repository";
-
+import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {BasicShowPage} from '../../../shared';
+import {UserRepository} from '../../repository';
 
 @WebComponent({
-    template: "",
-    tag:"vetprovieh-user"
+  template: '',
+  tag: 'vetprovieh-user',
 })
-export class UsersShowPage extends BasicShowPage{
-    
+/**
+ * Show or Edit User Page
+ */
+export class UsersShowPage extends BasicShowPage {
     private repository : UserRepository = new UserRepository();
 
+    /**
+     * Connected-Callback Implementation (Web-Components)
+     */
     connectedCallback() {
-        this.detailElement.src = this.repository.endpoint;
+      this.detailElement.src = this.repository.endpoint;
     }
 }

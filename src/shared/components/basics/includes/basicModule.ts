@@ -1,10 +1,9 @@
 
 
 export class VetproviehBasicModule {
+    public basePath:string;
 
-    public basePath:string; 
-    
-    constructor(basePath: string){
-        this.basePath = basePath;
+    constructor(basePath: string) {
+      this.basePath = basePath;
     }
 }

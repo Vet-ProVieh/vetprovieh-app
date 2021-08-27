@@ -1,11 +1,11 @@
-import { VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import RecordRTC from "recordrtc";
-import { RecordingRtcModal } from "./recording-rtc-modal";
+import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import RecordRTC from 'recordrtc';
+import {RecordingRtcModal} from './recording-rtc-modal';
 
 
 @WebComponent({
-    tag: "recording-audio-modal",
-    template: VetproviehElement.template + `
+  tag: 'recording-audio-modal',
+  template: VetproviehElement.template + `
     <div id="modal" class="modal">
         <div class="modal-background"></div>
         <div class="modal-card">
@@ -17,26 +17,22 @@ import { RecordingRtcModal } from "./recording-rtc-modal";
             <audio style="object-fit: fill;" id="media">
             </audio>
         </section>
-        <footer class="modal-card-foot"> 
+        <footer class="modal-card-foot">
             ${RecordingRtcModal.buttonsTemplate}
           </div>
         </footer>
         </div>
-    </div>`
+    </div>`,
 })
 export class RecordingAudioModal extends RecordingRtcModal {
-
-
-    /**
+  /**
      * After Stream started, bind recorder
-     * @param {MediaStream} stream 
+     * @param {MediaStream} stream
      */
-    protected afterStreamStarted(stream: MediaStream){
-        this.recorder = new RecordRTC(stream, {
-            type: 'audio',
-            mimeType: 'audio/webm',
-        });
-    }
-
-
+  protected afterStreamStarted(stream: MediaStream) {
+    this.recorder = new RecordRTC(stream, {
+      type: 'audio',
+      mimeType: 'audio/webm',
+    });
+  }
 }

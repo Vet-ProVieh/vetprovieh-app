@@ -1,7 +1,7 @@
-import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
+import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
 @WebComponent({
-    tag: "vp-opplan-new"
+  tag: 'vp-opplan-new',
 })
 export class OperationPlanNewPage {
 

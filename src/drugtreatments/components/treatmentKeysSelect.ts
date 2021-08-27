@@ -1,13 +1,13 @@
-import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { FieldWithLabel } from "../../shared";
-import { TreatmentKeys } from "../models";
-import { DrugTreatmentKeysRepository } from "../repository";
+import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {FieldWithLabel} from '../../shared';
+import {TreatmentKeys} from '../models';
+import {DrugTreatmentKeysRepository} from '../repository';
 
 /**
- * Custom Field to Render 
+ * Custom Field to Render
  */
 @WebComponent({
-    template: `
+  template: `
     <div class="control">
         <div class="field">
             \${this.renderLabel()}
@@ -18,37 +18,36 @@ import { DrugTreatmentKeysRepository } from "../repository";
             </div>
         </div>
     </div>`,
-    tag: 'treatment-keys-select'
+  tag: 'treatment-keys-select',
 })
 export class TreatmentKeysSelect extends FieldWithLabel {
-
     private repository: DrugTreatmentKeysRepository = new DrugTreatmentKeysRepository();
 
-    public optionsAsHtml: string = ""
+    public optionsAsHtml = ''
 
 
     public connectedCallback() {
-        this.renderOptions().then((result) => {
-            super.connectedCallback();
-        })
+      this.renderOptions().then((result) => {
+        super.connectedCallback();
+      });
     }
 
     private renderOptions(): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
-            this.optionsAsHtml = `<option value="">Keine Behandlung</option>`;
-            this.repository.keys().then((keys: string[]) => {
-                keys.forEach((value: string) => {
-                    let option = document.createElement("option") as HTMLOptionElement;
-                    option.value = value;
-                    option.innerHTML = value;
-                    this.optionsAsHtml += option.outerHTML;
-                })
-                resolve(true);
-            }).catch((error) =>  {
-                console.log("Could not load TreatmentKeys");
-                resolve(false);
-            })
-        })
+      return new Promise<any>((resolve, reject) => {
+        this.optionsAsHtml = `<option value="">Keine Behandlung</option>`;
+        this.repository.keys().then((keys: string[]) => {
+          keys.forEach((value: string) => {
+            const option = document.createElement('option') as HTMLOptionElement;
+            option.value = value;
+            option.innerHTML = value;
+            this.optionsAsHtml += option.outerHTML;
+          });
+          resolve(true);
+        }).catch((error) => {
+          console.log('Could not load TreatmentKeys');
+          resolve(false);
+        });
+      });
     }
 
 
@@ -57,6 +56,6 @@ export class TreatmentKeysSelect extends FieldWithLabel {
    * @return {HTMLInputElement}
    */
     protected get inputField(): HTMLSelectElement {
-        return this.getElementsByTagName("select")[0] as HTMLSelectElement;
+      return this.getElementsByTagName('select')[0] as HTMLSelectElement;
     }
 }

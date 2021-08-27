@@ -1,8 +1,8 @@
-import { BasicModel } from "../../shared";
-import { MeasureField } from "./field";
+import {BasicModel} from '../../shared';
+import {MeasureField} from './field';
 
-export class MeasureGroup extends BasicModel{
-    public name: string = "";
+export class MeasureGroup extends BasicModel {
+    public name = '';
     public details: MeasureField[] = [];
-    public position: number = 0;
+    public position = 0;
 }

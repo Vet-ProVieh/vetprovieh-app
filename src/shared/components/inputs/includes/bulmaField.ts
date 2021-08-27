@@ -1,12 +1,12 @@
-import { WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { FieldWithLabel } from "./fieldWithLabel";
+import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {FieldWithLabel} from './fieldWithLabel';
 
 
 /**
- * Custom Field to Render 
+ * Custom Field to Render
  */
 @WebComponent({
-    template: `
+  template: `
     <div class="control">
         <div class="field">
             \${this.renderLabel()}
@@ -15,8 +15,8 @@ import { FieldWithLabel } from "./fieldWithLabel";
             </div>
         </div>
     </div>`,
-    tag: 'bulma-input'
+  tag: 'bulma-input',
 })
-export class BulmaField  extends FieldWithLabel{
+export class BulmaField extends FieldWithLabel {
 
 }

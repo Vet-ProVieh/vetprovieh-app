@@ -1,6 +1,6 @@
-import { VetproviehBinding, VetproviehElement, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { QuestionModal } from "../../../shared";
-import { KeyResult } from "../../models";
+import {VetproviehBinding, VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {QuestionModal} from '../../../shared';
+import {KeyResult} from '../../models';
 
 /**
  * Component to Edit KeyResult
@@ -14,7 +14,7 @@ import { KeyResult } from "../../models";
               <input property="name" class="input" placeholder="Bitte geben Sie ihr Zwischenziel ein" type="text" required/>
           </div>
           <div class="column is-2">
-            <div class="buttons">                      
+            <div class="buttons">
               <button class="button is-danger" id="delete">
                   <i class="fas fa-trash-alt"></i>
               </button>
@@ -22,10 +22,9 @@ import { KeyResult } from "../../models";
           </div>
       </div>
     `,
-  tag: "vp-edit-key-result",
+  tag: 'vp-edit-key-result',
 })
 export class KeyResultEditComponent extends VetproviehElement {
-
   private _keyResult: KeyResult = new KeyResult();
 
   constructor() {
@@ -38,9 +37,9 @@ export class KeyResultEditComponent extends VetproviehElement {
   public set keyResult(val: KeyResult) {
     if (this._keyResult !== val) {
       this._keyResult = val;
-      
+
       if (this.shadowRoot) {
-        VetproviehBinding.bindFormElements(this.shadowRoot.querySelector(".columns"), this.keyResult,);
+        VetproviehBinding.bindFormElements(this.shadowRoot.querySelector('.columns'), this.keyResult,);
       }
     }
   }
@@ -51,12 +50,12 @@ export class KeyResultEditComponent extends VetproviehElement {
   }
 
   public checkVailidity(): boolean {
-    console.log("CHECK_VALIDITY KeyResultEdit");
-    let input = this.shadowRoot?.querySelector("input");
+    console.log('CHECK_VALIDITY KeyResultEdit');
+    const input = this.shadowRoot?.querySelector('input');
     if (input) {
-      let valid = input.checkValidity();
-      if (valid) input.classList.remove("is-danger");
-      else input.classList.add("is-danger")
+      const valid = input.checkValidity();
+      if (valid) input.classList.remove('is-danger');
+      else input.classList.add('is-danger');
 
       return valid;
     } else {
@@ -68,7 +67,7 @@ export class KeyResultEditComponent extends VetproviehElement {
    * Delete KeyResult, Dispatch Event and delete DOM-Element
    */
   public delete() {
-    this.dispatchEvent(new CustomEvent("delete", { detail: this.keyResult }));
+    this.dispatchEvent(new CustomEvent('delete', {detail: this.keyResult}));
     this.remove();
   }
 
@@ -76,12 +75,12 @@ export class KeyResultEditComponent extends VetproviehElement {
    * Register EventListeners to Buttons
    */
   private registerButtons() {
-    this.deleteButton.addEventListener("click", () => {
-      QuestionModal.askQuestion("Entfernen?", "Möchten Sie das Zwischenziel entfernen?").then((result) => {
+    this.deleteButton.addEventListener('click', () => {
+      QuestionModal.askQuestion('Entfernen?', 'Möchten Sie das Zwischenziel entfernen?').then((result) => {
         if (result) {
           this.delete();
         }
-      })
+      });
     });
   }
 
@@ -90,7 +89,6 @@ export class KeyResultEditComponent extends VetproviehElement {
    * @return {HTMLButtonElement}
    */
   private get deleteButton(): HTMLButtonElement {
-    return this.getByIdFromShadowRoot("delete") as HTMLButtonElement;
+    return this.getByIdFromShadowRoot('delete') as HTMLButtonElement;
   }
-
 }

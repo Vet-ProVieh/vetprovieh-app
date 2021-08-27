@@ -1,16 +1,14 @@
-import { WebComponent, Indexable } from "@tomuench/vetprovieh-shared/lib";
-import { GeoEvent } from "../../models/geo";
-import { IGeoProvider } from "../../providers/geo/IGeoProvider";
-import { OpenStreetMapNomatim } from "../../providers/geo/OpenStreetMapNomatim";
-
+import {WebComponent, Indexable} from '@tomuench/vetprovieh-shared/lib';
+import {GeoEvent} from '../../models/geo';
+import {IGeoProvider} from '../../providers/geo/IGeoProvider';
+import {OpenStreetMapNomatim} from '../../providers/geo/OpenStreetMapNomatim';
 
 
 @WebComponent({
-    extends: "button",
-    tag: 'geo-button'
+  extends: 'button',
+  tag: 'geo-button',
 })
 export class GeoCoordButton extends HTMLButtonElement {
-
     // Type of loading
     private _loadType: GeoButtionType = GeoButtionType.device;
 
@@ -18,14 +16,14 @@ export class GeoCoordButton extends HTMLButtonElement {
      * Observed Attributes
      */
     static get observedAttributes() {
-        return ['loadType'];
+      return ['loadType'];
     }
 
     constructor() {
-        super();
-        this.addEventListener("click", () => {
-            this._loadGeoCoordinates();
-        });
+      super();
+      this.addEventListener('click', () => {
+        this._loadGeoCoordinates();
+      });
     }
 
     /**
@@ -35,9 +33,9 @@ export class GeoCoordButton extends HTMLButtonElement {
     * @param {any} value
     */
     attributeChangedCallback(name: string, old: any, value: any) {
-        if (old !== value) {
-            (this as Indexable)[name] = value;
-        }
+      if (old !== value) {
+        (this as Indexable)[name] = value;
+      }
     }
 
     /**
@@ -45,9 +43,9 @@ export class GeoCoordButton extends HTMLButtonElement {
      * @param {GeoButtionType} value
      */
     public set loadType(value: GeoButtionType) {
-        if (value !== this.loadType) {
-            this._loadType = value;
-        }
+      if (value !== this.loadType) {
+        this._loadType = value;
+      }
     }
 
     /**
@@ -55,44 +53,42 @@ export class GeoCoordButton extends HTMLButtonElement {
      * @return {GeoButtionType}
      */
     public get loadType() {
-        return this._loadType;
+      return this._loadType;
     }
 
     /**
      * Emit Event to the outside
-     * @param position 
+     * @param position
      */
     private _emitGeoCoordinates(position: Position) {
-        let event = new GeoEvent(position.coords.latitude, position.coords.longitude);
-        console.log(event);
-        this.dispatchEvent(event)
+      const event = new GeoEvent(position.coords.latitude, position.coords.longitude);
+      console.log(event);
+      this.dispatchEvent(event);
     }
 
     /**
      * Load Geocoordinates dependent on loadTyp
      */
     private _loadGeoCoordinates() {
-        switch (this.loadType) {
-            case GeoButtionType.device:
-                this.loadCoordinatesFromDevice();
-                break;
-        }
+      switch (this.loadType) {
+        case GeoButtionType.device:
+          this.loadCoordinatesFromDevice();
+          break;
+      }
     }
 
     /**
      * Load Coordinates from device
      */
     private loadCoordinatesFromDevice() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(this._emitGeoCoordinates.bind(this),
-                () => console.log("ERROR"));
-
-        }
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(this._emitGeoCoordinates.bind(this),
+            () => console.log('ERROR'));
+      }
     }
-
 }
 
 
 enum GeoButtionType {
-    device = "device"
+    device = 'device'
 }

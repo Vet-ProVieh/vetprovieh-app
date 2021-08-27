@@ -1,12 +1,11 @@
-import { FieldGenerator } from "../../helpers";
-import { ChoicesField } from "./choicesField";
+import {FieldGenerator} from '../../helpers';
+import {ChoicesField} from './choicesField';
 
-export class List extends ChoicesField{
-    
-    constructor() {
-        super();
-        this.fieldType = "careplanList";
-    }
+export class List extends ChoicesField {
+  constructor() {
+    super();
+    this.fieldType = 'careplanList';
+  }
 }
 
 

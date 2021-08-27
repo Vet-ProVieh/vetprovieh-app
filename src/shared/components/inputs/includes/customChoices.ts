@@ -1,8 +1,8 @@
-import { WebComponent, VetproviehElement, VetproviehRepeat } from "@tomuench/vetprovieh-shared/lib";
-import { BulmaField } from "./bulmaField";
+import {WebComponent, VetproviehElement, VetproviehRepeat} from '@tomuench/vetprovieh-shared/lib';
+import {BulmaField} from './bulmaField';
 
 @WebComponent({
-    template: VetproviehElement.template + `
+  template: VetproviehElement.template + `
     <style>
      #choices {
          margin-bottom: 20px;
@@ -18,34 +18,33 @@ import { BulmaField } from "./bulmaField";
         </button>
     </div>
         `,
-    tag: 'custom-choices'
+  tag: 'custom-choices',
 })
 export class CustomChoices extends VetproviehElement {
-
     private _value: string[] = [];
     private _property: string | undefined;
-    private _label: string = ""
+    private _label = ''
 
 
     constructor() {
-        super(true, true);
+      super(true, true);
     }
 
-  /**
+    /**
      * Callback Implementation
      * @param {string} name
      * @param {any} old
      * @param {any} value
      */
     attributeChangedCallback(name: string, old: any, value: any) {
-        super.attributeChangedCallback(name, old, value);
-      }
+      super.attributeChangedCallback(name, old, value);
+    }
     /**
      * Get Label
      * @return {string}
      */
     public get label(): string {
-        return this._label;
+      return this._label;
     }
 
     /**
@@ -53,9 +52,9 @@ export class CustomChoices extends VetproviehElement {
      * @param {string} v
      */
     public set label(v: string) {
-        if (v !== this._label) {
-            this._label = v;
-        }
+      if (v !== this._label) {
+        this._label = v;
+      }
     }
 
     /**
@@ -63,7 +62,7 @@ export class CustomChoices extends VetproviehElement {
      * @return {string | undefined}
      */
     public get property(): string | undefined {
-        return this._property;
+      return this._property;
     }
 
     /**
@@ -71,16 +70,16 @@ export class CustomChoices extends VetproviehElement {
      * @param {string | undefined} val
      */
     public set property(val: string | undefined) {
-        if (this.property !== val) {
-            this._property = val;
-        }
+      if (this.property !== val) {
+        this._property = val;
+      }
     }
 
     /**
       * Observed Attributes
       */
     static get observedAttributes() {
-        return ['value', 'property', 'label'];
+      return ['value', 'property', 'label'];
     }
 
 
@@ -89,7 +88,7 @@ export class CustomChoices extends VetproviehElement {
      * @return {VetproviehRepeat}
      */
     private get choicesDiv(): HTMLDivElement {
-        return this.getByIdFromShadowRoot("choices") as HTMLDivElement;
+      return this.getByIdFromShadowRoot('choices') as HTMLDivElement;
     }
 
     /**
@@ -97,19 +96,20 @@ export class CustomChoices extends VetproviehElement {
      * @return {HTMLParagraphElement}
      */
     private get noChoicesAvailable(): HTMLParagraphElement {
-        return this.getByIdFromShadowRoot("noChoicesAvailable") as HTMLParagraphElement;
+      return this.getByIdFromShadowRoot('noChoicesAvailable') as HTMLParagraphElement;
     }
 
     /**
      * Show or Hide Announcment
      */
     private hideOrShowNoChoices() {
-        if (this.value?.length > 0) {
-            if (!this.noChoicesAvailable.classList.contains("is-hidden"))
-                this.noChoicesAvailable.classList.add("is-hidden");
-        } else {
-            this.noChoicesAvailable.classList.remove("is-hidden");
+      if (this.value?.length > 0) {
+        if (!this.noChoicesAvailable.classList.contains('is-hidden')) {
+          this.noChoicesAvailable.classList.add('is-hidden');
         }
+      } else {
+        this.noChoicesAvailable.classList.remove('is-hidden');
+      }
     }
 
     /**
@@ -117,7 +117,7 @@ export class CustomChoices extends VetproviehElement {
      * @return {HTMLButtonElement}
      */
     private get addElementButton(): HTMLButtonElement {
-        return this.getByIdFromShadowRoot("addElement") as HTMLButtonElement;
+      return this.getByIdFromShadowRoot('addElement') as HTMLButtonElement;
     }
 
     /**
@@ -125,80 +125,80 @@ export class CustomChoices extends VetproviehElement {
      * @return {boolean}
      */
     private get valueIsSet(): boolean {
-        return this.value && Array.isArray(this.value)
+      return this.value && Array.isArray(this.value);
     }
 
     public render() {
-        super.render();
-        this.hideOrShowNoChoices();
+      super.render();
+      this.hideOrShowNoChoices();
 
-        if (this.valueIsSet) {
-            for (let i = 0; i < this.value.length; i++) {
-                this.renderChoice(i);
-            }
+      if (this.valueIsSet) {
+        for (let i = 0; i < this.value.length; i++) {
+          this.renderChoice(i);
         }
+      }
 
-        this.attachListenerToAddButton();
+      this.attachListenerToAddButton();
     }
 
 
     /**
      * Render Choice
-     * @param {number} index 
+     * @param {number} index
      */
     private renderChoice(index: number) {
-        let columns = document.createElement("div");
-        columns.id = `ValueAt${index}`
-        columns.classList.add("columns");
+      const columns = document.createElement('div');
+      columns.id = `ValueAt${index}`;
+      columns.classList.add('columns');
 
-        let column1 = this.buildColumn();
-        column1.appendChild(this.buildInput(index));
-        columns.append(column1);
+      const column1 = this.buildColumn();
+      column1.appendChild(this.buildInput(index));
+      columns.append(column1);
 
-        let column2 = this.buildColumn("is-one-fifth");
-        column2.append(this.renderDelete(index));
-        columns.append(column2);
+      const column2 = this.buildColumn('is-one-fifth');
+      column2.append(this.renderDelete(index));
+      columns.append(column2);
 
-        this.choicesDiv.append(columns);
+      this.choicesDiv.append(columns);
     }
 
     /**
      * Create new Column
      * @return {HTMLDivElement}
      */
-    private buildColumn(size = ""): HTMLDivElement{
-        let column = document.createElement("div");
-        column.classList.add("column");
-        if(size !== "") column.classList.add(size);
-        return column;
+    private buildColumn(size = ''): HTMLDivElement {
+      const column = document.createElement('div');
+      column.classList.add('column');
+      if (size !== '') column.classList.add(size);
+      return column;
     }
 
     /**
      * Render Input-Element
-     * @param {number} index 
+     * @param {number} index
      * @return {BulmaField}
      */
     private buildInput(index: number) : BulmaField {
-        const valueAtPos = this.value[index];
-        let newInput = new BulmaField();
-        newInput.placeholder = "Bitte Ihren gewünschten Wert eintragen.";
-        newInput.value = valueAtPos;
-        newInput.addEventListener("change", () => {
-            this.value[index] = newInput.value
-        });
-        return newInput;
+      const valueAtPos = this.value[index];
+      const newInput = new BulmaField();
+      newInput.placeholder = 'Bitte Ihren gewünschten Wert eintragen.';
+      newInput.value = valueAtPos;
+      newInput.addEventListener('change', () => {
+        this.value[index] = newInput.value;
+      });
+      return newInput;
     }
 
     private renderDelete(index: number): HTMLButtonElement {
-        let button = document.createElement("button");
-        button.classList.add("button","is-danger");
-        button.innerHTML = "X";
-        button.addEventListener("click", () => this.delete(index));
-        return button;
+      const button = document.createElement('button');
+      button.classList.add('button', 'is-danger');
+      button.innerHTML = 'X';
+      button.addEventListener('click', () => this.delete(index));
+      return button;
     }
 
     private delete(index: number) {
-        let columns = this.getByIdFromShadowRoot(`ValueAt${index}`);
+      const columns = this.getByIdFromShadowRoot(`ValueAt${index}`);
         columns?.remove();
         this.value.splice(index, 1);
         this.hideOrShowNoChoices();
@@ -209,13 +209,13 @@ export class CustomChoices extends VetproviehElement {
      * Attaching Listener to Add-Button
      */
     private attachListenerToAddButton() {
-        if (this.addElementButton) {
-            this.addElementButton.addEventListener("click", () => {
-                this.value.push("");
-                this.renderChoice(this.value.length - 1);
-                this.hideOrShowNoChoices();
-            })
-        }
+      if (this.addElementButton) {
+        this.addElementButton.addEventListener('click', () => {
+          this.value.push('');
+          this.renderChoice(this.value.length - 1);
+          this.hideOrShowNoChoices();
+        });
+      }
     }
 
     /**
@@ -223,7 +223,7 @@ export class CustomChoices extends VetproviehElement {
      * @return {string[]}
      */
     get value(): string[] {
-        return this._value;
+      return this._value;
     }
 
     /**
@@ -231,14 +231,13 @@ export class CustomChoices extends VetproviehElement {
      * @param {string[]} val
      */
     set value(val: string[]) {
-        if (val !== this._value) {
-            if (Array.isArray(val)) {
-                this._value = val;
-            } else {
-                this._value = [];
-            }
-            this.render();
+      if (val !== this._value) {
+        if (Array.isArray(val)) {
+          this._value = val;
+        } else {
+          this._value = [];
         }
+        this.render();
+      }
     }
-
 }

@@ -1,5 +1,5 @@
 
-import { VetproviehElement, VetproviehNavParams } from "@tomuench/vetprovieh-shared/lib";
+import {VetproviehElement, VetproviehNavParams} from '@tomuench/vetprovieh-shared/lib';
 
 /**
  * Basic-Select-Page
@@ -8,16 +8,15 @@ import { VetproviehElement, VetproviehNavParams } from "@tomuench/vetprovieh-sha
  * - abortbutton - Button with id="abortButton" to navigateBack without params
  */
 export class BasicSelectPage extends VetproviehElement {
-
-    public static PARAM_KEY = "selectPage.return";
+    public static PARAM_KEY = 'selectPage.return';
 
     constructor() {
-        super(false, false);
+      super(false, false);
     }
 
     connectedCallback() {
-        this.render();
-        this.registerEventListener();
+      this.render();
+      this.registerEventListener();
     }
 
 
@@ -26,7 +25,7 @@ export class BasicSelectPage extends VetproviehElement {
      * @return {any}
      */
     protected get returnValue(): any {
-        throw new Error("Must be implemented in child");
+      throw new Error('Must be implemented in child');
     }
 
     /**
@@ -34,17 +33,17 @@ export class BasicSelectPage extends VetproviehElement {
      */
     private registerEventListener() {
         this.abortButton?.addEventListener('click', () => {
-            this.navigateBack();
+          this.navigateBack();
         });
 
         this.takeoverButton?.addEventListener('click', () => {
-            if (this.hasSelectedItems()) {
-                this.setReturnValue();
-                this.navigateBack();
-            } else {
-                
-            }
-        })
+          if (this.hasSelectedItems()) {
+            this.setReturnValue();
+            this.navigateBack();
+          } else {
+
+          }
+        });
     }
 
     /**
@@ -52,14 +51,14 @@ export class BasicSelectPage extends VetproviehElement {
      * @return {string}
      */
     protected get paramKey() : string {
-        return BasicSelectPage.PARAM_KEY;
+      return BasicSelectPage.PARAM_KEY;
     }
 
     /**
      * Navigate Back and set params
      */
     protected navigateBack() {
-        window.location.href = this.returnUrl;
+      window.location.href = this.returnUrl;
     }
 
     /**
@@ -67,15 +66,15 @@ export class BasicSelectPage extends VetproviehElement {
    * @return {string}
    */
     private get returnUrl(): string {
-        return VetproviehNavParams.getUrlParameter("returnUrl")
+      return VetproviehNavParams.getUrlParameter('returnUrl');
     }
 
     /**
      * Checks if items where selcted
-     * @returns {boolean}
+     * @return {boolean}
      */
     protected hasSelectedItems(): boolean {
-        return Array.isArray(this.returnValue) && this.returnValue.length > 0 || 
+      return Array.isArray(this.returnValue) && this.returnValue.length > 0 ||
         !Array.isArray(this.returnValue) && this.returnValue != undefined;
     }
 
@@ -84,10 +83,10 @@ export class BasicSelectPage extends VetproviehElement {
      * Setting ReturnValue
      */
     private setReturnValue() {
-        let current: Array<any> = VetproviehNavParams.get(this.paramKey)
-        if (!Array.isArray(current) || current == null || current == undefined) current = [];
-        current.push(this.returnValue);
-        VetproviehNavParams.set(this.paramKey, current);
+      let current: Array<any> = VetproviehNavParams.get(this.paramKey);
+      if (!Array.isArray(current) || current == null || current == undefined) current = [];
+      current.push(this.returnValue);
+      VetproviehNavParams.set(this.paramKey, current);
     }
 
 
@@ -96,7 +95,7 @@ export class BasicSelectPage extends VetproviehElement {
      * @return {HTMLButtonElement}
      */
     protected get takeoverButton(): HTMLButtonElement {
-        return document.getElementById("takeoverButton") as HTMLButtonElement;
+      return document.getElementById('takeoverButton') as HTMLButtonElement;
     }
 
     /**
@@ -104,8 +103,6 @@ export class BasicSelectPage extends VetproviehElement {
      * @return {HTMLButtonElement}
      */
     private get abortButton(): HTMLButtonElement {
-        return document.getElementById("abortButton") as HTMLButtonElement;
+      return document.getElementById('abortButton') as HTMLButtonElement;
     }
-
-
 }

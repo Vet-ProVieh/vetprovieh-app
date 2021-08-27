@@ -1,36 +1,35 @@
-import { VetproviehBinding, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import {VetproviehBinding, VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
 
 export class FieldWithLabel extends VetproviehElement {
-
-    private _label: string = "";
-    private _placeholder: string = "";
-    private _type: string = "text";
+    private _label = '';
+    private _placeholder = '';
+    private _type = 'text';
     private _value: any;
     private _property: string | undefined;
-    private _required: boolean = false;
+    private _required = false;
 
-    protected _binding: VetproviehBinding = new VetproviehBinding(this, "value");
+    protected _binding: VetproviehBinding = new VetproviehBinding(this, 'value');
 
-    constructor(shadowed = false, render = false){
-        super(shadowed, render);
+    constructor(shadowed = false, render = false) {
+      super(shadowed, render);
     }
 
     public render() {
-        this._binding.clear();
-        super.render();
-        this.addBinding();
+      this._binding.clear();
+      super.render();
+      this.addBinding();
     }
 
     /**
      * Adding Binding
      */
     protected addBinding() {
-        this._binding.addBinding(this.inputField, "value", "change");
+      this._binding.addBinding(this.inputField, 'value', 'change');
     }
 
 
     public connectedCallback() {
-        this.render();
+      this.render();
     }
 
     /**
@@ -38,7 +37,7 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {string | undefined}
      */
     public get property(): string | undefined {
-        return this._property;
+      return this._property;
     }
 
     /**
@@ -46,9 +45,9 @@ export class FieldWithLabel extends VetproviehElement {
      * @param {string | undefined} val
      */
     public set property(val: string | undefined) {
-        if (this.property !== val) {
-            this._property = val;
-        }
+      if (this.property !== val) {
+        this._property = val;
+      }
     }
 
     /**
@@ -56,17 +55,17 @@ export class FieldWithLabel extends VetproviehElement {
      * @param {string | undefined} val
      */
     public set required(val: string | undefined) {
-        let valAsBool = val?.toString().toLowerCase() === "";
-        if (this._required !== valAsBool) {
-            this._required = valAsBool;
-        }
+      const valAsBool = val?.toString().toLowerCase() === '';
+      if (this._required !== valAsBool) {
+        this._required = valAsBool;
+      }
     }
 
     /**
       * Observed Attributes
       */
     static get observedAttributes() {
-        return ['value', 'label', 'property', 'type', 'required'];
+      return ['value', 'label', 'property', 'type', 'required'];
     }
 
     /**
@@ -74,7 +73,7 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {HTMLInputElement}
      */
     protected get inputField(): HTMLElement {
-        return this.getElementsByTagName("input")[0] as HTMLElement;
+      return this.getElementsByTagName('input')[0] as HTMLElement;
     }
 
     /**
@@ -82,23 +81,23 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {string}
      */
     protected renderLabel() {
-        if (this.label !== "" && this.label) {
-            return ` <label class="label">${this.label}</label>`;
-        } else {
-            return "";
-        }
+      if (this.label !== '' && this.label) {
+        return ` <label class="label">${this.label}</label>`;
+      } else {
+        return '';
+      }
     }
 
-        /**
+    /**
      * Render required field
      * @return {string}
      */
     protected renderRequired() {
-        if (this._required) {
-            return ` required`;
-        } else {
-            return "";
-        }
+      if (this._required) {
+        return ` required`;
+      } else {
+        return '';
+      }
     }
 
     /**
@@ -106,11 +105,11 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {string}
      */
     protected renderPlaceholder() {
-        if (this.placeholder !== "" && this.placeholder) {
-            return `placeholder="${this.placeholder}"`;
-        } else {
-            return "";
-        }
+      if (this.placeholder !== '' && this.placeholder) {
+        return `placeholder="${this.placeholder}"`;
+      } else {
+        return '';
+      }
     }
 
     /**
@@ -118,7 +117,7 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {string}
      */
     public get placeholder(): string {
-        return this._placeholder;
+      return this._placeholder;
     }
 
     /**
@@ -126,9 +125,9 @@ export class FieldWithLabel extends VetproviehElement {
      * @param {string} v
      */
     public set placeholder(v: string) {
-        if (v !== this.placeholder) {
-            this._placeholder = v;
-        }
+      if (v !== this.placeholder) {
+        this._placeholder = v;
+      }
     }
 
     /*
@@ -136,7 +135,7 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {string}
      */
     public get type(): string {
-        return this._type;
+      return this._type;
     }
 
     /**
@@ -144,9 +143,9 @@ export class FieldWithLabel extends VetproviehElement {
      * @param {string} v
      */
     public set type(v: string) {
-        if (v !== this._type) {
-            this._type = v;
-        }
+      if (v !== this._type) {
+        this._type = v;
+      }
     }
 
     /**
@@ -154,11 +153,11 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {any}
      */
     public get value(): any {
-        if (this._value !== null && this._value !== undefined) {
-            return this._value;
-        } else {
-            return "";
-        }
+      if (this._value !== null && this._value !== undefined) {
+        return this._value;
+      } else {
+        return '';
+      }
     }
 
     /**
@@ -166,20 +165,20 @@ export class FieldWithLabel extends VetproviehElement {
      * @param {any} v
      */
     public set value(v: any) {
-        if (this._value !== v) {
-            this._value = v
-            this.setInputField();
-        }
+      if (this._value !== v) {
+        this._value = v;
+        this.setInputField();
+      }
     }
 
     /**
      * Passthrough value to inputField
      */
     protected setInputField() {
-        let input = (this.inputField as HTMLInputElement);
-        if (input && input.value !== this.value) {
-            (this.inputField as HTMLInputElement).value = this.value;
-        }
+      const input = (this.inputField as HTMLInputElement);
+      if (input && input.value !== this.value) {
+        (this.inputField as HTMLInputElement).value = this.value;
+      }
     }
 
     /**
@@ -187,7 +186,7 @@ export class FieldWithLabel extends VetproviehElement {
      * @return {string}
      */
     public get label(): string {
-        return this._label;
+      return this._label;
     }
 
     /**
@@ -195,8 +194,8 @@ export class FieldWithLabel extends VetproviehElement {
      * @param {string} v
      */
     public set label(v: string) {
-        if (v !== this._label) {
-            this._label = v;
-        }
+      if (v !== this._label) {
+        this._label = v;
+      }
     }
 }

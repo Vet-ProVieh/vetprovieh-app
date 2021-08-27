@@ -1,5 +1,5 @@
 
-    export enum RenderType {
+export enum RenderType {
         Single,
         Multiple
     }

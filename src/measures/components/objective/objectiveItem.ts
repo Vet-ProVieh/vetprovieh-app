@@ -1,18 +1,18 @@
 
-import { WebComponent, VetproviehElement, ObjectHelper, ViewHelper } from "@tomuench/vetprovieh-shared/lib";
-import { ObjectiveModal } from "./objective-modal";
-import { Objective, KeyResult } from "../../models/";
-import { KeyResultComponent } from "./keyResult";
-import { QuestionModal, StarsComponent } from "../../../shared";
+import {WebComponent, VetproviehElement, ObjectHelper, ViewHelper} from '@tomuench/vetprovieh-shared/lib';
+import {ObjectiveModal} from './objective-modal';
+import {Objective, KeyResult} from '../../models/';
+import {KeyResultComponent} from './keyResult';
+import {QuestionModal, StarsComponent} from '../../../shared';
 
 /**
  * Controller for Page
  * pages/operations/plans/create or edit
  */
 @WebComponent({
-    template:
+  template:
         VetproviehElement.template +
-        ` 
+        `
     <style>
         .dropdown {
             position: relative;
@@ -32,7 +32,7 @@ import { QuestionModal, StarsComponent } from "../../../shared";
             cursor: pointer;
         }
 
-        
+
     </style>
 
     <objective-modal id="modal"></objective-modal>
@@ -61,7 +61,7 @@ import { QuestionModal, StarsComponent } from "../../../shared";
                     </div>
                     <div id="buttonsRow" class="columns is-mobile \${this.cssHidden(this.editable != 'true')}">
                         <div class="column">
-                            <button id="deleteButton" class="button is-danger is-light is-fullwidth 
+                            <button id="deleteButton" class="button is-danger is-light is-fullwidth
                                 \${this.cssHidden(this.editable != 'true')}">
                                 <i class="fas fa-trash-alt"></i>
                                 <span> Entfernen</span>
@@ -80,53 +80,52 @@ import { QuestionModal, StarsComponent } from "../../../shared";
         </div>
     </div>
     `,
-    tag: "vp-objective-item",
+  tag: 'vp-objective-item',
 })
 export class ObjectiveItemComponent extends VetproviehElement {
-
     private _objective: Objective = new Objective();
-    private _valuation: boolean = false;
-    private _editable: boolean = false;
+    private _valuation = false;
+    private _editable = false;
 
     /**
      * Show editable Buttons or not
      * @property {string} editable
      */
     public get editable(): string {
-        return this._editable.toString();
+      return this._editable.toString();
     }
     public set editable(v: string) {
-        let vAsBool = ObjectHelper.stringToBool(v);
-        if (this._editable !== vAsBool) {
-            this._editable = vAsBool;
-            this.toggleEditableFields();
-        }
+      const vAsBool = ObjectHelper.stringToBool(v);
+      if (this._editable !== vAsBool) {
+        this._editable = vAsBool;
+        this.toggleEditableFields();
+      }
     }
 
     /**
      * Toggle Editable fields
      */
     private toggleEditableFields() {
-        let elements = [this.deleteButton, this.editButton, this.shadowRoot?.querySelector("#buttonsRow")];
-        elements.forEach((element) => {
-            if (element) {
-                ViewHelper.toggleVisibility(element as HTMLElement, this._editable);
-            }
-        })
+      const elements = [this.deleteButton, this.editButton, this.shadowRoot?.querySelector('#buttonsRow')];
+      elements.forEach((element) => {
+        if (element) {
+          ViewHelper.toggleVisibility(element as HTMLElement, this._editable);
+        }
+      });
 
-        this.shadowRoot?.querySelectorAll("vp-key-result").forEach((keyResult) => {
-            let e = keyResult as KeyResultComponent;
-            e.editable = this.editable;
-        })
+        this.shadowRoot?.querySelectorAll('vp-key-result').forEach((keyResult) => {
+          const e = keyResult as KeyResultComponent;
+          e.editable = this.editable;
+        });
     }
 
     /**
      * Toggle Rating Component
      */
     private toggleValuationFields() {
-        if (this.ratingComponent) {
-            ViewHelper.toggleVisibility(this.ratingComponent, this._valuation);
-        }
+      if (this.ratingComponent) {
+        ViewHelper.toggleVisibility(this.ratingComponent, this._valuation);
+      }
     }
 
 
@@ -135,78 +134,78 @@ export class ObjectiveItemComponent extends VetproviehElement {
      * @property {string} valuation
      */
     public get valuation(): string {
-        return this._valuation.toString();
+      return this._valuation.toString();
     }
 
     public set valuation(v: string) {
-        let vAsBool = ObjectHelper.stringToBool(v);
-        if (this._valuation !== vAsBool) {
-            this._valuation = vAsBool;
-            this.toggleValuationFields();
-        }
+      const vAsBool = ObjectHelper.stringToBool(v);
+      if (this._valuation !== vAsBool) {
+        this._valuation = vAsBool;
+        this.toggleValuationFields();
+      }
     }
 
     public formatDate(v: string): string {
-        return ObjectHelper.formatDate(v);
+      return ObjectHelper.formatDate(v);
     }
 
     /**
      * @property {Objective}
      */
     public get objective(): Objective {
-        return this._objective;
+      return this._objective;
     }
 
     public set objective(val: Objective) {
-        if (this._objective !== val) {
-            this._objective = val;
-            this.render();
-        }
+      if (this._objective !== val) {
+        this._objective = val;
+        this.render();
+      }
     }
 
     connectedCallback() {
-        let stars = this.getByIdFromShadowRoot("stars") as StarsComponent;
-        // this.objective.rating = stars.score;
-        stars.score = this.objective.rating;
-        stars.addEventListener("click", () => {
-            this.objective.rating = stars.score;
-        })
+      const stars = this.getByIdFromShadowRoot('stars') as StarsComponent;
+      // this.objective.rating = stars.score;
+      stars.score = this.objective.rating;
+      stars.addEventListener('click', () => {
+        this.objective.rating = stars.score;
+      });
     }
 
     public render() {
-        super.render();
-        this.renderKeyResults();
+      super.render();
+      this.renderKeyResults();
 
-        let btn = this.shadowRoot?.getElementById("btn-dropdown") as HTMLElement;
-        btn.addEventListener("click", () => this.toggleDetails());
+      const btn = this.shadowRoot?.getElementById('btn-dropdown') as HTMLElement;
+      btn.addEventListener('click', () => this.toggleDetails());
 
-        this.registerDeleteButton();
-        this.registerEditButton();
-        this.configureModal();
+      this.registerDeleteButton();
+      this.registerEditButton();
+      this.configureModal();
     }
 
     /**
      * Render KeyResults
      */
     private renderKeyResults() {
-        let container = this.keyResultsContainer();
-        container.innerHTML = "";
-        this.objective.keyResults.forEach((keyResult) => {
-            this.addKeyResult(keyResult);
-        })
+      const container = this.keyResultsContainer();
+      container.innerHTML = '';
+      this.objective.keyResults.forEach((keyResult) => {
+        this.addKeyResult(keyResult);
+      });
     }
 
     private addKeyResult(keyResult: KeyResult) {
-        let container = this.keyResultsContainer();
-        let keyResultItem = new KeyResultComponent();
-        keyResultItem.keyResult = keyResult;
-        keyResultItem.editable = this.editable;
-        container.appendChild(keyResultItem);
+      const container = this.keyResultsContainer();
+      const keyResultItem = new KeyResultComponent();
+      keyResultItem.keyResult = keyResult;
+      keyResultItem.editable = this.editable;
+      container.appendChild(keyResultItem);
     }
 
 
     constructor() {
-        super(true, false);
+      super(true, false);
     }
 
     /**
@@ -214,49 +213,49 @@ export class ObjectiveItemComponent extends VetproviehElement {
      * @return {StarsComponent}
      */
     private get ratingComponent(): StarsComponent {
-        return this.getByIdFromShadowRoot("stars") as StarsComponent;
+      return this.getByIdFromShadowRoot('stars') as StarsComponent;
     }
 
     /**
      * Register Delete Button
      */
     private registerDeleteButton() {
-        this.deleteButton.addEventListener("click", () => {
-            QuestionModal.askQuestion("Sind Sie sicher?", "Möchten Sie die Maßnahme entfernen?").then((result) => {
-                if (result) {
-                    this.dispatchEvent(new CustomEvent("delete", { detail: this.objective }));
-                }
-            })
+      this.deleteButton.addEventListener('click', () => {
+        QuestionModal.askQuestion('Sind Sie sicher?', 'Möchten Sie die Maßnahme entfernen?').then((result) => {
+          if (result) {
+            this.dispatchEvent(new CustomEvent('delete', {detail: this.objective}));
+          }
         });
+      });
     }
 
     /**
      * Register Edit Button
      */
     private registerEditButton() {
-        this.editButton.addEventListener("click", () => {
-            this.openEditModal();
-        });
+      this.editButton.addEventListener('click', () => {
+        this.openEditModal();
+      });
     }
 
     /**
      * Open Edit Modal
      */
     public openEditModal() {
-        this.objectivesModal.objective = this._objective;
-        this.objectivesModal.active = true;
+      this.objectivesModal.objective = this._objective;
+      this.objectivesModal.active = true;
     }
 
     /**
      * Toggle-Details for ObjectiveItem
      */
     public toggleDetails() {
-        let cardBody = this.contentContainer;
-        let arrow = this.shadowRoot?.getElementById("arrow") as HTMLElement;
+      const cardBody = this.contentContainer;
+      const arrow = this.shadowRoot?.getElementById('arrow') as HTMLElement;
 
-        let show = cardBody.classList.contains("is-hidden");
-        ViewHelper.toggleVisibility(cardBody, show);
-        arrow.style.transform = `rotate(${show ? 180 : 0}deg)`;
+      const show = cardBody.classList.contains('is-hidden');
+      ViewHelper.toggleVisibility(cardBody, show);
+      arrow.style.transform = `rotate(${show ? 180 : 0}deg)`;
     }
 
     /**
@@ -264,11 +263,11 @@ export class ObjectiveItemComponent extends VetproviehElement {
      * @return {HTMLElement}
      */
     private get contentContainer(): HTMLElement {
-        return this.shadowRoot?.getElementById("content") as HTMLElement;
+      return this.shadowRoot?.getElementById('content') as HTMLElement;
     }
 
     private keyResultsContainer() {
-        return this.shadowRoot?.getElementById("keyResults") as HTMLElement;
+      return this.shadowRoot?.getElementById('keyResults') as HTMLElement;
     }
 
 
@@ -277,7 +276,7 @@ export class ObjectiveItemComponent extends VetproviehElement {
      * @return {HTMLButtonElement}
      */
     private get deleteButton(): HTMLButtonElement {
-        return this.shadowRoot?.getElementById("deleteButton") as HTMLButtonElement;
+      return this.shadowRoot?.getElementById('deleteButton') as HTMLButtonElement;
     }
 
     /**
@@ -285,15 +284,15 @@ export class ObjectiveItemComponent extends VetproviehElement {
      * @return {HTMLButtonElement}
      */
     private get editButton(): HTMLButtonElement {
-        return this.shadowRoot?.getElementById("editButton") as HTMLButtonElement;
+      return this.shadowRoot?.getElementById('editButton') as HTMLButtonElement;
     }
 
     /**
      * Get Objectives-Modal-DOM-Element
-     * @returns {ObjectiveModal}
+     * @return {ObjectiveModal}
      */
     private get objectivesModal(): ObjectiveModal {
-        return this.shadowRoot?.getElementById("modal") as ObjectiveModal;
+      return this.shadowRoot?.getElementById('modal') as ObjectiveModal;
     }
 
 
@@ -301,12 +300,12 @@ export class ObjectiveItemComponent extends VetproviehElement {
      * Configuring Callback from Modal
      */
     private configureModal() {
-        this.objectivesModal.addEventListener("save", (event: Event) => {
-            this.render();
-        });
+      this.objectivesModal.addEventListener('save', (event: Event) => {
+        this.render();
+      });
     }
 
     static get observedAttributes() {
-        return ["valuation"];
+      return ['valuation'];
     }
 }

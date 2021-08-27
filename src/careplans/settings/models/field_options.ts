@@ -1,16 +1,15 @@
-import { BulmaField } from "../../../shared";
+import {BulmaField} from '../../../shared';
 
 /**
  * FieldOptions for generating InputFields (Settings::Careplan)
  */
 export class FieldOptions {
-
     public tag: string;
     public type: string;
 
-    constructor(tag: string, type: string = "") {
-        this.tag = tag;
-        this.type = type;
+    constructor(tag: string, type = '') {
+      this.tag = tag;
+      this.type = type;
     }
 
     /**
@@ -18,7 +17,7 @@ export class FieldOptions {
      * @return {boolean}
      */
     public get isInput(): boolean {
-        return this.tag === "input";
+      return this.tag === 'input';
     }
 
     /**
@@ -26,14 +25,14 @@ export class FieldOptions {
      * @return {Array<string>}
      */
     public get classList(): string[] {
-        let list: string[] = []
+      const list: string[] = [];
 
-        if (this.isInput) {
-            if (this.type !== "checkbox") {
-                list.push("input");
-            }
+      if (this.isInput) {
+        if (this.type !== 'checkbox') {
+          list.push('input');
         }
-        return list;
+      }
+      return list;
     }
 
     /**
@@ -41,7 +40,7 @@ export class FieldOptions {
      * @return {boolean}
      */
     public get isTextField(): boolean {
-        return this.tag === "input" && this.type !== "checkbox";
+      return this.tag === 'input' && this.type !== 'checkbox';
     }
 
     /**
@@ -49,30 +48,30 @@ export class FieldOptions {
      * @return {boolean}
      */
     public get isBulmaInput(): boolean {
-        return this.tag.indexOf("bulma") >= 0;
+      return this.tag.indexOf('bulma') >= 0;
     }
 
     /**
      * Create a Field with Field-Options
-     * @param {FieldOptions} options 
+     * @param {FieldOptions} options
      * @return {HTMLElement}
      */
     public createInputField(propertyKey: string): HTMLElement {
-        let element = document.createElement(this.tag) as HTMLElement;
-        
-        if (this.type != "") element.setAttribute("type", this.type);
-        if (this.isTextField) element.classList.add("input");
+      const element = document.createElement(this.tag) as HTMLElement;
 
-        element.setAttribute('property', propertyKey);
-        element.setAttribute("label", propertyKey);
+      if (this.type != '') element.setAttribute('type', this.type);
+      if (this.isTextField) element.classList.add('input');
 
-        if(this.isBulmaInput) (element as BulmaField).render();
-        return element;
+      element.setAttribute('property', propertyKey);
+      element.setAttribute('label', propertyKey);
+
+      if (this.isBulmaInput) (element as BulmaField).render();
+      return element;
     }
 
 
-    public static INPUT_NUMBER = new FieldOptions("bulma-input", "number");
-    public static INPUT_CHECKBOX = new FieldOptions("bulma-input-checkbox", "checkbox");
-    public static INPUT_TEXT = new FieldOptions("bulma-input", "text");
-    public static CUSTOM_CHOICES = new FieldOptions("custom-choices");
+    public static INPUT_NUMBER = new FieldOptions('bulma-input', 'number');
+    public static INPUT_CHECKBOX = new FieldOptions('bulma-input-checkbox', 'checkbox');
+    public static INPUT_TEXT = new FieldOptions('bulma-input', 'text');
+    public static CUSTOM_CHOICES = new FieldOptions('custom-choices');
 }

@@ -1,12 +1,11 @@
-import { BasicModel } from "../../../shared";
-import { CareplanField } from "./careplanField";
+import {BasicModel} from '../../../shared';
+import {CareplanField} from './careplanField';
 
 
 export class CareplanGroup extends BasicModel {
-
-    name: string = "";
-    position: number = 0;
+    name = '';
+    position = 0;
     fields: CareplanField[] = []
-    active: boolean = true;
-    isTherapy: boolean = false;
+    active = true;
+    isTherapy = false;
 }

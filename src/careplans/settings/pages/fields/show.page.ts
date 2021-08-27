@@ -1,122 +1,124 @@
-import { WebComponent, Indexable, VetproviehNavParams, ViewHelper } from "@tomuench/vetprovieh-shared/lib";
-import { PageWithReadOnly, SelectFieldType } from "../../components";
-import { CareplanField } from "../../models/careplanField";
-import { TextArea, ComboBox, Video, ImageField, List, SpeechField } from "../../models/fields";
-import { TextFields } from "../../models/fields/textFields";
+import {WebComponent, Indexable, VetproviehNavParams, ViewHelper} from '@tomuench/vetprovieh-shared/lib';
+import {PageWithReadOnly, SelectFieldType} from '../../components';
+import {CareplanField} from '../../models/careplanField';
+import {TextArea, ComboBox, Video, ImageField, List, SpeechField} from '../../models/fields';
+import {TextFields} from '../../models/fields/textFields';
 
 @WebComponent({
-    template: "",
-    tag: "careplan-field-page"
+  template: '',
+  tag: 'careplan-field-page',
 })
 export class CarePlanFieldShowPage extends PageWithReadOnly {
-    /**
+  /**
     * Lifecycle
     * Executed after Data is loaded
     */
-    protected afterDataLoaded() {
-        super.afterDataLoaded();
+  protected afterDataLoaded() {
+    super.afterDataLoaded();
 
-        this.fieldTypeSelect.value = this.currentObject.fieldType;
-        this.attachListener();
-        this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
-        this.markAsReadOnly();
-        this.fieldTypeSelect.dispatchEvent(new Event("change"));
-    }
+    this.fieldTypeSelect.value = this.currentObject.fieldType;
+    this.attachListener();
+    this.extraFields.attributeChangedCallback('fieldtype', null, this.fieldTypeSelect.value);
+    this.markAsReadOnly();
+    this.fieldTypeSelect.dispatchEvent(new Event('change'));
+  }
 
-    /**
+  /**
      * Setting Params
      */
-    private setParams() {
-        this.setUrlParameter(this.currentObject, "groupId", "groups", (i: string) => { return { id: parseInt(i) } })
-        this.setUrlParameter(this.currentObject, "position", "position", parseInt);
-    }
+  private setParams() {
+    this.setUrlParameter(this.currentObject, 'groupId', 'groups', (i: string) => {
+      return {id: parseInt(i)};
+    });
+    this.setUrlParameter(this.currentObject, 'position', 'position', parseInt);
+  }
 
-    /**
+  /**
      * Attach Listener to FieldTypeSelect
      */
-    private attachListener() {
-        this.fieldTypeSelect.addEventListener("change", (event) => {
-            let newField = this.buildField(this.fieldTypeSelect.value);
-            this.detailElement.currentObject = newField;
-            this.setParams();
-            this.extraFields.attributeChangedCallback("fieldtype", null, this.fieldTypeSelect.value);
-            this.detailElement.rebindForm();
-        })
-    }
+  private attachListener() {
+    this.fieldTypeSelect.addEventListener('change', (event) => {
+      const newField = this.buildField(this.fieldTypeSelect.value);
+      this.detailElement.currentObject = newField;
+      this.setParams();
+      this.extraFields.attributeChangedCallback('fieldtype', null, this.fieldTypeSelect.value);
+      this.detailElement.rebindForm();
+    });
+  }
 
-    /**
+  /**
      * Building Careplan-Field with the help of its type
-     * @param {string} fieldType 
+     * @param {string} fieldType
      * @return {CareplanField}
      */
-    private buildField(fieldType: string): CareplanField {
-        var blankField = this.generateField(fieldType);
+  private buildField(fieldType: string): CareplanField {
+    const blankField = this.generateField(fieldType);
 
-        this.hideAdditionalFields(fieldType === "speech");
+    this.hideAdditionalFields(fieldType === 'speech');
 
-        let currentObject = this.detailElement.currentObject;
-        Object.keys(blankField).forEach((key) => {
-            if (key != "fieldType") {
-                if (currentObject[key] !== null && currentObject[key] !== undefined) {
-                    (blankField as Indexable)[key] = currentObject[key];
-                } else {
-                    currentObject[key] = (blankField as Indexable)[key];
-                }
-            }
-        });
+    const currentObject = this.detailElement.currentObject;
+    Object.keys(blankField).forEach((key) => {
+      if (key != 'fieldType') {
+        if (currentObject[key] !== null && currentObject[key] !== undefined) {
+          (blankField as Indexable)[key] = currentObject[key];
+        } else {
+          currentObject[key] = (blankField as Indexable)[key];
+        }
+      }
+    });
 
 
-        return blankField;
-    }
+    return blankField;
+  }
 
-    /**
+  /**
      * Zusatzfelder verstecken
-     * @param {boolean} hide 
+     * @param {boolean} hide
      */
-    private hideAdditionalFields(hide: boolean) {
-        let addBox = this.detailElement.getByIdFromShadowRoot("additional");
-        if(addBox) ViewHelper.toggleVisibility(addBox, !hide);
-    }
+  private hideAdditionalFields(hide: boolean) {
+    const addBox = this.detailElement.getByIdFromShadowRoot('additional');
+    if (addBox) ViewHelper.toggleVisibility(addBox, !hide);
+  }
 
-    /**
-     * Generating Field 
+  /**
+     * Generating Field
      * @param {string} type
      * @return {CareplanField}
      */
-    private generateField(type: string): CareplanField {
-        switch (type) {
-            case "textArea":
-                return new TextArea();
-            case "textFields":
-                return new TextFields();
-            case "video":
-                return new Video();
-            case "image":
-                return new ImageField();
-            case "careplanList":
-                return new List();
-            case "comboBox":
-                return new ComboBox();
-            case "speech":
-                return new SpeechField();
-            default:
-                return new CareplanField();
-        }
+  private generateField(type: string): CareplanField {
+    switch (type) {
+      case 'textArea':
+        return new TextArea();
+      case 'textFields':
+        return new TextFields();
+      case 'video':
+        return new Video();
+      case 'image':
+        return new ImageField();
+      case 'careplanList':
+        return new List();
+      case 'comboBox':
+        return new ComboBox();
+      case 'speech':
+        return new SpeechField();
+      default:
+        return new CareplanField();
     }
+  }
 
-    /**
+  /**
      * Getting WebComponent for Specific Field-Type
      * @return {SelectFieldType}
      */
-    private get extraFields(): SelectFieldType {
-        return this.detailElement.getByIdFromShadowRoot("extraFields") as SelectFieldType;
-    }
+  private get extraFields(): SelectFieldType {
+    return this.detailElement.getByIdFromShadowRoot('extraFields') as SelectFieldType;
+  }
 
-    /**
+  /**
      * Getting Select field
      * @return {HTMLSelectElement}
      */
-    private get fieldTypeSelect(): HTMLSelectElement {
-        return this.detailElement.getByIdFromShadowRoot("fieldType") as HTMLSelectElement;
-    }
+  private get fieldTypeSelect(): HTMLSelectElement {
+    return this.detailElement.getByIdFromShadowRoot('fieldType') as HTMLSelectElement;
+  }
 }

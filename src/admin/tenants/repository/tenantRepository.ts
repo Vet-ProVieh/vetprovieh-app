@@ -1,9 +1,14 @@
-import { BaseRepository } from "@tomuench/vetprovieh-shared/lib";
-import { Tenant } from "../models";
+import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
+import {Tenant} from '../models';
 
-export class TenantRepository extends BaseRepository<Tenant>{
-
-    constructor(){
-        super("/service/tenantmanagements");
-    }
+/**
+ * Repository for tenants
+ */
+export class TenantRepository extends BaseRepository<Tenant> {
+  /**
+   * Default_Constructor
+   */
+  constructor() {
+    super('/service/tenantmanagements');
+  }
 }

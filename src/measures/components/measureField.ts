@@ -1,22 +1,21 @@
-import { BaseRepository, ElementBinding, ViewHelper, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { VetproviehSelect } from "../../app/main";
-import { InputFactory } from "../../careplans/operational/components/field/inputFactory";
-import { MeasureField } from "../models";
+import {BaseRepository, ElementBinding, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehSelect} from '../../app/main';
+import {InputFactory} from '../../careplans/operational/components/field/inputFactory';
+import {MeasureField} from '../models';
 
 /**
  * MeasureField Display-Component
  */
 @WebComponent({
-    template: undefined,
-    tag: 'vp-measure-field'
+  template: undefined,
+  tag: 'vp-measure-field',
 })
 export class MeasureFieldComponent extends ElementBinding {
-
     private _linkedField: MeasureFieldComponent | undefined;
-    private _isValid: boolean = false;
+    private _isValid = false;
 
     constructor() {
-        super();
+      super();
     }
 
     /**
@@ -24,55 +23,55 @@ export class MeasureFieldComponent extends ElementBinding {
      * @return {MeasureFieldComponent | undefined}
      */
     public get linkedField(): MeasureFieldComponent | undefined {
-        return this._linkedField;
+      return this._linkedField;
     }
 
 
     /**
      * Link Field to another
-     * @param field 
+     * @param field
      */
     public linkToField(field: MeasureFieldComponent) {
-        if (field) {
-            this._linkedField = field;
-            this.evaluteLinkedValue(field.object.value);
+      if (field) {
+        this._linkedField = field;
+        this.evaluteLinkedValue(field.object.value);
 
-            field.addEventListener("change", (event) => {
-                let e = event as CustomEvent;
-                this.evaluteLinkedValue(e?.detail);
-            })
-        }
+        field.addEventListener('change', (event) => {
+          const e = event as CustomEvent;
+          this.evaluteLinkedValue(e?.detail);
+        });
+      }
     }
 
     /**
      * Evaluate required and visiblity in dependency of the linked value
-     * @param {any} value 
+     * @param {any} value
      */
     private evaluteLinkedValue(value: any) {
-        let obj = this.object as MeasureField
-        let shouldShow = this.compareLinkedPos(
+      const obj = this.object as MeasureField;
+      const shouldShow = this.compareLinkedPos(
             obj.link_position?.value, value,
             obj.link_position?.compare);
-            console.log(shouldShow);
-        ViewHelper.toggleVisibility(this, shouldShow);
-        if (this.inputField) this.inputField.required = shouldShow;
+      console.log(shouldShow);
+      ViewHelper.toggleVisibility(this, shouldShow);
+      if (this.inputField) this.inputField.required = shouldShow;
     }
 
     /**
      * Compares two Linked Positions
      * @param {any} value1
-     * @param {any} value2 
-     * @param {string} operator 
+     * @param {any} value2
+     * @param {string} operator
      */
-    private compareLinkedPos(value1: any, value2: any, operator: string = "=="): boolean {
-        switch (operator) {
-            case "==":
-                return value1 == value2;
-            case "!=":
-                return value1 != value2;
-            default:
-                return value1 == value2;
-        }
+    private compareLinkedPos(value1: any, value2: any, operator = '=='): boolean {
+      switch (operator) {
+        case '==':
+          return value1 == value2;
+        case '!=':
+          return value1 != value2;
+        default:
+          return value1 == value2;
+      }
     }
 
     /**
@@ -80,21 +79,21 @@ export class MeasureFieldComponent extends ElementBinding {
      * @return {Boolean}
      */
     get isValid(): boolean {
-        let x: HTMLFormElement;
-        return this._isValid;
+      let x: HTMLFormElement;
+      return this._isValid;
     }
 
 
     /**
      * Getting Repository for element
-     * @param {string} src 
+     * @param {string} src
      * @return {BaseRepository | undefined}
      */
     private getChoiceRepository(src: string): BaseRepository<any> | undefined {
-        switch (src) {
-            default:
-                return undefined;
-        }
+      switch (src) {
+        default:
+          return undefined;
+      }
     }
 
     /**
@@ -102,29 +101,29 @@ export class MeasureFieldComponent extends ElementBinding {
     * @protected
     */
     protected _afterRender() {
-        if (this.object.choiceSrc) {
-            let vetproviehSelect = this.querySelector("vetprovieh-select") as VetproviehSelect;
-            if (vetproviehSelect) {
-                let repository = this.getChoiceRepository(this.object.choiceSrc);
-                if (repository) vetproviehSelect.repository = repository;
-            }
+      if (this.object.choiceSrc) {
+        const vetproviehSelect = this.querySelector('vetprovieh-select') as VetproviehSelect;
+        if (vetproviehSelect) {
+          const repository = this.getChoiceRepository(this.object.choiceSrc);
+          if (repository) vetproviehSelect.repository = repository;
         }
+      }
 
-        this.addValidListener();
+      this.addValidListener();
     }
 
     /**
      * Adding Event Listener for Validity to trace changes
      */
     private addValidListener() {
-        let input = this.inputField;
-        if (input) {
-            input.addEventListener("change", (event) => {
-                this.dispatchEvent(new CustomEvent("change", { detail: (event.target as any).value }));
-                this._isValid = input.checkValidity()
-            });
-            this._isValid = input.checkValidity()
-        }
+      const input = this.inputField;
+      if (input) {
+        input.addEventListener('change', (event) => {
+          this.dispatchEvent(new CustomEvent('change', {detail: (event.target as any).value}));
+          this._isValid = input.checkValidity();
+        });
+        this._isValid = input.checkValidity();
+      }
     }
 
     /**
@@ -132,20 +131,20 @@ export class MeasureFieldComponent extends ElementBinding {
      * @return {HTMLInputElement}
      */
     private get inputField(): HTMLInputElement {
-        return this.querySelector("[property='value']") as HTMLInputElement;
+      return this.querySelector('[property=\'value\']') as HTMLInputElement;
     }
 
     /**
      * Attaching Value from Takeover
-     * @param {any} value 
+     * @param {any} value
      */
     public attachValue(value: any) {
-        if (this.object.detailsType == "textArea") {
-            let inputfield = this.querySelector("textarea") as HTMLTextAreaElement;
-            if (inputfield) {
-                inputfield.value += `${value}\r\n`;
-            }
+      if (this.object.detailsType == 'textArea') {
+        const inputfield = this.querySelector('textarea') as HTMLTextAreaElement;
+        if (inputfield) {
+          inputfield.value += `${value}\r\n`;
         }
+      }
     }
 
     /**
@@ -153,8 +152,8 @@ export class MeasureFieldComponent extends ElementBinding {
      * @return {string}
      */
     get template(): string {
-        if (this.object) {
-            return super.template + `
+      if (this.object) {
+        return super.template + `
             <div class="field is-horizontal" style="margin-top:5px; margin-bottom:5px">
                 <div class="field-label">
                     <label class="label">{{name}}</label>
@@ -166,9 +165,8 @@ export class MeasureFieldComponent extends ElementBinding {
                 </div>
             </div>
             <hr/>`;
-
-        } else {
-            return '';
-        }
+      } else {
+        return '';
+      }
     }
 }

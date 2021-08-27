@@ -1,13 +1,13 @@
-import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
 /**
  * Layout for Vet:ProVieh
  */
 @WebComponent({
-  tag: "vetprovieh-layout",
+  tag: 'vetprovieh-layout',
   template: `
-          <nav class="navbar is-fixed-top has-shadow 
-                  has-background-vetprovieh-light-blue" 
+          <nav class="navbar is-fixed-top has-shadow
+                  has-background-vetprovieh-light-blue"
             role="navigation" aria-label="main navigation">
           <div class="navbar-brand">
               <a id="left-menu-open" class="navbar-item has-text-white" >
@@ -83,11 +83,11 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
                   <li><a href="/admin/tenants">Tenants</a></li>
                 </ul>
               </div>
-              
+
           </aside>
           </template>
           </vetprovieh-sidemenu>
-          <!--  <vetprovieh-sidemenu id="right-menu" 
+          <!--  <vetprovieh-sidemenu id="right-menu"
                   orientation="right" width="300px">
           <h2> Right </h2>
           <ul>
@@ -101,7 +101,7 @@ import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib
             \${this._outsideInnerHtml}
           </div>
           </section>
-            `
+            `,
 })
 export class VetproviehLayout extends VetproviehElement {
   /**
@@ -120,7 +120,6 @@ export class VetproviehLayout extends VetproviehElement {
   constructor() {
     super(false, false);
     this._outsideInnerHtml = this.innerHTML;
-
   }
 
   /**
@@ -154,7 +153,7 @@ export class VetproviehLayout extends VetproviehElement {
 
   public render() {
     super.render();
-    console.log("RENDERING");
+    console.log('RENDERING');
   }
   protected get skipRenderOnCallback() : boolean {
     return true;
@@ -164,9 +163,9 @@ export class VetproviehLayout extends VetproviehElement {
    */
   _addCssClassToBody() {
     document.getElementsByTagName('body')[0]
-      .classList.add('has-navbar-fixed-top');
+        .classList.add('has-navbar-fixed-top');
 
-    document.body.style.visibility = "visible";
+    document.body.style.visibility = 'visible';
   }
 
   /**
@@ -175,9 +174,9 @@ export class VetproviehLayout extends VetproviehElement {
   _addListenerToButton() {
     ['left', 'right'].forEach((menuOrientation) => {
       const button = document
-        .getElementById(menuOrientation + '-menu-open') as HTMLElement;
+          .getElementById(menuOrientation + '-menu-open') as HTMLElement;
       const sideMenu = document
-        .getElementById(menuOrientation + '-menu') as HTMLElement;
+          .getElementById(menuOrientation + '-menu') as HTMLElement;
       if (button) {
         button.addEventListener('click', () => {
           sideMenu.dispatchEvent(new Event('toggle'));
@@ -185,5 +184,4 @@ export class VetproviehLayout extends VetproviehElement {
       }
     });
   }
-
 }

@@ -1,12 +1,12 @@
-import { WebComponent, VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
-import { User } from "../models";
-import { UserRepository } from "../repository";
+import {WebComponent, VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
+import {User} from '../models';
+import {UserRepository} from '../repository';
 
 @WebComponent({
-    template: VetproviehElement.template + `
+  template: VetproviehElement.template + `
             <style>
                 .username {
-                    font-size: 18px;
+                    font-size: 18px;O
                 }
             </style>
             <div class="card-content">
@@ -14,24 +14,30 @@ import { UserRepository } from "../repository";
                     <div class="media-content">
                         <a href="/users/profile.html">
                             <p class="username is-5">
-                                \${this.currentUser?.firstName} \${this.currentUser?.lastName}
+                                \${this.currentUser?.firstName}
+                                \${this.currentUser?.lastName}
                             </p>
                         </a>
                         <p class="subtitle is-7">
-                            \${this.currentUser?.tenant?.name} \${this.currentUser?.tenant?.name2}
+                            \${this.currentUser?.tenant?.name}
+                            \${this.currentUser?.tenant?.name2}
                         </p>
                     </div>
                 </div>
                 <div style="margin-top:5px">
-                    <button id="logout" class="button is-small is-danger is-outlined" type="button">
+                    <button id="logout"
+                            class="button is-small is-danger is-outlined"
+                            type="button">
                         Abmelden
                     </button>
                 </div>
             </div>`,
-    tag: 'profile-widget'
+  tag: 'profile-widget',
 })
+/**
+ * Profile Widget shows current logged-in user
+ */
 export class ProfileWidget extends VetproviehElement {
-
     private repository: UserRepository = new UserRepository();
 
     // Current-User to Display
@@ -41,47 +47,50 @@ export class ProfileWidget extends VetproviehElement {
      * Default-Konstruktor
      */
     constructor() {
-        super(true, false);
+      super(true, false);
     }
 
+    /**
+     * Connected-Callback for Web-Components
+     */
     connectedCallback() {
-        super.connectedCallback();
-        this.loadUser();
+      super.connectedCallback();
+      this.loadUser();
     }
 
     /**
      * Load Current User Data
      */
     private loadUser() {
-        this.repository.loadProfile().then((profile: User) => {
-            this.currentUser = profile;
-            this.render();
-            this.addEventListenerToLogout();
-        })
+      this.repository.loadProfile().then((profile: User) => {
+        this.currentUser = profile;
+        this.render();
+        this.addEventListenerToLogout();
+      });
     }
 
     /**
      * Attach EventListener to logoutButton
      */
     private addEventListenerToLogout() {
-        if (this.logoutButton) {
-            this.logoutButton.addEventListener("click", () => {
-                this.logout()
-            });
-        }
+      if (this.logoutButton) {
+        this.logoutButton.addEventListener('click', () => {
+          this.logout();
+        });
+      }
     }
 
     /**
      * LogoutButton abrufen
      */
     private get logoutButton(): HTMLButtonElement {
-        return this.getByIdFromShadowRoot("logout") as HTMLButtonElement;
+      return this.getByIdFromShadowRoot('logout') as HTMLButtonElement;
     }
 
     /**
      * Sign out current User
      */
     private logout() {
-        this.repository.logout();
+      this.repository.logout();
     }
 }

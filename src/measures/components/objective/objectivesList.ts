@@ -1,9 +1,9 @@
-import { VetproviehBasicList } from "@tomuench/vetprovieh-list/lib/vetprovieh-basic-list";
-import { VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { ObjectivesRepository } from "../../repository";
+import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+import {VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {ObjectivesRepository} from '../../repository';
 
 @WebComponent({
-    template: VetproviehElement.template + `<style>
+  template: VetproviehElement.template + `<style>
                 :host {
                     display: block;
                 }
@@ -16,12 +16,12 @@ import { ObjectivesRepository } from "../../repository";
                 #header {
                     margin-top: 15px;
                 }
-    
+
                 </style>
-            
+
                 <!-- SearchControl on Top -->
                 <div id="searchControl" class="control">
-                    <input id="search" class="input" type="text" 
+                    <input id="search" class="input" type="text"
                             placeholder="Bitte Suchbegriff eingeben">
                 </div>
                 <div id="header" class="is-hidden-touch">
@@ -43,23 +43,22 @@ import { ObjectivesRepository } from "../../repository";
                 <!-- Pager for Paging through List-->
                 <vetprovieh-pager id="pager" page="1" maximum="7">
                 </vetprovieh-pager>`,
-    tag: "objectives-list"
+  tag: 'objectives-list',
 })
 export class ObjectivesListComponent extends VetproviehBasicList {
-  
-    constructor() {
-        super();
-    }
+  constructor() {
+    super();
+  }
 
-    connectedCallback(){
-        super.connectedCallback();
-        this.repository = new ObjectivesRepository(VetproviehNavParams.getUrlParameter("barnId"));
-    }
+  connectedCallback() {
+    super.connectedCallback();
+    this.repository = new ObjectivesRepository(VetproviehNavParams.getUrlParameter('barnId'));
+  }
 
-    protected elementSelected(event:any) {
-        let checkbox = event.target.querySelector("input[type='checkbox']")
-        if(checkbox) checkbox.checked = !checkbox.checked;
+  protected elementSelected(event:any) {
+    const checkbox = event.target.querySelector('input[type=\'checkbox\']');
+    if (checkbox) checkbox.checked = !checkbox.checked;
 
-        super.elementSelected(event);
-    }
+    super.elementSelected(event);
+  }
 }

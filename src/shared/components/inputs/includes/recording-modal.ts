@@ -1,24 +1,24 @@
-import { VetproviehElement } from "@tomuench/vetprovieh-shared/lib";
+import {VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
 
 export class RecordingModal extends VetproviehElement {
-    private _active: boolean = false;
-    private _title: string = "";
+    private _active = false;
+    private _title = '';
     protected _content: Blob | null = null;
 
     protected _stream: MediaStream | undefined;
 
     protected recordedContent: any | undefined;
 
-    protected isMobile: boolean = !!navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+    protected isMobile = !!navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
 
     public get title(): string {
-        return this._title;
+      return this._title;
     }
 
     public set title(v: string) {
-        if (this._title !== v) {
-            this._title = v;
-        }
+      if (this._title !== v) {
+        this._title = v;
+      }
     }
 
     /**
@@ -26,7 +26,7 @@ export class RecordingModal extends VetproviehElement {
      * @return {boolean}
      */
     public get active(): boolean {
-        return this._active;
+      return this._active;
     }
 
     /**
@@ -34,15 +34,15 @@ export class RecordingModal extends VetproviehElement {
      * @param {boolean} v
      */
     public set active(v: boolean) {
-        if (this._active !== v) {
-            this._active = v;
-            if (v) {
-                this.modalBox.classList.add("is-active");
-                this.startVideo();
-            } else {
-                this.modalBox.classList.remove("is-active");
-            }
+      if (this._active !== v) {
+        this._active = v;
+        if (v) {
+          this.modalBox.classList.add('is-active');
+          this.startVideo();
+        } else {
+          this.modalBox.classList.remove('is-active');
         }
+      }
     }
 
 
@@ -51,48 +51,48 @@ export class RecordingModal extends VetproviehElement {
      * - Bindings and so on
      */
     connectedCallback() {
-        super.connectedCallback();
+      super.connectedCallback();
 
-        let closeFunc = () => {
-            this.close();
-        }
-        closeFunc.bind(this);
-        this.closeButton.addEventListener("click", closeFunc)
+      const closeFunc = () => {
+        this.close();
+      };
+      closeFunc.bind(this);
+      this.closeButton.addEventListener('click', closeFunc);
 
-        this.addButtonListeners();
+      this.addButtonListeners();
     }
 
     /**
      * Adding Listener to Buttons
      */
     protected addButtonListeners() {
-        throw "Please implement";
+      throw 'Please implement';
     }
 
     /**
      * Get Content from Modal
      */
     public loadContent(): Blob | null {
-        return this._content;
+      return this._content;
     }
 
     /**
      * Closing Modal
      * @param {boolean} takeover
      */
-    public close(takeover: boolean = false) {
-        this.active = false;
+    public close(takeover = false) {
+      this.active = false;
 
-        // Dispatching Changed Event
-        let event = new CustomEvent("change", {
-            detail: {
-                takeover: takeover,
-                content: takeover ? this.recordedContent : undefined
-            }
-        });
-        this.closeStreams();
-        this.dispatchEvent(event);
-        this.reset();
+      // Dispatching Changed Event
+      const event = new CustomEvent('change', {
+        detail: {
+          takeover: takeover,
+          content: takeover ? this.recordedContent : undefined,
+        },
+      });
+      this.closeStreams();
+      this.dispatchEvent(event);
+      this.reset();
     }
 
     /**
@@ -104,13 +104,13 @@ export class RecordingModal extends VetproviehElement {
     }
 
     private closeStreams() {
-        this.mediaElement.srcObject = null;
+      this.mediaElement.srcObject = null;
 
         this._stream?.getTracks().forEach((track) => {
-            if (track.readyState == 'live') {
-                track.stop();
-            }
-        })
+          if (track.readyState == 'live') {
+            track.stop();
+          }
+        });
         this._stream = undefined;
     }
 
@@ -118,31 +118,31 @@ export class RecordingModal extends VetproviehElement {
      * Starting Video
      */
     private startVideo() {
-        let streamFunc = (stream: MediaStream) => {
-            this.mediaElement.autoplay = true;
-            this.mediaElement.srcObject = stream;
-            this._stream = stream;
+      const streamFunc = (stream: MediaStream) => {
+        this.mediaElement.autoplay = true;
+        this.mediaElement.srcObject = stream;
+        this._stream = stream;
 
-            this.afterStreamStarted(stream);
-        }
+        this.afterStreamStarted(stream);
+      };
 
-        streamFunc.bind(this);
+      streamFunc.bind(this);
 
-        let videoOptions: any = true;
+      let videoOptions: any = true;
 
-        if (this.isMobile) {
-            videoOptions = {
-                facingMode: "environment"
-            }
-        }
-        if (navigator.mediaDevices) {
-            navigator.getUserMedia = navigator.mediaDevices.getUserMedia
+      if (this.isMobile) {
+        videoOptions = {
+          facingMode: 'environment',
+        };
+      }
+      if (navigator.mediaDevices) {
+        navigator.getUserMedia = navigator.mediaDevices.getUserMedia;
 
-            navigator.mediaDevices.getUserMedia({
-                video: videoOptions,
-                audio: true
-            }).then(streamFunc, this.bindingFailed);
-        }
+        navigator.mediaDevices.getUserMedia({
+          video: videoOptions,
+          audio: true,
+        }).then(streamFunc, this.bindingFailed);
+      }
     }
 
     protected afterStreamStarted(stream: MediaStream) {
@@ -154,12 +154,12 @@ export class RecordingModal extends VetproviehElement {
      * @param {any} error
      */
     private bindingFailed(error: any) {
-        console.log(error);
+      console.log(error);
     }
 
 
     protected get mediaElement(): HTMLVideoElement {
-        return this.getByIdFromShadowRoot('media') as HTMLVideoElement;
+      return this.getByIdFromShadowRoot('media') as HTMLVideoElement;
     }
 
     /**
@@ -167,7 +167,7 @@ export class RecordingModal extends VetproviehElement {
     * @return {HTMLButtonElement}
     */
     private get closeButton(): HTMLButtonElement {
-        return this.getByIdFromShadowRoot("closeButton") as HTMLButtonElement;
+      return this.getByIdFromShadowRoot('closeButton') as HTMLButtonElement;
     }
 
     /**
@@ -175,14 +175,13 @@ export class RecordingModal extends VetproviehElement {
      * @return {HTMLElement}
      */
     private get modalBox(): HTMLElement {
-        return this.getByIdFromShadowRoot("modal") as HTMLElement;
+      return this.getByIdFromShadowRoot('modal') as HTMLElement;
     }
 
     /**
      * Observed Attributes
      */
     static get observedAttributes() {
-        return ['type', 'title'];
+      return ['type', 'title'];
     }
-
 }

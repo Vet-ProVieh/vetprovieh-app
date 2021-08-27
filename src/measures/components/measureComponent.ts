@@ -1,13 +1,13 @@
-import { ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent } from "@tomuench/vetprovieh-shared/lib";
-import { Barn } from "../../barns";
-import { RenderType } from "../../shared";
-import { DynamicForm } from "../../shared/components/forms/dynamicForm";
-import { ReplaceFactory, TakeoverFactory } from "../factories";
-import { Measure, MeasureField, MeasureGroup } from "../models";
-import { InitializeMeasurePage } from "../pages";
-import { MeasuresRepository } from "../repository";
-import { MeasureGroupComponent } from "./measureGroup";
-import { ObjectivesComponent } from "./objective";
+import {ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {Barn} from '../../barns';
+import {RenderType} from '../../shared';
+import {DynamicForm} from '../../shared/components/forms/dynamicForm';
+import {ReplaceFactory, TakeoverFactory} from '../factories';
+import {Measure, MeasureField, MeasureGroup} from '../models';
+import {InitializeMeasurePage} from '../pages';
+import {MeasuresRepository} from '../repository';
+import {MeasureGroupComponent} from './measureGroup';
+import {ObjectivesComponent} from './objective';
 
 /**
  * Controller for Page
@@ -16,7 +16,7 @@ import { ObjectivesComponent } from "./objective";
 @WebComponent({
   template:
     VetproviehElement.template +
-    ` 
+    `
     <form id="form">
         <vetprovieh-notification id="notification">
         </vetprovieh-notification>
@@ -43,43 +43,42 @@ import { ObjectivesComponent } from "./objective";
           </ul>
         </div>
         <div id="detail" class="container">
-        
-          
+
+
         </div>
         <div id="objectives" class="panel is-hidden is-primary">
           <p class="panel-heading">
           Maßnahmen zur Verringerung des Antibiotika-Einsatzes
           </p>
         </div>
-        
+
         <div class="container sticky-footer">
             <div class="columns is-mobile">
                 <div class="column">
-                    <input id="abortButton" 
-                            class="button is-danger is-fullwidth" 
-                            type="reset" value="Abbrechen">                   
+                    <input id="abortButton"
+                            class="button is-danger is-fullwidth"
+                            type="reset" value="Abbrechen">
                 </div>
                 <div class="column">
-                    <input id="saveButton" 
-                            class="button is-success is-fullwidth" 
+                    <input id="saveButton"
+                            class="button is-success is-fullwidth"
                             type="button" value="Speichern">
                 </div>
             </div>
         </div>
     </form>
     `,
-  tag: "vp-measure",
+  tag: 'vp-measure',
 })
 export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
-
   private repository: MeasuresRepository = new MeasuresRepository();
   private categories: HTMLAnchorElement[] = [];
   private objectivesComponent: ObjectivesComponent | undefined;
 
   constructor() {
-    super("data", RenderType.Multiple);
+    super('data', RenderType.Multiple);
     this.storeElement = true;
-    this.src = "/service/measures";
+    this.src = '/service/measures';
   }
 
   /**
@@ -102,7 +101,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   /**
    * Overwriteable Callback
    * @param {any} data
-   * @protected 
+   * @protected
    */
   _afterFetch(data: any) {
     let params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
@@ -120,7 +119,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     if (this.isNew()) {
       this.takeoverLastMeasure().then(() => {
         super._afterFetch(data);
-      })
+      });
     } else {
       super._afterFetch(data);
     }
@@ -142,30 +141,30 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   }
 
   /**
-   * Tab-Buttons registrieren. 
+   * Tab-Buttons registrieren.
    */
   private registerTabEvents() {
-    this.shadowRoot?.querySelectorAll("a").forEach((a: HTMLAnchorElement) => {
+    this.shadowRoot?.querySelectorAll('a').forEach((a: HTMLAnchorElement) => {
       if (a) {
         this.categories.push(a);
-        a.addEventListener("click", (event) => {
+        a.addEventListener('click', (event) => {
           this.activateTabAnchor(a);
           this.deactiveTabAnchors(a);
         });
       }
-    })
+    });
   }
 
   /**
    * Mark Anchor as activated and remove hidden vor Tab
-   * @param {HTMLAnchorElement} a 
+   * @param {HTMLAnchorElement} a
    */
   private activateTabAnchor(a: HTMLAnchorElement) {
-    let showId = a.dataset.id;
-    a.parentElement?.classList.add("is-active");
-    let element = this.shadowRoot?.querySelector(`#${showId}`);
+    const showId = a.dataset.id;
+    a.parentElement?.classList.add('is-active');
+    const element = this.shadowRoot?.querySelector(`#${showId}`);
     if (element) {
-      element.classList.remove("is-hidden");
+      element.classList.remove('is-hidden');
     }
 
     if (this.objectivesComponent) {
@@ -175,18 +174,18 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
   /**
    * Mark Tab-Anchor as not active and hide other Elements
-   * @param {HTMLAnchorElement} a 
+   * @param {HTMLAnchorElement} a
    */
   private deactiveTabAnchors(a: HTMLAnchorElement) {
-    let showId = a.dataset.id;
+    const showId = a.dataset.id;
     this.categories.filter((x) => x != a).forEach((otherA) => {
-      let showCatId = otherA.dataset.id;
-      otherA.parentElement?.classList.remove("is-active");
+      const showCatId = otherA.dataset.id;
+      otherA.parentElement?.classList.remove('is-active');
 
       if (showId !== showCatId) {
-        let element = this.shadowRoot?.querySelector(`#${showCatId}`);
+        const element = this.shadowRoot?.querySelector(`#${showCatId}`);
         if (element) {
-          element.classList.add("is-hidden");
+          element.classList.add('is-hidden');
         }
       }
     }, false);
@@ -196,7 +195,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    * Last Measure Takeover
    */
   private takeoverLastMeasure(): Promise<any> {
-    let takeoverFactory = new TakeoverFactory(this.currentObject, this.repository);
+    const takeoverFactory = new TakeoverFactory(this.currentObject, this.repository);
     return takeoverFactory.takeoverFromLatestMeasure().then((result) => {
       return this.loadBasicData();
     }).catch((error) => {
@@ -208,7 +207,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    * Loading Basic Data for Barn and User
    */
   private loadBasicData(): Promise<any> {
-    let replaceFactory = new ReplaceFactory();
+    const replaceFactory = new ReplaceFactory();
     return replaceFactory.replacePlaceholders(this.currentObject).then(() => {
     }).catch((error) => console.log(error));
   }
@@ -218,24 +217,24 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    * @return {HTMLElement}
    */
   private get objectivesContainer(): HTMLElement {
-    return this.shadowRoot?.querySelector("#objectives") as HTMLElement;
+    return this.shadowRoot?.querySelector('#objectives') as HTMLElement;
   }
 
   /**
    * on the new page?
    */
   private isNew(): boolean {
-    return window.location.href.includes("new");
+    return window.location.href.includes('new');
   }
 
   /**
    * Initialising Object with Params
-   * @param {any} params 
+   * @param {any} params
    */
   private setParamsToComponent(params: any) {
     if (params != null && params != undefined) {
       if (params.barnId != null && params.barnId != undefined) {
-        this.currentObject.barn = { id: parseInt(params.barnId) } as Barn;
+        this.currentObject.barn = {id: parseInt(params.barnId)} as Barn;
       }
       if (params.measuresDate != null && params.measuresDate != undefined) {
         this.currentObject.measuresDate = params.measuresDate;
@@ -245,5 +244,4 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
       }
     }
   }
-
 }

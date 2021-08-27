@@ -1,10 +1,10 @@
-import { BasicModel } from "../../../shared";
+import {BasicModel} from '../../../shared';
 
 
 /**
  * Field in a OperationGroup
  */
 export class OperationField extends BasicModel {
-    public name: string = "";
+    public name = '';
     public value: any;
 }
