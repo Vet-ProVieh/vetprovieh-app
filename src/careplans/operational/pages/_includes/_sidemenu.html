@@ -4,7 +4,7 @@
             Aktueller Stall
         </p>
         <div class="panel-block">
-            <barn-list-show barnid="{{barnId}}"></barn-list-show>
+            <barn-list-show barnid="{{barn.id}}"></barn-list-show>
         </div>
     </article>
     <article class="panel">
@@ -23,13 +23,13 @@
         <div class="panel-block">
             <ul class="menu-list">
                 <li>
-                    <a href="/documents/index.html?barnId={{barnId}}">
+                    <a href="/documents/index.html?barnId={{barn.id}}">
                         <i class="fas fa-file-alt"></i>
                         Dokumente
                     </a>
                 </li>
                 <li>
-                    <a href="/careplans/operational/index.html?barn_id={{barnId}}">
+                    <a href="/careplans/operational/index.html?barn_id={{barn.id}}">
                         <i class="fas fa-hand-holding-medical"></i>
                         Behandlungen
                     </a>
@@ -37,15 +37,16 @@
             </ul>
         </div>
     </article>
-    <vetprovieh-assistant id="speechAssistant"></vetprovieh-assistant>
+    <!--<vetprovieh-assistant id="speechAssistant"></vetprovieh-assistant>-->
 </div>
 
 
 <vetprovieh-sidemenu id="right-menu" orientation="right" width="300px">
+    <template>
     <p class="menu-label">
         Aktueller Stall
     </p>
-    <barn-list-show barnid="{{barnId}}"></barn-list-show>
+    <barn-list-show barnid="{{barn.id}}"></barn-list-show>
 
     <p class="menu-label">
         Behandlungsprozess
@@ -57,16 +58,19 @@
     </p>
     <ul class="menu-list">
         <li>
-            <a href="/documents/index.html?barnId={{barnId}}">
+            <a href="/documents/index.html?barnId={{barn.id}}">
                 <i class="fas fa-file-alt"></i>
                 Dokumente
             </a>
         </li>
         <li>
-            <a href="/careplans/operational/index.html?barn_id={{barnId}}">
+            <a href="/careplans/operational/index.html?barn_id={{barn.id}}">
                 <i class="fas fa-hand-holding-medical"></i>
                 Behandlungen
             </a>
         </li>
     </ul>
+    <hr/>
+    <vetprovieh-assistant id="speechAssistant"></vetprovieh-assistant>
+    </template>
 </vetprovieh-sidemenu>

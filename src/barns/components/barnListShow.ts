@@ -9,8 +9,8 @@ import {BarnsRepository} from '../repository';
   template: `
         <p style="font-size:0.9em">
         <strong>Stall:</strong> \${this.barn?.name} ($\{this.barn?.vvvoNumber})<br />
-        <strong>Landwirt:</strong> \${this.barn?.farmer.name} (\${this.barn?.farmer.contactPerson.firstName}
-            \${this.barn?.farmer.contactPerson.lastName})<br />
+        <strong>Landwirt:</strong> \${this.barn?.farmer.name} (\${this.barn?.farmer.contactPerson?.firstName}
+            \${this.barn?.farmer.contactPerson?.lastName})<br />
         </p>
     `,
   tag: 'barn-list-show',
