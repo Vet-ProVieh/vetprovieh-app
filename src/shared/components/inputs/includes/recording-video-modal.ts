@@ -15,7 +15,7 @@ import {RecordingRtcModal} from './recording-rtc-modal';
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <video style="object-fit: fill;" muted playsinline="true" id="media">
+            <video style="object-fit: fill;" muted="true" playsinline="true" id="media">
             </video>
         </section>
         <footer class="modal-card-foot">

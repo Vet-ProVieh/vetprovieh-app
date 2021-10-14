@@ -40,7 +40,6 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         this._isValid = v;
         if (v) {
                 this.querySelector('#group')?.classList.add('is-primary');
-                this.hideElement(this.panelBlock);
         } else {
                 this.querySelector('#group')?.classList.remove('is-primary');
         }
@@ -214,5 +213,6 @@ export class MeasureGroupComponent extends ElementGroupBinding {
       });
 
       this.internalIsValid = this.calculateValidation();
+      if(this.internalIsValid) this.hideElement(this.panelBlock);
     }
 }

@@ -13,7 +13,7 @@
           "name": "Anschrift des Betriebsstandortes",
           "optional": false,
           "position": 1,
-          "value": "{{barn.name}}\r\n{{barn.address.streetName}}\r\n{{barn.address.streetNumber}}\r\n{{barn.address.postalCode}} {{barn.address.city}}",
+          "value": "{{farmer.name}}\r\n{{barn.address.streetName}}\r\n{{barn.address.streetNumber}}\r\n{{barn.address.postalCode}} {{barn.address.city}}",
           "voiceInputable": true
         },
         {

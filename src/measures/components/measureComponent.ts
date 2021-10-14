@@ -7,6 +7,7 @@ import {Measure, MeasureField, MeasureGroup} from '../models';
 import {InitializeMeasurePage} from '../pages';
 import {MeasuresRepository} from '../repository';
 import {MeasureGroupComponent} from './measureGroup';
+import { MeasurePdfButton } from './measurePdfButton';
 import {ObjectivesComponent} from './objective';
 
 /**
@@ -58,6 +59,9 @@ import {ObjectivesComponent} from './objective';
                     <input id="abortButton"
                             class="button is-danger is-fullwidth"
                             type="reset" value="Abbrechen">
+                </div>
+                <div class="column is-2">
+                  <measure-pdf-button></measure-pdf-button>
                 </div>
                 <div class="column">
                     <input id="saveButton"
@@ -115,6 +119,8 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
     this.setParamsToComponent(params);
 
+    const pdfButton = this.shadowRoot?.querySelector("measure-pdf-button") as MeasurePdfButton
+    pdfButton.measureid = data.id;
 
     if (this.isNew()) {
       this.takeoverLastMeasure().then(() => {

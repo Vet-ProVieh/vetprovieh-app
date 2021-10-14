@@ -77,6 +77,9 @@ export class InputFactory {
       case 'image':
         response = this.buildImage(options);
         break;
+      case 'DateFields':
+        response = this.buildDatePicker(options);
+        break;
       case 'speech':
         response = this.buildSpeech(options);
         break;
@@ -103,6 +106,20 @@ export class InputFactory {
         break;
     }
     return this.wrapFormControl(response);
+  }
+
+
+  /**
+     * Generating a VideoArea
+     * @param {any} options
+     */
+   private static buildDatePicker(options: any): string {
+    return `<input ` +
+    this.genTag('property', 'value') +
+    this.genTag('name', options.name) +
+    `class="input" type="date" ` +
+    this.isRequired(options.optional != true) +
+    `></input>`;
   }
 
   /**

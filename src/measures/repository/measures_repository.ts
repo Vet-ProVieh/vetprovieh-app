@@ -37,6 +37,29 @@ export class MeasuresRepository extends BaseRepository<Measure> {
   }
 
   /**
+   * Download rendered PDF
+   * @param {stirng} id 
+   * @returns {Promise<string|null>}
+   */
+  downloadPdf(id: string) : Promise<string|null> {
+    return new Promise((resolve, reject) => {
+      fetch(`${this.endpoint}/createReport/${id}/pdf`)
+      .then((response) => {
+        if(response.ok){
+          response.blob().then(((blob) => {
+            resolve(URL.createObjectURL(blob));
+          }));          
+        } else {
+          reject(null);
+        }
+      }).catch((error) => {
+        console.log(error); 
+        reject(null);
+      })
+    });
+  }
+
+  /**
    * Get last filledout Measure for Barn
    * @param {number} barnId
    * @return {Promise<Measure>}

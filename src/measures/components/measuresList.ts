@@ -37,9 +37,6 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                         <div class="column">
                             <strong>Ausgefüllt von</strong>
                         </div>
-                        <div class="column is-1">
-                            <strong>Aktionen</strong>
-                        </div>
                     </div>
                 </div>
                 <!-- Listing Elements here -->

@@ -54,6 +54,7 @@ export class MeasureFieldComponent extends ElementBinding {
             obj.link_position?.compare);
       console.log(shouldShow);
       ViewHelper.toggleVisibility(this, shouldShow);
+      ViewHelper.toggleRequirement(this, shouldShow);
       if (this.inputField) this.inputField.required = shouldShow;
     }
 

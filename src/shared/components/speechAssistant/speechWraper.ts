@@ -112,6 +112,19 @@ export class SpeechWrapper {
     }
 
     /**
+     * Speech Recognition ended
+     * @param {Function} func
+     */
+    set onaudioend(func: Function) {
+      if (this.ready) {
+        this._recognition.onaudioend = function() {
+          console.log('onaudio ended');
+          func({});
+        };
+      }
+    }
+
+    /**
      * On Results Raw Callback
      * @param {Function} func
      */
