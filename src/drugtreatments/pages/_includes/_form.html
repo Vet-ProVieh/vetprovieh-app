@@ -1,0 +1,49 @@
+<template>
+    <div class="field">
+        <div class="card">
+            <div class="card-content">
+                <p class="title is-4">Allgemeines</p>
+                <label class="label">Zugeordneter Landwirt</label>
+
+                <div class="control">
+                    <vetprovieh-select id="farmer" property="farmer.id" display="name" required>
+                        <template>
+                            <div style="padding:15px">
+                                <span>{{operationPlans.barn.farmer.name}}</span>
+                            </div>
+                        </template>
+                    </vetprovieh-select>
+                </div>
+
+                <label class="label">Zugeordneter Tierarzt</label>
+                <div class="control">
+                    <input property="operationPlans.barn.lastVet.firstName" class="input " type="text" required>
+                    <input property="operationPlans.barn.lastVet.lastName" class="input" type="text" required>
+                </div>
+
+                <label class="label">Stall</label>
+                <div class="control">
+                    <input property="operationPlans.barn.name" class="input" type="text"
+                        required>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-content">
+                <p class="title is-4">Antibiotika</p>
+                <label class="label">Name</label>
+                <div class="control">
+                    <input property="drugs.name" class="input " type="text" required>
+                    <input property="operationPlans.barn.lastVet.lastName" class="input" type="text" required>
+                </div>
+
+                <label class="label">Stall</label>
+                <div class="control">
+                    <input property="operationPlans.barn.name" class="input" type="text"
+                        required>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

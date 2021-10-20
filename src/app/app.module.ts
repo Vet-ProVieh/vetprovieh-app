@@ -1,3 +1,4 @@
+
 // Externe Komponenten
 export {VetproviehList} from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
 export {VetproviehSelect} from '@tomuench/vetprovieh-select/lib/vetprovieh-select';
@@ -16,4 +17,5 @@ export * as Users from '../users';
 export * as Tenants from '../admin/tenants';
 export * as Drugs from '../drugs';
 export * as DrugTreatments from '../drugtreatments';
+export * as DrugReport from '../drugreports';
 export * as SyncComp from '../shared/components/basics/includes/sync';
