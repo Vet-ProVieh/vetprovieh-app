@@ -43,6 +43,15 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                   <li><a href="/measures">
                   <i class="fas fa-paw"></i> Maßnahmen</a></li>
               </ul>
+              <p class="menu-label">
+                Antibiotikamonitoring
+              </p>
+              <ul class="menu-list">
+                  <li><a href="/drugtreatments">
+                  <i class="fas fa-syringe"></i> Antibiotika-Behandlung</a></li>
+                  <li><a href="/drugreports">
+                  <i class="fas fa-notes-medical"></i> Antibiotika-Berichte</a></li>
+              </ul>
               <!--
               <p class="menu-label">
                   Persönliche Einstellungen

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Vet:Provieh - Ihre Medik. Berichte</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+    <vetprovieh-layout title="Ihre Medikamentenberichte">
+        <vetprovieh-drugreports>
+            <vetprovieh-list pagesize="15">
+                <template>
+                    <div>
+                        <a href="#">
+                            <strong>{{guid}}</strong>
+                        </a>
+                        <p style="font-size:0.9em">
+                            <strong>Registrierungsnr:</strong> {{reportDate}}<br />
+                            <strong>Hersteller:</strong> {{reportPeriod}}<br />
+                            <strong>Zugelassen für:</strong><br />
+                        </p>
+                    </div>
+                    <hr />
+                </template>
+            </vetprovieh-list>
+        </vetprovieh-drugreports>
+    </vetprovieh-layout>
+</body>
+
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>

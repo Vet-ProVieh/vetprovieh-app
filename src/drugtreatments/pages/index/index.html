@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Vet:Provieh - Ihre Behandlungen</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+    <vetprovieh-layout title="Ihre Behandlungen">
+        <vetprovieh-drugtreatments>
+            <vetprovieh-list pagesize="15">
+                <template>
+                    <div>
+                        <a href="show.html?id={{id}}">
+                            <strong>{{operationPlans.barn.farmer.name}}: {{operationPlans.animal}}</strong>
+                        </a>
+                        <p style="font-size:0.9em">
+                            <strong>Datum:</strong> {{treatmentDate}}
+                            <strong>Stall:</strong> {{operationPlans.barn.name}}<br/>
+                            <strong>Tierarzt:</strong> {{operationPlans.barn.lastVet.firstName}} {{operationPlans.barn.lastVet.lastName}}<br />
+                            Für <strong> {{effectDays}} </strong>Tage<br />
+                        </p>
+                    </div>
+                    <hr />
+                </template>
+            </vetprovieh-list>
+        </vetprovieh-drugtreatments>
+    </vetprovieh-layout>
+</body>
+
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>

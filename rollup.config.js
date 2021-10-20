@@ -25,7 +25,9 @@ var modules = {
     'careplans/settings/pages/fields': 'settings/careplans/fields',
     'users': 'users',
     'documents': 'documents',
-    'register': 'register'
+    'register': 'register',
+    'drugtreatments': 'drugtreatments',
+    'drugreports': 'drugreports'
 };
 
 var targets = Object.keys(modules).map((source) => {
