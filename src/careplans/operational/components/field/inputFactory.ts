@@ -77,7 +77,7 @@ export class InputFactory {
       case 'image':
         response = this.buildImage(options);
         break;
-      case 'DateFields':
+      case 'dateFields':
         response = this.buildDatePicker(options);
         break;
       case 'speech':
