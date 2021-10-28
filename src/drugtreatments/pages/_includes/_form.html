@@ -3,46 +3,58 @@
         <div class="card">
             <div class="card-content">
                 <p class="title is-4">Allgemeines</p>
-                <label class="label">Zugeordneter Landwirt</label>
 
+                <label class="label">Zugeordneter Landwirt</label>
                 <div class="control">
-                    <vetprovieh-select id="farmer" property="farmer.id" display="name" required>
+                    <input property="barn.farmer.name" class="input " type="text" disabled>
+                </div>
+
+                <label class="label">Zugeordneter Tierarzt</label>
+                <div class="control">
+                    <input value="{{barn.lastVet.firstName}} {{barn.lastVet.lastName}}" class="input " type="text" disabled>
+                </div> 
+
+                <label class="label">Stall</label>
+                <div class="control">
+                    <vetprovieh-select id="barn" property="barn.id" display="name" required>
                         <template>
                             <div style="padding:15px">
-                                <span>{{operationPlans.barn.farmer.name}}</span>
+                                <span>{{name}} {{vvvoNumber}}</span>
                             </div>
                         </template>
                     </vetprovieh-select>
                 </div>
 
-                <label class="label">Zugeordneter Tierarzt</label>
-                <div class="control">
-                    <input property="operationPlans.barn.lastVet.firstName" class="input " type="text" required>
-                    <input property="operationPlans.barn.lastVet.lastName" class="input" type="text" required>
-                </div>
 
-                <label class="label">Stall</label>
-                <div class="control">
-                    <input property="operationPlans.barn.name" class="input" type="text"
-                        required>
-                </div>
             </div>
         </div>
         <br>
         <div class="card">
             <div class="card-content">
-                <p class="title is-4">Antibiotika</p>
-                <label class="label">Name</label>
-                <div class="control">
-                    <input property="drugs.name" class="input " type="text" required>
-                    <input property="operationPlans.barn.lastVet.lastName" class="input" type="text" required>
+                <div class="columns">
+                    <div class="column">
+                        <p class="title is-4">Antibiotika</p>
+                        <drug-list id="drug-list"></drug-list>
+                    </div>
                 </div>
-
-                <label class="label">Stall</label>
-                <div class="control">
-                    <input property="operationPlans.barn.name" class="input" type="text"
-                        required>
-                </div>
+                
+                
+                <!-- ANTIBIOTIKA ALS VETPROVIEH-LIST ANZEIGEN -->
+                    <!--<vetprovieh-list pagesize="15">
+                        <template>
+                            <div>
+                                <a href="#">
+                                    <strong>{{name}}</strong>
+                                </a>
+                                <p style="font-size:0.9em">
+                                    <strong>Registrierungsnr:</strong> {{registrationNumber}}<br />
+                                    <strong>Hersteller:</strong> {{manufacturer}}<br />
+                                    <strong>Zugelassen für:</strong><br />
+                                </p>
+                            </div>
+                            <hr />
+                        </template>
+                    </vetprovieh-list>-->
             </div>
         </div>
     </div>

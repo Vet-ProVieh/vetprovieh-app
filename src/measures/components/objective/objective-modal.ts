@@ -68,7 +68,7 @@ export class ObjectiveModal extends SimpleModal {
     super();
   }
 
-
+ 
     // @ts-ignore
     private _objective: Objective;
 
