@@ -16,6 +16,6 @@ export class DrugstreatmentsIndexPage extends BasicIndexPage<Drugtreatment> {
     const barnId = VetproviehNavParams.getUrlParameter('barnId');
     rep.barnId = barnId;
     super(rep);
-      this.barnId = barnId;
+    this.barnId = barnId;
   }
 }

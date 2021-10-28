@@ -1,11 +1,11 @@
 import {BasicShowPage} from '../../../shared';
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {Drugtreatment} from '../../models';
 import { BarnsRepository } from '../../../barns/repository';
 import { FarmersRepository } from '../../../farmers';
 import { VetproviehSelect } from '@tomuench/vetprovieh-select/lib/vetprovieh-select';
 import { Drug } from '../../../drugs';
-import { DrugList } from '../..';
+import { DrugList, DrugtreatmentRepository } from '../..';
 
 
 /**
@@ -20,11 +20,15 @@ import { DrugList } from '../..';
  */
 export class DrugtreatmentShowPage extends BasicShowPage {
 
+    private rep: DrugtreatmentRepository;
+    private barnId: string;
     /**
      * Default-Constructor
      */
     constructor() {
       super();
+      this.rep = new DrugtreatmentRepository();
+      this.barnId = VetproviehNavParams.getUrlParameter('id');
     }
 
     /**
@@ -35,13 +39,12 @@ export class DrugtreatmentShowPage extends BasicShowPage {
     }
 
     protected afterDataLoaded() {
-      console.log(this.drugtreatment);
-      
       this.bindFarmerSelectField();
       this.bindBarnSelectField();
-    this.drugs.forEach(drug => {
-      this.drugList.appendDrug(drug);
-    });
+      this.drugs.forEach(drug => {
+        this.drugList.appendDrug(drug);
+      });
+      this.checkIfReported();
     }
 
     /**
@@ -60,7 +63,25 @@ export class DrugtreatmentShowPage extends BasicShowPage {
       return this.detailElement?.getByIdFromShadowRoot("drug-list") as DrugList;
     }
 
-    
+    private get isReportedField(): HTMLElement {
+      return this.detailElement?.getByIdFromShadowRoot("is-reported") as HTMLElement;
+    }
+
+    private get reportButton(): HTMLButtonElement {
+      return this.detailElement?.getByIdFromShadowRoot("report") as HTMLButtonElement;
+    }
+
+    private checkIfReported(){
+      if(this.drugtreatment.isReported){
+        this.isReportedField.textContent = "ja";
+        this.reportButton.disabled = true;
+        this.reportButton.addEventListener("click", ()=>{});
+      }else{
+        this.reportButton.addEventListener("click", ()=>{
+          this.rep.report(this.barnId);
+        });
+      }
+    }
 
     /**
      * Binding

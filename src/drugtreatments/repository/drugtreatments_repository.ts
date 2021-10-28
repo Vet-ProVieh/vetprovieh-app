@@ -22,9 +22,7 @@ export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
     * @return Promise<T[]>
     */
     all(): Promise<Drugtreatment[]> {
-      console.log(this.endpoint);
-      if(this._barnId != ''){
-        console.log("FILTERED ENDPOINT");
+      if(this._barnId != '' && this._barnId != null){
         return fetch(`${this.endpoint}/barn/${this.barnId}`).then((response) => {
           if (response.status === 404) {
             return [];
@@ -32,7 +30,6 @@ export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
           return response.json();
         });
       }else{
-        console.log("UNFILTERED ENDPOINT!");
         return fetch(`${this.endpoint}`).then((response) => {
           if (response.status === 404) {
             return [];
@@ -40,5 +37,17 @@ export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
           return response.json();
         });
       }
+    }
+
+    report(id: string){
+      return new Promise((resolve, reject) => {
+        fetch(`${this.endpoint}/hit/treatment_id/${id}`, {
+          method: 'Update'
+        }).then((response) => {
+          resolve(response.ok);
+        }).catch((response) => {
+          resolve(false);
+        })
+      })
     }
 }
