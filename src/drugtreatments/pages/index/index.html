@@ -19,12 +19,12 @@
                 <template>
                     <div>
                         <a href="show.html?id={{id}}">
-                            <strong>{{operationPlans.barn.farmer.name}}: {{operationPlans.animal}}</strong>
+                            <strong>{{barn.farmer.name}}: {{barn.animal}}</strong>
                         </a>
                         <p style="font-size:0.9em">
                             <strong>Datum:</strong> {{treatmentDate}}</br>
-                            <strong>Stall:</strong> {{operationPlans.barn.name}}<br/>
-                            <strong>Tierarzt:</strong> {{operationPlans.barn.lastVet.firstName}} {{operationPlans.barn.lastVet.lastName}}<br />
+                            <strong>Stall:</strong> {{barn.name}} {{barn.vvvoNumber}}<br/>
+                            <strong>Tierarzt:</strong> {{barn.lastVet.firstName}} {{barn.lastVet.lastName}}<br />
                             Für <strong> {{effectDays}} </strong>Tage<br />
                         </p>
                     </div>

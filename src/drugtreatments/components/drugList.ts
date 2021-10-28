@@ -5,7 +5,7 @@ import { Drug } from "../../drugs";
     template: VetproviehElement.template + `
         <table class="table">
             <thead>
-                <tr>
+                <tr><th>#</th>
                     <th>Name</th>
                     <th>Dosierung</th>
                     <th>Zulassungsnummer</th>
@@ -29,13 +29,16 @@ import { Drug } from "../../drugs";
     }
 
     public appendDrug(drug: Drug){
+        const count = this.tableBody.childElementCount+1
         let row: HTMLTableRowElement = this.tableBody.insertRow();
         let cell0: HTMLTableCellElement = row.insertCell(0);
         let cell1: HTMLTableCellElement = row.insertCell(1);
         let cell2: HTMLTableCellElement = row.insertCell(2);
-        cell0.textContent = drug.name;
-        cell1.textContent = drug.dose;
-        cell2.textContent = drug.approvalNumber
+        let cell3: HTMLTableCellElement = row.insertCell(3);
+        cell0.textContent = count.toString();
+        cell1.textContent = drug.name;
+        cell2.textContent = drug.dose;
+        cell3.textContent = drug.approvalNumber;
         
     }
 

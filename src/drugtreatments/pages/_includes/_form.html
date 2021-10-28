@@ -24,11 +24,76 @@
                         </template>
                     </vetprovieh-select>
                 </div>
+                <br>
 
 
             </div>
         </div>
         <br>
+        
+        <div class="card">
+            
+            <div class="card-content">
+                <p class="title is-4">Details</p>
+                <div class="columns">
+                    <div class="column is-half">
+                        <label class="label">Datum</label>
+                        <div class="control">
+                            <input property="treatmentDate" class="input " type="date">
+                        </div>
+                    </div>
+                    <div class="column is-half">
+                        <label class="label">Tieranzahl</label>
+                        <div class="control">
+                            <input property="animalNumber" class="input " type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-half">
+                        <label class="label">Anwendungstage</label>
+                        <div class="control">
+                            <input property="applicationDays" class="input " type="text">
+                        </div>
+                    </div>
+                    <div class="column is-half">
+                        <label class="label">Wirktage</label>
+                        <div class="control">
+                            <input property="effectDays" class="input " type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+
+                    
+
+
+                    <div class="column is-half">
+                        <div class="control">
+                            <select-animal property="operationPlans.animal" label="Tierart"></select-animal>
+                        </div>
+                    </div>
+                </div>
+                
+
+                
+                
+                
+                
+                
+                
+                
+                
+                </br>
+                
+                <div class="control">
+                    <button class="button is-success" disabled>Antibiotikabehandlung senden</button>
+                    <p>bereits gesendet: ja</p>
+                </div>
+            </div>
+        </div>
+        <br>
+
         <div class="card">
             <div class="card-content">
                 <div class="columns">
@@ -37,24 +102,6 @@
                         <drug-list id="drug-list"></drug-list>
                     </div>
                 </div>
-                
-                
-                <!-- ANTIBIOTIKA ALS VETPROVIEH-LIST ANZEIGEN -->
-                    <!--<vetprovieh-list pagesize="15">
-                        <template>
-                            <div>
-                                <a href="#">
-                                    <strong>{{name}}</strong>
-                                </a>
-                                <p style="font-size:0.9em">
-                                    <strong>Registrierungsnr:</strong> {{registrationNumber}}<br />
-                                    <strong>Hersteller:</strong> {{manufacturer}}<br />
-                                    <strong>Zugelassen für:</strong><br />
-                                </p>
-                            </div>
-                            <hr />
-                        </template>
-                    </vetprovieh-list>-->
             </div>
         </div>
     </div>
