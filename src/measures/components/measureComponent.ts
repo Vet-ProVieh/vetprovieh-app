@@ -120,7 +120,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     this.setParamsToComponent(params);
 
     const pdfButton = this.shadowRoot?.querySelector("measure-pdf-button") as MeasurePdfButton
-    pdfButton.measureid = data.id;
+    pdfButton.objectid = data.id;
 
     if (this.isNew()) {
       this.takeoverLastMeasure().then(() => {

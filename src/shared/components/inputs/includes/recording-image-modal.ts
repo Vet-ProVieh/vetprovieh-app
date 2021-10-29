@@ -13,16 +13,15 @@ import { RecordingModal } from './recording-modal';
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <video id="media" muted="true width="600" height="400">
+            <video id="media" muted="true" width="600" height="400">
             </video>
-            <img id="fileShower" class="is-hidden" />
-            <input id="fileInput" type="file" class="is-hidden" accept="image/*" />
+            ${RecordingModal.fileChooserTemplate("image/*")}
         </section>
         <footer class="modal-card-foot">
             <div class="field is-grouped">
                 <p class="control">
                     <button class="button is-primary" id="takeSnapshotButton">Bild aufnehmen</button>
-                    <button class="button is-primary" id="loadFileButton">Datei wählen</button>
+                    <button class="button is-primary" id="loadFileButton">Bild wählen</button>
                 </p>
             </div>
         </footer>
@@ -42,10 +41,7 @@ export class RecordingImageModal extends RecordingModal {
     takeSnapshot.bind(this);
     this.snapshotButton.addEventListener('click', takeSnapshot);
 
-    this.fileButton.addEventListener("click", (_) => {
-      this.fileInput.addEventListener("change", (event: any) => this.loadImage(event))
-      this.fileInput.click();
-    });
+    this.bindFileChooser();
   }
 
   /**
@@ -61,22 +57,6 @@ export class RecordingImageModal extends RecordingModal {
   }
 
   /**
-   * File Input laden
-   * @return {HTMLButtonElement}
-   */
-   protected get fileInput(): HTMLInputElement {
-    return this.getByIdFromShadowRoot("fileInput") as HTMLInputElement;
-  }
-
-  /**
-   * File Button laden
-   * @return {HTMLButtonElement}
-   */
-  protected get fileButton(): HTMLButtonElement {
-    return this.getByIdFromShadowRoot("loadFileButton") as HTMLButtonElement;
-  }
-
-  /**
    * Load Snapshot Button
    * @return {HTMLButtonElement}
    */
@@ -84,34 +64,6 @@ export class RecordingImageModal extends RecordingModal {
     return this.getByIdFromShadowRoot("takeSnapshotButton") as HTMLButtonElement;
   }
 
-  /**
-   * Load File-Shower
-   * @return {HTMLImageElement}
-   */
-  private get fileShower(): HTMLImageElement {
-    return this.getByIdFromShadowRoot("fileShower") as HTMLImageElement;
-  }
-
-  private loadImage(event: any) {
-
-    const reader = new FileReader();
-    reader.addEventListener('load', (event: any) => {
-      this.recordedContent = event.target.result;
-      this.fileShower.src = this.recordedContent;
-      ViewHelper.toggleVisibility(this.fileShower, false);
-      ViewHelper.toggleVisibility(this.fileShower, true);
-      fetch(this.recordedContent)
-        .then((result) => result.blob())
-        .then((b) => {
-          this._content = b
-          this.close(true);
-        })
-        .catch((e) => console.error(e));
-    })
-
-    reader.readAsDataURL(event.path[0].files[0]);
-
-  }
 
   /**
      * Taking a Snapshot from Canvas

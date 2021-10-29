@@ -1,16 +1,16 @@
 import { WebComponent } from '@tomuench/vetprovieh-shared/lib';
-import { PdfButton } from '../../shared';
-import { MeasuresRepository } from "../repository";
+import { PdfButton } from '../../../shared';
+import { OperationPlansRepository } from '../repository';
 
 
 @WebComponent({
     template: PdfButton.template,
-    tag: "measure-pdf-button"
+    tag: "opplan-pdf-button"
 })
 export class MeasurePdfButton extends PdfButton {
 
     constructor(){
-        super(new MeasuresRepository());
+        super(new OperationPlansRepository());
     }
 
 }

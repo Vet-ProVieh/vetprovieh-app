@@ -32,6 +32,9 @@ export class RecordingRtcModal extends RecordingModal {
             </button>
         </p>
         <p class="control">
+           <button class="button is-primary" id="loadFileButton">Audio/Video wählen</button>
+        </p>
+        <p class="control">
             <button class="button is-danger" id="stop" disabled>
                 <span class="icon"><i class="fas fa-stop"></i></span>
                 <span>Aufnahme stoppen</span>
@@ -50,8 +53,13 @@ export class RecordingRtcModal extends RecordingModal {
      */
     protected addButtonListeners() {
       const _self = this;
+
+      this.bindFileChooser();
+      
       this.startButton.addEventListener('click', () => {
         this.startRecording(_self);
+        this.startButton.classList.add('is-hidden');
+        this.fileButton.classList.add('is-hidden');
       });
       this.stopButton.addEventListener('click', () => {
         this.stopRecording(_self);
