@@ -12,9 +12,6 @@ export class UserRepository extends BaseRepository<User> {
     constructor() {
       super(`/service/usermanagements`);
 
-      this.keycloakHelper.init().then(() => {
-        console.log('KeycloakHelper initialized');
-      });
     }
 
     /**
