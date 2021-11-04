@@ -1,4 +1,4 @@
-import { VetproviehElement, WebComponent } from '@tomuench/vetprovieh-shared/lib';
+import { VetproviehElement } from '@tomuench/vetprovieh-shared/lib';
 import * as bulmaToast from 'bulma-toast';
 
 export class PdfButton extends VetproviehElement {
@@ -61,7 +61,7 @@ export class PdfButton extends VetproviehElement {
     public static get template(): string {
         return VetproviehElement.template + `
         <button id="button" class="button is-light is-fullwidth" aria-label="Load PDF file">
-            <i class="fas fa-file-pdf"></i> <span style="padding-left:5px" class="is-hidden-touch"> Als PDF laden </span>
+            <i class="fas fa-file-pdf"></i> <span style="padding-left:5px"> Als PDF laden </span>
         </button>`;
     }
 }
