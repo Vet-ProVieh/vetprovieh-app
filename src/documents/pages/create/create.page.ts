@@ -105,6 +105,7 @@ export class DocumentCreatePage extends BasicShowPage {
           document.name = file.name;
           document.barnId = this.barnId;
           document.content = file;
+          document.tags = ['document'];
           promises.push(sendFunction(document));
         }
       }

@@ -93,6 +93,8 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     this.registerTabEvents();
   }
 
+   
+
   /**
    * Building a GroupComponent
    * must be implemented in Subclass

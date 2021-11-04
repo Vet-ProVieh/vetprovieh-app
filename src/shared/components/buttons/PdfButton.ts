@@ -60,7 +60,7 @@ export class PdfButton extends VetproviehElement {
      */
     public static get template(): string {
         return VetproviehElement.template + `
-        <button id="button" style="z-index:2000" class="button is-light is-fullwidth" aria-label="Load PDF file">
+        <button id="button" class="button is-light is-fullwidth" aria-label="Load PDF file">
             <i class="fas fa-file-pdf"></i> <span style="padding-left:5px" class="is-hidden-touch"> Als PDF laden </span>
         </button>`;
     }

@@ -33,6 +33,18 @@ export class DocumentRepository extends BaseRepository<Document> {
   }
 
   /**
+   * Downloading a file and open it
+   * @param {string} id 
+   */
+  public downloadAndOpen(id: string) {
+    this.download(`${this.endpoint}/${id}`).then((result) => {
+      if(result){
+        window.open(result, "_blank");
+      }
+    })
+  }
+
+  /**
    * Getting All
    * @return Promise<T[]>
    */

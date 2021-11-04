@@ -52,10 +52,13 @@ export class MeasureFieldComponent extends ElementBinding {
       const shouldShow = this.compareLinkedPos(
             obj.link_position?.value, value,
             obj.link_position?.compare);
-      console.log(shouldShow);
+      
       ViewHelper.toggleVisibility(this, shouldShow);
       ViewHelper.toggleRequirement(this, shouldShow);
-      if (this.inputField) this.inputField.required = shouldShow;
+      if (this.inputField) {
+        this.inputField.required = shouldShow;
+        obj.optional = !shouldShow;
+      }
     }
 
     /**
