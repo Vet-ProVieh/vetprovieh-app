@@ -159,6 +159,13 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
           this.activateTabAnchor(a);
           this.deactiveTabAnchors(a);
         });
+
+        // Activate the current Process-Step
+        let step = VetproviehNavParams.getUrlParameter("process");
+        let state = VetproviehNavParams.getUrlParameter("state");
+        if(a.dataset.id === step && a.dataset.state == state){
+          a.click();
+        }
       }
     });
   }
