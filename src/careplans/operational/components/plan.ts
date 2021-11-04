@@ -126,4 +126,12 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
   private get openButton(): HTMLElement {
     return this.getByIdFromShadowRoot('openButton') as HTMLElement;
   }
+
+
+
+
+  protected afterSave() {
+    if(!window.location.pathname.includes("show"))
+      window.open(`/careplans/operational/show.html?id=${this.currentObject.id}`, "_self");
+  }
 }
