@@ -5,7 +5,8 @@ import { BarnsRepository } from '../../../barns/repository';
 import { FarmersRepository } from '../../../farmers';
 import { VetproviehSelect } from '@tomuench/vetprovieh-select/lib/vetprovieh-select';
 import { Drug } from '../../../drugs';
-import { DrugList, DrugtreatmentRepository } from '../..';
+import { DrugtreatmentRepository } from '../../repository';
+import { DrugList } from '../../components';
 
 
 /**
