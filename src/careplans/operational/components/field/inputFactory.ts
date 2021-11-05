@@ -95,6 +95,9 @@ export class InputFactory {
       case 'careplanList':
         response = this.buildList(options);
         break;
+      case 'pdfFields':
+        response = this.buildFileUpload(options);
+        break;
       case 'video':
         response = this.buildVideo(options);
         break;
@@ -110,16 +113,29 @@ export class InputFactory {
 
 
   /**
+     * Generating a FileUpload
+     * @param {any} options
+     */
+  private static buildFileUpload(options: any): string {
+    return `<file-upload ` +
+      this.genTag('barnid', options.barnId) +
+      this.genTag('property', 'value') +
+      this.genTag('name', options.name) +
+      this.isRequired(options.optional != true) +
+      `></file-upload>`;
+  }
+
+  /**
      * Generating a VideoArea
      * @param {any} options
      */
-   private static buildDatePicker(options: any): string {
+  private static buildDatePicker(options: any): string {
     return `<input ` +
-    this.genTag('property', 'value') +
-    this.genTag('name', options.name) +
-    `class="input" type="date" ` +
-    this.isRequired(options.optional != true) +
-    `></input>`;
+      this.genTag('property', 'value') +
+      this.genTag('name', options.name) +
+      `class="input" type="date" ` +
+      this.isRequired(options.optional != true) +
+      `></input>`;
   }
 
   /**
@@ -148,13 +164,13 @@ export class InputFactory {
      * @param {any} options
      * @return {string}
      */
-  private static buildSpeech(options: any) : string {
+  private static buildSpeech(options: any): string {
     return `<vetprovieh-audio ` +
-                    this.genTag('barnid', options.barnId) +
-                    this.genTag('property', 'value') +
-                    this.genTag('type', 'audio') +
-                    this.genTag('name', options.name) +
-                `></vetprovieh-audio>`;
+      this.genTag('barnid', options.barnId) +
+      this.genTag('property', 'value') +
+      this.genTag('type', 'audio') +
+      this.genTag('name', options.name) +
+      `></vetprovieh-audio>`;
   }
 
   /**
@@ -163,11 +179,11 @@ export class InputFactory {
      */
   private static buildImage(options: any): string {
     return `<vetprovieh-image ` +
-            this.genTag('barnid', options.barnId) +
-            this.genTag('property', 'value') +
-            this.genTag('type', 'image') +
-            this.genTag('name', options.name) +
-            `></vetprovieh-image>`;
+      this.genTag('barnid', options.barnId) +
+      this.genTag('property', 'value') +
+      this.genTag('type', 'image') +
+      this.genTag('name', options.name) +
+      `></vetprovieh-image>`;
   }
 
   /**
@@ -176,14 +192,14 @@ export class InputFactory {
      */
   private static buildTextArea(options: any): string {
     return `<textarea ` +
-            this.genTag('property', 'value') +
-            this.genTag('name', options.name) +
-            this.genTag('cols', options.cols) +
-            this.genTag('rows', options.rows) +
-            this.isVoiceInputable(options.voiceInputable) +
-            `class="textarea" type="text" ` +
-            this.isRequired(options.optional != true) +
-            `></textarea>`;
+      this.genTag('property', 'value') +
+      this.genTag('name', options.name) +
+      this.genTag('cols', options.cols) +
+      this.genTag('rows', options.rows) +
+      this.isVoiceInputable(options.voiceInputable) +
+      `class="textarea" type="text" ` +
+      this.isRequired(options.optional != true) +
+      `></textarea>`;
   }
 
   /**
@@ -218,11 +234,11 @@ export class InputFactory {
      */
   private static buildTextField(options: any): string {
     return `<textarea ` +
-            this.genTag('property', 'value') +
-            this.genTag('name', options.name) +
-            this.isVoiceInputable(options.voiceInputable) +
-            this.isRequired(options.optional != true) +
-            `class="input" type="text"></textarea>`;
+      this.genTag('property', 'value') +
+      this.genTag('name', options.name) +
+      this.isVoiceInputable(options.voiceInputable) +
+      this.isRequired(options.optional != true) +
+      `class="input" type="text"></textarea>`;
   }
 
   /**
@@ -232,26 +248,26 @@ export class InputFactory {
     */
   private static buildSelect(options: any): string {
     return `<div class="select is-multiple">` +
-            `<select ` +
-            this.genTag('property', 'value') +
-            this.genTag('size', options.size) +
-            this.genTag('style', options.style) +
-            this.genTag('name', options.name) +
-            this.isMultiple(options.multipleSelect) +
-            this.isRequired(options.optional != true) +
-            `>${this.buildOptionTags(options.choices)}</select></div>`;
+      `<select ` +
+      this.genTag('property', 'value') +
+      this.genTag('size', options.size) +
+      this.genTag('style', options.style) +
+      this.genTag('name', options.name) +
+      this.isMultiple(options.multipleSelect) +
+      this.isRequired(options.optional != true) +
+      `>${this.buildOptionTags(options.choices)}</select></div>`;
   }
 
   private static buildVetproviehSelect(options: any): string {
     return `<div class="select is-multiple" style="width:100%;">` +
-            `<vetprovieh-select display="name" internalprop="registrationNumber" ` +
-            this.genTag('property', 'value') +
-            this.genTag('size', options.size) +
-            this.genTag('style', options.style) +
-            this.genTag('name', options.name) +
-            this.isMultiple(options.multipleSelect) +
-            this.isRequired(options.optional != true) +
-            `>
+      `<vetprovieh-select display="name" internalprop="registrationNumber" ` +
+      this.genTag('property', 'value') +
+      this.genTag('size', options.size) +
+      this.genTag('style', options.style) +
+      this.genTag('name', options.name) +
+      this.isMultiple(options.multipleSelect) +
+      this.isRequired(options.optional != true) +
+      `>
             <template>
                 <div style="padding:5px">
                     <span>{{name}} ({{registrationNumber}}), {{manufacturer}}</span>
@@ -268,7 +284,7 @@ export class InputFactory {
   private static buildOptionTags(choices: string[]): string {
     if (choices) {
       return choices.map((choice) => `<option value="` + choice + `">` + choice + `</option>`)
-          .join('\r\n');
+        .join('\r\n');
     } else {
       return '';
     }
