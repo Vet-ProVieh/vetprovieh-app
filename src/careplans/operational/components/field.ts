@@ -55,7 +55,10 @@ export class VpOperationField extends ElementBinding {
         let diagnosisButton = this.querySelector("measure-proactive-button") as MeasureProactiveButton;
         diagnosisButton.diagnosis = element.value;
       });
-      
+      setTimeout(() => { 
+        let diagnosisButton = this.querySelector("measure-proactive-button") as MeasureProactiveButton;
+        diagnosisButton.diagnosis = element.value; 
+      }, 400);
     }
   }
 
@@ -76,7 +79,13 @@ export class VpOperationField extends ElementBinding {
    */
   private measureProactiveButton(object: OperationField): string {
     if (this.isDiagnosis(object)) {
-      return `<div><measure-proactive-button> </measure-proactive-button></div>`;
+      return `<div class="field is-horizontal">
+                <div class="field-label">
+                </div>
+                <div class="field-body">
+                  <measure-proactive-button> </measure-proactive-button>
+                </div>  
+              </div>`;
     } else {
       return "";
     }
@@ -98,9 +107,9 @@ export class VpOperationField extends ElementBinding {
                     <div class="field">
                       ${InputFactory.generateField(this.object.fieldType, this.object)}
                     </div>
-                    ${this.measureProactiveButton(this.object)}
                 </div>
             </div>
+            ${this.measureProactiveButton(this.object)}
             <hr/>`;
     } else {
       return '';

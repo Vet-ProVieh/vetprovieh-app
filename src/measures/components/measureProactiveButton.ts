@@ -4,8 +4,8 @@ import { MeasuresRepository } from "../repository";
 
 @WebComponent({
     template: VetproviehElement.template + `
-        <button id="button" class="button is-light is-fullwidth" aria-label="Maßnahmen anzeigen">
-            Maßnahmen anzeigen
+        <button id="button" class="button is-info is-outlined is-fullwidth" aria-label="Maßnahmen anzeigen">
+        <i class="fas fa-search"></i> <span style="padding-left:5px"> proaktive Maßnahmen anzeigen</span>
         </button>
     `,
     tag: "measure-proactive-button"
@@ -19,7 +19,7 @@ export class MeasureProactiveButton extends VetproviehElement {
 
     constructor() {
         super();
-        //   ViewHelper.toggleVisibility(this, false);
+     
     }
 
     /**
@@ -30,6 +30,7 @@ export class MeasureProactiveButton extends VetproviehElement {
         this.button.addEventListener("click", (event) => {
             window.open(`/measures/proactive.html?search=${btoa(this.diagnosis)}`, "_self");
         })
+        ViewHelper.toggleVisibility(this, false);
     }
 
     protected get skipRenderOnCallback(): boolean {
