@@ -75,6 +75,7 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                   Meine Praxis
                 </p>
                 <ul class="menu-list">
+                    <li><a href="/admin/tenants/credentials">Zugangsdaten (Portale)</a></li>
                     <li><a href="/users">Mitarbeiter</a></li>
                     <li><a href="/settings/careplans">Behandlungspläne</a></li>
                 </ul>
