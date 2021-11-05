@@ -3,45 +3,90 @@
         <div class="card">
             <div class="card-content">
                 <p class="title is-4">Allgemeines</p>
-                <label class="label">Zugeordneter Landwirt</label>
 
+                <label class="label">Zugeordneter Landwirt</label>
                 <div class="control">
-                    <vetprovieh-select id="farmer" property="farmer.id" display="name" required>
-                        <template>
-                            <div style="padding:15px">
-                                <span>{{operationPlans.barn.farmer.name}}</span>
-                            </div>
-                        </template>
-                    </vetprovieh-select>
+                    <input property="barn.farmer.name" class="input " type="text" disabled>
                 </div>
 
                 <label class="label">Zugeordneter Tierarzt</label>
                 <div class="control">
-                    <input property="operationPlans.barn.lastVet.firstName" class="input " type="text" required>
-                    <input property="operationPlans.barn.lastVet.lastName" class="input" type="text" required>
-                </div>
+                    <input value="{{barn.lastVet.firstName}} {{barn.lastVet.lastName}}" class="input " type="text" disabled>
+                </div> 
 
                 <label class="label">Stall</label>
                 <div class="control">
-                    <input property="operationPlans.barn.name" class="input" type="text"
-                        required>
+                    <vetprovieh-select id="barn" property="barn.id" display="name" required>
+                        <template>
+                            <div style="padding:15px">
+                                <span>{{name}} {{vvvoNumber}}</span>
+                            </div>
+                        </template>
+                    </vetprovieh-select>
+                </div>
+                <br>
+
+
+            </div>
+        </div>
+        <br>
+        
+        <div class="card">
+            
+            <div class="card-content">
+                <p class="title is-4">Details</p>
+                <div class="columns">
+                    <div class="column is-half">
+                        <label class="label">Datum</label>
+                        <div class="control">
+                            <input property="treatmentDate" class="input " type="date">
+                        </div>
+                    </div>
+                    <div class="column is-half">
+                        <label class="label">Tieranzahl</label>
+                        <div class="control">
+                            <input property="animalNumber" class="input " type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-half">
+                        <label class="label">Anwendungstage</label>
+                        <div class="control">
+                            <input property="applicationDays" class="input " type="text">
+                        </div>
+                    </div>
+                    <div class="column is-half">
+                        <label class="label">Wirktage</label>
+                        <div class="control">
+                            <input property="effectDays" class="input " type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column is-half">
+                        <div class="control">
+                            <select-animal property="operationPlans.animal" label="Tierart"></select-animal>
+                        </div>
+                    </div>
+                </div>
+                </br>
+                
+                <div class="control">
+                    <button class="button is-success" id="report">Antibiotikabehandlung senden</button>
+                    <div><div style="float: left;">bereits gesendet:&nbsp;</div><div id="is-reported" style="float: left;">nein</div></div><br>
                 </div>
             </div>
         </div>
         <br>
+
         <div class="card">
             <div class="card-content">
-                <p class="title is-4">Antibiotika</p>
-                <label class="label">Name</label>
-                <div class="control">
-                    <input property="drugs.name" class="input " type="text" required>
-                    <input property="operationPlans.barn.lastVet.lastName" class="input" type="text" required>
-                </div>
-
-                <label class="label">Stall</label>
-                <div class="control">
-                    <input property="operationPlans.barn.name" class="input" type="text"
-                        required>
+                <div class="columns">
+                    <div class="column">
+                        <p class="title is-4">Antibiotika</p>
+                        <drug-list id="drug-list"></drug-list>
+                    </div>
                 </div>
             </div>
         </div>

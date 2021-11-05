@@ -1,41 +1,4 @@
-import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
-import { Drugreport } from '../models';
-
-export class DrugreportRepository extends BaseRepository<Drugreport> {
-  constructor() {
-    super('/service/drugsreport');
-  }
-
-  
-  /**
-     * Find a Object by its id
-     * @param {number} id 
-     * @return {Promise<T>}
-     */
-    /*
-   find(id: number): Promise<any> {
-     
-    return new Promise((resolve, reject) => {
-      resolve(DEMO_DATEN[0]);
-    })
-}
-*/
-
-
-  /**
-   * Getting All
-   * @returns Promise<T[]>
-   */
-  /*
-   all(): Promise<any[]> {
-    return new Promise((resolve, reject) => {
-      resolve(DEMO_DATEN);
-    })
-} */
-}
-/*
-var DEMO_DATEN = [{
-  "drugsTreatments": {
+{
     "amount": "string",
     "animalNumber": "string",
     "applicationDays": "string",
@@ -175,11 +138,11 @@ var DEMO_DATEN = [{
           },
           "userName": "string"
         },
-        "lastVisit": "2021-09-29",
+        "lastVisit": "2021-10-07",
         "name": "string",
         "currentMeasure": 0
       },
-      "createdAt": "2021-09-29",
+      "createdAt": "2021-10-07",
       "drugsTreatments": [
         "string"
       ],
@@ -209,7 +172,7 @@ var DEMO_DATEN = [{
               "rows": 0,
               "treatmentKeys": "string",
               "type": "string",
-              "updatedAt": "2021-09-29",
+              "updatedAt": "2021-10-07",
               "validators": [
                 {
                   "id": 0,
@@ -236,17 +199,10 @@ var DEMO_DATEN = [{
       ],
       "rating": 0,
       "readOnly": true,
-      "updatedAt": "2021-09-29"
+      "updatedAt": "2021-10-07"
     },
-    "treatmentDate": "2021-09-29",
+    "treatmentDate": "2021-10-07",
     "treatmentType": "string",
     "vetId": "string",
     "waitingDays": "string"
-  },
-  "guid": "string",
-  "id": 0,
-  "isReported": true,
-  "reportDate": "2021-09-29",
-  "reportPeriod": "string"
-}]
-*/
+  }

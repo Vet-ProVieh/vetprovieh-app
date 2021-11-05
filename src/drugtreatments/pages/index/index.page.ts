@@ -1,4 +1,4 @@
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {BasicIndexPage} from '../../../shared';
 import { Drugtreatment } from '../../models';
 import { DrugtreatmentRepository } from '../../repository';
@@ -9,7 +9,13 @@ import { DrugtreatmentRepository } from '../../repository';
   tag: 'vetprovieh-drugtreatments',
 })
 export class DrugstreatmentsIndexPage extends BasicIndexPage<Drugtreatment> {
+  private barnId: string;
+
   constructor() {
-    super(new DrugtreatmentRepository());
+    const rep = new DrugtreatmentRepository();
+    const barnId = VetproviehNavParams.getUrlParameter('barnId');
+    rep.barnId = barnId;
+    super(rep);
+    this.barnId = barnId;
   }
 }

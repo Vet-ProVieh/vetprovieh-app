@@ -1,16 +1,11 @@
-import {BasicShowPage, GeoCoordButton, GeoMap, GpsCoordinates} from '../../../shared';
-import {FarmersRepository} from '../../../farmers';
-import {VetproviehSelect, VetproviehDetail} from '../../../app/main';
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
-import {LoadedEvent} from '@tomuench/vetprovieh-detail/lib/loaded-event';
+import {BasicShowPage} from '../../../shared';
+import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {Drugtreatment} from '../../models';
-import {GeoEvent} from '../../../shared/models/geo';
-import {OpenStreetMapNomatim} from '../../../shared/providers/geo/OpenStreetMapNomatim';
-import {IGeoProvider} from '../../../shared/providers/geo/IGeoProvider';
-import {textHeights} from 'ol/render/canvas';
-import {UserRepository} from '../../../users';
-import {User} from '../../../users/models';
-import {OpenObjectivesButton} from '../../../measures';
+import { BarnsRepository } from '../../../barns/repository';
+import { FarmersRepository } from '../../../farmers';
+import { VetproviehSelect } from '@tomuench/vetprovieh-select/lib/vetprovieh-select';
+import { Drug } from '../../../drugs';
+import { DrugList, DrugtreatmentRepository } from '../..';
 
 
 /**
@@ -25,21 +20,31 @@ import {OpenObjectivesButton} from '../../../measures';
  */
 export class DrugtreatmentShowPage extends BasicShowPage {
 
+    private rep: DrugtreatmentRepository;
+    private barnId: string;
     /**
      * Default-Constructor
      */
     constructor() {
       super();
+      this.rep = new DrugtreatmentRepository();
+      this.barnId = VetproviehNavParams.getUrlParameter('id');
     }
 
     /**
      * Callback for Web-Component
      */
     connectedCallback() {
-      this.detailElement.addEventListener('loadeddata', (loadEvent: any) => {
-        
-        
+      super.connectedCallback();
+    }
+
+    protected afterDataLoaded() {
+      this.bindFarmerSelectField();
+      this.bindBarnSelectField();
+      this.drugs.forEach(drug => {
+        this.drugList.appendDrug(drug);
       });
+      this.checkIfReported();
     }
 
     /**
@@ -47,16 +52,55 @@ export class DrugtreatmentShowPage extends BasicShowPage {
      * @return {Drugtreatment}
      */
     private get drugtreatment(): Drugtreatment {
-      return this.detailElement.currentObject as Drugtreatment;
+      return this.currentObject as Drugtreatment;
     }
 
+    private get drugs(): Drug[] {
+      return this.drugtreatment.drugs;
+    }
+
+    private get drugList(): DrugList {
+      return this.detailElement?.getByIdFromShadowRoot("drug-list") as DrugList;
+    }
+
+    private get isReportedField(): HTMLElement {
+      return this.detailElement?.getByIdFromShadowRoot("is-reported") as HTMLElement;
+    }
+
+    private get reportButton(): HTMLButtonElement {
+      return this.detailElement?.getByIdFromShadowRoot("report") as HTMLButtonElement;
+    }
+
+    private checkIfReported(){
+      if(this.drugtreatment.isReported){
+        this.isReportedField.textContent = "ja";
+        this.reportButton.disabled = true;
+        this.reportButton.addEventListener("click", ()=>{});
+      }else{
+        this.reportButton.addEventListener("click", ()=>{
+          this.rep.report(this.barnId);
+        });
+      }
+    }
 
     /**
-     * Getting GeoMap
-     * @return {GeoMap}
+     * Binding
      */
-    private get geoMap(): GeoMap {
-      return this.detailElement.getByIdFromShadowRoot('geoMap') as GeoMap;
+     private bindFarmerSelectField() {
+      const selectField: VetproviehSelect = this.detailElement.getByIdFromShadowRoot('farmer') as VetproviehSelect;
+      if (selectField) {
+        selectField.repository = new FarmersRepository();
+      }
+    }
+
+    /**
+     * Binding
+     */
+     private bindBarnSelectField() {
+      const selectField: VetproviehSelect = this.detailElement.getByIdFromShadowRoot('barn') as VetproviehSelect;
+      if (selectField) {
+        selectField.repository = new BarnsRepository();
+      }
     }
 
 }
