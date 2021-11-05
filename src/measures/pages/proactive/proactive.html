@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+
+<!-- Header -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Vet:Provieh - Ihre Maßnahmenpläne</title>
+    <link rel="manifest" href="/manifest.json">
+    <!--#include file="/includes/stylesheets.html"-->
+</head>
+
+<!-- Layout-Container -->
+
+<body>
+    <vetprovieh-layout title="Ihre Maßnahmenpläne">
+        <vetprovieh-proactive-measures>
+            <measures-list pagesize="20">
+                <template>
+                    <div class="columns is-gapless">
+                        <div class="column">
+                            <strong class="is-hidden-desktop">Id:</strong> {{id}}
+                        </div>
+                        <div class="column">
+                           <strong class="is-hidden-desktop">Datum:</strong> {{measuresDate|date}}
+                        </div>
+                        <div class="column">
+                            <strong class="is-hidden-desktop">Tierhalter</strong>{{barn.farmer.name}} <br />
+                            <strong class="is-hidden-desktop">Stall:</strong> {{barn.animal}}:{{barn.vvvoNumber}}
+                        </div>
+
+                        <div class="column">
+                            <strong class="is-hidden-desktop">Bearbeiter:</strong>{{createdBy.userName}}
+                        </div>
+                    </div>
+                    <hr />
+                </template>
+            </measures-list>
+        </vetprovieh-proactive-measures>
+    </vetprovieh-layout>
+</body>
+
+<!--#include file="/includes/scripts.html"-->
+
+</html>
