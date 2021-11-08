@@ -48,7 +48,6 @@ export class VetproviehMedia extends VetproviehElement {
       });
     }
 
-
     /**
      * Getter barnid
      * @return {string}
@@ -82,9 +81,11 @@ export class VetproviehMedia extends VetproviehElement {
     public set value(v: string | undefined) {
       if (this._value !== v && v !== undefined) {
         this._value = v;
-        this._thumbnail = v;
-        this.renderContentBox();
-        this.dispatchEvent(new Event('change'));
+        this._repository.download(v).then((downloadedValue) => {
+          this._thumbnail = downloadedValue;
+          this.renderContentBox();
+          this.dispatchEvent(new Event('change'));
+        }).catch((error) => console.log(error));
       }
     }
 

@@ -1,13 +1,14 @@
-import {ViewHelper} from '@tomuench/vetprovieh-shared';
-import {VetproviehBasicDetail} from '@tomuench/vetprovieh-detail/lib/index';
-import {VpOperationGroup} from './group';
-import {WebComponent, VetproviehElement, VetproviehNavParams, ElementGroupBinding} from '@tomuench/vetprovieh-shared/lib';
-import {OperationGroup, OperationPlan} from '../models';
-import {ProcessMenu} from './process-menu';
-import {VetproviehSidemenu} from '../../../app/main';
-import {Barn, BarnListShow} from '../../../barns';
-import {SpeechAssistant} from '../../../shared';
-import {DynamicForm} from '../../../shared/components/forms/dynamicForm';
+import { ViewHelper } from '@tomuench/vetprovieh-shared';
+import { VetproviehBasicDetail } from '@tomuench/vetprovieh-detail/lib/index';
+import { VpOperationGroup } from './group';
+import { WebComponent, VetproviehElement, VetproviehNavParams, ElementGroupBinding } from '@tomuench/vetprovieh-shared/lib';
+import { OperationGroup, OperationPlan } from '../models';
+import { ProcessMenu } from './process-menu';
+import { VetproviehSidemenu } from '../../../app/main';
+import { Barn, BarnListShow } from '../../../barns';
+import { SpeechAssistant } from '../../../shared';
+import { DynamicForm } from '../../../shared/components/forms/dynamicForm';
+import { OpenObjectivesButton } from '../../../measures';
 
 /**
  * Controller for Page
@@ -24,7 +25,7 @@ import {DynamicForm} from '../../../shared/components/forms/dynamicForm';
 
         </div>
         <hr/>
-        <div class="container">
+        <div class="container sticky-footer">
             <div class="columns is-mobile">
                 <div class="column">
                     <input id="abortButton"
@@ -80,14 +81,22 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
     console.log('Setting barnid');
 
     if (barnUrlId != null && barnUrlId != undefined) {
-      this.currentObject.barn = {id: parseInt(barnUrlId)};
-        this.shadowRoot?.querySelectorAll('barn-list-show').forEach((barnShow: any) => {
-          barnShow.barnid = barnUrlId;
-        });
-        this.rightMenu.shadowRoot?.querySelectorAll('barn-list-show').forEach((barnShow: any) => {
-          barnShow.barnid = barnUrlId;
-        });
+      this.currentObject.barn = { id: parseInt(barnUrlId) };
+      this.setBarnId(this.currentObject.barn.id);
+    } else if (this.currentObject.barn?.id > 0) {
+      this.setBarnId(this.currentObject.barn.id);
     }
+  }
+
+  private setBarnId(barnId: number) {
+    this.shadowRoot?.querySelectorAll('barn-list-show').forEach((barnShow: any) => {
+      barnShow.barnid = barnId;
+    });
+    this.rightMenu.shadowRoot?.querySelectorAll('barn-list-show').forEach((barnShow: any) => {
+      barnShow.barnid = barnId;
+    });
+
+    this.openObjectives.barnid = barnId
   }
 
   /**
@@ -123,7 +132,27 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
     this.openButton.addEventListener('click', openFunc);
   }
 
+  /**
+   * Open Button
+   * @return {HTMLElement}
+   */
   private get openButton(): HTMLElement {
     return this.getByIdFromShadowRoot('openButton') as HTMLElement;
+  }
+
+  /**
+   * Return button
+   * @return {OpenObjectivesButton}
+   */
+  private get openObjectives(): OpenObjectivesButton {
+    return this.getByIdFromShadowRoot("openObjectives") as OpenObjectivesButton;
+  }
+
+
+
+
+  protected afterSave() {
+    if (!window.location.pathname.includes("show"))
+      window.open(`/careplans/operational/show.html?id=${this.currentObject.id}`, "_self");
   }
 }

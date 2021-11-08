@@ -6,3 +6,5 @@ export * from './textArea';
 export * from './textFields';
 export * from './video';
 export * from './speechField';
+export * from './dateFields';
+export * from './pdfField';

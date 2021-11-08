@@ -410,7 +410,8 @@
           "optional": false,
           "position": 4,
           "value": "",
-          "voiceInputable": true
+          "voiceInputable": true,
+          "multipleSelect": true
         },
         {
           "choices": ["Reinigung Futterleitungen", "Reinigung Futterschalen", "Reinigung Futtersilo"],
@@ -419,7 +420,8 @@
           "optional": false,
           "position": 5,
           "value": "",
-          "voiceInputable": true
+          "voiceInputable": true,
+          "multipleSelect": true
         },
         {
           "choices": ["Keine", "selbst", "durch Fremdfirma"],
@@ -428,7 +430,8 @@
           "optional": false,
           "position": 6,
           "value": "",
-          "voiceInputable": true
+          "voiceInputable": true,
+          "multipleSelect": true
         }
       ]
     },

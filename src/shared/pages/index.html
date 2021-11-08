@@ -15,6 +15,11 @@
 <body>
   <vetprovieh-layout title="Vetprovieh::Dashboard">
     <div class="tile is-ancestor">
+      <div class="tile is-parent">
+          <update-pwa-button></update-pwa-button>
+      </div>
+    </div>
+    <div class="tile is-ancestor">
       <div class="tile is-vertical is-8">
         <div class="tile is-parent">
           <article class="tile is-child box">
@@ -51,8 +56,7 @@
                     <p style="font-size:0.9em;">
                       <span class="tag is-pulled-right is-primary">{{distance}} KM</span>
                       <strong>VVVO:</strong> {{vvvoNumber}}<br />
-                      <strong>Landwirt:</strong> {{farmer.name}} ({{farmer.contactPerson.firstName}}
-                      {{farmer.contactPerson.lastName}})<br />
+                      <strong>Landwirt:</strong> {{farmer.name}}<br />
                       <strong>Letzter Besuch:</strong> {{lastVisit|date}}
                     </p>
                   </div>

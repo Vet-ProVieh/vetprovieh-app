@@ -27,6 +27,11 @@ export class DocumentsIndexPage extends BasicIndexPage<Document> {
         this.barnShower.attributeChangedCallback('barnid', '', VetproviehNavParams.getUrlParameter('barnId'));
       }, 300);
 
+      this.getVetproviehList().addEventListener("selected",(event) => {
+        let e = event as CustomEvent;
+        (this.repository as DocumentRepository).downloadAndOpen(e.detail.id);
+      })
+
       this.createLink.href += `?barnId=${this.barnId}`;
     }
 

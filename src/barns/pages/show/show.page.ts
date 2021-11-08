@@ -56,7 +56,7 @@ export class BarnsShowPage extends BasicShowPage {
             this.detailElement.shadowRoot?.querySelectorAll('open-objectives').forEach((element: any) => {
               const button = element as OpenObjectivesButton;
               button.amount = this.barn.currentMeasure;
-              if (this.barn.id) button.barnId = +this.barn.id;
+              if (this.barn.id) button.barnid = +this.barn.id;
             });
       });
     }

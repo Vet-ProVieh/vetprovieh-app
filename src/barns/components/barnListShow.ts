@@ -9,8 +9,7 @@ import {BarnsRepository} from '../repository';
   template: `
         <p style="font-size:0.9em">
         <strong>Stall:</strong> \${this.barn?.name} ($\{this.barn?.vvvoNumber})<br />
-        <strong>Landwirt:</strong> \${this.barn?.farmer.name} (\${this.barn?.farmer.contactPerson.firstName}
-            \${this.barn?.farmer.contactPerson.lastName})<br />
+        <strong>Landwirt:</strong> \${this.barn?.farmer.name} \${this.barnContact}<br />
         </p>
     `,
   tag: 'barn-list-show',
@@ -29,6 +28,16 @@ export class BarnListShow extends VetproviehElement {
      */
     constructor() {
       super(false, false);
+    }
+
+    public get barnContact() : string {
+      let contactPerson = this.barn?.farmer.contactPerson;
+
+      if(contactPerson?.firstName && contactPerson?.lastName) {
+        return ` (${contactPerson.firstName} ${contactPerson.lastName})`;
+      } else {
+        return "";
+      }
     }
 
     /**

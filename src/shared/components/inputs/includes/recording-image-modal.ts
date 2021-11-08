@@ -1,5 +1,5 @@
-import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
-import {RecordingModal} from './recording-modal';
+import { VetproviehElement, WebComponent, ViewHelper } from '@tomuench/vetprovieh-shared/lib';
+import { RecordingModal } from './recording-modal';
 
 
 @WebComponent({
@@ -13,13 +13,15 @@ import {RecordingModal} from './recording-modal';
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <video id="media" width="600" height="400">
+            <video id="media" muted="true" width="600" height="400">
             </video>
+            ${RecordingModal.fileChooserTemplate("image/*")}
         </section>
         <footer class="modal-card-foot">
             <div class="field is-grouped">
                 <p class="control">
-                    <button class="button is-primary" id="takeSnapshotButton">Aufnehmen</button>
+                    <button class="button is-primary" id="takeSnapshotButton">Bild aufnehmen</button>
+                    <button class="button is-primary" id="loadFileButton">Bild wählen</button>
                 </p>
             </div>
         </footer>
@@ -31,15 +33,37 @@ export class RecordingImageModal extends RecordingModal {
      * Adding Listener to Buttons
      */
   protected addButtonListeners() {
-    const b = this.getByIdFromShadowRoot('takeSnapshotButton') as HTMLButtonElement;
     const takeSnapshot = () => {
       this.snapshot().then(() => {
         this.close(true);
       });
     };
     takeSnapshot.bind(this);
-    b.addEventListener('click', takeSnapshot);
+    this.snapshotButton.addEventListener('click', takeSnapshot);
+
+    this.bindFileChooser();
   }
+
+  /**
+    * Setter Active
+    * @param {boolean} v
+    */
+  public set active(v: boolean) {
+    if (this.active !== v) {
+      ViewHelper.toggleVisibility(this.mediaElement, true);
+      ViewHelper.toggleVisibility(this.fileShower, false);
+      super.active = v;
+    }
+  }
+
+  /**
+   * Load Snapshot Button
+   * @return {HTMLButtonElement}
+   */
+  private get snapshotButton(): HTMLButtonElement {
+    return this.getByIdFromShadowRoot("takeSnapshotButton") as HTMLButtonElement;
+  }
+
 
   /**
      * Taking a Snapshot from Canvas

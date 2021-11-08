@@ -15,16 +15,14 @@
 <body>
     <vetprovieh-layout title="Offene Maßnahmen">
         <vetprovieh-open-measures>
-            <measures-list pagesize="20">
+            <measures-list pagesize="20" sublink="process=objectives&state=execution">
                 <template>
                     <div class="columns">
                         <div class="column">
-                            {{measuresDate|date}}
+                            <strong>{{id}}</strong>
                         </div>
                         <div class="column">
-                            <a href="show.html?id={{id}}">
-                                <strong>{{barn.farmer.name}}</strong>
-                            </a>
+                            {{measuresDate|date}}
                         </div>
                         <div class="column">
                             <strong>VVVO:</strong> {{barn.vvvoNumber}}<br />
@@ -33,15 +31,6 @@
 
                         <div class="column">
                             {{createdBy.userName}}
-                        </div>
-
-                        <div class="column">
-                            x %
-                        </div>
-                        <div class="column is-1">
-                            <button class="button is-light" aria-label="Load PDF file">
-                                <i class="fas fa-file-pdf"></i>
-                            </button>
                         </div>
                     </div>
                     <hr />

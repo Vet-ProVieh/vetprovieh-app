@@ -7,6 +7,7 @@ import {Measure, MeasureField, MeasureGroup} from '../models';
 import {InitializeMeasurePage} from '../pages';
 import {MeasuresRepository} from '../repository';
 import {MeasureGroupComponent} from './measureGroup';
+import { MeasurePdfButton } from './measurePdfButton';
 import {ObjectivesComponent} from './objective';
 
 /**
@@ -59,6 +60,9 @@ import {ObjectivesComponent} from './objective';
                             class="button is-danger is-fullwidth"
                             type="reset" value="Abbrechen">
                 </div>
+                <div class="column is-2">
+                  <measure-pdf-button></measure-pdf-button>
+                </div>
                 <div class="column">
                     <input id="saveButton"
                             class="button is-success is-fullwidth"
@@ -89,6 +93,8 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     this.registerTabEvents();
   }
 
+   
+
   /**
    * Building a GroupComponent
    * must be implemented in Subclass
@@ -115,6 +121,8 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
     this.setParamsToComponent(params);
 
+    const pdfButton = this.shadowRoot?.querySelector("measure-pdf-button") as MeasurePdfButton
+    pdfButton.objectid = data.id;
 
     if (this.isNew()) {
       this.takeoverLastMeasure().then(() => {
@@ -151,6 +159,13 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
           this.activateTabAnchor(a);
           this.deactiveTabAnchors(a);
         });
+
+        // Activate the current Process-Step
+        let step = VetproviehNavParams.getUrlParameter("process");
+        let state = VetproviehNavParams.getUrlParameter("state");
+        if(a.dataset.id === step && a.dataset.state == state){
+          a.click();
+        }
       }
     });
   }

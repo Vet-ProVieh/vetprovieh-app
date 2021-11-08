@@ -1,5 +1,6 @@
 import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import RecordRTC from 'recordrtc';
+import { RecordingModal } from './recording-modal';
 import {RecordingRtcModal} from './recording-rtc-modal';
 
 
@@ -14,7 +15,8 @@ import {RecordingRtcModal} from './recording-rtc-modal';
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <audio style="object-fit: fill;" id="media">
+            <audio muted="true" style="object-fit: fill;" id="media">
+            ${RecordingModal.fileChooserTemplate('aduio/*')}
             </audio>
         </section>
         <footer class="modal-card-foot">

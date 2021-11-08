@@ -1,5 +1,4 @@
 var keycloakHelper = KeycloakHelper.instance();
-keycloakHelper.connect();
 if (!keycloakHelper.authenticated) {
   keycloakHelper.onAuthSuccess = function () {
 

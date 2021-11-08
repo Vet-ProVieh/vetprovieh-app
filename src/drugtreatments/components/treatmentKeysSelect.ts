@@ -12,7 +12,7 @@ import {DrugTreatmentKeysRepository} from '../repository';
         <div class="field">
             \${this.renderLabel()}
             <div class="control">
-                <select id="field" \${this.renderPlaceholder()} class="input" required>
+                <select id="field" \${this.renderPlaceholder()} class="input">
                 \${this.optionsAsHtml}
                 </select>
             </div>

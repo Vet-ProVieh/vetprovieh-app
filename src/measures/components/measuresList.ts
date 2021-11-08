@@ -37,9 +37,6 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                         <div class="column">
                             <strong>Ausgefüllt von</strong>
                         </div>
-                        <div class="column is-1">
-                            <strong>Aktionen</strong>
-                        </div>
                     </div>
                 </div>
                 <!-- Listing Elements here -->
@@ -51,12 +48,31 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
   tag: 'measures-list',
 })
 export class MeasuresList extends VetproviehBasicList {
+   
+   
+   private _sublink : string = "";
+
+   public get sublink() : string {
+       return this._sublink;
+   }
+   public set sublink(v : string) {
+       this._sublink = v;
+   }
+   
   connectedCallback() {
     super.connectedCallback();
     this.addEventListener('selected', (event) => {
       const target = event.target as HTMLElement;
       const customEvent = (event as CustomEvent);
-      window.location.href = `show.html?id=${customEvent.detail.id}`;
+      window.location.href = `show.html?id=${customEvent.detail.id}&${this.sublink}`;
     });
   }
+
+   /**
+     * Getting observed Attributes
+     * @return {string[]}
+     */
+    static get observedAttributes() {
+        return ['pagesize', 'searchable', 'pageable', 'sublink'];
+    }
 }

@@ -8,6 +8,7 @@ class KeycloakHelper {
   static instance() {
     if(!KEYCLOAK_HELPER){
       KEYCLOAK_HELPER = new KeycloakHelper();
+      KEYCLOAK_HELPER.connect();
     }
 
     return KEYCLOAK_HELPER;

@@ -14,3 +14,4 @@ export {SimpleModal} from './includes/simple-modal';
 export * from './includes/question-modal';
 export * from './includes/vetprovieh-stars';
 export * from './includes/bulmaMultiCheckbox';
+export * from './includes/fileUpload';

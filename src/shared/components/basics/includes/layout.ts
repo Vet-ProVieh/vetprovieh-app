@@ -40,8 +40,6 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
               <ul class="menu-list">
                   <li><a href="/measures">
                   <i class="fas fa-warehouse"></i> Maßnahmenpläne</a></li>
-                  <li><a href="/measures">
-                  <i class="fas fa-paw"></i> Maßnahmen</a></li>
               </ul>
               <p class="menu-label">
                 Antibiotikamonitoring
@@ -77,7 +75,7 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                   Meine Praxis
                 </p>
                 <ul class="menu-list">
-                    <li><a href="/settings/surgery">Basisdaten</a></li>
+                    <li><a href="/admin/tenants/credentials">Zugangsdaten (Portale)</a></li>
                     <li><a href="/users">Mitarbeiter</a></li>
                     <li><a href="/settings/careplans">Behandlungspläne</a></li>
                 </ul>
@@ -108,6 +106,7 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
           <section class="section full-height" style="padding-top: 1rem">
           <div id="mainContainer" class="container ">
             \${this._outsideInnerHtml}
+            <back-button></back-button>
           </div>
           </section>
             `,
