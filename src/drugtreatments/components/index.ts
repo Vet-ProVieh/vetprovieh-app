@@ -1,2 +1,2 @@
 export * from './treatmentKeysSelect';
-export * from './drugList';
+export * from './drugtreatmentList';

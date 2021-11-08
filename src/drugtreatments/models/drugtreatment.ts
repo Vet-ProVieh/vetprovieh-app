@@ -1,6 +1,7 @@
 import { OperationPlan } from '../../careplans';
 import { Drug } from '../../drugs';
 import {BasicModel} from '../../shared';
+import {Barn} from '../../barns';
 
 export class Drugtreatment extends BasicModel {
     public amount = '';
@@ -11,6 +12,7 @@ export class Drugtreatment extends BasicModel {
     public effectDays = '';
     public isReported = true;
     public operationPlans: OperationPlan|undefined;
+    public barn: Barn|undefined;
     public treatmentDate = '';
     public treatmentType = '';
     public vetId = '';

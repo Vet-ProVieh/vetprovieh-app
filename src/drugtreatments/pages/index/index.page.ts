@@ -18,4 +18,5 @@ export class DrugstreatmentsIndexPage extends BasicIndexPage<Drugtreatment> {
     super(rep);
     this.barnId = barnId;
   }
+
 }

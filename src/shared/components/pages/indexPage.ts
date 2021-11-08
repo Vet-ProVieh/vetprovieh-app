@@ -1,5 +1,5 @@
 import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
-import {IRepository, VetproviehNavParams} from '@tomuench/vetprovieh-shared/lib';
+import {IRepository, VetproviehNavParams, VetproviehTable} from '@tomuench/vetprovieh-shared/lib';
 import {VetproviehList} from '../../../app/main';
 
 export class BasicIndexPage<T> extends HTMLElement {
@@ -34,7 +34,12 @@ export class BasicIndexPage<T> extends HTMLElement {
      * Load VetproviehList Element from DOM
      * @return {VetproviehList}
      */
-    protected getVetproviehList() : VetproviehList {
-      return document.getElementsByTagName('vetprovieh-list')[0] as VetproviehList;
+    protected getVetproviehList(): VetproviehBasicList {
+      console.log(document.getElementsByTagName('vetprovieh-list')[0] != undefined);
+      if(document.getElementsByTagName('vetprovieh-list')[0] == undefined){
+        return document.getElementsByTagName('vetprovieh-table')[0] as VetproviehBasicList;
+      }else{
+        return document.getElementsByTagName('vetprovieh-list')[0] as VetproviehBasicList;
+      }
     }
 }

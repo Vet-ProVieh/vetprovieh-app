@@ -15,22 +15,53 @@
 <body>
     <vetprovieh-layout title="Ihre Behandlungen">
         <vetprovieh-drugtreatments>
-            <vetprovieh-list pagesize="15">
+            <vetprovieh-table id="vpTable" pagesize="20" pageable="false">
+                <div id="header">
+                    <div class="columns">
+                        <div class="column is-1">
+                            <strong>ID</strong>
+                        </div>
+                        <div class="column is-1">
+                            <strong>Datum</strong>
+                        </div>
+                        <div class="column">
+                            <strong>Landwirt/Stall</strong>
+                        </div>
+                        <div class="column">
+                            <strong>Menge</strong>
+                        </div>
+                        <div class="column">
+                            <strong>Antibiotikum</strong>
+                        </div>
+                        <div class="column">
+                            <strong>Gemeldet?</strong>
+                        </div>
+                    </div>
+                </div>
                 <template>
-                    <div>
-                        <a href="show.html?id={{id}}">
-                            <strong>{{barn.farmer.name}}: {{barn.animal}}</strong>
-                        </a>
-                        <p style="font-size:0.9em">
-                            <strong>Datum:</strong> {{treatmentDate}}</br>
-                            <strong>Stall:</strong> {{barn.name}} {{barn.vvvoNumber}}<br/>
-                            <strong>Tierarzt:</strong> {{barn.lastVet.firstName}} {{barn.lastVet.lastName}}<br />
-                            Für <strong> {{effectDays}} </strong>Tage<br />
-                        </p>
+                    <div class="columns">
+                        <div class="column is-1">
+                            {{id}}
+                        </div>
+                        <div class="column">
+                            <strong>{{treatmentDate|date}}</strong>
+                        </div>
+                        <div class="column">
+                            <barn-list-show barnid="{{barnIid}}"></barn-list-show>
+                        </div>
+                        <div class="column">
+                            {{amount}} {{drugs[0].dose}}
+                        </div>
+                        <div class="column">
+                            {{drugs[0].name}}
+                        </div>
+                        <div class="column">
+                            {{isReported}}
+                        </div>
                     </div>
                     <hr />
                 </template>
-            </vetprovieh-list>
+            </vetprovieh-table>
         </vetprovieh-drugtreatments>
     </vetprovieh-layout>
 </body>

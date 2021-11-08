@@ -82,12 +82,35 @@
 
         <div class="card">
             <div class="card-content">
+                <p class="title is-4">Antibiotikum</p>
                 <div class="columns">
-                    <div class="column">
-                        <p class="title is-4">Antibiotika</p>
-                        <drug-list id="drug-list"></drug-list>
+                <div class="column is-half">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input property="drugs[0].name" class="input " type="text">
+                    </div>
+                </div>  
+                <div class="column is-half">
+                    <label class="label">Zulassungsnummer</label>
+                    <div class="control">
+                        <input property="drugs[0].approvalNumber" class="input " type="text">
+                    </div>
+                </div> 
+            </div>
+            <div class="columns">
+                <div class="column is-half">
+                    <label class="label">Menge</label>
+                    <div class="control">
+                        <input property="amount" class="input " type="text">
+                    </div>
+                </div> 
+                <div class="column is-half">
+                    <label class="label">Dosis</label>
+                    <div class="control">
+                        <input property="drugs[0].dose" class="input " type="text">
                     </div>
                 </div>
+            </div>    
             </div>
         </div>
     </div>
