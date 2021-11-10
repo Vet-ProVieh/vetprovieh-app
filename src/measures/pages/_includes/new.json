@@ -1,9 +1,6 @@
 {
   "animal": "HM1",
-  "animalNumber": "string",
-  "barn": {
-    "id": 1
-  },
+  "animalNumber": "",
   "data": [{
       "name": "Angaben zum Betrieb",
       "position": 1,

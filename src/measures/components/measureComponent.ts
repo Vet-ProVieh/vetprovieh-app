@@ -1,14 +1,14 @@
-import {ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
-import {Barn} from '../../barns';
-import {RenderType} from '../../shared';
-import {DynamicForm} from '../../shared/components/forms/dynamicForm';
-import {ReplaceFactory, TakeoverFactory} from '../factories';
-import {Measure, MeasureField, MeasureGroup} from '../models';
-import {InitializeMeasurePage} from '../pages';
-import {MeasuresRepository} from '../repository';
-import {MeasureGroupComponent} from './measureGroup';
+import { ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent } from '@tomuench/vetprovieh-shared/lib';
+import { Barn } from '../../barns';
+import { RenderType } from '../../shared';
+import { DynamicForm } from '../../shared/components/forms/dynamicForm';
+import { ReplaceFactory, TakeoverFactory } from '../factories';
+import { Measure, MeasureField, MeasureGroup } from '../models';
+import { InitializeMeasurePage } from '../pages';
+import { MeasuresRepository } from '../repository';
+import { MeasureGroupComponent } from './measureGroup';
 import { MeasurePdfButton } from './measurePdfButton';
-import {ObjectivesComponent} from './objective';
+import { ObjectivesComponent } from './objective';
 
 /**
  * Controller for Page
@@ -93,7 +93,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     this.registerTabEvents();
   }
 
-   
+
 
   /**
    * Building a GroupComponent
@@ -111,11 +111,10 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    */
   _afterFetch(data: any) {
     let params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
+    if (!params) params = {};
 
     if (data?.barn?.id) {
-      params = {
-        barnId: data.barn.id,
-      };
+      params.barnId = data.barn.id;
       VetproviehNavParams.set(InitializeMeasurePage.NAVIGATION_KEY, params);
     }
 
@@ -163,11 +162,16 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
         // Activate the current Process-Step
         let step = VetproviehNavParams.getUrlParameter("process");
         let state = VetproviehNavParams.getUrlParameter("state");
-        if(a.dataset.id === step && a.dataset.state == state){
+        if (a.dataset.id === step && a.dataset.state == state) {
           a.click();
         }
       }
     });
+  }
+
+  protected afterSave() {
+    if (!window.location.pathname.includes("show"))
+      window.open(`/measures/show.html?id=${this.currentObject.id}&process=objectives&state=execution`, "_self");
   }
 
   /**
@@ -249,7 +253,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   private setParamsToComponent(params: any) {
     if (params != null && params != undefined) {
       if (params.barnId != null && params.barnId != undefined) {
-        this.currentObject.barn = {id: parseInt(params.barnId)} as Barn;
+        this.currentObject.barn = { id: parseInt(params.barnId) } as Barn;
       }
       if (params.measuresDate != null && params.measuresDate != undefined) {
         this.currentObject.measuresDate = params.measuresDate;

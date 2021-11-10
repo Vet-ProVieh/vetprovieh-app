@@ -1,16 +1,16 @@
-import {VetproviehList} from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
-import {ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
-import {PlanMeasureModel} from '../../../careplans/operational/models/planMeasure';
-import {MeasureOperationPlansRepository} from '../../../careplans/operational/repository';
-import {BasicSelectPage} from '../../../shared';
-import {Objective} from '../../models';
-import {KeyResult} from '../../models/keyresult';
-import {ObjectivesRepository} from '../../repository';
+import { VetproviehList } from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
+import { ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent } from '@tomuench/vetprovieh-shared/lib';
+import { PlanMeasureModel } from '../../../careplans/operational/models/planMeasure';
+import { MeasureOperationPlansRepository } from '../../../careplans/operational/repository';
+import { BasicSelectPage } from '../../../shared';
+import { Objective } from '../../models';
+import { KeyResult } from '../../models/keyresult';
+import { ObjectivesRepository } from '../../repository';
 
 @WebComponent({
   template:
-        VetproviehElement.template +
-        `
+    VetproviehElement.template +
+    `
 
         <div class="tabs is-toggle is-fullwidth">
             <ul>
@@ -117,219 +117,221 @@ import {ObjectivesRepository} from '../../repository';
   tag: 'vp-measures-select',
 })
 export class MeasuresSelectPage extends BasicSelectPage {
-    private repository: MeasureOperationPlansRepository;
+  private repository: MeasureOperationPlansRepository;
 
-    constructor() {
-      super();
-      this.repository = new MeasureOperationPlansRepository(
-          VetproviehNavParams.getUrlParameter('barnId')
-      );
+  constructor() {
+    super();
+    this.repository = new MeasureOperationPlansRepository(
+      VetproviehNavParams.getUrlParameter('barnId')
+    );
+  }
+
+  /**
+  * Getting ParamKey; Can be overriden in subclasses
+  * @return {string}
+  */
+  protected get paramKey(): string {
+    return 'selectPageMeasure.return';
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+
+    const list: VetproviehList = this.vetproviehList;
+    if (list) {
+      list.repository = this.repository;
+      list.addEventListener('selected', () => {
+        this.updateSelectedAmount();
+      });
     }
 
-    /**
-    * Getting ParamKey; Can be overriden in subclasses
-    * @return {string}
-    */
-    protected get paramKey(): string {
-      return 'selectPageMeasure.return';
+    const list2: VetproviehList = this.objectivesList;
+    if (list2) {
+      list2.addEventListener('selected', () => {
+        this.updateSelectedAmount();
+      });
     }
 
-    connectedCallback() {
-      super.connectedCallback();
 
-      const list: VetproviehList = this.vetproviehList;
-      if (list) {
-        list.repository = this.repository;
-        list.addEventListener('selected', () => {
-          this.updateSelectedAmount();
-        });
-      }
+    const tabs = this.querySelector('.tabs');
 
-      const list2: VetproviehList = this.objectivesList;
-      if (list2) {
-        list2.addEventListener('selected', () => {
-          this.updateSelectedAmount();
-        });
-      }
+    if (tabs) {
+      const anchors = tabs.querySelectorAll('a');
+      anchors.forEach((element: HTMLAnchorElement) => {
+        element.addEventListener('click', () => {
+          const id = element.dataset.id;
 
+          anchors.forEach((a) => {
+            a.parentElement?.classList.remove('is-active');
+          });
 
-      const tabs = this.querySelector('.tabs');
+          element.parentElement?.classList.add('is-active');
 
-      if (tabs) {
-        const anchors = tabs.querySelectorAll('a');
-        anchors.forEach((element: HTMLAnchorElement) => {
-          element.addEventListener('click', () => {
-            const id = element.dataset.id;
-
-            anchors.forEach((a) => {
-                        a.parentElement?.classList.remove('is-active');
-            });
-
-                    element.parentElement?.classList.add('is-active');
-
-                    [this.querySelector('#measures'), this.querySelector('#opplans')].forEach((content) => {
-                      if (content?.id == id) {
-                            content?.classList.remove('is-hidden');
-                      } else if (content) {
-                            content?.classList.add('is-hidden');
-                      }
-                    });
+          [this.querySelector('#measures'), this.querySelector('#opplans')].forEach((content) => {
+            if (content?.id == id) {
+              content?.classList.remove('is-hidden');
+            } else if (content) {
+              content?.classList.add('is-hidden');
+            }
           });
         });
-      }
+      });
     }
+  }
 
-    /**
-     * Return Value
-     * @return {any}
-     */
-    protected get returnValue(): any {
-      return this.selectedOperationPlans.concat(this.selectedCurrentObjectives);
-    }
+  /**
+   * Return Value
+   * @return {any}
+   */
+  protected get returnValue(): any {
+    return this.selectedOperationPlans.concat(this.selectedCurrentObjectives);
+  }
 
-    /**
-     * Loading Liste von Operation-Plan
-     * @return {VetproviehList}
-     */
-    private get vetproviehList(): VetproviehList {
-      return document.getElementById('measuresList') as VetproviehList;
-    }
+  /**
+   * Loading Liste von Operation-Plan
+   * @return {VetproviehList}
+   */
+  private get vetproviehList(): VetproviehList {
+    return document.getElementById('measuresList') as VetproviehList;
+  }
 
-    /**
-    * Loading Liste von Operation-Plan
-    * @return {VetproviehList}
-    */
-    private get objectivesList(): VetproviehList {
-      return document.getElementById('objectivesList') as VetproviehList;
-    }
+  /**
+  * Loading Liste von Operation-Plan
+  * @return {VetproviehList}
+  */
+  private get objectivesList(): VetproviehList {
+    return document.getElementById('objectivesList') as VetproviehList;
+  }
 
-    /**
-     * Get selected OperationPlans
-     * @return {Array<Objective | undefined>}
-     */
-    public get selectedOperationPlans(): Array<Objective | undefined> {
-      return this.operationPlans
-          .filter((operationPlan: PlanMeasureModel) => !!operationPlan.id && operationPlan.values && this.selectedOperationPlanIds.includes(+operationPlan.id))
-          .map((part: PlanMeasureModel) => this.opPlanToObjective(part));
-    }
+  /**
+   * Get selected OperationPlans
+   * @return {Array<Objective | undefined>}
+   */
+  public get selectedOperationPlans(): Array<Objective | undefined> {
+    return this.operationPlans
+      .filter((operationPlan: PlanMeasureModel) => !!operationPlan.id && operationPlan.values && this.selectedOperationPlanIds.includes(+operationPlan.id))
+      .map((part: PlanMeasureModel) => this.opPlanToObjective(part));
+  }
 
-    /**
-     * Transform Opplan to Objective
-     * @param {PlanMeasureModel} part
-     * @return {Objective | undefined}
-     */
-    private opPlanToObjective(part: PlanMeasureModel): Objective | undefined {
-      if (part.values) {
-        const tokenMeasure = part.values.EmpfohleneMaßnahme;
-        const objective = new Objective();
-        objective.name = `Maßnahmen aus ${part.name} vom ${ObjectHelper.formatDate(part.updatedAt)}`;
-        objective.keyResults = [];
+  /**
+   * Transform Opplan to Objective
+   * @param {PlanMeasureModel} part
+   * @return {Objective | undefined}
+   */
+  private opPlanToObjective(part: PlanMeasureModel): Objective | undefined {
+    if (part.values) {
+      const tokenMeasure = part.values.EmpfohleneMaßnahme;
+      const objective = new Objective();
+      objective.name = `Maßnahmen aus ${part.name} vom ${ObjectHelper.formatDate(part.updatedAt)}`;
+      objective.keyResults = [];
+      if (tokenMeasure) {
         tokenMeasure.split('\r\n').forEach((measureLine: string) => {
           const keyResult = new KeyResult();
           keyResult.name = measureLine;
           objective.keyResults.push(keyResult);
         });
-        return objective;
-      } else {
-        return undefined;
       }
+      return objective;
+    } else {
+      return undefined;
     }
+  }
 
-    /**
-    * Get selected OperationPlans
-    * @return {Array<Objective>}
-    */
-    public get selectedCurrentObjectives(): Array<Objective> {
-      return this.objectives
-          .filter((objective: Objective) => !!objective.id && this.selectedObjectivesIds.includes(+objective.id));
-    }
+  /**
+  * Get selected OperationPlans
+  * @return {Array<Objective>}
+  */
+  public get selectedCurrentObjectives(): Array<Objective> {
+    return this.objectives
+      .filter((objective: Objective) => !!objective.id && this.selectedObjectivesIds.includes(+objective.id));
+  }
 
-    /**
-     * Get selected operationPlanIds
-     * @return {Array<number>}
-     */
-    public get selectedOperationPlanIds(): Array<number> {
-      const inputCheckboxes = this.vetproviehList.shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
-      const returnValue: number[] = [];
-        inputCheckboxes?.forEach((checkbox) => {
-          if ((checkbox as any).checked) {
-            returnValue.push(+(checkbox as any).value);
-          }
-        });
-        return returnValue;
-    }
-
-    /**
-    * Get selected objectiveIds
-    * @return {Array<number>}
-    */
-    public get selectedObjectivesIds(): Array<number> {
-      const inputCheckboxes = this.objectivesList.shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
-      const returnValue: number[] = [];
-        inputCheckboxes?.forEach((checkbox) => {
-          if ((checkbox as any).checked) {
-            returnValue.push(+(checkbox as any).value);
-          }
-        });
-        return returnValue;
-    }
-
-
-    /**
-     * Get All visible OperationPlans
-     * @return {Array<PlanMeasureModel>}
-     */
-    public get operationPlans(): Array<PlanMeasureModel> {
-      return this.vetproviehList?.objects || [];
-    }
-
-    /**
-    * Get All visible Objectives
-    * @return {Array<Objective>}
-    */
-    public get objectives(): Array<Objective> {
-      return this.objectivesList?.objects || [];
-    }
-
-
-    /**
-     * Updating Tab Element Selected Amount
-     */
-    private updateSelectedAmount() {
-      const amountOpPlans = this.selectedOperationPlanIds.length;
-      const amountObjectives = this.selectedObjectivesIds.length;
-
-      // Activate takeover Button
-      this.takeoverButton.disabled = amountOpPlans + amountObjectives == 0;
-
-      this.updateSelectAmountBadge(this.selectedOpPlans, amountOpPlans);
-      this.updateSelectAmountBadge(this.selectedObjectives, amountObjectives);
-    }
-
-    /**
-     * Update Span Element with Amount
-     * @param {HTMLSpanElement} span
-     * @param {number} selectedAmount
-     */
-    private updateSelectAmountBadge(span: HTMLSpanElement, selectedAmount: number) {
-      if (span) {
-        span.textContent = selectedAmount.toString();
+  /**
+   * Get selected operationPlanIds
+   * @return {Array<number>}
+   */
+  public get selectedOperationPlanIds(): Array<number> {
+    const inputCheckboxes = this.vetproviehList.shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
+    const returnValue: number[] = [];
+    inputCheckboxes?.forEach((checkbox) => {
+      if ((checkbox as any).checked) {
+        returnValue.push(+(checkbox as any).value);
       }
-    }
+    });
+    return returnValue;
+  }
 
-    /**
-     * Badge Amount in Tab-Header
-     * @return {HTMLSpanElement}
-     */
-    private get selectedObjectives(): HTMLSpanElement {
-      return document.getElementById('selectedObjectives') as HTMLSpanElement;
-    }
+  /**
+  * Get selected objectiveIds
+  * @return {Array<number>}
+  */
+  public get selectedObjectivesIds(): Array<number> {
+    const inputCheckboxes = this.objectivesList.shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
+    const returnValue: number[] = [];
+    inputCheckboxes?.forEach((checkbox) => {
+      if ((checkbox as any).checked) {
+        returnValue.push(+(checkbox as any).value);
+      }
+    });
+    return returnValue;
+  }
 
-    /**
-     * Badge Amount in Tab-Header
-     * @return {HTMLSpanElement}
-     */
-    private get selectedOpPlans(): HTMLSpanElement {
-      return document.getElementById('selectedOpPlans') as HTMLSpanElement;
+
+  /**
+   * Get All visible OperationPlans
+   * @return {Array<PlanMeasureModel>}
+   */
+  public get operationPlans(): Array<PlanMeasureModel> {
+    return this.vetproviehList?.objects || [];
+  }
+
+  /**
+  * Get All visible Objectives
+  * @return {Array<Objective>}
+  */
+  public get objectives(): Array<Objective> {
+    return this.objectivesList?.objects || [];
+  }
+
+
+  /**
+   * Updating Tab Element Selected Amount
+   */
+  private updateSelectedAmount() {
+    const amountOpPlans = this.selectedOperationPlanIds.length;
+    const amountObjectives = this.selectedObjectivesIds.length;
+
+    // Activate takeover Button
+    this.takeoverButton.disabled = amountOpPlans + amountObjectives == 0;
+
+    this.updateSelectAmountBadge(this.selectedOpPlans, amountOpPlans);
+    this.updateSelectAmountBadge(this.selectedObjectives, amountObjectives);
+  }
+
+  /**
+   * Update Span Element with Amount
+   * @param {HTMLSpanElement} span
+   * @param {number} selectedAmount
+   */
+  private updateSelectAmountBadge(span: HTMLSpanElement, selectedAmount: number) {
+    if (span) {
+      span.textContent = selectedAmount.toString();
     }
+  }
+
+  /**
+   * Badge Amount in Tab-Header
+   * @return {HTMLSpanElement}
+   */
+  private get selectedObjectives(): HTMLSpanElement {
+    return document.getElementById('selectedObjectives') as HTMLSpanElement;
+  }
+
+  /**
+   * Badge Amount in Tab-Header
+   * @return {HTMLSpanElement}
+   */
+  private get selectedOpPlans(): HTMLSpanElement {
+    return document.getElementById('selectedOpPlans') as HTMLSpanElement;
+  }
 }
