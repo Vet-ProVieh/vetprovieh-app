@@ -43,11 +43,11 @@
                         <div class="column is-1">
                             {{id}}
                         </div>
-                        <div class="column">
+                        <div class="column is-1">
                             <strong>{{treatmentDate|date}}</strong>
                         </div>
                         <div class="column">
-                            <barn-list-show barnid="{{barnIid}}"></barn-list-show>
+                            <barn-list-show barnid="{{barn.id}}"></barn-list-show>
                         </div>
                         <div class="column">
                             {{amount}} {{drugs[0].dose}}
