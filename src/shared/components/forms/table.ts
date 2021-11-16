@@ -15,6 +15,10 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                 #header {
                     margin-top: 15px;
                 }
+
+                a{
+                  color: black;
+                }
                 </style>
 
                 <!-- SearchControl on Top -->
