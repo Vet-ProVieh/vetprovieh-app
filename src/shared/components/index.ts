@@ -4,3 +4,4 @@ export * from './pages';
 export * from './geo';
 export * from './speechAssistant';
 export * from './buttons';
+export * from './forms';

@@ -39,15 +39,15 @@
                     </div>
                 </div>
                 <template>
-                    <div class="columns">
+                    <a href="show?id={{id}}"><div class="columns">
                         <div class="column is-1">
                             {{id}}
                         </div>
-                        <div class="column">
+                        <div class="column is-1">
                             <strong>{{treatmentDate|date}}</strong>
                         </div>
                         <div class="column">
-                            <barn-list-show barnid="{{barnIid}}"></barn-list-show>
+                            <barn-list-show barnid="{{barn.id}}"></barn-list-show>
                         </div>
                         <div class="column">
                             {{amount}} {{drugs[0].dose}}
@@ -58,7 +58,7 @@
                         <div class="column">
                             {{isReported}}
                         </div>
-                    </div>
+                    </div></a>
                     <hr />
                 </template>
             </vetprovieh-table>

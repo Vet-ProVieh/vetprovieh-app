@@ -15,6 +15,10 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                 #header {
                     margin-top: 15px;
                 }
+
+                a{
+                  color: black;
+                }
                 </style>
 
                 <!-- SearchControl on Top -->
@@ -26,7 +30,7 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                 </div>
                 <!-- Listing Elements here -->
                 <div id="listElements" style="margin-top:20px;">
-                    hier list elements
+                    
                 </div>
                 <!-- Pager for Paging through List-->
                 <vetprovieh-pager id="pager" page="1" maximum="7">

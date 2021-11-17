@@ -13,6 +13,7 @@ export class BasicIndexPage<T> extends HTMLElement {
     connectedCallback() {
       console.log("ConnectedCallback");
       const list: VetproviehList = this.getVetproviehList();
+      console.log(list);
       list.repository = this.repository;
     }
 
