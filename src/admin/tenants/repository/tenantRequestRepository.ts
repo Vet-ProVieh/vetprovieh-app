@@ -9,6 +9,6 @@ export class TenantRequestRepository extends BaseRepository<TenantRequest> {
    * Default_Constructor
    */
   constructor() {
-    super('/service/tenantmanagements/requests');
+    super('/service/tenants/requests');
   }
 }

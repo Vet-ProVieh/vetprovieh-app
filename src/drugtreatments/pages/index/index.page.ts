@@ -1,5 +1,5 @@
-import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
-import {BasicIndexPage} from '../../../shared';
+import { VetproviehNavParams, WebComponent } from '@tomuench/vetprovieh-shared/lib';
+import { BasicIndexPage } from '../../../shared';
 import { Drugtreatment } from '../../models';
 import { DrugtreatmentRepository } from '../../repository';
 

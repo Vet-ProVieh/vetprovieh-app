@@ -10,7 +10,7 @@ export class UserRepository extends BaseRepository<User> {
      * Default-Contructor
      */
     constructor() {
-      super(`/service/usermanagements`);
+      super(`/service/users`);
 
     }
 

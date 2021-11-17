@@ -9,6 +9,6 @@ export class CredentialRepository extends BaseRepository<Credential> {
    * Default_Constructor
    */
   constructor() {
-    super('/service/tenantmanagements/credentials');
+    super('/service/tenants/credentials');
   }
 }
