@@ -29,6 +29,9 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                             <strong>Id</strong>
                         </div>
                         <div class="column">
+                            <strong>Abgeschlossen?</strong>
+                        </div>
+                        <div class="column">
                             <strong>Datum</strong>
                         </div>
                         <div class="column">

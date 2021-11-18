@@ -43,6 +43,7 @@ export class MeasureFieldComponent extends ElementBinding {
       }
     }
 
+
     /**
      * Evaluate required and visiblity in dependency of the linked value
      * @param {any} value
