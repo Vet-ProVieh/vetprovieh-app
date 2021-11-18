@@ -1,7 +1,7 @@
 import { BaseRepository, ElementBinding, IRepository, WebComponent } from '@tomuench/vetprovieh-shared/lib';
 import { OperationField } from '..';
 import { VetproviehSelect } from '../../../app/main';
-import { DrugsRepository } from '../../../drugs';
+import { Drug, DrugsRepository } from '../../../drugs';
 import { MeasureProactiveButton } from '../../../measures';
 import { InputFactory } from './field/inputFactory';
 
@@ -17,6 +17,11 @@ export class VpOperationField extends ElementBinding {
   constructor(barnId: string) {
     super();
     this.barnId = barnId;
+  }
+
+
+  protected afterObjectSet() {
+    this.dataset.treatmentKeys = this.object.treatmentKeys;
   }
 
 
@@ -48,27 +53,45 @@ export class VpOperationField extends ElementBinding {
       }
     }
 
-    if(this.isDiagnosis(this.object)){
+    if (this.isDiagnosis(this.object)) {
       let element = this.querySelector("[property='value']") as HTMLTextAreaElement;
 
-      element.addEventListener("change",(event) => {
+      element.addEventListener("change", (event) => {
         let diagnosisButton = this.querySelector("measure-proactive-button") as MeasureProactiveButton;
         diagnosisButton.diagnosis = element.value;
       });
-      setTimeout(() => { 
+      setTimeout(() => {
         let diagnosisButton = this.querySelector("measure-proactive-button") as MeasureProactiveButton;
-        diagnosisButton.diagnosis = element.value; 
+        diagnosisButton.diagnosis = element.value;
       }, 400);
+    }
+
+    if(this.object.treatmentKeys == "MedikamentName"){
+      this.bindDrugField();
     }
   }
 
+  private bindDrugField() {
+    let zulassungsField = this.parentElement?.querySelector("vp-operation-field[data-treatment-keys='Zulassungsnummer']") as VpOperationField;
+    let vetproviehSelect = zulassungsField?.querySelector("vetprovieh-select") as VetproviehSelect;
+    if (vetproviehSelect) {
+      let nameFieldArea = this.querySelector("textarea");
+      if(nameFieldArea) nameFieldArea.disabled = true;
+
+      vetproviehSelect.addEventListener("change", () => {
+        let obj = vetproviehSelect.selectedObject as Drug;
+        this.object.value = obj.name;
+        if(nameFieldArea) nameFieldArea.value = obj.name;
+      })
+    }
+  }
 
   /**
    * Is current Object a Diagnosis?
    * @param {OperationField} object 
    * @returns {boolean}
    */
-  private isDiagnosis(object: OperationField) : boolean {
+  private isDiagnosis(object: OperationField): boolean {
     return object.treatmentKeys === "Diagnose";
   }
 

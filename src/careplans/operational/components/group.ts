@@ -35,7 +35,7 @@ export class VpOperationGroup extends ElementGroupBinding {
    * @protected
    */
     protected subFields(): Array<any> {
-      return this.object.opFields;
+      return (this.object.opFields as Array<any>).sort((a,b) => a.positon - b.position);
     }
 
 

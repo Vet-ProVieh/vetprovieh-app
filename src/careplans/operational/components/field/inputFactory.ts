@@ -260,7 +260,7 @@ export class InputFactory {
 
   private static buildVetproviehSelect(options: any): string {
     return `<div class="select is-multiple" style="width:100%;">` +
-      `<vetprovieh-select display="name" internalprop="registrationNumber" ` +
+      `<vetprovieh-select display="approvalNumber" internalprop="approvalNumber" ` +
       this.genTag('property', 'value') +
       this.genTag('size', options.size) +
       this.genTag('style', options.style) +
@@ -270,7 +270,7 @@ export class InputFactory {
       `>
             <template>
                 <div style="padding:5px">
-                    <span>{{name}} ({{registrationNumber}}), {{manufacturer}}</span>
+                    <span>{{name}} ({{approvalNumber}}), {{manufacturer}}</span>
                 </div>
             </template>
             </vetprovieh-select></div>`;
@@ -282,8 +282,9 @@ export class InputFactory {
      * @return {string}
      */
   private static buildOptionTags(choices: string[]): string {
+    let blank = `<option value=""></option>`
     if (choices) {
-      return choices.map((choice) => `<option value="` + choice + `">` + choice + `</option>`)
+      return blank + choices.map((choice) => `<option value="` + choice + `">` + choice + `</option>`)
         .join('\r\n');
     } else {
       return '';
