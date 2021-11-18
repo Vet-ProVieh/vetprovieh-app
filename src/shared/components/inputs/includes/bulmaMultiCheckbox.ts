@@ -51,6 +51,14 @@ export class BulmaMultiCheckbox extends FieldWithLabel {
     return super.value;
   }
 
+  public set checked(v: string){
+    this.value = v;
+  }
+
+  public get checked(): string {
+    return this.value;
+  }
+
   /**
    * Check if Value is in current possible choices
    * @param {string} v
