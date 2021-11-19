@@ -6,7 +6,7 @@ import { FarmersRepository } from '../../../farmers';
 import { VetproviehSelect } from '@tomuench/vetprovieh-select/lib/vetprovieh-select';
 import { Drug } from '../../../drugs';
 import { DrugtreatmentRepository } from '../../repository';
-import { DrugList } from '../../components';
+import { DrugreportRepository } from '../../../drugreports';
 
 
 /**
@@ -22,6 +22,7 @@ import { DrugList } from '../../components';
 export class DrugtreatmentShowPage extends BasicShowPage {
 
     private rep: DrugtreatmentRepository;
+    private drugReportRep: DrugreportRepository;
     private barnId: string;
     /**
      * Default-Constructor
@@ -29,6 +30,7 @@ export class DrugtreatmentShowPage extends BasicShowPage {
     constructor() {
       super();
       this.rep = new DrugtreatmentRepository();
+      this.drugReportRep = new DrugreportRepository();
       this.barnId = VetproviehNavParams.getUrlParameter('id');
     }
 
@@ -42,9 +44,6 @@ export class DrugtreatmentShowPage extends BasicShowPage {
     protected afterDataLoaded() {
       this.bindFarmerSelectField();
       this.bindBarnSelectField();
-      this.drugs.forEach(drug => {
-        this.drugList.appendDrug(drug);
-      });
       this.checkIfReported();
     }
 
@@ -58,10 +57,6 @@ export class DrugtreatmentShowPage extends BasicShowPage {
 
     private get drugs(): Drug[] {
       return this.drugtreatment.drugs;
-    }
-
-    private get drugList(): DrugList {
-      return this.detailElement?.getByIdFromShadowRoot("drug-list") as DrugList;
     }
 
     private get isReportedField(): HTMLElement {
@@ -79,7 +74,14 @@ export class DrugtreatmentShowPage extends BasicShowPage {
         this.reportButton.addEventListener("click", ()=>{});
       }else{
         this.reportButton.addEventListener("click", ()=>{
-          this.rep.report(this.barnId);
+          this.drugReportRep.report(this.barnId).then((message) => { 
+            console.log("fetch war erfolgreich: " + message );
+            //TOAST ZEIGEN (SUCCESS)
+            this.reportButton.disabled = true;
+          }).catch((message) => { 
+            console.log("Fetch ist schiefgelaufen!"); 
+            //TOAST ZEIGEN (FEHLER)
+          });
         });
       }
     }

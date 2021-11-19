@@ -38,16 +38,4 @@ export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
         });
       }
     }
-
-    report(id: string){
-      return new Promise((resolve, reject) => {
-        fetch(`${this.endpoint}/hit/treatment_id/${id}`, {
-          method: 'Update'
-        }).then((response) => {
-          resolve(response.ok);
-        }).catch((response) => {
-          resolve(false);
-        })
-      })
-    }
 }

@@ -6,6 +6,18 @@ export class DrugreportRepository extends BaseRepository<Drugreport> {
     super('/service/drugsreport');
   }
 
+  report(id: string){
+    return new Promise((resolve, reject) => {
+      fetch(`${this.endpoint}/hit/treatment_id/${id}`, {
+        method: 'PUT'
+      }).then((response) => {
+        resolve(response.ok);
+      }).catch((response) => {
+        reject(false);
+      })
+    })
+  }
+
   
   /**
      * Find a Object by its id
