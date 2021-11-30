@@ -1,5 +1,5 @@
 import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
-import {IRepository, VetproviehNavParams, VetproviehTable} from '@tomuench/vetprovieh-shared/lib';
+import {IRepository} from '@tomuench/vetprovieh-shared/lib';
 import {VetproviehList} from '../../../app/main';
 
 export class BasicIndexPage<T> extends HTMLElement {

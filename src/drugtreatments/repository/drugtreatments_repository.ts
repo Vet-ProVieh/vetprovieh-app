@@ -3,7 +3,7 @@ import { Drugtreatment } from '../models';
 
 export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
   constructor() {
-    super('/service/drugstreatment');
+    super('/service/drugtreatments');
   }
 
 

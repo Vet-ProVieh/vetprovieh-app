@@ -7,6 +7,7 @@ import { VetproviehSelect } from '@tomuench/vetprovieh-select/lib/vetprovieh-sel
 import { Drug } from '../../../drugs';
 import { DrugtreatmentRepository } from '../../repository';
 import { DrugreportRepository } from '../../../drugreports';
+import * as bulmaToast from 'bulma-toast';
 
 
 /**
@@ -74,13 +75,11 @@ export class DrugtreatmentShowPage extends BasicShowPage {
         this.reportButton.addEventListener("click", ()=>{});
       }else{
         this.reportButton.addEventListener("click", ()=>{
-          this.drugReportRep.report(this.barnId).then((message) => { 
-            console.log("fetch war erfolgreich: " + message );
-            //TOAST ZEIGEN (SUCCESS)
+          this.drugReportRep.report(this.barnId).then((msg) => { 
+            bulmaToast.toast({ message: 'Melden erfolgreich!', type: 'is-success' })
             this.reportButton.disabled = true;
-          }).catch((message) => { 
-            console.log("Fetch ist schiefgelaufen!"); 
-            //TOAST ZEIGEN (FEHLER)
+          }).catch((msg) => { 
+            bulmaToast.toast({ message: 'Melden fehlgeschlagen', type: 'is-danger' })
           });
         });
       }
