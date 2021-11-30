@@ -11,6 +11,7 @@ import { DrugtreatmentRepository } from '../../repository';
 export class DrugstreatmentsIndexPage extends BasicIndexPage<Drugtreatment> {
   private barnId: string;
 
+  //Setting repository and barnid from urlparameter (if exist)
   constructor() {
     const rep = new DrugtreatmentRepository();
     const barnId = VetproviehNavParams.getUrlParameter('barnId');

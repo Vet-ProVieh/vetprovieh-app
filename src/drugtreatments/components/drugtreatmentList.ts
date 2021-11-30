@@ -21,6 +21,10 @@ import { Drug } from "../../drugs";
             `,
     tag: 'drugtreatment-list',
   })
+
+  /* 
+  * Component for displaying Drugtreatmens as list 
+  */
   export class DrugtreatmentList extends VetproviehElement {
 
     render(){

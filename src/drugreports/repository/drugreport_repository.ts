@@ -6,6 +6,7 @@ export class DrugreportRepository extends BaseRepository<Drugreport> {
     super('/service/drugreports');
   }
 
+  //Report treatments to make drugreport
   report(id: string){
     return new Promise((resolve, reject) => {
       fetch(`${this.endpoint}/hit/treatment_id/${id}`, {

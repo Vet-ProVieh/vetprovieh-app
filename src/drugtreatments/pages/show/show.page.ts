@@ -10,9 +10,6 @@ import { DrugreportRepository } from '../../../drugreports';
 import * as bulmaToast from 'bulma-toast';
 
 
-/**
- * ShowPage
- */
 @WebComponent({
   template: '',
   tag: 'vetprovieh-drugtreatment',
@@ -68,6 +65,10 @@ export class DrugtreatmentShowPage extends BasicShowPage {
       return this.detailElement?.getByIdFromShadowRoot("report") as HTMLButtonElement;
     }
 
+    /**
+     * Check if drugtreatment is already reported 
+     *  if not add event listener to report button
+     */
     private checkIfReported(){
       if(this.drugtreatment.isReported){
         this.isReportedField.textContent = "ja";
