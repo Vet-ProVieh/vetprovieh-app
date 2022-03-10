@@ -3,7 +3,7 @@ import { Drugtreatment } from '../models';
 
 export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
   constructor() {
-    super('/service/drugstreatment');
+    super('/service/drugtreatments');
   }
 
 
@@ -34,7 +34,7 @@ export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
           if (response.status === 404) {
             return [];
           }
-          return response.json();
+          return response.json().then((value) => (value as any[]).sort((a,b) => b.id - a.id));;
         });
       }
     }

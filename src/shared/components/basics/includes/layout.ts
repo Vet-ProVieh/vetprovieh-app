@@ -47,8 +47,8 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
               <ul class="menu-list">
                   <li><a href="/drugtreatments">
                   <i class="fas fa-syringe"></i> Antibiotika-Behandlung</a></li>
-                  <li><a href="/drugreports">
-                  <i class="fas fa-notes-medical"></i> Antibiotika-Berichte</a></li>
+                  <!--<li><a href="/drugreports">
+                  <i class="fas fa-notes-medical"></i> Antibiotika-Berichte</a></li>-->
               </ul>
               <!--
               <p class="menu-label">
