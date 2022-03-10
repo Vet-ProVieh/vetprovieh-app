@@ -33,6 +33,9 @@ import {VetproviehElement, VetproviehTable, WebComponent} from '@tomuench/vetpro
                 </vetprovieh-pager>`,
   tag: 'drugtreatment-table',
 })
+/* 
+* Component for displaying Drugtreatmens as table 
+*/
 export class DrugtreatmentTable extends VetproviehTable {
     private _header: HTMLElement;
     constructor() {
