@@ -1,9 +1,9 @@
-import { WebComponent } from '@tomuench/vetprovieh-shared/lib';
-import { BasicIndexPage } from '../../../../shared';
-import { Credential } from '../../models';
-import { CredentialRepository } from '../../repository';
+import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {BasicIndexPage} from '../../../../shared';
+import {Credential} from '../../models';
+import {CredentialRepository} from '../../repository';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-credentials',

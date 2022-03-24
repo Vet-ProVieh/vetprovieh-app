@@ -1,9 +1,7 @@
-import {WebComponent, Indexable} from '@tomuench/vetprovieh-shared/lib';
+import {Indexable, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {GeoEvent} from '../../models/geo';
-import {IGeoProvider} from '../../providers/geo/IGeoProvider';
-import {OpenStreetMapNomatim} from '../../providers/geo/OpenStreetMapNomatim';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   extends: 'button',
   tag: 'geo-button',

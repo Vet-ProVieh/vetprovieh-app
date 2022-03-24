@@ -1,5 +1,5 @@
-import { OperationPlan } from '../../careplans';
-import { Drug } from '../../drugs';
+import {OperationPlan} from '../../careplans';
+import {Drug} from '../../drugs';
 import {BasicModel} from '../../shared';
 import {Barn} from '../../barns';
 

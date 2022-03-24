@@ -1,4 +1,4 @@
-import { Drugtreatment } from '../../drugtreatments';
+import {Drugtreatment} from '../../drugtreatments';
 import {BasicModel} from '../../shared';
 
 export class Drugreport extends BasicModel {

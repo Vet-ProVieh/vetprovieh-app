@@ -1,19 +1,28 @@
 
-import {VetproviehElement, VetproviehNavParams} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, VetproviehNavParams}
+  from '@tomuench/vetprovieh-shared/lib';
+import {Global} from '..';
 
 /**
  * Basic-Select-Page
  * Child musst insert the following:
- * - takeoverButton - Button with id="takeoverButton" to navigateBack with params
+ * - takeoverButton - Button with id="takeoverButton" to
+ *                     navigateBack with params
  * - abortbutton - Button with id="abortButton" to navigateBack without params
  */
 export class BasicSelectPage extends VetproviehElement {
     public static PARAM_KEY = 'selectPage.return';
 
+    /**
+     * Default-Constructor
+     */
     constructor() {
       super(false, false);
     }
 
+    /**
+     * ConnectedCallback
+     */
     connectedCallback() {
       this.render();
       this.registerEventListener();
@@ -22,7 +31,6 @@ export class BasicSelectPage extends VetproviehElement {
 
     /**
      * Return Value
-     * @return {any}
      */
     protected get returnValue(): any {
       throw new Error('Must be implemented in child');
@@ -84,7 +92,7 @@ export class BasicSelectPage extends VetproviehElement {
      */
     private setReturnValue() {
       let current: Array<any> = VetproviehNavParams.get(this.paramKey);
-      if (!Array.isArray(current) || current == null || current == undefined) current = [];
+      if (!Array.isArray(current) || Global.isEmpty(current)) current = [];
       current.push(this.returnValue);
       VetproviehNavParams.set(this.paramKey, current);
     }

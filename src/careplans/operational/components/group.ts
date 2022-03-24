@@ -2,9 +2,7 @@ import {VpOperationField} from './field';
 import {ElementGroupBinding, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {ElementBinding} from '@tomuench/vetprovieh-shared/lib';
 
-/**
- * Pager OperationGroup
- */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: `<div id="group" class="panel is-primary">
                     <p class="panel-heading">
@@ -12,7 +10,7 @@ import {ElementBinding} from '@tomuench/vetprovieh-shared/lib';
 
                         <button id="openButton" class="button is-primary is-hidden-tablet" type="button"
                         style="right: 0.8em;position: absolute;top: 1.2em;">
-                        <i class="fas fa-bars"></i>
+                        <i class="fas fa-bars" aria-hidden="true"></i>
                         </button>
                     </p>
                     <div id="fields" class="panel-block" style="display:block">
@@ -21,6 +19,9 @@ import {ElementBinding} from '@tomuench/vetprovieh-shared/lib';
                 </div>`,
   tag: 'vp-operation-group',
 })
+/**
+ * Pager OperationGroup
+ */
 export class VpOperationGroup extends ElementGroupBinding {
     private barnId = '';
 
@@ -35,7 +36,7 @@ export class VpOperationGroup extends ElementGroupBinding {
    * @protected
    */
     protected subFields(): Array<any> {
-      return (this.object.opFields as Array<any>).sort((a,b) => a.positon - b.position);
+      return (this.object.opFields as Array<any>).sort((a, b) => a.positon - b.position);
     }
 
 

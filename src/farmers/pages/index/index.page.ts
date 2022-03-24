@@ -3,7 +3,7 @@ import {FarmersRepository} from '../../repository/farmers_repository';
 import {Farmer} from '../../models';
 import {BasicIndexPage} from '../../../shared';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-farmers',

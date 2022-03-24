@@ -1,6 +1,7 @@
-import { VetproviehElement, ViewHelper, WebComponent } from '@tomuench/vetprovieh-shared/lib';
-import { BarnsRepository } from '../../../barns/repository';
+import {VetproviehElement, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {BarnsRepository} from '../../../barns/repository';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: `
         <bulma-fab-button href="\${this.href}" icon="fa-info" size="small"></bulma-fab-button>
@@ -29,7 +30,7 @@ export class OpenObjectivesButton extends VetproviehElement {
     return `${this._autoLoad}`;
   }
   public set autoload(v: string) {
-    this._autoLoad = v === "true";
+    this._autoLoad = v === 'true';
   }
 
 
@@ -56,11 +57,11 @@ export class OpenObjectivesButton extends VetproviehElement {
 
   private tryToLoadData() {
     if (this.autoload) {
-      let rep = new BarnsRepository();
+      const rep = new BarnsRepository();
       rep.find(this.barnid).then((barn) => {
         this.amount = barn.currentMeasure;
         this.setVisibility();
-      }).catch((ex) => console.log(ex))
+      }).catch((ex) => console.log(ex));
     } else {
       this.setVisibility();
     }

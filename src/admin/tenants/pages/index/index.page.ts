@@ -3,7 +3,7 @@ import {BasicIndexPage} from '../../../../shared';
 import {Tenant} from '../../models';
 import {TenantRepository} from '../../repository';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-tenants',

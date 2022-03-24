@@ -5,10 +5,14 @@ import {BasicIndexPage} from '../../../../../shared';
 import * as bulmaToast from 'bulma-toast';
 import {Animal} from '../../../../../barns';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-careplans',
 })
+/**
+ * Index of Careplans
+ */
 export class CarePlanIndexPage extends BasicIndexPage<Careplan> {
     private animals = Animal.all();
 

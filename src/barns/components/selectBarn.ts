@@ -4,10 +4,7 @@ import {Barn} from '../models';
 import {WebComponent, VetproviehElement, GeoHelper} from '@tomuench/vetprovieh-shared/lib';
 import {BarnsRepository} from '../repository';
 
-
-/**
- * Barn Selection
- */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `<style>
                 :host {

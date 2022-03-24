@@ -1,9 +1,7 @@
-import {WebComponent, VetproviehElement, Indexable, VetproviehBinding} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {FieldGenerator} from '../helpers';
-import {CareplanField} from '../models/careplanField';
-import {FieldOptions} from '../models/field_options';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `
 
@@ -13,6 +11,9 @@ import {FieldOptions} from '../models/field_options';
     `,
   tag: 'select-field-type',
 })
+/**
+ * Select a FieldType
+ */
 export class SelectFieldType extends VetproviehElement {
     private _fieldType: string | undefined;
 

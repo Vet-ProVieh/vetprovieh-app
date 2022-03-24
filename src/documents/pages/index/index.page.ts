@@ -4,7 +4,7 @@ import {BasicIndexPage} from '../../../shared/components/pages';
 import {Document} from '../../models';
 import {DocumentRepository} from '../../repository';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-documents',
@@ -27,10 +27,10 @@ export class DocumentsIndexPage extends BasicIndexPage<Document> {
         this.barnShower.attributeChangedCallback('barnid', '', VetproviehNavParams.getUrlParameter('barnId'));
       }, 300);
 
-      this.getVetproviehList().addEventListener("selected",(event) => {
-        let e = event as CustomEvent;
+      this.getVetproviehList().addEventListener('selected', (event) => {
+        const e = event as CustomEvent;
         (this.repository as DocumentRepository).downloadAndOpen(e.detail.id);
-      })
+      });
 
       this.createLink.href += `?barnId=${this.barnId}`;
     }

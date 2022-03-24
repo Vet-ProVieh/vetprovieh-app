@@ -1,11 +1,19 @@
 import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {VetproviehMedia} from './vetprovieh-media';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   tag: 'vetprovieh-audio',
   template: VetproviehMedia.template,
 })
+/**
+ * Vetprovieh-Audio-Input
+ * InputModal to record audio-data
+ */
 export class VetproviehAudio extends VetproviehMedia {
+  /**
+   * Default-Konstruktor
+   */
   constructor() {
     super();
     this.type = 'audio';
@@ -17,7 +25,10 @@ export class VetproviehAudio extends VetproviehMedia {
      */
   protected get content(): string {
     if (this.thumbnail) {
-      return `<audio controls> <source src="${this.thumbnail}" type="audio/webm"></source> </audio>`;
+      return `<audio controls> 
+                <source src="${this.thumbnail}" type="audio/webm">
+                </source>
+              </audio>`;
     } else {
       return super.content;
     }

@@ -1,19 +1,19 @@
 import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
-import {Map, View, Feature} from 'ol';
-import TileLayer from 'ol/layer/Tile';
-import OSM from 'ol/source/OSM';
-import {GpsCoordinates} from '../../models';
+import {Feature, Map, View} from 'ol';
 import {Coordinate} from 'ol/coordinate';
-import {transform} from 'ol/proj.js';
+import Circle from 'ol/geom/Circle';
 import Layer from 'ol/layer/Layer';
-import Point from 'ol/geom/Point';
+import TileLayer from 'ol/layer/Tile';
 import VectorLayer from 'ol/layer/Vector';
+import {transform} from 'ol/proj.js';
+import OSM from 'ol/source/OSM';
 import VectorSource from 'ol/source/Vector';
-import Style from 'ol/style/Style';
 import Fill from 'ol/style/Fill';
 import Stroke from 'ol/style/Stroke';
-import Circle from 'ol/geom/Circle';
+import Style from 'ol/style/Style';
+import {GpsCoordinates} from '../../models';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: `
         <link rel="stylesheet" href="/assets/css/ol.css">

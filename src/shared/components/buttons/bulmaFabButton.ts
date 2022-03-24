@@ -1,6 +1,7 @@
 
 import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `
                 <style>
@@ -21,7 +22,7 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                     .button.is-floating.is-small{top:20px;right:20px;width:25px;height:45px;font-size:1.2rem;border-radius:50px}
                 </style>
                <a href="\${this.href}" type="button" class="button is-floating is-warning is-\${this.size}">
-                    <i class="fas \${this.icon}"></i>
+                    <i class="fas \${this.icon}" aria-hidden="true"></i>
                </a>`,
   tag: 'bulma-fab-button',
 })

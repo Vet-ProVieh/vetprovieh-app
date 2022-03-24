@@ -3,6 +3,7 @@ import {FieldMarker} from './fieldMarker';
 import {ResponseInterpreter} from './responseInterpreter';
 import {SpeechWrapper} from './speechWraper';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
         VetproviehElement.template + `
@@ -10,7 +11,7 @@ import {SpeechWrapper} from './speechWraper';
         <div class="panel-block">
             <button id="speechButton"
             class="button is-primary is-link is-fullwidth" type="button">
-                <i class="fas fa-microphone-alt"></i> Sprachassistent
+                <i class="fas fa-microphone-alt" aria-hidden="true"></i> Sprachassistent
             </button>
         </div>
     </article>
@@ -67,7 +68,8 @@ export class SpeechAssistant extends VetproviehElement {
           }
         });
       }
-      let grammar = `#JSGF V1.0;grammar command;<fieldname> = ${fieldNames.join(' | ')};`;
+      let grammar = `#JSGF V1.0;grammar command;`;
+      grammar += `<fieldname> = ${fieldNames.join(' | ')};`;
       grammar += `public <command> = <fieldname>: * weiter;`;
       this.speechWrapper.addGrammar(grammar);
     }

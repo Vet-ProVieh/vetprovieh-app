@@ -13,7 +13,7 @@ export class Measure extends BasicModel {
     public measuresDate = '';
     public objectives: Objective[] = [];
     public therapyFrequency = '';
-    public focusOfDiseases: string = "";
-    public isProactive: boolean = false;
-    public closed: boolean = false;
+    public focusOfDiseases = '';
+    public isProactive = false;
+    public closed = false;
 }

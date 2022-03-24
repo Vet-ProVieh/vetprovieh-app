@@ -1,21 +1,20 @@
-import { MeasuresRepository } from "./measures_repository";
-import { Measure } from "../models";
+import {MeasuresRepository} from './measures_repository';
+import {Measure} from '../models';
 
 
 export class MeasureProactiveRepository extends MeasuresRepository {
-
-    private filter: string = "";
+    private filter = '';
 
     constructor(filter: string) {
-        super();
-        this.filter = filter;
+      super();
+      this.filter = filter;
     }
 
-      /**
+    /**
      * Getting All
-     * @returns Promise<T[]>
+     * @return Promise<T[]>
      */
-       all(): Promise<Measure[]> {
-        return this.proActive(this.filter);
+    all(): Promise<Measure[]> {
+      return this.proActive(this.filter);
     }
 }

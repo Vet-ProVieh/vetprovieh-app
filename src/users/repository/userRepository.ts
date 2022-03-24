@@ -11,7 +11,6 @@ export class UserRepository extends BaseRepository<User> {
      */
     constructor() {
       super(`/service/users`);
-
     }
 
     /**

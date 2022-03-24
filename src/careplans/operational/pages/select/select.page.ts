@@ -4,6 +4,7 @@ import {BasicSelectPage} from '../../../../shared';
 import {OperationPlan} from '../../models';
 import {MeasureOperationPlansRepository} from '../../repository';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
         VetproviehElement.template +
@@ -81,6 +82,9 @@ import {MeasureOperationPlansRepository} from '../../repository';
       `,
   tag: 'vp-opplan-select',
 })
+/**
+ * Select a OperationPlan as Page
+ */
 export class OperationPlanSelectPage extends BasicSelectPage {
     private repository: MeasureOperationPlansRepository;
 

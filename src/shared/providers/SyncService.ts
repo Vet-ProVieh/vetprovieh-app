@@ -1,7 +1,8 @@
 import {IRepository} from '@tomuench/vetprovieh-shared/lib';
 import {BaseModel} from '@tomuench/vetprovieh-shared/lib/orm/baseModel';
 import {BarnsRepository} from '../../barns/repository';
-import {OperationPlanBluerprintsRepository} from '../../careplans/operational/repository';
+import {OperationPlanBluerprintsRepository}
+  from '../../careplans/operational/repository';
 import {FarmersRepository} from '../../farmers';
 
 /**

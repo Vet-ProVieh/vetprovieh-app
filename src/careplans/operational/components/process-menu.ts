@@ -1,9 +1,7 @@
-import {VetproviehBasicRepeat, VetproviehElement, WebComponent, VetproviehRepeat, ViewHelper} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehBasicRepeat, VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
-/**
- * Process-Menu
- * is used to display the right menu inside some process.
- */
+
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `
   <aside class="menu">
@@ -12,6 +10,10 @@ import {VetproviehBasicRepeat, VetproviehElement, WebComponent, VetproviehRepeat
   </aside>`,
   tag: 'process-menu',
 })
+/**
+ * Process-Menu
+ * is used to display the right menu inside some process.
+ */
 export class ProcessMenu extends VetproviehBasicRepeat {
   constructor() {
     super(specialListTemplate());

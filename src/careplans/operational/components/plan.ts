@@ -1,19 +1,14 @@
-import { ViewHelper } from '@tomuench/vetprovieh-shared';
-import { VetproviehBasicDetail } from '@tomuench/vetprovieh-detail/lib/index';
-import { VpOperationGroup } from './group';
-import { WebComponent, VetproviehElement, VetproviehNavParams, ElementGroupBinding } from '@tomuench/vetprovieh-shared/lib';
-import { OperationGroup, OperationPlan } from '../models';
-import { ProcessMenu } from './process-menu';
-import { VetproviehSidemenu } from '../../../app/main';
-import { Barn, BarnListShow } from '../../../barns';
-import { SpeechAssistant } from '../../../shared';
-import { DynamicForm } from '../../../shared/components/forms/dynamicForm';
-import { OpenObjectivesButton } from '../../../measures';
+import {ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehSidemenu} from '../../../app/main';
+import {OpenObjectivesButton} from '../../../measures';
+import {SpeechAssistant} from '../../../shared';
+import {DynamicForm} from '../../../shared/components/forms/dynamicForm';
+import {OperationGroup, OperationPlan} from '../models';
+import {VpOperationGroup} from './group';
+import {ProcessMenu} from './process-menu';
 
-/**
- * Controller for Page
- * pages/operations/plans/create or edit
- */
+
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
     VetproviehElement.template +
@@ -43,6 +38,10 @@ import { OpenObjectivesButton } from '../../../measures';
     `,
   tag: 'vp-operation-plan',
 })
+/**
+ * Controller for Page
+ * pages/operations/plans/create or edit
+ */
 export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> {
   constructor() {
     super('opGroups');
@@ -81,7 +80,7 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
     console.log('Setting barnid');
 
     if (barnUrlId != null && barnUrlId != undefined) {
-      this.currentObject.barn = { id: parseInt(barnUrlId) };
+      this.currentObject.barn = {id: parseInt(barnUrlId)};
       this.setBarnId(this.currentObject.barn.id);
     } else if (this.currentObject.barn?.id > 0) {
       this.setBarnId(this.currentObject.barn.id);
@@ -96,7 +95,7 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
       barnShow.barnid = barnId;
     });
 
-    this.openObjectives.barnid = barnId
+    this.openObjectives.barnid = barnId;
   }
 
   /**
@@ -145,14 +144,13 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
    * @return {OpenObjectivesButton}
    */
   private get openObjectives(): OpenObjectivesButton {
-    return this.getByIdFromShadowRoot("openObjectives") as OpenObjectivesButton;
+    return this.getByIdFromShadowRoot('openObjectives') as OpenObjectivesButton;
   }
 
 
-
-
   protected afterSave() {
-    if (!window.location.pathname.includes("show"))
-      window.open(`/careplans/operational/show.html?id=${this.currentObject.id}`, "_self");
+    if (!window.location.pathname.includes('show')) {
+      window.open(`/careplans/operational/show.html?id=${this.currentObject.id}`, '_self');
+    }
   }
 }

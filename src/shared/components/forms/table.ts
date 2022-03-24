@@ -1,6 +1,7 @@
 import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
 import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `<style>
                 :host {
@@ -30,7 +31,7 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                 </div>
                 <!-- Listing Elements here -->
                 <div id="listElements" style="margin-top:20px;">
-                    
+
                 </div>
                 <!-- Pager for Paging through List-->
                 <vetprovieh-pager id="pager" page="1" maximum="7">

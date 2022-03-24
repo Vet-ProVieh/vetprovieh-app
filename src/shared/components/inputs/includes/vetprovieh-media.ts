@@ -14,10 +14,17 @@ export class VetproviehMedia extends VetproviehElement {
     private _repository: DocumentRepository = new DocumentRepository();
     private _value: string | undefined;
 
+    /**
+     * Default-Constructor
+     */
     constructor() {
       super(true, false);
     }
 
+    /**
+     * Returning a Template
+     * @return {String}
+     */
     public static get template() {
       return VetproviehElement.template + `
         <div>
@@ -30,7 +37,11 @@ export class VetproviehMedia extends VetproviehElement {
                 </div>
             </footer>
         </div>
-        <recording-\${this.type}-modal id="recordingModal" title="\${this.name}" active="false"></recording-\${this.type}-modal>
+        <recording-\${this.type}-modal 
+             id="recordingModal" 
+             title="\${this.name}" 
+             active="false">
+        </recording-\${this.type}-modal>
         `;
     }
 
@@ -133,6 +144,10 @@ export class VetproviehMedia extends VetproviehElement {
       return this._thumbnail;
     }
 
+    /**
+     * Setter thumbnail
+     * @param {string | undefined} v
+     */
     protected set thumbnail(v: string | undefined) {
       if (this._thumbnail !== v) {
         this._thumbnail = v;
@@ -161,7 +176,10 @@ export class VetproviehMedia extends VetproviehElement {
      * @return {string}
      */
     protected get openButton(): string {
-      return `<button id="openButton" class="button is-pulled-right">${this.buttonname} aufnehmen</button>`;
+      return `<button id="openButton" 
+                      class="button is-pulled-right">
+                      ${this.buttonname} aufnehmen
+              </button>`;
     }
 
     /**
@@ -193,7 +211,8 @@ export class VetproviehMedia extends VetproviehElement {
      * Binding OpenButton
      */
     private bindOpenButton() {
-      const button = this.getByIdFromShadowRoot('openButton') as HTMLButtonElement;
+      const button = this
+          .getByIdFromShadowRoot('openButton') as HTMLButtonElement;
       const clickFunction = () => {
         console.log('Activating Recording modal');
         this.recordingModal.active = true;
@@ -237,6 +256,6 @@ export class VetproviehMedia extends VetproviehElement {
      * @param {any} event
      */
     protected afterModalClose(event:any) {
-
+      console.log(event);
     }
 }

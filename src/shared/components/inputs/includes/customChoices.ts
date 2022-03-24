@@ -1,6 +1,7 @@
-import {WebComponent, VetproviehElement, VetproviehRepeat} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {BulmaField} from './bulmaField';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `
     <style>
@@ -20,12 +21,17 @@ import {BulmaField} from './bulmaField';
         `,
   tag: 'custom-choices',
 })
+/**
+ * CustomChoices-Component
+ */
 export class CustomChoices extends VetproviehElement {
     private _value: string[] = [];
     private _property: string | undefined;
     private _label = ''
 
-
+    /**
+   * Default-Constructor
+   */
     constructor() {
       super(true, true);
     }
@@ -96,7 +102,8 @@ export class CustomChoices extends VetproviehElement {
      * @return {HTMLParagraphElement}
      */
     private get noChoicesAvailable(): HTMLParagraphElement {
-      return this.getByIdFromShadowRoot('noChoicesAvailable') as HTMLParagraphElement;
+      return this
+          .getByIdFromShadowRoot('noChoicesAvailable') as HTMLParagraphElement;
     }
 
     /**
@@ -105,10 +112,10 @@ export class CustomChoices extends VetproviehElement {
     private hideOrShowNoChoices() {
       if (this.value?.length > 0) {
         if (!this.noChoicesAvailable.classList.contains('is-hidden')) {
-          this.noChoicesAvailable.classList.add('is-hidden');
+          ViewHelper.toggleVisibility(this.noChoicesAvailable, false);
         }
       } else {
-        this.noChoicesAvailable.classList.remove('is-hidden');
+        ViewHelper.toggleVisibility(this.noChoicesAvailable, true);
       }
     }
 
@@ -128,6 +135,9 @@ export class CustomChoices extends VetproviehElement {
       return this.value && Array.isArray(this.value);
     }
 
+    /**
+     * Render Component
+     */
     public render() {
       super.render();
       this.hideOrShowNoChoices();
@@ -164,6 +174,7 @@ export class CustomChoices extends VetproviehElement {
 
     /**
      * Create new Column
+     * @param {string} size
      * @return {HTMLDivElement}
      */
     private buildColumn(size = ''): HTMLDivElement {
@@ -189,6 +200,11 @@ export class CustomChoices extends VetproviehElement {
       return newInput;
     }
 
+    /**
+     * Render delete button
+     * @param {number} index
+     * @return {HTMLButtonElement}
+     */
     private renderDelete(index: number): HTMLButtonElement {
       const button = document.createElement('button');
       button.classList.add('button', 'is-danger');
@@ -197,6 +213,10 @@ export class CustomChoices extends VetproviehElement {
       return button;
     }
 
+    /**
+     * delete
+     * @param {number} index
+     */
     private delete(index: number) {
       const columns = this.getByIdFromShadowRoot(`ValueAt${index}`);
         columns?.remove();

@@ -1,19 +1,30 @@
-import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+import {VetproviehBasicList}
+  from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
 import {IRepository} from '@tomuench/vetprovieh-shared/lib';
 import {VetproviehList} from '../../../app/main';
 
+
+/**
+ * BasicIndexPage
+ * - used for different types of listing pages
+ */
 export class BasicIndexPage<T> extends HTMLElement {
     protected repository: IRepository<T>;
 
+    /**
+     * Default-Constructor
+     * @param {IRepository<T>} repository
+     */
     constructor(repository: IRepository<T>) {
       super();
       this.repository = repository;
     }
 
+    /**
+     * Connected-Callback
+     */
     connectedCallback() {
-      console.log("ConnectedCallback");
       const list: VetproviehList = this.getVetproviehList();
-      console.log(list);
       list.repository = this.repository;
     }
 
@@ -26,6 +37,10 @@ export class BasicIndexPage<T> extends HTMLElement {
       list.search(search);
     }
 
+    /**
+     * Search by Params
+     * @param {{string: string}} search
+     */
     protected searchByParams(search: { [Identifier: string]: string }) {
       const list: VetproviehList = this.getVetproviehList();
       list.urlSearchParams = search;
@@ -37,11 +52,10 @@ export class BasicIndexPage<T> extends HTMLElement {
      * @return {VetproviehList}
      */
     protected getVetproviehList(): VetproviehBasicList {
-      console.log(document.getElementsByTagName('vetprovieh-list')[0] != undefined);
-      if(document.getElementsByTagName('vetprovieh-list')[0] == undefined){
-        return document.getElementsByTagName('vetprovieh-table')[0] as VetproviehBasicList;
-      }else{
-        return document.getElementsByTagName('vetprovieh-list')[0] as VetproviehBasicList;
+      let list = document.querySelector('vetprovieh-list');
+      if ( list == undefined) {
+        list = document.querySelector('vetprovieh-table');
       }
+      return list as VetproviehBasicList;
     }
 }

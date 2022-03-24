@@ -4,6 +4,7 @@ import {Objective, KeyResult} from '../../models';
 import { } from '../../models/keyresult';
 import {KeyResultEditComponent} from './keyResultEdit';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   tag: 'objective-modal',
   template: VetproviehElement.template + `
@@ -47,13 +48,13 @@ import {KeyResultEditComponent} from './keyResultEdit';
                 <div class="columns is-mobile">
                     <div class="column">
                         <button class="button is-danger is-fullwidth" id="cancel">
-                            <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                            <span class="icon"><i class="fas fa-trash-alt" aria-hidden="true"></i></span>
                             <span>Abbrechen</span>
                         </button>
                     </div>
                     <div class="column">
                         <button class="button is-primary is-fullwidth" id="save">
-                            <span class="icon"><i class="fas fa-save"></i></span>
+                            <span class="icon"><i class="fas fa-save" aria-hidden="true"></i></span>
                             <span>Übernehmen</span>
                         </button>
                     </div>
@@ -68,7 +69,7 @@ export class ObjectiveModal extends SimpleModal {
     super();
   }
 
- 
+
     // @ts-ignore
     private _objective: Objective;
 

@@ -3,7 +3,7 @@ import {Drug} from '../../models';
 import {BasicIndexPage} from '../../../shared';
 import {DrugsRepository} from '../../repository';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-drugs',

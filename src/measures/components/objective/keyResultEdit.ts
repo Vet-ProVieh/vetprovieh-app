@@ -5,6 +5,7 @@ import {KeyResult} from '../../models';
 /**
  * Component to Edit KeyResult
  */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
     VetproviehElement.template +
@@ -16,7 +17,7 @@ import {KeyResult} from '../../models';
           <div class="column is-2">
             <div class="buttons">
               <button class="button is-danger" id="delete">
-                  <i class="fas fa-trash-alt"></i>
+                  <i class="fas fa-trash-alt" aria-hidden="true"></i>
               </button>
             </div>
           </div>

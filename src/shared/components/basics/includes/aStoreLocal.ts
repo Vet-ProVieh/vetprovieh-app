@@ -4,6 +4,7 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 /**
  * Extension for a Link Tag (a-element)
  */
+// eslint-disable-next-line new-cap
 @WebComponent({
   tag: 'store-local-link',
   template: VetproviehElement.template + `

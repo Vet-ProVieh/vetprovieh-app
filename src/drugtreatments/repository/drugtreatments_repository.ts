@@ -1,25 +1,25 @@
 import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
-import { Drugtreatment } from '../models';
+import {Drugtreatment} from '../models';
 
 export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
   constructor() {
     super('/service/drugtreatments');
   }
-  
+
   /**
   * Getting All
   * Filter for BarnID if set
   * @return Promise<T[]>
   */
   all(): Promise<Drugtreatment[]> {
-    if(this._barnId != '' && this._barnId != null){
+    if (this._barnId != '' && this._barnId != null) {
       return fetch(`${this.endpoint}/barn/${this.barnId}`).then((response) => {
         if (response.status === 404) {
           return [];
         }
         return response.json();
       });
-    }else{
+    } else {
       return fetch(`${this.endpoint}`).then((response) => {
         if (response.status === 404) {
           return [];

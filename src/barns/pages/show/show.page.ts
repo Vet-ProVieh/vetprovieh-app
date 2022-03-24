@@ -1,21 +1,17 @@
-import {BasicShowPage, GeoCoordButton, GeoMap, GpsCoordinates} from '../../../shared';
-import {FarmersRepository} from '../../../farmers';
-import {VetproviehSelect, VetproviehDetail} from '../../../app/main';
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {LoadedEvent} from '@tomuench/vetprovieh-detail/lib/loaded-event';
-import {Barn} from '../../models';
-import {GeoEvent} from '../../../shared/models/geo';
-import {OpenStreetMapNomatim} from '../../../shared/providers/geo/OpenStreetMapNomatim';
-import {IGeoProvider} from '../../../shared/providers/geo/IGeoProvider';
-import {textHeights} from 'ol/render/canvas';
-import {UserRepository} from '../../../users';
-import {User} from '../../../users/models';
+import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehSelect} from '../../../app/main';
+import {FarmersRepository} from '../../../farmers';
 import {OpenObjectivesButton} from '../../../measures';
+import {BasicShowPage, GeoCoordButton, GeoMap, GpsCoordinates} from '../../../shared';
+import {GeoEvent} from '../../../shared/models/geo';
+import {IGeoProvider} from '../../../shared/providers/geo/IGeoProvider';
+import {OpenStreetMapNomatim} from '../../../shared/providers/geo/OpenStreetMapNomatim';
+import {UserRepository} from '../../../users';
+import {Barn} from '../../models';
 
 
-/**
- * ShowPage
- */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-barn',

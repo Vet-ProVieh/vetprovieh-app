@@ -5,6 +5,7 @@ import {FieldWithLabel} from './fieldWithLabel';
 /**
  * Custom Field to Render
  */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: `
     <div class="control">

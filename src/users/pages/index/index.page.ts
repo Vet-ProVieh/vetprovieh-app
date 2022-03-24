@@ -3,7 +3,7 @@ import {BasicIndexPage} from '../../../shared';
 import {User} from '../../models';
 import {UserRepository} from '../../repository';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-users',

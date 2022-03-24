@@ -1,9 +1,9 @@
 import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import RecordRTC from 'recordrtc';
-import { RecordingModal } from './recording-modal';
+import {RecordingModal} from './recording-modal';
 import {RecordingRtcModal} from './recording-rtc-modal';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   tag: 'recording-audio-modal',
   template: VetproviehElement.template + `

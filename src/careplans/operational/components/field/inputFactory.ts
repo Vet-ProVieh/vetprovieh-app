@@ -282,10 +282,10 @@ export class InputFactory {
      * @return {string}
      */
   private static buildOptionTags(choices: string[]): string {
-    let blank = `<option value=""></option>`
+    const blank = `<option value=""></option>`;
     if (choices) {
       return blank + choices.map((choice) => `<option value="` + choice + `">` + choice + `</option>`)
-        .join('\r\n');
+          .join('\r\n');
     } else {
       return '';
     }

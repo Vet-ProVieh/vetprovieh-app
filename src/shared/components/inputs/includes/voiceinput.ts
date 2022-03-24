@@ -1,4 +1,4 @@
-import { SpeechWrapper } from '../../speechAssistant';
+import {SpeechWrapper} from '../../speechAssistant';
 
 /** *
  * Exentsion for Input to Achieve Voice-Input
@@ -7,8 +7,11 @@ export class VoiceInput extends HTMLTextAreaElement {
   private _speechWrapper = new SpeechWrapper(true);
   private _started = false;
   private _overwrite = false;
-  private _startValue = "";
+  private _startValue = '';
 
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super();
   }
@@ -36,9 +39,10 @@ export class VoiceInput extends HTMLTextAreaElement {
   }
 
   /**
+   * @private
    * Adding Voice-Input Button to Text-Field
    */
-  _addVoiceInputButton() {
+  private _addVoiceInputButton() {
     const button: HTMLButtonElement = this.buildButton();
     const buttonOverwrite: HTMLButtonElement = this.buildButton(['is-danger']);
 
@@ -87,7 +91,7 @@ export class VoiceInput extends HTMLTextAreaElement {
 
   /**
    * Buttons anfügen
-   * @param {HTMLButtonElement[]} buttons 
+   * @param {HTMLButtonElement[]} buttons
    */
   private appendButtons(buttons: HTMLButtonElement[]) {
     const div = document.createElement('div');
@@ -105,22 +109,21 @@ export class VoiceInput extends HTMLTextAreaElement {
 
   /**
    * Building Button to Click
-   * @param {string[]} additionalClasses 
-   * @returns {HTMLButtonElement}
+   * @param {string[]} additionalClasses
+   * @return {HTMLButtonElement}
    */
   private buildButton(additionalClasses: string[] = []): HTMLButtonElement {
     const button: HTMLButtonElement = document.createElement('button');
-    button.innerHTML = `<i class="fas fa-microphone-alt" />`;
+    button.innerHTML = `<i class="fas fa-microphone-alt" aria-hidden="true" />`;
     button.type = 'button';
-    
+
     button.classList.add('button');
 
     additionalClasses.forEach((clazz) => {
       button.classList.add(clazz);
-    })
+    });
     return button;
   }
-
 }
 
 

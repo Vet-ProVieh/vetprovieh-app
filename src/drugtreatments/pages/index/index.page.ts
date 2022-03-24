@@ -1,9 +1,9 @@
-import { VetproviehNavParams, WebComponent } from '@tomuench/vetprovieh-shared/lib';
-import { BasicIndexPage } from '../../../shared';
-import { Drugtreatment } from '../../models';
-import { DrugtreatmentRepository } from '../../repository';
+import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {BasicIndexPage} from '../../../shared';
+import {Drugtreatment} from '../../models';
+import {DrugtreatmentRepository} from '../../repository';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-drugtreatments',
@@ -11,7 +11,7 @@ import { DrugtreatmentRepository } from '../../repository';
 export class DrugstreatmentsIndexPage extends BasicIndexPage<Drugtreatment> {
   private barnId: string;
 
-  //Setting repository and barnid from urlparameter (if exist)
+  // Setting repository and barnid from urlparameter (if exist)
   constructor() {
     const rep = new DrugtreatmentRepository();
     const barnId = VetproviehNavParams.getUrlParameter('barnId');
@@ -19,5 +19,4 @@ export class DrugstreatmentsIndexPage extends BasicIndexPage<Drugtreatment> {
     super(rep);
     this.barnId = barnId;
   }
-
 }

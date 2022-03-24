@@ -1,7 +1,7 @@
-import { VetproviehBasicDetail } from '@tomuench/vetprovieh-detail/lib/index';
-import { ViewHelper } from '@tomuench/vetprovieh-shared';
-import { ElementGroupBinding, VetproviehNavParams } from '@tomuench/vetprovieh-shared/lib';
-import { BasicModel, RenderType } from '../../models';
+import {VetproviehBasicDetail} from '@tomuench/vetprovieh-detail/lib/index';
+import {ViewHelper} from '@tomuench/vetprovieh-shared';
+import {ElementGroupBinding, VetproviehNavParams} from '@tomuench/vetprovieh-shared/lib';
+import {BasicModel, RenderType} from '../../models';
 
 
 /**

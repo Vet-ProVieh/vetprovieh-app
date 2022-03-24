@@ -9,6 +9,7 @@ import {ObjectiveItemComponent} from './objectiveItem';
  * Controller for Page
  * pages/operations/plans/create or edit
  */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
     VetproviehElement.template +
@@ -35,7 +36,7 @@ import {ObjectiveItemComponent} from './objectiveItem';
                         class="button is-info is-light is-fullwidth \${this.cssHidden(this.isHidden)}"
                         type="button">
                         <span class="icon is-small">
-                            <i class="fas fa-edit"></i>
+                            <i class="fas fa-edit" aria-hidden="true"></i>
                         </span>
                         <span>Maßnahme erstellen</span>
                 </button>

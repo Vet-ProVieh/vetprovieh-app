@@ -3,6 +3,7 @@ import {PageWithReadOnly} from '../../components';
 import {CareplanGroup} from '../../models/careplanGroup';
 import {CareplanFieldRepository} from '../../repository';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'careplan-group-page',

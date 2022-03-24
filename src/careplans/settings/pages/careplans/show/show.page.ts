@@ -1,13 +1,17 @@
-import {WebComponent, VetproviehTable} from '@tomuench/vetprovieh-shared/lib';
-import {Careplan} from '../../../models';
 import {LoadedEvent} from '@tomuench/vetprovieh-detail/lib/loaded-event';
-import {CareplanGroupRepository} from '../../../repository';
+import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {PageWithReadOnly} from '../../../components';
+import {Careplan} from '../../../models';
+import {CareplanGroupRepository} from '../../../repository';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'careplan-page',
 })
+/**
+ * CarePlans Show Page
+ */
 export class CarePlanShowPage extends PageWithReadOnly {
   /**
    * Lifecycle

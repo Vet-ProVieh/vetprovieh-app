@@ -1,6 +1,6 @@
-import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
 import {VetproviehElement, VetproviehTable, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `<style>
                 :host {
@@ -33,8 +33,8 @@ import {VetproviehElement, VetproviehTable, WebComponent} from '@tomuench/vetpro
                 </vetprovieh-pager>`,
   tag: 'drugtreatment-table',
 })
-/* 
-* Component for displaying Drugtreatmens as table 
+/*
+* Component for displaying Drugtreatmens as table
 */
 export class DrugtreatmentTable extends VetproviehTable {
     private _header: HTMLElement;

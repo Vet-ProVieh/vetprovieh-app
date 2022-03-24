@@ -2,9 +2,8 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {Barn} from '../models';
 import {BarnsRepository} from '../repository';
 
-/**
- * Show Barn for BarnId
- */
+
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: `
         <p style="font-size:0.9em">
@@ -15,7 +14,7 @@ import {BarnsRepository} from '../repository';
   tag: 'barn-list-show',
 })
 /**
- * Showing Barns
+ * Showing Barns as a List
  */
 export class BarnListShow extends VetproviehElement {
     private repository: BarnsRepository = new BarnsRepository();
@@ -31,12 +30,12 @@ export class BarnListShow extends VetproviehElement {
     }
 
     public get barnContact() : string {
-      let contactPerson = this.barn?.farmer.contactPerson;
+      const contactPerson = this.barn?.farmer.contactPerson;
 
-      if(contactPerson?.firstName && contactPerson?.lastName) {
+      if (contactPerson?.firstName && contactPerson?.lastName) {
         return ` (${contactPerson.firstName} ${contactPerson.lastName})`;
       } else {
-        return "";
+        return '';
       }
     }
 

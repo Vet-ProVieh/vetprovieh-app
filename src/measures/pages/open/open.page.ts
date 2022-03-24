@@ -1,9 +1,10 @@
 import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
-import {ActionPlan, Measure} from '../../models';
-import {MeasuresRepository} from '../../repository/measures_repository';
 import {BasicIndexPage} from '../../../shared';
 import {MeasuresList} from '../../components';
+import {Measure} from '../../models';
+import {MeasuresRepository} from '../../repository/measures_repository';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-open-measures',

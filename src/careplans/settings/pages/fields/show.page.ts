@@ -1,13 +1,17 @@
-import {WebComponent, Indexable, VetproviehNavParams, ViewHelper} from '@tomuench/vetprovieh-shared/lib';
+import {Indexable, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {PageWithReadOnly, SelectFieldType} from '../../components';
 import {CareplanField} from '../../models/careplanField';
-import {TextArea, ComboBox, Video, ImageField, List, SpeechField} from '../../models/fields';
+import {ComboBox, ImageField, List, SpeechField, TextArea, Video} from '../../models/fields';
 import {TextFields} from '../../models/fields/textFields';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'careplan-field-page',
 })
+/**
+ * Careplan Fields show Page
+ */
 export class CarePlanFieldShowPage extends PageWithReadOnly {
   /**
     * Lifecycle

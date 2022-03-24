@@ -2,6 +2,7 @@ import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basi
 import {VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {ObjectivesRepository} from '../../repository';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `<style>
                 :host {

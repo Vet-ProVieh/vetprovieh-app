@@ -1,19 +1,20 @@
-import { ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent } from '@tomuench/vetprovieh-shared/lib';
-import { Barn } from '../../barns';
-import { RenderType } from '../../shared';
-import { DynamicForm } from '../../shared/components/forms/dynamicForm';
-import { ReplaceFactory, TakeoverFactory } from '../factories';
-import { Measure, MeasureField, MeasureGroup } from '../models';
-import { InitializeMeasurePage } from '../pages';
-import { MeasuresRepository } from '../repository';
-import { MeasureGroupComponent } from './measureGroup';
-import { MeasurePdfButton } from './measurePdfButton';
-import { ObjectivesComponent } from './objective';
+import {ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {Barn} from '../../barns';
+import {RenderType} from '../../shared';
+import {DynamicForm} from '../../shared/components/forms/dynamicForm';
+import {ReplaceFactory, TakeoverFactory} from '../factories';
+import {Measure, MeasureGroup} from '../models';
+import {InitializeMeasurePage} from '../pages';
+import {MeasuresRepository} from '../repository';
+import {MeasureGroupComponent} from './measureGroup';
+import {MeasurePdfButton} from './measurePdfButton';
+import {ObjectivesComponent} from './objective';
 
 /**
  * Controller for Page
  * pages/operations/plans/create or edit
  */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
     VetproviehElement.template +
@@ -94,7 +95,6 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   }
 
 
-
   /**
    * Building a GroupComponent
    * must be implemented in Subclass
@@ -120,7 +120,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
     this.setParamsToComponent(params);
 
-    const pdfButton = this.shadowRoot?.querySelector("measure-pdf-button") as MeasurePdfButton
+    const pdfButton = this.shadowRoot?.querySelector('measure-pdf-button') as MeasurePdfButton;
     pdfButton.objectid = data.id;
 
     if (this.isNew()) {
@@ -160,8 +160,8 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
         });
 
         // Activate the current Process-Step
-        let step = VetproviehNavParams.getUrlParameter("process");
-        let state = VetproviehNavParams.getUrlParameter("state");
+        const step = VetproviehNavParams.getUrlParameter('process');
+        const state = VetproviehNavParams.getUrlParameter('state');
         if (a.dataset.id === step && a.dataset.state == state) {
           a.click();
         }
@@ -170,8 +170,9 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   }
 
   protected afterSave() {
-    if (!window.location.pathname.includes("show"))
-      window.open(`/measures/show.html?id=${this.currentObject.id}&process=objectives&state=execution`, "_self");
+    if (!window.location.pathname.includes('show')) {
+      window.open(`/measures/show.html?id=${this.currentObject.id}&process=objectives&state=execution`, '_self');
+    }
   }
 
   /**
@@ -253,7 +254,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   private setParamsToComponent(params: any) {
     if (params != null && params != undefined) {
       if (params.barnId != null && params.barnId != undefined) {
-        this.currentObject.barn = { id: parseInt(params.barnId) } as Barn;
+        this.currentObject.barn = {id: parseInt(params.barnId)} as Barn;
       }
       if (params.measuresDate != null && params.measuresDate != undefined) {
         this.currentObject.measuresDate = params.measuresDate;

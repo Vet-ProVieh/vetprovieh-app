@@ -1,8 +1,8 @@
 
-import { BaseRepository } from '@tomuench/vetprovieh-shared/lib';
-import { Document } from '../models/';
-import { v4 as uuidv4 } from 'uuid';
-import { resolvePlugin } from '@babel/core';
+import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
+import {Document} from '../models/';
+import {v4 as uuidv4} from 'uuid';
+import {resolvePlugin} from '@babel/core';
 
 export class DocumentRepository extends BaseRepository<Document> {
   constructor() {
@@ -27,21 +27,21 @@ export class DocumentRepository extends BaseRepository<Document> {
       fetch(url).then((result) => {
         result.blob().then((blob) => {
           resolve(URL.createObjectURL(blob));
-        }).catch((error) => reject(error))
-      }).catch((error) => reject(error))
+        }).catch((error) => reject(error));
+      }).catch((error) => reject(error));
     });
   }
 
   /**
    * Downloading a file and open it
-   * @param {string} id 
+   * @param {string} id
    */
   public downloadAndOpen(id: string) {
     this.download(`${this.endpoint}/${id}`).then((result) => {
-      if(result){
-        window.open(result, "_blank");
+      if (result) {
+        window.open(result, '_blank');
       }
-    })
+    });
   }
 
   /**
@@ -73,7 +73,7 @@ export class DocumentRepository extends BaseRepository<Document> {
           location = location?.substr(location.lastIndexOf('/') + 1);
           resolve(`/service/upload/uploadFile/${location}`);
         })
-          .catch((e) => reject(false));
+            .catch((e) => reject(false));
       }
     });
   }

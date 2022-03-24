@@ -1,10 +1,15 @@
 import {SpeechWrapper} from './speechWraper';
 
 /**
- * Interpret Response of Recognition
+ * Interpret Response of the recognized Speech
  */
 export class ResponseInterpreter {
-    private markFieldEmitter: (fieldName: string, final:boolean) => any = (x) => false;
+    /**
+     * @return {boolean}
+     */
+    private markFieldEmitter: (fieldName: string,
+      final:boolean) => any = () => false;
+
     private speechWraper: SpeechWrapper;
 
     /**

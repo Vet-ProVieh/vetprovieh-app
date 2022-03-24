@@ -1,5 +1,5 @@
-import { BaseRepository } from '@tomuench/vetprovieh-shared/lib';
-import { Measure } from '../models';
+import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
+import {Measure} from '../models';
 
 export class MeasuresRepository extends BaseRepository<Measure> {
   constructor() {
@@ -13,36 +13,36 @@ export class MeasuresRepository extends BaseRepository<Measure> {
    */
   openMeasuresForBarn(barnId: number): Promise<Measure[]> {
     return fetch(`/service/barns/${barnId}/currentMeasures/`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw Error(response.statusText);
-        }
-      }).catch((error) => {
-        return [];
-      });
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw Error(response.statusText);
+          }
+        }).catch((error) => {
+          return [];
+        });
   }
 
 
   /**
    * Loading Proactive Results for Diagnosis
-   * @param {string} focusOfDiseases 
+   * @param {string} focusOfDiseases
    * @return {Promise<Measure[]>}
    */
   proActive(focusOfDiseases: string): Promise<Measure[]> {
-    let param = btoa(focusOfDiseases);
+    const param = btoa(focusOfDiseases);
 
     return fetch(`/service/measures/proactive/${param}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw Error(response.statusText);
-        }
-      }).catch((error) => {
-        return [];
-      });
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw Error(response.statusText);
+          }
+        }).catch((error) => {
+          return [];
+        });
   }
 
   /**
@@ -60,24 +60,24 @@ export class MeasuresRepository extends BaseRepository<Measure> {
 
   /**
    * Download rendered PDF
-   * @param {stirng} id 
-   * @returns {Promise<string|null>}
+   * @param {stirng} id
+   * @return {Promise<string|null>}
    */
   downloadPdf(id: string): Promise<string | null> {
     return new Promise((resolve, reject) => {
       fetch(`${this.endpoint}/createReport/${id}/pdf`)
-        .then((response) => {
-          if (response.ok) {
-            response.blob().then(((blob) => {
-              resolve(URL.createObjectURL(blob));
-            }));
-          } else {
+          .then((response) => {
+            if (response.ok) {
+              response.blob().then(((blob) => {
+                resolve(URL.createObjectURL(blob));
+              }));
+            } else {
+              reject(null);
+            }
+          }).catch((error) => {
+            console.log(error);
             reject(null);
-          }
-        }).catch((error) => {
-          console.log(error);
-          reject(null);
-        })
+          });
     });
   }
 
@@ -88,14 +88,14 @@ export class MeasuresRepository extends BaseRepository<Measure> {
    */
   lastforBarn(barnId: number): Promise<Measure> {
     return fetch(`${this.endpoint}/barn/${barnId}/last`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw Error(response.statusText);
-        }
-      }).catch((error) => {
-        return undefined;
-      });
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            throw Error(response.statusText);
+          }
+        }).catch((error) => {
+          return undefined;
+        });
   }
 }

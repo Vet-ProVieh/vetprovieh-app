@@ -1,12 +1,12 @@
-import { VetproviehList } from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
-import { ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent } from '@tomuench/vetprovieh-shared/lib';
-import { PlanMeasureModel } from '../../../careplans/operational/models/planMeasure';
-import { MeasureOperationPlansRepository } from '../../../careplans/operational/repository';
-import { BasicSelectPage } from '../../../shared';
-import { Objective } from '../../models';
-import { KeyResult } from '../../models/keyresult';
-import { ObjectivesRepository } from '../../repository';
+import {VetproviehList} from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
+import {ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {PlanMeasureModel} from '../../../careplans/operational/models/planMeasure';
+import {MeasureOperationPlansRepository} from '../../../careplans/operational/repository';
+import {BasicSelectPage} from '../../../shared';
+import {Objective} from '../../models';
+import {KeyResult} from '../../models/keyresult';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
     VetproviehElement.template +
@@ -122,7 +122,7 @@ export class MeasuresSelectPage extends BasicSelectPage {
   constructor() {
     super();
     this.repository = new MeasureOperationPlansRepository(
-      VetproviehNavParams.getUrlParameter('barnId')
+        VetproviehNavParams.getUrlParameter('barnId')
     );
   }
 
@@ -209,8 +209,8 @@ export class MeasuresSelectPage extends BasicSelectPage {
    */
   public get selectedOperationPlans(): Array<Objective | undefined> {
     return this.operationPlans
-      .filter((operationPlan: PlanMeasureModel) => !!operationPlan.id && operationPlan.values && this.selectedOperationPlanIds.includes(+operationPlan.id))
-      .map((part: PlanMeasureModel) => this.opPlanToObjective(part));
+        .filter((operationPlan: PlanMeasureModel) => !!operationPlan.id && operationPlan.values && this.selectedOperationPlanIds.includes(+operationPlan.id))
+        .map((part: PlanMeasureModel) => this.opPlanToObjective(part));
   }
 
   /**
@@ -243,7 +243,7 @@ export class MeasuresSelectPage extends BasicSelectPage {
   */
   public get selectedCurrentObjectives(): Array<Objective> {
     return this.objectives
-      .filter((objective: Objective) => !!objective.id && this.selectedObjectivesIds.includes(+objective.id));
+        .filter((objective: Objective) => !!objective.id && this.selectedObjectivesIds.includes(+objective.id));
   }
 
   /**

@@ -2,6 +2,7 @@ import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {BasicShowPage} from '../../../shared';
 import {UserRepository} from '../../repository';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-user',

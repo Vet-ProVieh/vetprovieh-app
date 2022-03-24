@@ -1,17 +1,31 @@
 import {VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
+import {Global} from '../..';
 
+/**
+ * Simple-Modal
+ * ------------
+ * Shows a title and a body. user can accept or decline.
+ */
 export class SimpleModal extends VetproviehElement {
     private _active = false;
     private _title = '';
     protected _content: Blob | null = null;
 
 
-    protected isMobile = !!navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+    protected isMobile = Global.isMobile;
 
+    /**
+     * Get Title
+     * @return {string}
+     */
     public get title(): string {
       return this._title;
     }
 
+    /**
+     * Set Title
+     * @param {string} v
+     */
     public set title(v: string) {
       if (this._title !== v) {
         this._title = v;
@@ -62,11 +76,12 @@ export class SimpleModal extends VetproviehElement {
      * Adding Listener to Buttons
      */
     protected addButtonListeners() {
-      throw 'Please implement';
+      throw new Error('Please implement');
     }
 
     /**
      * Get Content from Modal
+     * @return {Blob|null}
      */
     public loadContent(): Blob | null {
       return this._content;
@@ -77,6 +92,7 @@ export class SimpleModal extends VetproviehElement {
      * @param {boolean} takeover
      */
     public close(takeover = false) {
+      console.debug(`Takeover = ${takeover}`);
       this.active = false;
 
       this.dispatchEvent(new CustomEvent('close'));
@@ -88,11 +104,12 @@ export class SimpleModal extends VetproviehElement {
      * Resets Modal
      */
     protected reset() {
-
+      console.debug('Simple-Modal reset');
     }
 
     /**
      * Get Save-Button
+     * @return {HTMLButtonElement}
      */
     protected get saveButton(): HTMLButtonElement {
       return this.shadowRoot?.getElementById('save') as HTMLButtonElement;

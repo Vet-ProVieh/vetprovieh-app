@@ -9,6 +9,7 @@ import {MeasureField} from '../models';
 /**
  * Pager OperationGroup
  */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template +
         `<div id="group" class="panel" style="margin-bottom: 20px">
@@ -213,6 +214,6 @@ export class MeasureGroupComponent extends ElementGroupBinding {
       });
 
       this.internalIsValid = this.calculateValidation();
-      if(this.internalIsValid) this.hideElement(this.panelBlock);
+      if (this.internalIsValid) this.hideElement(this.panelBlock);
     }
 }

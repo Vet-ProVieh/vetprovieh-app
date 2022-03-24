@@ -3,7 +3,7 @@ import {BarnsRepository} from '../../repository';
 import {Barn} from '../../models';
 import {BasicIndexPage} from '../../../shared';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-barns',

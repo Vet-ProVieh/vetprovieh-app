@@ -6,6 +6,7 @@ import {KeyResult, KeyResultMilestones} from '../../models/keyresult';
  * Controller for Page
  * pages/operations/plans/create or edit
  */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
     VetproviehElement.template +
@@ -16,7 +17,7 @@ import {KeyResult, KeyResultMilestones} from '../../models/keyresult';
         </div>
         <div class="column is-one-third" style="text-align: right;">
             <button id="check" \${this._editable ? '' : 'disabled'} type="button" class="button small">
-              <i class="fas fa-check"></i>
+              <i class="fas fa-check" aria-hidden="true"></i>
             </button>
         </div>
 

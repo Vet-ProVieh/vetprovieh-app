@@ -1,11 +1,18 @@
 import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {VetproviehMedia} from './vetprovieh-media';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   tag: 'vetprovieh-video',
   template: VetproviehMedia.template,
 })
+/**
+ * Vetprovieh-Video Component
+ */
 export class VetproviehVideo extends VetproviehMedia {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super();
     this.type = 'video';
@@ -17,7 +24,11 @@ export class VetproviehVideo extends VetproviehMedia {
      */
   protected get content(): string {
     if (this.thumbnail) {
-      return `<video controls> <source src="${this.thumbnail}" type="video/webm;codecs=vp8,opus"></source> </video>`;
+      return `<video controls> 
+                <source src="${this.thumbnail}" 
+                        type="video/webm;codecs=vp8,opus">
+                </source>
+              </video>`;
     } else {
       return super.content;
     }

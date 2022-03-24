@@ -3,7 +3,7 @@ import RecordRTC from 'recordrtc';
 import {RecordingModal} from './recording-modal';
 import {RecordingRtcModal} from './recording-rtc-modal';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   tag: 'recording-video-modal',
   template: VetproviehElement.template + `

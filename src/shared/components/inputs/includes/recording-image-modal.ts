@@ -1,7 +1,8 @@
-import { VetproviehElement, WebComponent, ViewHelper } from '@tomuench/vetprovieh-shared/lib';
-import { RecordingModal } from './recording-modal';
+import {VetproviehElement, WebComponent, ViewHelper}
+  from '@tomuench/vetprovieh-shared/lib';
+import {RecordingModal} from './recording-modal';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   tag: 'recording-image-modal',
   template: VetproviehElement.template + `
@@ -15,19 +16,28 @@ import { RecordingModal } from './recording-modal';
         <section class="modal-card-body">
             <video id="media" muted="true" width="600" height="400">
             </video>
-            ${RecordingModal.fileChooserTemplate("image/*")}
+            ${RecordingModal.fileChooserTemplate('image/*')}
         </section>
         <footer class="modal-card-foot">
             <div class="field is-grouped">
                 <p class="control">
-                    <button class="button is-primary" id="takeSnapshotButton">Bild aufnehmen</button>
-                    <button class="button is-primary" id="loadFileButton">Bild wählen</button>
+                    <button class="button is-primary" id="takeSnapshotButton">
+                      Bild aufnehmen
+                    </button>
+                    <button class="button is-primary" id="loadFileButton">
+                      Bild wählen
+                    </button>
                 </p>
             </div>
         </footer>
         </div>
     </div>`,
 })
+/**
+ * RecordingImageModal
+ * -------------------
+ * Record a image with RTC and save it
+ */
 export class RecordingImageModal extends RecordingModal {
   /**
      * Adding Listener to Buttons
@@ -61,7 +71,8 @@ export class RecordingImageModal extends RecordingModal {
    * @return {HTMLButtonElement}
    */
   private get snapshotButton(): HTMLButtonElement {
-    return this.getByIdFromShadowRoot("takeSnapshotButton") as HTMLButtonElement;
+    return this
+        .getByIdFromShadowRoot('takeSnapshotButton') as HTMLButtonElement;
   }
 
 

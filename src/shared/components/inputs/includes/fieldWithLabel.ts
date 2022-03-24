@@ -1,5 +1,9 @@
-import {VetproviehBinding, VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehBinding, VetproviehElement}
+  from '@tomuench/vetprovieh-shared/lib';
 
+/**
+ * Bulma Form-Field with Label
+ */
 export class FieldWithLabel extends VetproviehElement {
     private _label = '';
     private _placeholder = '';
@@ -8,12 +12,21 @@ export class FieldWithLabel extends VetproviehElement {
     private _property: string | undefined;
     private _required = false;
 
-    protected _binding: VetproviehBinding = new VetproviehBinding(this, 'value');
+    protected _binding: VetproviehBinding;
 
+    /**
+     * Default-Constructor
+     * @param {boolean} shadowed
+     * @param {boolean} render
+     */
     constructor(shadowed = false, render = false) {
       super(shadowed, render);
+      this._binding = new VetproviehBinding(this, 'value');
     }
 
+    /**
+     * Render
+     */
     public render() {
       this._binding.clear();
       super.render();
@@ -27,7 +40,9 @@ export class FieldWithLabel extends VetproviehElement {
       this._binding.addBinding(this.inputField, 'value', 'change');
     }
 
-
+    /**
+     * ConnectedCallback
+     */
     public connectedCallback() {
       this.render();
     }
@@ -130,7 +145,7 @@ export class FieldWithLabel extends VetproviehElement {
       }
     }
 
-    /*
+    /**
      * Get Type
      * @return {string}
      */

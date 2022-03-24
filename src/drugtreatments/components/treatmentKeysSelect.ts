@@ -1,11 +1,8 @@
 import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {FieldWithLabel} from '../../shared';
-import {TreatmentKeys} from '../models';
 import {DrugTreatmentKeysRepository} from '../repository';
 
-/**
- * Custom Field to Render
- */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: `
     <div class="control">

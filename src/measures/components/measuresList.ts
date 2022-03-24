@@ -1,6 +1,7 @@
 import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
 import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `<style>
                 :host {
@@ -51,31 +52,29 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
   tag: 'measures-list',
 })
 export class MeasuresList extends VetproviehBasicList {
-   
-   
-   private _sublink : string = "";
+   private _sublink = '';
 
    public get sublink() : string {
-       return this._sublink;
+     return this._sublink;
    }
    public set sublink(v : string) {
-       this._sublink = v;
+     this._sublink = v;
    }
-   
-  connectedCallback() {
-    super.connectedCallback();
-    this.addEventListener('selected', (event) => {
-      const target = event.target as HTMLElement;
-      const customEvent = (event as CustomEvent);
-      window.location.href = `show.html?id=${customEvent.detail.id}&${this.sublink}`;
-    });
-  }
+
+   connectedCallback() {
+     super.connectedCallback();
+     this.addEventListener('selected', (event) => {
+       const target = event.target as HTMLElement;
+       const customEvent = (event as CustomEvent);
+       window.location.href = `show.html?id=${customEvent.detail.id}&${this.sublink}`;
+     });
+   }
 
    /**
      * Getting observed Attributes
      * @return {string[]}
      */
-    static get observedAttributes() {
-        return ['pagesize', 'searchable', 'pageable', 'sublink'];
-    }
+   static get observedAttributes() {
+     return ['pagesize', 'searchable', 'pageable', 'sublink'];
+   }
 }

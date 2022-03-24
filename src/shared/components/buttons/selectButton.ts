@@ -1,12 +1,13 @@
 import {VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {BasicSelectPage} from '../pages';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
         VetproviehElement.template + `
         <a href="\${this.href}&returnUrl=\${this.currentAbsoluteUrl}" class="button is-link is-light is-fullwidth">
             <span class="icon is-small">
-                <i class="fas fa-search"></i>
+                <i class="fas fa-search" aria-hidden="true"></i>
             </span>
             <span>\${this.name}</span>
         </a>

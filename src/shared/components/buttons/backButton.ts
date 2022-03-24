@@ -1,8 +1,9 @@
 
-import { VetproviehElement, ViewHelper, WebComponent } from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
-    template: VetproviehElement.template + `
+  template: VetproviehElement.template + `
                 <style>
                   .button.is-floating{
                       position:fixed;
@@ -21,45 +22,42 @@ import { VetproviehElement, ViewHelper, WebComponent } from '@tomuench/vetprovie
                     .button.is-floating.is-small{top:20px;right:20px;width:25px;height:45px;font-size:1.2rem;border-radius:50px}
                 </style>
                <a id="button" type="button" class="button is-floating is-info">
-                    <i class="fas fa-arrow-alt-circle-left"></i>
+                    <i class="fas fa-arrow-alt-circle-left" aria-hidden="true"></i>
                </a>`,
-    tag: 'back-button',
+  tag: 'back-button',
 })
 export class BackButton extends VetproviehElement {
-
-    /**
+  /**
      * Rendering Element
      */
-    public render() {
-        super.render();
+  public render() {
+    super.render();
 
-        if (this.showBackButton) {
-            this.bindButton();
-        } else {
-            ViewHelper.toggleVisibility(this.button, false);
-        }
+    if (this.showBackButton) {
+      this.bindButton();
+    } else {
+      ViewHelper.toggleVisibility(this.button, false);
     }
+  }
 
-    /**
+  /**
      * Show Back button
      * @return {boolean}
      */
-    public get showBackButton(): boolean {
-        return window.history.length > 0 &&
-            window.location.pathname != "/" &&
-            window.location.pathname != "/index.html";
-    }
+  public get showBackButton(): boolean {
+    return window.history.length > 0 &&
+            window.location.pathname != '/' &&
+            window.location.pathname != '/index.html';
+  }
 
 
+  private bindButton() {
+    this.button.addEventListener('click', () => {
+      window.history.back();
+    });
+  }
 
-    private bindButton() {
-        this.button.addEventListener("click", () => {
-            window.history.back();
-        })
-    }
-
-    private get button(): HTMLButtonElement {
-        return this.getByIdFromShadowRoot("button") as HTMLButtonElement;
-    }
-
+  private get button(): HTMLButtonElement {
+    return this.getByIdFromShadowRoot('button') as HTMLButtonElement;
+  }
 }

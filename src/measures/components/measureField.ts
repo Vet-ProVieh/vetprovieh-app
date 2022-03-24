@@ -6,6 +6,7 @@ import {MeasureField} from '../models';
 /**
  * MeasureField Display-Component
  */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: undefined,
   tag: 'vp-measure-field',
@@ -53,7 +54,7 @@ export class MeasureFieldComponent extends ElementBinding {
       const shouldShow = this.compareLinkedPos(
             obj.link_position?.value, value,
             obj.link_position?.compare);
-      
+
       ViewHelper.toggleVisibility(this, shouldShow);
       ViewHelper.toggleRequirement(this, shouldShow);
       if (this.inputField) {

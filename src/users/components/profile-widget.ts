@@ -2,6 +2,7 @@ import {WebComponent, VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
 import {User} from '../models';
 import {UserRepository} from '../repository';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `
             <style>

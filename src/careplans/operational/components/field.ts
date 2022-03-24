@@ -1,17 +1,19 @@
-import { BaseRepository, ElementBinding, IRepository, WebComponent } from '@tomuench/vetprovieh-shared/lib';
-import { OperationField } from '..';
-import { VetproviehSelect } from '../../../app/main';
-import { Drug, DrugsRepository } from '../../../drugs';
-import { MeasureProactiveButton } from '../../../measures';
-import { InputFactory } from './field/inputFactory';
+import {BaseRepository, ElementBinding, IRepository, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {OperationField} from '..';
+import {VetproviehSelect} from '../../../app/main';
+import {Drug, DrugsRepository} from '../../../drugs';
+import {MeasureProactiveButton} from '../../../measures';
+import {InputFactory} from './field/inputFactory';
 
-/**
- * Pager OperationField
- */
+
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: undefined,
   tag: 'vp-operation-field',
 })
+/**
+ * Pager OperationField
+ */
 export class VpOperationField extends ElementBinding {
   private barnId = '';
   constructor(barnId: string) {
@@ -54,51 +56,51 @@ export class VpOperationField extends ElementBinding {
     }
 
     if (this.isDiagnosis(this.object)) {
-      let element = this.querySelector("[property='value']") as HTMLTextAreaElement;
+      const element = this.querySelector('[property=\'value\']') as HTMLTextAreaElement;
 
-      element.addEventListener("change", (event) => {
-        let diagnosisButton = this.querySelector("measure-proactive-button") as MeasureProactiveButton;
+      element.addEventListener('change', (event) => {
+        const diagnosisButton = this.querySelector('measure-proactive-button') as MeasureProactiveButton;
         diagnosisButton.diagnosis = element.value;
       });
       setTimeout(() => {
-        let diagnosisButton = this.querySelector("measure-proactive-button") as MeasureProactiveButton;
+        const diagnosisButton = this.querySelector('measure-proactive-button') as MeasureProactiveButton;
         diagnosisButton.diagnosis = element.value;
       }, 400);
     }
 
-    if(this.object.treatmentKeys == "MedikamentName"){
+    if (this.object.treatmentKeys == 'MedikamentName') {
       this.bindDrugField();
     }
   }
 
   private bindDrugField() {
-    let zulassungsField = this.parentElement?.querySelector("vp-operation-field[data-treatment-keys='Zulassungsnummer']") as VpOperationField;
-    let vetproviehSelect = zulassungsField?.querySelector("vetprovieh-select") as VetproviehSelect;
+    const zulassungsField = this.parentElement?.querySelector('vp-operation-field[data-treatment-keys=\'Zulassungsnummer\']') as VpOperationField;
+    const vetproviehSelect = zulassungsField?.querySelector('vetprovieh-select') as VetproviehSelect;
     if (vetproviehSelect) {
-      let nameFieldArea = this.querySelector("textarea");
-      if(nameFieldArea) nameFieldArea.disabled = true;
+      const nameFieldArea = this.querySelector('textarea');
+      if (nameFieldArea) nameFieldArea.disabled = true;
 
-      vetproviehSelect.addEventListener("change", () => {
-        let obj = vetproviehSelect.selectedObject as Drug;
+      vetproviehSelect.addEventListener('change', () => {
+        const obj = vetproviehSelect.selectedObject as Drug;
         this.object.value = obj.name;
-        if(nameFieldArea) nameFieldArea.value = obj.name;
-      })
+        if (nameFieldArea) nameFieldArea.value = obj.name;
+      });
     }
   }
 
   /**
    * Is current Object a Diagnosis?
-   * @param {OperationField} object 
-   * @returns {boolean}
+   * @param {OperationField} object
+   * @return {boolean}
    */
   private isDiagnosis(object: OperationField): boolean {
-    return object.treatmentKeys === "Diagnose";
+    return object.treatmentKeys === 'Diagnose';
   }
 
   /**
    * Render Proactive-Button for Template
    * @param {OperationField} object
-   * @returns {string} 
+   * @return {string}
    */
   private measureProactiveButton(object: OperationField): string {
     if (this.isDiagnosis(object)) {
@@ -110,7 +112,7 @@ export class VpOperationField extends ElementBinding {
                 </div>  
               </div>`;
     } else {
-      return "";
+      return '';
     }
   }
 

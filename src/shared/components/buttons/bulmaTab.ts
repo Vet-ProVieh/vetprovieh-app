@@ -1,6 +1,6 @@
 import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: `
         <li class="is-active">
@@ -65,7 +65,7 @@ export class BulmaTabElement {
     public displayName: string | undefined;
 }
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: `
         <div class="tabs is-toggle is-fullwidth is-large">

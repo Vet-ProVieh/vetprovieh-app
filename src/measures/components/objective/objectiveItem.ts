@@ -9,6 +9,7 @@ import {QuestionModal, StarsComponent} from '../../../shared';
  * Controller for Page
  * pages/operations/plans/create or edit
  */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
         VetproviehElement.template +
@@ -63,14 +64,14 @@ import {QuestionModal, StarsComponent} from '../../../shared';
                         <div class="column">
                             <button id="deleteButton" class="button is-danger is-light is-fullwidth
                                 \${this.cssHidden(this.editable != 'true')}">
-                                <i class="fas fa-trash-alt"></i>
+                                <i class="fas fa-trash-alt" aria-hidden="true"></i>
                                 <span> Entfernen</span>
                             </button>
                         </div>
                         <div class="column">
                             <button id="editButton" class="button is-info is-light is-fullwidth
                                 \${this.cssHidden(this.editable != 'true')}">
-                                <i class="fas fa-edit"></i>
+                                <i class="fas fa-edit" aria-hidden="true"></i>
                                 <span> Bearbeiten</span>
                             </button>
                         </div>

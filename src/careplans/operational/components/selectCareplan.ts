@@ -4,7 +4,7 @@ import {OperationPlanBluerprintsRepository} from '../repository';
 import {Careplan} from '../../settings';
 import {AStoreLocal} from '../../../shared';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `<style>
             :host {
@@ -38,6 +38,9 @@ import {AStoreLocal} from '../../../shared';
             </vetprovieh-pager>`,
   tag: 'select-careplan',
 })
+/**
+ * Select an existing careplan
+ */
 export class SelectCareplan extends VetproviehBasicList {
   constructor() {
     super();

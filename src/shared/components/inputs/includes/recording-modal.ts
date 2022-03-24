@@ -1,5 +1,11 @@
-import { VetproviehElement, ViewHelper } from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, ViewHelper} from '@tomuench/vetprovieh-shared/lib';
+import {Global} from '../..';
 
+/**
+ * Recording-Modal
+ * ---------------
+ * Record Audio or Video.
+ */
 export class RecordingModal extends VetproviehElement {
   private _active = false;
   private _title = '';
@@ -9,12 +15,20 @@ export class RecordingModal extends VetproviehElement {
 
   protected recordedContent: any | undefined;
 
-  protected isMobile = !!navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
+  protected isMobile = Global.isMobile;
 
+  /**
+   * Get Title
+   * @return {string}
+   */
   public get title(): string {
     return this._title;
   }
 
+  /**
+   * Set title
+   * @param {string} v
+   */
   public set title(v: string) {
     if (this._title !== v) {
       this._title = v;
@@ -66,11 +80,12 @@ export class RecordingModal extends VetproviehElement {
    * Adding Listener to Buttons
    */
   protected addButtonListeners() {
-    throw 'Please implement';
+    throw new Error('Please implement');
   }
 
   /**
    * Get Content from Modal
+   * @return {Blob|null}
    */
   public loadContent(): Blob | null {
     return this._content;
@@ -100,9 +115,12 @@ export class RecordingModal extends VetproviehElement {
    * Resets Modal
    */
   protected reset() {
-
+    console.log('Recording-Modal reset');
   }
 
+  /**
+   * Closing Media-Streams from client
+   */
   private closeStreams() {
     this.mediaElement.srcObject = null;
 
@@ -136,7 +154,7 @@ export class RecordingModal extends VetproviehElement {
       };
     }
     if (navigator.mediaDevices) {
-      navigator.getUserMedia = navigator.mediaDevices.getUserMedia;
+      (navigator as any).getUserMedia = navigator.mediaDevices.getUserMedia;
 
       navigator.mediaDevices.getUserMedia({
         video: videoOptions,
@@ -145,8 +163,12 @@ export class RecordingModal extends VetproviehElement {
     }
   }
 
+  /**
+   * After stream Started
+   * @param {MediaStream} stream
+   */
   protected afterStreamStarted(stream: MediaStream) {
-
+    console.debug('Recording-Modal: AfterStreamStarted');
   }
 
   /**
@@ -158,6 +180,10 @@ export class RecordingModal extends VetproviehElement {
   }
 
 
+  /**
+   * Get MediaElement
+   * @return {HTMLVideoElement}
+   */
   protected get mediaElement(): HTMLVideoElement {
     return this.getByIdFromShadowRoot('media') as HTMLVideoElement;
   }
@@ -184,7 +210,7 @@ export class RecordingModal extends VetproviehElement {
    * @return {HTMLButtonElement}
    */
   protected get fileInput(): HTMLInputElement {
-    return this.getByIdFromShadowRoot("fileInput") as HTMLInputElement;
+    return this.getByIdFromShadowRoot('fileInput') as HTMLInputElement;
   }
 
   /**
@@ -192,12 +218,18 @@ export class RecordingModal extends VetproviehElement {
    * @return {HTMLButtonElement}
    */
   protected get fileButton(): HTMLButtonElement {
-    return this.getByIdFromShadowRoot("loadFileButton") as HTMLButtonElement;
+    return this.getByIdFromShadowRoot('loadFileButton') as HTMLButtonElement;
   }
 
+  /**
+   * Bind FileChooser
+   */
   protected bindFileChooser() {
-    this.fileButton.addEventListener("click", (_) => {
-      this.fileInput.addEventListener("change", (event: any) => this.loadImage(event))
+    this.fileButton.addEventListener('click', () => {
+      this.fileInput.addEventListener(
+          'change',
+          (event: any) => this.loadImage(event)
+      );
       this.fileInput.click();
     });
   }
@@ -208,11 +240,14 @@ export class RecordingModal extends VetproviehElement {
    * @return {HTMLImageElement}
    */
   protected get fileShower(): HTMLImageElement {
-    return this.getByIdFromShadowRoot("fileShower") as HTMLImageElement;
+    return this.getByIdFromShadowRoot('fileShower') as HTMLImageElement;
   }
 
+  /**
+   * Loading a image
+   * @param {any} event
+   */
   private loadImage(event: any) {
-
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.recordedContent = event.target.result;
@@ -220,16 +255,15 @@ export class RecordingModal extends VetproviehElement {
       ViewHelper.toggleVisibility(this.fileShower, false);
       ViewHelper.toggleVisibility(this.fileShower, true);
       fetch(this.recordedContent)
-        .then((result) => result.blob())
-        .then((b) => {
-          this._content = b
-          this.close(true);
-        })
-        .catch((e) => console.error(e));
-    })
+          .then((result) => result.blob())
+          .then((b) => {
+            this._content = b;
+            this.close(true);
+          })
+          .catch((e) => console.error(e));
+    });
 
     reader.readAsDataURL(event.path[0].files[0]);
-
   }
 
 
@@ -242,8 +276,8 @@ export class RecordingModal extends VetproviehElement {
 
   /**
    * Getting FileChooser Template
-   * @param type 
-   * @returns {String} for example image/*
+   * @param {string} type
+   * @return {String} for example image/*
    */
   public static fileChooserTemplate(type: string): String {
     return `<img id="fileShower" class="is-hidden" />

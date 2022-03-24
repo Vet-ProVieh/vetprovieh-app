@@ -1,6 +1,7 @@
 import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
 import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `<style>
                 :host {
@@ -33,6 +34,9 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                 </vetprovieh-pager>`,
   tag: 'opplan-table',
 })
+/**
+ * Operation-Plan as a Table
+ */
 export class OperationPlanTable extends VetproviehBasicList {
     private _header: HTMLElement;
     constructor() {

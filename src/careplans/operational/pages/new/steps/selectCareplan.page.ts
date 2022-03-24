@@ -1,11 +1,14 @@
 import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
-import {BasicShowPage} from '../../../../../shared';
 import {BarnListShow} from '../../../../../barns';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'select-careplans-page',
 })
+/**
+ * Select a Careplan as a Page
+ */
 export class SelectCareplanPage extends HTMLElement {
   constructor() {
     super();

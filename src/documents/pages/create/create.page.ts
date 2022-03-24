@@ -5,6 +5,7 @@ import {BasicShowPage} from '../../../shared/components/pages/showPage';
 import {Document} from '../../models';
 import {DocumentRepository} from '../../repository';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   tag: 'document-create',
   template: ``,

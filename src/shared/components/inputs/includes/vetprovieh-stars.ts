@@ -4,6 +4,7 @@ import {WebComponent, VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
 const STAR_FULL = 'fas fa-star';
 const STAR_OPEN = 'far fa-star';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template:
         VetproviehElement.template +
@@ -67,7 +68,7 @@ export class StarsComponent extends VetproviehElement {
     render() {
       super.render();
       for (let i = 0; i < this._amount; i++) {
-        this.wrapper.innerHTML += `<i class="far fa-star"></i>`;
+        this.wrapper.innerHTML += `<i class="far fa-star" aria-hidden="true"></i>`;
       }
 
       this.renderCurrentState();

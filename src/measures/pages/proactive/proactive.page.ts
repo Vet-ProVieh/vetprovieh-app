@@ -1,16 +1,17 @@
-import { VetproviehNavParams, WebComponent } from '@tomuench/vetprovieh-shared/lib';
-import { MeasureProactiveRepository } from '../../repository';
-import { BasicIndexPage } from '../../../shared';
-import { MeasuresList } from '../../components';
-import { Measure } from '../../models';
+import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {MeasureProactiveRepository} from '../../repository';
+import {BasicIndexPage} from '../../../shared';
+import {MeasuresList} from '../../components';
+import {Measure} from '../../models';
 
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-proactive-measures',
 })
 export class MeasuresProactiveIndexPage extends BasicIndexPage<Measure> {
   constructor() {
-    let filter = atob(VetproviehNavParams.getUrlParameter("search"));
+    const filter = atob(VetproviehNavParams.getUrlParameter('search'));
     super(new MeasureProactiveRepository(filter));
   }
 

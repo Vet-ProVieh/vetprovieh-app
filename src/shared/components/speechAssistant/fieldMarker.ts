@@ -1,10 +1,20 @@
 import {VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
 
 
+/**
+ * Mark a Field in a Form
+ */
 export class FieldMarker {
+  /**
+   * Marking Field
+   * @param {string} name
+   * @param {boolean} final
+   * @return {any}
+   */
   public markField(name: string, final: boolean): any {
-    console.log(`Marking field: ${name}`);
-    const fields = (document.getElementById('detail') as VetproviehElement).shadowRoot?.querySelectorAll('textarea, input');
+    console.debug(`Marking field: ${name}`);
+    const fields = this.detailElement
+        .shadowRoot?.querySelectorAll('textarea, input');
 
     let f;
         fields?.forEach((field: any) => {
@@ -20,5 +30,13 @@ export class FieldMarker {
           }
         });
         return f;
+  }
+
+  /**
+   * Load DetailElement
+   * @return {VetproviehElement}
+   */
+  private get detailElement(): VetproviehElement {
+    return (document.getElementById('detail') as VetproviehElement);
   }
 }

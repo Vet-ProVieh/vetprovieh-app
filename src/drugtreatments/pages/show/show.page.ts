@@ -1,15 +1,15 @@
-import {BasicShowPage} from '../../../shared';
+import {VetproviehSelect} from '@tomuench/vetprovieh-select/lib/vetprovieh-select';
 import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
-import {Drugtreatment} from '../../models';
-import { BarnsRepository } from '../../../barns/repository';
-import { FarmersRepository } from '../../../farmers';
-import { VetproviehSelect } from '@tomuench/vetprovieh-select/lib/vetprovieh-select';
-import { Drug } from '../../../drugs';
-import { DrugtreatmentRepository } from '../../repository';
-import { DrugreportRepository } from '../../../drugreports';
 import * as bulmaToast from 'bulma-toast';
+import {BarnsRepository} from '../../../barns/repository';
+import {DrugreportRepository} from '../../../drugreports';
+import {Drug} from '../../../drugs';
+import {FarmersRepository} from '../../../farmers';
+import {BasicShowPage} from '../../../shared';
+import {Drugtreatment} from '../../models';
+import {DrugtreatmentRepository} from '../../repository';
 
-
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: '',
   tag: 'vetprovieh-drugtreatment',
@@ -18,7 +18,6 @@ import * as bulmaToast from 'bulma-toast';
  * Drugtreatment Show Page
  */
 export class DrugtreatmentShowPage extends BasicShowPage {
-
     private rep: DrugtreatmentRepository;
     private drugReportRep: DrugreportRepository;
     private barnId: string;
@@ -58,29 +57,29 @@ export class DrugtreatmentShowPage extends BasicShowPage {
     }
 
     private get isReportedField(): HTMLElement {
-      return this.detailElement?.getByIdFromShadowRoot("is-reported") as HTMLElement;
+      return this.detailElement?.getByIdFromShadowRoot('is-reported') as HTMLElement;
     }
 
     private get reportButton(): HTMLButtonElement {
-      return this.detailElement?.getByIdFromShadowRoot("report") as HTMLButtonElement;
+      return this.detailElement?.getByIdFromShadowRoot('report') as HTMLButtonElement;
     }
 
     /**
-     * Check if drugtreatment is already reported 
+     * Check if drugtreatment is already reported
      *  if not add event listener to report button
      */
-    private checkIfReported(){
-      if(this.drugtreatment.isReported){
-        this.isReportedField.textContent = "ja";
+    private checkIfReported() {
+      if (this.drugtreatment.isReported) {
+        this.isReportedField.textContent = 'ja';
         this.reportButton.disabled = true;
-        this.reportButton.addEventListener("click", ()=>{});
-      }else{
-        this.reportButton.addEventListener("click", ()=>{
-          this.drugReportRep.report(this.barnId).then((msg) => { 
-            bulmaToast.toast({ message: 'Melden erfolgreich!', type: 'is-success' })
+        this.reportButton.addEventListener('click', ()=>{});
+      } else {
+        this.reportButton.addEventListener('click', ()=>{
+          this.drugReportRep.report(this.barnId).then((msg) => {
+            bulmaToast.toast({message: 'Melden erfolgreich!', type: 'is-success'});
             this.reportButton.disabled = true;
-          }).catch((msg) => { 
-            bulmaToast.toast({ message: 'Melden fehlgeschlagen', type: 'is-danger' })
+          }).catch((msg) => {
+            bulmaToast.toast({message: 'Melden fehlgeschlagen', type: 'is-danger'});
           });
         });
       }
@@ -89,7 +88,7 @@ export class DrugtreatmentShowPage extends BasicShowPage {
     /**
      * Binding
      */
-     private bindFarmerSelectField() {
+    private bindFarmerSelectField() {
       const selectField: VetproviehSelect = this.detailElement.getByIdFromShadowRoot('farmer') as VetproviehSelect;
       if (selectField) {
         selectField.repository = new FarmersRepository();
@@ -99,11 +98,10 @@ export class DrugtreatmentShowPage extends BasicShowPage {
     /**
      * Binding
      */
-     private bindBarnSelectField() {
+    private bindBarnSelectField() {
       const selectField: VetproviehSelect = this.detailElement.getByIdFromShadowRoot('barn') as VetproviehSelect;
       if (selectField) {
         selectField.repository = new BarnsRepository();
       }
     }
-
 }
