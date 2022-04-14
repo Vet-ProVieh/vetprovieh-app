@@ -1,5 +1,6 @@
 
-import {VetproviehElement, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, ViewHelper, WebComponent}
+  from '@tomuench/vetprovieh-shared/lib';
 
 // eslint-disable-next-line new-cap
 @WebComponent({
@@ -17,15 +18,34 @@ import {VetproviehElement, ViewHelper, WebComponent} from '@tomuench/vetprovieh-
                       box-shadow:0 .0625em .125em rgba(10,10,10,.05);
                       z-index:1000
                     }
-                    .button.is-floating.is-large{width:90px;height:90px;font-size:2.6rem}
-                    .button.is-floating.is-medium{width:75px;height:75px;font-size:2.2rem}
-                    .button.is-floating.is-small{top:20px;right:20px;width:25px;height:45px;font-size:1.2rem;border-radius:50px}
+                    .button.is-floating.is-large{
+                      width:90px;
+                      height:90px;
+                      font-size:2.6rem
+                    }
+                    .button.is-floating.is-medium{
+                      width:75px;
+                      height:75px;
+                      font-size:2.2rem
+                    }
+                    .button.is-floating.is-small{
+                      top:20px;
+                      right:20px;
+                      width:25px;
+                      height:45px;
+                      font-size:1.2rem;
+                      border-radius:50px
+                    }
                 </style>
                <a id="button" type="button" class="button is-floating is-info">
-                    <i class="fas fa-arrow-alt-circle-left" aria-hidden="true"></i>
+                    <i class="fas fa-arrow-alt-circle-left"
+                       aria-hidden="true"></i>
                </a>`,
   tag: 'back-button',
 })
+/**
+ * Button to go back
+ */
 export class BackButton extends VetproviehElement {
   /**
      * Rendering Element
@@ -50,13 +70,19 @@ export class BackButton extends VetproviehElement {
             window.location.pathname != '/index.html';
   }
 
-
+  /**
+ * Add EventListener to Button
+ */
   private bindButton() {
     this.button.addEventListener('click', () => {
       window.history.back();
     });
   }
 
+  /**
+   * Get Button
+   * @return {HTMLButtonElement}
+   */
   private get button(): HTMLButtonElement {
     return this.getByIdFromShadowRoot('button') as HTMLButtonElement;
   }

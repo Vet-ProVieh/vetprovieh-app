@@ -11,7 +11,9 @@ import {SpeechWrapper} from './speechWraper';
         <div class="panel-block">
             <button id="speechButton"
             class="button is-primary is-link is-fullwidth" type="button">
-                <i class="fas fa-microphone-alt" aria-hidden="true"></i> Sprachassistent
+                <i class="fas fa-microphone-alt"
+                   aria-hidden="true"></i>
+                   Sprachassistent
             </button>
         </div>
     </article>
