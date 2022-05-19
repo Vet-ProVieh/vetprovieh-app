@@ -1,4 +1,7 @@
-import {VetproviehElement, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehElement,
+  ViewHelper,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {BulmaField} from './bulmaField';
 
 // eslint-disable-next-line new-cap
@@ -12,7 +15,9 @@ import {BulmaField} from './bulmaField';
     <div class="control">
         <div class="label">\${this.property}</div>
         <div id="choices">
-            <p id="noChoicesAvailable">Noch keine Auswahlmöglichkeiten eingefügt</p>
+            <p id="noChoicesAvailable">
+              Noch keine Auswahlmöglichkeiten eingefügt
+            </p>
         </div>
         <button id="addElement" class="button" type="button">
             Element hinzufügen

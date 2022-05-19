@@ -1,4 +1,6 @@
-import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+import {
+  VetproviehBasicList,
+} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
 import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
 // eslint-disable-next-line new-cap
@@ -38,8 +40,15 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                 </vetprovieh-pager>`,
   tag: 'vetprovieh-table',
 })
+/**
+ * Vetprovieh-Table Component
+ */
 export class VetproviehTable extends VetproviehBasicList {
     private _header: HTMLElement;
+
+    /**
+     * Default-Constructor
+     */
     constructor() {
       super();
       this._header = this.querySelector('#header') as HTMLElement;
@@ -50,11 +59,16 @@ export class VetproviehTable extends VetproviehBasicList {
      */
     connectedCallback() {
       super.connectedCallback();
-      if (this._header) this.shadowRoot?.getElementById('header')?.appendChild(this._header);
+      if (this._header) {
+        this.shadowRoot?.getElementById('header')?.appendChild(this._header);
+      }
     }
 
-
-    protected elementSelected(event:any) {
+    /**
+ * Element Selected
+ * @param {any} event
+ */
+    public elementSelected(event:any) {
       const checkbox = event.target.querySelector('input[type=\'checkbox\']');
       if (checkbox) checkbox.checked = !checkbox.checked;
 

@@ -6,17 +6,24 @@ import {GeoEvent} from '../../models/geo';
   extends: 'button',
   tag: 'geo-button',
 })
+/**
+ * Load GeoCord Button
+ */
 export class GeoCoordButton extends HTMLButtonElement {
     // Type of loading
     private _loadType: GeoButtionType = GeoButtionType.device;
 
     /**
      * Observed Attributes
+     * @return {string[]}
      */
-    static get observedAttributes() {
+    static get observedAttributes() : string[] {
       return ['loadType'];
     }
 
+    /**
+     * Default-Constructor
+     */
     constructor() {
       super();
       this.addEventListener('click', () => {
@@ -56,10 +63,12 @@ export class GeoCoordButton extends HTMLButtonElement {
 
     /**
      * Emit Event to the outside
-     * @param position
+     * @param {Position} position
      */
     private _emitGeoCoordinates(position: Position) {
-      const event = new GeoEvent(position.coords.latitude, position.coords.longitude);
+      const event = new GeoEvent(
+          position.coords.latitude,
+          position.coords.longitude);
       console.log(event);
       this.dispatchEvent(event);
     }
@@ -80,8 +89,9 @@ export class GeoCoordButton extends HTMLButtonElement {
      */
     private loadCoordinatesFromDevice() {
       if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(this._emitGeoCoordinates.bind(this),
-            () => console.log('ERROR'));
+        navigator.geolocation
+            .getCurrentPosition(this._emitGeoCoordinates.bind(this),
+                () => console.log('ERROR'));
       }
     }
 }

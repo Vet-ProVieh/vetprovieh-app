@@ -31,7 +31,9 @@ export class RecordingRtcModal extends RecordingModal {
         <div class="field is-grouped">
         <p class="control">
             <button class="button is-primary" id="start">
-                <span class="icon"><i class="fas fa-play" aria-hidden="true"></i></span>
+                <span class="icon">
+                  <i class="fas fa-play" aria-hidden="true"></i>
+                </span>
                 <span>Aufnahme starten</span>
             </button>
         </p>
@@ -42,13 +44,17 @@ export class RecordingRtcModal extends RecordingModal {
         </p>
         <p class="control">
             <button class="button is-danger" id="stop" disabled>
-                <span class="icon"><i class="fas fa-stop" aria-hidden="true"></i></span>
+                <span class="icon">
+                  <i class="fas fa-stop" aria-hidden="true"></i>
+                </span>
                 <span>Aufnahme stoppen</span>
             </button>
         </p>
         <p class="control">
             <button class="button is-primary is-hidden" id="takeoverButton">
-            <span class="icon"><i class="fas fa-download" aria-hidden="true"></i></span>
+            <span class="icon">
+              <i class="fas fa-download" aria-hidden="true"></i>
+            </span>
                 <span>Aufnahme übernehmen</span>
             </button>
         </p>`;

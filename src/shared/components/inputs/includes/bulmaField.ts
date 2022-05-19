@@ -12,12 +12,16 @@ import {FieldWithLabel} from './fieldWithLabel';
         <div class="field">
             \${this.renderLabel()}
             <div class="control">
-                <input class="input" id="input" type="\${this.type}" \${this.renderPlaceholder()} \${this.renderRequired()}>
+                <input class="input" id="input" type="\${this.type}"
+                \${this.renderPlaceholder()} \${this.renderRequired()}>
             </div>
         </div>
     </div>`,
   tag: 'bulma-input',
 })
+/**
+ * Simple Bumla-Input-Field
+ */
 export class BulmaField extends FieldWithLabel {
 
 }

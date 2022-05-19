@@ -1,19 +1,28 @@
-import {VetproviehElement, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehElement,
+  ViewHelper,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
 
-/**
- * Update PWa
- */
+// eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template + `
 
         <article class="tile is-child box">
-            <button id="button" class="button is-danger">Neue Version verfügbar. Jetzt aktualisieren</button>
+            <button id="button" class="button is-danger">
+               Neue Version verfügbar. Jetzt aktualisieren
+            </button>
         </article>
     `,
   tag: 'update-pwa-button',
 })
+/**
+ * Update PWA-Button
+ */
 export class UpdatePwaButton extends VetproviehElement {
+  /**
+   * Clear Cache and Reload
+   */
     private clearCacheAndReload = () => {
       caches.keys().then((cacheNames) => {
         cacheNames.forEach((cacheName) => {
@@ -25,6 +34,9 @@ export class UpdatePwaButton extends VetproviehElement {
       }, 300);
     }
 
+    /**
+     * ConnectedCallback
+     */
     connectedCallback() {
       super.connectedCallback();
 
@@ -41,6 +53,10 @@ export class UpdatePwaButton extends VetproviehElement {
     }
 
 
+    /**
+     * Get Button-Element
+     * @return {HTMLButtonElement}
+     */
     private get button(): HTMLButtonElement {
       return this.getByIdFromShadowRoot('button') as HTMLButtonElement;
     }

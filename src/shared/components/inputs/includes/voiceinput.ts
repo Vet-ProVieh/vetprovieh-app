@@ -54,7 +54,7 @@ export class VoiceInput extends HTMLTextAreaElement {
       buttonOverwrite.classList.remove('is-primary');
     };
 
-    button.addEventListener('click', (e) => {
+    button.addEventListener('click', () => {
       _self._started = !_self._started;
       if (_self._started) {
         button.classList.add('is-primary');
@@ -69,7 +69,7 @@ export class VoiceInput extends HTMLTextAreaElement {
       }
     });
 
-    buttonOverwrite.addEventListener('click', (e) => {
+    buttonOverwrite.addEventListener('click', () => {
       _self._started = !_self._started;
       if (_self._started) {
         buttonOverwrite.classList.add('is-primary');

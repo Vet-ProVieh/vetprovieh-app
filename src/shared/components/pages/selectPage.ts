@@ -1,7 +1,7 @@
 
 import {VetproviehElement, VetproviehNavParams}
   from '@tomuench/vetprovieh-shared/lib';
-import {Global} from '..';
+import {Global} from '../../components/basics';
 
 /**
  * Basic-Select-Page

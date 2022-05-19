@@ -1,7 +1,14 @@
 import {VetproviehList} from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
-import {ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
-import {PlanMeasureModel} from '../../../careplans/operational/models/planMeasure';
-import {MeasureOperationPlansRepository} from '../../../careplans/operational/repository';
+import {
+  ObjectHelper,
+  VetproviehElement,
+  VetproviehNavParams,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  PlanMeasureModel} from '../../../careplans/operational/models/planMeasure';
+import {
+  MeasureOperationPlansRepository,
+} from '../../../careplans/operational/repository';
 import {BasicSelectPage} from '../../../shared';
 import {Objective} from '../../models';
 import {KeyResult} from '../../models/keyresult';
@@ -11,19 +18,22 @@ import {KeyResult} from '../../models/keyresult';
   template:
     VetproviehElement.template +
     `
-
         <div class="tabs is-toggle is-fullwidth">
             <ul>
                 <li >
                 <a data-id="measures">
-                    <span class="icon is-small"><i class="fas fa-scroll" aria-hidden="true"></i></span>
+                    <span class="icon is-small">
+                      <i class="fas fa-scroll" aria-hidden="true"></i>
+                    </span>
                     <span>Maßnahmen</span>
                     ( <span id="selectedObjectives">0</span> )
                 </a>
                 </li>
                 <li class="is-active">
                 <a data-id="opplans">
-                    <span class="icon is-small"><i class="fas fa-toolbox" aria-hidden="true"></i></span>
+                    <span class="icon is-small">
+                      <i class="fas fa-toolbox" aria-hidden="true"></i>
+                    </span>
                     <span class="is-hidden-touch">Maßnahmen aus Betreuung</span>
                     <span class="is-hidden-desktop">Betreuung</span>
                     ( <span id="selectedOpPlans">0</span> )
@@ -44,7 +54,8 @@ import {KeyResult} from '../../models/keyresult';
                                 {{name}}
                             </div>
                             <div class="column  is-2">
-                                <vp-stars editable="false" score="{{rating}}"></vp-stars>
+                                <vp-stars editable="false" score="{{rating}}">
+                                </vp-stars>
                             </div>
                         </div>
                         <hr style="margin:0px;" />
@@ -56,7 +67,9 @@ import {KeyResult} from '../../models/keyresult';
                     <div id="header">
                         <div class="columns is-mobile">
                             <div class="column is-1">
-                                <strong class="is-hidden-touch">Auswahl?</strong>
+                                <strong class="is-hidden-touch">
+                                  Auswahl?
+                                </strong>
                             </div>
                             <div class="column is-1-desktop is-3-mobile">
                                 <strong>Datum</strong>
@@ -116,9 +129,15 @@ import {KeyResult} from '../../models/keyresult';
       `,
   tag: 'vp-measures-select',
 })
+/**
+ * Select measures page
+ */
 export class MeasuresSelectPage extends BasicSelectPage {
   private repository: MeasureOperationPlansRepository;
 
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super();
     this.repository = new MeasureOperationPlansRepository(
@@ -134,6 +153,9 @@ export class MeasuresSelectPage extends BasicSelectPage {
     return 'selectPageMeasure.return';
   }
 
+  /**
+   * ConnectedCallback
+   */
   connectedCallback() {
     super.connectedCallback();
 
@@ -167,7 +189,10 @@ export class MeasuresSelectPage extends BasicSelectPage {
 
           element.parentElement?.classList.add('is-active');
 
-          [this.querySelector('#measures'), this.querySelector('#opplans')].forEach((content) => {
+          [
+            this.querySelector('#measures'),
+            this.querySelector('#opplans'),
+          ].forEach((content) => {
             if (content?.id == id) {
               content?.classList.remove('is-hidden');
             } else if (content) {
@@ -208,8 +233,12 @@ export class MeasuresSelectPage extends BasicSelectPage {
    * @return {Array<Objective | undefined>}
    */
   public get selectedOperationPlans(): Array<Objective | undefined> {
+    const filterFunc = (operationPlan: PlanMeasureModel) => {
+      return !!operationPlan.id && operationPlan.values &&
+      this.selectedOperationPlanIds.includes(+operationPlan.id);
+    };
     return this.operationPlans
-        .filter((operationPlan: PlanMeasureModel) => !!operationPlan.id && operationPlan.values && this.selectedOperationPlanIds.includes(+operationPlan.id))
+        .filter(filterFunc)
         .map((part: PlanMeasureModel) => this.opPlanToObjective(part));
   }
 
@@ -222,7 +251,8 @@ export class MeasuresSelectPage extends BasicSelectPage {
     if (part.values) {
       const tokenMeasure = part.values.EmpfohleneMaßnahme;
       const objective = new Objective();
-      objective.name = `Maßnahmen aus ${part.name} vom ${ObjectHelper.formatDate(part.updatedAt)}`;
+      const formatedDate = ObjectHelper.formatDate(part.updatedAt);
+      objective.name = `Maßnahmen aus ${part.name} vom ${formatedDate}`;
       objective.keyResults = [];
       if (tokenMeasure) {
         tokenMeasure.split('\r\n').forEach((measureLine: string) => {
@@ -243,7 +273,8 @@ export class MeasuresSelectPage extends BasicSelectPage {
   */
   public get selectedCurrentObjectives(): Array<Objective> {
     return this.objectives
-        .filter((objective: Objective) => !!objective.id && this.selectedObjectivesIds.includes(+objective.id));
+        .filter((objective: Objective) => !!objective.id &&
+        this.selectedObjectivesIds.includes(+objective.id));
   }
 
   /**
@@ -251,7 +282,8 @@ export class MeasuresSelectPage extends BasicSelectPage {
    * @return {Array<number>}
    */
   public get selectedOperationPlanIds(): Array<number> {
-    const inputCheckboxes = this.vetproviehList.shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
+    const inputCheckboxes = this.vetproviehList
+        .shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
     const returnValue: number[] = [];
     inputCheckboxes?.forEach((checkbox) => {
       if ((checkbox as any).checked) {
@@ -266,7 +298,8 @@ export class MeasuresSelectPage extends BasicSelectPage {
   * @return {Array<number>}
   */
   public get selectedObjectivesIds(): Array<number> {
-    const inputCheckboxes = this.objectivesList.shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
+    const inputCheckboxes = this.objectivesList
+        .shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
     const returnValue: number[] = [];
     inputCheckboxes?.forEach((checkbox) => {
       if ((checkbox as any).checked) {
@@ -279,18 +312,18 @@ export class MeasuresSelectPage extends BasicSelectPage {
 
   /**
    * Get All visible OperationPlans
-   * @return {Array<PlanMeasureModel>}
+   * @return {PlanMeasureModel[]}
    */
-  public get operationPlans(): Array<PlanMeasureModel> {
-    return this.vetproviehList?.objects || [];
+  public get operationPlans(): PlanMeasureModel[] {
+    return ( this.vetproviehList?.objects || []) as PlanMeasureModel[];
   }
 
   /**
   * Get All visible Objectives
-  * @return {Array<Objective>}
+  * @return {Objective[]}
   */
-  public get objectives(): Array<Objective> {
-    return this.objectivesList?.objects || [];
+  public get objectives(): Objective[] {
+    return (this.objectivesList?.objects || []) as Objective[];
   }
 
 
@@ -313,7 +346,9 @@ export class MeasuresSelectPage extends BasicSelectPage {
    * @param {HTMLSpanElement} span
    * @param {number} selectedAmount
    */
-  private updateSelectAmountBadge(span: HTMLSpanElement, selectedAmount: number) {
+  private updateSelectAmountBadge(
+      span: HTMLSpanElement,
+      selectedAmount: number) {
     if (span) {
       span.textContent = selectedAmount.toString();
     }

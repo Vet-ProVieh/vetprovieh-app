@@ -1,9 +1,7 @@
 import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {FieldWithLabel} from './fieldWithLabel';
 
-/**
- * Custom Field to Render
- */
+
 // eslint-disable-next-line new-cap
 @WebComponent({
   template: `
@@ -16,17 +14,30 @@ import {FieldWithLabel} from './fieldWithLabel';
     </div>`,
   tag: 'bulma-input-checkbox',
 })
+/**
+ * Bluma Checkbox-Field
+ */
 export class BulmaCheckbox extends FieldWithLabel {
+  /**
+   * Default_Constructor
+   */
   constructor() {
     super();
     this.type = 'checkbox';
   }
 
-
+  /**
+ * Getter checked
+ * @return {any}
+ */
   public get checked(): any {
     return this.value;
   }
 
+  /**
+ * Setter checked
+ * @param {any} val
+ */
   public set checked(val: any) {
     this.value = val;
   }

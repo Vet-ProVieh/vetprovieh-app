@@ -26,6 +26,9 @@ import {RecordingRtcModal} from './recording-rtc-modal';
         </div>
     </div>`,
 })
+/**
+ * Recording Audio Modal
+ */
 export class RecordingAudioModal extends RecordingRtcModal {
   /**
      * After Stream started, bind recorder

@@ -1,5 +1,5 @@
 import {VetproviehElement, ViewHelper} from '@tomuench/vetprovieh-shared/lib';
-import {Global} from '../..';
+import {Global} from '../../basics';
 
 /**
  * Recording-Modal
@@ -169,6 +169,7 @@ export class RecordingModal extends VetproviehElement {
    */
   protected afterStreamStarted(stream: MediaStream) {
     console.debug('Recording-Modal: AfterStreamStarted');
+    console.debug(stream);
   }
 
   /**

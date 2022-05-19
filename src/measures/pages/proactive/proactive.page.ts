@@ -1,4 +1,6 @@
-import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehNavParams,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {MeasureProactiveRepository} from '../../repository';
 import {BasicIndexPage} from '../../../shared';
 import {MeasuresList} from '../../components';
@@ -9,7 +11,13 @@ import {Measure} from '../../models';
   template: '',
   tag: 'vetprovieh-proactive-measures',
 })
+/**
+ * Measurements proactive
+ */
 export class MeasuresProactiveIndexPage extends BasicIndexPage<Measure> {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     const filter = atob(VetproviehNavParams.getUrlParameter('search'));
     super(new MeasureProactiveRepository(filter));

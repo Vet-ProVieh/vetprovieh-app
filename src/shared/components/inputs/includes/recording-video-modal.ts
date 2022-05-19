@@ -15,7 +15,8 @@ import {RecordingRtcModal} from './recording-rtc-modal';
             <button id="closeButton" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-            <video style="object-fit: fill;" muted="true" playsinline="true" id="media">
+            <video style="object-fit: fill;" muted="true"
+                   playsinline="true" id="media">
             </video>
             ${RecordingModal.fileChooserTemplate('video/*')}
         </section>
@@ -26,6 +27,9 @@ import {RecordingRtcModal} from './recording-rtc-modal';
         </div>
     </div>`,
 })
+/**
+ * Recording Video Modal
+ */
 export class RecordingVideoModal extends RecordingRtcModal {
   /**
      * After Stream started, bind recorder

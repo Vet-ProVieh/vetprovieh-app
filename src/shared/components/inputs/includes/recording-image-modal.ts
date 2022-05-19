@@ -93,6 +93,8 @@ export class RecordingImageModal extends RecordingModal {
           this._content = blob;
           resolve(true);
         });
+      } else {
+        reject(new Error('No Canvas initiated'));
       }
     });
   }

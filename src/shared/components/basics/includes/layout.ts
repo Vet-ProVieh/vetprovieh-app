@@ -24,32 +24,39 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
               <profile-widget></profile-widget>
               <ul class="menu-list">
                   <li><a href="/index.html">
-                  <i class="fas fa-compass" aria-hidden="true"></i> Dashboard</a></li>
+                    <i class="fas fa-compass" aria-hidden="true"></i>
+                    Dashboard
+                  </a></li>
               </ul>
               <p class="menu-label">
                   Behandlung
               </p>
               <ul class="menu-list">
                   <li><a href="/careplans/operational/1_selectBarn.html">
-                  <i class="fas fa-hand-holding-medical" aria-hidden="true"></i> Neue Behandlung</a></li>
+                  <i class="fas fa-hand-holding-medical" aria-hidden="true">
+                  </i> Neue Behandlung</a></li>
                   <li><a href="/careplans/operational">
-                  <i class="fas fa-hand-holding-medical" aria-hidden="true"></i> Behandlungen</a></li>
+                  <i class="fas fa-hand-holding-medical" aria-hidden="true">
+                  </i> Behandlungen</a></li>
               </ul>
               <p class="menu-label">
                 Maßnahmenplanung
               </p>
               <ul class="menu-list">
                   <li><a href="/measures">
-                  <i class="fas fa-warehouse" aria-hidden="true"></i> Maßnahmenpläne</a></li>
+                  <i class="fas fa-warehouse" aria-hidden="true">
+                  </i> Maßnahmenpläne</a></li>
               </ul>
               <p class="menu-label">
                 Antibiotikamonitoring
               </p>
               <ul class="menu-list">
                   <li><a href="/drugtreatments">
-                  <i class="fas fa-syringe" aria-hidden="true"></i> Antibiotika-Behandlung</a></li>
+                  <i class="fas fa-syringe" aria-hidden="true">
+                  </i> Antibiotika-Behandlung</a></li>
                   <!--<li><a href="/drugreports">
-                  <i class="fas fa-notes-medical" aria-hidden="true"></i> Antibiotika-Berichte</a></li>-->
+                  <i class="fas fa-notes-medical" aria-hidden="true">
+                  </i> Antibiotika-Berichte</a></li>-->
               </ul>
               <!--
               <p class="menu-label">
@@ -65,18 +72,22 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
               </p>
               <ul class="menu-list">
                   <li><a href="/farmers">
-                  <i class="fas fa-warehouse" aria-hidden="true"></i> Landwirte</a></li>
+                  <i class="fas fa-warehouse" aria-hidden="true">
+                  </i> Landwirte</a></li>
                   <li><a href="/barns">
-                  <i class="fas fa-paw" aria-hidden="true"></i> Ställe</a></li>
+                  <i class="fas fa-paw" aria-hidden="true">
+                  </i> Ställe</a></li>
                   <li><a href="/drugs">
-                  <i class="fas fa-tablets" aria-hidden="true"></i> Medikamente</a></li>
+                  <i class="fas fa-tablets" aria-hidden="true">
+                  </i> Medikamente</a></li>
               </ul>
               <div is="div-access" roles="admin">
                 <p class="menu-label" style="margin-top: 1em;">
                   Meine Praxis
                 </p>
                 <ul class="menu-list">
-                    <li><a href="/admin/tenants/credentials">Zugangsdaten (Portale)</a></li>
+                    <li><a href="/admin/tenants/credentials">
+                      Zugangsdaten (Portale)</a></li>
                     <li><a href="/users">Mitarbeiter</a></li>
                     <li><a href="/settings/careplans">Behandlungspläne</a></li>
                 </ul>
@@ -87,7 +98,8 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                   Administration
                 </p>
                 <ul class="menu-list">
-                  <li><a href="/admin/tenants/requests.html">Tenant-Requests</a></li>
+                  <li><a href="/admin/tenants/requests.html">
+                    Tenant-Requests</a></li>
                   <li><a href="/admin/tenants">Tenants</a></li>
                 </ul>
               </div>
@@ -112,11 +124,15 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
           </section>
             `,
 })
+/**
+ * Vetprovieh-Layout
+ */
 export class VetproviehLayout extends VetproviehElement {
   /**
        * Observed Attributes
+       * @return {string[]}
        */
-  static get observedAttributes() {
+  static get observedAttributes() : string[] {
     return ['title'];
   }
 
@@ -160,13 +176,14 @@ export class VetproviehLayout extends VetproviehElement {
     this._addListenerToButton();
   }
 
-  public render() {
-    super.render();
-    console.log('RENDERING');
-  }
+  /**
+   * skip render on callback?
+   * @return {boolean}
+   */
   protected get skipRenderOnCallback() : boolean {
     return true;
   }
+
   /**
    * CSS-Klasse an das Body-Element hängen, so dass Header fixed ist.
    */

@@ -1,4 +1,7 @@
-import {BaseRepository, ElementBinding, IRepository, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  BaseRepository,
+  ElementBinding,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {OperationField} from '..';
 import {VetproviehSelect} from '../../../app/main';
 import {Drug, DrugsRepository} from '../../../drugs';
@@ -16,12 +19,20 @@ import {InputFactory} from './field/inputFactory';
  */
 export class VpOperationField extends ElementBinding {
   private barnId = '';
+
+  /**
+   * Default-Constructor
+   * @param {string} barnId
+   */
   constructor(barnId: string) {
     super();
     this.barnId = barnId;
   }
 
 
+  /**
+   * AfterObjectSet
+   */
   protected afterObjectSet() {
     this.dataset.treatmentKeys = this.object.treatmentKeys;
   }
@@ -48,7 +59,7 @@ export class VpOperationField extends ElementBinding {
    */
   protected _afterRender() {
     if (this.object.choiceSrc) {
-      const vetproviehSelect = this.querySelector('vetprovieh-select') as VetproviehSelect;
+      const vetproviehSelect = this.vetproviehSelect;
       if (vetproviehSelect) {
         const repository = this.getChoiceRepository(this.object.choiceSrc);
         if (repository) vetproviehSelect.repository = repository;
@@ -56,15 +67,14 @@ export class VpOperationField extends ElementBinding {
     }
 
     if (this.isDiagnosis(this.object)) {
-      const element = this.querySelector('[property=\'value\']') as HTMLTextAreaElement;
+      const element = this
+          .querySelector('[property=\'value\']') as HTMLTextAreaElement;
 
       element.addEventListener('change', (event) => {
-        const diagnosisButton = this.querySelector('measure-proactive-button') as MeasureProactiveButton;
-        diagnosisButton.diagnosis = element.value;
+        this.proactiveButton.diagnosis = element.value;
       });
       setTimeout(() => {
-        const diagnosisButton = this.querySelector('measure-proactive-button') as MeasureProactiveButton;
-        diagnosisButton.diagnosis = element.value;
+        this.proactiveButton.diagnosis = element.value;
       }, 400);
     }
 
@@ -73,15 +83,40 @@ export class VpOperationField extends ElementBinding {
     }
   }
 
+  /**
+   * Getter VetproviehSelect
+   * @return {VetproviehSelect}
+   */
+  private get vetproviehSelect() : VetproviehSelect {
+    return this.querySelector('vetprovieh-select') as VetproviehSelect;
+  }
+
+  /**
+   * Get proActiveButton
+   * @return {MeasureProactiveButton}
+   */
+  private get proactiveButton() : MeasureProactiveButton {
+    return this
+        .querySelector('measure-proactive-button') as MeasureProactiveButton;
+  }
+
+  /**
+   * Binding drug Field
+   */
   private bindDrugField() {
-    const zulassungsField = this.parentElement?.querySelector('vp-operation-field[data-treatment-keys=\'Zulassungsnummer\']') as VpOperationField;
-    const vetproviehSelect = zulassungsField?.querySelector('vetprovieh-select') as VetproviehSelect;
+    const zulassungsField = this
+        .parentElement?.querySelector(SELECTOR) as VpOperationField;
+    let vetproviehSelect: VetproviehSelect|undefined = undefined;
+    if (zulassungsField) {
+      vetproviehSelect = zulassungsField
+          .querySelector('vetprovieh-select') as VetproviehSelect;
+    }
     if (vetproviehSelect) {
       const nameFieldArea = this.querySelector('textarea');
       if (nameFieldArea) nameFieldArea.disabled = true;
 
       vetproviehSelect.addEventListener('change', () => {
-        const obj = vetproviehSelect.selectedObject as Drug;
+        const obj = vetproviehSelect?.selectedObject as Drug;
         this.object.value = obj.name;
         if (nameFieldArea) nameFieldArea.value = obj.name;
       });
@@ -124,13 +159,14 @@ export class VpOperationField extends ElementBinding {
     if (this.object) {
       this.object.barnId = this.barnId;
       return super.template + `
-            <div class="field is-horizontal" style="margin-top:5px; margin-bottom:5px">
+            <div class="field is-horizontal" 
+                  style="margin-top:5px; margin-bottom:5px">
                 <div class="field-label">
                     <label class="label">{{name}}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
-                      ${InputFactory.generateField(this.object.fieldType, this.object)}
+            ${InputFactory.generateField(this.object.fieldType, this.object)}
                     </div>
                 </div>
             </div>
@@ -141,3 +177,6 @@ export class VpOperationField extends ElementBinding {
     }
   }
 }
+
+
+const SELECTOR = 'vp-operation-field[data-treatment-keys=\'Zulassungsnummer\']';

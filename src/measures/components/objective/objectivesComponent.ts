@@ -5,10 +5,6 @@ import {InitializeMeasurePage} from '../../pages';
 import {ObjectiveModal} from './objective-modal';
 import {ObjectiveItemComponent} from './objectiveItem';
 
-/**
- * Controller for Page
- * pages/operations/plans/create or edit
- */
 // eslint-disable-next-line new-cap
 @WebComponent({
   template:
@@ -58,6 +54,10 @@ import {ObjectiveItemComponent} from './objectiveItem';
     `,
   tag: 'vp-objectives',
 })
+/**
+ * Controller for Page
+ * pages/operations/plans/create or edit
+ */
 export class ObjectivesComponent extends VetproviehElement {
   static readonly possibleStates = ['execution', 'valuation'];
 
@@ -66,14 +66,32 @@ export class ObjectivesComponent extends VetproviehElement {
   private _state = 'execution';
 
   /**
+   * Default-Constructor
+   */
+  constructor() {
+    super(true, false);
+
+    const params = VetproviehNavParams
+        .get(InitializeMeasurePage.NAVIGATION_KEY);
+    this.internalBarnId = params.barnId;
+
+    this.render();
+  }
+
+  /**
    * State shows or hide different inputs.
    * Expected Values: execution, valuation
-   * @property {string} state
+   * @return {string}
    */
   public get state() : string {
     return this._state;
   }
 
+  /**
+   * State shows or hide different inputs.
+   * Expected Values: execution, valuation
+   * @param {string} v
+   */
   public set state(v : string) {
     if (ObjectivesComponent.possibleStates.includes(v) && this._state !== v) {
       this._state = v;
@@ -113,16 +131,6 @@ export class ObjectivesComponent extends VetproviehElement {
 
   public set objectives(val: Objective[]) {
     this._objectives = val;
-  }
-
-
-  constructor() {
-    super(true, false);
-
-    const params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
-    this.internalBarnId = params.barnId;
-
-    this.render();
   }
 
 

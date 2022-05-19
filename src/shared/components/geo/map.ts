@@ -28,6 +28,9 @@ import {GpsCoordinates} from '../../models';
     `,
   tag: 'geo-map',
 })
+/**
+ * Display a Map
+ */
 export class GeoMap extends VetproviehElement {
     private map: Map | undefined;
 
@@ -47,10 +50,9 @@ export class GeoMap extends VetproviehElement {
 
     private zoom = 16;
 
-    constructor() {
-      super();
-    }
-
+    /**
+ * Connected-Callback
+ */
     connectedCallback() {
       this.createMap();
       if (this.map) {
@@ -86,9 +88,8 @@ export class GeoMap extends VetproviehElement {
 
     /**
      * Koordinaten anzeigen
-     * @param geoCoords
      */
-    public addMarker(geoCoords: GpsCoordinates) {
+    public addMarker() {
       const source = this.vectorLayer.getSource();
       const feature = new Feature(new Circle(this.transformedCenter, 20));
       source.addFeature(feature);
@@ -102,6 +103,9 @@ export class GeoMap extends VetproviehElement {
       source.clear();
     }
 
+    /**
+     * Recenter the displayed map
+     */
     private recenterMap() {
       if (this.map) {
         this.map.getView().setCenter(this.transformedCenter);
@@ -137,7 +141,7 @@ export class GeoMap extends VetproviehElement {
 
     /**
      * Ansicht erstellen
-     * @return [View]
+     * @return {View}
      */
     private buildView(): View {
       return new View({
@@ -149,7 +153,7 @@ export class GeoMap extends VetproviehElement {
 
     /**
      * Building Layer for Map
-     * @return [Array<TileLayer>]
+     * @return {Layer[]}
      */
     private generateLayers(): Layer[] {
       return [

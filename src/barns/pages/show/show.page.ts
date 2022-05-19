@@ -134,7 +134,7 @@ export class BarnsShowPage extends BasicShowPage {
       const center = new GpsCoordinates(coords.latitude, coords.longitude);
       this.geoMap.gpsCenter = center;
       this.geoMap.clearMarkers();
-      this.geoMap.addMarker(center);
+      this.geoMap.addMarker();
     }
 
     /**
@@ -147,9 +147,11 @@ export class BarnsShowPage extends BasicShowPage {
 
     /**
      * Binding
+     * @param {any} loadEvent
      */
     private bindFarmerSelectField(loadEvent: any) {
-      const selectField: VetproviehSelect = this.detailElement.getByIdFromShadowRoot('farmer') as VetproviehSelect;
+      const selectField: VetproviehSelect = this.detailElement
+          .getByIdFromShadowRoot('farmer') as VetproviehSelect;
       if (selectField) {
         this._disableFarmerSelect(loadEvent as LoadedEvent, selectField);
         selectField.repository = new FarmersRepository();

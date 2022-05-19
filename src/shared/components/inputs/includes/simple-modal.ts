@@ -1,5 +1,5 @@
 import {VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
-import {Global} from '../..';
+import {Global} from '../../../components/basics';
 
 /**
  * Simple-Modal

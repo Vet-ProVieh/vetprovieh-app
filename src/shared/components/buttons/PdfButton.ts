@@ -1,65 +1,90 @@
 import {VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
 import * as bulmaToast from 'bulma-toast';
 
+/**
+ * Generate a PDF with a Button
+ */
 export class PdfButton extends VetproviehElement {
-    private repository : IPdfRepository;
+  private repository: IPdfRepository;
+  private _objectid = '';
+  /**
+   * Default_Constructor
+   * @param {IPdfRepository} repository
+   */
+  constructor(repository: IPdfRepository) {
+    super();
+    this.repository = repository;
+  }
 
-    constructor(repository: IPdfRepository) {
-      super();
-      this.repository = repository;
-    }
+  /**
+   * Getter objectid
+   * @return {string}
+   */
+  public get objectid(): string {
+    return this._objectid;
+  }
 
-    private _objectid = '';
-
-    public get objectid(): string {
-      return this._objectid;
-    }
-    public set objectid(v: string) {
+  /**
+   * Setter objectid
+   * @param {string} v
+   */
+  public set objectid(v: string) {
+    if (this._objectid !== v) {
       this._objectid = v;
     }
+  }
 
-    connectedCallback() {
-      this.pdfButton.addEventListener('click', () => {
-        if (this.objectid) {
-          this.repository.downloadPdf(this.objectid).then((value) => {
-            if (value) {
-              window.open(value, '_blank');
-            }
-          });
-        } else {
-          bulmaToast.toast({
-            message: 'Bitte speichern Sie zunächst die Behandlung',
-            type: 'is-warning',
-            dismissible: false,
-            position: 'bottom-center',
-            animate: {in: 'fadeIn', out: 'fadeOut'},
-          });
-        }
-      });
-    }
-
-
-    static get observedAttributes() {
-      return ['objectid'];
-    }
-
-    /**
-     * Load PDF-Button
-     * @return {HTMLButtonElement}
-     */
-    private get pdfButton(): HTMLButtonElement {
-      return this.shadowRoot?.getElementById('button') as HTMLButtonElement;
-    }
+  /**
+   * Connected-Callback
+   */
+  connectedCallback() {
+    this.pdfButton.addEventListener('click', () => {
+      if (this.objectid) {
+        this.repository.downloadPdf(this.objectid).then((value) => {
+          if (value) {
+            window.open(value, '_blank');
+          }
+        });
+      } else {
+        bulmaToast.toast({
+          message: 'Bitte speichern Sie zunächst die Behandlung',
+          type: 'is-warning',
+          dismissible: false,
+          position: 'bottom-center',
+          animate: {in: 'fadeIn', out: 'fadeOut'},
+        });
+      }
+    });
+  }
 
 
-    /**
-     * Load Template
-     * @return {string}
-     */
-    public static get template(): string {
-      return VetproviehElement.template + `
-        <button id="button" class="button is-light is-fullwidth" aria-label="Load PDF file">
-            <i class="fas fa-file-pdf" aria-hidden="true"></i> <span style="padding-left:5px"> PDF laden </span>
+  /**
+   * Get observed Attributes
+   * @return {string[]}
+   */
+  static get observedAttributes() : string[] {
+    return ['objectid'];
+  }
+
+  /**
+   * Load PDF-Button
+   * @return {HTMLButtonElement}
+   */
+  private get pdfButton(): HTMLButtonElement {
+    return this.shadowRoot?.getElementById('button') as HTMLButtonElement;
+  }
+
+
+  /**
+   * Load Template
+   * @return {string}
+   */
+  public static get template(): string {
+    return VetproviehElement.template + `
+        <button id="button" 
+            class="button is-light is-fullwidth" aria-label="Load PDF file">
+            <i class="fas fa-file-pdf" aria-hidden="true"></i> 
+            <span style="padding-left:5px"> PDF laden </span>
         </button>`;
-    }
+  }
 }

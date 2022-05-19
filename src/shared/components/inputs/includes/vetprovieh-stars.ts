@@ -68,7 +68,8 @@ export class StarsComponent extends VetproviehElement {
     render() {
       super.render();
       for (let i = 0; i < this._amount; i++) {
-        this.wrapper.innerHTML += `<i class="far fa-star" aria-hidden="true"></i>`;
+        this.wrapper
+            .innerHTML += `<i class="far fa-star" aria-hidden="true"></i>`;
       }
 
       this.renderCurrentState();

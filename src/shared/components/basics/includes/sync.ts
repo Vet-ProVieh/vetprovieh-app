@@ -6,9 +6,16 @@ import {SyncService} from '../../../providers/SyncService';
   tag: 'sync-module',
   template: ``,
 })
+
+/**
+ * Sync-Component
+ */
 export class SyncComponent extends HTMLElement {
     private syncService: SyncService = new SyncService();
 
+    /**
+     * Default-Constructor
+     */
     constructor() {
       super();
       this.syncService.loadData();
