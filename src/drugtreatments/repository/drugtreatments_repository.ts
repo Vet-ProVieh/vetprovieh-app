@@ -1,15 +1,22 @@
 import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
 import {Drugtreatment} from '../models';
 
+/**
+ * DrugTreatments Repository
+ */
 export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
+  private _barnId = '';
+
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super('/service/drugtreatments');
   }
 
   /**
   * Getting All
-  * Filter for BarnID if set
-  * @return Promise<T[]>
+  * @return {Promise<Drugtreatment[]>}
   */
   all(): Promise<Drugtreatment[]> {
     if (this._barnId != '' && this._barnId != null) {
@@ -29,12 +36,21 @@ export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
     }
   }
 
-  private _barnId = '';
+  /**
+ * Getter barnId
+ * @return {string}
+ */
   public get barnId() : string {
     return this._barnId;
   }
 
+  /**
+   * setter barnId
+   * @param {string} v
+   */
   public set barnId(v : string) {
-    this._barnId = v;
+    if (this._barnId !== v) {
+      this._barnId = v;
+    }
   }
 }

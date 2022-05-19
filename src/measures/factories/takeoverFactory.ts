@@ -1,6 +1,5 @@
-import {Measure, MeasureGroup, MeasureField} from '../models';
+import {Measure, MeasureField, MeasureGroup} from '../models';
 import {MeasuresRepository} from '../repository';
-import {throwStatement} from '@babel/types';
 
 /**
  * Takeover from one measure to another
@@ -9,6 +8,11 @@ export class TakeoverFactory {
     private currentObject: Measure;
     private repository: MeasuresRepository
 
+    /**
+     * Default-Constructor
+     * @param {Measure} measure
+     * @param {MeasuresRepository} repository
+     */
     constructor(measure: Measure, repository: MeasuresRepository) {
       this.currentObject = measure;
       this.repository = repository;
@@ -39,7 +43,6 @@ export class TakeoverFactory {
     public takeoverFromLatestMeasure(): Promise<Measure> {
       return new Promise((resolve, reject) => {
         if (this.canLoadMeasure) {
-          // @ts-ignore get checked by canLoadMeasure
           this.repository.lastforBarn(+this.currentObject.barn.id)
               .then((oldMeasure: Measure) => {
                 if (this.isValidMeasure(oldMeasure)) {
@@ -47,7 +50,7 @@ export class TakeoverFactory {
                 }
                 resolve(this.currentObject);
               }).catch((error) => {
-                resolve(this.currentObject);
+                reject(error);
               });
         } else {
           resolve(this.currentObject);

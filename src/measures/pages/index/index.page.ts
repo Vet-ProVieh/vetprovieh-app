@@ -9,11 +9,16 @@ import {MeasuresRepository} from '../../repository/measures_repository';
   template: '',
   tag: 'vetprovieh-measures',
 })
+/**
+ * Measures Index Page
+ */
 export class MeasuresIndexPage extends BasicIndexPage<Measure> {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super(new MeasuresRepository());
   }
-
 
   /**
      * Load VetproviehList Element from DOM

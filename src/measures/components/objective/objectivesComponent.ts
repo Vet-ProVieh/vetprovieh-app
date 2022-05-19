@@ -1,4 +1,8 @@
-import {VetproviehElement, VetproviehNavParams, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehElement,
+  VetproviehNavParams,
+  ViewHelper,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {SelectButton} from '../../../shared';
 import {Objective} from '../../models/objective';
 import {InitializeMeasurePage} from '../../pages';
@@ -29,7 +33,7 @@ import {ObjectiveItemComponent} from './objectiveItem';
               </div>
               <div class="column">
                 <button id="addMeasure"
-                        class="button is-info is-light is-fullwidth \${this.cssHidden(this.isHidden)}"
+ class="button is-info is-light is-fullwidth \${this.cssHidden(this.isHidden)}"
                         type="button">
                         <span class="icon is-small">
                             <i class="fas fa-edit" aria-hidden="true"></i>
@@ -125,16 +129,27 @@ export class ObjectivesComponent extends VetproviehElement {
     return this.state == 'valuation';
   }
 
+  /**
+   * Getter objectives
+   * @return {Objective[]}
+   */
   public get objectives(): Objective[] {
     return this._objectives;
   }
 
+  /**
+   * Setter Objectives
+   * @param {Objective[]} val
+   */
   public set objectives(val: Objective[]) {
     this._objectives = val;
   }
 
-
-  static get observedAttributes() {
+  /**
+ * Get observed Attributes
+ * @return {string[]}
+ */
+  static get observedAttributes() : string[] {
     return ['objectives', 'state'];
   }
 
@@ -146,23 +161,41 @@ export class ObjectivesComponent extends VetproviehElement {
     this.render();
   }
 
+  /**
+   * Render
+   */
   public render() {
     super.render();
     this.renderObjectives();
     this._afterRender();
   }
 
-  public renderNoMeasures(visible = true) {
-    return `<p class="${visible ? '' : 'is-hidden'}"><i>Keine Maßnahmen angegeben</i></p>`;
+  /**
+   * Render if no measures found
+   * @param {boolean} visible
+   * @return {string}
+   */
+  public renderNoMeasures(visible = true) : string {
+    return `<p class="${visible ? '' : 'is-hidden'}">
+              <i>Keine Maßnahmen angegeben</i>
+            </p>`;
   }
 
 
+  /**
+   * Setter internalBarnId
+   * @param {string} value
+   */
   private set internalBarnId(value: string) {
     if (this._barnId !== value) {
       this._barnId = value;
     }
   }
 
+  /**
+   * Getter barnId
+   * @return {string}
+   */
   public get barnId(): string {
     return this._barnId;
   }
@@ -172,7 +205,9 @@ export class ObjectivesComponent extends VetproviehElement {
    */
   renderObjectives() {
     const container = this.antibioticsContainer();
-    container.innerHTML = this.renderNoMeasures(!this.objectives || this.objectives.length > 0);
+    container.innerHTML = this.renderNoMeasures(
+        !this.objectives || this.objectives.length > 0
+    );
     // TODO welfare container
     this.objectives?.forEach((objective) => this.addObjectiveToDom(objective));
   }
@@ -201,14 +236,17 @@ export class ObjectivesComponent extends VetproviehElement {
     objectiveItem.editable = (!valuation).toString();
 
     objectiveItem.addEventListener('delete', (event) => {
-      const index = this.objectives.findIndex((x) => x == (event as CustomEvent).detail);
+      const index = this.objectives
+          .findIndex((x) => x == (event as CustomEvent).detail);
       if (index >= 0) {
         this.objectives.splice(index, 1);
         objectiveItem.remove();
 
         if (this.objectives.length == 0) {
           const container = this.selectContainer(objective);
-          if (container) container.querySelector('p')?.classList.remove('is-hidden');
+          if (container) {
+            container.querySelector('p')?.classList.remove('is-hidden');
+          }
         }
       }
     });
@@ -225,7 +263,9 @@ export class ObjectivesComponent extends VetproviehElement {
    * @param {Objective} objective
    * @param {ObjectiveItemComponent} item
    */
-  private appendToContainer(objective: Objective, item: ObjectiveItemComponent) {
+  private appendToContainer(
+      objective: Objective,
+      item: ObjectiveItemComponent) {
     const container = this.selectContainer(objective);
 
     if (container) {
@@ -298,8 +338,10 @@ export class ObjectivesComponent extends VetproviehElement {
     });
   }
 
-
-  _afterRender() {
+  /**
+ * After Render Callback
+ */
+  private _afterRender() {
     this.bindManualAddButton();
     this.bindSelectButton();
   }
@@ -329,7 +371,7 @@ export class ObjectivesComponent extends VetproviehElement {
   /**
      * Process answer of select-Button.
      * TODO unterschiedliche Fälle implementieren
-     * @param answer
+     * @param {SelectButton} selectButton
      */
   private processSelectButtonAnswer(selectButton: SelectButton) {
     const answer = selectButton.recievedParam;

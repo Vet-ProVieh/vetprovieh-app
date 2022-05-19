@@ -1,14 +1,17 @@
-import {ElementBinding, ElementGroupBinding, ObjectHelper, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  ElementGroupBinding,
+  ObjectHelper,
+  VetproviehElement,
+  VetproviehNavParams,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import {PlanMeasureModel} from '../../careplans/operational/models/planMeasure';
 import {SelectButton} from '../../shared';
+import {MeasureField} from '../models';
 import {InitializeMeasurePage} from '../pages';
 import {MeasureFieldComponent} from './measureField';
-import {TakeoverFactory} from '../factories';
-import {MeasureField} from '../models';
 
-/**
- * Pager OperationGroup
- */
+
 // eslint-disable-next-line new-cap
 @WebComponent({
   template: VetproviehElement.template +
@@ -29,13 +32,16 @@ import {MeasureField} from '../models';
                 </div>`,
   tag: 'vp-measure-group',
 })
+/**
+ * MeasureGroupComponent
+ */
 export class MeasureGroupComponent extends ElementGroupBinding {
     private _isValid = false;
 
-    connectedCallback() {
-      super.connectedCallback();
-    }
-
+    /**
+     * Setter internalIsValid
+     * @param {boolean} v
+     */
     private set internalIsValid(v: boolean) {
       if (this._isValid !== v) {
         this._isValid = v;
@@ -71,15 +77,16 @@ export class MeasureGroupComponent extends ElementGroupBinding {
    * Returns the subFields of the object
    * must be overwritten in the children
    * @protected
+   * @return {any[]}
    */
-    protected subFields(): Array<any> {
+    protected subFields(): any[] {
       return this.object.details;
     }
 
 
     /**
      * Generating new SubElement
-     * @param type
+     * @return {MeasureFieldComponent}
      */
     protected newElement(): MeasureFieldComponent {
       return new MeasureFieldComponent();
@@ -90,13 +97,18 @@ export class MeasureGroupComponent extends ElementGroupBinding {
      */
     renderSelectButton() {
       if (this.object.name == 'Gründe für das Überschreiten der Kennzahl 2') {
-        const params = VetproviehNavParams.get(InitializeMeasurePage.NAVIGATION_KEY);
+        const params = VetproviehNavParams
+            .get(InitializeMeasurePage.NAVIGATION_KEY);
 
-        const button = ` <select-button href="/careplans/operational/select.html?barnId=${params.barnId}" name="Übernahme aus Betreuungsmanagement">
+        const button = `
+        <select-button 
+           href="/careplans/operational/select.html?barnId=${params.barnId}" 
+           name="Übernahme aus Betreuungsmanagement">
                  </select-button>
                  <hr/>`;
 
-        const selectFieldWrapper = this.querySelector('#selectField') as HTMLElement;
+        const selectFieldWrapper = this
+            .querySelector('#selectField') as HTMLElement;
         if (selectFieldWrapper) selectFieldWrapper.innerHTML = button;
       }
     }
@@ -104,7 +116,7 @@ export class MeasureGroupComponent extends ElementGroupBinding {
     /**
      * Process answer of select-Button.
      * TODO unterschiedliche Fälle implementieren
-     * @param answer
+     * @param {SelectButton} selectButton
      */
     private processSelectButtonAnswer(selectButton: SelectButton) {
       const answer = selectButton.recievedParam;
@@ -118,7 +130,11 @@ export class MeasureGroupComponent extends ElementGroupBinding {
               const field = (fields as any)[paramKey];
               if (field) {
                 const value = (part.values as any)[paramKey];
-                if (value) field.attachValue(`${ObjectHelper.formatDate(part.updatedAt)} ${part.name} ${part.id}:\r\n${value}\r\n`);
+                if (value) {
+                  field.attachValue(
+                      `${ObjectHelper.formatDate(part.updatedAt)}` +
+                    `${part.name} ${part.id}:\r\n${value}\r\n`);
+                }
               }
             });
           }
@@ -129,7 +145,7 @@ export class MeasureGroupComponent extends ElementGroupBinding {
     /**
      * Find fields to fill
      * Key ist expected returnValue key from opPlan
-     * @returns
+     * @return {any}
      */
     private loadSubFields(): any {
       return {
@@ -167,7 +183,9 @@ export class MeasureGroupComponent extends ElementGroupBinding {
       return this.querySelector('.panel-block') as HTMLElement;
     }
 
-
+    /**
+ * after Render
+ */
     _afterRender() {
       this._subfieldBindings = [];
       const fields = this.subFields();
@@ -208,9 +226,11 @@ export class MeasureGroupComponent extends ElementGroupBinding {
      */
     private initValidation() {
       this._subfieldBindings.forEach((subfield) => {
-        subfield.addEventListener('change', (subfield: MeasureFieldComponent) => {
-          this.internalIsValid = this.calculateValidation();
-        });
+        subfield.addEventListener(
+            'change',
+            () => {
+              this.internalIsValid = this.calculateValidation();
+            });
       });
 
       this.internalIsValid = this.calculateValidation();

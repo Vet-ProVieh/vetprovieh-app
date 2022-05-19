@@ -1,4 +1,6 @@
-import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+import {
+  VetproviehBasicList,
+} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
 import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
 // eslint-disable-next-line new-cap
@@ -51,22 +53,39 @@ import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
                 </vetprovieh-pager>`,
   tag: 'measures-list',
 })
+/**
+ * Measures-List
+ */
 export class MeasuresList extends VetproviehBasicList {
    private _sublink = '';
 
+   /**
+    * Getter sublink
+    * @return {string}
+    */
    public get sublink() : string {
      return this._sublink;
    }
+
+   /**
+    * setter sublink
+    * @param {string} v
+    */
    public set sublink(v : string) {
-     this._sublink = v;
+     if (this._sublink !== v) {
+       this._sublink = v;
+     }
    }
 
+   /**
+    * ConnectedCallback
+    */
    connectedCallback() {
      super.connectedCallback();
      this.addEventListener('selected', (event) => {
-       const target = event.target as HTMLElement;
        const customEvent = (event as CustomEvent);
-       window.location.href = `show.html?id=${customEvent.detail.id}&${this.sublink}`;
+       const href = `show.html?id=${customEvent.detail.id}&${this.sublink}`;
+       window.location.href = href;
      });
    }
 

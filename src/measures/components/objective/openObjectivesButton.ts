@@ -1,22 +1,38 @@
-import {VetproviehElement, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehElement,
+  ViewHelper,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {BarnsRepository} from '../../../barns/repository';
 
 // eslint-disable-next-line new-cap
 @WebComponent({
   template: `
-        <bulma-fab-button href="\${this.href}" icon="fa-info" size="small"></bulma-fab-button>
+        <bulma-fab-button href="\${this.href}" icon="fa-info" size="small">
+        </bulma-fab-button>
     `,
   tag: 'open-objectives',
 })
+/**
+ * Open Objectives Button
+ */
 export class OpenObjectivesButton extends VetproviehElement {
   private _amount = 0;
   private _barnId = 0;
   private _autoLoad = false;
 
 
+  /**
+   * Getter barnid
+   * @return {number}
+   */
   public get barnid(): number {
     return this._barnId;
   }
+
+  /**
+   * Setter barnid
+   * @param {number} v
+   */
   public set barnid(v: number) {
     if (this._barnId !== v) {
       this._barnId = v;
@@ -25,14 +41,21 @@ export class OpenObjectivesButton extends VetproviehElement {
     }
   }
 
-
+  /**
+   * Getter autoload
+   * @return {string}
+   */
   public get autoload(): string {
     return `${this._autoLoad}`;
   }
+
+  /**
+   * Setter autoload
+   * @param {string} v
+   */
   public set autoload(v: string) {
     this._autoLoad = v === 'true';
   }
-
 
   /**
    * Amount of open Objectives
@@ -42,6 +65,10 @@ export class OpenObjectivesButton extends VetproviehElement {
     return this._amount;
   }
 
+  /**
+   * Setter amount
+   * @param {number} v
+   */
   public set amount(v: number) {
     if (this.amount != +v) {
       this._amount = +v;
@@ -49,12 +76,17 @@ export class OpenObjectivesButton extends VetproviehElement {
     }
   }
 
+  /**
+   * Connected Callback
+   */
   connectedCallback() {
     super.connectedCallback();
-
     this.tryToLoadData();
   }
 
+  /**
+   * Try to load data from repository
+   */
   private tryToLoadData() {
     if (this.autoload) {
       const rep = new BarnsRepository();
@@ -69,7 +101,6 @@ export class OpenObjectivesButton extends VetproviehElement {
 
   /**
    * Rendering Visibility for fab button
-   * @return {string}
    */
   public setVisibility() {
     ViewHelper.toggleVisibility(this, +this.amount > 0);

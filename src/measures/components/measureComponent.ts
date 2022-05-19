@@ -1,4 +1,9 @@
-import {ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  ElementGroupBinding,
+  VetproviehElement,
+  VetproviehNavParams,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import {Barn} from '../../barns';
 import {RenderType} from '../../shared';
 import {DynamicForm} from '../../shared/components/forms/dynamicForm';
@@ -26,19 +31,25 @@ import {ObjectivesComponent} from './objective';
           <ul>
             <li class="is-active">
               <a data-id="detail" data-state="execution">
-                <span class="icon is-small"><i class="fas fa-scroll" aria-hidden="true"></i></span>
+                <span class="icon is-small">
+                  <i class="fas fa-scroll" aria-hidden="true">
+                  </i></span>
                 <span class="is-hidden-touch">Planung</span>
               </a>
             </li>
             <li>
               <a data-id="objectives" data-state="execution">
-                <span class="icon is-small"><i class="fas fa-toolbox" aria-hidden="true"></i></span>
+                <span class="icon is-small">
+                  <i class="fas fa-toolbox" aria-hidden="true">
+                  </i></span>
                 <span class="is-hidden-touch">Durchführung</span>
               </a>
             </li>
             <li>
               <a data-id="objectives" data-state="valuation">
-                <span class="icon is-small"><i class="fas fa-star" aria-hidden="true"></i></span>
+                <span class="icon is-small">
+                  <i class="fas fa-star" aria-hidden="true">
+                  </i></span>
                 <span class="is-hidden-touch">Bewertung</span>
               </a>
             </li>
@@ -75,11 +86,17 @@ import {ObjectivesComponent} from './objective';
     `,
   tag: 'vp-measure',
 })
+/**
+ * Measure Component
+ */
 export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   private repository: MeasuresRepository = new MeasuresRepository();
   private categories: HTMLAnchorElement[] = [];
   private objectivesComponent: ObjectivesComponent | undefined;
 
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super('data', RenderType.Multiple);
     this.storeElement = true;
@@ -120,7 +137,8 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
     this.setParamsToComponent(params);
 
-    const pdfButton = this.shadowRoot?.querySelector('measure-pdf-button') as MeasurePdfButton;
+    const pdfButton = this
+        .shadowRoot?.querySelector('measure-pdf-button') as MeasurePdfButton;
     pdfButton.objectid = data.id;
 
     if (this.isNew()) {
@@ -169,9 +187,14 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     });
   }
 
+  /**
+   * AfterSave Callback
+   */
   protected afterSave() {
     if (!window.location.pathname.includes('show')) {
-      window.open(`/measures/show.html?id=${this.currentObject.id}&process=objectives&state=execution`, '_self');
+      const link = `/measures/show.html?id=${this.currentObject.id}` +
+      `&process=objectives&state=execution`;
+      window.open(link, '_self');
     }
   }
 
@@ -213,23 +236,30 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
   /**
    * Last Measure Takeover
+   * @return {Promise<any>}
    */
   private takeoverLastMeasure(): Promise<any> {
-    const takeoverFactory = new TakeoverFactory(this.currentObject, this.repository);
-    return takeoverFactory.takeoverFromLatestMeasure().then((result) => {
+    const takeoverFactory = new TakeoverFactory(
+        this.currentObject,
+        this.repository);
+    return takeoverFactory.takeoverFromLatestMeasure().then(() => {
       return this.loadBasicData();
     }).catch((error) => {
+      console.warn(error);
       return this.loadBasicData();
     });
   }
 
   /**
    * Loading Basic Data for Barn and User
+   * @return {Promise<any>}
    */
   private loadBasicData(): Promise<any> {
     const replaceFactory = new ReplaceFactory();
-    return replaceFactory.replacePlaceholders(this.currentObject).then(() => {
-    }).catch((error) => console.log(error));
+    return replaceFactory
+        .replacePlaceholders(this.currentObject)
+        .then(() => console.log('replaced'))
+        .catch((error) => console.log(error));
   }
 
   /**
@@ -242,6 +272,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
 
   /**
    * on the new page?
+   * @return {boolean}
    */
   private isNew(): boolean {
     return window.location.href.includes('new');
@@ -259,7 +290,8 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
       if (params.measuresDate != null && params.measuresDate != undefined) {
         this.currentObject.measuresDate = params.measuresDate;
       }
-      if (params.therapyFrequency != null && params.therapyFrequency != undefined) {
+      if (params.therapyFrequency != null &&
+        params.therapyFrequency != undefined) {
         this.currentObject.therapyFrequency = params.therapyFrequency;
       }
     }

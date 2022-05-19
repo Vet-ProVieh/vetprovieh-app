@@ -3,6 +3,9 @@ import {Drug} from '../../drugs';
 import {BasicModel} from '../../shared';
 import {Barn} from '../../barns';
 
+/**
+ * Drug-Treatment Model
+ */
 export class Drugtreatment extends BasicModel {
     public amount = '';
     public animalNumber = '';

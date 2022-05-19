@@ -1,7 +1,9 @@
-import {VetproviehBinding, VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehBinding,
+  VetproviehElement,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {SimpleModal} from '../../../shared';
-import {Objective, KeyResult} from '../../models';
-import { } from '../../models/keyresult';
+import {KeyResult, Objective} from '../../models';
 import {KeyResultEditComponent} from './keyResultEdit';
 
 // eslint-disable-next-line new-cap
@@ -18,12 +20,15 @@ import {KeyResultEditComponent} from './keyResultEdit';
         <section class="modal-card-body">
             <form id="form">
                 <div id="objective">
-                    <bulma-input property="name" label="Bezeichnung der Maßnahme" required>
+                    <bulma-input property="name"
+                        label="Bezeichnung der Maßnahme" required>
                     </bulma-input>
 
-                    <bulma-input-checkbox property="welfare" label="Tierwohl?"></bulma-input-checkbox>
+                    <bulma-input-checkbox property="welfare"
+                       label="Tierwohl?"></bulma-input-checkbox>
 
-                    <bulma-input type="date" property="date" label="Durchzuführen bis" required>
+                    <bulma-input type="date" property="date"
+                    label="Durchzuführen bis" required>
                     </bulma-input>
                 </div>
                 <hr/>
@@ -47,14 +52,20 @@ import {KeyResultEditComponent} from './keyResultEdit';
             <div class="container">
                 <div class="columns is-mobile">
                     <div class="column">
-                        <button class="button is-danger is-fullwidth" id="cancel">
-                            <span class="icon"><i class="fas fa-trash-alt" aria-hidden="true"></i></span>
+                        <button class="button is-danger is-fullwidth"
+                             id="cancel">
+                            <span class="icon">
+                             <i class="fas fa-trash-alt" aria-hidden="true">
+                             </i></span>
                             <span>Abbrechen</span>
                         </button>
                     </div>
                     <div class="column">
-                        <button class="button is-primary is-fullwidth" id="save">
-                            <span class="icon"><i class="fas fa-save" aria-hidden="true"></i></span>
+                        <button
+                          class="button is-primary is-fullwidth" id="save">
+                            <span class="icon">
+                            <i class="fas fa-save" aria-hidden="true">
+                            </i></span>
                             <span>Übernehmen</span>
                         </button>
                     </div>
@@ -64,23 +75,31 @@ import {KeyResultEditComponent} from './keyResultEdit';
         </div>
     </div>`,
 })
+/**
+ * ObjectiveModal
+ */
 export class ObjectiveModal extends SimpleModal {
-  constructor() {
-    super();
-  }
+    private _objective: Objective = new Objective();
 
-
-    // @ts-ignore
-    private _objective: Objective;
-
+    /**
+     * Setter objective
+     * @param {Objective} v
+     */
     public set objective(v: Objective) {
       if (this._objective !== v) {
         this._objective = v;
-        VetproviehBinding.bindFormElements(this.getByIdFromShadowRoot('objective'), this._objective);
+        VetproviehBinding.bindFormElements(
+            this.getByIdFromShadowRoot('objective'),
+            this._objective
+        );
         this.renderKeyResults();
       }
     }
 
+    /**
+     * Getter objective
+     * @return {Objective}
+     */
     public get objective(): Objective {
       return this._objective;
     }
@@ -110,30 +129,49 @@ export class ObjectiveModal extends SimpleModal {
       this.keyResults.append(keyResultEdit);
     }
 
+    /**
+     *  add Button Listeners
+     */
     protected addButtonListeners() {
-      const btnSave = this.shadowRoot?.getElementById('save') as HTMLButtonElement;
+      const btnSave = this
+          .shadowRoot?.getElementById('save') as HTMLButtonElement;
       btnSave.addEventListener('click', () => {
-        console.log(this.objective);
         if (this.validateInputs()) {
-          this.dispatchEvent(new CustomEvent('save', {detail: this._objective}));
+          this.dispatchEvent(
+              new CustomEvent('save', {detail: this._objective}
+              ));
           this.close();
         }
       });
 
-      const addKeyResult = this.shadowRoot?.getElementById('addKeyResult') as HTMLElement;
+      const addKeyResult = this
+          .shadowRoot?.getElementById('addKeyResult') as HTMLElement;
       addKeyResult.addEventListener('click', () => {
         const keyResult = new KeyResult();
         this.objective.keyResults.push(keyResult);
         this.appendKeyResult(keyResult);
       });
 
-      (this.shadowRoot?.getElementById('cancel') as HTMLButtonElement).addEventListener('click', () => {
+      this.cancelButton.addEventListener('click', () => {
         this.close();
       });
     }
 
-    // Return True if Inputs are valid - return false and render Inputs in red if invalid
-    private validateInputs() {
+    /**
+     * Get CancelButton
+     * @return {HTMLButtonElement}
+     */
+    private get cancelButton() : HTMLButtonElement {
+      return this.shadowRoot?.getElementById('cancel') as HTMLButtonElement;
+    }
+
+    /**
+     * Validate inputs
+     * Return True if Inputs are valid - return false
+     * and render Inputs in red if invalid
+     * @return {boolean}
+     * */
+    private validateInputs() : boolean {
       const form = this.getByIdFromShadowRoot('form') as HTMLFormElement;
 
       const validityOfKeyResults = this.checkValidityOfKeyResults();
@@ -148,26 +186,42 @@ export class ObjectiveModal extends SimpleModal {
       }
     }
 
+    /**
+     * Checking Validity of KeyResults
+     * @return {boolean}
+     */
     private checkValidityOfKeyResults(): boolean {
       let validity = true;
-        this.shadowRoot?.querySelectorAll('vp-edit-key-result').forEach((e: any) => {
+        this.shadowRoot?.querySelectorAll('vp-edit-key-result')
+        .forEach((e: any) => {
           validity = validity && (e as KeyResultEditComponent).checkVailidity();
         });
         return validity;
     }
 
+    /**
+     * Render As Invalid
+     * @param {NodeListOf<Element>} invalid
+     */
     private renderAsInvalid(invalid: NodeListOf<Element>) {
       invalid.forEach((elem)=>{
         (elem as HTMLInputElement).classList.add('is-danger');
       });
     }
 
+    /**
+     * Render As valid
+     * @param {NodeListOf<Element>} valid
+     */
     private renderAsValid(valid: NodeListOf<Element>) {
       valid.forEach((elem)=>{
         (elem as HTMLInputElement).classList.remove('is-danger');
       });
     }
 
+    /**
+     * Connected-Callback
+     */
     connectedCallback() {
       super.connectedCallback();
       this.objective = new Objective();
@@ -181,7 +235,11 @@ export class ObjectiveModal extends SimpleModal {
       return this.shadowRoot?.getElementById('keyResults') as HTMLElement;
     }
 
-    static get observedAttributes() {
+    /**
+     * get observed attributes
+     * @return {string[]}
+     */
+    static get observedAttributes() : string[] {
       return ['objective'];
     }
 }

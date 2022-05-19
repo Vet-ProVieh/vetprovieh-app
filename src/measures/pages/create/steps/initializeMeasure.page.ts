@@ -1,4 +1,7 @@
-import {ObjectHelper, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  ObjectHelper,
+  VetproviehNavParams,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {BarnListShow} from '../../../../barns';
 
 // eslint-disable-next-line new-cap
@@ -6,13 +9,15 @@ import {BarnListShow} from '../../../../barns';
   template: '',
   tag: 'initialize-measure',
 })
+/**
+ * Initialize a new Measure page
+ */
 export class InitializeMeasurePage extends HTMLElement {
     public static NAVIGATION_KEY = 'MeasureIntializeParams';
 
-    constructor() {
-      super();
-    }
-
+    /**
+ * Connected-Callback
+ */
     connectedCallback() {
       this.barnShower.barnid = VetproviehNavParams.getUrlParameter('barn_id');
 
@@ -41,13 +46,19 @@ export class InitializeMeasurePage extends HTMLElement {
       });
     }
 
+    /**
+     * Reset new Page
+     */
     private resetNewPage() {
       let key = `${window.location.protocol}//${window.location.hostname}`;
       key += '/measures/new.html?barn_id=null';
       VetproviehNavParams.delete(key);
     }
 
-
+    /**
+ * Getter initialize Button
+ * @return {HTMLButtonElement}
+ */
     private get initializeButton(): HTMLButtonElement {
       return document.getElementById('btn-new') as HTMLButtonElement;
     }
@@ -68,8 +79,13 @@ export class InitializeMeasurePage extends HTMLElement {
       return document.getElementById('therapy-frequency') as HTMLInputElement;
     }
 
+    /**
+     * Get TherapyFrequency
+     * @return {HTMLInputElement}
+     */
     private get therapyFrequencyText(): HTMLInputElement {
-      return document.getElementById('therapy-frequency-text') as HTMLInputElement;
+      return document
+          .getElementById('therapy-frequency-text') as HTMLInputElement;
     }
 
     /**

@@ -1,4 +1,8 @@
-import {VetproviehBinding, VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehBinding,
+  VetproviehElement,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import {QuestionModal} from '../../../shared';
 import {KeyResult} from '../../models';
 
@@ -12,7 +16,9 @@ import {KeyResult} from '../../models';
     `
       <div class="columns is-mobile">
           <div class="column">
-              <input property="name" class="input" placeholder="Bitte geben Sie ihr Zwischenziel ein" type="text" required/>
+              <input property="name" class="input"
+                 placeholder="Bitte geben Sie ihr Zwischenziel ein"
+                 type="text" required/>
           </div>
           <div class="column is-2">
             <div class="buttons">
@@ -25,31 +31,49 @@ import {KeyResult} from '../../models';
     `,
   tag: 'vp-edit-key-result',
 })
+/**
+ * KeyResult edit component
+ */
 export class KeyResultEditComponent extends VetproviehElement {
   private _keyResult: KeyResult = new KeyResult();
 
-  constructor() {
-    super();
-  }
+  /**
+   * Getter KeyResult
+   * @return {KeyResult}
+   */
   public get keyResult(): KeyResult {
     return this._keyResult;
   }
 
+  /**
+   * Setter keyresult
+   * @param {KeyResult} val
+   */
   public set keyResult(val: KeyResult) {
     if (this._keyResult !== val) {
       this._keyResult = val;
 
       if (this.shadowRoot) {
-        VetproviehBinding.bindFormElements(this.shadowRoot.querySelector('.columns'), this.keyResult,);
+        VetproviehBinding.bindFormElements(
+            this.shadowRoot.querySelector('.columns'),
+            this.keyResult
+        );
       }
     }
   }
 
+  /**
+   * Render
+   */
   public render() {
     super.render();
     this.registerButtons();
   }
 
+  /**
+   * Check Validity
+   * @return {boolean}
+   */
   public checkVailidity(): boolean {
     console.log('CHECK_VALIDITY KeyResultEdit');
     const input = this.shadowRoot?.querySelector('input');
@@ -77,7 +101,10 @@ export class KeyResultEditComponent extends VetproviehElement {
    */
   private registerButtons() {
     this.deleteButton.addEventListener('click', () => {
-      QuestionModal.askQuestion('Entfernen?', 'Möchten Sie das Zwischenziel entfernen?').then((result) => {
+      QuestionModal.askQuestion(
+          'Entfernen?',
+          'Möchten Sie das Zwischenziel entfernen?'
+      ).then((result) => {
         if (result) {
           this.delete();
         }

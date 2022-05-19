@@ -1,5 +1,8 @@
 import {BasicModel} from '../../shared';
 
+/**
+ * Measure-Field
+ */
 export class MeasureField extends BasicModel {
     public name = '';
     public value: any;
@@ -8,5 +11,15 @@ export class MeasureField extends BasicModel {
     public detailsType: string | undefined;
     public optional = false;
     public voiceInputable = true;
-    public link_position: { id: number, value: any, compare: string } | undefined;
+    // eslint-disable-next-line camelcase
+    public link_position: ILinkPosition | undefined;
+}
+
+/**
+ * Interface ILinkPosition
+ */
+export interface ILinkPosition {
+    id: number;
+    value: any;
+    compare: string;
 }

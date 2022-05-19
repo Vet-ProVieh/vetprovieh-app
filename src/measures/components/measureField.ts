@@ -1,23 +1,27 @@
-import {BaseRepository, ElementBinding, ViewHelper, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  BaseRepository,
+  ElementBinding,
+  ViewHelper,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import {VetproviehSelect} from '../../app/main';
-import {InputFactory} from '../../careplans/operational/components/field/inputFactory';
+import {
+  InputFactory,
+} from '../../careplans/operational/components/field/inputFactory';
 import {MeasureField} from '../models';
 
-/**
- * MeasureField Display-Component
- */
+
 // eslint-disable-next-line new-cap
 @WebComponent({
   template: undefined,
   tag: 'vp-measure-field',
 })
+/**
+ * MeasureField Display-Component
+ */
 export class MeasureFieldComponent extends ElementBinding {
     private _linkedField: MeasureFieldComponent | undefined;
     private _isValid = false;
-
-    constructor() {
-      super();
-    }
 
     /**
      * Getting Linked Element to this Field
@@ -30,9 +34,9 @@ export class MeasureFieldComponent extends ElementBinding {
 
     /**
      * Link Field to another
-     * @param field
+     * @param {MeasureFieldComponent | undefined } field
      */
-    public linkToField(field: MeasureFieldComponent) {
+    public linkToField(field: MeasureFieldComponent | undefined ) {
       if (field) {
         this._linkedField = field;
         this.evaluteLinkedValue(field.object.value);
@@ -68,8 +72,12 @@ export class MeasureFieldComponent extends ElementBinding {
      * @param {any} value1
      * @param {any} value2
      * @param {string} operator
+     * @return {boolean}
      */
-    private compareLinkedPos(value1: any, value2: any, operator = '=='): boolean {
+    private compareLinkedPos(
+        value1: any,
+        value2: any,
+        operator = '=='): boolean {
       switch (operator) {
         case '==':
           return value1 == value2;
@@ -85,7 +93,6 @@ export class MeasureFieldComponent extends ElementBinding {
      * @return {Boolean}
      */
     get isValid(): boolean {
-      let x: HTMLFormElement;
       return this._isValid;
     }
 
@@ -108,7 +115,8 @@ export class MeasureFieldComponent extends ElementBinding {
     */
     protected _afterRender() {
       if (this.object.choiceSrc) {
-        const vetproviehSelect = this.querySelector('vetprovieh-select') as VetproviehSelect;
+        const vetproviehSelect = this
+            .querySelector('vetprovieh-select') as VetproviehSelect;
         if (vetproviehSelect) {
           const repository = this.getChoiceRepository(this.object.choiceSrc);
           if (repository) vetproviehSelect.repository = repository;
@@ -160,13 +168,14 @@ export class MeasureFieldComponent extends ElementBinding {
     get template(): string {
       if (this.object) {
         return super.template + `
-            <div class="field is-horizontal" style="margin-top:5px; margin-bottom:5px">
+            <div class="field is-horizontal" 
+                 style="margin-top:5px; margin-bottom:5px">
                 <div class="field-label">
                     <label class="label">{{name}}</label>
                 </div>
                 <div class="field-body">
                     <div class="field">` +
-                InputFactory.generateField(this.object.detailsType, this.object) +
+         InputFactory.generateField(this.object.detailsType, this.object) +
                 `   </div>
                 </div>
             </div>

@@ -7,7 +7,13 @@ import {MeasuresRepository} from '../repository';
   template: PdfButton.template,
   tag: 'measure-pdf-button',
 })
+/**
+ * Measure-PDF Button
+ */
 export class MeasurePdfButton extends PdfButton {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super(new MeasuresRepository());
   }

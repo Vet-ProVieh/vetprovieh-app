@@ -3,6 +3,9 @@ import {BasicModel} from '../../shared';
 import {MeasureGroup} from './group';
 import {Objective} from './objective';
 
+/**
+ * Measure-Model
+ */
 export class Measure extends BasicModel {
     public animal = '';
     public animalNumber = '';
