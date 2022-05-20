@@ -21,7 +21,7 @@ export class CarePlanShowPage extends PageWithReadOnly {
     super.afterDataLoaded();
 
     this._setTemplateForGroups();
-    this._showGroups((event as LoadedEvent).data as Careplan);
+    this._showGroups(this.currentObject);
     (this.addButton as any)['disabled'] = !(this.currentObject.id);
     this.markAsReadOnly();
     this.addPositionToAddButton();

@@ -18,7 +18,19 @@ export class MeasuresRepository extends BaseRepository<Measure> {
    * @return {Promise<Measure[]>}
    */
   openMeasuresForBarn(barnId: number): Promise<Measure[]> {
-    return fetch(`/service/barns/${barnId}/currentMeasures/`)
+    return this.executeRequest<Measure[]>(
+        `/service/barns/${barnId}/currentMeasures/`,
+        []);
+  }
+
+  /**
+   * Normal Http Get for an Endpoint
+   * @param {string} url
+   * @param {T} emptyValue
+   * @return {Promise<T>}
+   */
+  private executeRequest<T>(url: string, emptyValue: T) : Promise<T> {
+    return fetch(url)
         .then((response) => {
           if (response.ok) {
             return response.json();
@@ -27,7 +39,7 @@ export class MeasuresRepository extends BaseRepository<Measure> {
           }
         }).catch((error) => {
           console.warn(error);
-          return [];
+          return emptyValue;
         });
   }
 
@@ -40,17 +52,9 @@ export class MeasuresRepository extends BaseRepository<Measure> {
   proActive(focusOfDiseases: string): Promise<Measure[]> {
     const param = btoa(focusOfDiseases);
 
-    return fetch(`/service/measures/proactive/${param}`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw Error(response.statusText);
-          }
-        }).catch((error) => {
-          console.warn(error);
-          return [];
-        });
+    return this.executeRequest<Measure[]>(
+        `/service/measures/proactive/${param}`,
+        []);
   }
 
   /**
@@ -95,16 +99,8 @@ export class MeasuresRepository extends BaseRepository<Measure> {
    * @return {Promise<Measure>}
    */
   lastforBarn(barnId: number): Promise<Measure> {
-    return fetch(`${this.endpoint}/barn/${barnId}/last`)
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          } else {
-            throw Error(response.statusText);
-          }
-        }).catch((error) => {
-          console.warn(error);
-          return undefined;
-        });
+    return this.executeRequest<Measure>(
+        `${this.endpoint}/barn/${barnId}/last`,
+        new Measure());
   }
 }

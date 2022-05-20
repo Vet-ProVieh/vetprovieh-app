@@ -121,7 +121,7 @@ export class BumlaTabComponent extends VetproviehElement {
      */
     public set current(v: string) {
       if (this._current !== v) {
-
+        this._current = v;
       }
     }
 

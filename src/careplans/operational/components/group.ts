@@ -2,8 +2,8 @@ import {VpOperationField} from './field';
 import {
   ElementGroupBinding,
   WebComponent,
+  ElementBinding,
 } from '@tomuench/vetprovieh-shared/lib';
-import {ElementBinding} from '@tomuench/vetprovieh-shared/lib';
 
 // eslint-disable-next-line new-cap
 @WebComponent({

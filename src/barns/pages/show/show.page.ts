@@ -153,12 +153,20 @@ export class BarnsShowPage extends BasicShowPage {
     }
 
     /**
+     * Get FarmerSelect
+     * @return {VetproviehSelect}
+     */
+    private get farmerSelect(): VetproviehSelect {
+      return this.detailElement
+          .getByIdFromShadowRoot('farmer') as VetproviehSelect;
+    }
+
+    /**
      * Binding
      * @param {any} loadEvent
      */
     private bindFarmerSelectField(loadEvent: any) {
-      const selectField: VetproviehSelect = this.detailElement
-          .getByIdFromShadowRoot('farmer') as VetproviehSelect;
+      const selectField = this.farmerSelect;
       if (selectField) {
         this._disableFarmerSelect(loadEvent as LoadedEvent, selectField);
         selectField.repository = new FarmersRepository();

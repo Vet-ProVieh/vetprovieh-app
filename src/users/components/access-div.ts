@@ -24,8 +24,8 @@ export class AccessDiv extends HTMLDivElement {
      */
     public set roles(v: string) {
       if (v !== null && v !== undefined) {
-        const input = v.split(',');
-        input.forEach((i) => i = i.trim());
+        const input = v.split(',')
+            .map((i) => i.trim());
         this._roles = input;
         this.setVisibility();
       }

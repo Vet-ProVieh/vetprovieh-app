@@ -285,12 +285,21 @@ export class MeasuresSelectPage extends BasicSelectPage {
     const inputCheckboxes = this.vetproviehList
         .shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
     const returnValue: number[] = [];
-    inputCheckboxes?.forEach((checkbox) => {
-      if ((checkbox as any).checked) {
-        returnValue.push(+(checkbox as any).value);
-      }
-    });
+    inputCheckboxes?.forEach(
+      (checkbox) => this.processCheckboxes(returnValue, checkbox)
+      );
     return returnValue;
+  }
+
+  /**
+   * process Checkboxes
+   * @param {any[]} returnValue
+   * @param {any} checkbox
+   */
+  private processCheckboxes(returnValue: any[], checkbox: any) {
+    if ((checkbox as any).checked) {
+      returnValue.push(+(checkbox as any).value);
+    }
   }
 
   /**
@@ -301,11 +310,9 @@ export class MeasuresSelectPage extends BasicSelectPage {
     const inputCheckboxes = this.objectivesList
         .shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
     const returnValue: number[] = [];
-    inputCheckboxes?.forEach((checkbox) => {
-      if ((checkbox as any).checked) {
-        returnValue.push(+(checkbox as any).value);
-      }
-    });
+    inputCheckboxes?.forEach(
+      (checkbox) => this.processCheckboxes(returnValue, checkbox)
+      );
     return returnValue;
   }
 

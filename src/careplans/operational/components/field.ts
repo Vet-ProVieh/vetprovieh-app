@@ -5,6 +5,7 @@ import {
 import {OperationField} from '..';
 import {VetproviehSelect} from '../../../app/main';
 import {Drug, DrugsRepository} from '../../../drugs';
+import {FarmersRepository} from '../../../farmers';
 import {MeasureProactiveButton} from '../../../measures';
 import {InputFactory} from './field/inputFactory';
 
@@ -47,7 +48,8 @@ export class VpOperationField extends ElementBinding {
     switch (src) {
       case 'drugs':
         return new DrugsRepository();
-
+      case 'farmers':
+        return new FarmersRepository();
       default:
         return undefined;
     }

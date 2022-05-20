@@ -6,7 +6,6 @@ import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
 })
 /**
  * New-Page for OperationPlan
- * TODO wird das benötigt?
  */
 export class OperationPlanNewPage {
 

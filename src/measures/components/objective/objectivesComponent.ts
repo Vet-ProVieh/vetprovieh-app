@@ -208,7 +208,6 @@ export class ObjectivesComponent extends VetproviehElement {
     container.innerHTML = this.renderNoMeasures(
         !this.objectives || this.objectives.length > 0
     );
-    // TODO welfare container
     this.objectives?.forEach((objective) => this.addObjectiveToDom(objective));
   }
 
@@ -370,7 +369,6 @@ export class ObjectivesComponent extends VetproviehElement {
 
   /**
      * Process answer of select-Button.
-     * TODO unterschiedliche Fälle implementieren
      * @param {SelectButton} selectButton
      */
   private processSelectButtonAnswer(selectButton: SelectButton) {

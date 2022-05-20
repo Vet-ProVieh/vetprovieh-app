@@ -246,9 +246,9 @@ export class RecordingModal extends VetproviehElement {
 
   /**
    * Loading a image
-   * @param {any} event
+   * @param {any} eventLoadFile
    */
-  private loadImage(event: any) {
+  private loadImage(eventLoadFile: any) {
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       this.recordedContent = event.target.result;
@@ -264,7 +264,7 @@ export class RecordingModal extends VetproviehElement {
           .catch((e) => console.error(e));
     });
 
-    reader.readAsDataURL(event.path[0].files[0]);
+    reader.readAsDataURL(eventLoadFile.path[0].files[0]);
   }
 
 

@@ -71,7 +71,7 @@ export class DocumentCreatePage extends BasicShowPage {
       this.fileInput.addEventListener('change', () => {
         if (this.fileInput.files) {
           this.uploadButton.disabled = this.fileInput.files == null ||
-          !(this.fileInput.files.length > 0);
+          (this.fileInput.files.length <= 0);
         }
       });
     }

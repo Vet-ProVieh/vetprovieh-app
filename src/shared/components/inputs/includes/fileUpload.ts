@@ -112,9 +112,9 @@ export class FileUpload extends VetproviehElement {
 
   /**
    * loadFile
-   * @param {any}event
+   * @param {any} eventLoadFile
    */
-  private loadFile(event: any) {
+  private loadFile(eventLoadFile: any) {
     const reader = new FileReader();
     reader.addEventListener('load', (event: any) => {
       const recordedContent = event.target.result;
@@ -127,7 +127,7 @@ export class FileUpload extends VetproviehElement {
           .catch((e) => console.error(e));
     });
 
-    reader.readAsDataURL(event.path[0].files[0]);
+    reader.readAsDataURL(eventLoadFile.path[0].files[0]);
   }
 
 

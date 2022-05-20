@@ -115,7 +115,6 @@ export class MeasureGroupComponent extends ElementGroupBinding {
 
     /**
      * Process answer of select-Button.
-     * TODO unterschiedliche Fälle implementieren
      * @param {SelectButton} selectButton
      */
     private processSelectButtonAnswer(selectButton: SelectButton) {
@@ -150,7 +149,6 @@ export class MeasureGroupComponent extends ElementGroupBinding {
     private loadSubFields(): any {
       return {
         Behandlung: this.loadSubField('Angaben zu Krankheitsgeschehen'),
-        // Diagnose: this.loadSubField("Angaben zu Krankheitsgeschehen"),
         Erregernachweis: this.loadSubField('Erregernachweis / Resistenztest'),
         Sektion: this.loadSubField('Sektion'),
         Sonstiges: this.loadSubField('Sonstiges'),
@@ -202,7 +200,6 @@ export class MeasureGroupComponent extends ElementGroupBinding {
         }
         super.attachField(newField);
       });
-      // super._afterRender();
 
       this.renderSelectButton();
       const selectButton = this.querySelector('select-button') as SelectButton;

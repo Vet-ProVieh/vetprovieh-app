@@ -48,8 +48,6 @@ export class BasicSelectPage extends VetproviehElement {
           if (this.hasSelectedItems()) {
             this.setReturnValue();
             this.navigateBack();
-          } else {
-
           }
         });
     }

@@ -19,22 +19,20 @@ export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
   * @return {Promise<Drugtreatment[]>}
   */
   all(): Promise<Drugtreatment[]> {
+    let url = `${this.endpoint}`;
     if (this._barnId != '' && this._barnId != null) {
-      return fetch(`${this.endpoint}/barn/${this.barnId}`).then((response) => {
-        if (response.status === 404) {
-          return [];
-        }
-        return response.json();
-      });
-    } else {
-      return fetch(`${this.endpoint}`).then((response) => {
-        if (response.status === 404) {
-          return [];
-        }
-        return response.json();
-      });
+      url = `${this.endpoint}/barn/${this.barnId}`;
     }
+
+    return fetch(url)
+        .then((response) => {
+          if (response.status === 404) {
+            return [];
+          }
+          return response.json();
+        });
   }
+
 
   /**
  * Getter barnId

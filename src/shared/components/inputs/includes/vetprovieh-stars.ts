@@ -139,7 +139,11 @@ export class StarsComponent extends VetproviehElement {
      * @param {number | undefined} val
      */
     public set amount(val: number | undefined) {
-        (val != undefined) ? this._amount = val : this._amount = 5;
+      if (val) {
+        this._amount = val;
+      } else {
+        this._amount = 5;
+      }
     }
 
     /**

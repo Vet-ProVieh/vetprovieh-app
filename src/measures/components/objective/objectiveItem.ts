@@ -210,7 +210,6 @@ export class ObjectiveItemComponent extends VetproviehElement {
    */
   connectedCallback() {
     const stars = this.getByIdFromShadowRoot('stars') as StarsComponent;
-    // this.objective.rating = stars.score;
     stars.score = this.objective.rating;
     stars.addEventListener('click', () => {
       this.objective.rating = stars.score;
