@@ -1,4 +1,8 @@
-import {ElementGroupBinding, VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  ElementGroupBinding,
+  VetproviehElement,
+  VetproviehNavParams,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {VetproviehSidemenu} from '../../../app/main';
 import {OpenObjectivesButton} from '../../../measures';
 import {SpeechAssistant} from '../../../shared';
@@ -42,7 +46,11 @@ import {ProcessMenu} from './process-menu';
  * Controller for Page
  * pages/operations/plans/create or edit
  */
-export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> {
+export class VpOperationPlan
+  extends DynamicForm<OperationPlan, OperationGroup> {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super('opGroups');
     this.storeElement = true;
@@ -67,7 +75,7 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
    * @param {any} data
    * @protected
    */
-  _afterFetch(data: any) {
+  protected _afterFetch(data: any) {
     this.setBarnIdToComponents();
 
     super._afterFetch(data);
@@ -75,6 +83,9 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
     setTimeout(() => this._setNavigation(), 300);
   }
 
+  /**
+   * Set Barn Id to subcomponents
+   */
   private setBarnIdToComponents() {
     const barnUrlId = VetproviehNavParams.getUrlParameter('barn_id');
     console.log('Setting barnid');
@@ -87,11 +98,17 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
     }
   }
 
+  /**
+   * Set BarnId
+   * @param {number} barnId
+   */
   private setBarnId(barnId: number) {
-    this.shadowRoot?.querySelectorAll('barn-list-show').forEach((barnShow: any) => {
+    this.shadowRoot?.querySelectorAll('barn-list-show')
+    .forEach((barnShow: any) => {
       barnShow.barnid = barnId;
     });
-    this.rightMenu.shadowRoot?.querySelectorAll('barn-list-show').forEach((barnShow: any) => {
+    this.rightMenu.shadowRoot?.querySelectorAll('barn-list-show')
+    .forEach((barnShow: any) => {
       barnShow.barnid = barnId;
     });
 
@@ -102,8 +119,10 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
    * Setting Process-Menu Items and activate current Element
    */
   _setNavigation() {
-    const processMenu1 = this.getByIdFromShadowRoot('processMenu') as ProcessMenu;
-    const processMenu2 = this.rightMenu.getByIdFromShadowRoot('processMenu2') as ProcessMenu;
+    const processMenu1 = this
+        .getByIdFromShadowRoot('processMenu') as ProcessMenu;
+    const processMenu2 = this
+        .rightMenu.getByIdFromShadowRoot('processMenu2') as ProcessMenu;
     [processMenu1, processMenu2].forEach((processMenu) => {
       if (processMenu) {
         processMenu.objects = this.currentObject.opGroups;
@@ -113,16 +132,24 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
 
     this.registerResponsiveButtons();
 
-    const assistant = this.getByIdFromShadowRoot('speechAssistant') as SpeechAssistant;
+    const assistant = this
+        .getByIdFromShadowRoot('speechAssistant') as SpeechAssistant;
     if (assistant) {
       assistant.activate();
     }
   }
 
+  /**
+   * Getter RigtMenu
+   * @return {VetproviehSidemenu}
+   */
   private get rightMenu(): VetproviehSidemenu {
     return this.getByIdFromShadowRoot('right-menu') as VetproviehSidemenu;
   }
 
+  /**
+   * Register responsive Buttons
+   */
   private registerResponsiveButtons() {
     const openFunc = () => {
       this.rightMenu.dispatchEvent(new Event('toggle'));
@@ -147,10 +174,14 @@ export class VpOperationPlan extends DynamicForm<OperationPlan, OperationGroup> 
     return this.getByIdFromShadowRoot('openObjectives') as OpenObjectivesButton;
   }
 
-
+  /**
+ * After save callback
+ */
   protected afterSave() {
     if (!window.location.pathname.includes('show')) {
-      window.open(`/careplans/operational/show.html?id=${this.currentObject.id}`, '_self');
+      window.open(
+          `/careplans/operational/show.html?id=${this.currentObject.id}`,
+          '_self');
     }
   }
 }

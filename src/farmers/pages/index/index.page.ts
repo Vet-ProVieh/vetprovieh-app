@@ -8,7 +8,13 @@ import {BasicIndexPage} from '../../../shared';
   template: '',
   tag: 'vetprovieh-farmers',
 })
+/**
+ * Farmers Index Page
+ */
 export class FarmersIndexPage extends BasicIndexPage<Farmer> {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super(new FarmersRepository());
   }

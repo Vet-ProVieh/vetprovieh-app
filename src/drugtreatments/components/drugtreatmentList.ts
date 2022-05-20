@@ -22,18 +22,23 @@ import {Drugtreatment} from '..';
   tag: 'drugtreatment-list',
 })
 
-/*
+/**
   * Component for displaying Drugtreatmens as list
   */
 export class DrugtreatmentList extends VetproviehElement {
-  render() {
-    super.render();
+  /**
+   * Return table-Body
+   * @return {HTMLTableSectionElement}
+   */
+  private get tableBody() :HTMLTableSectionElement {
+    const tableBody = this.shadowRoot?.getElementById('tableBody');
+    return tableBody as HTMLTableSectionElement;
   }
 
-  private get tableBody() {
-    return this.shadowRoot?.getElementById('tableBody') as HTMLTableSectionElement;
-  }
-
+  /**
+   * Append a treatment
+   * @param {DrugTreatment} drugtreatment
+   */
   public appendTreatment(drugtreatment: Drugtreatment) {
     const row: HTMLTableRowElement = this.tableBody.insertRow();
     const cell0: HTMLTableCellElement = row.insertCell(0);
@@ -49,7 +54,8 @@ export class DrugtreatmentList extends VetproviehElement {
     if (drugtreatment.barn != undefined) {
       cell2.textContent = drugtreatment.barn?.farmer.name;
     }
-    cell3.textContent = drugtreatment.amount + ' ' + drugtreatment.drugs[0].dose;
+    cell3.textContent = drugtreatment.amount + ' ' +
+    drugtreatment.drugs[0].dose;
     cell4.textContent = drugtreatment.drugs[0].name;
     if (drugtreatment.isReported) {
       cell5.textContent = 'ja';

@@ -1,5 +1,11 @@
-import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
-import {VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehBasicList,
+} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+import {
+  VetproviehElement,
+  VetproviehNavParams,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import {BasicSelectPage} from '../../../../shared';
 import {OperationPlan} from '../../models';
 import {MeasureOperationPlansRepository} from '../../repository';
@@ -49,7 +55,8 @@ import {MeasureOperationPlansRepository} from '../../repository';
                             <strong>{{name}}</strong>
                         </div>
                         <div class="column">
-                            <barn-list-show barnid="{{barn.id}}"></barn-list-show>
+                            <barn-list-show barnid="{{barn.id}}">
+                            </barn-list-show>
                         </div>
                         <div class="column">
                             {{values.Diagnose}}
@@ -88,12 +95,19 @@ import {MeasureOperationPlansRepository} from '../../repository';
 export class OperationPlanSelectPage extends BasicSelectPage {
     private repository: MeasureOperationPlansRepository;
 
+    /**
+     * Default-Constructor
+     */
     constructor() {
       super();
       this.repository = new MeasureOperationPlansRepository(
           VetproviehNavParams.getUrlParameter('barnId')
       );
     }
+
+    /**
+     * Connected-Callback
+     */
     connectedCallback() {
       super.connectedCallback();
 
@@ -123,7 +137,9 @@ export class OperationPlanSelectPage extends BasicSelectPage {
      */
     public get selectedOperationPlans(): Array<OperationPlan> {
       return this.operationPlans
-          .filter((operationPlan: OperationPlan) => !!operationPlan.id && this.selectedOperationPlanIds.includes(+operationPlan.id));
+          .filter((operationPlan: OperationPlan) =>
+            !!operationPlan.id &&
+            this.selectedOperationPlanIds.includes(+operationPlan.id));
     }
 
     /**
@@ -131,7 +147,8 @@ export class OperationPlanSelectPage extends BasicSelectPage {
      * @return {Array<number>}
      */
     public get selectedOperationPlanIds(): Array<number> {
-      const inputCheckboxes = this.vetproviehList.shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
+      const inputCheckboxes = this.vetproviehList
+          .shadowRoot?.querySelectorAll('input[type=\'checkbox\']');
       const returnValue: number[] = [];
         inputCheckboxes?.forEach((checkbox) => {
           if ((checkbox as any).checked) {
@@ -143,9 +160,9 @@ export class OperationPlanSelectPage extends BasicSelectPage {
 
     /**
      * Get All visible OperationPlans
-     * @return {Array<OperationPlan>}
+     * @return {OperationPlan[]}
      */
-    public get operationPlans(): Array<OperationPlan> {
-      return this.vetproviehList?.objects || [];
+    public get operationPlans(): OperationPlan[] {
+      return (this.vetproviehList?.objects || []) as OperationPlan[];
     }
 }

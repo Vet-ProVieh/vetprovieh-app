@@ -1,4 +1,6 @@
-import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehNavParams,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {BarnListShow} from '../../../barns';
 import {BasicIndexPage} from '../../../shared/components/pages';
 import {Document} from '../../models';
@@ -9,9 +11,15 @@ import {DocumentRepository} from '../../repository';
   template: '',
   tag: 'vetprovieh-documents',
 })
+/**
+ * Document-Index-Page
+ */
 export class DocumentsIndexPage extends BasicIndexPage<Document> {
     private barnId: string;
 
+    /**
+     * Default-Constructor
+     */
     constructor() {
       const rep = new DocumentRepository();
       const barnId = VetproviehNavParams.getUrlParameter('barnId');
@@ -20,11 +28,17 @@ export class DocumentsIndexPage extends BasicIndexPage<Document> {
       this.barnId = barnId;
     }
 
+    /**
+     * Connected-Callback
+     */
     connectedCallback() {
       super.connectedCallback();
 
       setTimeout(() => {
-        this.barnShower.attributeChangedCallback('barnid', '', VetproviehNavParams.getUrlParameter('barnId'));
+        this.barnShower.attributeChangedCallback(
+            'barnid',
+            '',
+            VetproviehNavParams.getUrlParameter('barnId'));
       }, 300);
 
       this.getVetproviehList().addEventListener('selected', (event) => {

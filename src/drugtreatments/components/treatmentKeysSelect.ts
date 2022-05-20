@@ -17,24 +17,33 @@ import {DrugTreatmentKeysRepository} from '../repository';
     </div>`,
   tag: 'treatment-keys-select',
 })
+/**
+ * Treatment Keys Select
+ */
 export class TreatmentKeysSelect extends FieldWithLabel {
-    private repository: DrugTreatmentKeysRepository = new DrugTreatmentKeysRepository();
-
+    private repository = new DrugTreatmentKeysRepository();
     public optionsAsHtml = ''
 
-
+    /**
+     * ConnectedCallback
+     */
     public connectedCallback() {
-      this.renderOptions().then((result) => {
+      this.renderOptions().then(() => {
         super.connectedCallback();
       });
     }
 
+    /**
+     * Render Options
+     * @return {Promise<any>}
+     */
     private renderOptions(): Promise<any> {
       return new Promise<any>((resolve, reject) => {
         this.optionsAsHtml = `<option value="">Keine Behandlung</option>`;
         this.repository.keys().then((keys: string[]) => {
           keys.forEach((value: string) => {
-            const option = document.createElement('option') as HTMLOptionElement;
+            const option = document
+                .createElement('option') as HTMLOptionElement;
             option.value = value;
             option.innerHTML = value;
             this.optionsAsHtml += option.outerHTML;
@@ -42,6 +51,7 @@ export class TreatmentKeysSelect extends FieldWithLabel {
           resolve(true);
         }).catch((error) => {
           console.log('Could not load TreatmentKeys');
+          console.warn(error);
           resolve(false);
         });
       });

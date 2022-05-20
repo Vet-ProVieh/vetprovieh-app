@@ -11,6 +11,9 @@ import {OperationPlansRepository} from '../repository';
  * Generate Measure as PDF
  */
 export class MeasurePdfButton extends PdfButton {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super(new OperationPlansRepository());
   }

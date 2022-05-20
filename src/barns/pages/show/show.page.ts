@@ -3,10 +3,17 @@ import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {VetproviehSelect} from '../../../app/main';
 import {FarmersRepository} from '../../../farmers';
 import {OpenObjectivesButton} from '../../../measures';
-import {BasicShowPage, GeoCoordButton, GeoMap, GpsCoordinates} from '../../../shared';
+import {
+  BasicShowPage,
+  GeoCoordButton,
+  GeoMap,
+  GpsCoordinates,
+} from '../../../shared';
 import {GeoEvent} from '../../../shared/models/geo';
 import {IGeoProvider} from '../../../shared/providers/geo/IGeoProvider';
-import {OpenStreetMapNomatim} from '../../../shared/providers/geo/OpenStreetMapNomatim';
+import {
+  OpenStreetMapNomatim,
+} from '../../../shared/providers/geo/OpenStreetMapNomatim';
 import {UserRepository} from '../../../users';
 import {Barn} from '../../models';
 
@@ -24,19 +31,15 @@ export class BarnsShowPage extends BasicShowPage {
 
     private userRepository: UserRepository = new UserRepository();
 
-    /**
-     * DEfault-Constructor
-     */
-    constructor() {
-      super();
-    }
 
     /**
      * Callback for Web-Component
      */
     connectedCallback() {
       this.detailElement.addEventListener('loadeddata', (loadEvent: any) => {
-        if (this.barn.gpsCoordinates == null) this.barn.gpsCoordinates = new GpsCoordinates(0, 0);
+        if (this.barn.gpsCoordinates == null) {
+          this.barn.gpsCoordinates = new GpsCoordinates(0, 0);
+        }
         this.detailElement.addBeforeSavePromise(() => {
           return this.loadGeoCoordinates(this.barn);
         });
@@ -49,11 +52,13 @@ export class BarnsShowPage extends BasicShowPage {
         this.bindFarmerSelectField(loadEvent);
         this.bindGeoButton();
 
-            this.detailElement.shadowRoot?.querySelectorAll('open-objectives').forEach((element: any) => {
-              const button = element as OpenObjectivesButton;
-              button.amount = this.barn.currentMeasure;
-              if (this.barn.id) button.barnid = +this.barn.id;
-            });
+            this.detailElement
+                .shadowRoot?.querySelectorAll('open-objectives')
+                .forEach((element: any) => {
+                  const button = element as OpenObjectivesButton;
+                  button.amount = this.barn.currentMeasure;
+                  if (this.barn.id) button.barnid = +this.barn.id;
+                });
       });
     }
 
@@ -62,9 +67,10 @@ export class BarnsShowPage extends BasicShowPage {
      * @param {LoadedEvent} loadEvent
      * @param {VetproviehSelect} selectField
      */
-    private _disableFarmerSelect(loadEvent: LoadedEvent, selectField: VetproviehSelect) {
-      const event = loadEvent as LoadedEvent;
-      if ((event.data as Barn).id) {
+    private _disableFarmerSelect(
+        loadEvent: LoadedEvent,
+        selectField: VetproviehSelect) {
+      if ((loadEvent.data as Barn).id) {
         selectField.disable();
       }
     }
@@ -77,12 +83,13 @@ export class BarnsShowPage extends BasicShowPage {
     private loadGeoCoordinates(barn: Barn): Promise<any> {
       return new Promise((resolve, reject) => {
         console.log(barn);
-        if (barn.gpsCoordinates?.latitude === 0 && barn.gpsCoordinates?.longitude === 0) {
+        if (barn.gpsCoordinates?.latitude === 0 &&
+          barn.gpsCoordinates?.longitude === 0) {
           this.geoProvider.loadCoordinates(
               `${barn.address.streetName} ${barn.address.streetNumber}`,
               barn.address.postalCode,
               barn.address.city).then((event) => {
-            this.processGeoEvent(event as GeoEvent);
+            this.processGeoEvent(event);
             resolve(true);
           });
         } else {
@@ -114,7 +121,8 @@ export class BarnsShowPage extends BasicShowPage {
      * Binding GeoButton for Address
      */
     private bindGeoButton() {
-      const geoButton = this.detailElement.getByIdFromShadowRoot('geoDeviceButton') as GeoCoordButton;
+      const geoButton = this.detailElement
+          .getByIdFromShadowRoot('geoDeviceButton') as GeoCoordButton;
       if (geoButton) {
         this.addToMap(this.barn.gpsCoordinates);
 

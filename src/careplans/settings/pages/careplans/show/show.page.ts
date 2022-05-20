@@ -27,8 +27,12 @@ export class CarePlanShowPage extends PageWithReadOnly {
     this.addPositionToAddButton();
   }
 
+  /**
+   * Add Position Button
+   */
   private addPositionToAddButton() {
-    (this.addButton as HTMLAnchorElement).href += `&position=${this.maxPosition(this.currentObject.groups)}`;
+    const a = this.addButton as HTMLAnchorElement;
+    a.href += `&position=${this.maxPosition(this.currentObject.groups)}`;
   }
 
   /**
@@ -50,14 +54,14 @@ export class CarePlanShowPage extends PageWithReadOnly {
                 {{item.position}}
             </td>
             <td>
-                <a href="groups/show.html?id={{item.id}}${this.readOnlyLinkAttached}" >
+       <a href="groups/show.html?id={{item.id}}${this.readOnlyLinkAttached}" >
                     {{item.name}}
                 </a>
                 <input type="checkbox" disabled/>
             </td>
             <td class="small-td">
                 <button data-action="delete" type="button" 
-                        class="button is-danger is-small ${this.readOnly ? 'is-hidden' : ''}">
+          class="button is-danger is-small ${this.readOnly ? 'is-hidden' : ''}">
                         Löschen
                 </button>
             </td>
@@ -66,6 +70,7 @@ export class CarePlanShowPage extends PageWithReadOnly {
 
   /**
      * Showing Groups of a Careplan
+     * @param {Careplan} careplan
      * @private
      */
   private _showGroups(careplan: Careplan) {

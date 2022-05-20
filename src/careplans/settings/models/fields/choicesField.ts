@@ -1,4 +1,3 @@
-import {FieldGenerator} from '../../helpers';
 import {CareplanField} from '../careplanField';
 import {FieldOptions} from '../field_options';
 
@@ -21,7 +20,7 @@ export class ChoicesField extends CareplanField {
 
     /**
      * Get FieldParams for creating Fields
-     * @return {{[Identifier: string]: FieldOptions}}
+     * @return {any}
      */
     protected get fieldParams() : {[Identifier: string]: FieldOptions} {
       return {
@@ -33,7 +32,7 @@ export class ChoicesField extends CareplanField {
 }
 
 
-var CHOICE_SRCS = [
+const CHOICE_SRCS = [
   'MEDS',
   'XXXX',
 ];

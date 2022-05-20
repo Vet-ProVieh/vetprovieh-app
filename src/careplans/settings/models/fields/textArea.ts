@@ -9,6 +9,9 @@ export class TextArea extends CareplanField {
     public rows = 1;
     public cols = 20;
 
+    /**
+     * Default-Constructor
+     */
     constructor() {
       super();
       this.fieldType = 'textArea';
@@ -16,7 +19,7 @@ export class TextArea extends CareplanField {
 
     /**
      * Get FieldParams for creating Fields
-     * @return {{[Identifier: string]: FieldOptions}}
+     * @return {any}
      */
     protected get fieldParams() : {[Identifier: string]: FieldOptions} {
       return {

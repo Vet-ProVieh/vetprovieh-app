@@ -1,4 +1,7 @@
-import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehNavParams,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import {BarnListShow} from '../../../../../barns';
 
 // eslint-disable-next-line new-cap
@@ -10,12 +13,21 @@ import {BarnListShow} from '../../../../../barns';
  * Select a Careplan as a Page
  */
 export class SelectCareplanPage extends HTMLElement {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super();
   }
 
+  /**
+   * Connected-Callback
+   */
   connectedCallback() {
-    this.barnShower.attributeChangedCallback('barnid', '', VetproviehNavParams.getUrlParameter('barn_id'));
+    this.barnShower.attributeChangedCallback(
+        'barnid',
+        '',
+        VetproviehNavParams.getUrlParameter('barn_id'));
   }
 
 

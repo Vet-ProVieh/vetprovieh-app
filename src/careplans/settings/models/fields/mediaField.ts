@@ -1,11 +1,13 @@
 import {CareplanField} from '../careplanField';
 import {FieldOptions} from '../field_options';
 
-
+/**
+ * Media-Field
+ */
 export class MediaField extends CareplanField {
   /**
      * Get FieldParams for creating Fields
-     * @return {{[Identifier: string]: FieldOptions}}
+     * @return {any}
      */
   protected get fieldParams() : {[Identifier: string]: FieldOptions} {
     return {

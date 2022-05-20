@@ -1,5 +1,11 @@
-import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
-import {VetproviehElement, VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehBasicList,
+} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+import {
+  VetproviehElement,
+  VetproviehNavParams,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import {ObjectivesRepository} from '../../repository';
 
 // eslint-disable-next-line new-cap
@@ -46,17 +52,24 @@ import {ObjectivesRepository} from '../../repository';
                 </vetprovieh-pager>`,
   tag: 'objectives-list',
 })
+/**
+ * Objectives List Component
+ */
 export class ObjectivesListComponent extends VetproviehBasicList {
-  constructor() {
-    super();
-  }
-
+  /**
+   * ConnectedCallback
+   */
   connectedCallback() {
     super.connectedCallback();
-    this.repository = new ObjectivesRepository(VetproviehNavParams.getUrlParameter('barnId'));
+    const barnId = VetproviehNavParams.getUrlParameter('barnId');
+    this.repository = new ObjectivesRepository(barnId);
   }
 
-  protected elementSelected(event:any) {
+  /**
+   * ElementSelected Listener
+   * @param {any} event
+   */
+  public elementSelected(event:any) {
     const checkbox = event.target.querySelector('input[type=\'checkbox\']');
     if (checkbox) checkbox.checked = !checkbox.checked;
 

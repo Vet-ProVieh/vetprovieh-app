@@ -13,9 +13,6 @@ export class ReplaceFactory {
     private _data: any = {};
     private _barnId: string | number | undefined;
 
-    constructor() {
-    }
-
     /**
      * Replacing Placeholders in Measure
      * @param {Measure | undefined} measure
@@ -32,14 +29,18 @@ export class ReplaceFactory {
             });
             resolve(true);
           }).catch((error) => {
-            reject(false);
+            reject(error);
           });
         } else {
-          reject(false);
+          reject(new Error('No Measure'));
         }
       });
     }
 
+    /**
+     * Getting data
+     * @return {any}
+     */
     public get data() : any {
       return this._data;
     }
@@ -59,12 +60,15 @@ export class ReplaceFactory {
      * @param {MeasureField} field
      */
     private replacePlaceholdersInField(field: MeasureField) {
-      const newValue = ViewHelper.replacePlaceholdersInText(field.value, this.data);
+      const newValue = ViewHelper.replacePlaceholdersInText(
+          field.value,
+          this.data);
       field.value = newValue;
     }
 
     /**
      * Daten initailisieren
+     * @return {Promise<any>}
      */
     public initData(): Promise<any> {
       const promises = [];
@@ -76,6 +80,7 @@ export class ReplaceFactory {
 
     /**
      * Loading User from Server
+     * @return {Promise<any>}
      */
     private loadUser(): Promise<any> {
       this.userRepository = new UserRepository();
@@ -86,6 +91,7 @@ export class ReplaceFactory {
 
     /**
      * Loading Barn from Server
+     * @return {Promise<any>}
      */
     private async loadBarn(): Promise<any> {
       if (this._barnId) {

@@ -1,4 +1,7 @@
-import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehNavParams,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import * as bulmaToast from 'bulma-toast';
 import {BarnListShow} from '../../../barns';
 import {BasicShowPage} from '../../../shared/components/pages/showPage';
@@ -10,19 +13,32 @@ import {DocumentRepository} from '../../repository';
   tag: 'document-create',
   template: ``,
 })
+/**
+ * Document create Page
+ */
 export class DocumentCreatePage extends BasicShowPage {
     private repository = new DocumentRepository();
 
+    /**
+     * Connected-Callback
+     */
     connectedCallback() {
       this.bindUploadButton();
       this.bindFileInput();
       this.bindBackButton();
 
       setTimeout(() => {
-        this.barnShower.attributeChangedCallback('barnid', '', VetproviehNavParams.getUrlParameter('barnId'));
+        this.barnShower.attributeChangedCallback(
+            'barnid',
+            '',
+            VetproviehNavParams.getUrlParameter('barnId'));
       }, 300);
     }
 
+    /**
+     * getter barnId
+     * @return {string}
+     */
     private get barnId(): string {
       return VetproviehNavParams.getUrlParameter('barnId');
     }
@@ -54,7 +70,8 @@ export class DocumentCreatePage extends BasicShowPage {
     private bindFileInput() {
       this.fileInput.addEventListener('change', () => {
         if (this.fileInput.files) {
-          this.uploadButton.disabled = this.fileInput.files == null || !(this.fileInput.files.length > 0);
+          this.uploadButton.disabled = this.fileInput.files == null ||
+          !(this.fileInput.files.length > 0);
         }
       });
     }
@@ -94,8 +111,11 @@ export class DocumentCreatePage extends BasicShowPage {
 
     /**
      * Generating Document for send
+     * @param {any} sendFunction
      */
-    private generateAndSendDocuments(sendFunction: (doc: Document) => Promise<any>) {
+    private generateAndSendDocuments(
+        sendFunction: (doc: Document) => Promise<any>
+    ) {
       const input = this.fileInput;
       const promises = [];
       if (input && input.files) {
@@ -112,10 +132,11 @@ export class DocumentCreatePage extends BasicShowPage {
       }
 
       Promise.all(promises).then((result) => {
+        console.log(result);
         this.reset();
         this.showSuccess();
       }).catch((error) => {
-
+        console.warn(error);
       });
     }
 

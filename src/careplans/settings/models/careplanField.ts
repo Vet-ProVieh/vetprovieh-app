@@ -1,6 +1,9 @@
 import {BasicModel} from '../../../shared';
 import {FieldOptions} from './field_options';
 
+/**
+ * Careplan Field
+ */
 export class CareplanField extends BasicModel {
     name = '';
     fieldType = '';
@@ -13,7 +16,7 @@ export class CareplanField extends BasicModel {
 
     /**
      * Get FieldParams for creating Fields
-     * @return {{[Identifier: string]: FieldOptions}}
+     * @return {any}
      */
     protected get fieldParams() : {[Identifier: string]: FieldOptions} {
       return {

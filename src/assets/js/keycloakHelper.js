@@ -1,12 +1,11 @@
 /**
  * Helper for Keycloak
  */
-var KEYCLOAK_HELPER = undefined;
+let KEYCLOAK_HELPER = undefined;
 
 class KeycloakHelper {
-
   static instance() {
-    if(!KEYCLOAK_HELPER){
+    if (!KEYCLOAK_HELPER) {
       KEYCLOAK_HELPER = new KeycloakHelper();
       KEYCLOAK_HELPER.connect();
     }
@@ -16,24 +15,24 @@ class KeycloakHelper {
 
   constructor() {
     this._keycloakInstance = new Keycloak({
-      "realm": this.subdomain,
-      "auth-server-url": "/auth/",
-      "ssl-required": "none",
-      "clientId": "app",
-      "verify-token-audience": true,
-      "use-resource-role-mappings": true,
-      "confidential-port": 0
+      'realm': this.subdomain,
+      'auth-server-url': '/auth/',
+      'ssl-required': 'none',
+      'clientId': 'app',
+      'verify-token-audience': true,
+      'use-resource-role-mappings': true,
+      'confidential-port': 0,
     });
 
-    var _self = this;
+    const _self = this;
 
-    this._keycloakInstance.onAuthSuccess = function () {
+    this._keycloakInstance.onAuthSuccess = function() {
       _self.storeTokens();
       while (_self._callbackFunctions.length > 0) {
-        let func = _self._callbackFunctions.pop();
+        const func = _self._callbackFunctions.pop();
         func();
       }
-    }
+    };
   }
 
 
@@ -43,38 +42,36 @@ class KeycloakHelper {
    */
   get subdomain() {
     try {
-      let domain = window.location.hostname.split(".")[0];
-      if (domain == "localhost") {
-        return "praxisa";
+      const domain = window.location.hostname.split('.')[0];
+      if (domain == 'localhost') {
+        return 'praxisa';
       }
       return domain;
     } catch (ex) {
-      return "unknown";
+      return 'unknown';
     }
   }
 
   init() {
-    let token = this._token;
-    let refreshToken = this._refreshToken;
+    const token = this._token;
+    const refreshToken = this._refreshToken;
     return this._keycloakInstance.init({
       onLoad: 'login-required',
       token,
-      refreshToken
+      refreshToken,
     });
   }
 
   connect() {
-    let instance = this._keycloakInstance;
-    console.log("KeycloakHelper: Connecting");
-    this.init().then(function (authenticated) {
+    const instance = this._keycloakInstance;
+    console.log('KeycloakHelper: Connecting');
+    this.init().then(function(authenticated) {
       if (!authenticated) {
         instance.login({
           scope: 'openid offline_access',
         });
-
       }
-
-    }).catch(function (error) {
+    }).catch(function(error) {
       console.log(error);
       console.log('failed to initialize Keycloak');
     });
@@ -95,7 +92,7 @@ class KeycloakHelper {
   }
 
   get _token() {
-    return localStorage.getItem("kc_token");
+    return localStorage.getItem('kc_token');
   }
 
   get _refreshToken() {
@@ -112,52 +109,52 @@ class KeycloakHelper {
 
   get localTokenValid() {
     if (this._token) {
-      let content = this.parseJwt(this._token);
-      let currentTime = Math.round(new Date().getTime() / 1000);
+      const content = this.parseJwt(this._token);
+      const currentTime = Math.round(new Date().getTime() / 1000);
       return content.exp >= currentTime;
     }
     return false;
   }
 
   parseJwt(token) {
-    var base64Url = token.split('.')[1];
-    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function (c) {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
 
     return JSON.parse(jsonPayload);
-  };
+  }
 
   updateToken(amount) {
-    console.log("KeycloakHelper: UpdateToken");
-    var _self = this;
+    console.log('KeycloakHelper: UpdateToken');
+    const _self = this;
     return new Promise((resolve, reject) => {
       _self.instance.updateToken(amount)
-        .then(() => {
-          this.storeTokens();
-          resolve();
-        }).catch(reject);
-    })
+          .then(() => {
+            this.storeTokens();
+            resolve();
+          }).catch(reject);
+    });
   }
 
   attachToken(incomingArgs) {
-    console.log("Attach-Token");
-    var args = incomingArgs;
-    var i = args.length;
+    console.log('Attach-Token');
+    const args = incomingArgs;
+    let i = args.length;
 
     if (i > 1 && args[i - 1]) {
       args[i - 1] = Object.assign({}, args[i - 1], {
-        headers: {}
+        headers: {},
       });
       i--;
     } else {
       args[i] = {
-        headers: {}
-      }
+        headers: {},
+      };
     }
 
-    if(this.localTokenValid){
+    if (this.localTokenValid) {
       args[i].headers['Authorization'] = 'Bearer ' + this._token;
     } else {
       args[i].headers['Authorization'] = 'Bearer ' + this.instance.token;
@@ -181,9 +178,9 @@ class KeycloakHelper {
   _callbackFunctions = [];
 
   storeTokens() {
-    console.log("Storing Tokens");
-    localStorage.setItem("kc_token", this.instance.token);
-    localStorage.setItem("kc_token_parsed", JSON.stringify(this.instance.tokenParsed));
-    localStorage.setItem("kc_refreshToken", this.instance.refreshToken);
+    console.log('Storing Tokens');
+    localStorage.setItem('kc_token', this.instance.token);
+    localStorage.setItem('kc_token_parsed', JSON.stringify(this.instance.tokenParsed));
+    localStorage.setItem('kc_refreshToken', this.instance.refreshToken);
   }
 }

@@ -133,7 +133,11 @@ export class MeasureFieldComponent extends ElementBinding {
       const input = this.inputField;
       if (input) {
         input.addEventListener('change', (event) => {
-          this.dispatchEvent(new CustomEvent('change', {detail: (event.target as any).value}));
+          this.dispatchEvent(
+              new CustomEvent(
+                  'change',
+                  {detail: (event.target as any).value})
+          );
           this._isValid = input.checkValidity();
         });
         this._isValid = input.checkValidity();
@@ -154,7 +158,8 @@ export class MeasureFieldComponent extends ElementBinding {
      */
     public attachValue(value: any) {
       if (this.object.detailsType == 'textArea') {
-        const inputfield = this.querySelector('textarea') as HTMLTextAreaElement;
+        const inputfield = this
+            .querySelector('textarea') as HTMLTextAreaElement;
         if (inputfield) {
           inputfield.value += `${value}\r\n`;
         }

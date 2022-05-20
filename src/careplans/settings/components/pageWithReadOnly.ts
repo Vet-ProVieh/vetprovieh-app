@@ -1,6 +1,12 @@
-import {IRepository, VetproviehNavParams, VetproviehTable} from '@tomuench/vetprovieh-shared/lib';
+import {
+  IRepository,
+  VetproviehNavParams,
+  VetproviehTable} from '@tomuench/vetprovieh-shared/lib';
 import {BasicShowPage} from '../../../shared';
 
+/**
+ * page With Read Only
+ */
 export class PageWithReadOnly extends BasicShowPage {
   /**
      * CurrentView Readonly?
@@ -10,10 +16,17 @@ export class PageWithReadOnly extends BasicShowPage {
     return VetproviehNavParams.getUrlParameter('readOnly') == 'true';
   }
 
+  /**
+   * Read only Link attached
+   * @return {string}
+   */
   protected get readOnlyLinkAttached(): string {
     return this.readOnly ? '&readOnly=true' : '';
   }
 
+  /**
+   * Mark as read only
+   */
   protected markAsReadOnly() {
     if (this.readOnly) {
             this.addButton?.classList.add('is-hidden');
@@ -26,11 +39,23 @@ export class PageWithReadOnly extends BasicShowPage {
   }
 
 
+  /**
+   * get addButton
+   * @return {HTMLAnchorElement}
+   */
   protected get addButton(): HTMLAnchorElement {
-    return this.detailElement.getByIdFromShadowRoot('addButton') as HTMLAnchorElement;
+    return this.detailElement
+        .getByIdFromShadowRoot('addButton') as HTMLAnchorElement;
   }
 
-  protected setTemplateForTable(templateContent: string, repository: IRepository<any>) {
+  /**
+   * Set Template for Table
+   * @param {string} templateContent
+   * @param {IRepository<any>} repository
+   */
+  protected setTemplateForTable(
+      templateContent: string,
+      repository: IRepository<any>) {
     const repeater = this.getTable();
     const template: HTMLTemplateElement = document.createElement('template');
     template.innerHTML = templateContent;
@@ -43,6 +68,7 @@ export class PageWithReadOnly extends BasicShowPage {
      * @return {VetproviehTable}
      */
   protected getTable(): VetproviehTable {
-    return this.detailElement.getByIdFromShadowRoot('subItems') as VetproviehTable;
+    return this.detailElement
+        .getByIdFromShadowRoot('subItems') as VetproviehTable;
   }
 }

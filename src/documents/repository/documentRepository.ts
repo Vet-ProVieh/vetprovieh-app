@@ -2,25 +2,40 @@
 import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
 import {Document} from '../models/';
 import {v4 as uuidv4} from 'uuid';
-import {resolvePlugin} from '@babel/core';
 
+/**
+ * Document Repository
+ */
 export class DocumentRepository extends BaseRepository<Document> {
+  private _barnId = '';
+
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super('/service/upload/uploadFile');
   }
 
-
-  private _barnId = '';
+  /**
+   * Getter barnId
+   * @return {string}
+   */
   public get barnId(): string {
     return this._barnId;
   }
 
+  /**
+   * Setter barnId
+   * @param {string} v
+   */
   public set barnId(v: string) {
     this._barnId = v;
   }
 
   /**
    * Downloading Image/video to local blob
+   * @param {string} url
+   * @return {Promise<string|undefined>}
    */
   public download(url: string): Promise<string | undefined> {
     return new Promise((resolve, reject) => {
@@ -46,7 +61,7 @@ export class DocumentRepository extends BaseRepository<Document> {
 
   /**
    * Getting All
-   * @return Promise<T[]>
+   * @return {Promise<Document[]>}
    */
   all(): Promise<Document[]> {
     return fetch(`${this.endpoint}/barn/${this.barnId}`).then((response) => {
@@ -57,6 +72,11 @@ export class DocumentRepository extends BaseRepository<Document> {
     });
   }
 
+  /**
+   * Create a Document
+   * @param {Document} document
+   * @return {Promise<any>}
+   */
   create(document: Document): Promise<any> {
     return new Promise((resolve, reject) => {
       if (document.id == undefined) {
@@ -73,7 +93,7 @@ export class DocumentRepository extends BaseRepository<Document> {
           location = location?.substr(location.lastIndexOf('/') + 1);
           resolve(`/service/upload/uploadFile/${location}`);
         })
-            .catch((e) => reject(false));
+            .catch((e) => reject(e));
       }
     });
   }
@@ -82,6 +102,7 @@ export class DocumentRepository extends BaseRepository<Document> {
   /**
    * Building FormData to send
    * @param {Document} document
+   * @return {FormData}
    */
   private buildRequestdata(document: Document): FormData {
     const formData = new FormData();

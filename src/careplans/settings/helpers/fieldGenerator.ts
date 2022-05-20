@@ -1,13 +1,13 @@
 import {CareplanField} from '../models/careplanField';
 
 /**
- *
+ * Field Generator
  */
 export class FieldGenerator {
   /**
      * Generating Fields
      * @param {string} key
-     * @retrun {HTMLElement[]}
+     * @return {HTMLElement[]}
      */
   public static generate(key: string): HTMLElement[] {
     if (key) {
@@ -41,4 +41,4 @@ export class FieldGenerator {
 }
 
 
-var FieldTypesToClass: { [Identifier: string]: CareplanField } = {};
+const FieldTypesToClass: { [Identifier: string]: CareplanField } = {};

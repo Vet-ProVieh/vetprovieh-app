@@ -1,7 +1,13 @@
 import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
 import {OperationPlan} from '../models';
 
+/**
+ * OperationPlans Repository
+ */
 export class OperationPlansRepository extends BaseRepository<OperationPlan> {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super('/service/operationplans');
   }
@@ -20,11 +26,11 @@ export class OperationPlansRepository extends BaseRepository<OperationPlan> {
                 resolve(URL.createObjectURL(blob));
               }));
             } else {
-              reject(null);
+              reject(response);
             }
           }).catch((error) => {
-            console.log(error);
-            reject(null);
+            console.warn(error);
+            reject(error);
           });
     });
   }

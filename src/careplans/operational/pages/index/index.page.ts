@@ -12,11 +12,17 @@ import {OperationPlansRepository} from '../../repository/plans_repository';
  * OperationPlan IndexPage
  */
 export class OpertionPlanIndexPage extends BasicIndexPage<OperationPlan> {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super(new OperationPlansRepository());
   }
 
 
+  /**
+   * Connected-Callback
+   */
   connectedCallback() {
     super.connectedCallback();
 

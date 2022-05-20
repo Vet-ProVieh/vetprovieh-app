@@ -1,8 +1,13 @@
-import {WebComponent, VetproviehElement, VetproviehNavParams} from '@tomuench/vetprovieh-shared/lib';
-import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+import {
+  WebComponent,
+  VetproviehElement,
+  VetproviehNavParams,
+} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehBasicList,
+} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
 import {OperationPlanBluerprintsRepository} from '../repository';
 import {Careplan} from '../../settings';
-import {AStoreLocal} from '../../../shared';
 
 // eslint-disable-next-line new-cap
 @WebComponent({
@@ -22,7 +27,8 @@ import {AStoreLocal} from '../../../shared';
             <div id="searchControl" class="control">
                 <div class="field">
                     <div class="field-body">
-                        <textarea id="search" class="input" type="text" is="voice-input"
+                        <textarea id="search"
+                        class="input" type="text" is="voice-input"
                                 placeholder="Bitte Suchbegriff eingeben">
                         </textarea>
                     </div>
@@ -42,16 +48,27 @@ import {AStoreLocal} from '../../../shared';
  * Select an existing careplan
  */
 export class SelectCareplan extends VetproviehBasicList {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super();
 
     this.repository = new OperationPlanBluerprintsRepository();
   }
 
+  /**
+   * Getter selected animal type
+   * @return {string}
+   */
   private get selectedAnimalType(): string {
     return VetproviehNavParams.getUrlParameter('animal');
   }
 
+  /**
+   * Getter selected barn id
+   * @return {string}
+   */
   private get selectedBarnId(): string {
     return VetproviehNavParams.getUrlParameter('barn_id');
   }
@@ -82,12 +99,20 @@ export class SelectCareplan extends VetproviehBasicList {
   }
 
 
+  /**
+   * Set list template
+   * @param {HTMLTemplateElement} template
+   */
   public setlistTemplate(template: HTMLTemplateElement) {
     if (template && this._listTemplate !== template.content) {
-      const anchor = template.content.querySelector('store-local-link') as HTMLElement;
+      const anchor = template.content
+          .querySelector('store-local-link') as HTMLElement;
       if (anchor) {
         const href = anchor.getAttribute('href');
-        anchor.setAttribute('href', href + `?barn_id=${VetproviehNavParams.getUrlParameter('barn_id')}`);
+        anchor.setAttribute(
+            'href',
+            href +
+            `?barn_id=${VetproviehNavParams.getUrlParameter('barn_id')}`);
       }
       this._listTemplate = template.content;
     }

@@ -1,12 +1,22 @@
 import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
 import {Drugreport} from '../models';
 
+/**
+ * Drugreport Repository
+ */
 export class DrugreportRepository extends BaseRepository<Drugreport> {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super('/service/drugreports');
   }
 
-  // Report treatments to make drugreport
+  /**
+   * Get Report
+   * @param {string} id
+   * @return {Promise}
+   */
   report(id: string) {
     return new Promise((resolve, reject) => {
       fetch(`${this.endpoint}/hit/treatment_id/${id}`, {
@@ -14,7 +24,7 @@ export class DrugreportRepository extends BaseRepository<Drugreport> {
       }).then((response) => {
         resolve(response.ok);
       }).catch((response) => {
-        reject(false);
+        reject(response);
       });
     });
   }

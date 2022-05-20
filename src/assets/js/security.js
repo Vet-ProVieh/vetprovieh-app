@@ -1,27 +1,25 @@
-var keycloakHelper = KeycloakHelper.instance();
+const keycloakHelper = KeycloakHelper.instance();
 if (!keycloakHelper.authenticated) {
-  keycloakHelper.onAuthSuccess = function () {
-
-  }
+  keycloakHelper.onAuthSuccess = function() {
+    console.log('Auth was successful');
+  };
 }
 
 const proxied = window.fetch;
-window.fetch = function () {
+window.fetch = function() {
   return new Promise((resolve, reject) => {
-    let _args = arguments;
-    keycloakHelper.onAuthSuccess = function () {
-      var args = keycloakHelper.attachToken(_args);
-      let request = new Request(args[0], args[1])
+    const _args = arguments;
+    keycloakHelper.onAuthSuccess = function() {
+      const args = keycloakHelper.attachToken(_args);
+      const request = new Request(args[0], args[1]);
       proxied(request).then(resolve).catch(reject);
     };
-    // TODO unsauber gelöst. Hier muss noch nachgearbeitet werden.
-
   });
 };
 
 
-var proxiedOpen = window.XMLHttpRequest.prototype.send;
-window.XMLHttpRequest.prototype.send = function () {
+const proxiedOpen = window.XMLHttpRequest.prototype.send;
+window.XMLHttpRequest.prototype.send = function() {
   keycloakHelper.setRequestHeader(this);
   return proxiedOpen.apply(this, [].slice.call(arguments));
 };

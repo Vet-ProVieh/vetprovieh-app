@@ -1,15 +1,21 @@
 import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
 import {Measure} from '../models';
 
+/**
+ * Measures Repository
+ */
 export class MeasuresRepository extends BaseRepository<Measure> {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super('/service/measures');
   }
 
   /**
    * Open Measures for Barn
-   * @param barnId
-   * @returns
+   * @param {number}barnId
+   * @return {Promise<Measure[]>}
    */
   openMeasuresForBarn(barnId: number): Promise<Measure[]> {
     return fetch(`/service/barns/${barnId}/currentMeasures/`)
@@ -20,6 +26,7 @@ export class MeasuresRepository extends BaseRepository<Measure> {
             throw Error(response.statusText);
           }
         }).catch((error) => {
+          console.warn(error);
           return [];
         });
   }
@@ -41,14 +48,15 @@ export class MeasuresRepository extends BaseRepository<Measure> {
             throw Error(response.statusText);
           }
         }).catch((error) => {
+          console.warn(error);
           return [];
         });
   }
 
   /**
     * Suche mit Parametern
-    * @param {{ [Identifier: string]: string }} params
-    * @returns Promise<T[]>
+    * @param {any} params
+    * @return {Promise<Measure[]>}
     */
   whereByParams(params: { [Identifier: string]: string }): Promise<Measure[]> {
     if (params.type == 'open') {
@@ -72,11 +80,11 @@ export class MeasuresRepository extends BaseRepository<Measure> {
                 resolve(URL.createObjectURL(blob));
               }));
             } else {
-              reject(null);
+              reject(response);
             }
           }).catch((error) => {
-            console.log(error);
-            reject(null);
+            console.warn(error);
+            reject(error);
           });
     });
   }
@@ -95,6 +103,7 @@ export class MeasuresRepository extends BaseRepository<Measure> {
             throw Error(response.statusText);
           }
         }).catch((error) => {
+          console.warn(error);
           return undefined;
         });
   }

@@ -172,7 +172,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     this.shadowRoot?.querySelectorAll('a').forEach((a: HTMLAnchorElement) => {
       if (a) {
         this.categories.push(a);
-        a.addEventListener('click', (event) => {
+        a.addEventListener('click', () => {
           this.activateTabAnchor(a);
           this.deactiveTabAnchors(a);
         });

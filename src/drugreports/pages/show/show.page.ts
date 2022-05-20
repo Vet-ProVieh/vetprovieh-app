@@ -31,7 +31,8 @@ export class DrugreportShowPage extends BasicShowPage {
     * Executed after Data is loaded
     */
   protected afterDataLoaded() {
-    const list = this.detailElement.shadowRoot?.querySelector('vetprovieh-list') as VetproviehList;
+    const list = this.detailElement
+        .shadowRoot?.querySelector('vetprovieh-list') as VetproviehList;
     list.attachData([this.currentObject.drugsTreatments], '', true);
   }
 

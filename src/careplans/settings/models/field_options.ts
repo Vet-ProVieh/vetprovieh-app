@@ -7,6 +7,11 @@ export class FieldOptions {
     public tag: string;
     public type: string;
 
+    /**
+     * Default-Constructor
+     * @param {string} tag
+     * @param {string} type
+     */
     constructor(tag: string, type = '') {
       this.tag = tag;
       this.type = type;
@@ -22,7 +27,7 @@ export class FieldOptions {
 
     /**
      * Css-Classes for Type
-     * @return {Array<string>}
+     * @return {string[]}
      */
     public get classList(): string[] {
       const list: string[] = [];
@@ -53,7 +58,7 @@ export class FieldOptions {
 
     /**
      * Create a Field with Field-Options
-     * @param {FieldOptions} options
+     * @param {string} propertyKey
      * @return {HTMLElement}
      */
     public createInputField(propertyKey: string): HTMLElement {
@@ -71,7 +76,9 @@ export class FieldOptions {
 
 
     public static INPUT_NUMBER = new FieldOptions('bulma-input', 'number');
-    public static INPUT_CHECKBOX = new FieldOptions('bulma-input-checkbox', 'checkbox');
+    public static INPUT_CHECKBOX = new FieldOptions(
+        'bulma-input-checkbox',
+        'checkbox');
     public static INPUT_TEXT = new FieldOptions('bulma-input', 'text');
     public static CUSTOM_CHOICES = new FieldOptions('custom-choices');
 }

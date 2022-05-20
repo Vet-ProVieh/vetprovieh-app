@@ -20,11 +20,15 @@ export class SelectFieldType extends VetproviehElement {
 
     /**
       * Observed Attributes
+      * @return {string[]}
       */
-    static get observedAttributes() {
+    static get observedAttributes() : string[] {
       return ['fieldtype'];
     }
 
+    /**
+     * Default-Constructor
+     */
     constructor() {
       super(false, false);
       this.render();
@@ -49,6 +53,9 @@ export class SelectFieldType extends VetproviehElement {
       }
     }
 
+    /**
+     * Render
+     */
     public render() {
       super.render();
       this.createAndAttachFields(this.fieldtype);

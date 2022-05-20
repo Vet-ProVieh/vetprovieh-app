@@ -16,10 +16,16 @@ import {Animal} from '../../../../../barns';
 export class CarePlanIndexPage extends BasicIndexPage<Careplan> {
     private animals = Animal.all();
 
+    /**
+     * Default-Constructor
+     */
     constructor() {
       super(new CareplansRepository());
     }
 
+    /**
+     * Connected-Callback
+     */
     connectedCallback() {
       super.connectedCallback();
       this.attachListenerToDuplicateButtons();
@@ -77,8 +83,13 @@ export class CarePlanIndexPage extends BasicIndexPage<Careplan> {
       });
     }
 
+    /**
+     * Replace Animal Code
+     * @param {HTMLParagraphElement} paragraph
+     */
     private replaceAnimalCode(paragraph: HTMLParagraphElement) {
-      const animal = this.animals.filter((a) => a.code == paragraph.innerHTML)[0];
+      const animal = this.animals
+          .filter((a) => a.code == paragraph.innerHTML)[0];
       if (animal) {
         paragraph.innerHTML = animal.name;
       }

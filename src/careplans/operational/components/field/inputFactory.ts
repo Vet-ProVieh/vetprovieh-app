@@ -1,5 +1,7 @@
 
-
+/**
+ * Input-Factory
+ */
 export class InputFactory {
   /**
      * Return Extension vor voice-input
@@ -16,6 +18,7 @@ export class InputFactory {
 
   /**
      * Is Field required?
+     * @param {boolean} required
      * @return {string} "required" | ""
      */
   private static isRequired(required: boolean): string {
@@ -43,6 +46,7 @@ export class InputFactory {
      * Generating specific tag
      * @param {string} tag
      * @param {string} value
+     * @return {string}
      */
   private static genTag(tag: string, value: string): string {
     if (tag && value === '') {
@@ -67,6 +71,7 @@ export class InputFactory {
      * Generating a InputField
      * @param {string} fieldType
      * @param {any} options
+     * @return {string}
      */
   static generateField(fieldType: string, options: any): string {
     let response = '';
@@ -115,41 +120,46 @@ export class InputFactory {
   /**
      * Generating a FileUpload
      * @param {any} options
+     * @return {string}
      */
   private static buildFileUpload(options: any): string {
     return `<file-upload ` +
       this.genTag('barnid', options.barnId) +
       this.genTag('property', 'value') +
       this.genTag('name', options.name) +
-      this.isRequired(options.optional != true) +
+      this.isRequired(!options.optional) +
       `></file-upload>`;
   }
 
   /**
      * Generating a VideoArea
      * @param {any} options
+     * @return {string}
      */
   private static buildDatePicker(options: any): string {
     return `<input ` +
       this.genTag('property', 'value') +
       this.genTag('name', options.name) +
       `class="input" type="date" ` +
-      this.isRequired(options.optional != true) +
+      this.isRequired(!options.optional) +
       `></input>`;
   }
 
   /**
      * Generating a VideoArea
      * @param {any} options
+     * @return {string}
      */
   private static buildVideo(options: any): string {
-    return `<vetprovieh-video ${this.genTag('barnid', options.barnId)} ${this.genTag('property', 'value')} ${this.genTag('name', options.name)}></vetprovieh-video>`;
+    return `<vetprovieh-video ${this.genTag('barnid', options.barnId)} ` +
+    `${this.genTag('property', 'value')} ` +
+    `${this.genTag('name', options.name)}></vetprovieh-video>`;
   }
 
   /**
      * Creating Bulma Checkbox
-     * @param options
-     * @returns
+     * @param {any} options
+     * @return {string}
      */
   private static buildCheckbox(options: any): string {
     return `<bulma-multi-checkbox 
@@ -176,6 +186,7 @@ export class InputFactory {
   /**
      * Generating a VideoArea
      * @param {any} options
+     * @return {string}
      */
   private static buildImage(options: any): string {
     return `<vetprovieh-image ` +
@@ -189,6 +200,7 @@ export class InputFactory {
   /**
      * Generating a TextArea
      * @param {any} options
+     * @return {string}
      */
   private static buildTextArea(options: any): string {
     return `<textarea ` +
@@ -198,7 +210,7 @@ export class InputFactory {
       this.genTag('rows', options.rows) +
       this.isVoiceInputable(options.voiceInputable) +
       `class="textarea" type="text" ` +
-      this.isRequired(options.optional != true) +
+      this.isRequired(!options.optional) +
       `></textarea>`;
   }
 
@@ -237,7 +249,7 @@ export class InputFactory {
       this.genTag('property', 'value') +
       this.genTag('name', options.name) +
       this.isVoiceInputable(options.voiceInputable) +
-      this.isRequired(options.optional != true) +
+      this.isRequired(!options.optional) +
       `class="input" type="text"></textarea>`;
   }
 
@@ -254,19 +266,25 @@ export class InputFactory {
       this.genTag('style', options.style) +
       this.genTag('name', options.name) +
       this.isMultiple(options.multipleSelect) +
-      this.isRequired(options.optional != true) +
+      this.isRequired(!options.optional) +
       `>${this.buildOptionTags(options.choices)}</select></div>`;
   }
 
+  /**
+   * Create a vetprovieh select
+   * @param {any} options
+   * @return {string}
+   */
   private static buildVetproviehSelect(options: any): string {
     return `<div class="select is-multiple" style="width:100%;">` +
-      `<vetprovieh-select display="approvalNumber" internalprop="approvalNumber" ` +
+      `<vetprovieh-select display="approvalNumber" `+
+      `internalprop="approvalNumber" ` +
       this.genTag('property', 'value') +
       this.genTag('size', options.size) +
       this.genTag('style', options.style) +
       this.genTag('name', options.name) +
       this.isMultiple(options.multipleSelect) +
-      this.isRequired(options.optional != true) +
+      this.isRequired(!options.optional) +
       `>
             <template>
                 <div style="padding:5px">
@@ -284,8 +302,9 @@ export class InputFactory {
   private static buildOptionTags(choices: string[]): string {
     const blank = `<option value=""></option>`;
     if (choices) {
-      return blank + choices.map((choice) => `<option value="` + choice + `">` + choice + `</option>`)
-          .join('\r\n');
+      return blank + choices.map((choice) => {
+        return `<option value="` + choice + `">` + choice + `</option>`;
+      }).join('\r\n');
     } else {
       return '';
     }

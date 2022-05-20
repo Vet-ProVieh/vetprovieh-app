@@ -1,14 +1,20 @@
 import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
-import {TreatmentKeys} from '../models';
+import {TreatmentKeys} from '../../drugtreatments';
 
+/**
+ * DrugTreatmentKeys Repository
+ */
 export class DrugTreatmentKeysRepository extends BaseRepository<TreatmentKeys> {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super(`/service/drugtreatments/treatmentKeys`);
   }
 
   /**
      * Getting All
-     * @return Promise<T[]>
+     * @return {Promise<string[]>}
      */
   keys(): Promise<string[]> {
     return fetch(this.endpoint).then((response) => {

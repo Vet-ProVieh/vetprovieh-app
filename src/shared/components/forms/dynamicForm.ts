@@ -93,7 +93,6 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
    */
   protected buildGroupComponent(): ElementGroupBinding {
     throw new Error('Please define buildGroupComponent in your Child-Class');
-    return new ElementGroupBinding();
   }
 
   /**
@@ -135,7 +134,7 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
    * @param {any} data
    * @protected
    */
-  private _afterFetch(data: any) {
+  protected _afterFetch(data: any) {
     this._fetched = true;
     this._setGroupComponent();
   }

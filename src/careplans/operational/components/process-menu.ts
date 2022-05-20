@@ -1,4 +1,8 @@
-import {VetproviehBasicRepeat, VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehBasicRepeat,
+  VetproviehElement,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 
 
 // eslint-disable-next-line new-cap
@@ -15,6 +19,9 @@ import {VetproviehBasicRepeat, VetproviehElement, WebComponent} from '@tomuench/
  * is used to display the right menu inside some process.
  */
 export class ProcessMenu extends VetproviehBasicRepeat {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super(specialListTemplate());
   }

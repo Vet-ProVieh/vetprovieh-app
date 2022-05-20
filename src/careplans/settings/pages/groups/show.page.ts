@@ -8,6 +8,9 @@ import {CareplanFieldRepository} from '../../repository';
   template: '',
   tag: 'careplan-group-page',
 })
+/**
+ * CareplanGroup ShowPage
+ */
 export class CarePlanGroupShowPage extends PageWithReadOnly {
   /**
      * Lifecycle
@@ -21,19 +24,33 @@ export class CarePlanGroupShowPage extends PageWithReadOnly {
     (this.addButton as any).disabled = !(this.detailElement.currentObject.id);
     this.markAsReadOnly();
 
-    this.setUrlParameter(this.currentObject, 'careplanId', 'carePlans', (i: string) => {
-      return {id: parseInt(i)};
-    });
-    this.setUrlParameter(this.currentObject, 'position', 'position', parseInt);
+    this.setUrlParameter(
+        this.currentObject,
+        'careplanId',
+        'carePlans',
+        (i: string) => {
+          return {id: parseInt(i)};
+        });
+    this.setUrlParameter(
+        this.currentObject,
+        'position',
+        'position',
+        parseInt);
 
     this.addPositionToAddButton();
   }
 
-
+  /**
+   * Adding addButton to Position
+   */
   private addPositionToAddButton() {
-    (this.addButton as HTMLAnchorElement).href += `&position=${this.maxPosition(this.currentObject.fields)}`;
+    const aElement = (this.addButton as HTMLAnchorElement);
+    aElement.href += `&position=${this.maxPosition(this.currentObject.fields)}`;
   }
 
+  /**
+   * Set Template for Fields
+   */
   private _setTemplateForFields() {
     this.setTemplateForTable(`
             <tr class="item">
@@ -41,13 +58,13 @@ export class CarePlanGroupShowPage extends PageWithReadOnly {
                     {{item.position}}
                 </td>
                 <td>
-                    <a href="../fields/show.html?id={{item.id}}${this.readOnlyLinkAttached}">
+      <a href="../fields/show.html?id={{item.id}}${this.readOnlyLinkAttached}">
                         {{item.name}}
                     </a>
                 </td>
                 <td class="small-td">
                     <button data-action="delete" type="button" 
-                            class="button is-danger is-small ${this.readOnly ? 'is-hidden' : ''}">
+          class="button is-danger is-small ${this.readOnly ? 'is-hidden' : ''}">
                             Löschen
                     </button>
                 </td>

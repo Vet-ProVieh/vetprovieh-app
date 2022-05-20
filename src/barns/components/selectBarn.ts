@@ -1,7 +1,12 @@
-import {VetproviehBasicList} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+import {
+  VetproviehBasicList,
+} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
 import {GpsCoordinates} from '../../shared';
 import {Barn} from '../models';
-import {WebComponent, VetproviehElement, GeoHelper} from '@tomuench/vetprovieh-shared/lib';
+import {
+  WebComponent,
+  VetproviehElement,
+  GeoHelper} from '@tomuench/vetprovieh-shared/lib';
 import {BarnsRepository} from '../repository';
 
 // eslint-disable-next-line new-cap
@@ -91,7 +96,6 @@ export class SelectBarn extends VetproviehBasicList {
           (barn as any).distance = Math.round(distance / 10.00) / 100.00;
           return distance;
         } else {
-          // TODO Really Zero? Without GPS-Coordinates no destination
           return 0;
         }
       } else {

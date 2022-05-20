@@ -1,11 +1,11 @@
 
-import {ObjectHelper, VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  ObjectHelper,
+  VetproviehElement,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import {KeyResult, KeyResultMilestones} from '../../models/keyresult';
 
-/**
- * Controller for Page
- * pages/operations/plans/create or edit
- */
 // eslint-disable-next-line new-cap
 @WebComponent({
   template:
@@ -16,7 +16,9 @@ import {KeyResult, KeyResultMilestones} from '../../models/keyresult';
             \${this.keyResult.name}
         </div>
         <div class="column is-one-third" style="text-align: right;">
-            <button id="check" \${this._editable ? '' : 'disabled'} type="button" class="button small">
+            <button id="check" \${this._editable ? '' : 'disabled'}
+            type="button"
+            class="button small">
               <i class="fas fa-check" aria-hidden="true"></i>
             </button>
         </div>
@@ -26,17 +28,32 @@ import {KeyResult, KeyResultMilestones} from '../../models/keyresult';
     `,
   tag: 'vp-key-result',
 })
+/**
+ * Key-Result-Component
+ */
 export class KeyResultComponent extends VetproviehElement {
   private _keyResult: KeyResult = new KeyResult();
   private _editable = false;
 
   /**
-   * Show editable Buttons or not
-   * @property {string} editable
+   * Default-Constructor
+   */
+  constructor() {
+    super(true, false);
+  }
+
+  /**
+   * Getter editable
+   * @return {string}
    */
   public get editable(): string {
     return this._editable.toString();
   }
+
+  /**
+   * Setter editable
+   * @param {string} v
+   */
   public set editable(v: string) {
     const vAsBool = ObjectHelper.stringToBool(v);
     if (this._editable !== vAsBool) {
@@ -52,10 +69,18 @@ export class KeyResultComponent extends VetproviehElement {
     this.checkKeyResultButton.disabled = !this._editable;
   }
 
+  /**
+   * Getter keyResult
+   * @return {KeyResult}
+   */
   public get keyResult(): KeyResult {
     return this._keyResult;
   }
 
+  /**
+   * Setter keyResult
+   * @param {KeyResult} val
+   */
   public set keyResult(val: KeyResult) {
     if (this.keyResult !== val) {
       this._keyResult = val;
@@ -63,10 +88,9 @@ export class KeyResultComponent extends VetproviehElement {
     }
   }
 
-  constructor() {
-    super(true, false);
-  }
-
+  /**
+   * Render
+   */
   render() {
     super.render();
     this.renderCurrentState();

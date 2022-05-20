@@ -1,5 +1,10 @@
-import {VetproviehSelect} from '@tomuench/vetprovieh-select/lib/vetprovieh-select';
-import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehSelect,
+} from '@tomuench/vetprovieh-select/lib/vetprovieh-select';
+import {
+  VetproviehNavParams,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import * as bulmaToast from 'bulma-toast';
 import {BarnsRepository} from '../../../barns/repository';
 import {DrugreportRepository} from '../../../drugreports';
@@ -38,6 +43,9 @@ export class DrugtreatmentShowPage extends BasicShowPage {
       super.connectedCallback();
     }
 
+    /**
+     * afterDataLoadCallback
+     */
     protected afterDataLoaded() {
       this.bindFarmerSelectField();
       this.bindBarnSelectField();
@@ -52,16 +60,29 @@ export class DrugtreatmentShowPage extends BasicShowPage {
       return this.currentObject as Drugtreatment;
     }
 
+    /**
+     * Getter drugs
+     * @return {Drug[]}
+     */
     private get drugs(): Drug[] {
       return this.drugtreatment.drugs;
     }
 
+    /**
+     * Getter ReportField
+     * @return {HTMLElement}
+     */
     private get isReportedField(): HTMLElement {
-      return this.detailElement?.getByIdFromShadowRoot('is-reported') as HTMLElement;
+      return this
+          .detailElement?.getByIdFromShadowRoot('is-reported') as HTMLElement;
     }
 
+    /**
+     * Report-Button
+     */
     private get reportButton(): HTMLButtonElement {
-      return this.detailElement?.getByIdFromShadowRoot('report') as HTMLButtonElement;
+      return this
+          .detailElement?.getByIdFromShadowRoot('report') as HTMLButtonElement;
     }
 
     /**
@@ -72,14 +93,20 @@ export class DrugtreatmentShowPage extends BasicShowPage {
       if (this.drugtreatment.isReported) {
         this.isReportedField.textContent = 'ja';
         this.reportButton.disabled = true;
-        this.reportButton.addEventListener('click', ()=>{});
       } else {
         this.reportButton.addEventListener('click', ()=>{
-          this.drugReportRep.report(this.barnId).then((msg) => {
-            bulmaToast.toast({message: 'Melden erfolgreich!', type: 'is-success'});
+          this.drugReportRep.report(this.barnId).then(() => {
+            bulmaToast.toast({
+              message: 'Melden erfolgreich!',
+              type: 'is-success',
+            });
             this.reportButton.disabled = true;
-          }).catch((msg) => {
-            bulmaToast.toast({message: 'Melden fehlgeschlagen', type: 'is-danger'});
+          }).catch((ex) => {
+            console.warn(ex);
+            bulmaToast.toast({
+              message: 'Melden fehlgeschlagen',
+              type: 'is-danger',
+            });
           });
         });
       }
@@ -89,7 +116,8 @@ export class DrugtreatmentShowPage extends BasicShowPage {
      * Binding
      */
     private bindFarmerSelectField() {
-      const selectField: VetproviehSelect = this.detailElement.getByIdFromShadowRoot('farmer') as VetproviehSelect;
+      const selectField: VetproviehSelect = this.detailElement
+          .getByIdFromShadowRoot('farmer') as VetproviehSelect;
       if (selectField) {
         selectField.repository = new FarmersRepository();
       }
@@ -99,7 +127,8 @@ export class DrugtreatmentShowPage extends BasicShowPage {
      * Binding
      */
     private bindBarnSelectField() {
-      const selectField: VetproviehSelect = this.detailElement.getByIdFromShadowRoot('barn') as VetproviehSelect;
+      const selectField: VetproviehSelect = this.detailElement
+          .getByIdFromShadowRoot('barn') as VetproviehSelect;
       if (selectField) {
         selectField.repository = new BarnsRepository();
       }
