@@ -8,6 +8,7 @@ import {
   VetproviehElement,
   GeoHelper} from '@tomuench/vetprovieh-shared/lib';
 import {BarnsRepository} from '../repository';
+import {BaseModel} from '@tomuench/vetprovieh-shared/lib/orm/baseModel';
 
 // eslint-disable-next-line new-cap
 @WebComponent({
@@ -54,7 +55,7 @@ export class SelectBarn extends VetproviehBasicList {
 
       this.repository = new BarnsRepository();
 
-      this._loadCurrentGpsCoordinates().then((res) => {
+      this._loadCurrentGpsCoordinates().then(() => {
         this.calculateDistances();
         this._filterObjects();
       });
@@ -66,8 +67,9 @@ export class SelectBarn extends VetproviehBasicList {
     private calculateDistances() {
       setInterval(() => {
         if (this.objects) {
-          this._loadCurrentGpsCoordinates().then((res) => {
-            this.objects.forEach((b: Barn) => this.calcDistance(b, true));
+          this._loadCurrentGpsCoordinates().then(() => {
+            this.objects
+                .forEach((b: BaseModel) => this.calcDistance(b as Barn, true));
             this._filterObjects();
           });
         }
@@ -131,7 +133,7 @@ export class SelectBarn extends VetproviehBasicList {
             .then((pos: GpsCoordinates) => {
               this.currentGpsPosition = pos;
               resolve(true);
-            });
+            }).catch((e) => reject(e));
       });
     }
 }

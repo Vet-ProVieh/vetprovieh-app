@@ -64,21 +64,26 @@ export class RecordingRtcModal extends RecordingModal {
    * Add Listener to Buttons
    */
   protected addButtonListeners() {
-    const _self = this;
-
     this.bindFileChooser();
 
-    this.startButton.addEventListener('click', () => {
-      this.startRecording(_self);
+    const startRecordingFunc = () => {
+      this.startRecording(this);
       this.startButton.classList.add('is-hidden');
       this.fileButton.classList.add('is-hidden');
-    });
-    this.stopButton.addEventListener('click', () => {
-      this.stopRecording(_self);
+    };
+
+    const stopRecordingFunc = () => {
+      this.stopRecording(this);
       this.stopButton.classList.add('is-hidden');
       this.startButton.classList.add('is-hidden');
       this.takeoverButton.classList.remove('is-hidden');
-    });
+    };
+
+    startRecordingFunc.bind(this);
+    stopRecordingFunc.bind(this);
+
+    this.startButton.addEventListener('click', startRecordingFunc);
+    this.stopButton.addEventListener('click', stopRecordingFunc);
 
     const closeFuncTakeover = () => {
       this.recordedContent = this._content;

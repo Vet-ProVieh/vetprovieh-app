@@ -8,7 +8,13 @@ import {DrugsRepository} from '../../repository';
   template: '',
   tag: 'vetprovieh-drugs',
 })
+/**
+ * Drugs-Index-Page
+ */
 export class DrugsIndexPage extends BasicIndexPage<Drug> {
+  /**
+   * Default-Constructor
+   */
   constructor() {
     super(new DrugsRepository());
   }

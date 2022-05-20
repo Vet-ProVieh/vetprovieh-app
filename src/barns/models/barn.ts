@@ -2,7 +2,9 @@ import {Farmer} from '../../farmers';
 import {BasicModel, Address, GpsCoordinates} from '../../shared';
 import {User} from '../../users/models';
 
-
+/**
+ * Barn-Model
+ */
 export class Barn extends BasicModel {
     address: Address = new Address();
     deleted = 0;

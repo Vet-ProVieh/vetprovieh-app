@@ -4,9 +4,11 @@ import {registerRoute} from 'workbox-routing';
 import {NetworkOnly} from 'workbox-strategies';
 
 const version = '0.1.3';
+console.debug('Service-Worker Version ' + version);
 
 const bgSyncPlugin = new BackgroundSyncPlugin('vetproviehSync', {
-  maxRetentionTime: 7 * 24 * 60, // Retry for max of 24 Hours (specified in minutes)
+  maxRetentionTime: 7 * 24 * 60,
+  // Retry for max of 24 Hours (specified in minutes)
 });
 
 const route = registerRoute(
@@ -16,3 +18,6 @@ const route = registerRoute(
     }),
     'POST'
 );
+
+
+console.debug(route);

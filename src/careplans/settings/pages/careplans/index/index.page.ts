@@ -37,7 +37,6 @@ export class CarePlanIndexPage extends BasicIndexPage<Careplan> {
      */
     private addDuplicateEventToButton(button: HTMLButtonElement) {
       const func = (event: any) => {
-        console.log(event);
         const rep = this.repository as CareplansRepository;
         rep.duplicate(event.path[0].dataset.id).then((result) => {
           if (result) {
@@ -72,15 +71,17 @@ export class CarePlanIndexPage extends BasicIndexPage<Careplan> {
      */
     private attachListenerToDuplicateButtons() {
       const list = this.getVetproviehList();
-      const self = this;
-      list.addEventListener('loaded', () => {
-            list.shadowRoot?.querySelectorAll('button').forEach((button) => {
-              self.addDuplicateEventToButton(button);
-            });
-            list.shadowRoot?.querySelectorAll('p.animal').forEach((p) => {
-              self.replaceAnimalCode(p as HTMLParagraphElement);
-            });
-      });
+      const loadedFunc = () => {
+        list.shadowRoot?.querySelectorAll('button').forEach((button) => {
+          this.addDuplicateEventToButton(button);
+        });
+        list.shadowRoot?.querySelectorAll('p.animal').forEach((p) => {
+          this.replaceAnimalCode(p as HTMLParagraphElement);
+        });
+      };
+      loadedFunc.bind(this);
+
+      list.addEventListener('loaded', loadedFunc);
     }
 
     /**

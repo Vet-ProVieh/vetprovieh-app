@@ -70,7 +70,7 @@ export class VpOperationField extends ElementBinding {
       const element = this
           .querySelector('[property=\'value\']') as HTMLTextAreaElement;
 
-      element.addEventListener('change', (event) => {
+      element.addEventListener('change', () => {
         this.proactiveButton.diagnosis = element.value;
       });
       setTimeout(() => {

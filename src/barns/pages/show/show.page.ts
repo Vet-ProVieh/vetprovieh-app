@@ -82,7 +82,6 @@ export class BarnsShowPage extends BasicShowPage {
      */
     private loadGeoCoordinates(barn: Barn): Promise<any> {
       return new Promise((resolve, reject) => {
-        console.log(barn);
         if (barn.gpsCoordinates?.latitude === 0 &&
           barn.gpsCoordinates?.longitude === 0) {
           this.geoProvider.loadCoordinates(
@@ -93,7 +92,7 @@ export class BarnsShowPage extends BasicShowPage {
             resolve(true);
           });
         } else {
-          resolve(false);
+          reject(new Error('No Coords'));
         }
       });
     }

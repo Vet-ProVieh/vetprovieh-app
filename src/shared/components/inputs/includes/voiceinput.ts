@@ -25,16 +25,17 @@ export class VoiceInput extends HTMLTextAreaElement {
       this._addVoiceInputButton();
 
 
-      const self = this;
-      this._speechWrapper.onresultRaw = (result: any) => {
+      const onResultFunc = (result: any) => {
         if (this._overwrite) {
-          self.value = result[0].transcript;
+          this.value = result[0].transcript;
         } else {
-          self.value = self._startValue + result[0].transcript;
+          this.value = this._startValue + result[0].transcript;
         }
-        self.dispatchEvent(new Event('change'));
-        self.dispatchEvent(new Event('keyup'));
+        this.dispatchEvent(new Event('change'));
+        this.dispatchEvent(new Event('keyup'));
       };
+      onResultFunc.bind(this);
+      this._speechWrapper.onresultRaw = onResultFunc;
     }
   }
 
@@ -46,7 +47,41 @@ export class VoiceInput extends HTMLTextAreaElement {
     const button: HTMLButtonElement = this.buildButton();
     const buttonOverwrite: HTMLButtonElement = this.buildButton(['is-danger']);
 
-    const _self = this;
+
+    const buttonFunc = () => {
+      this._started = !this._started;
+      if (this._started) {
+        button.classList.add('is-primary');
+        buttonOverwrite.disabled = true;
+        this._overwrite = false;
+        this._startValue = this.value;
+        this._speechWrapper.start();
+      } else {
+        button.classList.remove('is-primary');
+        this._speechWrapper.stop();
+        buttonOverwrite.disabled = false;
+      }
+    };
+
+    const buttonOverwriteFunc = () => {
+      this._started = !this._started;
+      if (this._started) {
+        buttonOverwrite.classList.add('is-primary');
+        buttonOverwrite.classList.remove('is-danger');
+        this._overwrite = true;
+        button.disabled = false;
+        button.disabled = true;
+        this._speechWrapper.start();
+      } else {
+        buttonOverwrite.classList.remove('is-primary');
+        buttonOverwrite.classList.add('is-danger');
+        button.disabled = false;
+        this._speechWrapper.stop();
+      }
+    };
+
+    buttonFunc.bind(this);
+    buttonOverwriteFunc.bind(this);
 
     this._speechWrapper.onresult = (result: any) => {
       console.log(result);
@@ -54,37 +89,9 @@ export class VoiceInput extends HTMLTextAreaElement {
       buttonOverwrite.classList.remove('is-primary');
     };
 
-    button.addEventListener('click', () => {
-      _self._started = !_self._started;
-      if (_self._started) {
-        button.classList.add('is-primary');
-        buttonOverwrite.disabled = true;
-        _self._overwrite = false;
-        _self._startValue = _self.value;
-        _self._speechWrapper.start();
-      } else {
-        button.classList.remove('is-primary');
-        _self._speechWrapper.stop();
-        buttonOverwrite.disabled = false;
-      }
-    });
+    button.addEventListener('click', buttonFunc);
 
-    buttonOverwrite.addEventListener('click', () => {
-      _self._started = !_self._started;
-      if (_self._started) {
-        buttonOverwrite.classList.add('is-primary');
-        buttonOverwrite.classList.remove('is-danger');
-        _self._overwrite = true;
-        button.disabled = false;
-        button.disabled = true;
-        _self._speechWrapper.start();
-      } else {
-        buttonOverwrite.classList.remove('is-primary');
-        buttonOverwrite.classList.add('is-danger');
-        button.disabled = false;
-        _self._speechWrapper.stop();
-      }
-    });
+    buttonOverwrite.addEventListener('click', buttonOverwriteFunc);
 
     this.appendButtons([button, buttonOverwrite]);
   }

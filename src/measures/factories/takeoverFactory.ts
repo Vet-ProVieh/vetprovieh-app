@@ -98,7 +98,8 @@ export class TakeoverFactory {
      * @param {MeasureField} field
      */
     private takeOverField(currentGroup: MeasureGroup, field: MeasureField) {
-      const currentField = currentGroup.details.filter((f) => f.position == field.position)[0];
+      const currentField = currentGroup.details
+          .filter((f) => f.position == field.position)[0];
       if (currentField) {
         currentField.value = field.value;
       }

@@ -7,8 +7,10 @@ import {BarnsRepository} from '../repository';
 @WebComponent({
   template: `
         <p style="font-size:0.9em">
-        <strong>Stall:</strong> \${this.barn?.name} ($\{this.barn?.vvvoNumber})<br />
-        <strong>Landwirt:</strong> \${this.barn?.farmer.name} \${this.barnContact}<br />
+        <strong>
+        Stall:</strong> \${this.barn?.name} ($\{this.barn?.vvvoNumber})<br />
+        <strong>
+        Landwirt:</strong> \${this.barn?.farmer.name} \${this.barnContact}<br />
         </p>
     `,
   tag: 'barn-list-show',
@@ -29,6 +31,10 @@ export class BarnListShow extends VetproviehElement {
       super(false, false);
     }
 
+    /**
+     * Get BarnContact
+     * @return {string}
+     */
     public get barnContact() : string {
       const contactPerson = this.barn?.farmer.contactPerson;
 

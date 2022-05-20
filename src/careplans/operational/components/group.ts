@@ -1,5 +1,8 @@
 import {VpOperationField} from './field';
-import {ElementGroupBinding, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  ElementGroupBinding,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import {ElementBinding} from '@tomuench/vetprovieh-shared/lib';
 
 // eslint-disable-next-line new-cap
@@ -8,7 +11,8 @@ import {ElementBinding} from '@tomuench/vetprovieh-shared/lib';
                     <p class="panel-heading">
                        {{position}}. {{name}}
 
-                        <button id="openButton" class="button is-primary is-hidden-tablet" type="button"
+                        <button id="openButton"
+                        class="button is-primary is-hidden-tablet" type="button"
                         style="right: 0.8em;position: absolute;top: 1.2em;">
                         <i class="fas fa-bars" aria-hidden="true"></i>
                         </button>
@@ -25,6 +29,10 @@ import {ElementBinding} from '@tomuench/vetprovieh-shared/lib';
 export class VpOperationGroup extends ElementGroupBinding {
     private barnId = '';
 
+    /**
+     * Default-Constructor
+     * @param {string} barnId
+     */
     constructor(barnId: string) {
       super();
       this.barnId = barnId;
@@ -34,15 +42,17 @@ export class VpOperationGroup extends ElementGroupBinding {
    * Returns the subFields of the object
    * must be overwritten in the children
    * @protected
+   * @return {any[]}
    */
-    protected subFields(): Array<any> {
-      return (this.object.opFields as Array<any>).sort((a, b) => a.positon - b.position);
+    protected subFields(): any[] {
+      const objs = (this.object.opFields as Array<any>);
+      return objs.sort((a, b) => a.positon - b.position);
     }
 
 
     /**
      * Generating new SubElement
-     * @param type
+     * @return {ElementBinding}
      */
     protected newElement(): ElementBinding {
       return new VpOperationField(this.barnId);

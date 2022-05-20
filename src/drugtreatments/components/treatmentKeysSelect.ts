@@ -30,6 +30,9 @@ export class TreatmentKeysSelect extends FieldWithLabel {
     public connectedCallback() {
       this.renderOptions().then(() => {
         super.connectedCallback();
+      }).catch((error) => {
+        console.warn(error);
+        super.connectedCallback();
       });
     }
 
@@ -51,8 +54,7 @@ export class TreatmentKeysSelect extends FieldWithLabel {
           resolve(true);
         }).catch((error) => {
           console.log('Could not load TreatmentKeys');
-          console.warn(error);
-          resolve(false);
+          reject(error);
         });
       });
     }

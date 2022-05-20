@@ -1,4 +1,7 @@
-import {VetproviehNavParams, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehNavParams,
+  WebComponent,
+} from '@tomuench/vetprovieh-shared/lib';
 import {BasicIndexPage} from '../../../../shared';
 import {OperationPlan} from '../../models';
 import {OperationPlansRepository} from '../../repository/plans_repository';

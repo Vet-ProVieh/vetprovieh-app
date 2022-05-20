@@ -1,4 +1,7 @@
-import {VetproviehElement, VetproviehTable, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {
+  VetproviehElement,
+  VetproviehTable,
+  WebComponent} from '@tomuench/vetprovieh-shared/lib';
 
 // eslint-disable-next-line new-cap
 @WebComponent({
@@ -33,11 +36,15 @@ import {VetproviehElement, VetproviehTable, WebComponent} from '@tomuench/vetpro
                 </vetprovieh-pager>`,
   tag: 'drugtreatment-table',
 })
-/*
+/**
 * Component for displaying Drugtreatmens as table
 */
 export class DrugtreatmentTable extends VetproviehTable {
     private _header: HTMLElement;
+
+    /**
+     * Default-Constructor
+     */
     constructor() {
       super();
       this._header = this.querySelector('#header') as HTMLElement;
@@ -48,6 +55,8 @@ export class DrugtreatmentTable extends VetproviehTable {
      */
     connectedCallback() {
       super.connectedCallback();
-      if (this._header) this.shadowRoot?.getElementById('header')?.appendChild(this._header);
+      if (this._header) {
+        this.shadowRoot?.getElementById('header')?.appendChild(this._header);
+      }
     }
 }

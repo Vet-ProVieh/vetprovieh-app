@@ -26,7 +26,7 @@ export class CareplansRepository extends BaseRepository<Careplan> {
         resolve(response.ok);
       }).catch((response) => {
         console.warn(response);
-        resolve(false);
+        reject(response);
       });
     });
   }

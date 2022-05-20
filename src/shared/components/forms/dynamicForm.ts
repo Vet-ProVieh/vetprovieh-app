@@ -1,3 +1,4 @@
+/* eslint-disable valid-jsdoc */
 import {VetproviehBasicDetail} from '@tomuench/vetprovieh-detail/lib/index';
 import {ViewHelper} from '@tomuench/vetprovieh-shared';
 import {
@@ -12,7 +13,8 @@ import {BasicModel, RenderType} from '../../models';
  * Es besitzt n Gruppen und Gruppen besitzen
  * wiederum n-Felder. Die Komponenten sind analog dazu aufgebaut
  */
-export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> extends VetproviehBasicDetail {
+export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel>
+  extends VetproviehBasicDetail {
   private _groupElements: ElementGroupBinding[] | any[] = [];
   private _fetched = false;
   private groupAttributeName: string;
@@ -135,6 +137,7 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel> 
    * @protected
    */
   protected _afterFetch(data: any) {
+    console.debug('After fetch: ' + data);
     this._fetched = true;
     this._setGroupComponent();
   }

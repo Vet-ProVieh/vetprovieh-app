@@ -1,21 +1,32 @@
-
+/**
+ * Animal types
+ */
 export class Animal {
     public code: string;
     public name: string;
 
+    /**
+     * Default-Constructor
+     * @param {string} code
+     * @param {string} name
+     */
     constructor(code:string, name:string) {
       this.code = code;
       this.name = name;
     }
 
-    public static all() : Array<Animal> {
+    /**
+     * Getting all Animal
+     * @return {Animal[]}
+     */
+    public static all() : Animal[] {
       return TYPES;
     }
 }
 
 
 // Define Types one time
-var TYPES = [
+const TYPES = [
   new Animal('SON', 'Sonstige Tier-/Nutzungsarten, nicht mitteilungspfl.'),
   new Animal('RM1', 'Rinder - Mastkälber bis 8 Mo, mitteilungspflichtig'),
   new Animal('RM2', 'Rinder - Mast ab 8 Mo, mitteilungspflichtig'),

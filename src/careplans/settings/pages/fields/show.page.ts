@@ -4,7 +4,13 @@ import {
   WebComponent} from '@tomuench/vetprovieh-shared/lib';
 import {PageWithReadOnly, SelectFieldType} from '../../components';
 import {CareplanField} from '../../models/careplanField';
-import {ComboBox, ImageField, List, SpeechField, TextArea, Video} from '../../models/fields';
+import {
+  ComboBox,
+  ImageField,
+  List,
+  SpeechField,
+  TextArea,
+  Video} from '../../models/fields';
 import {TextFields} from '../../models/fields/textFields';
 
 // eslint-disable-next-line new-cap
@@ -51,7 +57,7 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
      * Attach Listener to FieldTypeSelect
      */
   private attachListener() {
-    this.fieldTypeSelect.addEventListener('change', (event) => {
+    this.fieldTypeSelect.addEventListener('change', () => {
       const newField = this.buildField(this.fieldTypeSelect.value);
       this.detailElement.currentObject = newField;
       this.setParams();
