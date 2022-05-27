@@ -80,7 +80,6 @@ export class KeycloakHelper {
      */
     connect() {
       const instance = this._keycloakInstance;
-      console.log('KeycloakHelper: Connecting');
       this.init().then(function(authenticated) {
         if (!authenticated) {
           instance.login({
