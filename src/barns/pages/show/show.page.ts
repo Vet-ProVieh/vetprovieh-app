@@ -130,8 +130,6 @@ export class BarnsShowPage extends BasicShowPage {
         geoButton.addEventListener('geo-loaded', (event: any) => {
           this.processGeoEvent(event as GeoEvent);
         });
-      } else {
-        console.log('GEOBUTTON NOT FOUND');
       }
     }
 

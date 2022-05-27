@@ -53,7 +53,6 @@ export class TreatmentKeysSelect extends FieldWithLabel {
           });
           resolve(true);
         }).catch((error) => {
-          console.log('Could not load TreatmentKeys');
           reject(error);
         });
       });

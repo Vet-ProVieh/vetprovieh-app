@@ -59,7 +59,6 @@ export class SelectButton extends VetproviehElement {
      */
     private popLastParam(): any {
       const paramKey = this.getParam();
-      console.log(paramKey);
       const params: Array<any> = VetproviehNavParams.get(paramKey);
       if (params && Array.isArray(params)) {
         const lastParam = params.pop();

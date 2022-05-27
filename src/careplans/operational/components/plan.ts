@@ -65,7 +65,6 @@ export class VpOperationPlan
     if (this.currentObject.barn) {
       return new VpOperationGroup(this.currentObject.barn.id as any);
     } else {
-      console.log('Could not render GroupElement. Barn is not set');
       return new VpOperationGroup(0 as any);
     }
   }
@@ -88,7 +87,6 @@ export class VpOperationPlan
    */
   private setBarnIdToComponents() {
     const barnUrlId = VetproviehNavParams.getUrlParameter('barn_id');
-    console.log('Setting barnid');
 
     if (barnUrlId != null && barnUrlId != undefined) {
       this.currentObject.barn = {id: parseInt(barnUrlId)};

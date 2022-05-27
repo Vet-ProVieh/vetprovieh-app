@@ -36,13 +36,10 @@ export class InitializeMeasurePage extends HTMLElement {
 
       this.therapyFrequencySlider.addEventListener('input', () => {
         this.therapyFrequencyText.value = this.therapyFrequencySlider.value;
-        console.log('slider input');
       });
 
       this.therapyFrequencyText.addEventListener('keyup', () => {
         this.therapyFrequencySlider.value = this.therapyFrequencyText.value;
-        console.log(this.therapyFrequencySlider.value);
-        console.log('textinput');
       });
     }
 

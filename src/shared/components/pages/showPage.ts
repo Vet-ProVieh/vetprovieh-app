@@ -47,8 +47,6 @@ export class BasicShowPage extends HTMLElement {
    * @return {number}
    */
   protected maxPosition(positions: Array<any> = []) : number {
-    console.log('maxPosition');
-
     if (positions.length == 0) {
       return 1;
     } else {

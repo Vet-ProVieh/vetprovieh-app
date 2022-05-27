@@ -21,7 +21,6 @@ export class ReplaceFactory {
     public replacePlaceholders(measure: Measure | undefined): Promise<boolean> {
       return new Promise((resolve, reject) => {
         if (measure) {
-          console.log('Start replace');
           this._barnId = measure.barn?.id;
           this.initData().then(() => {
             measure.data.forEach((group) => {

@@ -258,7 +258,6 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     const replaceFactory = new ReplaceFactory();
     return replaceFactory
         .replacePlaceholders(this.currentObject)
-        .then(() => console.log('replaced'))
         .catch((error) => console.log(error));
   }
 

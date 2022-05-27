@@ -75,7 +75,6 @@ export class KeyResultEditComponent extends VetproviehElement {
    * @return {boolean}
    */
   public checkVailidity(): boolean {
-    console.log('CHECK_VALIDITY KeyResultEdit');
     const input = this.shadowRoot?.querySelector('input');
     if (input) {
       const valid = input.checkValidity();

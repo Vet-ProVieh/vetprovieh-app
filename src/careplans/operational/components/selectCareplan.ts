@@ -90,9 +90,6 @@ export class SelectCareplan extends VetproviehBasicList {
      * @return {Array}
      */
   private _filterCareplans(data: any[]) {
-    console.log(this.selectedAnimalType);
-    console.log(this.selectedBarnId);
-
     return data.filter((e: Careplan) => {
       return e.animal === this.selectedAnimalType;
     });

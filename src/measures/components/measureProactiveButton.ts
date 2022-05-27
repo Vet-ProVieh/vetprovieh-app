@@ -60,7 +60,6 @@ export class MeasureProactiveButton extends VetproviehElement {
    * @param {string} v
    */
   public set diagnosis(v: string) {
-    console.log('diagnosis: ' + v);
     if (this._diagnosis !== v) {
       this._diagnosis = v;
       this.checkProactiveMeasures();

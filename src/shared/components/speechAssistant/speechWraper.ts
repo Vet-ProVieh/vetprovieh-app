@@ -102,8 +102,6 @@ export class SpeechWrapper {
     set onresult(func: Function) {
       if (this.ready) {
         this._recognition.onresult = function(event: any) {
-          console.log('HEARED SOMETHING');
-          console.log(event);
           if (event.isFinal) {
             func(event.results[0][0].transcript);
           }
@@ -118,7 +116,6 @@ export class SpeechWrapper {
     set onaudioend(func: Function) {
       if (this.ready) {
         this._recognition.onaudioend = function() {
-          console.log('onaudio ended');
           func({});
         };
       }
@@ -161,7 +158,6 @@ export class SpeechWrapper {
      * @param {string} grammarText
      */
     addGrammar(grammarText: string) {
-      console.log(grammarText);
       this._speechRecognitionList.addFromString(grammarText, 2);
     }
 }

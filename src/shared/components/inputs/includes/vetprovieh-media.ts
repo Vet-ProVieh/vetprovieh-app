@@ -214,7 +214,6 @@ export class VetproviehMedia extends VetproviehElement {
       const button = this
           .getByIdFromShadowRoot('openButton') as HTMLButtonElement;
       const clickFunction = () => {
-        console.log('Activating Recording modal');
         this.recordingModal.active = true;
       };
       clickFunction.bind(this);

@@ -1,6 +1,8 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import {uglify} from 'rollup-plugin-uglify';
+import external from 'rollup-plugin-peer-deps-external';
+import {babel} from '@rollup/plugin-babel';
 
 const {
   generateSW,
@@ -56,17 +58,19 @@ export default {
   cache: true,
   // treeshake: true,
   plugins: [
-    typescript({
-      tsconfig: './tsconfig.json',
-      outputToFilesystem: true,
-    }),
-    production && uglify(),
+    babel({babelHelpers: 'bundled'}),
+    external(),
     resolve({
       browser: true,
     }), // tells Rollup how to find date-fns in node_modules
     commonjs(
         {sourceMap: false}
     ), // converts date-fns to ES modules
+    typescript({
+      tsconfig: './tsconfig.json',
+      outputToFilesystem: true,
+    }),
+    production && uglify(),
     production && terser(), // minify, but only in production
     replace({
       'process.env.NODE_ENV': '"development"',

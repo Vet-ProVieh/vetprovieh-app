@@ -69,7 +69,6 @@ export class GeoCoordButton extends HTMLButtonElement {
       const event = new GeoEvent(
           position.coords.latitude,
           position.coords.longitude);
-      console.log(event);
       this.dispatchEvent(event);
     }
 

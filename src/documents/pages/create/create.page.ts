@@ -119,7 +119,6 @@ export class DocumentCreatePage extends BasicShowPage {
       const input = this.fileInput;
       const promises = [];
       if (input && input.files) {
-        console.log(input.files);
         for (let i = 0; i < input.files.length; i++) {
           const file: File = input.files[i];
           const document = new Document();
@@ -132,7 +131,6 @@ export class DocumentCreatePage extends BasicShowPage {
       }
 
       Promise.all(promises).then((result) => {
-        console.log(result);
         this.reset();
         this.showSuccess();
       }).catch((error) => {

@@ -81,7 +81,6 @@ export class CarePlanShowPage extends PageWithReadOnly {
           const group = this.objects[i];
           if (group.active) {
             const element = groupRepeater.getElementByIndex(i);
-            console.log(element);
             const input = element?.querySelector('input');
             if (input) {
               input.checked = true;

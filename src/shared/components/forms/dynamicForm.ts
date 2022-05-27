@@ -74,7 +74,6 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel>
   _setGroupComponent() {
     if (this.renderType === RenderType.Single) {
       if (this.groupsFromObject.length > this.groupIdParam) {
-        console.log(`Setting Current-Group=${this.groupIdParam}`);
         const group = this.buildSingleGroup(
             this.groupsFromObject[this.groupIdParam]
         );
@@ -160,7 +159,6 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel>
   * Attaching Listener to Save and Abort Button
   */
   _attachListenerToButtons() {
-    console.log('Plan: Listener to Button');
     const saveButton = this.getByIdFromShadowRoot('saveButton') as HTMLElement;
     const abort = this.getByIdFromShadowRoot('abortButton') as HTMLElement;
 
@@ -168,7 +166,6 @@ export class DynamicForm<TObject extends BasicModel, TGroup extends BasicModel>
       this.save();
     });
     abort.addEventListener('click', () => {
-      console.log('cancel');
       // Destroy Cached local Data
       VetproviehNavParams.delete(window.location.href);
       window.history.back();
