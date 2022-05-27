@@ -12,7 +12,7 @@ const {
 } = require('rollup-plugin-workbox');
 import copy from 'rollup-plugin-copy';
 import replace from '@rollup/plugin-replace';
-import typescript from '@rollup/plugin-typescript';
+import typescript from 'rollup-plugin-typescript2';
 
 
 const modules = {
@@ -46,7 +46,7 @@ import {
 
 // `npm run build` -> `production` is true
 // `npm run dev` -> `production` is false
-const production = !process.env.ROLLUP_WATCH;
+const production = false;// !process.env.ROLLUP_WATCH;
 
 export default {
   input: 'src/app/main.ts',
@@ -58,18 +58,14 @@ export default {
   cache: true,
   // treeshake: true,
   plugins: [
-    babel({babelHelpers: 'bundled'}),
-    external(),
+    typescript(),
+    // external(),
     resolve({
       browser: true,
     }), // tells Rollup how to find date-fns in node_modules
     commonjs(
         {sourceMap: false}
     ), // converts date-fns to ES modules
-    typescript({
-      tsconfig: './tsconfig.json',
-      outputToFilesystem: true,
-    }),
     production && uglify(),
     production && terser(), // minify, but only in production
     replace({
