@@ -1,4 +1,4 @@
-import {VetproviehElement, ViewHelper} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, ViewHelper} from '@vetprovieh/vetprovieh-shared';
 import {Global} from '../../basics';
 
 /**

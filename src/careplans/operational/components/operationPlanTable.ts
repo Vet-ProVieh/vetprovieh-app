@@ -1,7 +1,7 @@
 import {VetproviehBasicList,
-} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+} from '@vetprovieh/vetprovieh-list';
 import {VetproviehElement, WebComponent,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 
 // eslint-disable-next-line new-cap
 @WebComponent({

@@ -2,10 +2,10 @@ import {
   WebComponent,
   VetproviehElement,
   VetproviehNavParams,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 import {
   VetproviehBasicList,
-} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+} from '@vetprovieh/vetprovieh-list';
 import {OperationPlanBluerprintsRepository} from '../repository';
 import {Careplan} from '../../settings';
 

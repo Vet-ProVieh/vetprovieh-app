@@ -1,5 +1,6 @@
 import {User} from '../models';
-import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
+import {BaseRepository} from '@vetprovieh/vetprovieh-shared';
+import {KeycloakHelper} from '../../shared/providers/KeycloakHelper';
 
 /**
  * Repository to Access Users

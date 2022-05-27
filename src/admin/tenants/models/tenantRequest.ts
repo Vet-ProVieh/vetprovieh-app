@@ -1,4 +1,4 @@
-import {BaseModel} from '@tomuench/vetprovieh-shared/lib/orm/baseModel';
+import {BaseModel} from '@vetprovieh/vetprovieh-shared';
 
 /**
  * A Tenant Request is a request to create a vet-company (tenant)

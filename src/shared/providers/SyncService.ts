@@ -1,5 +1,5 @@
-import {IRepository} from '@tomuench/vetprovieh-shared/lib';
-import {BaseModel} from '@tomuench/vetprovieh-shared/lib/orm/baseModel';
+import {IRepository} from '@vetprovieh/vetprovieh-shared';
+import {BaseModel} from '@vetprovieh/vetprovieh-shared';
 import {BarnsRepository} from '../../barns/repository';
 import {OperationPlanBluerprintsRepository}
   from '../../careplans/operational/repository';

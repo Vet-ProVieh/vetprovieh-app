@@ -1,5 +1,5 @@
-import {VetproviehNavParams} from '@tomuench/vetprovieh-shared';
-import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehNavParams} from '@vetprovieh/vetprovieh-shared';
+import {VetproviehElement, WebComponent} from '@vetprovieh/vetprovieh-shared';
 
 
 // eslint-disable-next-line new-cap

@@ -1,4 +1,4 @@
-import {ViewHelper} from '@tomuench/vetprovieh-shared/lib';
+import {ViewHelper} from '@vetprovieh/vetprovieh-shared';
 import {BarnsRepository} from '../../barns/repository';
 import {UserRepository} from '../../users';
 import {Measure, MeasureField, MeasureGroup} from '../models';

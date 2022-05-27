@@ -1,6 +1,6 @@
 import {VetproviehBasicList}
-  from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
-import {IRepository} from '@tomuench/vetprovieh-shared/lib';
+  from '@vetprovieh/vetprovieh-list';
+import {BaseModel, IRepository} from '@vetprovieh/vetprovieh-shared';
 import {VetproviehList} from '../../../app/main';
 
 
@@ -8,7 +8,7 @@ import {VetproviehList} from '../../../app/main';
  * BasicIndexPage
  * - used for different types of listing pages
  */
-export class BasicIndexPage<T> extends HTMLElement {
+export class BasicIndexPage<T extends BaseModel> extends HTMLElement {
     protected repository: IRepository<T>;
 
     /**

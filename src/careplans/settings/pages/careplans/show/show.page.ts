@@ -1,5 +1,4 @@
-import {LoadedEvent} from '@tomuench/vetprovieh-detail/lib/loaded-event';
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {PageWithReadOnly} from '../../../components';
 import {Careplan} from '../../../models';
 import {CareplanGroupRepository} from '../../../repository';

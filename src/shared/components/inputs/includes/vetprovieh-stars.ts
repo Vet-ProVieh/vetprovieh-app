@@ -1,5 +1,5 @@
 
-import {WebComponent, VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
+import {WebComponent, VetproviehElement} from '@vetprovieh/vetprovieh-shared';
 
 const STAR_FULL = 'fas fa-star';
 const STAR_OPEN = 'far fa-star';

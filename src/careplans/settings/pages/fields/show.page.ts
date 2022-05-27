@@ -1,7 +1,7 @@
 import {
   Indexable,
   ViewHelper,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {PageWithReadOnly, SelectFieldType} from '../../components';
 import {CareplanField} from '../../models/careplanField';
 import {

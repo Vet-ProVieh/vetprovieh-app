@@ -1,5 +1,5 @@
 
-import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
+import {BaseRepository} from '@vetprovieh/vetprovieh-shared';
 import {Document} from '../models/';
 import {v4 as uuidv4} from 'uuid';
 

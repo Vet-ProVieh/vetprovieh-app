@@ -4,7 +4,7 @@ import {
   VetproviehElement,
   VetproviehNavParams,
   WebComponent,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 import {PlanMeasureModel} from '../../careplans/operational/models/planMeasure';
 import {SelectButton} from '../../shared';
 import {MeasureField} from '../models';

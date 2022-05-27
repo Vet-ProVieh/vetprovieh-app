@@ -1,4 +1,4 @@
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {VetproviehMedia} from './vetprovieh-media';
 
 // eslint-disable-next-line new-cap

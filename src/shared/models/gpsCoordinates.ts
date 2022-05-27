@@ -1,4 +1,4 @@
-import {GeoHelper} from '@tomuench/vetprovieh-shared/lib';
+import {GeoHelper} from '@vetprovieh/vetprovieh-shared';
 import {Coordinate} from 'ol/coordinate';
 
 /**

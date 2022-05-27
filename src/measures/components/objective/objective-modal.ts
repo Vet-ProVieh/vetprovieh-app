@@ -1,7 +1,7 @@
 import {
   VetproviehBinding,
   VetproviehElement,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {SimpleModal} from '../../../shared';
 import {KeyResult, Objective} from '../../models';
 import {KeyResultEditComponent} from './keyResultEdit';

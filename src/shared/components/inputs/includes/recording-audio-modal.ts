@@ -1,4 +1,4 @@
-import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, WebComponent} from '@vetprovieh/vetprovieh-shared';
 import RecordRTC from 'recordrtc';
 import {RecordingModal} from './recording-modal';
 import {RecordingRtcModal} from './recording-rtc-modal';

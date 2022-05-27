@@ -1,5 +1,5 @@
-import {BaseModel} from '@tomuench/vetprovieh-shared/lib/orm/baseModel';
-import {Tenant} from './tentant';
+import {BaseModel} from '@vetprovieh/vetprovieh-shared';
+import {Tenant} from '../../admin/tenants';
 
 /**
  * User Informations

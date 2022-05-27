@@ -1,10 +1,10 @@
 import {
   VetproviehSelect,
-} from '@tomuench/vetprovieh-select/lib/vetprovieh-select';
+} from '@vetprovieh/vetprovieh-select';
 import {
   VetproviehNavParams,
   WebComponent,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 import * as bulmaToast from 'bulma-toast';
 import {BarnsRepository} from '../../../barns/repository';
 import {DrugreportRepository} from '../../../drugreports';

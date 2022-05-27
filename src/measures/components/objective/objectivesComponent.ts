@@ -2,7 +2,7 @@ import {
   VetproviehElement,
   VetproviehNavParams,
   ViewHelper,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {SelectButton} from '../../../shared';
 import {Objective} from '../../models/objective';
 import {InitializeMeasurePage} from '../../pages';

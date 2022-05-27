@@ -1,4 +1,4 @@
-import {BaseRepository} from '@tomuench/vetprovieh-shared/lib';
+import {BaseRepository} from '@vetprovieh/vetprovieh-shared';
 import {TenantRequest} from '../models';
 
 /**

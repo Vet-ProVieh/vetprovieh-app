@@ -1,5 +1,5 @@
-import {LoadedEvent} from '@tomuench/vetprovieh-detail/lib/loaded-event';
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {LoadedEvent} from '@vetprovieh/vetprovieh-detail';
+import {WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {VetproviehSelect} from '../../../app/main';
 import {FarmersRepository} from '../../../farmers';
 import {OpenObjectivesButton} from '../../../measures';
@@ -52,13 +52,15 @@ export class BarnsShowPage extends BasicShowPage {
         this.bindFarmerSelectField(loadEvent);
         this.bindGeoButton();
 
-            this.detailElement
-                .shadowRoot?.querySelectorAll('open-objectives')
-                .forEach((element: any) => {
-                  const button = element as OpenObjectivesButton;
-                  button.amount = this.barn.currentMeasure;
-                  if (this.barn.id) button.barnid = +this.barn.id;
-                });
+        if (this.detailElement.shadowRoot) {
+          this.detailElement
+              .shadowRoot.querySelectorAll('open-objectives')
+              .forEach((element: any) => {
+                const button = element as OpenObjectivesButton;
+                button.amount = this.barn.currentMeasure;
+                if (this.barn.id) button.barnid = +this.barn.id;
+              });
+        }
       });
     }
 

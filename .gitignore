@@ -8,3 +8,10 @@ www/
 
 coverage/
 .scannerwork
+
+bower_components/
+.idea/
+.vscode/
+.rollup.cache
+dist/
+tsconfig.tsbuildinfo

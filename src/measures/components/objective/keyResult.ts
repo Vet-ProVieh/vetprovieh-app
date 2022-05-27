@@ -3,7 +3,7 @@ import {
   ObjectHelper,
   VetproviehElement,
   WebComponent,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 import {KeyResult, KeyResultMilestones} from '../../models/keyresult';
 
 // eslint-disable-next-line new-cap

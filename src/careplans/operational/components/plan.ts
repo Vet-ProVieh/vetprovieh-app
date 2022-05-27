@@ -2,7 +2,7 @@ import {
   ElementGroupBinding,
   VetproviehElement,
   VetproviehNavParams,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {VetproviehSidemenu} from '../../../app/main';
 import {OpenObjectivesButton} from '../../../measures';
 import {SpeechAssistant} from '../../../shared';

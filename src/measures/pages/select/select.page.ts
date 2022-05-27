@@ -1,9 +1,9 @@
-import {VetproviehList} from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
+import {VetproviehList} from '@vetprovieh/vetprovieh-list';
 import {
   ObjectHelper,
   VetproviehElement,
   VetproviehNavParams,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {
   PlanMeasureModel} from '../../../careplans/operational/models/planMeasure';
 import {

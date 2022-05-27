@@ -1,9 +1,9 @@
 /* eslint-disable valid-jsdoc */
-import {VetproviehBasicDetail} from '@tomuench/vetprovieh-detail/lib/index';
-import {ViewHelper} from '@tomuench/vetprovieh-shared';
+import {VetproviehBasicDetail} from '@vetprovieh/vetprovieh-detail';
+import {ViewHelper} from '@vetprovieh/vetprovieh-shared';
 import {
   ElementGroupBinding,
-  VetproviehNavParams} from '@tomuench/vetprovieh-shared/lib';
+  VetproviehNavParams} from '@vetprovieh/vetprovieh-shared';
 import {BasicModel, RenderType} from '../../models';
 
 

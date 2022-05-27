@@ -1,7 +1,7 @@
 import {
   BaseRepository,
   ElementBinding,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {OperationField} from '..';
 import {VetproviehSelect} from '../../../app/main';
 import {Drug, DrugsRepository} from '../../../drugs';

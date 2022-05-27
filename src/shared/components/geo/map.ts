@@ -1,4 +1,4 @@
-import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {Feature, Map, View} from 'ol';
 import {Coordinate} from 'ol/coordinate';
 import Circle from 'ol/geom/Circle';
@@ -34,7 +34,7 @@ import {GpsCoordinates} from '../../models';
 export class GeoMap extends VetproviehElement {
     private map: Map | undefined;
 
-    private vectorLayer: VectorLayer = new VectorLayer({
+    private vectorLayer: VectorLayer<any> = new VectorLayer<any>({
       source: new VectorSource(),
       style: new Style({
         fill: new Fill({

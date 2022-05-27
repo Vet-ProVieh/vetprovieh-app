@@ -1,4 +1,4 @@
-import {VetproviehElement, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement, WebComponent} from '@vetprovieh/vetprovieh-shared';
 
 /**
  * Layout for Vet:ProVieh

@@ -1,4 +1,4 @@
-import {ViewHelper} from '@tomuench/vetprovieh-shared/lib';
+import {ViewHelper} from '@vetprovieh/vetprovieh-shared';
 import {UserRepository} from '../repository';
 
 /**

@@ -1,5 +1,5 @@
 import {VetproviehElement, WebComponent, ViewHelper}
-  from '@tomuench/vetprovieh-shared/lib';
+  from '@vetprovieh/vetprovieh-shared';
 import {RecordingModal} from './recording-modal';
 
 // eslint-disable-next-line new-cap

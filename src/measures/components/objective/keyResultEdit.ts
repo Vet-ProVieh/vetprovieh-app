@@ -2,7 +2,7 @@ import {
   VetproviehBinding,
   VetproviehElement,
   WebComponent,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 import {QuestionModal} from '../../../shared';
 import {KeyResult} from '../../models';
 

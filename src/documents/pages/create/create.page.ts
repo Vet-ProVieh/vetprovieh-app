@@ -1,7 +1,7 @@
 import {
   VetproviehNavParams,
   WebComponent,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 import * as bulmaToast from 'bulma-toast';
 import {BarnListShow} from '../../../barns';
 import {BasicShowPage} from '../../../shared/components/pages/showPage';

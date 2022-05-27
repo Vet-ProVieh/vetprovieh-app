@@ -3,7 +3,7 @@ import {
   ElementGroupBinding,
   WebComponent,
   ElementBinding,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 
 // eslint-disable-next-line new-cap
 @WebComponent({

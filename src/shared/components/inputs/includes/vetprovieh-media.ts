@@ -1,4 +1,4 @@
-import {VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehElement} from '@vetprovieh/vetprovieh-shared';
 import {Document, DocumentRepository} from '../../../../documents';
 import {RecordingModal} from './recording-modal';
 

@@ -1,4 +1,4 @@
-import {WebComponent, VetproviehElement} from '@tomuench/vetprovieh-shared/lib';
+import {WebComponent, VetproviehElement} from '@vetprovieh/vetprovieh-shared';
 import {User} from '../models';
 import {UserRepository} from '../repository';
 

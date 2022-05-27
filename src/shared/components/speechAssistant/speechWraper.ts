@@ -1,4 +1,4 @@
-import {Indexable} from '@tomuench/vetprovieh-shared/lib';
+import {Indexable} from '@vetprovieh/vetprovieh-shared';
 
 /**
  * Wrapper for the Speech API

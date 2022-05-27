@@ -1,4 +1,4 @@
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {CareplansRepository} from '../../../repository/carePlans_repository';
 import {Careplan} from '../../../models';
 import {BasicIndexPage} from '../../../../../shared';
@@ -48,7 +48,7 @@ export class CarePlanIndexPage extends BasicIndexPage<Careplan> {
               animate: {in: 'fadeIn', out: 'fadeOut'},
             });
             const list = this.getVetproviehList();
-            list._filterObjects();
+            list.search('');
           } else {
             bulmaToast.toast({
               message: 'Behandplungsplan konnte nicht dupliziert werden',

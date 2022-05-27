@@ -1,6 +1,6 @@
 import {
   VetproviehNavParams,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {MeasureProactiveRepository} from '../../repository';
 import {BasicIndexPage} from '../../../shared';
 import {MeasuresList} from '../../components';

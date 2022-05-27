@@ -1,7 +1,7 @@
 import {
   VetproviehElement,
   ViewHelper,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {BulmaField} from './bulmaField';
 
 // eslint-disable-next-line new-cap

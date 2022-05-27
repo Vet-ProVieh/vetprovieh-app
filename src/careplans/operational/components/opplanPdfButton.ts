@@ -1,4 +1,4 @@
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {PdfButton} from '../../../shared';
 import {OperationPlansRepository} from '../repository';
 

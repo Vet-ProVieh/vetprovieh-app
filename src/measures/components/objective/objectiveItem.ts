@@ -4,7 +4,7 @@ import {
   VetproviehElement,
   ObjectHelper,
   ViewHelper,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 import {ObjectiveModal} from './objective-modal';
 import {Objective, KeyResult} from '../../models/';
 import {KeyResultComponent} from './keyResult';

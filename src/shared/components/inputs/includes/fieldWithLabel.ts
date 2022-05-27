@@ -1,5 +1,5 @@
 import {VetproviehBinding, VetproviehElement}
-  from '@tomuench/vetprovieh-shared/lib';
+  from '@vetprovieh/vetprovieh-shared';
 
 /**
  * Bulma Form-Field with Label

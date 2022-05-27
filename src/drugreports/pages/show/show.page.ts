@@ -1,5 +1,5 @@
-import {VetproviehList} from '@tomuench/vetprovieh-list/lib/vetprovieh-list';
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehList} from '@vetprovieh/vetprovieh-list';
+import {WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {BasicShowPage} from '../../../shared';
 import {Drugreport} from '../../models';
 

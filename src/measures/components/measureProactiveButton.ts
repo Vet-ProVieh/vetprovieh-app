@@ -2,7 +2,7 @@ import {
   VetproviehElement,
   ViewHelper,
   WebComponent,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 import {MeasuresRepository} from '../repository';
 
 // eslint-disable-next-line new-cap

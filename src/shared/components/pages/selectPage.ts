@@ -1,6 +1,6 @@
 
 import {VetproviehElement, VetproviehNavParams}
-  from '@tomuench/vetprovieh-shared/lib';
+  from '@vetprovieh/vetprovieh-shared';
 import {Global} from '../../components/basics';
 
 /**

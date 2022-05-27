@@ -1,4 +1,4 @@
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {BasicIndexPage} from '../../../shared';
 import {Drugreport} from '../../models';
 import {DrugreportRepository} from '../../repository';

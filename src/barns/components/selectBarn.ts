@@ -1,14 +1,14 @@
 import {
   VetproviehBasicList,
-} from '@tomuench/vetprovieh-list/lib/vetprovieh-basic-list';
+} from '@vetprovieh/vetprovieh-list';
 import {GpsCoordinates} from '../../shared';
 import {Barn} from '../models';
 import {
   WebComponent,
   VetproviehElement,
-  GeoHelper} from '@tomuench/vetprovieh-shared/lib';
+  GeoHelper} from '@vetprovieh/vetprovieh-shared';
 import {BarnsRepository} from '../repository';
-import {BaseModel} from '@tomuench/vetprovieh-shared/lib/orm/baseModel';
+import {BaseModel} from '@vetprovieh/vetprovieh-shared';
 
 // eslint-disable-next-line new-cap
 @WebComponent({

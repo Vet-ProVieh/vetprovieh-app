@@ -1,4 +1,4 @@
-import {Indexable, WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {Indexable, WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {GeoEvent} from '../../models/geo';
 
 // eslint-disable-next-line new-cap

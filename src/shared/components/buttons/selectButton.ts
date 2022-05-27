@@ -1,7 +1,7 @@
 import {
   VetproviehElement,
   VetproviehNavParams,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {BasicSelectPage} from '../pages';
 
 // eslint-disable-next-line new-cap

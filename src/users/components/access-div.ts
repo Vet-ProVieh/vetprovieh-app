@@ -1,5 +1,5 @@
 import {UserRepository} from '../repository';
-import {ViewHelper} from '@tomuench/vetprovieh-shared/lib';
+import {ViewHelper} from '@vetprovieh/vetprovieh-shared';
 
 /**
  * Access for Specific Anchor

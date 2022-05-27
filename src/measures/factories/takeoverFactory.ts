@@ -23,7 +23,7 @@ export class TakeoverFactory {
      * @return {boolean}
      */
     private get canLoadMeasure(): boolean {
-      return !!this.currentObject ?.barn ?.id;
+      return !!this.currentObject?.barn?.id;
     }
 
     /**
@@ -43,7 +43,9 @@ export class TakeoverFactory {
     public takeoverFromLatestMeasure(): Promise<Measure> {
       return new Promise((resolve, reject) => {
         if (this.canLoadMeasure) {
-          this.repository.lastforBarn(+this.currentObject.barn.id)
+          this.repository
+              .lastforBarn(
+                  parseInt(this.currentObject?.barn?.id?.toString() || ''))
               .then((oldMeasure: Measure) => {
                 if (this.isValidMeasure(oldMeasure)) {
                   this.takeoverFrom(oldMeasure);

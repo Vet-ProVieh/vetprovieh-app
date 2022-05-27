@@ -1,6 +1,6 @@
 import {
   VetproviehNavParams,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {BarnListShow} from '../../../barns';
 import {BasicIndexPage} from '../../../shared/components/pages';
 import {Document} from '../../models';

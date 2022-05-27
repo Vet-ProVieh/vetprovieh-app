@@ -3,7 +3,7 @@ import {
   VetproviehElement,
   VetproviehNavParams,
   WebComponent,
-} from '@tomuench/vetprovieh-shared/lib';
+} from '@vetprovieh/vetprovieh-shared';
 import {Barn} from '../../barns';
 import {RenderType} from '../../shared';
 import {DynamicForm} from '../../shared/components/forms/dynamicForm';

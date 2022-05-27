@@ -1,4 +1,4 @@
-import {WebComponent} from '@tomuench/vetprovieh-shared/lib';
+import {WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {SyncService} from '../../../providers/SyncService';
 
 // eslint-disable-next-line new-cap

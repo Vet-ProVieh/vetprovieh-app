@@ -1,7 +1,7 @@
 import {
   ObjectHelper,
   VetproviehNavParams,
-  WebComponent} from '@tomuench/vetprovieh-shared/lib';
+  WebComponent} from '@vetprovieh/vetprovieh-shared';
 import {BarnListShow} from '../../../../barns';
 
 // eslint-disable-next-line new-cap

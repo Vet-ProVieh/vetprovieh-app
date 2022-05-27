@@ -1,7 +1,7 @@
 import {
   IRepository,
   VetproviehNavParams,
-  VetproviehTable} from '@tomuench/vetprovieh-shared/lib';
+  VetproviehTable} from '@vetprovieh/vetprovieh-shared';
 import {BasicShowPage} from '../../../shared';
 
 /**

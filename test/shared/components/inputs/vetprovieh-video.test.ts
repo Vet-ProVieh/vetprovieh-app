@@ -17,7 +17,7 @@ describe('type=image', () => {
             let button = image.getByIdFromShadowRoot("openButton");
 
             expect(button).not.toEqual(undefined);
-            expect(button?.textContent).toEqual("Video aufnehmen")
+            expect(button?.textContent).toMatch("Video aufnehmen")
         });
 
         it('should render no content', () => {
@@ -63,7 +63,7 @@ describe('type=video', () => {
             let button = video.getByIdFromShadowRoot("openButton");
 
             expect(button).not.toEqual(undefined);
-            expect(button?.textContent).toEqual("Video aufnehmen")
+            expect(button?.textContent).toMatch("Video aufnehmen")
         });
 
         it('should render no content', () => {

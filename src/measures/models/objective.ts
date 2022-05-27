@@ -1,4 +1,4 @@
-import {ObjectHelper} from '@tomuench/vetprovieh-shared/lib';
+import {ObjectHelper} from '@vetprovieh/vetprovieh-shared';
 import {BasicModel} from '../../shared';
 import {KeyResult, KeyResultMilestones} from './keyresult';
 

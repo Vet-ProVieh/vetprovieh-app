@@ -1,4 +1,4 @@
-import {VetproviehNavParams} from '@tomuench/vetprovieh-shared/lib';
+import {VetproviehNavParams} from '@vetprovieh/vetprovieh-shared';
 import {VetproviehDetail} from '../../../app/main';
 
 /**
