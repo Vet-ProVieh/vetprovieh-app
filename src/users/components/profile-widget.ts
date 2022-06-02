@@ -39,59 +39,58 @@ import {UserRepository} from '../repository';
  * Profile Widget shows current logged-in user
  */
 export class ProfileWidget extends VetproviehElement {
-    private repository: UserRepository = new UserRepository();
+  private repository: UserRepository = new UserRepository();
 
-    // Current-User to Display
-    private currentUser: User | undefined;
+  // Current-User to Display
+  private currentUser: User | undefined;
 
-    /**
-     * Default-Konstruktor
-     */
-    constructor() {
-      super(true, false);
-    }
+  /**
+   * Default-Konstruktor
+   */
+  constructor() {
+    super(true, false);
+  }
 
-    /**
-     * Connected-Callback for Web-Components
-     */
-    connectedCallback() {
-      super.connectedCallback();
-      this.loadUser();
-    }
+  /**
+   * Connected-Callback for Web-Components
+   */
+  connectedCallback() {
+    super.connectedCallback();
+    this.loadUser();
+  }
 
-    /**
-     * Load Current User Data
-     */
-    private loadUser() {
-      this.repository.loadProfile().then((profile: User) => {
-        this.currentUser = profile;
-        this.render();
-        this.addEventListenerToLogout();
+  /**
+   * Load Current User Data
+   */
+  private async loadUser() {
+    const profile = await this.repository.loadProfile();
+    this.currentUser = profile;
+    this.render();
+    this.addEventListenerToLogout();
+  }
+
+  /**
+   * Attach EventListener to logoutButton
+   */
+  private addEventListenerToLogout() {
+    if (this.logoutButton) {
+      this.logoutButton.addEventListener('click', () => {
+        this.logout();
       });
     }
+  }
 
-    /**
-     * Attach EventListener to logoutButton
-     */
-    private addEventListenerToLogout() {
-      if (this.logoutButton) {
-        this.logoutButton.addEventListener('click', () => {
-          this.logout();
-        });
-      }
-    }
+  /**
+   * LogoutButton abrufen
+   */
+  private get logoutButton(): HTMLButtonElement {
+    return this.getByIdFromShadowRoot('logout') as HTMLButtonElement;
+  }
 
-    /**
-     * LogoutButton abrufen
-     */
-    private get logoutButton(): HTMLButtonElement {
-      return this.getByIdFromShadowRoot('logout') as HTMLButtonElement;
-    }
-
-    /**
-     * Sign out current User
-     */
-    private logout() {
-      this.repository.logout();
-    }
+  /**
+   * Sign out current User
+   */
+  private logout() {
+    this.repository.logout();
+  }
 }
