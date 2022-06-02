@@ -52,7 +52,7 @@ export class KeycloakHelper {
     get subdomain() {
       try {
         const domain = window.location.hostname.split('.')[0];
-        if (domain == 'localhost') {
+        if (domain==='localhost') {
           return 'praxisa';
         }
         return domain;

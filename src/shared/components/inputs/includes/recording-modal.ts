@@ -125,7 +125,7 @@ export class RecordingModal extends VetproviehElement {
     this.mediaElement.srcObject = null;
 
     this._stream?.getTracks().forEach((track) => {
-      if (track.readyState == 'live') {
+      if (track.readyState==='live') {
         track.stop();
       }
     });

@@ -17,21 +17,14 @@ export class OperationPlansRepository extends BaseRepository<OperationPlan> {
    * @param {stirng} id
    * @return {Promise<string|null>}
    */
-  downloadPdf(id: string) : Promise<string|null> {
-    return new Promise((resolve, reject) => {
-      fetch(`${this.endpoint}/createReport/${id}/pdf`)
-          .then((response) => {
-            if (response.ok) {
-              response.blob().then(((blob) => {
-                resolve(URL.createObjectURL(blob));
-              }));
-            } else {
-              reject(response);
-            }
-          }).catch((error) => {
-            console.warn(error);
-            reject(error);
-          });
-    });
+  async downloadPdf(id: string): Promise<string | null> {
+    try {
+      const response = await fetch(`${this.endpoint}/createReport/${id}/pdf`);
+      const blobInResponse = await response.blob();
+      return URL.createObjectURL(blobInResponse);
+    } catch (error) {// here goes if someAsyncPromise() rejected}
+      console.warn(error);
+      throw error;
+    }
   }
 }

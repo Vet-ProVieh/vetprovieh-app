@@ -96,7 +96,7 @@ export class MeasureGroupComponent extends ElementGroupBinding {
      * Rendering of select button für Gründe Überschreiten der Kennzahl 2
      */
     renderSelectButton() {
-      if (this.object.name == 'Gründe für das Überschreiten der Kennzahl 2') {
+      if (this.object.name==='Gründe für das Überschreiten der Kennzahl 2') {
         const params = VetproviehNavParams
             .get(InitializeMeasurePage.NAVIGATION_KEY);
 
@@ -161,7 +161,7 @@ export class MeasureGroupComponent extends ElementGroupBinding {
      * @return {MeasureFieldComponent}
      */
     private loadSubField(name: string) {
-      return this._subfieldBindings.filter((x) => x.object.name == name)[0];
+      return this._subfieldBindings.filter((x) => x.object.name===name)[0];
     }
 
 

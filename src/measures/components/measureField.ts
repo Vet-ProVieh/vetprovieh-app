@@ -80,11 +80,11 @@ export class MeasureFieldComponent extends ElementBinding {
         operator = '=='): boolean {
       switch (operator) {
         case '==':
-          return value1 == value2;
+          return value1===value2;
         case '!=':
           return value1 != value2;
         default:
-          return value1 == value2;
+          return value1===value2;
       }
     }
 
@@ -154,7 +154,7 @@ export class MeasureFieldComponent extends ElementBinding {
      * @param {any} value
      */
     public attachValue(value: any) {
-      if (this.object.detailsType == 'textArea') {
+      if (this.object.detailsType==='textArea') {
         const inputfield = this
             .querySelector('textarea') as HTMLTextAreaElement;
         if (inputfield) {

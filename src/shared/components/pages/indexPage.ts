@@ -53,7 +53,7 @@ export class BasicIndexPage<T extends BaseModel> extends HTMLElement {
      */
     protected getVetproviehList(): VetproviehBasicList {
       let list = document.querySelector('vetprovieh-list');
-      if ( list == undefined) {
+      if ( list===undefined) {
         list = document.querySelector('vetprovieh-table');
       }
       return list as VetproviehBasicList;

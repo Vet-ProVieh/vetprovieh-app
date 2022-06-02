@@ -13,7 +13,7 @@ export class PageWithReadOnly extends BasicShowPage {
      * @return {boolean}
      */
   protected get readOnly(): boolean {
-    return VetproviehNavParams.getUrlParameter('readOnly') == 'true';
+    return VetproviehNavParams.getUrlParameter('readOnly')==='true';
   }
 
   /**

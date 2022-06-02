@@ -193,7 +193,7 @@ export class MeasuresSelectPage extends BasicSelectPage {
             this.querySelector('#measures'),
             this.querySelector('#opplans'),
           ].forEach((content) => {
-            if (content?.id == id) {
+            if (content?.id===id) {
               content?.classList.remove('is-hidden');
             } else if (content) {
               content?.classList.add('is-hidden');
@@ -342,7 +342,7 @@ export class MeasuresSelectPage extends BasicSelectPage {
     const amountObjectives = this.selectedObjectivesIds.length;
 
     // Activate takeover Button
-    this.takeoverButton.disabled = amountOpPlans + amountObjectives == 0;
+    this.takeoverButton.disabled = amountOpPlans + amountObjectives===0;
 
     this.updateSelectAmountBadge(this.selectedOpPlans, amountOpPlans);
     this.updateSelectAmountBadge(this.selectedObjectives, amountObjectives);

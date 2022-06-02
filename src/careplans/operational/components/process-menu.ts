@@ -40,7 +40,7 @@ export class ProcessMenu extends VetproviehBasicRepeat {
    * @param {number} id
    */
   public activateElement(id: number) {
-    const param = (id == 0 ? '' : id);
+    const param = (id===0 ? '' : id);
     const search = '[href*=\'groupsId=' + param + '\']';
     const link = this.shadowRoot?.querySelector(search);
     if (link) {

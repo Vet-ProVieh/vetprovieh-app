@@ -90,7 +90,7 @@ export class CarePlanIndexPage extends BasicIndexPage<Careplan> {
      */
     private replaceAnimalCode(paragraph: HTMLParagraphElement) {
       const animal = this.animals
-          .filter((a) => a.code == paragraph.innerHTML)[0];
+          .filter((a) => a.code===paragraph.innerHTML)[0];
       if (animal) {
         paragraph.innerHTML = animal.name;
       }

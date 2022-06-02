@@ -20,7 +20,7 @@ export class BasicShowPage extends HTMLElement {
      * @return {boolean}
      */
   protected get currentObjectIsNotPersisted() : boolean {
-    return this.currentObject.id == null || this.currentObject.id == undefined;
+    return this.currentObject.id===null || this.currentObject.id===undefined;
   }
 
 
@@ -47,7 +47,7 @@ export class BasicShowPage extends HTMLElement {
    * @return {number}
    */
   protected maxPosition(positions: Array<any> = []) : number {
-    if (positions.length == 0) {
+    if (positions.length===0) {
       return 1;
     } else {
       return Math.max(...positions.map((p: any) => p.position)) + 1;

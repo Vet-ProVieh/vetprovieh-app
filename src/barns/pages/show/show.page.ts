@@ -37,14 +37,14 @@ export class BarnsShowPage extends BasicShowPage {
      */
     connectedCallback() {
       this.detailElement.addEventListener('loadeddata', (loadEvent: any) => {
-        if (this.barn.gpsCoordinates == null) {
+        if (this.barn.gpsCoordinates === null) {
           this.barn.gpsCoordinates = new GpsCoordinates(0, 0);
         }
         this.detailElement.addBeforeSavePromise(() => {
           return this.loadGeoCoordinates(this.barn);
         });
 
-        if (this.barn.lastVet == undefined) {
+        if (this.barn.lastVet === undefined) {
           this.userRepository.loadProfile().then((user) => {
             this.barn.lastVet = user;
           });

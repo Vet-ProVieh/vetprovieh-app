@@ -79,7 +79,7 @@ export class DocumentRepository extends BaseRepository<Document> {
    */
   create(document: Document): Promise<any> {
     return new Promise((resolve, reject) => {
-      if (document.id == undefined) {
+      if (document.id===undefined) {
         document.id = DocumentRepository.generateUUID();
         const requestData = this.buildRequestdata(document);
         fetch(this.endpoint, {

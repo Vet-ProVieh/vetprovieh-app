@@ -32,8 +32,8 @@ export class TakeoverFactory {
      * @return {boolean}
      */
     private isValidMeasure(measure: Measure): boolean {
-      return this.currentObject.barn ?.id == measure.barn ?.id &&
-            this.currentObject.animalNumber == measure.animalNumber;
+      return this.currentObject.barn ?.id===measure.barn ?.id &&
+            this.currentObject.animalNumber===measure.animalNumber;
     }
 
     /**
@@ -101,7 +101,7 @@ export class TakeoverFactory {
      */
     private takeOverField(currentGroup: MeasureGroup, field: MeasureField) {
       const currentField = currentGroup.details
-          .filter((f) => f.position == field.position)[0];
+          .filter((f) => f.position===field.position)[0];
       if (currentField) {
         currentField.value = field.value;
       }

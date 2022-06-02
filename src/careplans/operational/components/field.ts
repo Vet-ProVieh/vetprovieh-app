@@ -80,7 +80,7 @@ export class VpOperationField extends ElementBinding {
       }, 400);
     }
 
-    if (this.object.treatmentKeys == 'MedikamentName') {
+    if (this.object.treatmentKeys==='MedikamentName') {
       this.bindDrugField();
     }
   }

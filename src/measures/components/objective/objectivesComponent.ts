@@ -126,7 +126,7 @@ export class ObjectivesComponent extends VetproviehElement {
    * @return {boolean}
    */
   public get isHidden() : boolean {
-    return this.state == 'valuation';
+    return this.state==='valuation';
   }
 
   /**
@@ -236,12 +236,12 @@ export class ObjectivesComponent extends VetproviehElement {
 
     objectiveItem.addEventListener('delete', (event) => {
       const index = this.objectives
-          .findIndex((x) => x == (event as CustomEvent).detail);
+          .findIndex((x) => x===(event as CustomEvent).detail);
       if (index >= 0) {
         this.objectives.splice(index, 1);
         objectiveItem.remove();
 
-        if (this.objectives.length == 0) {
+        if (this.objectives.length===0) {
           const container = this.selectContainer(objective);
           if (container) {
             container.querySelector('p')?.classList.remove('is-hidden');
@@ -378,7 +378,7 @@ export class ObjectivesComponent extends VetproviehElement {
       selectButton.scrollIntoView();
       answer.forEach((objective: Objective) => {
         Objective.reset(objective);
-        this.addObjective(objective, answer.length == 1);
+        this.addObjective(objective, answer.length===1);
       });
     }
   }

@@ -10,7 +10,7 @@ export class Global {
    * @return {boolean}
    */
   public static isEmpty(obj: Object) : boolean {
-    return obj == null || obj == undefined;
+    return obj===null || obj===undefined;
   }
 
   /**

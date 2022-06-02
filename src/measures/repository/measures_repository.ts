@@ -63,7 +63,7 @@ export class MeasuresRepository extends BaseRepository<Measure> {
     * @return {Promise<Measure[]>}
     */
   whereByParams(params: { [Identifier: string]: string }): Promise<Measure[]> {
-    if (params.type == 'open') {
+    if (params.type==='open') {
       return this.openMeasuresForBarn(+params.barnId);
     } else {
       return super.whereByParams(params);

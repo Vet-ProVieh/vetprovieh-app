@@ -180,7 +180,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
         // Activate the current Process-Step
         const step = VetproviehNavParams.getUrlParameter('process');
         const state = VetproviehNavParams.getUrlParameter('state');
-        if (a.dataset.id === step && a.dataset.state == state) {
+        if (a.dataset.id === step && a.dataset.state===state) {
           a.click();
         }
       }
