@@ -1,4 +1,5 @@
 import {BaseRepository} from '@vetprovieh/vetprovieh-shared';
+import {IPdfRepository} from '../../../shared/providers/iPdfRepository';
 import {OperationPlan} from '../models';
 
 /**

@@ -1,6 +1,6 @@
 
 
-interface IPdfRepository {
+export interface IPdfRepository {
 
     /**
      * Download a PDF

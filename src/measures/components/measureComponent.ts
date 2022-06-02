@@ -284,7 +284,9 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
   private setParamsToComponent(params: any) {
     if (params !==null && params !==undefined) {
       if (params.barnId !==null && params.barnId !==undefined) {
-        this.currentObject.barn = {id: parseInt(params.barnId)} as Barn;
+        const ghostBarn = new Barn();
+        ghostBarn.id = parseInt(params.barnId);
+        this.currentObject.barn = ghostBarn;
       }
       if (params.measuresDate !==null && params.measuresDate !==undefined) {
         this.currentObject.measuresDate = params.measuresDate;
