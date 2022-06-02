@@ -27,7 +27,7 @@ export class KeycloakHelper {
     constructor() {
       this._keycloakInstance = Keycloak({
         'realm': this.subdomain,
-        'url': '/auth/',
+        'url': 'https://keycloak.vetprovieh.de/auth/',
         'clientId': 'app',
       });
 

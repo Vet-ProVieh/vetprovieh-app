@@ -17,7 +17,7 @@ class KeycloakHelper {
   constructor() {
     this._keycloakInstance = new Keycloak({
       'realm': this.subdomain,
-      'auth-server-url': '/auth/',
+      'auth-server-url': 'https://keycloak.vetprovieh.de/auth/',
       'ssl-required': 'none',
       'clientId': 'app',
       'verify-token-audience': true,

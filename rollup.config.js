@@ -1,8 +1,14 @@
-import resolve, {nodeResolve} from '@rollup/plugin-node-resolve';
+import resolve, {
+  nodeResolve,
+} from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import {uglify} from 'rollup-plugin-uglify';
+import {
+  uglify,
+} from 'rollup-plugin-uglify';
 import external from 'rollup-plugin-peer-deps-external';
-import {babel} from '@rollup/plugin-babel';
+import {
+  babel,
+} from '@rollup/plugin-babel';
 
 const {
   generateSW,
@@ -46,7 +52,7 @@ import {
 
 // `npm run build` -> `production` is true
 // `npm run dev` -> `production` is false
-const production = false;// !process.env.ROLLUP_WATCH;
+const production = false; // !process.env.ROLLUP_WATCH;
 
 export default {
   input: 'src/app/main.ts',
@@ -55,32 +61,36 @@ export default {
     format: 'es',
     sourcemap: true,
   },
-  cache: false,
+  cache: true,
   // treeshake: true,
   plugins: [
     // external(),
-    external({
-      includeDependencies: true,
-    }),
+    external(),
     resolve({
       browser: true,
     }),
     typescript(),
-    commonjs( {
+    babel({
+      babelHelpers: 'bundled',
+      exclude: [
+        'node_modules/recordrtc/**',
+        'node_modules/keycloak-js/**',
+        'node_modules/rbush/**',
+      ],
+      babelrc: true,
+    }),
+    commonjs({
       sourceMap: false,
       include: [
         'node_modules/**',
-        'dist/**',
+        'src/app/main.ts',
       ],
-    } ),
-    babel({
-      babelrc: true,
-      exclude: 'node_modules/**',
-      babelHelpers: 'bundled',
+      ignoreGlobal: false, // Default: false
     }),
     nodeResolve({
       jsnext: true,
-      main: false,
+      include: ['node_modules/**'],
+      main: true,
     }),
     production && terser(), // minify, but only in production
     replace({
