@@ -1,5 +1,6 @@
 import {VetproviehElement} from '@vetprovieh/vetprovieh-shared';
 import * as bulmaToast from 'bulma-toast';
+import {IPdfRepository} from '../../providers/iPdfRepository';
 
 /**
  * Generate a PDF with a Button
