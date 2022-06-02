@@ -44,11 +44,7 @@ export class BarnsShowPage extends BasicShowPage {
           return this.loadGeoCoordinates(this.barn);
         });
 
-        if (this.barn.lastVet === undefined) {
-          this.userRepository.loadProfile().then((user) => {
-            this.barn.lastVet = user;
-          });
-        }
+        this.setLastUser();
         this.bindFarmerSelectField(loadEvent);
         this.bindGeoButton();
 
@@ -62,6 +58,16 @@ export class BarnsShowPage extends BasicShowPage {
               });
         }
       });
+    }
+
+    /**
+     * Setting last user to barn
+     */
+    private async setLastUser() {
+      if (this.barn.lastVet === undefined) {
+        const user = await this.userRepository.loadProfile();
+        this.barn.lastVet = user;
+      }
     }
 
     /**
@@ -82,21 +88,18 @@ export class BarnsShowPage extends BasicShowPage {
      * @param {Barn} barn
      * @return {Promise<any>}
      */
-    private loadGeoCoordinates(barn: Barn): Promise<any> {
-      return new Promise((resolve, reject) => {
-        if (barn.gpsCoordinates?.latitude === 0 &&
+    private async loadGeoCoordinates(barn: Barn): Promise<any> {
+      if (barn.gpsCoordinates?.latitude === 0 &&
           barn.gpsCoordinates?.longitude === 0) {
-          this.geoProvider.loadCoordinates(
-              `${barn.address.streetName} ${barn.address.streetNumber}`,
-              barn.address.postalCode,
-              barn.address.city).then((event) => {
-            this.processGeoEvent(event);
-            resolve(true);
-          });
-        } else {
-          reject(new Error('No Coords'));
-        }
-      });
+        const event = await this.geoProvider.loadCoordinates(
+            `${barn.address.streetName} ${barn.address.streetNumber}`,
+            barn.address.postalCode,
+            barn.address.city);
+        this.processGeoEvent(event);
+        return true;
+      } else {
+        throw new Error('No Coords');
+      }
     }
 
     /**

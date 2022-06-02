@@ -274,16 +274,15 @@ export class ObjectiveItemComponent extends VetproviehElement {
    * Register Delete Button
    */
   private registerDeleteButton() {
-    this.deleteButton.addEventListener('click', () => {
-      QuestionModal.askQuestion(
+    this.deleteButton.addEventListener('click', async () => {
+      const result = await QuestionModal.askQuestion(
           'Sind Sie sicher?',
-          'Möchten Sie die Maßnahme entfernen?').then((result) => {
-        if (result) {
-          this.dispatchEvent(
-              new CustomEvent('delete', {detail: this.objective})
-          );
-        }
-      });
+          'Möchten Sie die Maßnahme entfernen?');
+      if (result) {
+        this.dispatchEvent(
+            new CustomEvent('delete', {detail: this.objective})
+        );
+      }
     });
   }
 

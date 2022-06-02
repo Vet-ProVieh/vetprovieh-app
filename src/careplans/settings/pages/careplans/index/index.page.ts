@@ -35,30 +35,29 @@ export class CarePlanIndexPage extends BasicIndexPage<Careplan> {
      * Event for Duplicate Button
      * @param {HTMLButtonElement} button
      */
-    private addDuplicateEventToButton(button: HTMLButtonElement) {
-      const func = (event: any) => {
+    private async addDuplicateEventToButton(button: HTMLButtonElement) {
+      const func = async (event: any) => {
         const rep = this.repository as CareplansRepository;
-        rep.duplicate(event.path[0].dataset.id).then((result) => {
-          if (result) {
-            bulmaToast.toast({
-              message: 'Behandplungsplan erfolgreich dupliziert',
-              type: 'is-success',
-              dismissible: false,
-              position: 'bottom-center',
-              animate: {in: 'fadeIn', out: 'fadeOut'},
-            });
-            const list = this.getVetproviehList();
-            list.search('');
-          } else {
-            bulmaToast.toast({
-              message: 'Behandplungsplan konnte nicht dupliziert werden',
-              type: 'is-danger',
-              dismissible: false,
-              position: 'bottom-center',
-              animate: {in: 'fadeIn', out: 'fadeOut'},
-            });
-          }
-        });
+        const result = await rep.duplicate(event.path[0].dataset.id);
+        if (result) {
+          bulmaToast.toast({
+            message: 'Behandplungsplan erfolgreich dupliziert',
+            type: 'is-success',
+            dismissible: false,
+            position: 'bottom-center',
+            animate: {in: 'fadeIn', out: 'fadeOut'},
+          });
+          const list = this.getVetproviehList();
+          list.search('');
+        } else {
+          bulmaToast.toast({
+            message: 'Behandplungsplan konnte nicht dupliziert werden',
+            type: 'is-danger',
+            dismissible: false,
+            position: 'bottom-center',
+            animate: {in: 'fadeIn', out: 'fadeOut'},
+          });
+        }
       };
       func.bind(this);
 

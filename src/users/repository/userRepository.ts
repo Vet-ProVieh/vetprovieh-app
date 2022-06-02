@@ -40,13 +40,9 @@ export class UserRepository extends BaseRepository<User> {
      * Load User from Service
      * @return {Promise<User>}
      */
-    public loadProfile(): Promise<User> {
-      return new Promise((resolve, reject) => {
-        fetch(`${this.endpoint}/current`)
-            .then((response) => {
-              response.json().then(resolve);
-            }).catch((error) => reject(error));
-      });
+    public async loadProfile(): Promise<User> {
+      const response= await fetch(`${this.endpoint}/current`);
+      return await response.json();
     }
 
     /**

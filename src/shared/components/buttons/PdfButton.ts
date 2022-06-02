@@ -40,11 +40,7 @@ export class PdfButton extends VetproviehElement {
   connectedCallback() {
     this.pdfButton.addEventListener('click', () => {
       if (this.objectid) {
-        this.repository.downloadPdf(this.objectid).then((value) => {
-          if (value) {
-            window.open(value, '_blank');
-          }
-        });
+        this.downloadPdfAndOpen();
       } else {
         bulmaToast.toast({
           message: 'Bitte speichern Sie zunächst die Behandlung',
@@ -57,6 +53,16 @@ export class PdfButton extends VetproviehElement {
     });
   }
 
+  /**
+   * Download the pdf file and open
+   */
+  private async downloadPdfAndOpen() {
+    const value = await this.repository.downloadPdf(this.objectid);
+
+    if (value) {
+      window.open(value, '_blank');
+    }
+  }
 
   /**
    * Get observed Attributes

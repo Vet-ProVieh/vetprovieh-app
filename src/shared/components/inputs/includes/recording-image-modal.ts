@@ -43,10 +43,9 @@ export class RecordingImageModal extends RecordingModal {
      * Adding Listener to Buttons
      */
   protected addButtonListeners() {
-    const takeSnapshot = () => {
-      this.snapshot().then(() => {
-        this.close(true);
-      });
+    const takeSnapshot = async () => {
+      await this.snapshot();
+      this.close(true);
     };
     takeSnapshot.bind(this);
     this.snapshotButton.addEventListener('click', takeSnapshot);

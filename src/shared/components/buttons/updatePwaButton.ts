@@ -23,15 +23,14 @@ export class UpdatePwaButton extends VetproviehElement {
   /**
    * Clear Cache and Reload
    */
-    private clearCacheAndReload = () => {
-      caches.keys().then((cacheNames) => {
-        cacheNames.forEach((cacheName) => {
-          caches.delete(cacheName);
-        });
+    private clearCacheAndReload = async () => {
+      const cacheNames = await caches.keys();
+
+      cacheNames.forEach(async (cacheName) => {
+        await caches.delete(cacheName);
       });
-      setTimeout(function() {
-        window.location.replace('');
-      }, 300);
+
+      window.location.replace('');
     }
 
     /**
@@ -46,7 +45,7 @@ export class UpdatePwaButton extends VetproviehElement {
 
       ViewHelper.toggleVisibility(this, false);
 
-      navigator.serviceWorker.addEventListener('controllerchange', (e) => {
+      navigator?.serviceWorker.addEventListener('controllerchange', (e) => {
         console.log(e);
         ViewHelper.toggleVisibility(this, true);
       });

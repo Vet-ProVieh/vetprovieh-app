@@ -37,14 +37,10 @@ export class DocumentRepository extends BaseRepository<Document> {
    * @param {string} url
    * @return {Promise<string|undefined>}
    */
-  public download(url: string): Promise<string | undefined> {
-    return new Promise((resolve, reject) => {
-      fetch(url).then((result) => {
-        result.blob().then((blob) => {
-          resolve(URL.createObjectURL(blob));
-        }).catch((error) => reject(error));
-      }).catch((error) => reject(error));
-    });
+  public async download(url: string): Promise<string | undefined> {
+    const result = await fetch(url);
+    const blob = await result.blob();
+    return URL.createObjectURL(blob);
   }
 
   /**

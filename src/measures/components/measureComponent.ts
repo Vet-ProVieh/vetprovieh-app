@@ -144,7 +144,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
     if (this.isNew()) {
       this.takeoverLastMeasure().then(() => {
         super._afterFetch(data);
-      });
+      }).catch((error) => console.error(error));
     } else {
       super._afterFetch(data);
     }
