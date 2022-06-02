@@ -1,4 +1,4 @@
-import resolve from '@rollup/plugin-node-resolve';
+import resolve, {nodeResolve} from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import {uglify} from 'rollup-plugin-uglify';
 import external from 'rollup-plugin-peer-deps-external';
@@ -12,7 +12,7 @@ const {
 } = require('rollup-plugin-workbox');
 import copy from 'rollup-plugin-copy';
 import replace from '@rollup/plugin-replace';
-import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
 
 
 const modules = {
@@ -55,18 +55,33 @@ export default {
     format: 'es',
     sourcemap: true,
   },
-  cache: true,
+  cache: false,
   // treeshake: true,
   plugins: [
-    typescript(),
     // external(),
+    external({
+      includeDependencies: true,
+    }),
     resolve({
       browser: true,
-    }), // tells Rollup how to find date-fns in node_modules
-    commonjs(
-        {sourceMap: false}
-    ), // converts date-fns to ES modules
-    production && uglify(),
+    }),
+    typescript(),
+    commonjs( {
+      sourceMap: false,
+      include: [
+        'node_modules/**',
+        'dist/**',
+      ],
+    } ),
+    babel({
+      babelrc: true,
+      exclude: 'node_modules/**',
+      babelHelpers: 'bundled',
+    }),
+    nodeResolve({
+      jsnext: true,
+      main: false,
+    }),
     production && terser(), // minify, but only in production
     replace({
       'process.env.NODE_ENV': '"development"',

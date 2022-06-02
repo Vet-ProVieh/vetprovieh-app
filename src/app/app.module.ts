@@ -1,4 +1,3 @@
-
 // Externe Komponenten
 export {VetproviehList,
 } from '@vetprovieh/vetprovieh-list';
