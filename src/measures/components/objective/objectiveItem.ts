@@ -51,7 +51,7 @@ import {QuestionModal, StarsComponent} from '../../../shared';
                     </p>
                     <p class="card-header-title">
                         <vp-stars amount="5" id="stars"
-                        class="\${this.cssHidden(this.valuation != 'true')}">
+                        class="\${this.cssHidden(this.valuation !=='true')}">
                         </vp-stars>
                     </p>
                     <p class="card-header-title">
@@ -71,11 +71,11 @@ import {QuestionModal, StarsComponent} from '../../../shared';
                     <div class="content" id="keyResults">
                     </div>
                     <div id="buttonsRow"
-          class="columns is-mobile \${this.cssHidden(this.editable != 'true')}">
+          class="columns is-mobile \${this.cssHidden(this.editable !=='true')}">
                         <div class="column">
                             <button id="deleteButton"
                             class="button is-danger is-light is-fullwidth
-                                \${this.cssHidden(this.editable != 'true')}">
+                                \${this.cssHidden(this.editable !=='true')}">
                                 <i class="fas fa-trash-alt"
                                  aria-hidden="true"></i>
                                 <span> Entfernen</span>
@@ -84,7 +84,7 @@ import {QuestionModal, StarsComponent} from '../../../shared';
                         <div class="column">
                             <button id="editButton"
                                 class="button is-info is-light is-fullwidth
-                                \${this.cssHidden(this.editable != 'true')}">
+                                \${this.cssHidden(this.editable !=='true')}">
                                 <i class="fas fa-edit" aria-hidden="true"></i>
                                 <span> Bearbeiten</span>
                             </button>

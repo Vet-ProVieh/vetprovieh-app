@@ -221,7 +221,7 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    */
   private deactiveTabAnchors(a: HTMLAnchorElement) {
     const showId = a.dataset.id;
-    this.categories.filter((x) => x != a).forEach((otherA) => {
+    this.categories.filter((x) => x !==a).forEach((otherA) => {
       const showCatId = otherA.dataset.id;
       otherA.parentElement?.classList.remove('is-active');
 
@@ -282,15 +282,15 @@ export class MeasureComponent extends DynamicForm<Measure, MeasureGroup> {
    * @param {any} params
    */
   private setParamsToComponent(params: any) {
-    if (params != null && params != undefined) {
-      if (params.barnId != null && params.barnId != undefined) {
+    if (params !==null && params !==undefined) {
+      if (params.barnId !==null && params.barnId !==undefined) {
         this.currentObject.barn = {id: parseInt(params.barnId)} as Barn;
       }
-      if (params.measuresDate != null && params.measuresDate != undefined) {
+      if (params.measuresDate !==null && params.measuresDate !==undefined) {
         this.currentObject.measuresDate = params.measuresDate;
       }
-      if (params.therapyFrequency != null &&
-        params.therapyFrequency != undefined) {
+      if (params.therapyFrequency !==null &&
+        params.therapyFrequency !==undefined) {
         this.currentObject.therapyFrequency = params.therapyFrequency;
       }
     }

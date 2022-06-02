@@ -81,7 +81,7 @@ export class CarePlanFieldShowPage extends PageWithReadOnly {
 
     const currentObject = this.detailElement.currentObject;
     Object.keys(blankField).forEach((key) => {
-      if (key != 'fieldType') {
+      if (key !=='fieldType') {
         if (currentObject[key] !== null && currentObject[key] !== undefined) {
           (blankField as Indexable)[key] = currentObject[key];
         } else {

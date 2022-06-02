@@ -111,7 +111,7 @@ export class SelectBarn extends VetproviehBasicList {
      * @return {Array<Barn>}
      */
     protected _sort(data: Barn[]) {
-      if (this.currentGpsPosition != undefined) {
+      if (this.currentGpsPosition !==undefined) {
         return data.sort((a: Barn, b: Barn) => {
           const distanceA = this.calcDistance(a);
           const distanceB = this.calcDistance(b);

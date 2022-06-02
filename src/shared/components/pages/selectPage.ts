@@ -81,7 +81,7 @@ export class BasicSelectPage extends VetproviehElement {
      */
     protected hasSelectedItems(): boolean {
       return Array.isArray(this.returnValue) && this.returnValue.length > 0 ||
-        !Array.isArray(this.returnValue) && this.returnValue != undefined;
+        !Array.isArray(this.returnValue) && this.returnValue !==undefined;
     }
 
 

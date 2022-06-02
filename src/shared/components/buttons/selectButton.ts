@@ -74,7 +74,7 @@ export class SelectButton extends VetproviehElement {
      * @return {string}
      */
     private getParam(): string {
-      if (this.param != '' && this.param != null && this.param != undefined) {
+      if (this.param !=='' && this.param !==null && this.param !==undefined) {
         return this.param;
       } else {
         return BasicSelectPage.PARAM_KEY;

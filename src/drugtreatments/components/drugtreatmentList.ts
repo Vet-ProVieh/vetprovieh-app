@@ -47,11 +47,11 @@ export class DrugtreatmentList extends VetproviehElement {
     const cell3: HTMLTableCellElement = row.insertCell(3);
     const cell4: HTMLTableCellElement = row.insertCell(4);
     const cell5: HTMLTableCellElement = row.insertCell(5);
-    if (drugtreatment.id != undefined) {
+    if (drugtreatment.id !==undefined) {
       cell0.textContent = drugtreatment.id?.toString();
     }
     cell1.textContent = drugtreatment.treatmentDate;
-    if (drugtreatment.barn != undefined) {
+    if (drugtreatment.barn !==undefined) {
       cell2.textContent = drugtreatment.barn?.farmer.name;
     }
     cell3.textContent = drugtreatment.amount + ' ' +

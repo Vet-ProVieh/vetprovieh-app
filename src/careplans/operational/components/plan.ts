@@ -88,7 +88,7 @@ export class VpOperationPlan
   private setBarnIdToComponents() {
     const barnUrlId = VetproviehNavParams.getUrlParameter('barn_id');
 
-    if (barnUrlId != null && barnUrlId != undefined) {
+    if (barnUrlId !==null && barnUrlId !==undefined) {
       this.currentObject.barn = {id: parseInt(barnUrlId)};
       this.setBarnId(this.currentObject.barn.id);
     } else if (this.currentObject.barn?.id > 0) {

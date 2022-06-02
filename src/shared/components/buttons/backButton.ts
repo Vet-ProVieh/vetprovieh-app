@@ -66,8 +66,8 @@ export class BackButton extends VetproviehElement {
      */
   public get showBackButton(): boolean {
     return window.history.length > 0 &&
-            window.location.pathname != '/' &&
-            window.location.pathname != '/index.html';
+            window.location.pathname !=='/' &&
+            window.location.pathname !=='/index.html';
   }
 
   /**

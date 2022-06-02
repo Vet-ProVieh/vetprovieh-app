@@ -15,7 +15,7 @@ export class RecordingRtcModal extends RecordingModal {
    * @param {boolean} v
    */
   private set recording(v: boolean) {
-    if (this._recording != v) {
+    if (this._recording !==v) {
       if (this.startButton) this.startButton.disabled = v;
       if (this.stopButton) this.stopButton.disabled = !v;
       this._recording = v;

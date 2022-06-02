@@ -86,7 +86,7 @@ export class MeasureProactiveButton extends VetproviehElement {
    * Check if proactive Measures vor Diagnosis are found
    */
   private checkProactiveMeasures() {
-    if (this._diagnosis != '' && this._diagnosis) {
+    if (this._diagnosis !=='' && this._diagnosis) {
       this.repository.proActive(this._diagnosis).then((result: any[]) => {
         this.proactiveMeasuresFound(result.length > 0);
       }).catch((ex) => console.log(ex));

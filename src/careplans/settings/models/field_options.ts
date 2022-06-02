@@ -64,7 +64,7 @@ export class FieldOptions {
     public createInputField(propertyKey: string): HTMLElement {
       const element = document.createElement(this.tag) as HTMLElement;
 
-      if (this.type != '') element.setAttribute('type', this.type);
+      if (this.type !=='') element.setAttribute('type', this.type);
       if (this.isTextField) element.classList.add('input');
 
       element.setAttribute('property', propertyKey);

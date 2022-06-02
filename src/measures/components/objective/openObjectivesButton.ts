@@ -70,7 +70,7 @@ export class OpenObjectivesButton extends VetproviehElement {
    * @param {number} v
    */
   public set amount(v: number) {
-    if (this.amount != +v) {
+    if (this.amount !==+v) {
       this._amount = +v;
       this.setVisibility();
     }

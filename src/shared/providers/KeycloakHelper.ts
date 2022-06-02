@@ -112,7 +112,7 @@ export class KeycloakHelper {
    * @param {Keycloak.KeycloakInstance} val
    */
     set instance(val : Keycloak.KeycloakInstance) {
-      if (val != this._keycloakInstance) {
+      if (val !==this._keycloakInstance) {
         this._keycloakInstance = val;
       }
     }

@@ -20,7 +20,7 @@ export class DrugtreatmentRepository extends BaseRepository<Drugtreatment> {
   */
   all(): Promise<Drugtreatment[]> {
     let url = `${this.endpoint}`;
-    if (this._barnId != '' && this._barnId != null) {
+    if (this._barnId !=='' && this._barnId !==null) {
       url = `${this.endpoint}/barn/${this.barnId}`;
     }
 

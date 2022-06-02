@@ -46,7 +46,7 @@ export class AStoreLocal extends VetproviehElement {
    * @param {any} v
    */
   public set params(v: any) {
-    if (this._params != v) {
+    if (this._params !==v) {
       this._params = v;
     }
   }
