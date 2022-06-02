@@ -4,7 +4,8 @@ import {Measure} from '../models';
 /**
  * Measures Repository
  */
-export class MeasuresRepository extends BaseRepository<Measure> {
+export class MeasuresRepository extends BaseRepository<Measure>
+  implements IPdfRepository {
   /**
    * Default-Constructor
    */

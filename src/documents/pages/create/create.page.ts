@@ -130,7 +130,7 @@ export class DocumentCreatePage extends BasicShowPage {
         }
       }
 
-      Promise.all(promises).then((result) => {
+      Promise.all(promises).then(() => {
         this.reset();
         this.showSuccess();
       }).catch((error) => {

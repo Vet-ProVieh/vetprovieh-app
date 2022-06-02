@@ -63,9 +63,9 @@ export class GeoCoordButton extends HTMLButtonElement {
 
     /**
      * Emit Event to the outside
-     * @param {Position} position
+     * @param {any} position
      */
-    private _emitGeoCoordinates(position: Position) {
+    private _emitGeoCoordinates(position: any) {
       const event = new GeoEvent(
           position.coords.latitude,
           position.coords.longitude);
@@ -76,10 +76,8 @@ export class GeoCoordButton extends HTMLButtonElement {
      * Load Geocoordinates dependent on loadTyp
      */
     private _loadGeoCoordinates() {
-      switch (this.loadType) {
-        case GeoButtionType.device:
-          this.loadCoordinatesFromDevice();
-          break;
+      if (this.loadType === GeoButtionType.device) {
+        this.loadCoordinatesFromDevice();
       }
     }
 

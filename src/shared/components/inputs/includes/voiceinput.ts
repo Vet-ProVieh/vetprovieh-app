@@ -83,7 +83,7 @@ export class VoiceInput extends HTMLTextAreaElement {
     buttonFunc.bind(this);
     buttonOverwriteFunc.bind(this);
 
-    this._speechWrapper.onresult = (result: any) => {
+    this._speechWrapper.onresult = () => {
       button.classList.remove('is-primary');
       buttonOverwrite.classList.remove('is-primary');
     };

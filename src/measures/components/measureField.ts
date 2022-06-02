@@ -103,6 +103,7 @@ export class MeasureFieldComponent extends ElementBinding {
      * @return {BaseRepository | undefined}
      */
     private getChoiceRepository(src: string): BaseRepository<any> | undefined {
+      console.log(src);
       return undefined;
     }
 

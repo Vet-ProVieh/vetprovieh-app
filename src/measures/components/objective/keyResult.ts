@@ -133,6 +133,9 @@ export class KeyResultComponent extends VetproviehElement {
       case KeyResultMilestones.Target:
         this._keyResult.milestones = KeyResultMilestones.Start;
         break;
+      default:
+        this.keyResult.milestones = KeyResultMilestones.Current;
+        break;
     }
   }
 
@@ -152,6 +155,10 @@ export class KeyResultComponent extends VetproviehElement {
       case KeyResultMilestones.Target:
         this.checkKeyResult.className = 'fas fa-check-double';
         this.checkKeyResult.style.color = '#03fc07';
+        break;
+      default:
+        this.checkKeyResult.className = 'fas fa-check';
+        this.checkKeyResult.style.color = 'black';
         break;
     }
   }

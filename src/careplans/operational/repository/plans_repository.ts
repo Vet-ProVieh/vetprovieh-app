@@ -4,7 +4,8 @@ import {OperationPlan} from '../models';
 /**
  * OperationPlans Repository
  */
-export class OperationPlansRepository extends BaseRepository<OperationPlan> {
+export class OperationPlansRepository extends BaseRepository<OperationPlan>
+  implements IPdfRepository {
   /**
    * Default-Constructor
    */
