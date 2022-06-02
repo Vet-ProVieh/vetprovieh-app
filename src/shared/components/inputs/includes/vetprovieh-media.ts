@@ -56,7 +56,7 @@ export class VetproviehMedia extends VetproviehElement {
       document.name = filename;
       this._repository.create(document).then((url) => {
         this.value = url;
-      });
+      }).catch((error) => console.log(error));
     }
 
     /**

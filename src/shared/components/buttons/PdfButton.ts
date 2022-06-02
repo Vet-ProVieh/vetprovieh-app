@@ -40,7 +40,9 @@ export class PdfButton extends VetproviehElement {
   connectedCallback() {
     this.pdfButton.addEventListener('click', () => {
       if (this.objectid) {
-        this.downloadPdfAndOpen();
+        this.downloadPdfAndOpen()
+            .then(() => console.log('Download succeded'))
+            .catch((error) => console.log(error));
       } else {
         bulmaToast.toast({
           message: 'Bitte speichern Sie zunächst die Behandlung',

@@ -149,7 +149,7 @@ export class FileUpload extends VetproviehElement {
     document.name = filename;
     this._repository.create(document).then((url) => {
       this.value = url;
-    });
+    }).catch((error) => error);
   }
 
   /**

@@ -107,7 +107,7 @@ export class KeyResultEditComponent extends VetproviehElement {
         if (result) {
           this.delete();
         }
-      });
+      }).catch((error) => console.log(error));
     });
   }
 

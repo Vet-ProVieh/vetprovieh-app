@@ -13,6 +13,6 @@ if ('serviceWorker' in navigator) {
           // Necessary because:
           // - Store Requests to Upload (Files, Careplans and so on)
           (window as any).registration = registration;
-        });
+        }).catch((error) => console.log(error));
   });
 }

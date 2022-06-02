@@ -44,7 +44,9 @@ export class BarnsShowPage extends BasicShowPage {
           return this.loadGeoCoordinates(this.barn);
         });
 
-        this.setLastUser();
+        this.setLastUser()
+            .then(() => console.log('Last User loaded'))
+            .catch((error) => console.log(error));
         this.bindFarmerSelectField(loadEvent);
         this.bindGeoButton();
 

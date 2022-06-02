@@ -72,7 +72,8 @@ export class CarePlanIndexPage extends BasicIndexPage<Careplan> {
       const list = this.getVetproviehList();
       const loadedFunc = () => {
         list.shadowRoot?.querySelectorAll('button').forEach((button) => {
-          this.addDuplicateEventToButton(button);
+          this.addDuplicateEventToButton(button)
+              .catch((error) => console.log(error));
         });
         list.shadowRoot?.querySelectorAll('p.animal').forEach((p) => {
           this.replaceAnimalCode(p as HTMLParagraphElement);

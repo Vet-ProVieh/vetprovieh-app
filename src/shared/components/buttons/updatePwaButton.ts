@@ -40,7 +40,9 @@ export class UpdatePwaButton extends VetproviehElement {
       super.connectedCallback();
 
       this.button.addEventListener('click', () => {
-        this.clearCacheAndReload();
+        this.clearCacheAndReload()
+            .then(() => console.log('succeeded'))
+            .catch((error) => console.log(error));
       });
 
       ViewHelper.toggleVisibility(this, false);

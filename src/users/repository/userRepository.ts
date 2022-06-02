@@ -42,7 +42,8 @@ export class UserRepository extends BaseRepository<User> {
      */
     public async loadProfile(): Promise<User> {
       const response= await fetch(`${this.endpoint}/current`);
-      return await response.json();
+      const data = await response.json();
+      return data;
     }
 
     /**

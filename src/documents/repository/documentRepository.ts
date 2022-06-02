@@ -52,7 +52,7 @@ export class DocumentRepository extends BaseRepository<Document> {
       if (result) {
         window.open(result, '_blank');
       }
-    });
+    }).catch((error) => console.log(error));
   }
 
   /**
